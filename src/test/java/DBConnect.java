@@ -37,7 +37,7 @@ public class DBConnect {
 //        con.close();
 //    }
 
-    @Test
+    @Test(enabled = false)
     public void DB_diPocketTest() throws ClassNotFoundException, SQLException {
 
         //Connection con = DriverManager.getConnection(dbUrl,username,password);
