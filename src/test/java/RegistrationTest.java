@@ -85,7 +85,7 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 6)
-    public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone_node_2() throws SQLException, ClassNotFoundException {
+    public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone_node_2(){
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -97,11 +97,11 @@ public class RegistrationTest extends BaseTest{
                 .then()
                 .statusCode(200)
                 .log().all();
-        smsCode = getSMSCodeFromDB("380685448615");
     }
 
     @Test(priority = 7)
-    public void test_ClientServices_v1_references_verifyPhone_node_1(){
+    public void test_ClientServices_v1_references_verifyPhone_node_1() throws SQLException, ClassNotFoundException {
+        smsCode = getSMSCodeFromDB("380685448615");
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
