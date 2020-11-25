@@ -19,8 +19,8 @@ public class RegistrationTest2 extends BaseTest{
         RestAssured.useRelaxedHTTPSValidation();
     }
 
-    @Test(priority = 1)
-    public void test_ClientServices_v1_references_availableCountries_node_1(){
+    @Test
+    public void testClientServices_v1_references_availableCountries_node_1(){
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -32,8 +32,8 @@ public class RegistrationTest2 extends BaseTest{
                 .log().all();
     }
 
-        @Test(priority = 2)
-        public void test_ClientServices_v1_references_languages_node_2(){
+        @Test
+        public void testClientServices_v1_references_languages_node_2(){
             given()
                     .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                     .header("site", "DIPOCKET")
@@ -46,7 +46,7 @@ public class RegistrationTest2 extends BaseTest{
         }
 
     @Test(priority = 3)
-    public void test_ClientServices_v1_references_appConfig_node_2(){
+    public void testClientServices_v1_references_appConfig_node_2(){
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")

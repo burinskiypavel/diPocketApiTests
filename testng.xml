@@ -2,9 +2,9 @@
 <!--<test name = "testngTest" parallel="classes" thread-count="2">-->
  <test name = "testngTest">
      <classes>
-
-         <class name="RegistrationTest" />
          <class name="RegistrationTest2" />
+<!--         <class name="RegistrationTest" />-->
+
      </classes>
 
  </test>
