@@ -18,7 +18,7 @@ public class RegTest extends BaseTest{
         RestAssured.useRelaxedHTTPSValidation();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testRegistration() throws SQLException, ClassNotFoundException {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
