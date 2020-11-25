@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 
-public class RegistrationTests extends BaseTest{
+public class RegistrationTest extends BaseTest{
 
     @BeforeTest
     public void setUp() throws SQLException, ClassNotFoundException {

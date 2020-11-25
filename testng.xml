@@ -3,7 +3,7 @@
  <test name = "testngTest">
      <classes>
 
-         <class name="RegistrationTests" />
+         <class name="RegistrationTest" />
 
      </classes>
 
