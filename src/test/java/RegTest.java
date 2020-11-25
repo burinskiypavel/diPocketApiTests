@@ -10,8 +10,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 
-public class RegistrationTest2 extends BaseTest{
-    String smsCode = null;
+public class RegTest extends BaseTest{
 
     @BeforeTest
     public void setUp() throws SQLException, ClassNotFoundException {
@@ -19,8 +18,8 @@ public class RegistrationTest2 extends BaseTest{
         RestAssured.useRelaxedHTTPSValidation();
     }
 
-    @Test
-    public void testClientServices_v1_references_availableCountries_node_1(){
+    @Test(enabled = false)
+    public void testRegistration() throws SQLException, ClassNotFoundException {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -30,23 +29,18 @@ public class RegistrationTest2 extends BaseTest{
                 .statusCode(200)
                 .body("countryList.code", hasItems("AU", "AT", "AZ"))
                 .log().all();
-    }
 
-        @Test
-        public void testClientServices_v1_references_languages_node_2(){
-            given()
-                    .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                    .header("site", "DIPOCKET")
-                    .when()
-                    .get("https://dipocket3.intranet:8900/ClientServices/v1/references/languages")
-                    .then()
-                    .statusCode(200)
-                    .body("languageList.name", hasItems("English", "Polski", "Русский"))
-                    .log().all();
-        }
+        given()
+                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                .header("site", "DIPOCKET")
+                .when()
+                .get("https://dipocket3.intranet:8900/ClientServices/v1/references/languages")
+                .then()
+                .statusCode(200)
+                .body("languageList.name", hasItems("English", "Polski", "Русский"))
+                .log().all();
 
-    @Test(priority = 3)
-    public void testClientServices_v1_references_appConfig_node_2(){
+        //app config node 2
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -56,10 +50,8 @@ public class RegistrationTest2 extends BaseTest{
                 .statusCode(200)
                 .body("versionColor", equalTo("WHITE"))
                 .log().all();
-    }
 
-    @Test(priority = 4)
-    public void test_ClientServices_v1_userRegistration_loadSavePointData2_node_2() {
+        //LoadSavePointData2node2
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -69,26 +61,22 @@ public class RegistrationTest2 extends BaseTest{
                 .statusCode(200)
                 .body("isInvited", equalTo(false))
                 .log().all();
-    }
 
-    @Test(priority = 5)
-    public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone_node_2() throws SQLException, ClassNotFoundException {
+        //send SMS code
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
                 .body("{\n" +
                         "  \"smsNumber\" : 1\n" +
-                        "}")
+                       "}")
                 .when()
                 .post("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/sendSMSCodeForPhone?langId=4&phoneNum=380685448615")
                 .then()
                 .statusCode(200)
                 .log().all();
-        smsCode = getSMSCodeFromDB("380685448615");
-    }
+        String smsCode = getSMSCodeFromDB("380685448615");
 
-    @Test(priority = 6)
-    public void test_ClientServices_v1_references_verifyPhone_node_1(){
+        //verifyPhone node 1
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -98,11 +86,9 @@ public class RegistrationTest2 extends BaseTest{
                 .statusCode(200)
                 .body("value", equalTo(true))
                 .log().all();
-    }
 
-    @Test(priority = 7)
-    public void test_ClientServices_v1_references_topCountries_node_1() {
-        Response res = given()
+        //topCountries_node1
+        Response res =  given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
                 .when()
@@ -114,10 +100,8 @@ public class RegistrationTest2 extends BaseTest{
 
         String topCountriesHash = res.path("topCountriesHash").toString();
         Assert.assertEquals(topCountriesHash, "bd04afc0873b80500461aeb5fdf682e720d8b0b307566569d785ec269caf80a6");
-    }
 
-    @Test(priority = 8)
-    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2() {
+        //registrationSavePoint2_node2
         given()
                 .header("site", "DIPOCKET")
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -135,7 +119,7 @@ public class RegistrationTest2 extends BaseTest{
                         "    \"typeId\" : 3\n" +
                         "  },\n" +
                         "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+                        "  \"smsCode\" : \""+smsCode+"\",\n" +
                         "  \"isSkipped\" : false,\n" +
                         "  \"address1\" : {\n" +
                         "    \"typeId\" : 0\n" +
@@ -147,25 +131,22 @@ public class RegistrationTest2 extends BaseTest{
                 .then()
                 .statusCode(200)
                 .log().all();
-    }
 
 
-    @Test(priority = 9)
-    public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint_node_1() {
+        //CheckPhoneAndLoadSavePoint_node1
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
                 .when()
-                .get("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum=380685448615&code=" + smsCode + "")
+                .get("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum=380685448615&code="+smsCode+"")
                 .then()
                 .statusCode(200)
                 .body("isInvited", equalTo(false))
                 .body("smsCode", equalTo(smsCode))
                 .log().all();
-    }
 
-    @Test(priority = 10)
-    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2_() {
+
+        //registrationSavePoint2_node2
         given()
                 .header("site", "DIPOCKET")
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -199,7 +180,7 @@ public class RegistrationTest2 extends BaseTest{
                         "    \"countryId\" : 616\n" +
                         "  },\n" +
                         "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+                        "  \"smsCode\" : \""+smsCode+"\",\n" +
                         "  \"isSkipped\" : false,\n" +
                         "  \"address1\" : {\n" +
                         "    \"typeId\" : 0,\n" +
@@ -217,10 +198,7 @@ public class RegistrationTest2 extends BaseTest{
                 .statusCode(200)
                 .log().all();
 
-    }
-
-    @Test(priority = 11)
-    public void test_ClientServices_v1_userRegistration_clientImage_node_2() {
+        //client image node 2
         given()
                 .header("site", "DIPOCKET")
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -236,9 +214,8 @@ public class RegistrationTest2 extends BaseTest{
                 .then()
                 .statusCode(200)
                 .log().all();
-    }
-    @Test(priority = 12)
-    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_1() {
+
+        //registrationSavePoint2_node1
         given()
                 .header("site", "DIPOCKET")
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -272,7 +249,7 @@ public class RegistrationTest2 extends BaseTest{
                         "    \"countryId\" : 616\n" +
                         "  },\n" +
                         "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+                        "  \"smsCode\" : \""+smsCode+"\",\n" +
                         "  \"isSkipped\" : false,\n" +
                         "  \"address1\" : {\n" +
                         "    \"typeId\" : 0,\n" +
@@ -289,29 +266,25 @@ public class RegistrationTest2 extends BaseTest{
                 .then()
                 .statusCode(200)
                 .log().all();
-    }
 
-        @Test(priority = 13)
-        public void test_ClientServices_v1_userRegistration_clientImage_node_1() {
-            given()
-                    .header("site", "DIPOCKET")
-                    .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                    .header("Content-Type", "application/json")
-                    .body("{\n" +
-                            "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
-                            "  \"langId\" : 4,\n" +
-                            "  \"typeId\" : 4,\n" +
-                            "  \"base64Image\" : \"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\\nCbVUAAA6QH//2Q==\\n\"\n" +
-                            "}")
-                    .when()
-                    .put("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/clientImage?value=com.cs.dipocketback.pojo.registration.RegImageData@65a534c2")
-                    .then()
-                    .statusCode(200)
-                    .log().all();
-        }
+        //client image node 1
+        given()
+                .header("site", "DIPOCKET")
+                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                .header("Content-Type", "application/json")
+                .body("{\n" +
+                        "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
+                        "  \"langId\" : 4,\n" +
+                        "  \"typeId\" : 4,\n" +
+                        "  \"base64Image\" : \"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\\nCbVUAAA6QH//2Q==\\n\"\n" +
+                        "}")
+                .when()
+                .put("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/clientImage?value=com.cs.dipocketback.pojo.registration.RegImageData@65a534c2")
+                .then()
+                .statusCode(200)
+                .log().all();
 
-    @Test(priority = 14)
-    public void test_ClientServices_v1_references_questions_node_1() {
+        //questions node 1
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -322,10 +295,9 @@ public class RegistrationTest2 extends BaseTest{
                 .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"))
                 .body("checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"))
                 .log().all();
-    }
 
-    @Test(priority = 15)
-    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2__() {
+
+        //registrationSavePoint2_node2
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -360,7 +332,7 @@ public class RegistrationTest2 extends BaseTest{
                         "    \"countryId\" : 616\n" +
                         "  },\n" +
                         "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+                        "  \"smsCode\" : \""+smsCode+"\",\n" +
                         "  \"isSkipped\" : false,\n" +
                         "  \"address1\" : {\n" +
                         "    \"typeId\" : 0,\n" +
@@ -377,10 +349,8 @@ public class RegistrationTest2 extends BaseTest{
                 .then()
                 .statusCode(200)
                 .log().all();
-    }
 
-    @Test(priority = 16)
-    public void test_ClientServices_v1_userRegistration_sendTermsAndConditions_node_2() {
+        //SendTermsAndConditions_node_2
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
@@ -389,10 +359,8 @@ public class RegistrationTest2 extends BaseTest{
                 .then()
                 .statusCode(200)
                 .log().all();
-    }
 
-    @Test(priority = 17)
-    public void test_ClientServices_v1_userRegistration_registerNewClient2_node_1() {
+        //registerNewClient2_node1
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
                 .header("site", "DIPOCKET")
