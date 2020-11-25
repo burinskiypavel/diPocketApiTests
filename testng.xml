@@ -4,7 +4,7 @@
      <classes>
 
          <class name="RegistrationTest" />
-
+         <class name="RegistrationTest2" />
      </classes>
 
  </test>
