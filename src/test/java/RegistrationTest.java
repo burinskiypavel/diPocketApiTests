@@ -59,6 +59,19 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 4)
+    public void test_ClientServices_v1_references_languages_node_1(){
+        given()
+                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                .header("site", "DIPOCKET")
+                .when()
+                .get("https://dipocket3.intranet:8900/ClientServices/v1/references/languages")
+                .then()
+                .statusCode(200)
+                .body("langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"))
+                .log().all();
+    }
+
+    @Test(priority = 5)
     public void test_ClientServices_v1_userRegistration_loadSavePointData2_node_2() {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -71,7 +84,7 @@ public class RegistrationTest extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone_node_2() throws SQLException, ClassNotFoundException {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -87,7 +100,7 @@ public class RegistrationTest extends BaseTest{
         smsCode = getSMSCodeFromDB("380685448615");
     }
 
-    @Test(priority = 6)
+    @Test(priority = 7)
     public void test_ClientServices_v1_references_verifyPhone_node_1(){
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -100,7 +113,7 @@ public class RegistrationTest extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 7)
+    @Test(priority = 8)
     public void test_ClientServices_v1_references_topCountries_node_1() {
         Response res = given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -116,7 +129,7 @@ public class RegistrationTest extends BaseTest{
         Assert.assertEquals(topCountriesHash, "bd04afc0873b80500461aeb5fdf682e720d8b0b307566569d785ec269caf80a6");
     }
 
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2() {
         given()
                 .header("site", "DIPOCKET")
@@ -150,7 +163,7 @@ public class RegistrationTest extends BaseTest{
     }
 
 
-    @Test(priority = 9)
+    @Test(priority = 10)
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint_node_1() {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -164,7 +177,7 @@ public class RegistrationTest extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2_() {
         given()
                 .header("site", "DIPOCKET")
@@ -219,7 +232,7 @@ public class RegistrationTest extends BaseTest{
 
     }
 
-    @Test(priority = 11)
+    @Test(priority = 12)
     public void test_ClientServices_v1_userRegistration_clientImage_node_2() {
         given()
                 .header("site", "DIPOCKET")
@@ -237,7 +250,7 @@ public class RegistrationTest extends BaseTest{
                 .statusCode(200)
                 .log().all();
     }
-    @Test(priority = 12)
+    @Test(priority = 13)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_1() {
         given()
                 .header("site", "DIPOCKET")
@@ -291,7 +304,7 @@ public class RegistrationTest extends BaseTest{
                 .log().all();
     }
 
-        @Test(priority = 13)
+        @Test(priority = 14)
         public void test_ClientServices_v1_userRegistration_clientImage_node_1() {
             given()
                     .header("site", "DIPOCKET")
@@ -310,7 +323,7 @@ public class RegistrationTest extends BaseTest{
                     .log().all();
         }
 
-    @Test(priority = 14)
+    @Test(priority = 15)
     public void test_ClientServices_v1_references_questions_node_1() {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -324,7 +337,7 @@ public class RegistrationTest extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 15)
+    @Test(priority = 16)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2__() {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -379,7 +392,7 @@ public class RegistrationTest extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 16)
+    @Test(priority = 17)
     public void test_ClientServices_v1_userRegistration_sendTermsAndConditions_node_2() {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -391,7 +404,7 @@ public class RegistrationTest extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 17)
+    @Test(priority = 18)
     public void test_ClientServices_v1_userRegistration_registerNewClient2_node_1() {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
