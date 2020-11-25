@@ -18,7 +18,7 @@ public class RegTest extends BaseTest{
         RestAssured.useRelaxedHTTPSValidation();
     }
 
-    @Test(enabled = false)
+    @Test
     public void testRegistration() throws SQLException, ClassNotFoundException {
         given()
                 .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
@@ -37,7 +37,7 @@ public class RegTest extends BaseTest{
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/references/languages")
                 .then()
                 .statusCode(200)
-                .body("languageList.name", hasItems("English", "Polski", "Русский"))
+                .body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"))
                 .log().all();
 
         //app config node 2
@@ -49,6 +49,17 @@ public class RegTest extends BaseTest{
                 .then()
                 .statusCode(200)
                 .body("versionColor", equalTo("WHITE"))
+                .log().all();
+
+        //languages node 1
+        given()
+                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                .header("site", "DIPOCKET")
+                .when()
+                .get("https://dipocket3.intranet:8900/ClientServices/v1/references/languages")
+                .then()
+                .statusCode(200)
+                .body("langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"))
                 .log().all();
 
         //LoadSavePointData2node2

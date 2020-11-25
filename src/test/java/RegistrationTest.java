@@ -41,7 +41,7 @@ public class RegistrationTest extends BaseTest{
                     .get("https://dipocket3.intranet:8900/ClientServices/v1/references/languages")
                     .then()
                     .statusCode(200)
-                    .body("languageList.name", hasItems("English", "Polski", "Русский"))
+                    .body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"))
                     .log().all();
         }
 
