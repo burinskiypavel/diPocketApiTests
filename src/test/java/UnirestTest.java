@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class UnirestTest {
 
-    @Test
+    @Test(enabled = false)
     public void test1() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException, UnirestException {
         //unirest ssl
         SSLContext sslcontext = SSLContexts.custom()

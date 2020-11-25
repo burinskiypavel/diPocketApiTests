@@ -4,6 +4,7 @@ public class BaseTest {
 
     public String getSMSCodeFromDB(String number) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@dipocket1.intranet/dip";
+        //String dbUrl = "jdbc:oracle:oci:@dipocket1.intranet/dip";
         //Database Username
         String username = "Dipocket";
         String password = "c67";
@@ -65,6 +66,8 @@ public class BaseTest {
 
     public void deleteClientFromDB(String number) throws SQLException, ClassNotFoundException {
         String dbUrl = "jdbc:oracle:thin:@dipocket1.intranet/dip";
+        //String dbUrl = "jdbc:oracle:oci:@dipocket1.intranet/dip";
+
         //Database Username
         String username = "Dipocket";
         String password = "c67";
@@ -76,6 +79,7 @@ public class BaseTest {
         String query2 = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
+
 
         //Create Connection to DB
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
