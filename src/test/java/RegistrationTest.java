@@ -1,6 +1,12 @@
+import Config.Properties;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -12,31 +18,47 @@ import static org.hamcrest.CoreMatchers.hasItems;
 
 public class RegistrationTest extends BaseTest{
     String smsCode = null;
+    ExtentHtmlReporter htmlReport;
+    ExtentReports extent;
+
+    @BeforeClass
+    public void start(){
+        htmlReport = new ExtentHtmlReporter("extent.html");
+        extent = new ExtentReports();
+        extent.attachReporter(htmlReport);
+    }
+    @AfterClass
+    public void tearDown(){
+        extent.flush();
+    }
 
     @BeforeTest
     public void setUp() throws SQLException, ClassNotFoundException {
-        deleteClientFromDB("380685448615");
+        deleteClientFromDB(Properties.phoneNumber);
         RestAssured.useRelaxedHTTPSValidation();
     }
 
     @Test(priority = 1)
-    public void test_ClientServices_v1_references_availableCountries_node_1(){
+    public void test_ClientServices_v1_references_availableCountries(){
+        ExtentTest test1 = extent.createTest("test_ClientServices_v1_references_availableCountries");
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/references/availableCountries?langID=4")
                 .then()
                 .statusCode(200)
-                .body("countryList.code", hasItems("AU", "AT", "AZ"))
+                .body("countryList.code", hasItems("AU", "MK", "JP"))
+                .body("countryList.name", hasItems("Австралия", "Македония", "Япония"))
                 .log().all();
     }
 
         @Test(priority = 2)
-        public void test_ClientServices_v1_references_languages_node_2(){
+        public void test_ClientServices_v1_references_languages(){
+            ExtentTest test2 = extent.createTest("test_ClientServices_v1_references_languages");
             given()
-                    .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                    .header("site", "DIPOCKET")
+                    .header("deviceuuid", Properties.deviceuuid)
+                    .header("site", Properties.site)
                     .when()
                     .get("https://dipocket3.intranet:8900/ClientServices/v1/references/languages")
                     .then()
@@ -46,23 +68,26 @@ public class RegistrationTest extends BaseTest{
         }
 
     @Test(priority = 3)
-    public void test_ClientServices_v1_references_appConfig_node_2(){
+    public void test_ClientServices_v1_references_appConfig(){
+        ExtentTest test3 = extent.createTest("test_ClientServices_v1_references_appConfig");
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/references/appConfig?platform=android&version=2.2.9&langCode=rus")
                 .then()
                 .statusCode(200)
                 .body("versionColor", equalTo("WHITE"))
+                .body("appParams.isAccountCreationEnabled", equalTo(true))
                 .log().all();
     }
 
     @Test(priority = 4)
-    public void test_ClientServices_v1_references_languages_node_1(){
+    public void test_ClientServices_v1_references_languages_(){
+        ExtentTest test4 = extent.createTest("test_ClientServices_v1_references_languages");
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/references/languages")
                 .then()
@@ -72,10 +97,11 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 5)
-    public void test_ClientServices_v1_userRegistration_loadSavePointData2_node_2() {
+    public void test_ClientServices_v1_userRegistration_loadSavePointData2() {
+        ExtentTest test5 = extent.createTest("test_ClientServices_v1_userRegistration_loadSavePointData2");
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/loadSavePointData2?devUUID=eC10LFCnS1mDsuNoQaa-KH")
                 .then()
@@ -85,26 +111,29 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 6)
-    public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone_node_2(){
-        given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
-                .body("{\n" +
-                        "  \"smsNumber\" : 1\n" +
-                        "}")
-                .when()
-                .post("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/sendSMSCodeForPhone?langId=4&phoneNum=380685448615")
-                .then()
-                .statusCode(200)
-                .log().all();
+    public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
+        ExtentTest test6 = extent.createTest("test_ClientServices_v1_userRegistration_sendSMSCodeForPhone");
+
+//        given()
+//                .header("deviceuuid", Properties.deviceuuid)
+//                .header("site", Properties.site)
+//                .body("{\n" +
+//                        "  \"smsNumber\" : 1\n" +
+//                        "}")
+//                .when()
+//                .post("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/sendSMSCodeForPhone?langId=4&phoneNum=380685448615")
+//                .then()
+//                .statusCode(200)
+//                .log().all();
     }
 
     @Test(priority = 7)
-    public void test_ClientServices_v1_references_verifyPhone_node_1() throws SQLException, ClassNotFoundException {
-        smsCode = getSMSCodeFromDB("380685448615");
+    public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
+        ExtentTest test7 = extent.createTest("test_ClientServices_v1_references_verifyPhone");
+        smsCode = getSMSCodeFromDB(Properties.phoneNumber);
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/references/verifyPhone?phone=380685448615")
                 .then()
@@ -114,10 +143,11 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 8)
-    public void test_ClientServices_v1_references_topCountries_node_1() {
+    public void test_ClientServices_v1_references_topCountries() {
+        ExtentTest test8 = extent.createTest("test_ClientServices_v1_references_topCountries");
         Response res = given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/references/topCountries?langID=4");
 //                .then()
@@ -130,10 +160,11 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 9)
-    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2() {
+    public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
+        ExtentTest test9 = extent.createTest("test_ClientServices_v1_userRegistration_registrationSavePoint2");
         given()
-                .header("site", "DIPOCKET")
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
@@ -164,10 +195,11 @@ public class RegistrationTest extends BaseTest{
 
 
     @Test(priority = 10)
-    public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint_node_1() {
+    public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
+        ExtentTest test10 = extent.createTest("test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint");
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum=380685448615&code=" + smsCode + "")
                 .then()
@@ -178,10 +210,10 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 11)
-    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2_() {
+    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_() {
         given()
-                .header("site", "DIPOCKET")
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
@@ -233,10 +265,10 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 12)
-    public void test_ClientServices_v1_userRegistration_clientImage_node_2() {
+    public void test_ClientServices_v1_userRegistration_clientImage() {
         given()
-                .header("site", "DIPOCKET")
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
@@ -250,11 +282,12 @@ public class RegistrationTest extends BaseTest{
                 .statusCode(200)
                 .log().all();
     }
+
     @Test(priority = 13)
-    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_1() {
+    public void test_ClientServices_v1_userRegistration_registrationSavePoint2__() {
         given()
-                .header("site", "DIPOCKET")
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
@@ -305,10 +338,10 @@ public class RegistrationTest extends BaseTest{
     }
 
         @Test(priority = 14)
-        public void test_ClientServices_v1_userRegistration_clientImage_node_1() {
+        public void test_ClientServices_v1_userRegistration_clientImage__() {
             given()
-                    .header("site", "DIPOCKET")
-                    .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+                    .header("deviceuuid", Properties.deviceuuid)
+                    .header("site", Properties.site)
                     .header("Content-Type", "application/json")
                     .body("{\n" +
                             "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
@@ -324,10 +357,10 @@ public class RegistrationTest extends BaseTest{
         }
 
     @Test(priority = 15)
-    public void test_ClientServices_v1_references_questions_node_1() {
+    public void test_ClientServices_v1_references_questions() {
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .get("https://dipocket3.intranet:8900/ClientServices/v1/references/questions?langId=4&countryId=616")
                 .then()
@@ -338,10 +371,10 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 16)
-    public void test_ClientServices_v1_userRegistration_registrationSavePoint2_node_2__() {
+    public void test_ClientServices_v1_userRegistration_registrationSavePoint2___() {
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
@@ -393,10 +426,10 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 17)
-    public void test_ClientServices_v1_userRegistration_sendTermsAndConditions_node_2() {
+    public void test_ClientServices_v1_userRegistration_sendTermsAndConditions() {
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .when()
                 .put("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/sendTermsAndConditions?deviceUUID=eC10LFCnS1mDsuNoQaa-KH")
                 .then()
@@ -405,10 +438,10 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test(priority = 18)
-    public void test_ClientServices_v1_userRegistration_registerNewClient2_node_1() {
+    public void test_ClientServices_v1_userRegistration_registerNewClient2() {
         given()
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("site", "DIPOCKET")
+                .header("deviceuuid", Properties.deviceuuid)
+                .header("site", Properties.site)
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
