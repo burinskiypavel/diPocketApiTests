@@ -101,17 +101,17 @@ public class RegistrationTest extends BaseTest{
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
         ExtentTest test6 = extent.createTest("test_ClientServices_v1_userRegistration_sendSMSCodeForPhone");
 
-        given()
-                .header("deviceuuid", Properties.deviceuuid)
-                .header("site", Properties.site)
-                .body("{\n" +
-                        "  \"smsNumber\" : 1\n" +
-                        "}")
-                .when()
-                .post(Properties.devUrl+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+Properties.phoneNumber+"")
-                .then()
-                .statusCode(200)
-                .log().all();
+//        given()
+//                .header("deviceuuid", Properties.deviceuuid)
+//                .header("site", Properties.site)
+//                .body("{\n" +
+//                        "  \"smsNumber\" : 1\n" +
+//                        "}")
+//                .when()
+//                .post(Properties.devUrl+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+Properties.phoneNumber+"")
+//                .then()
+//                .statusCode(200)
+//                .log().all();
     }
 
     @Test(priority = 6)

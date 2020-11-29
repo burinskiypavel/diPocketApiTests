@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="diPocketApiTests2" />
+        <module name="diPocketApiTests" />
       </profile>
     </annotationProcessing>
   </component>

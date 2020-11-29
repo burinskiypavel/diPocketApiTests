@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="ojdbc8-19.3.0.0">
     <CLASSES>
-      <root url="jar://F:/Programs/OracleDriver/ojdbc8-19.3.0.0.jar!/" />
+      <root url="jar://D:/Programs/ojdbc8-19.3.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
