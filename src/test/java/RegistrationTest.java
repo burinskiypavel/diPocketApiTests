@@ -41,7 +41,7 @@ public class RegistrationTest extends BaseTest{
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries(){
         ExtentTest test1 = extent.createTest("test_ClientServices_v1_references_availableCountries");
-        given()
+         given()
                 .header("deviceuuid", Properties.deviceuuid)
                 .header("site", Properties.site)
                 .when()
@@ -442,7 +442,8 @@ public class RegistrationTest extends BaseTest{
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
                         "  \"secAnswer\" : \"***\",\n" +
-                        "  \"pin\" : \"******\",\n" +
+//                        "  \"pin\" : \"******\",\n" +
+                        "  \"pin\" : \"246740\",\n" +
                         "  \"stepNo\" : 4,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
                         "  \"address\" : {\n" +
