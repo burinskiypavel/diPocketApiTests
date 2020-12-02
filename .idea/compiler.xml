@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="diPocketApiTests2" />
         <module name="diPocketApiTests" />
+        <module name="diPocketApiTests3" />
       </profile>
     </annotationProcessing>
   </component>
