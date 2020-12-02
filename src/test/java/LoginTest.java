@@ -1,7 +1,5 @@
 import Config.Properties;
-import com.aventstack.extentreports.ExtentTest;
 import io.restassured.RestAssured;
-import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
