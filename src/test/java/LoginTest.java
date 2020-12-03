@@ -22,14 +22,14 @@ public class LoginTest  extends BaseTest{
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_node_1(){
         given()
-                .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
+                .header("deviceuuid", Properties.deviceuuid2)
                 .header("site", Properties.site)
-                .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
+                .header("authorization", Properties.authorizationBasic)
                 .header("content-type", "application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \"eGy9q-lDQBGKz-bgdz1U6q\",\n" +
+                        "  \"deviceUUID\" : \""+Properties.deviceuuid2+"\",\n" +
                         "  \"appVersion\" : \"2.2.7\"\n" +
                         "}")
                 .when()
@@ -44,22 +44,19 @@ public class LoginTest  extends BaseTest{
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_node_2() throws SQLException, ClassNotFoundException {
         String loginSMSCode = getLoginSMSFromDB("380685448615");
         Response res =  given()
-                .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
+                .header("deviceuuid", Properties.deviceuuid2)
                 .header("site", Properties.site)
-                .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
+                .header("authorization", Properties.authorizationBasic)
                 .header("content-type", "application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \"eGy9q-lDQBGKz-bgdz1U6q\",\n" +
+                        "  \"deviceUUID\" : \""+Properties.deviceuuid2+"\",\n" +
                         "  \"appVersion\" : \"2.2.7\",\n" +
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
                 .when()
                 .post( Properties.devUrl+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe");
-//                .then()
-//                .statusCode(200)
-//                .log().all();
         cliSessionId = res.getHeader("cliSessionId");
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
@@ -70,9 +67,9 @@ public class LoginTest  extends BaseTest{
     @Test(priority = 3)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
-                .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
+                .header("deviceuuid", Properties.deviceuuid2)
                 .header("site", Properties.site)
-                .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
+                .header("authorization", Properties.authorizationBasic)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"clientProfile/clientInfo2")
@@ -86,9 +83,9 @@ public class LoginTest  extends BaseTest{
     @Test(priority = 4)
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
-                .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
+                .header("deviceuuid", Properties.deviceuuid2)
                 .header("site", Properties.site)
-                .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
+                .header("authorization", Properties.authorizationBasic)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"clientProfile/clientConfig")
@@ -106,9 +103,9 @@ public class LoginTest  extends BaseTest{
     @Test(priority = 5)
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
-                .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
+                .header("deviceuuid", Properties.deviceuuid2)
                 .header("site", Properties.site)
-                .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
+                .header("authorization", Properties.authorizationBasic)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"accounts/clientDiPAccounts2?walletId=null")
@@ -119,30 +116,30 @@ public class LoginTest  extends BaseTest{
                 .log().all();
     }
 
-    @Test(enabled = false)//already exists
-    public void test_ClientServices_v1_references_AppConfig(){
-        given()
-                .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
-                .header("site", Properties.site)
-                .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
-                .header("clisessionid", ""+cliSessionId+"")
-                .when()
-                .get(Properties.devUrl+"references/appConfig?platform=android&version=2.2.7&langCode=ukr")
-                .then()
-                .statusCode(200)
-                .body("queryValidator", equalTo("b28f29ba8c1d5ddf7545d74b58c9fdfb58027f2cd2d30615f39950d5d138cba7"))
-                .body("countryHash", notNullValue())
-                .body("langHash", notNullValue())
-                .body("topCountriesHash", notNullValue())
-                .log().all();
-    }
+//    @Test(enabled = false)//already exists
+//    public void test_ClientServices_v1_references_AppConfig(){
+//        given()
+//                .header("deviceuuid", Properties.deviceuuid2)
+//                .header("site", Properties.site)
+//                .header("authorization", Properties.authorizationBasic)
+//                .header("clisessionid", ""+cliSessionId+"")
+//                .when()
+//                .get(Properties.devUrl+"references/appConfig?platform=android&version=2.2.7&langCode=ukr")
+//                .then()
+//                .statusCode(200)
+//                .body("queryValidator", equalTo("b28f29ba8c1d5ddf7545d74b58c9fdfb58027f2cd2d30615f39950d5d138cba7"))
+//                .body("countryHash", notNullValue())
+//                .body("langHash", notNullValue())
+//                .body("topCountriesHash", notNullValue())
+//                .log().all();
+//    }
 
     @Test(priority = 6)
     public void test_ClientServices_v1_tile_getMessage2(){
         given()
-                .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
+                .header("deviceuuid", Properties.deviceuuid2)
                 .header("site", Properties.site)
-                .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
+                .header("authorization", Properties.authorizationBasic)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"tile/getMessages2")

@@ -1,12 +1,8 @@
 <suite name = "Automation Suite" allow-return-values="true" verbose="3" parallel="classes" thread-count="1">
-<!--<test name = "testngTest" parallel="classes" thread-count="2">-->
  <test name = "testngTest">
      <classes>
-
          <class name="RegistrationTest" />
-
+         <class name="LoginTest" />
      </classes>
-
  </test>
-
 </suite>

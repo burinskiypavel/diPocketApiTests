@@ -8,4 +8,6 @@ public class Properties {
     public static String devUrl = "https://dipocket3.intranet:8900/ClientServices/v1/";
     public static String firstName = "Pavel";
     public static String lastName = "Burinsky";
+    public static String authorizationBasic = "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==";
+    public static String deviceuuid2 = "eGy9q-lDQBGKz-bgdz1U6q";
 }
