@@ -35,7 +35,7 @@ public class LoginTest  extends BaseTest{
                 .when()
                 .post( Properties.devUrl+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
                 .then()
-                .statusCode(200)
+                .statusCode(400)
                 .body("errCode", equalTo("DIP-00591"))
                 .log().all();
     }
@@ -73,7 +73,7 @@ public class LoginTest  extends BaseTest{
                 .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
                 .header("site", Properties.site)
                 .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
-                .header("clisessionid", "5116470")
+                .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"clientProfile/clientInfo2")
                 .then()
@@ -89,7 +89,7 @@ public class LoginTest  extends BaseTest{
                 .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
                 .header("site", Properties.site)
                 .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
-                .header("clisessionid", "5116470")
+                .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"clientProfile/clientConfig")
                 .then()
@@ -109,7 +109,7 @@ public class LoginTest  extends BaseTest{
                 .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
                 .header("site", Properties.site)
                 .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
-                .header("clisessionid", "5116470")
+                .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"accounts/clientDiPAccounts2?walletId=null")
                 .then()
@@ -119,13 +119,13 @@ public class LoginTest  extends BaseTest{
                 .log().all();
     }
 
-    @Test(enabled = false)
+    @Test(enabled = false)//already exists
     public void test_ClientServices_v1_references_AppConfig(){
         given()
                 .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
                 .header("site", Properties.site)
                 .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
-                .header("clisessionid", "5116470")
+                .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"references/appConfig?platform=android&version=2.2.7&langCode=ukr")
                 .then()
@@ -143,7 +143,7 @@ public class LoginTest  extends BaseTest{
                 .header("deviceuuid", "eGy9q-lDQBGKz-bgdz1U6q")
                 .header("site", Properties.site)
                 .header("authorization", "Basic MzgwNjg1NDQ4NjE1OjI0Njc0MA==")
-                .header("clisessionid", "5116470")
+                .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(Properties.devUrl+"tile/getMessages2")
                 .then()
