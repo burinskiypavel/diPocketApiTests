@@ -1,3 +1,5 @@
+package base;
+
 import java.sql.*;
 
 public class BaseTest {

@@ -1,4 +1,5 @@
 import Config.Properties;
+import base.BaseTest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
-public class LoginTest  extends BaseTest{
+public class LoginTest  extends BaseTest {
     String cliSessionId = null;
 
     @BeforeTest

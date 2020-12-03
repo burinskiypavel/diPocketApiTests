@@ -1,4 +1,7 @@
+package registration;
+
 import Config.Properties;
+import base.BaseTest;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
@@ -16,7 +19,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 
-public class RegistrationTest extends BaseTest{
+public class RegistrationTest extends BaseTest {
     String smsCode = null;
 
     @BeforeClass

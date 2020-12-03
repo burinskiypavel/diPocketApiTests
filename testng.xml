@@ -3,12 +3,12 @@
 <suite name="TestingSuite" parallel="none">
 <!--    <test name="Test1">-->
 <!--        <classes>-->
-<!--            <class name="RegistrationTest"/>-->
+<!--            <class name="registration.RegistrationTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
     <test name="DiPocketAPITests">
         <classes>
-            <class name="RegistrationTest"/>
+            <class name="registration.RegistrationTest"/>
             <class name="LoginTest"/>
         </classes>
     </test>
