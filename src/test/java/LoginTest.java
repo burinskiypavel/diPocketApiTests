@@ -19,8 +19,8 @@ public class LoginTest  extends BaseTest{
         RestAssured.useRelaxedHTTPSValidation();
     }
 
-    @Test(priority = 1)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp_node_1(){
+    @Test(priority = 18)
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
                 .header("site", Properties.site)
@@ -40,8 +40,8 @@ public class LoginTest  extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 2)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp_node_2() throws SQLException, ClassNotFoundException {
+    @Test(priority = 19)
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
         String loginSMSCode = getLoginSMSFromDB("380685448615");
         Response res =  given()
                 .header("deviceuuid", Properties.deviceuuid2)
@@ -64,7 +64,7 @@ public class LoginTest  extends BaseTest{
         Assert.assertEquals(StatusCode, 200);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 20)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
@@ -80,7 +80,7 @@ public class LoginTest  extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 21)
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
@@ -100,7 +100,7 @@ public class LoginTest  extends BaseTest{
                 .log().all();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 22)
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
@@ -134,7 +134,7 @@ public class LoginTest  extends BaseTest{
 //                .log().all();
 //    }
 
-    @Test(priority = 6)
+    @Test(priority = 23)
     public void test_ClientServices_v1_tile_getMessage2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)

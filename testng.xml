@@ -1,8 +1,15 @@
-<suite name = "Automation Suite" allow-return-values="true" verbose="3" parallel="classes" thread-count="1">
- <test name = "testngTest">
-     <classes>
-         <class name="RegistrationTest" />
-         <class name="LoginTest" />
-     </classes>
- </test>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestingSuite" parallel="none">
+<!--    <test name="Test1">-->
+<!--        <classes>-->
+<!--            <class name="RegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="DiPocketAPITests">
+        <classes>
+            <class name="RegistrationTest"/>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
 </suite>
