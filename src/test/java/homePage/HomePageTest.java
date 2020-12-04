@@ -1,4 +1,6 @@
-import Config.Properties;
+package homePage;
+
+import config.Properties;
 import base.BaseTest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -12,7 +14,7 @@ import java.util.Arrays;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
-public class LoginTest  extends BaseTest {
+public class HomePageTest extends BaseTest {
     String cliSessionId = null;
 
     @BeforeTest
@@ -43,7 +45,7 @@ public class LoginTest  extends BaseTest {
 
     @Test(priority = 19)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = getLoginSMSFromDB("380685448615");
+        String loginSMSCode = getLoginSMSFromDB("380685448615", Properties.deviceuuid2);
         Response res =  given()
                 .header("deviceuuid", Properties.deviceuuid2)
                 .header("site", Properties.site)

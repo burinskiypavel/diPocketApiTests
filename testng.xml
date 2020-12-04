@@ -9,7 +9,7 @@
     <test name="DiPocketAPITests">
         <classes>
             <class name="registration.RegistrationTest"/>
-            <class name="LoginTest"/>
+            <class name="homePage.HomePageTest"/>
         </classes>
     </test>
 </suite>

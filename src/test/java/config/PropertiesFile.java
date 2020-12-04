@@ -1,4 +1,4 @@
-package Config;
+package config;
 
 import java.io.*;
 import java.util.Properties;
@@ -17,14 +17,14 @@ public class PropertiesFile {
 
     public static void getProperties() throws IOException {
 
-        InputStream input = new FileInputStream(projectPath+"/src/test/java/Config/config.properties");
+        InputStream input = new FileInputStream("config.properties");
         prop.load(input);
         String browser = prop.getProperty("browser");
         System.out.println(browser);
     }
 
     public static void setProperties() throws IOException {
-        OutputStream output = new FileOutputStream(projectPath+"/src/test/java/Config/config.properties");
+        OutputStream output = new FileOutputStream(projectPath+"/src/test/java/config/config.properties");
         prop.setProperty("browser", "firefox");
         prop.store(output, null);
     }
