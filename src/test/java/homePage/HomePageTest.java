@@ -119,24 +119,6 @@ public class HomePageTest extends BaseTest {
                 .log().all();
     }
 
-//    @Test(enabled = false)//already exists
-//    public void test_ClientServices_v1_references_AppConfig(){
-//        given()
-//                .header("deviceuuid", Properties.deviceuuid2)
-//                .header("site", Properties.site)
-//                .header("authorization", Properties.authorizationBasic)
-//                .header("clisessionid", ""+cliSessionId+"")
-//                .when()
-//                .get(Properties.devUrl+"references/appConfig?platform=android&version=2.2.7&langCode=ukr")
-//                .then()
-//                .statusCode(200)
-//                .body("queryValidator", equalTo("b28f29ba8c1d5ddf7545d74b58c9fdfb58027f2cd2d30615f39950d5d138cba7"))
-//                .body("countryHash", notNullValue())
-//                .body("langHash", notNullValue())
-//                .body("topCountriesHash", notNullValue())
-//                .log().all();
-//    }
-
     @Test(priority = 23)
     public void test_ClientServices_v1_tile_getMessage2(){
         given()

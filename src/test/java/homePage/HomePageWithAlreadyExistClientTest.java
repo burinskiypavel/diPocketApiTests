@@ -5,6 +5,7 @@ import config.Properties;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -17,6 +18,13 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class HomePageWithAlreadyExistClientTest extends BaseTest {
     String cliSessionId = null;
+    static java.util.Properties prop = new java.util.Properties();
+
+    @BeforeClass
+    public void start() throws SQLException, ClassNotFoundException {
+        deleteClientDeviceFromDB("380980316499-AutoTest-Login");
+        prop = loadDataFromConfigFile();
+    }
 
     @BeforeTest
     public void setUp(){
@@ -120,24 +128,6 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
                 .body("accounts.ccy", equalTo(Arrays.asList("PLN")))
                 .log().all();
     }
-
-//    @Test(enabled = false)//already exists
-//    public void test_ClientServices_v1_references_AppConfig(){
-//        given()
-//                .header("deviceuuid", Properties.deviceuuid2)
-//                .header("site", Properties.site)
-//                .header("authorization", Properties.authorizationBasic2)
-//                .header("clisessionid", ""+cliSessionId+"")
-//                .when()
-//                .get(Properties.devUrl+"references/appConfig?platform=android&version=2.2.7&langCode=ukr")
-//                .then()
-//                .statusCode(200)
-//                .body("queryValidator", equalTo("b28f29ba8c1d5ddf7545d74b58c9fdfb58027f2cd2d30615f39950d5d138cba7"))
-//                .body("countryHash", notNullValue())
-//                .body("langHash", notNullValue())
-//                .body("topCountriesHash", notNullValue())
-//                .log().all();
-//    }
 
     @Test(priority = 23)
     public void test_ClientServices_v1_tile_getMessage2(){
