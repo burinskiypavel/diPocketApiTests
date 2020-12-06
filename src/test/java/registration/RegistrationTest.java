@@ -87,17 +87,17 @@ public class RegistrationTest extends BaseTest {
 
     @Test(priority = 5)
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
-//        given()
-//                .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
-//                .header("site", prop.getProperty("mobile.site"))
-//                .body("{\n" +
-//                        "  \"smsNumber\" : 1\n" +
-//                        "}")
-//                .when()
-//                .post(prop.getProperty("devUrl")+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+prop.getProperty("mobile.registration.phoneNumber")+"")
-//                .then()
-//                .statusCode(200)
-//                .log().all();
+        given()
+                .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
+                .header("site", prop.getProperty("mobile.site"))
+                .body("{\n" +
+                        "  \"smsNumber\" : 1\n" +
+                        "}")
+                .when()
+                .post(prop.getProperty("devUrl")+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+prop.getProperty("mobile.registration.phoneNumber")+"")
+                .then()
+                .statusCode(200)
+                .log().all();
     }
 
     @Test(priority = 6)

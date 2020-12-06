@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 public class ApplicationManager {
     static java.util.Properties prop = new java.util.Properties();
     static String projectPath = System.getProperty("user.dir");
+    //private MailHelper mailHelper;
 
 
     public java.util.Properties loadDataFromConfigFile(){
@@ -19,4 +20,11 @@ public class ApplicationManager {
         }
         return prop;
     }
+
+//    public MailHelper mail(){
+//        if(mailHelper == null){
+//            mailHelper = new MailHelper(this);
+//        }
+//        return mailHelper;
+//    }
 }
