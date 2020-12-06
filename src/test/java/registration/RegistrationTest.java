@@ -21,7 +21,7 @@ public class RegistrationTest extends BaseTest {
 
     @BeforeClass
     public void start() throws SQLException, ClassNotFoundException {
-        deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"));
+        deleteClientFromDB(Properties.phoneNumber);
         prop = loadDataFromConfigFile();
     }
 
