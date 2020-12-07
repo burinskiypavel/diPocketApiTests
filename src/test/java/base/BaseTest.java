@@ -4,12 +4,15 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.testng.Assert;
+import org.apache.commons.lang3.RandomStringUtils;
+
 
 import javax.net.ssl.SSLContext;
 import java.security.KeyManagementException;
@@ -74,10 +77,9 @@ public class BaseTest extends ApplicationManager {
 //    }
 
     public void deleteClientFromDB(String number) throws SQLException, ClassNotFoundException {
-        String dbUrl = "jdbc:oracle:thin:@dipocket1.intranet/dip";
-
-        String username = "Dipocket";
-        String password = "c67";
+        String dbUrl = "jdbc:oracle:thin:@"+prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
 
         String query2 = "commit";
 
@@ -96,9 +98,9 @@ public class BaseTest extends ApplicationManager {
     }
 
     public String getClientDeviceFromDB(String number, String uuid) throws ClassNotFoundException, SQLException {
-        String dbUrl = "jdbc:oracle:thin:@dipocket1.intranet/dip";
-        String username = "Dipocket";
-        String password = "c67";
+        String dbUrl = "jdbc:oracle:thin:@"+prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
         String query = "select ID from CLIENTDEVICE\n" +
                 "where uuid = '"+uuid+"'\n" +
                 "and clientid = (select id from client where MAINPHONE = '"+number+"' and site = 'DIPOCKET')";
@@ -124,9 +126,9 @@ public class BaseTest extends ApplicationManager {
     public String getLoginSMSFromDB(String number, String uuid) throws ClassNotFoundException, SQLException {
         String clienDevice = getClientDeviceFromDB(number, uuid);
 
-        String dbUrl = "jdbc:oracle:thin:@dipocket1.intranet/dip";
-        String username = "Dipocket";
-        String password = "c67";
+        String dbUrl = "jdbc:oracle:thin:@"+prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
         String query = "select CODE from VERIFYCODE where SRCID = '"+clienDevice+"'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -148,9 +150,9 @@ public class BaseTest extends ApplicationManager {
     }
 
     public void deleteClientDeviceFromDB(String clientDevice) throws ClassNotFoundException, SQLException {
-        String dbUrl = "jdbc:oracle:thin:@dipocket1.intranet/dip";
-        String username = "Dipocket";
-        String password = "c67";
+        String dbUrl = "jdbc:oracle:thin:@"+prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
         String query = "delete from clientdevice where uuid = '"+clientDevice+"'";
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
@@ -202,5 +204,10 @@ public class BaseTest extends ApplicationManager {
         //bearer = postResponse.getBody().getObject().getString("bearer");
         //System.out.println("bearer " + postResponse.getBody().getObject().getString("bearer"));
         Assert.assertNotNull(postResponse.getBody());
+    }
+
+    public String generateRandomString(int count){
+        String randomString =  RandomStringUtils.random(count, true, true);
+        return randomString;
     }
 }

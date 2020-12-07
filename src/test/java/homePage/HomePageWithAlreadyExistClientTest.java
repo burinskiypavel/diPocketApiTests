@@ -22,8 +22,8 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
 
     @BeforeClass
     public void start() throws SQLException, ClassNotFoundException {
-        deleteClientDeviceFromDB("380980316499-AutoTest-Login");
         prop = loadDataFromConfigFile();
+        deleteClientDeviceFromDB("380980316499-AutoTest-Login");
     }
 
     @BeforeTest

@@ -21,8 +21,8 @@ public class RegistrationTest extends BaseTest {
 
     @BeforeClass
     public void start() throws SQLException, ClassNotFoundException {
-        deleteClientFromDB(Properties.phoneNumber);
         prop = loadDataFromConfigFile();
+        //deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"));
     }
 
     @BeforeTest
@@ -87,17 +87,17 @@ public class RegistrationTest extends BaseTest {
 
     @Test(priority = 5)
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
-        given()
-                .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", prop.getProperty("mobile.site"))
-                .body("{\n" +
-                        "  \"smsNumber\" : 1\n" +
-                        "}")
-                .when()
-                .post(prop.getProperty("devUrl")+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+prop.getProperty("mobile.registration.phoneNumber")+"")
-                .then()
-                .statusCode(200)
-                .log().all();
+//        given()
+//                .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
+//                .header("site", prop.getProperty("mobile.site"))
+//                .body("{\n" +
+//                        "  \"smsNumber\" : 1\n" +
+//                        "}")
+//                .when()
+//                .post(prop.getProperty("devUrl")+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+prop.getProperty("mobile.registration.phoneNumber")+"")
+//                .then()
+//                .statusCode(200)
+//                .log().all();
     }
 
     @Test(priority = 6)
@@ -167,7 +167,7 @@ public class RegistrationTest extends BaseTest {
                 .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", prop.getProperty("mobile.site"))
                 .when()
-                .get(prop.getProperty("devUrl")+"userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum="+Properties.phoneNumber+"&code="+smsCode+"")
+                .get(prop.getProperty("devUrl")+"userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum="+prop.getProperty("mobile.registration.phoneNumber")+"&code="+smsCode+"")
                 .then()
                 .statusCode(200)
                 .body("isInvited", equalTo(false))
@@ -348,7 +348,7 @@ public class RegistrationTest extends BaseTest {
                         "  \"firstName\" : \""+prop.getProperty("mobile.registration.firstName")+"\",\n" +
                         "  \"lastName\" : \""+prop.getProperty("mobile.registration.lastName")+"\",\n" +
                         "  \"mainPhone\" : \""+prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"email\" : \"assetspb@gmail.com\",\n" +
+                        "  \"email\" : \""+prop.getProperty("mobile.registration.email")+"\",\n" +
                         "  \"countryId\" : 616,\n" +
                         "  \"currencyId\" : 985,\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
@@ -415,14 +415,14 @@ public class RegistrationTest extends BaseTest {
                         "  \"firstName\" : \""+prop.getProperty("mobile.registration.firstName")+"\",\n" +
                         "  \"lastName\" : \""+prop.getProperty("mobile.registration.lastName")+"\",\n" +
                         "  \"mainPhone\" : \""+prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"email\" : \"assetspb@gmail.com\",\n" +
+                        "  \"email\" : \""+prop.getProperty("mobile.registration.email")+"\",\n" +
                         "  \"countryId\" : 616,\n" +
                         "  \"currencyId\" : 985,\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
                         "  \"secAnswer\" : \"***\",\n" +
 //                        "  \"pin\" : \"******\",\n" +
-                        "  \"pin\" : \"246740\",\n" +                  //generate буквы, цифры 8-9 символов
+                        "  \"pin\" : \""+generateRandomString(8)+"\",\n" +
                         "  \"stepNo\" : 4,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
                         "  \"address\" : {\n" +
