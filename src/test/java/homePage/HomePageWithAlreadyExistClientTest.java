@@ -23,7 +23,7 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
     @BeforeClass
     public void start() throws SQLException, ClassNotFoundException {
         prop = loadDataFromConfigFile();
-        deleteClientDeviceFromDB("380980316499-AutoTest-Login");
+        deleteClientDeviceFromDB(prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @BeforeTest
@@ -34,14 +34,14 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
     @Test(priority = 18)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp(){
         given()
-                .header("deviceuuid", Properties.deviceuuid3)
-                .header("site", Properties.site)
+                .header("deviceuuid", prop.getProperty("mobile.login.deviceuuid"))
+                .header("site", prop.getProperty("mobile.site"))
                 .header("authorization", Properties.authorizationBasic2)
                 .header("content-type", "application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+Properties.deviceuuid3+"\",\n" +
+                        "  \"deviceUUID\" : \""+prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
                         "  \"appVersion\" : \"2.2.7\"\n" +
                         "}")
                 .when()
@@ -54,16 +54,16 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
 
     @Test(priority = 19)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = getLoginSMSFromDB("380980316499", Properties.deviceuuid3);
+        String loginSMSCode = getLoginSMSFromDB("380980316499", prop.getProperty("mobile.login.deviceuuid"));
         Response res =  given()
-                .header("deviceuuid", Properties.deviceuuid3)
-                .header("site", Properties.site)
+                .header("deviceuuid", prop.getProperty("mobile.login.deviceuuid"))
+                .header("site", prop.getProperty("mobile.site"))
                 .header("authorization", Properties.authorizationBasic2)
                 .header("content-type", "application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+Properties.deviceuuid3+"\",\n" +
+                        "  \"deviceUUID\" : \""+prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
                         "  \"appVersion\" : \"2.2.7\",\n" +
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
@@ -79,7 +79,7 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
     @Test(priority = 20)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
-                .header("deviceuuid", Properties.deviceuuid3)
+                .header("deviceuuid", prop.getProperty("mobile.login.deviceuuid"))
                 .header("site", Properties.site)
                 .header("authorization", Properties.authorizationBasic2)
                 .header("clisessionid", ""+cliSessionId+"")
@@ -95,7 +95,7 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
     @Test(priority = 21)
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
-                .header("deviceuuid", Properties.deviceuuid3)
+                .header("deviceuuid", prop.getProperty("mobile.login.deviceuuid"))
                 .header("site", Properties.site)
                 .header("authorization", Properties.authorizationBasic2)
                 .header("clisessionid", ""+cliSessionId+"")
@@ -115,7 +115,7 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
     @Test(priority = 22)
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
-                .header("deviceuuid", Properties.deviceuuid3)
+                .header("deviceuuid", prop.getProperty("mobile.login.deviceuuid"))
                 .header("site", Properties.site)
                 .header("authorization", Properties.authorizationBasic2)
                 .header("clisessionid", ""+cliSessionId+"")
@@ -131,7 +131,7 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
     @Test(priority = 23)
     public void test_ClientServices_v1_tile_getMessage2(){
         given()
-                .header("deviceuuid", Properties.deviceuuid3)
+                .header("deviceuuid", prop.getProperty("mobile.login.deviceuuid"))
                 .header("site", Properties.site)
                 .header("authorization", Properties.authorizationBasic2)
                 .header("clisessionid", ""+cliSessionId+"")
