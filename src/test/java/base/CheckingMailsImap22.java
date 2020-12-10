@@ -4,25 +4,18 @@ import com.sun.mail.util.BASE64DecoderStream;
 import io.restassured.internal.util.IOUtils;
 import org.apache.commons.codec.binary.Base64;
 
-import javax.activation.DataSource;
 import javax.mail.*;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimePart;
-import javax.mail.util.ByteArrayDataSource;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.util.Base64.Decoder.*;
 import java.util.Properties;
 
 
-
-public class CheckingMailsImap {
-    public static void check(String host, String storeType, String user,
+public class CheckingMailsImap22 {
+    public static String check(String host, String storeType, String user,
                              String password) throws MessagingException, IOException {
+        String url = null;
+
         try {
 
             //create properties field
@@ -65,7 +58,7 @@ public class CheckingMailsImap {
                 if (contentType.contains("multipart")) {
                     Multipart multiPart = (Multipart) message.getContent();
                     int numberOfParts = multiPart.getCount();
-                    for (int partCount = 0; partCount < numberOfParts; partCount++) {
+                    for (int partCount = 0; partCount < numberOfParts-1; partCount++) {
 
                         MimePart part = (MimePart) multiPart.getBodyPart(partCount);
 
@@ -81,30 +74,7 @@ public class CheckingMailsImap {
                         String cutDecodedContent = null;
                         cutDecodedContent = decodedContent.substring(1410, 1668);//5064
                         System.out.println("cutDecodedContent " + cutDecodedContent);
-
-
-//                        byte[] bytes = "Hello, World!".getBytes("UTF-8");
-//                        String encoded = Base64.encodeBase64String(bytes);
-//                        byte[] decoded = Base64.decodeBase64(encoded);
-
-                        //String str = new String(decoded);
-                        //System.out.println(str);
-
-
-                        byte[] bytes2 = cutDecodedContent.getBytes("UTF-8");
-                        //String encoded2 = Base64.encodeBase64String(bytes2);
-                        //byte[] decoded22 = Base64.decodeBase64(encoded2);
-                        byte[] decoded222 = Base64.decodeBase64(bytes2);
-
-                        String email = new String(decoded222);
-                        System.out.println(email);
-
-//                        String link = email.substring(1090, 1348);
-//                        System.out.println("link " + link);
-
-
-                        String decoded2 = Base64.decodeBase64(decodedContent).toString();
-                        System.out.println("decoded2 " + decoded2);
+                        url = cutDecodedContent;
 
                         String disposition = part.getDisposition();
 
@@ -147,6 +117,7 @@ public class CheckingMailsImap {
             e.printStackTrace();
         }
 
+        return url;
     }
 
 
@@ -160,7 +131,9 @@ public class CheckingMailsImap {
         String username = "testdipocket@gmail.com";// pavelburinskiy
         String password = "password1<";//reset246740
 
-        check(host, mailStoreType, username, password);
+        String link = check(host, mailStoreType, username, password);
+
+        System.out.println("test_test " + link);
 
     }
 }

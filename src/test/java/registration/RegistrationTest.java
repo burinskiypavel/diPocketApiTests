@@ -1,5 +1,7 @@
 package registration;
 
+import base.CheckingMailsImap;
+import base.CheckingMailsImap22;
 import config.Properties;
 import base.BaseTest;
 import io.restassured.RestAssured;
@@ -9,6 +11,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
@@ -22,7 +26,7 @@ public class RegistrationTest extends BaseTest {
     @BeforeClass
     public void start() throws SQLException, ClassNotFoundException {
         prop = loadDataFromConfigFile();
-        //deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"));
+        deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"));
     }
 
     @BeforeTest
@@ -87,17 +91,17 @@ public class RegistrationTest extends BaseTest {
 
     @Test(priority = 5)
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
-//        given()
-//                .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
-//                .header("site", prop.getProperty("mobile.site"))
-//                .body("{\n" +
-//                        "  \"smsNumber\" : 1\n" +
-//                        "}")
-//                .when()
-//                .post(prop.getProperty("devUrl")+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+prop.getProperty("mobile.registration.phoneNumber")+"")
-//                .then()
-//                .statusCode(200)
-//                .log().all();
+        given()
+                .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
+                .header("site", prop.getProperty("mobile.site"))
+                .body("{\n" +
+                        "  \"smsNumber\" : 1\n" +
+                        "}")
+                .when()
+                .post(prop.getProperty("devUrl")+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+prop.getProperty("mobile.registration.phoneNumber")+"")
+                .then()
+                .statusCode(200)
+                .log().all();
     }
 
     @Test(priority = 6)
@@ -404,7 +408,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test(priority = 17)
-    public void test_ClientServices_v1_userRegistration_registerNewClient2() {
+    public void test_ClientServices_v1_userRegistration_registerNewClient2(){
         given()
                 .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", prop.getProperty("mobile.site"))
@@ -466,6 +470,22 @@ public class RegistrationTest extends BaseTest {
                 .then()
                 .statusCode(200)
                 .body("resultCode", equalTo(0))
+                .log().all();
+
+    }
+
+    @Test(priority = 18)
+    public void testCheckEmailLink() throws IOException, MessagingException, InterruptedException {
+        Thread.sleep(5000);
+        String link = CheckingMailsImap22.check("pop.gmail.com", "pop3", "testdipocket@gmail.com", "password1<");
+        System.out.println("link_link " + link);
+        given()
+                .when()
+                .get(link)
+                .then()
+                .statusCode(200)
+                .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"))
+                .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
                 .log().all();
     }
 
