@@ -1,11 +1,10 @@
 package base;
 
-import java.util.Properties;
-
 import javax.mail.*;
 import javax.mail.internet.MimeBodyPart;
+import java.util.Properties;
 
-public class CheckingMails {
+public class CheckingMailsIMAP2 {
     public static void check(String host, String storeType, String user,
                              String password)
     {
@@ -14,13 +13,13 @@ public class CheckingMails {
             //create properties field
             Properties properties = new Properties();
 
-            properties.put("mail.pop3.host", host);
-            properties.put("mail.pop3.port", "995");
-            properties.put("mail.pop3.starttls.enable", "true");
+            properties.put("mail.imap.host", host);
+            properties.put("mail.imap.port", "993");
+            properties.put("mail.imap.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
 
             //create the POP3 store object and connect with the pop server
-            Store store = emailSession.getStore("pop3s");
+            Store store = emailSession.getStore("imaps");
 
             store.connect(host, user, password);
 
