@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import io.restassured.RestAssured;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -11,7 +12,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.testng.Assert;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 
 
 import javax.net.ssl.SSLContext;
@@ -21,6 +23,18 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class BaseTest extends ApplicationManager {
+   public static java.util.Properties prop = new java.util.Properties();
+
+
+    @BeforeClass
+    public void start() {
+        prop = loadDataFromConfigFile();
+    }
+
+    @BeforeTest
+    public void setUp(){
+        RestAssured.useRelaxedHTTPSValidation();
+    }
 
     public String getSMSCodeFromDB(String number) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+prop.getProperty("db.url")+"";

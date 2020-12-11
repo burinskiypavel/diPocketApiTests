@@ -16,18 +16,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
 public class HomePageTest extends BaseTest {
-    static java.util.Properties prop = new java.util.Properties();
     String cliSessionId = null;
-
-    @BeforeClass
-    public void start() {
-        prop = loadDataFromConfigFile();
-    }
-
-    @BeforeTest
-    public void setUp(){
-        RestAssured.useRelaxedHTTPSValidation();
-    }
 
     @Test(priority = 18)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp(){

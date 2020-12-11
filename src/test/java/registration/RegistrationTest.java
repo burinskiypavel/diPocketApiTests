@@ -19,22 +19,11 @@ import static org.hamcrest.CoreMatchers.hasItems;
 
 public class RegistrationTest extends BaseTest {
     String smsCode = null;
-    static java.util.Properties prop = new java.util.Properties();
-
-    @BeforeClass
-    public void start() throws SQLException, ClassNotFoundException {
-        prop = loadDataFromConfigFile();
-        //deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"));
-    }
-
-    @BeforeTest
-    public void setUp(){
-        RestAssured.useRelaxedHTTPSValidation();
-    }
 
     @Test(priority = 1)
-    public void test_ClientServices_v1_references_availableCountries(){
-         given()
+    public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
+        deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"));
+        given()
                 .header("deviceuuid", prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", prop.getProperty("mobile.site"))
                 .when()

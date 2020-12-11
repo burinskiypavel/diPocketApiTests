@@ -18,21 +18,10 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class HomePageWithAlreadyExistClientTest extends BaseTest {
     String cliSessionId = null;
-    static java.util.Properties prop = new java.util.Properties();
-
-    @BeforeClass
-    public void start() throws SQLException, ClassNotFoundException {
-        prop = loadDataFromConfigFile();
-        deleteClientDeviceFromDB(prop.getProperty("mobile.login.deviceuuid"));
-    }
-
-    @BeforeTest
-    public void setUp(){
-        RestAssured.useRelaxedHTTPSValidation();
-    }
 
     @Test(priority = 18)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp(){
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
+        deleteClientDeviceFromDB(prop.getProperty("mobile.login.deviceuuid"));
         given()
                 .header("deviceuuid", prop.getProperty("mobile.login.deviceuuid"))
                 .header("site", prop.getProperty("mobile.site"))
