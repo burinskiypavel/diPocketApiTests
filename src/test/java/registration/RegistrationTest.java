@@ -1,8 +1,6 @@
 package registration;
 
-import base.CheckingMailsImap;
 import base.CheckingMailsImap22;
-import config.Properties;
 import base.BaseTest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -26,7 +24,7 @@ public class RegistrationTest extends BaseTest {
     @BeforeClass
     public void start() throws SQLException, ClassNotFoundException {
         prop = loadDataFromConfigFile();
-        deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"));
+        //deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"));
     }
 
     @BeforeTest
@@ -475,16 +473,16 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test(priority = 18)
-    public void testCheckEmailLink() throws IOException, MessagingException, InterruptedException {
-        String link = CheckingMailsImap22.check("pop.gmail.com", "pop3", "testdipocket@gmail.com", "password1<");
+    public void testCheckEmailLink() throws InterruptedException {
+        String link = CheckingMailsImap22.check("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
         System.out.println("link_link " + link);
         given()
                 .when()
                 .get(link)
                 .then()
                 .statusCode(200)
-                .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"))
                 .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
+                .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"))
                 .log().all();
     }
 

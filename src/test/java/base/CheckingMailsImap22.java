@@ -12,14 +12,13 @@ import java.util.Properties;
 
 
 public class CheckingMailsImap22 {
-    public static String check(String host, String storeType, String user,
-                             String password) throws MessagingException, IOException, InterruptedException {
+    public static String check(String host, String user,
+                             String password) throws InterruptedException {
         String url = null;
-        Thread.sleep(4000);
+        Thread.sleep(3000);
 
         try {
 
-            //create properties field
             Properties properties = new Properties();
 
             properties.put("mail.imap.host", host);
@@ -27,16 +26,13 @@ public class CheckingMailsImap22 {
             properties.put("mail.imap.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
 
-            //create the POP3 store object and connect with the pop server
             Store store = emailSession.getStore("imaps");
 
             store.connect(host, user, password);
 
-            //create the folder object and open it
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
 
-            // retrieve the messages from the folder in an array and print it
             Message[] messages = emailFolder.getMessages();
             System.out.println("messages.length---" + messages.length);
 
@@ -108,7 +104,6 @@ public class CheckingMailsImap22 {
 
             }
 
-            //close the store and folder objects
             emailFolder.close(false);
             store.close();
 
@@ -132,7 +127,7 @@ public class CheckingMailsImap22 {
         String username = "testdipocket@gmail.com";// pavelburinskiy
         String password = "password1<";//reset246740
 
-        String link = check(host, mailStoreType, username, password);
+        String link = check(host,  username, password);
 
         System.out.println("test_test " + link);
 
