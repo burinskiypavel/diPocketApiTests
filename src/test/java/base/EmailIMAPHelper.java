@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-public class CheckingMailsImap22 {
-    public static String check(String host, String user,
+public class EmailIMAPHelper {
+    public static String getLinkFromEmailAfterRegistration(String host, String user,
                              String password) throws InterruptedException {
-        String url = null;
+        String emailLink = null;
         Thread.sleep(3000);
 
         try {
@@ -70,8 +70,8 @@ public class CheckingMailsImap22 {
 
                         String cutDecodedContent = null;
                         cutDecodedContent = decodedContent.substring(1410, 1668);//5064
-                        System.out.println("cutDecodedContent " + cutDecodedContent);
-                        url = cutDecodedContent;
+                        emailLink = cutDecodedContent;
+                        System.out.println("emailLink " + emailLink);
 
                         String disposition = part.getDisposition();
 
@@ -113,7 +113,7 @@ public class CheckingMailsImap22 {
             e.printStackTrace();
         }
 
-        return url;
+        return emailLink;
     }
 
 
@@ -127,7 +127,7 @@ public class CheckingMailsImap22 {
         String username = "testdipocket@gmail.com";// pavelburinskiy
         String password = "password1<";//reset246740
 
-        String link = check(host,  username, password);
+        String link = getLinkFromEmailAfterRegistration(host,  username, password);
 
         System.out.println("test_test " + link);
 

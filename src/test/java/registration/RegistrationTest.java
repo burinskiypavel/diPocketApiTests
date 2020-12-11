@@ -1,16 +1,11 @@
 package registration;
 
-import base.CheckingMailsImap22;
+import base.EmailIMAPHelper;
 import base.BaseTest;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
@@ -462,9 +457,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test(priority = 18)
-    public void testCheckEmailLink() throws InterruptedException {
-        String link = CheckingMailsImap22.check("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
-        System.out.println("link_link " + link);
+    public void testEmailLink() throws InterruptedException {
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
         given()
                 .when()
                 .get(link)

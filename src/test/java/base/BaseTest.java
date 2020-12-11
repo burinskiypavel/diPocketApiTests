@@ -25,7 +25,6 @@ import java.sql.*;
 public class BaseTest extends ApplicationManager {
    public static java.util.Properties prop = new java.util.Properties();
 
-
     @BeforeClass
     public void start() {
         prop = loadDataFromConfigFile();
