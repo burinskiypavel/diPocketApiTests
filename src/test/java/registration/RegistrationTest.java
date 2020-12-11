@@ -476,7 +476,6 @@ public class RegistrationTest extends BaseTest {
 
     @Test(priority = 18)
     public void testCheckEmailLink() throws IOException, MessagingException, InterruptedException {
-        Thread.sleep(5000);
         String link = CheckingMailsImap22.check("pop.gmail.com", "pop3", "testdipocket@gmail.com", "password1<");
         System.out.println("link_link " + link);
         given()

@@ -13,8 +13,9 @@ import java.util.Properties;
 
 public class CheckingMailsImap22 {
     public static String check(String host, String storeType, String user,
-                             String password) throws MessagingException, IOException {
+                             String password) throws MessagingException, IOException, InterruptedException {
         String url = null;
+        Thread.sleep(4000);
 
         try {
 
@@ -124,7 +125,7 @@ public class CheckingMailsImap22 {
 
 
 
-    public static void main(String[] args) throws IOException, MessagingException {
+    public static void main(String[] args) throws IOException, MessagingException, InterruptedException {
 
         String host = "pop.gmail.com";
         String mailStoreType = "pop3";
