@@ -15,7 +15,7 @@ public class EmailIMAPHelper {
     public static String getLinkFromEmailAfterRegistration(String host, String user,
                              String password) throws InterruptedException {
         String emailLink = null;
-        Thread.sleep(3000);
+        Thread.sleep(4000);
 
         try {
 
