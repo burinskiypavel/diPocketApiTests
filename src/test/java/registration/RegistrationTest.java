@@ -465,8 +465,8 @@ public class RegistrationTest extends BaseTest {
                 .get(link)
                 .then()
                 .statusCode(200)
-                .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
                 .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"))
+                .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
                 .log().all();
     }
 

@@ -69,7 +69,8 @@ public class EmailIMAPHelper {
                         System.out.println("decodedContent" + decodedContent);
 
                         String cutDecodedContent = null;
-                        cutDecodedContent = decodedContent.substring(1410, 1668);//5064
+                        //cutDecodedContent = decodedContent.substring(1410, 1668);// for idea
+                        cutDecodedContent = decodedContent.substring(2052, 2310);//for console
                         emailLink = cutDecodedContent;
                         System.out.println("emailLink " + emailLink);
 
