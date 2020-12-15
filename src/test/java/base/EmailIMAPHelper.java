@@ -13,7 +13,7 @@ import java.util.Properties;
 
 public class EmailIMAPHelper {
     public static String getLinkFromEmailAfterRegistration(String host, String user,
-                             String password) throws InterruptedException {
+                                                           String password) throws InterruptedException {
         String emailLink = null;
         Thread.sleep(4000);
 
@@ -69,9 +69,25 @@ public class EmailIMAPHelper {
                         System.out.println("decodedContent" + decodedContent);
 
                         String cutDecodedContent = null;
+
+
+                        String[] results = decodedContent.split("href=\"");
+                        String DescriptionTxt = results[0];
+                        String linkStr = results[1];
+
+                        String[] results2 = linkStr.split("\"> ");
+
+                        String linkStr2 = results2[0];
+                        String DescriptionTxt2  = results2[1];
+
+                        //String lin = linkStr.substring(258, 2062);
+
+
                         //cutDecodedContent = decodedContent.substring(1410, 1668);// for idea
-                        cutDecodedContent = decodedContent.substring(2052, 2310);//for console
-                        emailLink = cutDecodedContent;
+                        //cutDecodedContent = decodedContent.substring(2052, 2310);//for console local
+
+                        //emailLink = cutDecodedContent;
+                        emailLink = linkStr2;
                         System.out.println("emailLink " + emailLink);
 
                         String disposition = part.getDisposition();
@@ -118,15 +134,12 @@ public class EmailIMAPHelper {
     }
 
 
-
-
-
-    public static void main(String[] args) throws IOException, MessagingException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
 
         String host = "pop.gmail.com";
         String mailStoreType = "pop3";
-        String username = "testdipocket@gmail.com";// pavelburinskiy
-        String password = "password1<";//reset246740
+        String username = "testdipocket@gmail.com";
+        String password = "password1<";
 
         String link = getLinkFromEmailAfterRegistration(host,  username, password);
 
