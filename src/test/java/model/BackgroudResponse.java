@@ -1,4 +1,4 @@
-package tds.tds_v1_bio_accept_local;
+package model;
 
 import java.util.List;
 

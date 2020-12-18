@@ -4,8 +4,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.sun.org.apache.xpath.internal.objects.XString;
 import io.restassured.RestAssured;
+import model.BackgroudResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -15,15 +15,27 @@ import org.apache.http.ssl.SSLContexts;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
-import tds.tds_v1_bio_accept_local.Entry;
+import model.Entry;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 
 import javax.net.ssl.SSLContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -303,5 +315,65 @@ public class BaseTest extends ApplicationManager {
             element.getName();
             Assert.assertEquals(element.getValue(), text);
         }
+    }
+
+    public Document initXmlParsing(String response) throws ParserConfigurationException, SAXException, IOException {
+        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document document = documentBuilder.parse(new ByteArrayInputStream(response.getBytes()));
+        System.out.println("\nRoot element :" + document.getDocumentElement().getNodeName());
+        return document;
+    }
+
+    public List<Entry> parseXmlSetNameSetValueFromEntryAddThemToCollection(Document document, BackgroudResponse backgroudResponse) {
+        List<Entry> listEnty = new ArrayList<>();
+
+        NodeList entryList = document.getElementsByTagName("entry");
+
+        System.out.println("----------------------------");
+
+        for (int i = 0; i < entryList.getLength(); i++) {
+
+            Node nNode = entryList.item(i);
+
+            System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                Element eElement = (Element) nNode;
+
+                Entry entry = new Entry();
+                entry.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                entry.setValue(eElement.getElementsByTagName("value").item(0).getTextContent());
+
+                System.out.println("name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+                System.out.println("value : " + eElement.getElementsByTagName("value").item(0).getTextContent());
+
+                listEnty.add(entry);
+                //backgroudResponse.setEntries(listEnty);
+            }
+        }
+        return listEnty;
+    }
+
+    public BackgroudResponse parseXmlResponseSetDataStatusSetPageId(Document document) {
+        BackgroudResponse backgroudResponse = new BackgroudResponse();
+
+        Element dataStatusElement = (Element) document.getElementsByTagName("dataStatus").item(0);
+        System.out.println("dataStatus " + dataStatusElement.getTextContent());
+        backgroudResponse.setDataStatus(dataStatusElement.getTextContent());
+
+        Element pageIdElement = (Element) document.getElementsByTagName("pageId").item(0);
+        System.out.println("pageId " + pageIdElement.getTextContent());
+        backgroudResponse.setPageId(pageIdElement.getTextContent());
+
+        return backgroudResponse;
+    }
+
+    public Document initParseXmlFromFile() throws ParserConfigurationException, SAXException, IOException {
+        File fXmlFile = new File("files/response.xml");
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(fXmlFile);
+        return doc;
     }
 }

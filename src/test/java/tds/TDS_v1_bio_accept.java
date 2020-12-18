@@ -1,45 +1,19 @@
-package tds.tds_v1_bio_accept_local;
+package tds;
 
 import base.BaseTest;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import io.restassured.response.Response;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
+import model.BackgroudResponse;
+import model.Entry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-
-import javax.net.ssl.SSLContext;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.events.EndElement;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static io.restassured.RestAssured.filters;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDS_v1_bio_accept_local extends BaseTest {
+public class TDS_v1_bio_accept extends BaseTest {
     String txId = generateRandomNumber(10);
     String tranId = null;
 
@@ -50,7 +24,7 @@ public class TDS_v1_bio_accept_local extends BaseTest {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
-                        "        <txId>" + txId + "</txId>\n" +  //6381223761
+                        "        <txId>" + txId + "</txId>\n" +
                         "        <pan>5455980836095804</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
@@ -69,88 +43,6 @@ public class TDS_v1_bio_accept_local extends BaseTest {
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
                 .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"))
                 .log().all();
-    }
-
-    @Test(priority = 2, enabled = false)
-    public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1_parseFromFile() {
-        String now = getTimeStamp();
-        Response res = given()
-                .header("Content-Type", "application/xml")
-                .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                        "<backgroundRequest>\n" +
-                        "   <backgroundPareq>\n" +
-                        "      <txId>" + txId + "</txId>\n" +
-                        "      <pan>5455980836095804</pan>\n" +
-                        "      <expiry>3306</expiry>\n" +
-                        "      <acqBIN>501900</acqBIN>\n" +
-                        "      <merchant>CH</merchant>\n" +
-                        "      <merID>501-string-value</merID>\n" +
-                        "      <merchantUrl>integration test</merchantUrl>\n" +
-                        "      <merCountry>578</merCountry>\n" +
-                        "      <purchaseAmount>6200</purchaseAmount>\n" +
-                        "      <formattedAmount>USD 62.00</formattedAmount>\n" +
-                        "      <currencyCode>USD</currencyCode>\n" +
-                        "      <numericCurrencyCode>840</numericCurrencyCode>\n" +
-                        "      <exponent>2</exponent>\n" +
-                        "      <purchaseDesc>Coffee</purchaseDesc>\n" +
-                        "      <purchaseDate>" + now + "</purchaseDate>\n" +
-                        "      <channel>0</channel>\n" +
-                        "      <sID>2</sID>\n" +
-                        "      <xid>IWN8Tpt4ft1QcNIxvuMP80MAFmY=</xid>\n" +
-                        "      <httpAccept>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</httpAccept>\n" +
-                        "      <httpAgent>integration test</httpAgent>\n" +
-                        "      <cardholderIp>123.456.789.10</cardholderIp>\n" +
-                        "      <acsKey></acsKey>\n" +
-                        "   </backgroundPareq>\n" +
-                        "</backgroundRequest>")
-                .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1");
-
-        String response = res.toString();
-
-        try {
-
-            File fXmlFile = new File("files/response.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
-
-            //optional, but recommended
-            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-            doc.getDocumentElement().normalize();
-
-            System.out.println("\nRoot element :" + doc.getDocumentElement().getNodeName());
-
-            NodeList nList = doc.getElementsByTagName("entry");
-
-
-            System.out.println("----------------------------");
-
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-
-                Node nNode = nList.item(temp);
-
-                System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-                    Element eElement = (Element) nNode;
-
-                    //System.out.println("Staff id : " + eElement.getAttribute("id"));
-//                    System.out.println("dataStatus : " + eElement.getElementsByTagName("dataStatus").item(0).getTextContent());
-//                    System.out.println("pageId : " + eElement.getElementsByTagName("pageId").item(0).getTextContent());
-
-
-                    System.out.println("name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
-                    System.out.println("value : " + eElement.getElementsByTagName("value").item(0).getTextContent());
-                    //System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
-                    //System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
-
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Test(priority = 2)
@@ -210,59 +102,6 @@ public class TDS_v1_bio_accept_local extends BaseTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public Document initXmlParsing(String response) throws ParserConfigurationException, SAXException, IOException {
-        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document document = documentBuilder.parse(new ByteArrayInputStream(response.getBytes()));
-        System.out.println("\nRoot element :" + document.getDocumentElement().getNodeName());
-        return document;
-    }
-
-    public List<Entry> parseXmlSetNameSetValueFromEntryAddThemToCollection(Document document, BackgroudResponse backgroudResponse) {
-        List<Entry> listEnty = new ArrayList<>();
-
-        NodeList entryList = document.getElementsByTagName("entry");
-
-        System.out.println("----------------------------");
-
-        for (int i = 0; i < entryList.getLength(); i++) {
-
-            Node nNode = entryList.item(i);
-
-            System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-                Element eElement = (Element) nNode;
-
-                Entry entry = new Entry();
-                entry.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
-                entry.setValue(eElement.getElementsByTagName("value").item(0).getTextContent());
-
-                System.out.println("name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
-                System.out.println("value : " + eElement.getElementsByTagName("value").item(0).getTextContent());
-
-                listEnty.add(entry);
-                //backgroudResponse.setEntries(listEnty);
-
-            }
-        }
-        return listEnty;
-    }
-
-    public BackgroudResponse parseXmlResponseSetDataStatusSetPageId(Document document) {
-        BackgroudResponse backgroudResponse = new BackgroudResponse();
-
-        Element dataStatusElement = (Element) document.getElementsByTagName("dataStatus").item(0);
-        System.out.println("dataStatus " + dataStatusElement.getTextContent());
-        backgroudResponse.setDataStatus(dataStatusElement.getTextContent());
-
-        Element pageIdElement = (Element) document.getElementsByTagName("pageId").item(0);
-        System.out.println("pageId " + pageIdElement.getTextContent());
-        backgroudResponse.setPageId(pageIdElement.getTextContent());
-
-        return backgroudResponse;
     }
 
     @Test(priority = 3)
