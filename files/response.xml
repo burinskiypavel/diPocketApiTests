@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<backgroundResponse>
+    <backgroundPageRequest>
+        <dataStatus>0</dataStatus>
+        <pageId>bio-web.html</pageId>
+        <values>
+            <entry>
+                <name>TXID</name>
+                <value>` + randomTXID + `</value>
+            </entry>
+            <entry>
+                <name>CONFIRM_TITLE</name>
+                <value>Confirm with mobile App</value>
+            </entry>
+            <entry>
+                <name>SMS_SWITCH_MESSAGE</name>
+                <value>Don’t have App at hand?</value>
+            </entry>
+            <entry>
+                <name>CONFIRM_MESSAGE</name>
+                <value>To confirm the transaction, please open, review and confirm the notification we sent to your up and go App</value>
+            </entry>
+            <entry>
+                <name>CONFIRM_MESSAGE_DONE</name>
+                <value>When done, you need to return to this screen and tap ‘Continue’</value>
+            </entry>
+            <entry>
+                <name>SMS_MESSAGE</name>
+                <value>Confirm with SMS code</value>
+            </entry>
+            <entry>
+                <name>CANCEL_TEXT</name>
+                <value>Cancel</value>
+            </entry>
+        </values>
+    </backgroundPageRequest>
+</backgroundResponse>

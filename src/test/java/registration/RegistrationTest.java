@@ -464,10 +464,10 @@ public class RegistrationTest extends BaseTest {
                 .when()
                 .get(link)
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"))
-                .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
-                .log().all();
+                .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"));
     }
 
 }

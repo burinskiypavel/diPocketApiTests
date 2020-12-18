@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.sun.org.apache.xpath.internal.objects.XString;
 import io.restassured.RestAssured;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
@@ -14,6 +15,7 @@ import org.apache.http.ssl.SSLContexts;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import tds.tds_v1_bio_accept_local.Entry;
 
 
 import javax.net.ssl.SSLContext;
@@ -21,6 +23,10 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BaseTest extends ApplicationManager {
    public static java.util.Properties prop = new java.util.Properties();
@@ -222,5 +228,80 @@ public class BaseTest extends ApplicationManager {
     public String generateRandomString(int count){
         String randomString =  RandomStringUtils.random(count, true, true);
         return randomString;
+    }
+
+    public String generateRandomNumber(int count){
+        String randomNumber =  RandomStringUtils.random(count, false, true);
+        return randomNumber;
+    }
+
+    public String getTimeStamp() {
+        String timeStamp = new SimpleDateFormat("YYYYMMdd HH:mm:ss").format(Calendar.getInstance().getTime());
+        return timeStamp;
+    }
+
+    public void checkTextInCollectionEntryName(List<Entry> listEnty, String text) {
+        List<Entry> result = listEnty.stream()
+                .filter(line -> text.equals(line.getName()))
+                .collect(Collectors.toList());
+
+        if(result.size() == 0){
+            Assert.fail("Filter result is empty " + text + " is not in the list");
+        }
+        for(Entry element : result){
+            element.getName();
+            Assert.assertEquals(element.getName(), text);
+        }
+    }
+
+    public void checkTextInCollectionEntryName(List<Entry> listEnty, String[] textArr) {
+        for(int i = 0; i < textArr.length; i++) {
+            int finalI = i;
+            List<Entry> result = listEnty.stream()
+                    .filter(line -> textArr[finalI].equals(line.getName()))
+                    .collect(Collectors.toList());
+
+            if(result.size() == 0){
+                Assert.fail("Filter result is empty " + textArr[i]+ " is not in the list");
+            }
+
+            for (Entry element : result) {
+                element.getName();
+                Assert.assertEquals(element.getName(), textArr[i]);
+            }
+
+        }
+    }
+
+    public void checkTextInCollectionEntryValue(List<Entry> listEnty, String[] textArr) {
+        for(int i = 0; i < textArr.length; i++) {
+            int finalI = i;
+            List<Entry> result = listEnty.stream()
+                    .filter(line -> textArr[finalI].equals(line.getValue()))
+                    .collect(Collectors.toList());
+
+            if(result.size() == 0){
+                Assert.fail("Filter result is empty " + textArr[i]+ " is not in the list");
+            }
+
+            for (Entry element : result) {
+                element.getValue();
+                Assert.assertEquals(element.getValue(), textArr[i]);
+            }
+
+        }
+    }
+
+    public void checkTextInCollectionEntryValue(List<Entry> listEnty, String text) {
+        List<Entry> result = listEnty.stream()
+                .filter(line -> text.equals(line.getValue()))
+                .collect(Collectors.toList());
+        if(result.size() == 0){
+            Assert.fail("Filter result is empty " + text + " is not in the list");
+        }
+        for(Entry element : result){
+            element.getName();
+            Assert.assertEquals(element.getValue(), text);
+        }
     }
 }
