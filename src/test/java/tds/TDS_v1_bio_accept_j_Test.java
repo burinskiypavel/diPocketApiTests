@@ -13,7 +13,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDS_v1_bio_accept extends BaseTest {
+public class TDS_v1_bio_accept_j_Test extends BaseTest {
     String txId = generateRandomNumber(10);
     String tranId = null;
 
@@ -37,7 +37,7 @@ public class TDS_v1_bio_accept extends BaseTest {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
+                .post("https://localhost:8092/TDSServices/v1/bgAuth.v1")
                 .then()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
@@ -78,7 +78,7 @@ public class TDS_v1_bio_accept extends BaseTest {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1");
+                .post("https://localhost:8092/TDSServices/v1/bgAuth.v1");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -112,7 +112,7 @@ public class TDS_v1_bio_accept extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
+                .post("https://localhost:8092/TDSServices/v1/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -124,7 +124,7 @@ public class TDS_v1_bio_accept extends BaseTest {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId="+txId+"");
+                .get("https://localhost:8092/TDSServices/v1/tranId?txId="+txId+"");
 
         res.then().log().all();
         tranId = res.asString();
@@ -142,7 +142,7 @@ public class TDS_v1_bio_accept extends BaseTest {
                 .header("Content-Type", "application/json")
                 .header("SITE", "UPANDGO")
                 .header("ClISESSIONID", "123456")
-                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/"+tranId+"/tranAccept");
+                .post("https://localhost:8900/ClientServices/v1/tds/"+tranId+"/tranAccept");
 
         response.then().log().all();
         Assert.assertEquals(200, response.getStatusCode());
@@ -156,7 +156,7 @@ public class TDS_v1_bio_accept extends BaseTest {
                         "\t\"txId\" : "+txId+"\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
+                .post("https://localhost:8092/TDSServices/v1/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -185,7 +185,7 @@ public class TDS_v1_bio_accept extends BaseTest {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
+                .post("https://localhost:8092/TDSServices/bgAuth.v1")
                 .then()
                 .log().all()
                 .statusCode(200)

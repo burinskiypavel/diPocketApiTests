@@ -6,6 +6,9 @@
         <classes>
             <class name="registration.RegistrationTest"/>
             <class name="homePage.HomePageWithAlreadyExistClientTest"/>
+            <class name="tds.TDS_v1_bio_accept_Test"/>
+            <class name="tds.TDS_v1_bio_decline_Test"/>
+
         </classes>
     </test>
 </suite>
