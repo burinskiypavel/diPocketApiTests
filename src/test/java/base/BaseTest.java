@@ -252,6 +252,11 @@ public class BaseTest extends ApplicationManager {
         return timeStamp;
     }
 
+    public String getTimeStamp2(String pattern) {
+        String timeStamp = new SimpleDateFormat(pattern).format(Calendar.getInstance().getTime());
+        return timeStamp;
+    }
+
     public void checkTextInCollectionEntryName(List<Entry> listEnty, String text) {
         List<Entry> result = listEnty.stream()
                 .filter(line -> text.equals(line.getName()))
