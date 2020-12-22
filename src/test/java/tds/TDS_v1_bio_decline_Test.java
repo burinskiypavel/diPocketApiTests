@@ -17,7 +17,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
     String txId = generateRandomNumber(10);
     String tranId = null;
 
-    @Test(priority = 24)
+    @Test(priority = 31)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         given()
                 .header("Content-Type", "application/xml")
@@ -45,7 +45,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
                 .log().all();
     }
 
-    @Test(priority = 25)
+    @Test(priority = 32)
     public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() {
         String now = getTimeStamp();
         Response res = given()
@@ -104,7 +104,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
         }
     }
 
-    @Test(priority = 26)
+    @Test(priority = 33)
     public void test_tranStatusStep1_DiPocket3ds_acs_tranStatus_v1() {
         given()
                 .header("Content-Type", "application/json")
@@ -119,7 +119,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 27)
+    @Test(priority = 34)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
                 .when()
@@ -132,7 +132,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
         Assert.assertEquals(200, res.getStatusCode());
     }
 
-    @Test(priority = 28)
+    @Test(priority = 35)
     public void test_tranDecline_ClientServices_v1_tds_tranId_tranDecline() {
         Response response = given()
                 .when()
@@ -148,7 +148,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
         Assert.assertEquals(200, response.getStatusCode());
     }
 
-    @Test(priority = 29)
+    @Test(priority = 36)
     public void test_tranStatusStep2_DiPocket3ds_acs_tranStatus_v1() {
         given()
                 .header("Content-Type", "application/json")
@@ -163,7 +163,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
                 .body("value", equalTo("DECLINED"));
     }
 
-    @Test(priority = 30)
+    @Test(priority = 37)
     public void test_paReqStep2_DiPocket3ds_acs_bgAuth_v1() {
         given()
                 .header("Content-Type", "application/xml")
