@@ -36,9 +36,9 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
                 .when()
                 .post( prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
                 .then()
+                .log().all()
                 .statusCode(400)
-                .body("errCode", equalTo("DIP-00591"))
-                .log().all();
+                .body("errCode", equalTo("DIP-00591"));
     }
 
     @Test(priority = 19)
