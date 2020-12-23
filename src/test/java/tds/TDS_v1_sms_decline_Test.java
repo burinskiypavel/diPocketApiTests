@@ -48,8 +48,8 @@ public class TDS_v1_sms_decline_Test extends BaseTest {
 
     @Test(priority = 39)
     public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() {
-        String now = getTimeStamp();
-        String now2 = getTimeStamp2("dd.MM.YYYY HH:mm");
+        String now = getTimeStamp("YYYYMMdd HH:mm:ss");
+        String now2 = getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -111,7 +111,7 @@ public class TDS_v1_sms_decline_Test extends BaseTest {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId="+randomTXID+"");
+                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -126,7 +126,7 @@ public class TDS_v1_sms_decline_Test extends BaseTest {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPageResponse>\n" +
-                        "      <txId>"+randomTXID+"</txId>\n" +
+                        "      <txId>" + randomTXID + "</txId>\n" +
                         "      <pageId>sms_web.html</pageId>\n" +
                         "      <values>\n" +
                         "         <entry>\n" +

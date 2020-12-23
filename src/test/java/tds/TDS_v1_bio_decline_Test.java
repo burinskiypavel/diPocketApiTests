@@ -16,6 +16,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class TDS_v1_bio_decline_Test extends BaseTest {
     String txId = generateRandomNumber(10);
     String tranId = null;
+    String pan = "5455980836095804";
 
     @Test(priority = 31)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
@@ -25,7 +26,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
                         "        <txId>" + txId + "</txId>\n" +
-                        "        <pan>5455980836095804</pan>\n" +
+                        "        <pan>" + pan + "</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
                         "        <deviceCategory>0</deviceCategory>\n" +
@@ -47,14 +48,14 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
 
     @Test(priority = 32)
     public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() {
-        String now = getTimeStamp();
+        String now = getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
-                        "      <txId>"+txId+"</txId>\n" +
-                        "      <pan>5455980836095804</pan>\n" +
+                        "      <txId>" + txId + "</txId>\n" +
+                        "      <pan>" + pan + "</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
                         "      <acqBIN>501900</acqBIN>\n" +
                         "      <merchant>CH</merchant>\n" +
@@ -124,7 +125,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId="+txId+"");
+                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + txId + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -142,7 +143,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
                 .header("Content-Type", "application/json")
                 .header("SITE", "UPANDGO")
                 .header("ClISESSIONID", "123456")
-                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/"+tranId+"/tranDecline");
+                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranDecline");
 
         response.then().log().all();
         Assert.assertEquals(200, response.getStatusCode());
@@ -153,7 +154,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : "+txId+"\n" +
+                        "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
@@ -170,12 +171,12 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPageResponse>\n" +
-                        "      <txId>"+txId+"</txId>\n" +
+                        "      <txId>" + txId + "</txId>\n" +
                         "      <pageId>bio-web.html</pageId>\n" +
                         "      <values>\n" +
                         "         <entry>\n" +
                         "            <name>TXID</name>\n" +
-                        "            <value>"+txId+"</value>\n" +
+                        "            <value>" + txId + "</value>\n" +
                         "         </entry>\n" +
                         "         <entry>\n" +
                         "            <name>BIO_AUTH</name>\n" +

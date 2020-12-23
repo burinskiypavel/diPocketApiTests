@@ -247,12 +247,7 @@ public class BaseTest extends ApplicationManager {
         return randomNumber;
     }
 
-    public String getTimeStamp() {
-        String timeStamp = new SimpleDateFormat("YYYYMMdd HH:mm:ss").format(Calendar.getInstance().getTime());
-        return timeStamp;
-    }
-
-    public String getTimeStamp2(String pattern) {
+    public String getTimeStamp(String pattern) {
         String timeStamp = new SimpleDateFormat(pattern).format(Calendar.getInstance().getTime());
         return timeStamp;
     }
