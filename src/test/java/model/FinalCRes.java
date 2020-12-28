@@ -58,4 +58,7 @@ public class FinalCRes {
                 ", challengeCompletionInd='" + challengeCompletionInd + '\'' +
                 '}';
     }
+
 }
+
+

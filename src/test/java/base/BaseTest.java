@@ -451,6 +451,36 @@ public class BaseTest extends ApplicationManager {
         return finalCRes;
     }
 
+    public FinalCResDecline parseXmlResponseReturnFinalCResDeclineObject(Document document) {
+        FinalCResDecline finalCResDecline = new FinalCResDecline();
+
+        Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        finalCResDecline.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        finalCResDecline.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) document.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        finalCResDecline.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element transStatusElement = (Element) document.getElementsByTagName("transStatus").item(0);
+        System.out.println("transStatus " + transStatusElement.getTextContent());
+        finalCResDecline.setTransStatus(transStatusElement.getTextContent());
+
+        Element transStatusReasonElement = (Element) document.getElementsByTagName("transStatusReason").item(0);
+        System.out.println("transStatusReason " + transStatusReasonElement.getTextContent());
+        finalCResDecline.setTransStatusReason(transStatusReasonElement.getTextContent());
+
+        Element challengeCompletionIndElement = (Element) document.getElementsByTagName("challengeCompletionInd").item(0);
+        System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
+        finalCResDecline.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
+
+        return finalCResDecline;
+    }
+
     public BackgroundARes parseXmlResponseReturnBackgroundAResObject(Document document) {
         BackgroundARes backgroundARes = new BackgroundARes();
 
