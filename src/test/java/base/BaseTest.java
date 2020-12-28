@@ -7,6 +7,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import io.restassured.RestAssured;
 import model.BackgroudResponse;
 import model.BackgroundARes;
+import model.BackgroundCRes;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -356,6 +357,37 @@ public class BaseTest extends ApplicationManager {
         return listEnty;
     }
 
+    public List<Entry> parseXmlSetNameSetValueFromEntryAddThemToCollection(Document document) {
+        List<Entry> listEnty = new ArrayList<>();
+
+        NodeList entryList = document.getElementsByTagName("entry");
+
+        System.out.println("----------------------------");
+
+        for (int i = 0; i < entryList.getLength(); i++) {
+
+            Node nNode = entryList.item(i);
+
+            System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                Element eElement = (Element) nNode;
+
+                Entry entry = new Entry();
+                entry.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+                entry.setValue(eElement.getElementsByTagName("value").item(0).getTextContent());
+
+                System.out.println("name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+                System.out.println("value : " + eElement.getElementsByTagName("value").item(0).getTextContent());
+
+                listEnty.add(entry);
+                //backgroudResponse.setEntries(listEnty);
+            }
+        }
+        return listEnty;
+    }
+
     public BackgroudResponse parseXmlResponseSetDataStatusSetPageId(Document document) {
         BackgroudResponse backgroudResponse = new BackgroudResponse();
 
@@ -368,6 +400,32 @@ public class BaseTest extends ApplicationManager {
         backgroudResponse.setPageId(pageIdElement.getTextContent());
 
         return backgroudResponse;
+    }
+
+    public BackgroundCRes parseXmlResponseReturnBackgroundCResObject(Document document) {
+        BackgroundCRes backgroudCRes = new BackgroundCRes();
+
+        Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
+        System.out.println("dataStatus " + acsTransIDElement.getTextContent());
+        backgroudCRes.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        backgroudCRes.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) document.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        backgroudCRes.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element pageIdElement = (Element) document.getElementsByTagName("pageId").item(0);
+        System.out.println("pageId " + pageIdElement.getTextContent());
+        backgroudCRes.setPageId(pageIdElement.getTextContent());
+
+        Element challengeCompletionIndElement = (Element) document.getElementsByTagName("challengeCompletionInd").item(0);
+        System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
+        backgroudCRes.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
+
+        return backgroudCRes;
     }
 
     public BackgroundARes parseXmlResponseReturnBackgroundAResObject(Document document) {

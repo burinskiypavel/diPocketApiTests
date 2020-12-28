@@ -4,6 +4,7 @@ import base.BaseTest;
 import io.restassured.response.Response;
 import model.BackgroudResponse;
 import model.BackgroundARes;
+import model.BackgroundCRes;
 import model.Entry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDS_v2_browser_app_accept_Test extends BaseTest {
     String randomTXID = generateRandomNumber(10);
-    String randomAcsTransId = generateRandomNumber(11) + "-integrTest-acsTransid-v2";
+    String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String pan = "5455980836095804";
     String tranId = null;
@@ -27,7 +28,7 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
     String sms = null;
 
     @Test(priority = 42)
-    public void test_AReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
+    public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -90,72 +91,69 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
         Assert.assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 43, enabled = false)
-    public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() {
+    @Test(priority = 43)
+    public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = getTimeStamp("YYYYMMdd HH:mm:ss");
         String nowAsExpected = getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                        "<backgroundRequest>\n" +
-                        "   <backgroundPareq>\n" +
-                        "      <txId>" + randomTXID + "</txId>\n" +
-                        "      <pan>" + pan4TestSMS + "</pan>\n" +
-                        "      <expiry>3306</expiry>\n" +
-                        "      <acqBIN>502502</acqBIN>\n" +
-                        "      <merchant>CH</merchant>\n" +
-                        "      <merID>502-string-value</merID>\n" +
-                        "      <merchantUrl>integration test</merchantUrl>\n" +
-                        "      <merCountry>578</merCountry>\n" +
-                        "      <purchaseAmount>6300</purchaseAmount>\n" +
-                        "      <formattedAmount>USD 63.00</formattedAmount>\n" +
-                        "      <currencyCode>USD</currencyCode>\n" +
-                        "      <numericCurrencyCode>840</numericCurrencyCode>\n" +
-                        "      <exponent>2</exponent>\n" +
-                        "      <purchaseDesc>Coffee</purchaseDesc>\n" +
-                        "      <purchaseDate>" + now + "</purchaseDate>\n" +
-                        "      <channel>0</channel>\n" +
-                        "      <sID>2</sID>\n" +
-                        "      <xid>IWN8Tpt4ft1QcNIxvuMP80MAFmY=</xid>\n" +
-                        "      <httpAccept>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</httpAccept>\n" +
-                        "      <httpAgent>integration test</httpAgent>\n" +
-                        "      <cardholderIp>123.456.789.10</cardholderIp>\n" +
-                        "      <acsKey></acsKey>\n" +
-                        "   </backgroundPareq>\n" +
-                        "</backgroundRequest>")
+                        "<backgroundRequest2>\n" +
+                        "   <backgroundCReq>\n" +
+                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <challengeWindowSize>03</challengeWindowSize>\n" +
+                        "      <messageType>CReq</messageType>\n" +
+                        "      <messageVersion>2.1.0</messageVersion>\n" +
+                        "   </backgroundCReq>\n" +
+                        "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1");
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
 
-        try {
+
             Document document = initXmlParsing(response);
-            BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
-            List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
+            BackgroundCRes backgroudCres = parseXmlResponseReturnBackgroundCResObject(document);
+            List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document);
 
             System.out.println(listEnty);
             //System.out.println(backgroudResponse);
 
-            String masName[] = {"TXID", "CANCEL_TEXT", "CONFIRM_TITLE", "CONFIRM_MESSAGE", "MASKED_PAN_TITLE", "MASKED_PAN", "PURCHASEDATE_TITLE", "PURCHASEDATE", "MERCHANTNAME_TITLE", "MERCHANTNAME", "PURCHASEAMOUNT_TITLE", "PURCHASEAMOUNT", "ENTER_CODE_TEXT", "SUBMIT_TEXT"};
-            String masValue[] = {randomTXID, "Cancel", "Confirm with SMS code", "To confirm the transaction, please enter below the Code we sent by SMS to 4984", "Card #", "545598******8066", "Date", "" + nowAsExpected + "", "Store", "CH", "Amount", "63.00 USD", "Enter the Code here", "Submit"};
+            String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
+            String masValue[] = {randomAcsTransId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
             checkTextInCollectionEntryName(listEnty, masName);
             checkTextInCollectionEntryValue(listEnty, masValue);
-            Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-            Assert.assertEquals(backgroudResponse.getPageId(), "sms_web.html");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Assert.assertEquals(backgroudCres.getAcsTransID(), randomAcsTransId);
+        Assert.assertEquals(backgroudCres.getMessageType(), "CRes");
+        Assert.assertEquals(backgroudCres.getMessageVersion(), "2.1.0");
+        Assert.assertEquals(backgroudCres.getPageId(), "bio-web.html");
+        Assert.assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 44, enabled = false)
+    @Test(priority = 44)
+    public void test_tranStatusStep1_DiPocket3ds_acs_tranStatus() {
+        given()
+                .header("Content-Type", "application/json")
+                .body("{\n" +
+                        "\t\"txId\" : \""+randomAcsTransId+"\"\n" +
+                        "}")
+                .when()
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("value", equalTo("AWAITING"));
+    }
+
+    @Test(priority = 45)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
+                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
 
         res.then().log().all();
         tranId = res.asString();
