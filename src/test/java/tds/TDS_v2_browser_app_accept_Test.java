@@ -69,13 +69,12 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
-                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"))
-                .body("backgroundResponse.backgroundVeres.chName", equalTo("DON'TTOUCH"))
-                .log().all();
+                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
     @Test(priority = 43, enabled = false)
@@ -164,7 +163,7 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
         Assert.assertEquals(200, res.getStatusCode());
     }
 
-    @Test(priority = 46)
+    @Test(priority = 46, enabled = false)
     public void test_paReqStep2_DiPocket3ds_acs_bgAuth_v1() {
         given()
                 .header("Content-Type", "application/xml")
