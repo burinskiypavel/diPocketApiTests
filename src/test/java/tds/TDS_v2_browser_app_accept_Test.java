@@ -73,8 +73,8 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
-                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
+                .body("backgroundResponse2.backgroundARes.messageType", equalTo("ARes"))
+                .body("backgroundResponse.backgroundARes.transStatus", equalTo("C"));
     }
 
     @Test(priority = 43, enabled = false)
