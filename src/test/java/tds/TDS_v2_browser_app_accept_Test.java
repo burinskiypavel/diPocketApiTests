@@ -2,10 +2,7 @@ package tds;
 
 import base.BaseTest;
 import io.restassured.response.Response;
-import model.BackgroudResponse;
-import model.BackgroundARes;
-import model.BackgroundCRes;
-import model.Entry;
+import model.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
@@ -19,15 +16,12 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDS_v2_browser_app_accept_Test extends BaseTest {
-    String randomTXID = generateRandomNumber(10);
     String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String pan = "5455980836095804";
     String tranId = null;
-    String pan4TestSMS = "5455980666358066";
-    String sms = null;
 
-    @Test(priority = 42)
+    @Test(priority = 47)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -91,10 +85,8 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
         Assert.assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 43)
+    @Test(priority = 48)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
-        String now = getTimeStamp("YYYYMMdd HH:mm:ss");
-        String nowAsExpected = getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -133,8 +125,8 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
         Assert.assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 44)
-    public void test_tranStatusStep1_DiPocket3ds_acs_tranStatus() {
+    @Test(priority = 49)
+    public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
@@ -148,8 +140,8 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 45)
-    public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
+    @Test(priority = 50)
+    public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
@@ -161,41 +153,77 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
         Assert.assertEquals(200, res.getStatusCode());
     }
 
-    @Test(priority = 45, enabled = false)
-    public void test_getSMS_TDSTestServices_v1_tranId_txId_randomTXID() {
-        Response res = given()
+    @Test(priority = 51)
+    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() {
+        Response response = given()
                 .when()
+                .auth()
+                .preemptive()
+                .basic("380730000069", "a111111")
                 .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/sms?tranId="+tranId+"");
+                .header("SITE", "UPANDGO")
+                .header("ClISESSIONID", "123456")
+                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
 
-        res.then().log().all();
-        sms = res.asString();
-        System.out.println("response " + sms);
-        Assert.assertEquals(200, res.getStatusCode());
+        response.then().log().all();
+        Assert.assertEquals(200, response.getStatusCode());
     }
 
-    @Test(priority = 46, enabled = false)
-    public void test_paReqStep2_DiPocket3ds_acs_bgAuth_v1() {
+    @Test(priority = 52)
+    public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
         given()
-                .header("Content-Type", "application/xml")
-                .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                        "<backgroundRequest>\n" +
-                        "   <backgroundPageResponse>\n" +
-                        "      <txId>" + randomTXID + "</txId>\n" +
-                        "      <pageId>sms_web.html</pageId>\n" +
-                        "      <values>\n" +
-                        "         <entry>\n" +
-                        "            <name>SMS_OTP</name>\n" +
-                        "            <value>" + sms + "</value>\n" +
-                        "         </entry>\n" +
-                        "      </values>\n" +
-                        "   </backgroundPageResponse>\n" +
-                        "</backgroundRequest>")
+                .header("Content-Type", "application/json")
+                .body("{\n" +
+                        "\t\"txId\" : \""+randomAcsTransId+"\"\n" +
+                        "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("backgroundResponse.backgroundPares.paresStatus", equalTo("Y"));
+                .body("value", equalTo("ACCEPTED"));
+    }
+
+    @Test(priority = 53)
+    public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+        Response res = given()
+                .header("Content-Type", "application/xml")
+                .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                        "<backgroundRequest2>\n" +
+                        "   <backgroundCReq>\n" +
+                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <challengeWindowSize>03</challengeWindowSize>\n" +
+                        "      <messageType>CReq</messageType>\n" +
+                        "      <messageVersion>2.1.0</messageVersion>\n" +
+                        "      <backgroundPageResponse>\n" +
+                        "         <pageId>bio-web.html</pageId>\n" +
+                        "         <values>\n" +
+                        "            <entry>\n" +
+                        "               <name>TXID</name>\n" +
+                        "               <value>"+randomAcsTransId+"</value>\n" +
+                        "            </entry>\n" +
+                        "            <entry>\n" +
+                        "               <name>BIO_AUTH</name>\n" +
+                        "               <value>DECLINED</value>\n" +
+                        "            </entry>\n" +
+                        "         </values>\n" +
+                        "      </backgroundPageResponse>\n" +
+                        "   </backgroundCReq>\n" +
+                        "</backgroundRequest2>")
+                .when()
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
+
+        res.then().log().all().statusCode(200);
+        String response = res.asString();
+        System.out.println(res.asString());
+
+        Document document = initXmlParsing(response);
+        FinalCRes finalCRes = parseXmlResponseReturnFinalCResObject(document);
+
+        Assert.assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
+        Assert.assertEquals(finalCRes.getMessageType(), "CRes");
+        Assert.assertEquals(finalCRes.getMessageVersion(), "2.1.0");
+        Assert.assertEquals(finalCRes.getTransStatus(), "Y");
+        Assert.assertEquals(finalCRes.getChallengeCompletionInd(), "Y");
     }
 }

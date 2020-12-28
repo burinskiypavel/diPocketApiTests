@@ -5,9 +5,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.restassured.RestAssured;
-import model.BackgroudResponse;
-import model.BackgroundARes;
-import model.BackgroundCRes;
+import model.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -17,7 +15,6 @@ import org.apache.http.ssl.SSLContexts;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
-import model.Entry;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -406,7 +403,7 @@ public class BaseTest extends ApplicationManager {
         BackgroundCRes backgroudCRes = new BackgroundCRes();
 
         Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
-        System.out.println("dataStatus " + acsTransIDElement.getTextContent());
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
         backgroudCRes.setAcsTransID(acsTransIDElement.getTextContent());
 
         Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
@@ -426,6 +423,32 @@ public class BaseTest extends ApplicationManager {
         backgroudCRes.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
 
         return backgroudCRes;
+    }
+
+    public FinalCRes parseXmlResponseReturnFinalCResObject(Document document) {
+        FinalCRes finalCRes = new FinalCRes();
+
+        Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        finalCRes.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        finalCRes.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) document.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        finalCRes.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element transStatusElement = (Element) document.getElementsByTagName("transStatus").item(0);
+        System.out.println("transStatus " + transStatusElement.getTextContent());
+        finalCRes.setTransStatus(transStatusElement.getTextContent());
+
+        Element challengeCompletionIndElement = (Element) document.getElementsByTagName("challengeCompletionInd").item(0);
+        System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
+        finalCRes.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
+
+        return finalCRes;
     }
 
     public BackgroundARes parseXmlResponseReturnBackgroundAResObject(Document document) {
