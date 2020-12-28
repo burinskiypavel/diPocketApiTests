@@ -3,11 +3,15 @@ package tds;
 import base.BaseTest;
 import io.restassured.response.Response;
 import model.BackgroudResponse;
+import model.BackgroundARes;
 import model.Entry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -23,8 +27,8 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
     String sms = null;
 
     @Test(priority = 42)
-    public void test_AReq_DiPocket3ds_acs_bgAuth_v1() {
-        given()
+    public void test_AReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
+        Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
@@ -69,12 +73,21 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("backgroundResponse2.backgroundARes.messageType", equalTo("ARes"))
-                .body("backgroundResponse.backgroundARes.transStatus", equalTo("C"));
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
+
+        res.then().log().all().statusCode(200);
+        String response = res.asString();
+        System.out.println(res.asString());
+
+        Document document = initXmlParsing(response);
+        BackgroundARes backgroundARes = parseXmlResponseReturnBackgroundAResObject(document);
+
+        Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
+        Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
+        Assert.assertEquals(backgroundARes.getAuthenticationType(), "02");
+        Assert.assertEquals(backgroundARes.getMessageType(), "ARes");
+        Assert.assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
+        Assert.assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
     @Test(priority = 43, enabled = false)

@@ -6,6 +6,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.restassured.RestAssured;
 import model.BackgroudResponse;
+import model.BackgroundARes;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
@@ -367,6 +368,36 @@ public class BaseTest extends ApplicationManager {
         backgroudResponse.setPageId(pageIdElement.getTextContent());
 
         return backgroudResponse;
+    }
+
+    public BackgroundARes parseXmlResponseReturnBackgroundAResObject(Document document) {
+        BackgroundARes backgroundARes = new BackgroundARes();
+
+        Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        backgroundARes.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element acsChallengeMandatedElement = (Element) document.getElementsByTagName("acsChallengeMandated").item(0);
+        System.out.println("acsChallengeMandated " + acsChallengeMandatedElement.getTextContent());
+        backgroundARes.setAcsChallengeMandated(acsChallengeMandatedElement.getTextContent());
+
+        Element authenticationTypeElement = (Element) document.getElementsByTagName("authenticationType").item(0);
+        System.out.println("authenticationType " + authenticationTypeElement.getTextContent());
+        backgroundARes.setAuthenticationType(authenticationTypeElement.getTextContent());
+
+        Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        backgroundARes.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) document.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        backgroundARes.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element transStatusElement = (Element) document.getElementsByTagName("transStatus").item(0);
+        System.out.println("transStatus " + transStatusElement.getTextContent());
+        backgroundARes.setTransStatus(transStatusElement.getTextContent());
+
+        return backgroundARes;
     }
 
     public Document initParseXmlFromFile() throws ParserConfigurationException, SAXException, IOException {
