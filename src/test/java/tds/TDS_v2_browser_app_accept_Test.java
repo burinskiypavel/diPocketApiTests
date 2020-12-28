@@ -28,7 +28,7 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundAReq>\n" +
-                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <acsTransID>" + randomAcsTransId + "</acsTransID>\n" +
                         "      <threeDSCompInd>Y</threeDSCompInd>\n" +
                         "      <threeDSRequestorAuthenticationInd>01</threeDSRequestorAuthenticationInd>\n" +
                         "      <threeDSRequestorID>1000</threeDSRequestorID>\n" +
@@ -49,10 +49,10 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                         "      <browserTZ>-120</browserTZ>\n" +
                         "      <browserUserAgent>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36</browserUserAgent>\n" +
                         "      <cardExpiryDate>3210</cardExpiryDate>\n" +
-                        "      <acctNumber>"+pan+"</acctNumber>\n" +
+                        "      <acctNumber>" + pan + "</acctNumber>\n" +
                         "      <deviceChannel>02</deviceChannel>\n" +
                         "      <dsReferenceNumber>EMVCo1234567</dsReferenceNumber>\n" +
-                        "      <dsTransID>"+dsTransId+"</dsTransID>\n" +
+                        "      <dsTransID>" + dsTransId + "</dsTransID>\n" +
                         "      <dsURL>integration test</dsURL>\n" +
                         "      <mcc>0000</mcc>\n" +
                         "      <merchantCountryCode>246</merchantCountryCode>\n" +
@@ -92,7 +92,7 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
-                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <acsTransID>" + randomAcsTransId + "</acsTransID>\n" +
                         "      <challengeWindowSize>03</challengeWindowSize>\n" +
                         "      <messageType>CReq</messageType>\n" +
                         "      <messageVersion>2.1.0</messageVersion>\n" +
@@ -106,18 +106,18 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
         System.out.println(res.asString());
 
 
-            Document document = initXmlParsing(response);
-            BackgroundCRes backgroudCres = parseXmlResponseReturnBackgroundCResObject(document);
-            List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document);
+        Document document = initXmlParsing(response);
+        BackgroundCRes backgroudCres = parseXmlResponseReturnBackgroundCResObject(document);
+        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document);
 
-            System.out.println(listEnty);
-            //System.out.println(backgroudResponse);
+        System.out.println(listEnty);
+        //System.out.println(backgroudResponse);
 
-            String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
-            String masValue[] = {randomAcsTransId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
+        String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
+        String masValue[] = {randomAcsTransId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
-            checkTextInCollectionEntryName(listEnty, masName);
-            checkTextInCollectionEntryValue(listEnty, masValue);
+        checkTextInCollectionEntryName(listEnty, masName);
+        checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudCres.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroudCres.getMessageType(), "CRes");
         Assert.assertEquals(backgroudCres.getMessageVersion(), "2.1.0");
@@ -130,7 +130,7 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : \""+randomAcsTransId+"\"\n" +
+                        "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
                         "}")
                 .when()
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus")
@@ -174,7 +174,7 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : \""+randomAcsTransId+"\"\n" +
+                        "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
                         "}")
                 .when()
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus")
@@ -191,7 +191,7 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
-                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <acsTransID>" + randomAcsTransId + "</acsTransID>\n" +
                         "      <challengeWindowSize>03</challengeWindowSize>\n" +
                         "      <messageType>CReq</messageType>\n" +
                         "      <messageVersion>2.1.0</messageVersion>\n" +
@@ -200,7 +200,7 @@ public class TDS_v2_browser_app_accept_Test extends BaseTest {
                         "         <values>\n" +
                         "            <entry>\n" +
                         "               <name>TXID</name>\n" +
-                        "               <value>"+randomAcsTransId+"</value>\n" +
+                        "               <value>" + randomAcsTransId + "</value>\n" +
                         "            </entry>\n" +
                         "            <entry>\n" +
                         "               <name>BIO_AUTH</name>\n" +

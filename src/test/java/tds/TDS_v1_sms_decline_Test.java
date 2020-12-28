@@ -7,7 +7,10 @@ import model.Entry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -47,7 +50,7 @@ public class TDS_v1_sms_decline_Test extends BaseTest {
     }
 
     @Test(priority = 39)
-    public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() {
+    public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = getTimeStamp("YYYYMMdd HH:mm:ss");
         String now2 = getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
@@ -86,24 +89,20 @@ public class TDS_v1_sms_decline_Test extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        try {
-            Document document = initXmlParsing(response);
-            BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
-            List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
+        Document document = initXmlParsing(response);
+        BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
+        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
 
-            System.out.println(listEnty);
-            //System.out.println(backgroudResponse);
+        System.out.println(listEnty);
+        //System.out.println(backgroudResponse);
 
-            String masName[] = {"TXID", "CANCEL_TEXT", "CONFIRM_TITLE", "CONFIRM_MESSAGE", "MASKED_PAN_TITLE", "MASKED_PAN", "PURCHASEDATE_TITLE", "PURCHASEDATE", "MERCHANTNAME_TITLE", "MERCHANTNAME", "PURCHASEAMOUNT_TITLE", "PURCHASEAMOUNT", "ENTER_CODE_TEXT", "SUBMIT_TEXT"};
-            String masValue[] = {randomTXID, "Cancel", "Confirm with SMS code", "To confirm the transaction, please enter below the Code we sent by SMS to 4984", "Card #", "545598******8066", "Date", "" + now2 + "", "Store", "CH", "Amount", "63.00 USD", "Enter the Code here", "Submit"};
+        String masName[] = {"TXID", "CANCEL_TEXT", "CONFIRM_TITLE", "CONFIRM_MESSAGE", "MASKED_PAN_TITLE", "MASKED_PAN", "PURCHASEDATE_TITLE", "PURCHASEDATE", "MERCHANTNAME_TITLE", "MERCHANTNAME", "PURCHASEAMOUNT_TITLE", "PURCHASEAMOUNT", "ENTER_CODE_TEXT", "SUBMIT_TEXT"};
+        String masValue[] = {randomTXID, "Cancel", "Confirm with SMS code", "To confirm the transaction, please enter below the Code we sent by SMS to 4984", "Card #", "545598******8066", "Date", "" + now2 + "", "Store", "CH", "Amount", "63.00 USD", "Enter the Code here", "Submit"};
 
-            checkTextInCollectionEntryName(listEnty, masName);
-            checkTextInCollectionEntryValue(listEnty, masValue);
-            Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-            Assert.assertEquals(backgroudResponse.getPageId(), "sms_web.html");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        checkTextInCollectionEntryName(listEnty, masName);
+        checkTextInCollectionEntryValue(listEnty, masValue);
+        Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
+        Assert.assertEquals(backgroudResponse.getPageId(), "sms_web.html");
     }
 
     @Test(priority = 40)

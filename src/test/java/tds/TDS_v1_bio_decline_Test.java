@@ -7,7 +7,10 @@ import model.Entry;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -47,7 +50,7 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
     }
 
     @Test(priority = 32)
-    public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() {
+    public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -85,24 +88,21 @@ public class TDS_v1_bio_decline_Test extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        try {
-            Document document = initXmlParsing(response);
-            BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
-            List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
+        Document document = initXmlParsing(response);
+        BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
+        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
 
-            System.out.println(listEnty);
-            //System.out.println(backgroudResponse);
+        System.out.println(listEnty);
+        //System.out.println(backgroudResponse);
 
-            String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
-            String masValue[] = {txId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
+        String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
+        String masValue[] = {txId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
-            checkTextInCollectionEntryName(listEnty, masName);
-            checkTextInCollectionEntryValue(listEnty, masValue);
-            Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-            Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        checkTextInCollectionEntryName(listEnty, masName);
+        checkTextInCollectionEntryValue(listEnty, masValue);
+        Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
+        Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
+
     }
 
     @Test(priority = 33)
