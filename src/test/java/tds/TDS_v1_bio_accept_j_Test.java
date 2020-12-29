@@ -129,7 +129,7 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
         res.then().log().all();
         tranId = res.asString();
         System.out.println("tranId " + tranId);
-        Assert.assertEquals(200, res.getStatusCode());
+        Assert.assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 28)
@@ -145,7 +145,7 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
                 .post("https://localhost:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
 
         response.then().log().all();
-        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertEquals(response.getStatusCode(), 200);
     }
 
     @Test(priority = 29)

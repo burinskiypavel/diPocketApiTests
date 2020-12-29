@@ -117,7 +117,7 @@ public class TDS_v1_sms_accept_Test extends BaseTest {
         res.then().log().all();
         tranId = res.asString();
         System.out.println("tranId " + tranId);
-        Assert.assertEquals(200, res.getStatusCode());
+        Assert.assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 45)
@@ -130,7 +130,7 @@ public class TDS_v1_sms_accept_Test extends BaseTest {
         res.then().log().all();
         sms = res.asString();
         System.out.println("response " + sms);
-        Assert.assertEquals(200, res.getStatusCode());
+        Assert.assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 46)
