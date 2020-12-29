@@ -16,25 +16,26 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDS_v1_bio_accept_Test extends BaseTest {
-    String txId = generateRandomNumber(10);
+public class TDSV1SmsAcceptTest extends BaseTest {
+    String randomTXID = generateRandomNumber(10);
     String tranId = null;
-    String pan = "5455980836095804";
+    String pan4TestSMS = "5455980666358066";
+    String sms = null;
 
-    @Test(priority = 24)
+    @Test(priority = 42)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
-                        "        <txId>" + txId + "</txId>\n" +
-                        "        <pan>" + pan + "</pan>\n" +
-                        "        <acqBIN>412321</acqBIN>\n" +
-                        "        <merID>501-string-value</merID>\n" +
+                        "        <txId>" + randomTXID + "</txId>\n" +
+                        "        <pan>" + pan4TestSMS + "</pan>\n" +
+                        "        <acqBIN>502502</acqBIN>\n" +
+                        "        <merID>502-string-value</merID>\n" +
                         "        <deviceCategory>0</deviceCategory>\n" +
                         "        <userAgent>integration test</userAgent>\n" +
-                        "        <messageId>98000</messageId>\n" +
+                        "        <messageId>integration test</messageId>\n" +
                         "        <Extension id=\"test.3ds.idr\" critical=\"false\">\n" +
                         "        \ttest_value_in_Extension_tag\n" +
                         "        </Extension>\n" +
@@ -46,27 +47,29 @@ public class TDS_v1_bio_accept_Test extends BaseTest {
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
                 .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"))
+                .body("backgroundResponse.backgroundVeres.chName", equalTo("DON'TTOUCH"))
                 .log().all();
     }
 
-    @Test(priority = 25)
+    @Test(priority = 43)
     public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = getTimeStamp("YYYYMMdd HH:mm:ss");
+        String nowAsExpected = getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
-                        "      <txId>" + txId + "</txId>\n" +
-                        "      <pan>" + pan + "</pan>\n" +
+                        "      <txId>" + randomTXID + "</txId>\n" +
+                        "      <pan>" + pan4TestSMS + "</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
-                        "      <acqBIN>501900</acqBIN>\n" +
+                        "      <acqBIN>502502</acqBIN>\n" +
                         "      <merchant>CH</merchant>\n" +
-                        "      <merID>501-string-value</merID>\n" +
+                        "      <merID>502-string-value</merID>\n" +
                         "      <merchantUrl>integration test</merchantUrl>\n" +
                         "      <merCountry>578</merCountry>\n" +
-                        "      <purchaseAmount>6200</purchaseAmount>\n" +
-                        "      <formattedAmount>USD 62.00</formattedAmount>\n" +
+                        "      <purchaseAmount>6300</purchaseAmount>\n" +
+                        "      <formattedAmount>USD 63.00</formattedAmount>\n" +
                         "      <currencyCode>USD</currencyCode>\n" +
                         "      <numericCurrencyCode>840</numericCurrencyCode>\n" +
                         "      <exponent>2</exponent>\n" +
@@ -88,7 +91,6 @@ public class TDS_v1_bio_accept_Test extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-
         Document document = initXmlParsing(response);
         BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
         List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
@@ -96,36 +98,21 @@ public class TDS_v1_bio_accept_Test extends BaseTest {
         System.out.println(listEnty);
         //System.out.println(backgroudResponse);
 
-        String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
-        String masValue[] = {txId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
+        String masName[] = {"TXID", "CANCEL_TEXT", "CONFIRM_TITLE", "CONFIRM_MESSAGE", "MASKED_PAN_TITLE", "MASKED_PAN", "PURCHASEDATE_TITLE", "PURCHASEDATE", "MERCHANTNAME_TITLE", "MERCHANTNAME", "PURCHASEAMOUNT_TITLE", "PURCHASEAMOUNT", "ENTER_CODE_TEXT", "SUBMIT_TEXT"};
+        String masValue[] = {randomTXID, "Cancel", "Confirm with SMS code", "To confirm the transaction, please enter below the Code we sent by SMS to 4984", "Card #", "545598******8066", "Date", "" + nowAsExpected + "", "Store", "CH", "Amount", "63.00 USD", "Enter the Code here", "Submit"};
 
         checkTextInCollectionEntryName(listEnty, masName);
         checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-        Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
+        Assert.assertEquals(backgroudResponse.getPageId(), "sms_web.html");
     }
 
-    @Test(priority = 26)
-    public void test_tranStatusStep1_DiPocket3ds_acs_tranStatus_v1() {
-        given()
-                .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "\t\"txId\" : " + txId + "\n" +
-                        "}")
-                .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("value", equalTo("AWAITING"));
-    }
-
-    @Test(priority = 27)
+    @Test(priority = 44)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + txId + "");
+                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -133,54 +120,32 @@ public class TDS_v1_bio_accept_Test extends BaseTest {
         Assert.assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 28)
-    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() {
-        Response response = given()
+    @Test(priority = 45)
+    public void test_getSMS_TDSTestServices_v1_tranId_txId_randomTXID() {
+        Response res = given()
                 .when()
-                .auth()
-                .preemptive()
-                .basic("380730000069", "a111111")
                 .header("Content-Type", "application/json")
-                .header("SITE", "UPANDGO")
-                .header("ClISESSIONID", "123456")
-                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
+                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/sms?tranId=" + tranId + "");
 
-        response.then().log().all();
-        Assert.assertEquals(response.getStatusCode(), 200);
+        res.then().log().all();
+        sms = res.asString();
+        System.out.println("response " + sms);
+        Assert.assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 29)
-    public void test_tranStatusStep2_DiPocket3ds_acs_tranStatus_v1() {
-        given()
-                .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "\t\"txId\" : " + txId + "\n" +
-                        "}")
-                .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("value", equalTo("ACCEPTED"));
-    }
-
-    @Test(priority = 30)
+    @Test(priority = 46)
     public void test_paReqStep2_DiPocket3ds_acs_bgAuth_v1() {
         given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPageResponse>\n" +
-                        "      <txId>" + txId + "</txId>\n" +
-                        "      <pageId>bio-web.html</pageId>\n" +
+                        "      <txId>" + randomTXID + "</txId>\n" +
+                        "      <pageId>sms_web.html</pageId>\n" +
                         "      <values>\n" +
                         "         <entry>\n" +
-                        "            <name>TXID</name>\n" +
-                        "            <value>" + txId + "</value>\n" +
-                        "         </entry>\n" +
-                        "         <entry>\n" +
-                        "            <name>BIO_AUTH</name>\n" +
-                        "            <value>ACCEPTED</value>\n" +
+                        "            <name>SMS_OTP</name>\n" +
+                        "            <value>" + sms + "</value>\n" +
                         "         </entry>\n" +
                         "      </values>\n" +
                         "   </backgroundPageResponse>\n" +

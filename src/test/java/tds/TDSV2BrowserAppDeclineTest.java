@@ -15,7 +15,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDS_v2_browser_app_decline_Test extends BaseTest {
+public class TDSV2BrowserAppDeclineTest extends BaseTest {
     String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String pan = "5455980836095804";

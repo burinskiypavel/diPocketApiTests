@@ -407,7 +407,6 @@ public class RegistrationTest extends BaseTest {
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
                         "  \"secAnswer\" : \"***\",\n" +
-//                        "  \"pin\" : \"******\",\n" +
                         "  \"pin\" : \""+generateRandomString(8)+"\",\n" +
                         "  \"stepNo\" : 4,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +

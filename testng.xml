@@ -6,13 +6,13 @@
         <classes>
             <class name="registration.RegistrationTest"/>
             <class name="homePage.HomePageWithAlreadyExistClientTest"/>
-            <class name="tds.TDS_v1_bio_accept_Test"/>
-            <class name="tds.TDS_v1_bio_decline_Test"/>
-            <class name="tds.TDS_v1_sms_decline_Test"/>
-            <class name="tds.TDS_v1_sms_accept_Test"/>
+            <class name="tds.TDSV1BioAcceptTest"/>
+            <class name="tds.TDSV1BioDeclineTest"/>
+            <class name="tds.TDSV1SmsDeclineTest"/>
+            <class name="tds.TDSV1SmsAcceptTest"/>
 
-            <class name="tds.TDS_v2_browser_app_accept_Test"/>
-            <class name="tds.TDS_v2_browser_app_decline_Test"/>
+            <class name="tds.TDSV2BrowserAppAcceptTest"/>
+            <class name="tds.TDSV2BrowserAppDeclineTest"/>
             <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
 
         </classes>

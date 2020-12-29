@@ -2,11 +2,8 @@ package homePage;
 
 import config.Properties;
 import base.BaseTest;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;

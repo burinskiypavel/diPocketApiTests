@@ -16,7 +16,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDS_v1_bio_accept_j_Test extends BaseTest {
+public class TDSV1BioAcceptTest extends BaseTest {
     String txId = generateRandomNumber(10);
     String tranId = null;
     String pan = "5455980836095804";
@@ -41,7 +41,7 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://localhost:8092/TDSServices/v1/bgAuth.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
@@ -82,27 +82,28 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://localhost:8092/TDSServices/v1/bgAuth.v1");
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
 
-            Document document = initXmlParsing(response);
-            BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
-            List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
 
-            System.out.println(listEnty);
-            //System.out.println(backgroudResponse);
+        Document document = initXmlParsing(response);
+        BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
+        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
 
-            String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
-            String masValue[] = {txId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
+        System.out.println(listEnty);
+        //System.out.println(backgroudResponse);
 
-            checkTextInCollectionEntryName(listEnty, masName);
-            checkTextInCollectionEntryValue(listEnty, masValue);
-            Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-            Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
-        }
+        String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
+        String masValue[] = {txId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
+
+        checkTextInCollectionEntryName(listEnty, masName);
+        checkTextInCollectionEntryValue(listEnty, masValue);
+        Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
+        Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
+    }
 
     @Test(priority = 26)
     public void test_tranStatusStep1_DiPocket3ds_acs_tranStatus_v1() {
@@ -112,7 +113,7 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post("https://localhost:8092/TDSServices/v1/tranStatus.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -124,7 +125,7 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
-                .get("https://localhost:8092/TDSServices/v1/tranId?txId=" + txId + "");
+                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + txId + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -142,7 +143,7 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
                 .header("Content-Type", "application/json")
                 .header("SITE", "UPANDGO")
                 .header("ClISESSIONID", "123456")
-                .post("https://localhost:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
+                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
 
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -156,7 +157,7 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post("https://localhost:8092/TDSServices/v1/tranStatus.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -185,7 +186,7 @@ public class TDS_v1_bio_accept_j_Test extends BaseTest {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://localhost:8092/TDSServices/bgAuth.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
