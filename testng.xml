@@ -10,8 +10,10 @@
             <class name="tds.TDS_v1_bio_decline_Test"/>
             <class name="tds.TDS_v1_sms_decline_Test"/>
             <class name="tds.TDS_v1_sms_accept_Test"/>
+
             <class name="tds.TDS_v2_browser_app_accept_Test"/>
             <class name="tds.TDS_v2_browser_app_decline_Test"/>
+            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
 
         </classes>
     </test>
