@@ -41,7 +41,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
+                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
@@ -82,7 +82,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1");
+                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -113,7 +113,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
+                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -157,7 +157,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
+                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -186,7 +186,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
+                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
