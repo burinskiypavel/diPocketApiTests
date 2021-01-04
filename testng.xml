@@ -4,19 +4,38 @@
 
     <test name="DiPocketAPITests">
         <classes>
-            <class name="registration.RegistrationTest"/>
-            <class name="homePage.HomePageWithAlreadyExistClientTest"/>
+<!--            <class name="registration.RegistrationTest"/>-->
+<!--            <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
 
-            <class name="tds.TDSV1BioAcceptTest"/>
-            <class name="tds.TDSV1BioDeclineTest"/>
-            <class name="tds.TDSV1SmsDeclineTest"/>
-            <class name="tds.TDSV1SmsAcceptTest"/>
-            <class name="tds.TDSV1PareqAllFieldsTest"/>
+<!--            <class name="tds.TDSV1BioAcceptTest"/>-->
+<!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+<!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
+<!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
+<!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
 
-            <class name="tds.TDSV2BrowserAppAcceptTest"/>
-            <class name="tds.TDSV2BrowserAppCancelTest"/>
-            <class name="tds.TDSV2BrowserAppDeclineTest"/>
+<!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
+<!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
+<!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
             <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
+<!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
+
+        </classes>
+    </test>
+    <test name="DiPocketAPITests2">
+        <classes>
+            <!--            <class name="registration.RegistrationTest"/>-->
+            <!--            <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
+
+            <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
+            <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+            <!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
+            <!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
+            <!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
+
+            <!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
+            <!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
+            <!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
+<!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
             <class name="tds.TDSV2CReqAllFieldsTest"/>
 
         </classes>
