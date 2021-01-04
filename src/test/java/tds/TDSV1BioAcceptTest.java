@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import model.BackgroudResponse;
 import model.Entry;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -19,7 +20,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class TDSV1BioAcceptTest extends BaseTest {
     String txId = generateRandomNumber(10);
     String tranId = null;
-    String pan = "5455980836095804";
 
     @Test(priority = 24)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
@@ -41,9 +41,10 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1")
+                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .statusCode(200)
+                .body("backgroundResponse.backgroundVeres.chName", equalTo(""))
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
                 .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"))
                 .log().all();
@@ -82,7 +83,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1");
+                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -113,7 +114,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/tranStatus.v1")
+                .post(TDSBaseUrl+"/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -157,7 +158,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/tranStatus.v1")
+                .post(TDSBaseUrl+"/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -186,7 +187,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1")
+                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .log().all()
                 .statusCode(200)

@@ -41,10 +41,14 @@ import java.util.stream.Collectors;
 
 public class BaseTest extends ApplicationManager {
    public static java.util.Properties prop = new java.util.Properties();
+   public String pan = null;
+   public String TDSBaseUrl = null;
 
     @BeforeClass
     public void start() {
         prop = loadDataFromConfigFile();
+        pan = prop.getProperty("tds.pan");
+        TDSBaseUrl = prop.getProperty("tds.base.url");
     }
 
     @BeforeTest
