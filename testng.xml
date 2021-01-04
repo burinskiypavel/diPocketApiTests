@@ -14,6 +14,7 @@
             <class name="tds.TDSV1PareqAllFieldsTest"/>
 
             <class name="tds.TDSV2BrowserAppAcceptTest"/>
+            <class name="tds.TDSV2BrowserAppCancelTest"/>
             <class name="tds.TDSV2BrowserAppDeclineTest"/>
             <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
             <class name="tds.TDSV2CReqAllFieldsTest"/>

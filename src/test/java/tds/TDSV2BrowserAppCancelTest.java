@@ -18,15 +18,12 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
+public class TDSV2BrowserAppCancelTest extends BaseTest {
     String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String pan = "5455980836095804";
-    String maskedPan = "545598******5804";
-    String tranId = null;
-    String sms = null;
 
-    @Test(priority = 66)
+    @Test(priority = 56)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
@@ -41,7 +38,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
                         "      <threeDSRequestorName>integration test</threeDSRequestorName>\n" +
                         "      <threeDSRequestorURL>integration test</threeDSRequestorURL>\n" +
                         "      <threeDSServerRefNumber>3DS_LOA_SER_MOMD_020100_00068</threeDSServerRefNumber>\n" +
-                        "      <threeDSServerTransID>43abe893-8e2b-591e-8000-0000003b9535</threeDSServerTransID>\n" +
+                        "      <threeDSServerTransID>threeDSServerTransID</threeDSServerTransID>\n" +
                         "      <threeDSServerURL>integration test</threeDSServerURL>\n" +
                         "      <acquirerBIN>444444</acquirerBIN>\n" +
                         "      <acquirerMerchantID>1000</acquirerMerchantID>\n" +
@@ -54,7 +51,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
                         "      <browserScreenWidth>1920</browserScreenWidth>\n" +
                         "      <browserTZ>-120</browserTZ>\n" +
                         "      <browserUserAgent>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36</browserUserAgent>\n" +
-                        "      <cardExpiryDate>3510</cardExpiryDate>\n" +
+                        "      <cardExpiryDate>3205</cardExpiryDate>\n" +
                         "      <acctNumber>"+pan+"</acctNumber>\n" +
                         "      <deviceChannel>02</deviceChannel>\n" +
                         "      <dsReferenceNumber>EMVCo1234567</dsReferenceNumber>\n" +
@@ -66,8 +63,8 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
                         "      <messageCategory>01</messageCategory>\n" +
                         "      <messageType>AReq</messageType>\n" +
                         "      <messageVersion>2.1.0</messageVersion>\n" +
-                        "      <notificationURL>integration test</notificationURL>\n" +
-                        "      <purchaseAmount>6500</purchaseAmount>\n" +
+                        "      <notificationURL>https://3ds2-mpi.test.modirum.com/mdpaympi/MerchantServer/msgid/3914591</notificationURL>\n" +
+                        "      <purchaseAmount>6000</purchaseAmount>\n" +
                         "      <purchaseCurrency>840</purchaseCurrency>\n" +
                         "      <purchaseExponent>2</purchaseExponent>\n" +
                         "      <purchaseDate>"+now+"</purchaseDate>\n" +
@@ -76,7 +73,11 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
                 .when()
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
 
-        res.then().log().all().statusCode(200);
+        res.then()
+                .log().all()
+                .statusCode(200)
+                .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
+
         String response = res.asString();
         System.out.println(res.asString());
 
@@ -91,7 +92,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
         Assert.assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 67)
+    @Test(priority = 57)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -131,23 +132,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
         Assert.assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 68)
-    public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
-        given()
-                .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
-                        "}")
-                .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("value", equalTo("AWAITING"));
-    }
-
-
-    @Test(priority = 69)
+    @Test(priority = 58)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -162,16 +147,8 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
                         "         <pageId>bio-web.html</pageId>\n" +
                         "         <values>\n" +
                         "            <entry>\n" +
-                        "               <name>TXID</name>\n" +
-                        "               <value>"+randomAcsTransId+"</value>\n" +
-                        "            </entry>\n" +
-                        "            <entry>\n" +
-                        "               <name>BIO_AUTH</name>\n" +
-                        "               <value>DECLINED</value>\n" +
-                        "            </entry>\n" +
-                        "            <entry>\n" +
-                        "               <name>SMS_INSTEAD</name>\n" +
-                        "               <value>Y</value>\n" +
+                        "               <name>cancel</name>\n" +
+                        "               <value>true</value>\n" +
                         "            </entry>\n" +
                         "         </values>\n" +
                         "      </backgroundPageResponse>\n" +
@@ -180,97 +157,9 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
                 .when()
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
 
-        res.then().log().all().statusCode(200);
-        String response = res.asString();
-        System.out.println(res.asString());
-
-
-        Document document = initXmlParsing(response);
-        BackgroundCRes backgroudCres = parseXmlResponseReturnBackgroundCResObject(document);
-        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document);
-
-        System.out.println(listEnty);
-        //System.out.println(backgroudResponse);
-
-        String masName[] = {"TXID", "CANCEL_TEXT", "CONFIRM_TITLE", "CONFIRM_MESSAGE", "MASKED_PAN_TITLE", "MASKED_PAN", "PURCHASEDATE_TITLE", "PURCHASEDATE", "MERCHANTNAME_TITLE", "MERCHANTNAME", "PURCHASEAMOUNT_TITLE", "PURCHASEAMOUNT", "ENTER_CODE_TEXT", "SUBMIT_TEXT"};
-        String masValue[] = {randomAcsTransId, "Cancel", "Confirm with SMS code", "To confirm the transaction, please enter below the Code we sent by SMS to 0069", "Card #", maskedPan, "Date", "Store", "integration test", "Amount", "65.00 USD", "Enter the Code here", "Submit"};
-
-        checkTextInCollectionEntryName(listEnty, masName);
-        checkTextInCollectionEntryValue(listEnty, masValue);
-        Assert.assertEquals(backgroudCres.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(backgroudCres.getMessageType(), "CRes");
-        Assert.assertEquals(backgroudCres.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroudCres.getPageId(), "sms_web.html");
-        Assert.assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
-    }
-
-    @Test(priority = 70)
-    public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
-        given()
-                .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
-                        "}")
-                .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus")
-                .then()
-                .log().all()
+        res.then().log().all()
                 .statusCode(200)
-                .body("value", equalTo("AWAITING"));
-    }
-
-    @Test(priority = 71)
-    public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
-        Response res = given()
-                .when()
-                .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
-
-        res.then().log().all();
-        tranId = res.asString();
-        System.out.println("tranId " + tranId);
-        Assert.assertEquals(res.getStatusCode(), 200);
-    }
-
-    @Test(priority = 72)
-    public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
-        Response res = given()
-                .when()
-                .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/sms?tranId=" + tranId + "");
-
-        res.then().log().all();
-        sms = res.asString();
-        System.out.println("sms " + sms);
-        Assert.assertEquals(res.getStatusCode(), 200);
-    }
-
-    @Test(priority = 73)
-    public void test_CReq_DiPocket3ds_acs_bgAuth__() throws IOException, SAXException, ParserConfigurationException {
-        Response res = given()
-                .header("Content-Type", "application/xml")
-                .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                        "<backgroundRequest2>\n" +
-                        "   <backgroundCReq>\n" +
-                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
-                        "      <challengeWindowSize>03</challengeWindowSize>\n" +
-                        "      <messageType>CReq</messageType>\n" +
-                        "      <messageVersion>2.1.0</messageVersion>\n" +
-                        "      <backgroundPageResponse>\n" +
-                        "         <pageId>sms_web.html</pageId>\n" +
-                        "         <values>\n" +
-                        "            <entry>\n" +
-                        "               <name>SMS_OTP</name>\n" +
-                        "               <value>"+sms+"</value>\n" +
-                        "            </entry>\n" +
-                        "         </values>\n" +
-                        "      </backgroundPageResponse>\n" +
-                        "   </backgroundCReq>\n" +
-                        "</backgroundRequest2>")
-                .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
-
-        res.then().log().all().statusCode(200);
+                .body("backgroundResponse2.backgroundCRes.FinalCRes.transStatusReason", equalTo("26"));
         String response = res.asString();
         System.out.println(res.asString());
 
@@ -280,7 +169,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
         Assert.assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(finalCRes.getMessageType(), "CRes");
         Assert.assertEquals(finalCRes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(finalCRes.getTransStatus(), "Y");
+        Assert.assertEquals(finalCRes.getTransStatus(), "N");
         Assert.assertEquals(finalCRes.getChallengeCompletionInd(), "Y");
     }
 }
