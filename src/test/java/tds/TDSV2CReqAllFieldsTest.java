@@ -19,9 +19,8 @@ public class TDSV2CReqAllFieldsTest extends BaseTest {
     String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String pan = "5455980836095804";
-    String tranId = null;
 
-    @Test(priority = 69)
+    @Test(priority = 71)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -85,7 +84,7 @@ public class TDSV2CReqAllFieldsTest extends BaseTest {
         Assert.assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 70)
+    @Test(priority = 72)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")

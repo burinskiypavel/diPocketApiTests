@@ -6,10 +6,12 @@
         <classes>
             <class name="registration.RegistrationTest"/>
             <class name="homePage.HomePageWithAlreadyExistClientTest"/>
+
             <class name="tds.TDSV1BioAcceptTest"/>
             <class name="tds.TDSV1BioDeclineTest"/>
             <class name="tds.TDSV1SmsDeclineTest"/>
             <class name="tds.TDSV1SmsAcceptTest"/>
+            <class name="tds.TDSV1PareqAllFieldsTest"/>
 
             <class name="tds.TDSV2BrowserAppAcceptTest"/>
             <class name="tds.TDSV2BrowserAppDeclineTest"/>

@@ -21,7 +21,7 @@ public class TDSV2BrowserAppDeclineTest extends BaseTest {
     String pan = "5455980836095804";
     String tranId = null;
 
-    @Test(priority = 54)
+    @Test(priority = 56)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -85,7 +85,7 @@ public class TDSV2BrowserAppDeclineTest extends BaseTest {
         Assert.assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 55)
+    @Test(priority = 57)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -124,7 +124,7 @@ public class TDSV2BrowserAppDeclineTest extends BaseTest {
         Assert.assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 56)
+    @Test(priority = 58)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
         given()
                 .header("Content-Type", "application/json")
@@ -139,7 +139,7 @@ public class TDSV2BrowserAppDeclineTest extends BaseTest {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 57)
+    @Test(priority = 59)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
                 .when()
@@ -152,7 +152,7 @@ public class TDSV2BrowserAppDeclineTest extends BaseTest {
         Assert.assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 58)
+    @Test(priority = 60)
     public void test_tranDecline_ClientServices_v1_tds_tranId_tranDecline() {
         Response response = given()
                 .when()
@@ -168,7 +168,7 @@ public class TDSV2BrowserAppDeclineTest extends BaseTest {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 59)
+    @Test(priority = 61)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
         given()
                 .header("Content-Type", "application/json")
@@ -183,7 +183,7 @@ public class TDSV2BrowserAppDeclineTest extends BaseTest {
                 .body("value", equalTo("DECLINED"));
     }
 
-    @Test(priority = 60)
+    @Test(priority = 62)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")

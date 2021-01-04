@@ -26,7 +26,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
     String tranId = null;
     String sms = null;
 
-    @Test(priority = 61)
+    @Test(priority = 63)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
@@ -91,7 +91,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
         Assert.assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 62)
+    @Test(priority = 64)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -131,7 +131,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
         Assert.assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 63)
+    @Test(priority = 65)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
         given()
                 .header("Content-Type", "application/json")
@@ -147,7 +147,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
     }
 
 
-    @Test(priority = 64)
+    @Test(priority = 66)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -204,7 +204,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
         Assert.assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 65)
+    @Test(priority = 67)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
         given()
                 .header("Content-Type", "application/json")
@@ -219,7 +219,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 66)
+    @Test(priority = 68)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
                 .when()
@@ -232,7 +232,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
         Assert.assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 67)
+    @Test(priority = 69)
     public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
         Response res = given()
                 .when()
@@ -245,7 +245,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends BaseTest {
         Assert.assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 68)
+    @Test(priority = 70)
     public void test_CReq_DiPocket3ds_acs_bgAuth__() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .header("Content-Type", "application/xml")
