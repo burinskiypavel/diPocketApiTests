@@ -2,8 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestingSuite" parallel="none">
 
-    <test name="DiPocketAPITests">
-        <classes>
+<!--    <test name="DiPocketAPITests">-->
+<!--        <classes>-->
 <!--            <class name="registration.RegistrationTest"/>-->
 <!--            <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
 
@@ -16,28 +16,88 @@
 <!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
 <!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
 <!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
-            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
+<!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
 <!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
 
-        </classes>
-    </test>
-    <test name="DiPocketAPITests2">
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="DiPocketAPITests_RegistrationTest">
         <classes>
-            <!--            <class name="registration.RegistrationTest"/>-->
-            <!--            <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
-
-            <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
-            <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
-            <!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
-            <!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
-            <!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
-
-            <!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
-            <!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
-            <!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
-<!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
-            <class name="tds.TDSV2CReqAllFieldsTest"/>
-
+            <class name="registration.RegistrationTest"/>
         </classes>
     </test>
+
+    <test name="DiPocketAPITests_HomePageWithAlreadyExistClientTest">
+    <classes>
+        <class name="homePage.HomePageWithAlreadyExistClientTest"/>
+    </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV1_1">
+        <classes>
+            <class name="tds.TDSV1BioAcceptTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV1_2">
+        <classes>
+            <class name="tds.TDSV1BioDeclineTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV1_3">
+        <classes>
+            <class name="tds.TDSV1SmsDeclineTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV1_4">
+        <classes>
+            <class name="tds.TDSV1SmsAcceptTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV1_5">
+        <classes>
+            <class name="tds.TDSV1PareqAllFieldsTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV2_1">
+        <classes>
+            <class name="tds.TDSV2BrowserAppAcceptTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV2_2">
+        <classes>
+            <class name="tds.TDSV2BrowserAppCancelTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV2_3">
+        <classes>
+            <class name="tds.TDSV2BrowserAppDeclineTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV2_4">
+        <classes>
+            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV2_5">
+        <classes>
+            <class name="tds.TDSV2CReqAllFieldsTest"/>
+        </classes>
+    </test>
+
+    <test name="DiPocketAPITests_tdsV2_6">
+        <classes>
+            <class name="tds.TDSV2NativeOOBAppTest"/>
+        </classes>
+    </test>
+
 </suite>

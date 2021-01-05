@@ -515,6 +515,73 @@ public class BaseTest extends ApplicationManager {
         return backgroundARes;
     }
 
+    public OOBBackgroundCRes parseXmlReturnOOBBackgroundCResObject(Document document) {
+        OOBBackgroundCRes oobBackgroundCRes = new OOBBackgroundCRes();
+
+        Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
+        Element backgroundCResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundCRes").item(0);
+        Element InProgressCResElement = (Element) backgroundCResElement.getElementsByTagName("InProgressCRes").item(0);
+
+        Element acsTransIDElement = (Element) InProgressCResElement.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        oobBackgroundCRes.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element acsCounterAtoSElement = (Element) InProgressCResElement.getElementsByTagName("acsCounterAtoS").item(0);
+        System.out.println("acsCounterAtoS " + acsCounterAtoSElement.getTextContent());
+        oobBackgroundCRes.setAcsCounterAtoS(acsCounterAtoSElement.getTextContent());
+
+        Element acsUiTypeElement = (Element) InProgressCResElement.getElementsByTagName("acsUiType").item(0);
+        System.out.println("acsUiType " + acsUiTypeElement.getTextContent());
+        oobBackgroundCRes.setAcsUiType(acsUiTypeElement.getTextContent());
+
+        Element challengeInfoHeaderElement = (Element) InProgressCResElement.getElementsByTagName("challengeInfoHeader").item(0);
+        System.out.println("challengeInfoHeader " + challengeInfoHeaderElement.getTextContent());
+        oobBackgroundCRes.setChallengeInfoHeader(challengeInfoHeaderElement.getTextContent());
+
+        Element challengeInfoTextElement = (Element) InProgressCResElement.getElementsByTagName("challengeInfoText").item(0);
+        System.out.println("challengeInfoText " + challengeInfoTextElement.getTextContent());
+
+        String text = challengeInfoTextElement.getTextContent();
+
+                text = text.replaceAll("&#xD;&#xA;", " ");
+
+        oobBackgroundCRes.setChallengeInfoText(text);
+
+        Element expandInfoLabelElement = (Element) InProgressCResElement.getElementsByTagName("expandInfoLabel").item(0);
+        System.out.println("expandInfoLabel " + expandInfoLabelElement.getTextContent());
+        oobBackgroundCRes.setExpandInfoLabel(expandInfoLabelElement.getTextContent());
+
+        Element expandInfoTextElement = (Element) InProgressCResElement.getElementsByTagName("expandInfoText").item(0);
+        System.out.println("expandInfoText " + expandInfoTextElement.getTextContent());
+        oobBackgroundCRes.setExpandInfoText(expandInfoTextElement.getTextContent());
+
+        Element issuerImageElement = (Element) InProgressCResElement.getElementsByTagName("issuerImage").item(0);
+        System.out.println("issuerImage " + issuerImageElement.getTextContent());
+        oobBackgroundCRes.setIssuerImage(issuerImageElement.getTextContent());
+
+        Element psImageElement = (Element) InProgressCResElement.getElementsByTagName("psImage").item(0);
+        System.out.println("psImage " + psImageElement.getTextContent());
+        oobBackgroundCRes.setPsImage(psImageElement.getTextContent());
+
+        Element messageTypeElement = (Element) InProgressCResElement.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        oobBackgroundCRes.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) InProgressCResElement.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        oobBackgroundCRes.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element oobContinueLabelElement = (Element) InProgressCResElement.getElementsByTagName("oobContinueLabel").item(0);
+        System.out.println("oobContinueLabel " + oobContinueLabelElement.getTextContent());
+        oobBackgroundCRes.setOobContinueLabel(oobContinueLabelElement.getTextContent());
+
+        Element challengeCompletionIndElement = (Element) InProgressCResElement.getElementsByTagName("challengeCompletionInd").item(0);
+        System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
+        oobBackgroundCRes.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
+
+        return oobBackgroundCRes;
+    }
+
     public Document initParseXmlFromFile() throws ParserConfigurationException, SAXException, IOException {
         File fXmlFile = new File("files/response.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
