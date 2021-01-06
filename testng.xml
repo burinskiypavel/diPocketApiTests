@@ -100,4 +100,10 @@
         </classes>
     </test>
 
+    <test name="DiPocketAPITests_tdsV2_7">
+        <classes>
+            <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>
+        </classes>
+    </test>
+
 </suite>

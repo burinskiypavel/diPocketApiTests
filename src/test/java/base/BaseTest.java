@@ -582,6 +582,45 @@ public class BaseTest extends ApplicationManager {
         return oobBackgroundCRes;
     }
 
+    public OOBBackgroundCRes parseXmlReturnOOBBackgroundCResObject_NativeOOOBHtml(Document document) {
+        OOBBackgroundCRes oobBackgroundCRes = new OOBBackgroundCRes();
+
+        Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
+        Element backgroundCResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundCRes").item(0);
+        Element InProgressCResElement = (Element) backgroundCResElement.getElementsByTagName("InProgressCRes").item(0);
+
+        Element acsTransIDElement = (Element) InProgressCResElement.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        oobBackgroundCRes.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element acsCounterAtoSElement = (Element) InProgressCResElement.getElementsByTagName("acsCounterAtoS").item(0);
+        System.out.println("acsCounterAtoS " + acsCounterAtoSElement.getTextContent());
+        oobBackgroundCRes.setAcsCounterAtoS(acsCounterAtoSElement.getTextContent());
+
+        Element acsUiTypeElement = (Element) InProgressCResElement.getElementsByTagName("acsUiType").item(0);
+        System.out.println("acsUiType " + acsUiTypeElement.getTextContent());
+        oobBackgroundCRes.setAcsUiType(acsUiTypeElement.getTextContent());
+
+        Element messageTypeElement = (Element) InProgressCResElement.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        oobBackgroundCRes.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) InProgressCResElement.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        oobBackgroundCRes.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element backgroundPageRequestElement = (Element) InProgressCResElement.getElementsByTagName("backgroundPageRequest").item(0);
+        Element pageIdElement = (Element) backgroundPageRequestElement.getElementsByTagName("pageId").item(0);
+        System.out.println("pageId " + pageIdElement.getTextContent());
+        oobBackgroundCRes.setPageId(pageIdElement.getTextContent());
+
+        Element challengeCompletionIndElement = (Element) InProgressCResElement.getElementsByTagName("challengeCompletionInd").item(0);
+        System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
+        oobBackgroundCRes.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
+
+        return oobBackgroundCRes;
+    }
+
     public Document initParseXmlFromFile() throws ParserConfigurationException, SAXException, IOException {
         File fXmlFile = new File("files/response.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
