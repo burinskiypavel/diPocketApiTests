@@ -2,10 +2,7 @@ package tds;
 
 import base.BaseTest;
 import io.restassured.response.Response;
-import model.BackgroundARes;
-import model.Entry;
-import model.FinalCRes;
-import model.OOBBackgroundCRes;
+import model.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
@@ -16,10 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDSV2NativeOOBHtmlAcceptTest extends BaseTest {
+public class TDSV2NativeOOBHtmlDeclineTest extends BaseTest {
     String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String tranId = null;
@@ -149,7 +145,7 @@ public class TDSV2NativeOOBHtmlAcceptTest extends BaseTest {
     }
 
     @Test(priority = 4)
-    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() {
+    public void test_tranDecline_ClientServices_v1_tds_tranId_tranDecline() {
         Response response = given()
                 .when()
                 .auth()
@@ -158,7 +154,7 @@ public class TDSV2NativeOOBHtmlAcceptTest extends BaseTest {
                 .header("Content-Type", "application/json")
                 .header("SITE", "UPANDGO")
                 .header("ClISESSIONID", "123456")
-                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
+                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranDecline");
 
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -187,12 +183,13 @@ public class TDSV2NativeOOBHtmlAcceptTest extends BaseTest {
         System.out.println(res.asString());
 
         Document document = initXmlParsing(response);
-        FinalCRes finalCRes = parseXmlResponseReturnFinalCResObject(document);
+        FinalCResDecline finalCResDecline = parseXmlResponseReturnFinalCResDeclineObject(document);
 
-        Assert.assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(finalCRes.getMessageType(), "CRes");
-        Assert.assertEquals(finalCRes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(finalCRes.getTransStatus(), "Y");
-        Assert.assertEquals(finalCRes.getChallengeCompletionInd(), "Y");
+        Assert.assertEquals(finalCResDecline.getAcsTransID(), randomAcsTransId);
+        Assert.assertEquals(finalCResDecline.getMessageType(), "CRes");
+        Assert.assertEquals(finalCResDecline.getMessageVersion(), "2.1.0");
+        Assert.assertEquals(finalCResDecline.getTransStatus(), "N");
+        Assert.assertEquals(finalCResDecline.getTransStatusReason(), "26");
+        Assert.assertEquals(finalCResDecline.getChallengeCompletionInd(), "Y");
     }
 }
