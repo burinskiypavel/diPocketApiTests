@@ -50,7 +50,7 @@ public class TDSV1SmsDeclineTest extends BaseTest {
     }
 
     @Test(priority = 39)
-    public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
+    public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = getTimeStamp("YYYYMMdd HH:mm:ss");
         String now2 = getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
@@ -119,7 +119,7 @@ public class TDSV1SmsDeclineTest extends BaseTest {
     }
 
     @Test(priority = 41)
-    public void test_paReqStep2_DiPocket3ds_acs_bgAuth_v1() {
+    public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
         given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

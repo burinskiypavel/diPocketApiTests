@@ -50,7 +50,7 @@ public class TDSV1BioDeclineTest extends BaseTest {
     }
 
     @Test(priority = 32)
-    public void test_paReqStep1_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
+    public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -106,7 +106,7 @@ public class TDSV1BioDeclineTest extends BaseTest {
     }
 
     @Test(priority = 33)
-    public void test_tranStatusStep1_DiPocket3ds_acs_tranStatus_v1() {
+    public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
@@ -150,7 +150,7 @@ public class TDSV1BioDeclineTest extends BaseTest {
     }
 
     @Test(priority = 36)
-    public void test_tranStatusStep2_DiPocket3ds_acs_tranStatus_v1() {
+    public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
@@ -165,7 +165,7 @@ public class TDSV1BioDeclineTest extends BaseTest {
     }
 
     @Test(priority = 37)
-    public void test_paReqStep2_DiPocket3ds_acs_bgAuth_v1() {
+    public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
         given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
