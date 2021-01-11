@@ -118,4 +118,10 @@
         </classes>
     </test>
 
+    <test name="DiPocketAPITests_TDSV2NativeSmsHtmlAcceptTest">
+        <classes>
+            <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>
+        </classes>
+    </test>
+
 </suite>
