@@ -55,7 +55,7 @@ public class EmailIMAPHelper {
                 if (contentType.contains("multipart")) {
                     Multipart multiPart = (Multipart) message.getContent();
                     int numberOfParts = multiPart.getCount();
-                    for (int partCount = 0; partCount < numberOfParts-1; partCount++) {
+                    for (int partCount = 0; partCount < numberOfParts-3; partCount++) { //was numberOfParts-1
 
                         MimePart part = (MimePart) multiPart.getBodyPart(partCount);
 

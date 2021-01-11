@@ -621,6 +621,68 @@ public class BaseTest extends ApplicationManager {
         return oobBackgroundCRes;
     }
 
+    public NativeSms parseXmlReturnNativeSmsObject(Document document) {
+        NativeSms nativeSms = new NativeSms();
+
+        Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
+        Element backgroundCResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundCRes").item(0);
+        Element InProgressCResElement = (Element) backgroundCResElement.getElementsByTagName("InProgressCRes").item(0);
+
+        Element acsTransIDElement = (Element) InProgressCResElement.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        nativeSms.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element acsCounterAtoSElement = (Element) InProgressCResElement.getElementsByTagName("acsCounterAtoS").item(0);
+        System.out.println("acsCounterAtoS " + acsCounterAtoSElement.getTextContent());
+        nativeSms.setAcsCounterAtoS(acsCounterAtoSElement.getTextContent());
+
+        Element acsUiTypeElement = (Element) InProgressCResElement.getElementsByTagName("acsUiType").item(0);
+        System.out.println("acsUiType " + acsUiTypeElement.getTextContent());
+        nativeSms.setAcsUiType(acsUiTypeElement.getTextContent());
+
+
+        Element challengeInfoHeaderElement = (Element) InProgressCResElement.getElementsByTagName("challengeInfoHeader").item(0);
+        System.out.println("challengeInfoHeader " + challengeInfoHeaderElement.getTextContent());
+        nativeSms.setChallengeInfoHeader(challengeInfoHeaderElement.getTextContent());
+
+        Element challengeInfoLabelElement = (Element) InProgressCResElement.getElementsByTagName("challengeInfoLabel").item(0);
+        System.out.println("challengeInfoLabel " + challengeInfoLabelElement.getTextContent());
+        nativeSms.setChallengeInfoLabel(challengeInfoLabelElement.getTextContent());
+
+
+        Element challengeInfoTextElement = (Element) InProgressCResElement.getElementsByTagName("challengeInfoText").item(0);
+        System.out.println("challengeInfoText " + challengeInfoTextElement.getTextContent());
+        nativeSms.setChallengeInfoText(challengeInfoTextElement.getTextContent().toString());
+
+
+        Element issuerImageElement = (Element) InProgressCResElement.getElementsByTagName("issuerImage").item(0);
+        System.out.println("issuerImage " + issuerImageElement.getTextContent());
+        nativeSms.setIssuerImage(issuerImageElement.getTextContent());
+
+        Element psImageElement = (Element) InProgressCResElement.getElementsByTagName("psImage").item(0);
+        System.out.println("psImage " + psImageElement.getTextContent());
+        nativeSms.setPsImage(psImageElement.getTextContent());
+
+
+        Element messageTypeElement = (Element) InProgressCResElement.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        nativeSms.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) InProgressCResElement.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        nativeSms.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element submitAuthenticationLabelElement = (Element) InProgressCResElement.getElementsByTagName("submitAuthenticationLabel").item(0);
+        System.out.println("submitAuthenticationLabel " + submitAuthenticationLabelElement.getTextContent());
+        nativeSms.setSubmitAuthenticationLabel(submitAuthenticationLabelElement.getTextContent());
+
+        Element challengeCompletionIndElement = (Element) InProgressCResElement.getElementsByTagName("challengeCompletionInd").item(0);
+        System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
+        nativeSms.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
+
+        return nativeSms;
+    }
+
     public Document initParseXmlFromFile() throws ParserConfigurationException, SAXException, IOException {
         File fXmlFile = new File("files/response.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
