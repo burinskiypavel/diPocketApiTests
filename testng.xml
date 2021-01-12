@@ -136,4 +136,10 @@
         </classes>
     </test>
 
+    <test name="DiPocketAPITests_TDSV2NativeIncorrectTranTest">
+        <classes>
+            <class name="tds.TDSV2NativeIncorrectTranTest"/>
+        </classes>
+    </test>
+
 </suite>

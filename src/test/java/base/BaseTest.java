@@ -515,6 +515,35 @@ public class BaseTest extends ApplicationManager {
         return backgroundARes;
     }
 
+    public BackgroundAResDecline parseXmlResponseReturnBackgroundAResDeclinedObject(Document document) {
+        BackgroundAResDecline backgroundAResDecline = new BackgroundAResDecline();
+
+        Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
+        Element backgroundAResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundARes").item(0);
+
+        Element acsTransIDElement = (Element) backgroundAResElement.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        backgroundAResDecline.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element messageTypeElement = (Element) backgroundAResElement.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        backgroundAResDecline.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) backgroundAResElement.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        backgroundAResDecline.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element transStatusElement = (Element) backgroundAResElement.getElementsByTagName("transStatus").item(0);
+        System.out.println("transStatus " + transStatusElement.getTextContent());
+        backgroundAResDecline.setTransStatus(transStatusElement.getTextContent());
+
+        Element transStatusReasonElement = (Element) backgroundAResElement.getElementsByTagName("transStatusReason").item(0);
+        System.out.println("transStatusReason " + transStatusReasonElement.getTextContent());
+        backgroundAResDecline.setTransStatusReason(transStatusReasonElement.getTextContent());
+
+        return backgroundAResDecline;
+    }
+
     public OOBBackgroundCRes parseXmlReturnOOBBackgroundCResObject(Document document) {
         OOBBackgroundCRes oobBackgroundCRes = new OOBBackgroundCRes();
 
