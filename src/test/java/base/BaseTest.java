@@ -515,6 +515,32 @@ public class BaseTest extends ApplicationManager {
         return backgroundARes;
     }
 
+    public BackgroundARes parseXmlResponseReturnBackgroundAResAllFieldsObject(Document document) {
+        BackgroundARes backgroundARes = new BackgroundARes();
+
+        Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        backgroundARes.setAcsTransID(acsTransIDElement.getTextContent());
+
+        Element acsChallengeMandatedElement = (Element) document.getElementsByTagName("acsChallengeMandated").item(0);
+        System.out.println("acsChallengeMandated " + acsChallengeMandatedElement.getTextContent());
+        backgroundARes.setAcsChallengeMandated(acsChallengeMandatedElement.getTextContent());
+
+        Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        backgroundARes.setMessageType(messageTypeElement.getTextContent());
+
+        Element messageVersionElement = (Element) document.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        backgroundARes.setMessageVersion(messageVersionElement.getTextContent());
+
+        Element transStatusElement = (Element) document.getElementsByTagName("transStatus").item(0);
+        System.out.println("transStatus " + transStatusElement.getTextContent());
+        backgroundARes.setTransStatus(transStatusElement.getTextContent());
+
+        return backgroundARes;
+    }
+
     public BackgroundAResDecline parseXmlResponseReturnBackgroundAResDeclinedObject(Document document) {
         BackgroundAResDecline backgroundAResDecline = new BackgroundAResDecline();
 

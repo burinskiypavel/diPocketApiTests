@@ -142,4 +142,10 @@
         </classes>
     </test>
 
+    <test name="DiPocketAPITests_TDSV2AreqAllFieldTest">
+        <classes>
+            <class name="tds.TDSV2AreqAllFieldTest"/>
+        </classes>
+    </test>
+
 </suite>
