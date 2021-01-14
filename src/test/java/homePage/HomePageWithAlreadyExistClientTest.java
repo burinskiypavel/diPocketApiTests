@@ -38,6 +38,7 @@ public class HomePageWithAlreadyExistClientTest extends BaseTest {
                 .then()
                 .log().all()
                 .statusCode(400)
+                .body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
                 .body("errCode", equalTo("DIP-00591"));
     }
 
