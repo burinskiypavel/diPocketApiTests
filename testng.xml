@@ -24,13 +24,11 @@
 
 
 
-
-
-<!--    <test name="DiPocketAPITests_RegistrationTest">-->
-<!--        <classes>-->
-<!--            <class name="registration.RegistrationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_RegistrationTest">
+        <classes>
+            <class name="registration.RegistrationTest"/>
+        </classes>
+    </test>
 
     <test name="DiPocketAPITests_HomePageWithAlreadyExistClientTest">
     <classes>
@@ -38,113 +36,113 @@
     </classes>
     </test>
 
-<!--    <test name="DiPocketAPITests_tdsV1_1">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1BioAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV1_1">
+        <classes>
+            <class name="tds.TDSV1BioAcceptTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV1_2">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1BioDeclineTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV1_2">
+        <classes>
+            <class name="tds.TDSV1BioDeclineTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV1_3">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV1_3">
+        <classes>
+            <class name="tds.TDSV1SmsDeclineTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV1_4">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV1_4">
+        <classes>
+            <class name="tds.TDSV1SmsAcceptTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV1_5">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV1_5">
+        <classes>
+            <class name="tds.TDSV1PareqAllFieldsTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV2_1">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV2_1">
+        <classes>
+            <class name="tds.TDSV2BrowserAppAcceptTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV2_2">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV2_2">
+        <classes>
+            <class name="tds.TDSV2BrowserAppCancelTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV2_3">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV2_3">
+        <classes>
+            <class name="tds.TDSV2BrowserAppDeclineTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV2_4">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV2_4">
+        <classes>
+            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV2_5">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV2_5">
+        <classes>
+            <class name="tds.TDSV2CReqAllFieldsTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV2_6">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeOOBAppTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV2_6">
+        <classes>
+            <class name="tds.TDSV2NativeOOBAppTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV2_7">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV2_7">
+        <classes>
+            <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_tdsV2_8">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeOOBHtmlDeclineTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_tdsV2_8">
+        <classes>
+            <class name="tds.TDSV2NativeOOBHtmlDeclineTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_TDSV2NativeSmsAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeSmsAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_TDSV2NativeSmsAcceptTest">
+        <classes>
+            <class name="tds.TDSV2NativeSmsAcceptTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_TDSV2NativeSmsHtmlAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_TDSV2NativeSmsHtmlAcceptTest">
+        <classes>
+            <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_TDSV2NativeSmsInccodeTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeSmsInccodeTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_TDSV2NativeSmsInccodeTest">
+        <classes>
+            <class name="tds.TDSV2NativeSmsInccodeTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">
+        <classes>
+            <class name="tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="DiPocketAPITests_TDSV2NativeIncorrectTranTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeIncorrectTranTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="DiPocketAPITests_TDSV2NativeIncorrectTranTest">
+        <classes>
+            <class name="tds.TDSV2NativeIncorrectTranTest"/>
+        </classes>
+    </test>
 
     <test name="DiPocketAPITests_TDSV2AreqAllFieldTest">
         <classes>
