@@ -24,127 +24,127 @@
 
 
 
-    <test name="DiPocketAPITests_RegistrationTest">
+    <test name="RegistrationTest">
         <classes>
             <class name="registration.RegistrationTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_HomePageWithAlreadyExistClientTest">
+    <test name="HomePageWithAlreadyExistClientTest">
     <classes>
         <class name="homePage.HomePageWithAlreadyExistClientTest"/>
     </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV1_1">
+    <test name="TDSV1BioAcceptTest">
         <classes>
             <class name="tds.TDSV1BioAcceptTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV1_2">
+    <test name="TDSV1BioDeclineTest">
         <classes>
             <class name="tds.TDSV1BioDeclineTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV1_3">
+    <test name="TDSV1SmsDeclineTest">
         <classes>
             <class name="tds.TDSV1SmsDeclineTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV1_4">
+    <test name="TDSV1SmsAcceptTest">
         <classes>
             <class name="tds.TDSV1SmsAcceptTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV1_5">
+    <test name="TDSV1PareqAllFieldsTest">
         <classes>
             <class name="tds.TDSV1PareqAllFieldsTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV2_1">
+    <test name="TDSV2BrowserAppAcceptTest">
         <classes>
             <class name="tds.TDSV2BrowserAppAcceptTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV2_2">
+    <test name="TDSV2BrowserAppCancelTest">
         <classes>
             <class name="tds.TDSV2BrowserAppCancelTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV2_3">
+    <test name="TDSV2BrowserAppDeclineTest">
         <classes>
             <class name="tds.TDSV2BrowserAppDeclineTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV2_4">
+    <test name="TDSV2BrowserAppSmsInsteadAcceptTest">
         <classes>
             <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV2_5">
+    <test name="TDSV2CReqAllFieldsTest">
         <classes>
             <class name="tds.TDSV2CReqAllFieldsTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV2_6">
+    <test name="TDSV2NativeOOBAppTest">
         <classes>
             <class name="tds.TDSV2NativeOOBAppTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV2_7">
+    <test name="TDSV2NativeOOBHtmlAcceptTest">
         <classes>
             <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_tdsV2_8">
+    <test name="TDSV2NativeOOBHtmlDeclineTest">
         <classes>
             <class name="tds.TDSV2NativeOOBHtmlDeclineTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_TDSV2NativeSmsAcceptTest">
+    <test name="TDSV2NativeSmsAcceptTest">
         <classes>
             <class name="tds.TDSV2NativeSmsAcceptTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_TDSV2NativeSmsHtmlAcceptTest">
+    <test name="TDSV2NativeSmsHtmlAcceptTest">
         <classes>
             <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_TDSV2NativeSmsInccodeTest">
+    <test name="TDSV2NativeSmsInccodeTest">
         <classes>
             <class name="tds.TDSV2NativeSmsInccodeTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">
+    <test name="TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">
         <classes>
             <class name="tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_TDSV2NativeIncorrectTranTest">
+    <test name="TDSV2NativeIncorrectTranTest">
         <classes>
             <class name="tds.TDSV2NativeIncorrectTranTest"/>
         </classes>
     </test>
 
-    <test name="DiPocketAPITests_TDSV2AreqAllFieldTest">
+    <test name="TDSV2AreqAllFieldTest">
         <classes>
             <class name="tds.TDSV2AreqAllFieldTest"/>
         </classes>
