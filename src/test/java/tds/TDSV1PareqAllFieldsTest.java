@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV1PareqAllFieldsTest extends BaseTest {
-    String randomTXID = generateRandomNumber(10);
+    String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
     String pan = "5455980836095804";
 
@@ -41,7 +41,7 @@ public class TDSV1PareqAllFieldsTest extends BaseTest {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1")
+                .post(app.getDbHelper().prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .statusCode(200)
                 .log().all()
@@ -52,7 +52,7 @@ public class TDSV1PareqAllFieldsTest extends BaseTest {
 
     @Test(priority = 48)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
-        String now = getTimeStamp("YYYYMMdd HH:mm:ss");
+        String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -89,16 +89,16 @@ public class TDSV1PareqAllFieldsTest extends BaseTest {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1");
+                .post(app.getDbHelper().prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
 
 
-        Document document = initXmlParsing(response);
-        BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
-        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroudResponse backgroudResponse = app.getXmlHelper().parseXmlResponseSetDataStatusSetPageId(document);
+        List<Entry> listEnty = app.getXmlHelper().parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
 
         System.out.println(listEnty);
         //System.out.println(backgroudResponse);
@@ -106,8 +106,8 @@ public class TDSV1PareqAllFieldsTest extends BaseTest {
         String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
         String masValue[] = {randomTXID, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
-        checkTextInCollectionEntryName(listEnty, masName);
-        checkTextInCollectionEntryValue(listEnty, masValue);
+        app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
+        app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
         Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
     }

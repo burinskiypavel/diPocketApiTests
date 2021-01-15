@@ -10,14 +10,12 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV2CReqAllFieldsTest extends BaseTest {
-    String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
-    String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
+    String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
+    String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String pan = "5455980836095804";
 
     @Test(priority = 1)
@@ -73,8 +71,8 @@ public class TDSV2CReqAllFieldsTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroundARes backgroundARes = parseXmlResponseReturnBackgroundAResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
         Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
@@ -134,8 +132,8 @@ public class TDSV2CReqAllFieldsTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        FinalCResDecline finalCResDecline = parseXmlResponseReturnFinalCResDeclineObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        FinalCResDecline finalCResDecline = app.getXmlHelper().parseXmlResponseReturnFinalCResDeclineObject(document);
 
         Assert.assertEquals(finalCResDecline.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(finalCResDecline.getMessageType(), "CRes");

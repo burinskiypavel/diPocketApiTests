@@ -3,7 +3,6 @@ package tds;
 import base.BaseTest;
 import io.restassured.response.Response;
 import model.BackgroundARes;
-import model.FinalCRes;
 import model.FinalCResDecline;
 import model.NativeSms;
 import org.testng.Assert;
@@ -19,10 +18,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TDSV2NativeSmsInccodeTest extends BaseTest {
-    String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
-    String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
-    String now = getTimeStamp("YYYYMMddHHmmss");
-    String now2 = getTimeStamp("dd.MM.YYYY HH:mm");
+    String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
+    String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
+    String now = app.getTimeStamp("YYYYMMddHHmmss");
+    String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
     String wrongSMSCode = "123456";
 
     @Test(priority = 1)
@@ -78,7 +77,7 @@ public class TDSV2NativeSmsInccodeTest extends BaseTest {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"))
@@ -88,8 +87,8 @@ public class TDSV2NativeSmsInccodeTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroundARes backgroundARes = parseXmlResponseReturnBackgroundAResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
         Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
@@ -114,14 +113,14 @@ public class TDSV2NativeSmsInccodeTest extends BaseTest {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        NativeSms nativeSms = parseXmlReturnNativeSmsObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        NativeSms nativeSms = app.getXmlHelper().parseXmlReturnNativeSmsObject(document);
 
         Assert.assertEquals(nativeSms.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(nativeSms.getAcsCounterAtoS(), "000");
@@ -160,14 +159,14 @@ public class TDSV2NativeSmsInccodeTest extends BaseTest {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        FinalCResDecline finalCResDecline = parseXmlResponseReturnFinalCResDeclineObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        FinalCResDecline finalCResDecline = app.getXmlHelper().parseXmlResponseReturnFinalCResDeclineObject(document);
 
         Assert.assertEquals(finalCResDecline.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(finalCResDecline.getMessageType(), "CRes");

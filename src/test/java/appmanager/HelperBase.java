@@ -1,10 +1,13 @@
-package base;
+package appmanager;
 
 import java.io.FileInputStream;
 
-public class ApplicationManager {
-    static java.util.Properties prop = new java.util.Properties();
+public class HelperBase {
+    public static java.util.Properties prop = new java.util.Properties();
+    //static java.util.Properties prop = new java.util.Properties();
     static String projectPath = System.getProperty("user.dir");
+    //public String pan = null;
+    //public String TDSBaseUrl = null;
 
     //private MailHelper mailHelper;
 
@@ -20,11 +23,4 @@ public class ApplicationManager {
         }
         return prop;
     }
-
-//    public MailHelper mail(){
-//        if(mailHelper == null){
-//            mailHelper = new MailHelper(this);
-//        }
-//        return mailHelper;
-//    }
 }

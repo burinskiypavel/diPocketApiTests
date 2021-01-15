@@ -3,9 +3,6 @@ package tds;
 import base.BaseTest;
 import io.restassured.response.Response;
 import model.BackgroundARes;
-import model.BackgroundCRes;
-import model.Entry;
-import model.FinalCRes;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
@@ -13,18 +10,17 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV2AreqAllFieldTest extends BaseTest {
-    String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
-    String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
+    String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
+    String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
 
     @Test(priority = 1)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
-        String now = getTimeStamp("YYYYMMddHHmmss");
+        String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -86,7 +82,7 @@ public class TDSV2AreqAllFieldTest extends BaseTest {
                         "          <shipNameIndicator>01</shipNameIndicator>\n" +
                         "          <suspiciousAccActivity>01</suspiciousAccActivity>\n" +
                         "      </acctInfo>\n" +
-                        "      <acctNumber>"+pan+"</acctNumber>\n" +
+                        "      <acctNumber>"+ app.pan +"</acctNumber>\n" +
                         "      <acctID>987654321</acctID>\n" +
                         "      <billAddrCity>City name</billAddrCity>\n" +
                         "      <billAddrCountry>pol</billAddrCountry>\n" +
@@ -176,8 +172,8 @@ public class TDSV2AreqAllFieldTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroundARes backgroundARes = parseXmlResponseReturnBackgroundAResAllFieldsObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResAllFieldsObject(document);
 
         Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "N");

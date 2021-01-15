@@ -16,8 +16,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV2BrowserAppAcceptTest extends BaseTest {
-    String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
-    String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
+    String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
+    String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String pan = "5455980836095804";
     String tranId = null;
 
@@ -74,8 +74,8 @@ public class TDSV2BrowserAppAcceptTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroundARes backgroundARes = parseXmlResponseReturnBackgroundAResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
         Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
@@ -106,9 +106,9 @@ public class TDSV2BrowserAppAcceptTest extends BaseTest {
         System.out.println(res.asString());
 
 
-        Document document = initXmlParsing(response);
-        BackgroundCRes backgroudCres = parseXmlResponseReturnBackgroundCResObject(document);
-        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundCRes backgroudCres = app.getXmlHelper().parseXmlResponseReturnBackgroundCResObject(document);
+        List<Entry> listEnty = app.getXmlHelper().parseXmlSetNameSetValueFromEntryAddThemToCollection(document);
 
         System.out.println(listEnty);
         //System.out.println(backgroudResponse);
@@ -116,8 +116,8 @@ public class TDSV2BrowserAppAcceptTest extends BaseTest {
         String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
         String masValue[] = {randomAcsTransId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
-        checkTextInCollectionEntryName(listEnty, masName);
-        checkTextInCollectionEntryValue(listEnty, masValue);
+        app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
+        app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudCres.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroudCres.getMessageType(), "CRes");
         Assert.assertEquals(backgroudCres.getMessageVersion(), "2.1.0");
@@ -217,8 +217,8 @@ public class TDSV2BrowserAppAcceptTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        FinalCRes finalCRes = parseXmlResponseReturnFinalCResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        FinalCRes finalCRes = app.getXmlHelper().parseXmlResponseReturnFinalCResObject(document);
 
         Assert.assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(finalCRes.getMessageType(), "CRes");

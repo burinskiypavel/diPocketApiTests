@@ -16,13 +16,13 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV2NativeOOBAppTest extends BaseTest {
-    String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
-    String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
+    String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
+    String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String tranId = null;
 
     @Test(priority = 1)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
-        String now = getTimeStamp("YYYYMMddHHmmss");
+        String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -39,7 +39,7 @@ public class TDSV2NativeOOBAppTest extends BaseTest {
                         "      <acquirerBIN>444444</acquirerBIN>\n" +
                         "      <acquirerMerchantID>1000</acquirerMerchantID>\n" +
                         "      <cardExpiryDate>3201</cardExpiryDate>\n" +
-                        "      <acctNumber>"+pan+"</acctNumber>\n" +
+                        "      <acctNumber>"+ app.pan +"</acctNumber>\n" +
                         "      <deviceChannel>01</deviceChannel>\n" +
                         "      <deviceInfo>some deviceInfo for integration test</deviceInfo>\n" +
                         "      <deviceRenderOptions>\n" +
@@ -68,7 +68,7 @@ public class TDSV2NativeOOBAppTest extends BaseTest {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200).body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"))
         .body("backgroundResponse2.backgroundARes.acsRenderingType.acsUiTemplate", equalTo("04"));
@@ -76,8 +76,8 @@ public class TDSV2NativeOOBAppTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroundARes backgroundARes = parseXmlResponseReturnBackgroundAResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
         Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
@@ -102,7 +102,7 @@ public class TDSV2NativeOOBAppTest extends BaseTest {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundCRes.InProgressCRes.challengeInfoText", containsString("To confirm the transaction, please open, review and confirm the notification we sent to your up and go App"))
@@ -110,8 +110,8 @@ public class TDSV2NativeOOBAppTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        OOBBackgroundCRes oobBackgroundCRes = parseXmlReturnOOBBackgroundCResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        OOBBackgroundCRes oobBackgroundCRes = app.getXmlHelper().parseXmlReturnOOBBackgroundCResObject(document);
 
         Assert.assertEquals(oobBackgroundCRes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(oobBackgroundCRes.getAcsCounterAtoS(), "000");
@@ -174,14 +174,14 @@ public class TDSV2NativeOOBAppTest extends BaseTest {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        FinalCRes finalCRes = parseXmlResponseReturnFinalCResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        FinalCRes finalCRes = app.getXmlHelper().parseXmlResponseReturnFinalCResObject(document);
 
         Assert.assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(finalCRes.getMessageType(), "CRes");

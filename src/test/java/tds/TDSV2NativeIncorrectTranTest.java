@@ -2,10 +2,7 @@ package tds;
 
 import base.BaseTest;
 import io.restassured.response.Response;
-import model.BackgroundARes;
 import model.BackgroundAResDecline;
-import model.FinalCRes;
-import model.OOBBackgroundCRes;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
@@ -15,16 +12,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV2NativeIncorrectTranTest extends BaseTest {
-    String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
-    String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
+    String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
+    String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
 
     @Test(priority = 1)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
-        String now = getTimeStamp("YYYYMMddHHmmss");
+        String now = app.getTimeStamp("YYYYMMddHHmmss");
         String pan4TestSMS = "5455980666358066";
         Response res = given()
                 .header("Content-Type", "application/xml")
@@ -74,7 +70,7 @@ public class TDSV2NativeIncorrectTranTest extends BaseTest {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
@@ -82,8 +78,8 @@ public class TDSV2NativeIncorrectTranTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroundAResDecline backgroundAResDecline = parseXmlResponseReturnBackgroundAResDeclinedObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundAResDecline backgroundAResDecline = app.getXmlHelper().parseXmlResponseReturnBackgroundAResDeclinedObject(document);
 
         Assert.assertEquals(backgroundAResDecline.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroundAResDecline.getMessageType(), "ARes");

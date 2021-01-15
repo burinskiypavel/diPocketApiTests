@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV1SmsAcceptTest extends BaseTest {
-    String randomTXID = generateRandomNumber(10);
+    String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
     String pan4TestSMS = "5455980666358066";
     String sms = null;
@@ -53,8 +53,8 @@ public class TDSV1SmsAcceptTest extends BaseTest {
 
     @Test(priority = 43)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
-        String now = getTimeStamp("YYYYMMdd HH:mm:ss");
-        String nowAsExpected = getTimeStamp("dd.MM.YYYY HH:mm");
+        String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
+        String nowAsExpected = app.getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -91,9 +91,9 @@ public class TDSV1SmsAcceptTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
-        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroudResponse backgroudResponse = app.getXmlHelper().parseXmlResponseSetDataStatusSetPageId(document);
+        List<Entry> listEnty = app.getXmlHelper().parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
 
         System.out.println(listEnty);
         //System.out.println(backgroudResponse);
@@ -101,8 +101,8 @@ public class TDSV1SmsAcceptTest extends BaseTest {
         String masName[] = {"TXID", "CANCEL_TEXT", "CONFIRM_TITLE", "CONFIRM_MESSAGE", "MASKED_PAN_TITLE", "MASKED_PAN", "PURCHASEDATE_TITLE", "PURCHASEDATE", "MERCHANTNAME_TITLE", "MERCHANTNAME", "PURCHASEAMOUNT_TITLE", "PURCHASEAMOUNT", "ENTER_CODE_TEXT", "SUBMIT_TEXT"};
         String masValue[] = {randomTXID, "Cancel", "Confirm with SMS code", "To confirm the transaction, please enter below the Code we sent by SMS to 4984", "Card #", "545598******8066", "Date", "" + nowAsExpected + "", "Store", "CH", "Amount", "63.00 USD", "Enter the Code here", "Submit"};
 
-        checkTextInCollectionEntryName(listEnty, masName);
-        checkTextInCollectionEntryValue(listEnty, masValue);
+        app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
+        app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
         Assert.assertEquals(backgroudResponse.getPageId(), "sms_web.html");
     }

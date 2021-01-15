@@ -5,7 +5,6 @@ import io.restassured.response.Response;
 import model.BackgroudResponse;
 import model.Entry;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -18,7 +17,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV1BioAcceptTest extends BaseTest {
-    String txId = generateRandomNumber(10);
+    String txId = app.generateRandomNumber(10);
     String tranId = null;
 
     @Test(priority = 24)
@@ -29,7 +28,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
                         "        <txId>" + txId + "</txId>\n" +
-                        "        <pan>" + pan + "</pan>\n" +
+                        "        <pan>" + app.pan + "</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
                         "        <deviceCategory>0</deviceCategory>\n" +
@@ -41,7 +40,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.chName", equalTo(""))
@@ -52,14 +51,14 @@ public class TDSV1BioAcceptTest extends BaseTest {
 
     @Test(priority = 25)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
-        String now = getTimeStamp("YYYYMMdd HH:mm:ss");
+        String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
                         "      <txId>" + txId + "</txId>\n" +
-                        "      <pan>" + pan + "</pan>\n" +
+                        "      <pan>" + app.pan + "</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
                         "      <acqBIN>501900</acqBIN>\n" +
                         "      <merchant>CH</merchant>\n" +
@@ -83,16 +82,16 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
 
 
-        Document document = initXmlParsing(response);
-        BackgroudResponse backgroudResponse = parseXmlResponseSetDataStatusSetPageId(document);
-        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroudResponse backgroudResponse = app.getXmlHelper().parseXmlResponseSetDataStatusSetPageId(document);
+        List<Entry> listEnty = app.getXmlHelper().parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
 
         System.out.println(listEnty);
         //System.out.println(backgroudResponse);
@@ -100,8 +99,8 @@ public class TDSV1BioAcceptTest extends BaseTest {
         String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
         String masValue[] = {txId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
-        checkTextInCollectionEntryName(listEnty, masName);
-        checkTextInCollectionEntryValue(listEnty, masValue);
+        app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
+        app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
         Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
     }
@@ -114,7 +113,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/tranStatus.v1")
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -158,7 +157,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "\t\"txId\" : " + txId + "\n" +
                         "}")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/tranStatus.v1")
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -187,7 +186,7 @@ public class TDSV1BioAcceptTest extends BaseTest {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .log().all()
                 .statusCode(200)

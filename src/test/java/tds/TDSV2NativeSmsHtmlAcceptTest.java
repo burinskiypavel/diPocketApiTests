@@ -17,11 +17,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TDSV2NativeSmsHtmlAcceptTest extends BaseTest {
-    String randomAcsTransId = generateRandomNumber(10) + "-integrTest-acsTransid-v2";
-    String dsTransId = generateRandomNumber(10) + "-integrTest-dsTransId-v2";
+    String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
+    String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String tranId = null;
-    String now = getTimeStamp("YYYYMMddHHmmss");
-    String now2 = getTimeStamp("dd.MM.YYYY HH:mm");
+    String now = app.getTimeStamp("YYYYMMddHHmmss");
+    String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
     String sms = null;
 
     @Test(priority = 1)
@@ -72,7 +72,7 @@ public class TDSV2NativeSmsHtmlAcceptTest extends BaseTest {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("02"))
@@ -81,8 +81,8 @@ public class TDSV2NativeSmsHtmlAcceptTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroundARes backgroundARes = parseXmlResponseReturnBackgroundAResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
         Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
@@ -107,7 +107,7 @@ public class TDSV2NativeSmsHtmlAcceptTest extends BaseTest {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundCRes.InProgressCRes.acsCounterAtoS", equalTo("000"))
@@ -116,10 +116,10 @@ public class TDSV2NativeSmsHtmlAcceptTest extends BaseTest {
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        BackgroundCRes backgroundCRes = parseXmlResponseReturnBackgroundCResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroundCRes backgroundCRes = app.getXmlHelper().parseXmlResponseReturnBackgroundCResObject(document);
 
-        List<Entry> listEnty = parseXmlSetNameSetValueFromEntryAddThemToCollection(document);
+        List<Entry> listEnty = app.getXmlHelper().parseXmlSetNameSetValueFromEntryAddThemToCollection(document);
 
         System.out.println(listEnty);
         //System.out.println(backgroudResponse);
@@ -127,8 +127,8 @@ public class TDSV2NativeSmsHtmlAcceptTest extends BaseTest {
         String masName[] = {"TXID", "CANCEL_TEXT", "CONFIRM_TITLE", "CONFIRM_MESSAGE", "MASKED_PAN_TITLE", "MASKED_PAN", "PURCHASEDATE_TITLE", "PURCHASEDATE", "MERCHANTNAME_TITLE", "MERCHANTNAME", "PURCHASEAMOUNT_TITLE", "PURCHASEAMOUNT", "ENTER_CODE_TEXT", "SUBMIT_TEXT"};
         String masValue[] = {randomAcsTransId, "Cancel", "Confirm with SMS code", "To confirm the transaction, please enter below the Code we sent by SMS to 4984", "Card #", "545598******8066", "Date", now2, "Store", "integration test", "Amount", "47.00 USD", "Enter the Code here", "Submit"};
 
-        checkTextInCollectionEntryName(listEnty, masName);
-        checkTextInCollectionEntryValue(listEnty, masValue);
+        app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
+        app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
 
         Assert.assertEquals(backgroundCRes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(backgroundCRes.getMessageType(), "CRes");
@@ -179,14 +179,14 @@ public class TDSV2NativeSmsHtmlAcceptTest extends BaseTest {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
 
-        Document document = initXmlParsing(response);
-        FinalCRes finalCRes = parseXmlResponseReturnFinalCResObject(document);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        FinalCRes finalCRes = app.getXmlHelper().parseXmlResponseReturnFinalCResObject(document);
 
         Assert.assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
         Assert.assertEquals(finalCRes.getMessageType(), "CRes");
