@@ -1,6 +1,6 @@
 package tds;
 
-import base.BaseTest;
+import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroundARes;
 import org.testng.Assert;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDSV2AreqAllFieldTest extends BaseTest {
+public class TDSV2AreqAllFieldTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
 

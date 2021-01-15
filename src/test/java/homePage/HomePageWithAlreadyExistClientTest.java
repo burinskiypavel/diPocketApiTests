@@ -1,6 +1,6 @@
 package homePage;
 
-import base.BaseTest;
+import base.TestBase;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-public class HomePageWithAlreadyExistClientTest extends BaseTest {
+public class HomePageWithAlreadyExistClientTest extends TestBase {
     String cliSessionId = null;
 
     @Test(priority = 18)

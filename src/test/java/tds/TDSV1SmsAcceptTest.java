@@ -1,6 +1,6 @@
 package tds;
 
-import base.BaseTest;
+import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroudResponse;
 import model.Entry;
@@ -16,7 +16,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDSV1SmsAcceptTest extends BaseTest {
+public class TDSV1SmsAcceptTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
     String pan4TestSMS = "5455980666358066";

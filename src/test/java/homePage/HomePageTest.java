@@ -1,7 +1,7 @@
 package homePage;
 
+import base.TestBase;
 import config.Properties;
-import base.BaseTest;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
-public class HomePageTest extends BaseTest {
+public class HomePageTest extends TestBase {
     String cliSessionId = null;
 
     @Test(priority = 18)

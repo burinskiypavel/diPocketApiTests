@@ -1,7 +1,7 @@
 package registration;
 
 import base.EmailIMAPHelper;
-import base.BaseTest;
+import base.TestBase;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 
-public class RegistrationTest extends BaseTest {
+public class RegistrationTest extends TestBase {
     String smsCode = null;
 
     @Test(priority = 1)

@@ -4,7 +4,7 @@ import appmanager.ApplicationManager;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 
-public class BaseTest {
+public class TestBase {
 
     protected final ApplicationManager app = new ApplicationManager();
 

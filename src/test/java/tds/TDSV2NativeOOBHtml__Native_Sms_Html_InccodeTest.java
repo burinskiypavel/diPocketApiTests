@@ -1,6 +1,6 @@
 package tds;
 
-import base.BaseTest;
+import base.TestBase;
 import io.restassured.response.Response;
 import model.*;
 import org.testng.Assert;
@@ -15,7 +15,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends BaseTest {
+public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String maskedPan = "545598******5804";
