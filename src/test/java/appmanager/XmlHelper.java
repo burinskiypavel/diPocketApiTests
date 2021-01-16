@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class XmlHelper {
+public class XmlHelper extends HelperBase {
     public void checkTextInCollectionEntryName(List<Entry> listEnty, String text) {
         List<Entry> result = listEnty.stream()
                 .filter(line -> text.equals(line.getName()))
