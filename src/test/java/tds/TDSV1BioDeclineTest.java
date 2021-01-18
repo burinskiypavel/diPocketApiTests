@@ -46,6 +46,7 @@ public class TDSV1BioDeclineTest extends TestBase {
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
                 .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"))
+                .body("backgroundResponse.backgroundVeres.chName", equalTo(""))
                 .log().all();
     }
 

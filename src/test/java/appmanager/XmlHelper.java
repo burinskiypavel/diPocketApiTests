@@ -156,11 +156,14 @@ public class XmlHelper extends HelperBase {
     public BackgroudResponse parseXmlResponseSetDataStatusSetPageId(Document document) {
         BackgroudResponse backgroudResponse = new BackgroudResponse();
 
-        Element dataStatusElement = (Element) document.getElementsByTagName("dataStatus").item(0);
+        Element backgroundResponseElement = (Element) document.getElementsByTagName("backgroundResponse").item(0);
+        Element backgroundPageRequestElement = (Element) backgroundResponseElement.getElementsByTagName("backgroundPageRequest").item(0);
+
+        Element dataStatusElement = (Element) backgroundPageRequestElement.getElementsByTagName("dataStatus").item(0);
         System.out.println("dataStatus " + dataStatusElement.getTextContent());
         backgroudResponse.setDataStatus(dataStatusElement.getTextContent());
 
-        Element pageIdElement = (Element) document.getElementsByTagName("pageId").item(0);
+        Element pageIdElement = (Element) backgroundPageRequestElement.getElementsByTagName("pageId").item(0);
         System.out.println("pageId " + pageIdElement.getTextContent());
         backgroudResponse.setPageId(pageIdElement.getTextContent());
 

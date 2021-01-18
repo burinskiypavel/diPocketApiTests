@@ -88,7 +88,6 @@ public class TDSV1BioAcceptTest extends TestBase {
         String response = res.asString();
         System.out.println(res.asString());
 
-
         Document document = app.getXmlHelper().initXmlParsing(response);
         BackgroudResponse backgroudResponse = app.getXmlHelper().parseXmlResponseSetDataStatusSetPageId(document);
         List<Entry> listEnty = app.getXmlHelper().parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
