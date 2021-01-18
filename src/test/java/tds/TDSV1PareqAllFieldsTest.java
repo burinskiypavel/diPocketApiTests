@@ -18,7 +18,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV1PareqAllFieldsTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
-    String tranId = null;
     String pan = "5455980836095804";
 
     @Test(priority = 47)
@@ -94,7 +93,6 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
         res.then().log().all().statusCode(200);
         String response = res.asString();
         System.out.println(res.asString());
-
 
         Document document = app.getXmlHelper().initXmlParsing(response);
         BackgroudResponse backgroudResponse = app.getXmlHelper().parseXmlResponseSetDataStatusSetPageId(document);
