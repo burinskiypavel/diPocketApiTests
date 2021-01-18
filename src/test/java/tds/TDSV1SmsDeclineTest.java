@@ -44,6 +44,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .statusCode(200)
+                .body("backgroundResponse.backgroundVeres.chName", equalTo("DON'TTOUCH"))
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
                 .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"))
                 .log().all();
