@@ -18,7 +18,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV1PareqAllFieldsTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
-    String pan = "5455980836095804";
 
     @Test(priority = 47)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
@@ -28,7 +27,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
                         "        <txId>"+randomTXID+"</txId>\n" +
-                        "        <pan>"+pan+"</pan>\n" +
+                        "        <pan>"+app.pan+"</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
                         "        <deviceCategory>0</deviceCategory>\n" +
@@ -40,7 +39,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.getDbHelper().prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1")
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .statusCode(200)
                 .log().all()
@@ -58,7 +57,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
                         "      <txId>"+randomTXID+"</txId>\n" +
-                        "      <pan>"+pan+"</pan>\n" +
+                        "      <pan>"+app.pan+"</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
                         "      <acqBIN>501900</acqBIN>\n" +
                         "      <merchant>CH</merchant>\n" +
@@ -88,9 +87,9 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.getDbHelper().prop.getProperty("tds.base.url")+"/DiPocket3ds/acs/bgAuth.v1");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1");
 
-        res.then().log().all().statusCode(200);
+        res.then().log().all();
         String response = res.asString();
         System.out.println(res.asString());
 
@@ -101,12 +100,13 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
         System.out.println(listEnty);
         //System.out.println(backgroudResponse);
 
-        String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
-        String masValue[] = {randomTXID, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
+        String[] masName = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
+        String[] masValue = {randomTXID, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
         Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
+        Assert.assertEquals(res.getStatusCode(), 200);
     }
 }
