@@ -98,11 +98,11 @@ public class TDSV1BioAcceptTest extends TestBase {
         String[] masName = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
         String[] masValue = {randomTXID, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
+        Assert.assertEquals(res.getStatusCode(), 200);
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
         Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
-        Assert.assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 26)

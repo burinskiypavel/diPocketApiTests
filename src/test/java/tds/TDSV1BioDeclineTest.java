@@ -104,7 +104,6 @@ public class TDSV1BioDeclineTest extends TestBase {
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
         Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
-
     }
 
     @Test(priority = 33)
