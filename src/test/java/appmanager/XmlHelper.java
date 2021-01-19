@@ -173,23 +173,27 @@ public class XmlHelper extends HelperBase {
     public BackgroundCRes parseXmlResponseReturnBackgroundCResObject(Document document) {
         BackgroundCRes backgroudCRes = new BackgroundCRes();
 
-        Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
+        Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
+        Element backgroundCResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundCRes").item(0);
+        Element InProgressCResElement = (Element) backgroundCResElement.getElementsByTagName("InProgressCRes").item(0);
+
+        Element acsTransIDElement = (Element) InProgressCResElement.getElementsByTagName("acsTransID").item(0);
         System.out.println("acsTransID " + acsTransIDElement.getTextContent());
         backgroudCRes.setAcsTransID(acsTransIDElement.getTextContent());
 
-        Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
+        Element messageTypeElement = (Element) InProgressCResElement.getElementsByTagName("messageType").item(0);
         System.out.println("messageType " + messageTypeElement.getTextContent());
         backgroudCRes.setMessageType(messageTypeElement.getTextContent());
 
-        Element messageVersionElement = (Element) document.getElementsByTagName("messageVersion").item(0);
+        Element messageVersionElement = (Element) InProgressCResElement.getElementsByTagName("messageVersion").item(0);
         System.out.println("messageVersion " + messageVersionElement.getTextContent());
         backgroudCRes.setMessageVersion(messageVersionElement.getTextContent());
 
-        Element pageIdElement = (Element) document.getElementsByTagName("pageId").item(0);
+        Element pageIdElement = (Element) InProgressCResElement.getElementsByTagName("pageId").item(0);
         System.out.println("pageId " + pageIdElement.getTextContent());
         backgroudCRes.setPageId(pageIdElement.getTextContent());
 
-        Element challengeCompletionIndElement = (Element) document.getElementsByTagName("challengeCompletionInd").item(0);
+        Element challengeCompletionIndElement = (Element) InProgressCResElement.getElementsByTagName("challengeCompletionInd").item(0);
         System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
         backgroudCRes.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
 
@@ -199,23 +203,27 @@ public class XmlHelper extends HelperBase {
     public FinalCRes parseXmlResponseReturnFinalCResObject(Document document) {
         FinalCRes finalCRes = new FinalCRes();
 
-        Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
+        Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
+        Element backgroundCResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundCRes").item(0);
+        Element FinalCResElement = (Element) backgroundCResElement.getElementsByTagName("FinalCRes").item(0);
+
+        Element acsTransIDElement = (Element) FinalCResElement.getElementsByTagName("acsTransID").item(0);
         System.out.println("acsTransID " + acsTransIDElement.getTextContent());
         finalCRes.setAcsTransID(acsTransIDElement.getTextContent());
 
-        Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
+        Element messageTypeElement = (Element) FinalCResElement.getElementsByTagName("messageType").item(0);
         System.out.println("messageType " + messageTypeElement.getTextContent());
         finalCRes.setMessageType(messageTypeElement.getTextContent());
 
-        Element messageVersionElement = (Element) document.getElementsByTagName("messageVersion").item(0);
+        Element messageVersionElement = (Element) FinalCResElement.getElementsByTagName("messageVersion").item(0);
         System.out.println("messageVersion " + messageVersionElement.getTextContent());
         finalCRes.setMessageVersion(messageVersionElement.getTextContent());
 
-        Element transStatusElement = (Element) document.getElementsByTagName("transStatus").item(0);
+        Element transStatusElement = (Element) FinalCResElement.getElementsByTagName("transStatus").item(0);
         System.out.println("transStatus " + transStatusElement.getTextContent());
         finalCRes.setTransStatus(transStatusElement.getTextContent());
 
-        Element challengeCompletionIndElement = (Element) document.getElementsByTagName("challengeCompletionInd").item(0);
+        Element challengeCompletionIndElement = (Element) FinalCResElement.getElementsByTagName("challengeCompletionInd").item(0);
         System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
         finalCRes.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
 
@@ -225,27 +233,31 @@ public class XmlHelper extends HelperBase {
     public FinalCResDecline parseXmlResponseReturnFinalCResDeclineObject(Document document) {
         FinalCResDecline finalCResDecline = new FinalCResDecline();
 
-        Element acsTransIDElement = (Element) document.getElementsByTagName("acsTransID").item(0);
+        Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
+        Element backgroundCResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundCRes").item(0);
+        Element FinalCResElement = (Element) backgroundCResElement.getElementsByTagName("FinalCRes").item(0);
+
+        Element acsTransIDElement = (Element) FinalCResElement.getElementsByTagName("acsTransID").item(0);
         System.out.println("acsTransID " + acsTransIDElement.getTextContent());
         finalCResDecline.setAcsTransID(acsTransIDElement.getTextContent());
 
-        Element messageTypeElement = (Element) document.getElementsByTagName("messageType").item(0);
+        Element messageTypeElement = (Element) FinalCResElement.getElementsByTagName("messageType").item(0);
         System.out.println("messageType " + messageTypeElement.getTextContent());
         finalCResDecline.setMessageType(messageTypeElement.getTextContent());
 
-        Element messageVersionElement = (Element) document.getElementsByTagName("messageVersion").item(0);
+        Element messageVersionElement = (Element) FinalCResElement.getElementsByTagName("messageVersion").item(0);
         System.out.println("messageVersion " + messageVersionElement.getTextContent());
         finalCResDecline.setMessageVersion(messageVersionElement.getTextContent());
 
-        Element transStatusElement = (Element) document.getElementsByTagName("transStatus").item(0);
+        Element transStatusElement = (Element) FinalCResElement.getElementsByTagName("transStatus").item(0);
         System.out.println("transStatus " + transStatusElement.getTextContent());
         finalCResDecline.setTransStatus(transStatusElement.getTextContent());
 
-        Element transStatusReasonElement = (Element) document.getElementsByTagName("transStatusReason").item(0);
+        Element transStatusReasonElement = (Element) FinalCResElement.getElementsByTagName("transStatusReason").item(0);
         System.out.println("transStatusReason " + transStatusReasonElement.getTextContent());
         finalCResDecline.setTransStatusReason(transStatusReasonElement.getTextContent());
 
-        Element challengeCompletionIndElement = (Element) document.getElementsByTagName("challengeCompletionInd").item(0);
+        Element challengeCompletionIndElement = (Element) FinalCResElement.getElementsByTagName("challengeCompletionInd").item(0);
         System.out.println("challengeCompletionInd " + challengeCompletionIndElement.getTextContent());
         finalCResDecline.setChallengeCompletionInd(challengeCompletionIndElement.getTextContent());
 
@@ -368,7 +380,6 @@ public class XmlHelper extends HelperBase {
 
         Element challengeInfoTextElement = (Element) InProgressCResElement.getElementsByTagName("challengeInfoText").item(0);
         System.out.println("challengeInfoText " + challengeInfoTextElement.getTextContent());
-
         String text = challengeInfoTextElement.getTextContent();
 
                 text = text.replaceAll("&#xD;&#xA;", " ");
@@ -384,12 +395,14 @@ public class XmlHelper extends HelperBase {
         oobBackgroundCRes.setExpandInfoText(expandInfoTextElement.getTextContent());
 
         Element issuerImageElement = (Element) InProgressCResElement.getElementsByTagName("issuerImage").item(0);
-        System.out.println("issuerImage " + issuerImageElement.getTextContent());
-        oobBackgroundCRes.setIssuerImage(issuerImageElement.getTextContent());
+        Element mediumElement = (Element) issuerImageElement.getElementsByTagName("medium").item(0);
+        System.out.println("issuerImage " + mediumElement.getTextContent());
+        oobBackgroundCRes.setIssuerImage(mediumElement.getTextContent());
 
         Element psImageElement = (Element) InProgressCResElement.getElementsByTagName("psImage").item(0);
-        System.out.println("psImage " + psImageElement.getTextContent());
-        oobBackgroundCRes.setPsImage(psImageElement.getTextContent());
+        Element mediumElement2 = (Element) psImageElement.getElementsByTagName("medium").item(0);
+        System.out.println("psImage " + mediumElement2.getTextContent());
+        oobBackgroundCRes.setPsImage(mediumElement2.getTextContent());
 
         Element messageTypeElement = (Element) InProgressCResElement.getElementsByTagName("messageType").item(0);
         System.out.println("messageType " + messageTypeElement.getTextContent());
