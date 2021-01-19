@@ -12,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV2CReqAllFieldsTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
@@ -67,7 +68,9 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
                 .when()
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
 
-        res.then().log().all().statusCode(200);
+        res.then().log().all().statusCode(200)
+                .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
+
         String response = res.asString();
         System.out.println(res.asString());
 

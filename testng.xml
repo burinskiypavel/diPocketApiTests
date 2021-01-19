@@ -24,17 +24,17 @@
 
 
 
-    <test name="RegistrationTest">
-        <classes>
-            <class name="registration.RegistrationTest"/>
-        </classes>
-    </test>
+<!--    <test name="RegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="registration.RegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="HomePageWithAlreadyExistClientTest">
-    <classes>
-        <class name="homePage.HomePageWithAlreadyExistClientTest"/>
-    </classes>
-    </test>
+<!--    <test name="HomePageWithAlreadyExistClientTest">-->
+<!--    <classes>-->
+<!--        <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
+<!--    </classes>-->
+<!--    </test>-->
 
     <test name="TDSV1BioAcceptTest">
         <classes>

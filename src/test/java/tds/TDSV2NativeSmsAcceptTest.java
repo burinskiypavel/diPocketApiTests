@@ -81,7 +81,8 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"))
-                .body("backgroundResponse2.backgroundARes.acsRenderingType.acsUiTemplate", equalTo("01"));
+                .body("backgroundResponse2.backgroundARes.acsRenderingType.acsUiTemplate", equalTo("01"))
+                .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
 
         String response = res.asString();
         System.out.println(res.asString());

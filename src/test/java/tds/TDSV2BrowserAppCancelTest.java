@@ -73,8 +73,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                 .when()
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
 
-        res.then()
-                .log().all()
+        res.then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
 

@@ -76,7 +76,9 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
                 .when()
                 .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
 
-        res.then().log().all().statusCode(200);
+        res.then().log().all().statusCode(200)
+        .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
+
         String response = res.asString();
         System.out.println(res.asString());
 

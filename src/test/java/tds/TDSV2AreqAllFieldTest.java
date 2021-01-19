@@ -169,6 +169,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
 
         res.then().log().all().statusCode(200)
                     .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
+
         String response = res.asString();
         System.out.println(res.asString());
 

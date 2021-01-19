@@ -70,8 +70,10 @@ public class TDSV2NativeOOBAppTest extends TestBase {
                 .when()
                 .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
 
-        res.then().log().all().statusCode(200).body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"))
-        .body("backgroundResponse2.backgroundARes.acsRenderingType.acsUiTemplate", equalTo("04"));
+        res.then().log().all().statusCode(200)
+                .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"))
+                .body("backgroundResponse2.backgroundARes.acsRenderingType.acsUiTemplate", equalTo("04"))
+                .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
 
         String response = res.asString();
         System.out.println(res.asString());
