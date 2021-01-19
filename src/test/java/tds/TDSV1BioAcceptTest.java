@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV1BioAcceptTest extends TestBase {
-    String txId = app.generateRandomNumber(10);
+    String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
 
     @Test(priority = 24)
@@ -27,7 +27,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
-                        "        <txId>" + txId + "</txId>\n" +
+                        "        <txId>" + randomTXID + "</txId>\n" +
                         "        <pan>" + app.pan + "</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
@@ -57,7 +57,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
-                        "      <txId>" + txId + "</txId>\n" +
+                        "      <txId>" + randomTXID + "</txId>\n" +
                         "      <pan>" + app.pan + "</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
                         "      <acqBIN>501900</acqBIN>\n" +
@@ -95,13 +95,14 @@ public class TDSV1BioAcceptTest extends TestBase {
         System.out.println(listEnty);
         //System.out.println(backgroudResponse);
 
-        String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
-        String masValue[] = {txId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
+        String[] masName = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
+        String[] masValue = {randomTXID, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
         Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
         Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
+        Assert.assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 26)
@@ -109,7 +110,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : " + txId + "\n" +
+                        "\t\"txId\" : " + randomTXID + "\n" +
                         "}")
                 .when()
                 .post(app.TDSBaseUrl +"/DiPocket3ds/acs/tranStatus.v1")
@@ -124,7 +125,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + txId + "");
+                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -153,7 +154,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : " + txId + "\n" +
+                        "\t\"txId\" : " + randomTXID + "\n" +
                         "}")
                 .when()
                 .post(app.TDSBaseUrl +"/DiPocket3ds/acs/tranStatus.v1")
@@ -170,12 +171,12 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPageResponse>\n" +
-                        "      <txId>" + txId + "</txId>\n" +
+                        "      <txId>" + randomTXID + "</txId>\n" +
                         "      <pageId>bio-web.html</pageId>\n" +
                         "      <values>\n" +
                         "         <entry>\n" +
                         "            <name>TXID</name>\n" +
-                        "            <value>" + txId + "</value>\n" +
+                        "            <value>" + randomTXID + "</value>\n" +
                         "         </entry>\n" +
                         "         <entry>\n" +
                         "            <name>BIO_AUTH</name>\n" +

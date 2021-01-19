@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TDSV1BioAcceptJenkinsTest extends TestBase {
-    String txId = app.generateRandomNumber(10);
+    String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
     String pan = "5455980836095804";
 
@@ -28,7 +28,7 @@ public class TDSV1BioAcceptJenkinsTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
-                        "        <txId>" + txId + "</txId>\n" +
+                        "        <txId>" + randomTXID + "</txId>\n" +
                         "        <pan>" + pan + "</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
@@ -57,7 +57,7 @@ public class TDSV1BioAcceptJenkinsTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
-                        "      <txId>" + txId + "</txId>\n" +
+                        "      <txId>" + randomTXID + "</txId>\n" +
                         "      <pan>" + pan + "</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
                         "      <acqBIN>501900</acqBIN>\n" +
@@ -88,20 +88,20 @@ public class TDSV1BioAcceptJenkinsTest extends TestBase {
         String response = res.asString();
         System.out.println(res.asString());
 
-            Document document = app.getXmlHelper().initXmlParsing(response);
-            BackgroudResponse backgroudResponse = app.getXmlHelper().parseXmlResponseSetDataStatusSetPageId(document);
-            List<Entry> listEnty = app.getXmlHelper().parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
+        Document document = app.getXmlHelper().initXmlParsing(response);
+        BackgroudResponse backgroudResponse = app.getXmlHelper().parseXmlResponseSetDataStatusSetPageId(document);
+        List<Entry> listEnty = app.getXmlHelper().parseXmlSetNameSetValueFromEntryAddThemToCollection(document, backgroudResponse);
 
-            System.out.println(listEnty);
-            //System.out.println(backgroudResponse);
+        System.out.println(listEnty);
+        //System.out.println(backgroudResponse);
 
-            String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
-            String masValue[] = {txId, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
+        String masName[] = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
+        String masValue[] = {randomTXID, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
-            app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
-            app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
-            Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-            Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
+        app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
+        app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
+        Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
+        Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
         }
 
     @Test(priority = 26)
@@ -109,7 +109,7 @@ public class TDSV1BioAcceptJenkinsTest extends TestBase {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : " + txId + "\n" +
+                        "\t\"txId\" : " + randomTXID + "\n" +
                         "}")
                 .when()
                 .post("https://localhost:8092/TDSServices/v1/tranStatus.v1")
@@ -124,7 +124,7 @@ public class TDSV1BioAcceptJenkinsTest extends TestBase {
         Response res = given()
                 .when()
                 .header("Content-Type", "application/json")
-                .get("https://localhost:8092/TDSServices/v1/tranId?txId=" + txId + "");
+                .get("https://localhost:8092/TDSServices/v1/tranId?txId=" + randomTXID + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -153,7 +153,7 @@ public class TDSV1BioAcceptJenkinsTest extends TestBase {
         given()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : " + txId + "\n" +
+                        "\t\"txId\" : " + randomTXID + "\n" +
                         "}")
                 .when()
                 .post("https://localhost:8092/TDSServices/v1/tranStatus.v1")
@@ -170,12 +170,12 @@ public class TDSV1BioAcceptJenkinsTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPageResponse>\n" +
-                        "      <txId>" + txId + "</txId>\n" +
+                        "      <txId>" + randomTXID + "</txId>\n" +
                         "      <pageId>bio-web.html</pageId>\n" +
                         "      <values>\n" +
                         "         <entry>\n" +
                         "            <name>TXID</name>\n" +
-                        "            <value>" + txId + "</value>\n" +
+                        "            <value>" + randomTXID + "</value>\n" +
                         "         </entry>\n" +
                         "         <entry>\n" +
                         "            <name>BIO_AUTH</name>\n" +
