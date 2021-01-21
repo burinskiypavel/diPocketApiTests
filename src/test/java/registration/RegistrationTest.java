@@ -1,7 +1,7 @@
 package registration;
 
 import appmanager.HelperBase;
-import base.EmailIMAPHelper;
+import appmanager.EmailIMAPHelper;
 import base.TestBase;
 import io.restassured.response.Response;
 import org.testng.Assert;

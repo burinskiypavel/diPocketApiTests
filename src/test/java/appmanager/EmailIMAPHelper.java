@@ -1,4 +1,4 @@
-package base;
+package appmanager;
 
 import com.sun.mail.util.BASE64DecoderStream;
 import io.restassured.internal.util.IOUtils;
