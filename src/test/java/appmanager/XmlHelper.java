@@ -270,31 +270,51 @@ public class XmlHelper extends HelperBase {
         Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
         Element backgroundAResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundARes").item(0);
 
-        Element acsTransIDElement = (Element) backgroundAResElement.getElementsByTagName("acsTransID").item(0);
-        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
-        backgroundARes.setAcsTransID(acsTransIDElement.getTextContent());
+        getAcsTransIdFromBackgrounARes(backgroundARes, backgroundAResElement);
 
-        Element acsChallengeMandatedElement = (Element) backgroundAResElement.getElementsByTagName("acsChallengeMandated").item(0);
-        System.out.println("acsChallengeMandated " + acsChallengeMandatedElement.getTextContent());
-        backgroundARes.setAcsChallengeMandated(acsChallengeMandatedElement.getTextContent());
+        getAcsChallengeMandatedFromBackgrounARes(backgroundARes, backgroundAResElement);
 
         Element authenticationTypeElement = (Element) backgroundAResElement.getElementsByTagName("authenticationType").item(0);
         System.out.println("authenticationType " + authenticationTypeElement.getTextContent());
         backgroundARes.setAuthenticationType(authenticationTypeElement.getTextContent());
 
-        Element messageTypeElement = (Element) backgroundAResElement.getElementsByTagName("messageType").item(0);
-        System.out.println("messageType " + messageTypeElement.getTextContent());
-        backgroundARes.setMessageType(messageTypeElement.getTextContent());
+        getMessageTypeFromBackgroundARes(backgroundARes, backgroundAResElement);
 
-        Element messageVersionElement = (Element) backgroundAResElement.getElementsByTagName("messageVersion").item(0);
-        System.out.println("messageVersion " + messageVersionElement.getTextContent());
-        backgroundARes.setMessageVersion(messageVersionElement.getTextContent());
+        getMessageVersionFromBackgroudARes(backgroundARes, backgroundAResElement);
 
+        getTranStatusFromBackgroundARes(backgroundARes, backgroundAResElement);
+
+        return backgroundARes;
+    }
+
+    public void getTranStatusFromBackgroundARes(BackgroundARes backgroundARes, Element backgroundAResElement) {
         Element transStatusElement = (Element) backgroundAResElement.getElementsByTagName("transStatus").item(0);
         System.out.println("transStatus " + transStatusElement.getTextContent());
         backgroundARes.setTransStatus(transStatusElement.getTextContent());
+    }
 
-        return backgroundARes;
+    public void getMessageVersionFromBackgroudARes(BackgroundARes backgroundARes, Element backgroundAResElement) {
+        Element messageVersionElement = (Element) backgroundAResElement.getElementsByTagName("messageVersion").item(0);
+        System.out.println("messageVersion " + messageVersionElement.getTextContent());
+        backgroundARes.setMessageVersion(messageVersionElement.getTextContent());
+    }
+
+    public void getMessageTypeFromBackgroundARes(BackgroundARes backgroundARes, Element backgroundAResElement) {
+        Element messageTypeElement = (Element) backgroundAResElement.getElementsByTagName("messageType").item(0);
+        System.out.println("messageType " + messageTypeElement.getTextContent());
+        backgroundARes.setMessageType(messageTypeElement.getTextContent());
+    }
+
+    public void getAcsChallengeMandatedFromBackgrounARes(BackgroundARes backgroundARes, Element backgroundAResElement) {
+        Element acsChallengeMandatedElement = (Element) backgroundAResElement.getElementsByTagName("acsChallengeMandated").item(0);
+        System.out.println("acsChallengeMandated " + acsChallengeMandatedElement.getTextContent());
+        backgroundARes.setAcsChallengeMandated(acsChallengeMandatedElement.getTextContent());
+    }
+
+    public void getAcsTransIdFromBackgrounARes(BackgroundARes backgroundARes, Element backgroundAResElement) {
+        Element acsTransIDElement = (Element) backgroundAResElement.getElementsByTagName("acsTransID").item(0);
+        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
+        backgroundARes.setAcsTransID(acsTransIDElement.getTextContent());
     }
 
     public BackgroundARes parseXmlResponseReturnBackgroundAResAllFieldsObject(Document document) {
@@ -303,25 +323,15 @@ public class XmlHelper extends HelperBase {
         Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
         Element backgroundAResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundARes").item(0);
 
-        Element acsTransIDElement = (Element) backgroundAResElement.getElementsByTagName("acsTransID").item(0);
-        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
-        backgroundARes.setAcsTransID(acsTransIDElement.getTextContent());
+        getAcsTransIdFromBackgrounARes(backgroundARes, backgroundAResElement);
 
-        Element acsChallengeMandatedElement = (Element) backgroundAResElement.getElementsByTagName("acsChallengeMandated").item(0);
-        System.out.println("acsChallengeMandated " + acsChallengeMandatedElement.getTextContent());
-        backgroundARes.setAcsChallengeMandated(acsChallengeMandatedElement.getTextContent());
+        getAcsChallengeMandatedFromBackgrounARes(backgroundARes, backgroundAResElement);
 
-        Element messageTypeElement = (Element) backgroundAResElement.getElementsByTagName("messageType").item(0);
-        System.out.println("messageType " + messageTypeElement.getTextContent());
-        backgroundARes.setMessageType(messageTypeElement.getTextContent());
+        getMessageTypeFromBackgroundARes(backgroundARes, backgroundAResElement);
 
-        Element messageVersionElement = (Element) backgroundAResElement.getElementsByTagName("messageVersion").item(0);
-        System.out.println("messageVersion " + messageVersionElement.getTextContent());
-        backgroundARes.setMessageVersion(messageVersionElement.getTextContent());
+        getMessageVersionFromBackgroudARes(backgroundARes, backgroundAResElement);
 
-        Element transStatusElement = (Element) backgroundAResElement.getElementsByTagName("transStatus").item(0);
-        System.out.println("transStatus " + transStatusElement.getTextContent());
-        backgroundARes.setTransStatus(transStatusElement.getTextContent());
+        getTranStatusFromBackgroundARes(backgroundARes, backgroundAResElement);
 
         return backgroundARes;
     }
@@ -332,21 +342,13 @@ public class XmlHelper extends HelperBase {
         Element backgroundResponse2Element = (Element) document.getElementsByTagName("backgroundResponse2").item(0);
         Element backgroundAResElement = (Element) backgroundResponse2Element.getElementsByTagName("backgroundARes").item(0);
 
-        Element acsTransIDElement = (Element) backgroundAResElement.getElementsByTagName("acsTransID").item(0);
-        System.out.println("acsTransID " + acsTransIDElement.getTextContent());
-        backgroundAResDecline.setAcsTransID(acsTransIDElement.getTextContent());
+        getAcsTransIdFromBackgrounARes(backgroundAResDecline, backgroundAResElement);
 
-        Element messageTypeElement = (Element) backgroundAResElement.getElementsByTagName("messageType").item(0);
-        System.out.println("messageType " + messageTypeElement.getTextContent());
-        backgroundAResDecline.setMessageType(messageTypeElement.getTextContent());
+        getMessageTypeFromBackgroundARes(backgroundAResDecline, backgroundAResElement);
 
-        Element messageVersionElement = (Element) backgroundAResElement.getElementsByTagName("messageVersion").item(0);
-        System.out.println("messageVersion " + messageVersionElement.getTextContent());
-        backgroundAResDecline.setMessageVersion(messageVersionElement.getTextContent());
+        getMessageVersionFromBackgroudARes(backgroundAResDecline, backgroundAResElement);
 
-        Element transStatusElement = (Element) backgroundAResElement.getElementsByTagName("transStatus").item(0);
-        System.out.println("transStatus " + transStatusElement.getTextContent());
-        backgroundAResDecline.setTransStatus(transStatusElement.getTextContent());
+        getTranStatusFromBackgroundARes(backgroundAResDecline, backgroundAResElement);
 
         Element transStatusReasonElement = (Element) backgroundAResElement.getElementsByTagName("transStatusReason").item(0);
         System.out.println("transStatusReason " + transStatusReasonElement.getTextContent());

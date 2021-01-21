@@ -1,5 +1,6 @@
 package homePage;
 
+import appmanager.HelperBase;
 import base.TestBase;
 import config.Properties;
 import io.restassured.response.Response;
@@ -19,7 +20,7 @@ public class HomePageTest extends TestBase {
     public void test_ClientServices_v1_homePage_AutintificateMobileApp(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
-                .header("site", app.getDbHelper().prop.getProperty("mobile.site"))
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("authorization", Properties.authorizationBasic)
                 .header("content-type", "application/json; charset=UTF-8")
                 .body("{\n" +
@@ -29,7 +30,7 @@ public class HomePageTest extends TestBase {
                         "  \"appVersion\" : \"2.2.7\"\n" +
                         "}")
                 .when()
-                .post( app.getDbHelper().prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
+                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
                 .then()
                 .statusCode(400)
                 .body("errCode", equalTo("DIP-00591"))
@@ -41,7 +42,7 @@ public class HomePageTest extends TestBase {
         String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380685448615", Properties.deviceuuid2);
         Response res =  given()
                 .header("deviceuuid", Properties.deviceuuid2)
-                .header("site", app.getDbHelper().prop.getProperty("mobile.site"))
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("authorization", Properties.authorizationBasic)
                 .header("content-type", "application/json; charset=UTF-8")
                 .body("{\n" +
@@ -52,7 +53,7 @@ public class HomePageTest extends TestBase {
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
                 .when()
-                .post( app.getDbHelper().prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe");
+                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe");
         cliSessionId = res.getHeader("cliSessionId");
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
@@ -64,11 +65,11 @@ public class HomePageTest extends TestBase {
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
-                .header("site", app.getDbHelper().prop.getProperty("mobile.site"))
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("authorization", Properties.authorizationBasic)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(app.getDbHelper().prop.getProperty("mobile.base.url")+"clientProfile/clientInfo2")
+                .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/clientInfo2")
                 .then()
                 .statusCode(200)
                 .body("clientFirstName", equalTo("Pavel"))
@@ -80,11 +81,11 @@ public class HomePageTest extends TestBase {
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
-                .header("site", app.getDbHelper().prop.getProperty("mobile.site"))
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("authorization", Properties.authorizationBasic)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(app.getDbHelper().prop.getProperty("mobile.base.url")+"clientProfile/clientConfig")
+                .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/clientConfig")
                 .then()
                 .statusCode(200)
                 .body("payeeCurrencyHash", notNullValue())
@@ -100,11 +101,11 @@ public class HomePageTest extends TestBase {
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
-                .header("site", app.getDbHelper().prop.getProperty("mobile.site"))
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("authorization", Properties.authorizationBasic)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(app.getDbHelper().prop.getProperty("mobile.base.url")+"accounts/clientDiPAccounts2?walletId=null")
+                .get(HelperBase.prop.getProperty("mobile.base.url")+"accounts/clientDiPAccounts2?walletId=null")
                 .then()
                 .statusCode(200)
                 .body("accounts.state", equalTo(Arrays.asList("ACTIVE")))
@@ -116,11 +117,11 @@ public class HomePageTest extends TestBase {
     public void test_ClientServices_v1_tile_getMessage2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
-                .header("site", app.getDbHelper().prop.getProperty("mobile.site"))
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("authorization", Properties.authorizationBasic)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(app.getDbHelper().prop.getProperty("mobile.base.url")+"tile/getMessages2")
+                .get(HelperBase.prop.getProperty("mobile.base.url")+"tile/getMessages2")
                 .then()
                 .statusCode(200)
                 .body("communicationTileList.shortName", equalTo(Arrays.asList("Подтвердить email")))
