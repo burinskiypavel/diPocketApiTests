@@ -22,13 +22,14 @@ public class RegistrationTest extends TestBase {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .queryParam("langID", "4")
                 .when()
-                .get( HelperBase.prop.getProperty("mobile.base.url")+"references/availableCountries?langID=4")
+                .get( HelperBase.prop.getProperty("mobile.base.url")+"references/availableCountries")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body("countryList.code", hasItems("AU", "MK", "JP"))
-                .body("countryList.name", hasItems("Австралия", "Македония", "Япония"))
-                .log().all();
+                .body("countryList.name", hasItems("Австралия", "Македония", "Япония"));
     }
 
         @Test(priority = 2)
@@ -145,10 +146,9 @@ public class RegistrationTest extends TestBase {
                 .when()
                 .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/registrationSavePoint2?value=com.cs.dipocketback.pojo.registration.RegSavepointData@7ae86ada")
                 .then()
-                .statusCode(200)
-                .log().all();
+                .log().all()
+                .statusCode(200);
     }
-
 
     @Test(priority = 9)
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {

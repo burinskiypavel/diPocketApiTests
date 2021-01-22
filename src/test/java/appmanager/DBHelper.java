@@ -7,7 +7,7 @@ public class DBHelper extends HelperBase {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-        String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"'";
+        String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"' and SITE = 'DIPOCKET'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -22,7 +22,35 @@ public class DBHelper extends HelperBase {
             String numberFromDB = rs.getString(1);
             smsCode = rs.getString(2);
 
-            System. out.println(numberFromDB+"  "+smsCode);
+            System. out.println("phone: " + numberFromDB+" smsCode: "+smsCode);
+        }
+        con.close();
+        return smsCode;
+    }
+
+    public String getSMSCodeFromDBTelenor(String number) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        String smsCode = null;
+        while (rs.next()){
+            if(rs.isFirst()){
+                String numberFromDB = rs.getString(1);
+                smsCode = rs.getString(2);
+
+                System. out.println("phone: " + numberFromDB+" smsCode: "+smsCode);
+            }
+
         }
         con.close();
         return smsCode;
