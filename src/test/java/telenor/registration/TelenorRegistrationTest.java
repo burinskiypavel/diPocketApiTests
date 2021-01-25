@@ -12,6 +12,7 @@ import static org.hamcrest.CoreMatchers.hasItems;
 
 public class TelenorRegistrationTest extends TestBase {
     String smsCode = null;
+    String token = "512219400";
 
     @Test(priority = 1)
     public void test_WebServices_v1_registration_checkPhoneAndToken(){
@@ -20,20 +21,19 @@ public class TelenorRegistrationTest extends TestBase {
                 .header("site", "TELENOR")
                 .queryParam("value", "com.cs.dipocketback.pojo.telenor.TelenorRequest@6d1f8ef7")
                 .body("{\n" +
-                        "  \"publicToken\" : \"513051371\",\n" +
+                        "  \"publicToken\" : \""+token+"\",\n" +
                         "  \"phoneNumber\" : \"380980316499\"\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl+"/WebServices/v1/registration/checkPhoneAndToken")
+                .post("https://lvov.csltd.com.ua/WebServices/v1/registration/checkPhoneAndToken")
                 .then()
                 .log().all()
                 .statusCode(200)
                 .body("validPhone", equalTo(true))
                 .body("validToken", equalTo(true));
-//                .body("isLinkedToken", equalTo(false));
     }
 
-    @Test(priority = 2, enabled = false)
+    @Test(priority = 2)
     public void test_WebServices_v1_registration_sendSMSCodeForPhone(){
         given()
                 .header("content-type", "application/json; charset=utf-8")
@@ -43,13 +43,10 @@ public class TelenorRegistrationTest extends TestBase {
                         "  \"phoneNumber\" : \"380980316499\"\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl+"/WebServices/v1/registration/sendSMSCodeForPhone?value=com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@51ceb0d3")
+                .post("https://lvov.csltd.com.ua/WebServices/v1/registration/sendSMSCodeForPhone?value=com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@51ceb0d3")
                 .then()
                 .log().all()
                 .statusCode(200);
-                //.body("validPhone", equalTo(true))
-                //.body("validToken", equalTo(true));
-//                .body("isLinkedToken", equalTo(false));
     }
 
     @Test(priority = 3)
@@ -64,7 +61,7 @@ public class TelenorRegistrationTest extends TestBase {
                         "  \"code\" : \""+smsCode+"\"\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl+"/WebServices/v1/registration/checkCodeForPhone?value=com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@4b430f10")
+                .post("https://lvov.csltd.com.ua/WebServices/v1/registration/checkCodeForPhone?value=com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@4b430f10")
                 .then()
                 .log().all()
                 .statusCode(200);
@@ -80,7 +77,7 @@ public class TelenorRegistrationTest extends TestBase {
                         "  \"firstName\" : \"Pavel\",\n" +
                         "  \"lastName\" : \"TestQA\",\n" +
                         "  \"mainPhone\" : \"380980316499\",\n" +
-                        "  \"email\" : \"pavelburinskiy@gmail.com\",\n" +
+                        "  \"email\" : \"burinskiypavel@gmail.com\",\n" +
                         "  \"birthDateAsDate\" : \"1990-01-01\",\n" +
                         "  \"secQuestion\" : \"QA\",\n" +
                         "  \"secAnswer\" : \"QA\",\n" +
@@ -92,8 +89,8 @@ public class TelenorRegistrationTest extends TestBase {
                         "    \"zip\" : \"123456\",\n" +
                         "    \"countryId\" : 616\n" +
                         "  },\n" +
-                        "  \"token\" : \"513051371\",\n" +
-                        "  \"publicToken\" : \"513051371\",\n" +
+                        "  \"token\" : \"512219400\",\n" +
+                        "  \"publicToken\" : \"512219400\",\n" +
                         "  \"agreeTariffs\" : true,\n" +
                         "  \"agreeTerms\" : true,\n" +
                         "  \"agreeProcessInfo\" : true,\n" +
@@ -108,11 +105,38 @@ public class TelenorRegistrationTest extends TestBase {
                         "  \"attachedCardIds\" : [ ]\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl+"/WebServices/v1/registration/registerTelenorClient?value=com.cs.dipocketback.pojo.registration.RegSavepointData@541a8ad0")
+                .post("https://lvov.csltd.com.ua/WebServices/v1/registration/registerTelenorClient?value=com.cs.dipocketback.pojo.registration.RegSavepointData@541a8ad0")
                 .then()
                 .log().all()
                 .statusCode(200);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Test(priority = 22, enabled = false)
     public void test_WebServices_v1_auth_authenticate(){

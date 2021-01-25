@@ -107,7 +107,8 @@ public class TDSV1BioAcceptTest extends TestBase {
 
     @Test(priority = 26)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
-        given()
+        System.out.println("txid: " + randomTXID);
+        given().log().body().log().headers()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "\t\"txId\" : " + randomTXID + "\n" +
@@ -151,7 +152,8 @@ public class TDSV1BioAcceptTest extends TestBase {
 
     @Test(priority = 29)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
-        given()
+        System.out.println("txid: " + randomTXID);
+        given().log().body().log().headers()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "\t\"txId\" : " + randomTXID + "\n" +
