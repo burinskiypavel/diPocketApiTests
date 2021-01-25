@@ -23,8 +23,9 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 31)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
+        System.out.println("txid: " + randomTXID + " pan: " + app.pan);
         baseURI = app.TDSBaseUrl;
-        given()
+        given().log().body().log().headers()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
@@ -54,7 +55,8 @@ public class TDSV1BioDeclineTest extends TestBase {
     @Test(priority = 32)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
-        Response res = given()
+        System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
+        Response res = given().log().body().log().headers()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
@@ -109,7 +111,7 @@ public class TDSV1BioDeclineTest extends TestBase {
     @Test(priority = 33)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
-        given().log().body().log().headers()
+        given().log().body().log().headers().log().uri()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "\t\"txId\" : " + randomTXID + "\n" +
@@ -124,7 +126,8 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 34)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
-        Response res = given()
+        System.out.println("txid: " + randomTXID);
+        Response res = given().log().body().log().headers()
                 .when()
                 .header("Content-Type", "application/json")
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
@@ -137,7 +140,8 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 35)
     public void test_tranDecline_ClientServices_v1_tds_tranId_tranDecline() {
-        Response response = given()
+        System.out.println("tranId: " + tranId);
+        Response response = given().log().body().log().headers()
                 .when()
                 .auth()
                 .preemptive()
@@ -154,7 +158,7 @@ public class TDSV1BioDeclineTest extends TestBase {
     @Test(priority = 36)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
         System.out.println("txid: " + randomTXID);
-        given().log().body().log().headers()
+        given().log().body().log().headers().log().uri()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "\t\"txId\" : " + randomTXID + "\n" +
@@ -169,7 +173,8 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 37)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
-        given()
+        System.out.println("txid: " + randomTXID);
+        given().log().body().log().headers()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
