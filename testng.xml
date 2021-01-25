@@ -42,11 +42,11 @@
         </classes>
     </test>
 
-    <test name="TDSV1BioDeclineTest">
-        <classes>
-            <class name="tds.TDSV1BioDeclineTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV1BioDeclineTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TDSV1SmsDeclineTest">
         <classes>
@@ -147,6 +147,12 @@
     <test name="TDSV2AreqAllFieldTest">
         <classes>
             <class name="tds.TDSV2AreqAllFieldTest"/>
+        </classes>
+    </test>
+
+    <test name="TDSV1BioDeclineTest">
+        <classes>
+            <class name="tds.TDSV1BioDeclineTest"/>
         </classes>
     </test>
 

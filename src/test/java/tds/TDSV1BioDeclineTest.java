@@ -25,7 +25,7 @@ public class TDSV1BioDeclineTest extends TestBase {
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         System.out.println("txid: " + randomTXID + " pan: " + app.pan);
         baseURI = app.TDSBaseUrl;
-        given().log().body().log().headers()
+        given().log().body().log().headers().log().uri()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
@@ -56,7 +56,7 @@ public class TDSV1BioDeclineTest extends TestBase {
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
-        Response res = given().log().body().log().headers()
+        Response res = given().log().body().log().headers().log().uri()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
