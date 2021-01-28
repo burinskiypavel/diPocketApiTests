@@ -27,6 +27,7 @@ public class TelenorHomePageTest extends TestBase {
 
     @Test(priority = 1)
     public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode(){
+        System.out.println("smsCod:" + smsCode);
         Response res = given().log().uri().log().headers().log().body()
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
