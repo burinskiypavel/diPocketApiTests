@@ -28,6 +28,7 @@ public class ApplicationManager {
     private DBHelper dbHelper = new DBHelper();
     public String pan = null;
     public String TDSBaseUrl = null;
+    public String telenorSite = null;
 
     //private MailHelper mailHelper;
 
@@ -48,6 +49,7 @@ public class ApplicationManager {
         dbHelper.prop = dbHelper.loadDataFromConfigFile();
         pan = dbHelper.prop.getProperty("tds.pan");
         TDSBaseUrl = dbHelper.prop.getProperty("tds.base.url");
+        telenorSite = "TELENOR";
     }
 
     public void init() {

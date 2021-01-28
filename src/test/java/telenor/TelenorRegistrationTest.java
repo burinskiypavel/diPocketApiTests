@@ -1,4 +1,4 @@
-package telenor.registration;
+package telenor;
 
 import appmanager.HelperBase;
 import base.TestBase;
