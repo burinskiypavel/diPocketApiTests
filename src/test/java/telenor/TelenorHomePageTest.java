@@ -26,7 +26,7 @@ public class TelenorHomePageTest extends TestBase {
     String loginPhone = "$5_380685448615";
 
     @Test(priority = 1)
-    public void test_WebServices_v1_security_sendOtpForPhone(){
+    public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode(){
         Response res = given().log().uri().log().headers().log().body()
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
