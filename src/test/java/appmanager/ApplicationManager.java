@@ -26,9 +26,13 @@ public class ApplicationManager {
     //static String projectPath = System.getProperty("user.dir");
     private XmlHelper xmlHelper = new XmlHelper();
     private DBHelper dbHelper = new DBHelper();
+    private TelenorHelper telenorHelper = new TelenorHelper();
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
+    public String dipocket3_intranet = null;
+    public String telenorLoginPhone = null;
+    public String loginPhone = null;
 
     //private MailHelper mailHelper;
 
@@ -50,6 +54,9 @@ public class ApplicationManager {
         pan = dbHelper.prop.getProperty("tds.pan");
         TDSBaseUrl = dbHelper.prop.getProperty("tds.base.url");
         telenorSite = "TELENOR";
+        dipocket3_intranet = "https://dipocket3.intranet:8900";
+        telenorLoginPhone = dbHelper.prop.getProperty("mobile.registration.phoneNumber");
+        loginPhone = "$5_" + telenorLoginPhone; //$5_380685448615
     }
 
     public void init() {
@@ -123,6 +130,8 @@ public class ApplicationManager {
     public XmlHelper getXmlHelper() {
         return xmlHelper;
     }
+
+    public TelenorHelper getTelenorHelper() { return telenorHelper; }
 
 //    public MailHelper mail(){
 //        if(mailHelper == null){
