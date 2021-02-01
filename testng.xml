@@ -162,4 +162,10 @@
         </classes>
     </test>
 
+    <test name="TelenorRegistrationTest">
+        <classes>
+            <class name="telenor.TelenorRegistrationTest"/>
+        </classes>
+    </test>
+
 </suite>

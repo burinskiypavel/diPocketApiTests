@@ -1,31 +1,34 @@
 package telenor;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import org.testng.annotations.Test;
 
+import java.io.*;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItems;
 
 public class TelenorRegistrationTest extends TestBase {
     String smsCode = null;
-    String token = "512219400";
+    //String token = "512252941";
+    String token = null;
 
     @Test(priority = 1)
-    public void test_WebServices_v1_registration_checkPhoneAndToken(){
+    public void test_WebServices_v1_registration_checkPhoneAndToken() throws SQLException, ClassNotFoundException, IOException {
+        token = app.getTelenorHelper().getTokenFromFile("files/telenor/tokensForTelenorRegistration.txt");
+        app.getDbHelper().deleteClientFromDBTelenor(app.telenorRegistrationPhone);
+        System.out.println("hello");
         given()
                 .header("content-type", "application/json; charset=utf-8")
-                .header("site", "TELENOR")
+                .header("site", app.telenorSite)
                 .queryParam("value", "com.cs.dipocketback.pojo.telenor.TelenorRequest@6d1f8ef7")
                 .body("{\n" +
                         "  \"publicToken\" : \""+token+"\",\n" +
-                        "  \"phoneNumber\" : \"380980316499\"\n" +
+                        "  \"phoneNumber\" : \""+app.telenorRegistrationPhone+"\"\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/WebServices/v1/registration/checkPhoneAndToken")
+                .post(app.dipocket3_intranet+"/WebServices/v1/registration/checkPhoneAndToken")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -37,13 +40,14 @@ public class TelenorRegistrationTest extends TestBase {
     public void test_WebServices_v1_registration_sendSMSCodeForPhone(){
         given()
                 .header("content-type", "application/json; charset=utf-8")
-                .header("site", "TELENOR")
+                .header("site", app.telenorSite)
+                .queryParam("value", "com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@51ceb0d3")
                 .body("{\n" +
                         "  \"langId\" : 1,\n" +
-                        "  \"phoneNumber\" : \"380980316499\"\n" +
+                        "  \"phoneNumber\" : \""+app.telenorRegistrationPhone+"\"\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/WebServices/v1/registration/sendSMSCodeForPhone?value=com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@51ceb0d3")
+                .post(app.dipocket3_intranet+"/WebServices/v1/registration/sendSMSCodeForPhone")
                 .then()
                 .log().all()
                 .statusCode(200);
@@ -51,17 +55,18 @@ public class TelenorRegistrationTest extends TestBase {
 
     @Test(priority = 3)
     public void test_WebServices_v1_registration_checkCodeForPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDBTelenor("380980316499");
+        smsCode = app.getDbHelper().getSMSCodeFromDBTelenor(app.telenorRegistrationPhone);
         given()
                 .header("content-type", "application/json; charset=utf-8")
-                .header("site", "TELENOR")
+                .header("site", app.telenorSite)
+                .queryParam("value", "com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@4b430f10")
                 .body("{\n" +
                         "  \"langId\" : 1,\n" +
-                        "  \"phoneNumber\" : \"380980316499\",\n" +
+                        "  \"phoneNumber\" : \""+app.telenorRegistrationPhone+"\",\n" +
                         "  \"code\" : \""+smsCode+"\"\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/WebServices/v1/registration/checkCodeForPhone?value=com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@4b430f10")
+                .post(app.dipocket3_intranet+"/WebServices/v1/registration/checkCodeForPhone")
                 .then()
                 .log().all()
                 .statusCode(200);
@@ -71,13 +76,14 @@ public class TelenorRegistrationTest extends TestBase {
     public void test_WebServices_v1_registration_registerTelenorClient() {
         given()
                 .header("content-type", "application/json; charset=utf-8")
-                .header("site", "TELENOR")
+                .header("site", app.telenorSite)
+                .queryParam("value", "com.cs.dipocketback.pojo.registration.RegSavepointData@541a8ad0")
                 .body("{\n" +
                         "  \"langId\" : 1,\n" +
                         "  \"firstName\" : \"Pavel\",\n" +
                         "  \"lastName\" : \"TestQA\",\n" +
-                        "  \"mainPhone\" : \"380980316499\",\n" +
-                        "  \"email\" : \"burinskiypavel@gmail.com\",\n" +
+                        "  \"mainPhone\" : \""+app.telenorRegistrationPhone+"\",\n" +
+                        "  \"email\" : \"pavelqaemail@mailsac.com\",\n" +
                         "  \"birthDateAsDate\" : \"1990-01-01\",\n" +
                         "  \"secQuestion\" : \"QA\",\n" +
                         "  \"secAnswer\" : \"QA\",\n" +
@@ -89,8 +95,8 @@ public class TelenorRegistrationTest extends TestBase {
                         "    \"zip\" : \"123456\",\n" +
                         "    \"countryId\" : 616\n" +
                         "  },\n" +
-                        "  \"token\" : \"512219400\",\n" +
-                        "  \"publicToken\" : \"512219400\",\n" +
+                        "  \"token\" : \""+token+"\",\n" +
+                        "  \"publicToken\" : \""+token+"\",\n" +
                         "  \"agreeTariffs\" : true,\n" +
                         "  \"agreeTerms\" : true,\n" +
                         "  \"agreeProcessInfo\" : true,\n" +
@@ -105,72 +111,23 @@ public class TelenorRegistrationTest extends TestBase {
                         "  \"attachedCardIds\" : [ ]\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/WebServices/v1/registration/registerTelenorClient?value=com.cs.dipocketback.pojo.registration.RegSavepointData@541a8ad0")
+                .post(app.dipocket3_intranet+"/WebServices/v1/registration/registerTelenorClient")
                 .then()
                 .log().all()
                 .statusCode(200);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @Test(priority = 22, enabled = false)
-    public void test_WebServices_v1_auth_authenticate(){
+    @Test(priority = 5)
+    public void test_confirm_email_link_from_mailsac() throws InterruptedException {
+        String link_link = app.getTelenorHelper().getEmailConfirmationRegistrationTelenorLinkFromMailSac();
+        System.out.println("link_link: " + link_link);
         given()
-                .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", "TELENOR")
-                .header("authorization", "Basic MzgwNjg1NDQ4NjE1")
                 .when()
-                .post(app.TDSBaseUrl +"/WebServices/v1/auth/authenticate?value=org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@2dedf6a0")
+                .get(link_link)
                 .then()
                 .log().all()
                 .statusCode(200)
-//                .body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"))
-                .body("clientFirstName", equalTo("Pavel"));
-    }
-
-
-    @Test(priority = 23, enabled = false)
-    public void test_WebServices_v1_account_tokenByCardId(){
-        given()
-                .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", "TELENOR")
-                //.header("authorization", "Basic MzgwNjg1NDQ4NjE1")
-                .body("{\n" +
-                        "  \"value\" : \"14932\"\n" +
-                        "}")
-                .when()
-                .post(app.TDSBaseUrl +"/WebServices/v1/account/tokenByCardId?value=com.cs.dipocketback.pojo.base.StringContainer@3a70118")
-                .then()
-                .log().all()
-                .statusCode(200)
-//                .body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"))
-                .body("clientFirstName", equalTo("Pavel"));
+                .body("html.body.div.div.div.p", equalTo("You have successfully confirmed your email address"))
+                .body("html.body.div.div.div.h2", equalTo("Thank you!"));
     }
 }

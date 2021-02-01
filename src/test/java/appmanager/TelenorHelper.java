@@ -1,5 +1,6 @@
 package appmanager;
 
+import io.restassured.response.Response;
 import model.telenor.auth_authenticate.Address;
 import model.telenor.auth_authenticate.AuthAuthenticate;
 import model.telenor.auth_authenticate.Imagesstatus;
@@ -7,11 +8,17 @@ import model.telenor.clientDiPAccounts2.Accountt;
 import model.telenor.clientDiPAccounts2.ClientDiPAccounts;
 import model.telenor.clientImages.Image;
 import model.telenor.clientInfo.ClientInfo;
+import model.telenor.registration.mailsac.Mailsacc;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -170,4 +177,92 @@ public class TelenorHelper {
         assertThat(imagesstatus3.getImageType(), equalTo("SELFIE2"));
         assertThat(imagesstatus3.getImageState(), equalTo("NEW"));
     }
+
+    public void read_write() throws IOException {
+        FileReader fr = new FileReader("files/tokensForTelenorRegistration.txt");
+        BufferedReader br = new BufferedReader(fr);
+        FileWriter fw = new FileWriter("files/used.txt");
+        String line;
+
+        while((line = br.readLine()) != null)
+        {
+            line = line.replaceAll("qwerty","qwerty HAHA");
+            fw.write((line + "\n"), 0, (line+"\n").length());
+
+        }
+        fr.close();
+        fw.close();
+
+    }
+
+    public static List<String> readFile(String path) throws IOException {
+        try(BufferedReader br = new BufferedReader(new FileReader(path))){
+            List<String> listOfData = new ArrayList<>();
+            String d;
+            while((d = br.readLine()) != null){
+                listOfData.add(d);
+            }
+            return listOfData;
+        }
+    }
+
+    public static void writeFile(List<String> listOfData, String path) throws IOException{
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
+            for(String str: listOfData){
+                bw.write(str);
+                bw.newLine();
+            }
+        }
+    }
+
+    public String getTokenFromFile(String path) throws IOException {
+        String token = null;
+        List<String> data = TelenorHelper.readFile(path);
+        for (int i = 0; i < data.size(); i++){
+            if(!data.contains("Expired")){
+                if(!data.get(i).contains("Expired")){
+                    token = data.get(i);
+                    //token = tok;
+                    data.set(i, data.get(i) + " Expired");
+                    break;
+                }
+
+            }
+//            else {
+//                tok = data.get(0);
+//                data.set(0, data.get(0) + " Expired");
+//                break;
+//            }
+
+        }
+        TelenorHelper.writeFile(data, "files/telenor/used.txt");
+        List<String> data2 = TelenorHelper.readFile("files/telenor/used.txt");
+        TelenorHelper.writeFile(data2, path);
+        return token;
+    }
+
+    //@org.jetbrains.annotations.Nullable
+    public String getEmailConfirmationRegistrationTelenorLinkFromMailSac() throws InterruptedException {
+        Thread.sleep(4000);
+        Response res = given()
+                .header("Mailsac-Key", "k_T2K6ywY25Cej6ZsycegCoZNgAporSLPGeyCI")
+                .when()
+                .get("https://mailsac.com/api/addresses/pavelqaemail@mailsac.com/messages");
+
+        res.then().log().all();
+        Assert.assertEquals(res.getStatusCode(), 200);
+        Mailsacc[] mailsacc = res.as(Mailsacc[].class);
+
+        List<Mailsacc> mailsaccс = Arrays.asList(mailsacc);
+        String link_link = null;
+        for (int i = 0; i < mailsaccс.size(); i++){
+            List<String> emailLinks = mailsaccс.get(i) .getLinks();
+            System.out.println(emailLinks.get(0));
+            link_link = emailLinks.get(0);
+            break;
+        }
+        return link_link;
+    }
+
 }
+

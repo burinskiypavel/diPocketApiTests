@@ -32,7 +32,7 @@ public class DBHelper extends HelperBase {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-        String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"'";
+        String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"' and SITE = 'TELENOR'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -68,6 +68,27 @@ public class DBHelper extends HelperBase {
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
         CallableStatement myCall = connection.prepareCall("{call PKI_CLIENT.CLEARCLIENTBYPHONE(p_Site=>'DIPOCKET',p_Phone=>'"+number+"')}");
+        myCall.executeUpdate();
+
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs2= stmt.executeQuery(query2);
+
+        connection.close();
+    }
+
+    public void deleteClientFromDBTelenor(String number) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+
+        String query2 = "commit";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection connection = DriverManager.getConnection(dbUrl, username, password);
+
+        CallableStatement myCall = connection.prepareCall("{call PKI_CLIENT.CLEARCLIENTBYPHONE(p_Site=>'TELENOR',p_Phone=>'"+number+"')}");
         myCall.executeUpdate();
 
         Statement stmt = connection.createStatement();
