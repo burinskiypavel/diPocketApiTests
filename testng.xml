@@ -168,4 +168,10 @@
         </classes>
     </test>
 
+    <test name="TelenorCheckBalanceTest">
+        <classes>
+            <class name="telenor.TelenorCheckBalanceTest"/>
+        </classes>
+    </test>
+
 </suite>
