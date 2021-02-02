@@ -1,5 +1,5 @@
 
-package model.telenor.auth_authenticate;
+package model.telenor.login.auth_authenticate;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

@@ -11,7 +11,6 @@ import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
-import org.openqa.selenium.json.Json;
 import org.testng.Assert;
 
 import javax.net.ssl.SSLContext;
@@ -28,7 +27,7 @@ public class ApplicationManager {
     private XmlHelper xmlHelper = new XmlHelper();
     private DBHelper dbHelper = new DBHelper();
     private TelenorHelper telenorHelper = new TelenorHelper();
-    private JsonHelper jsonHelper = new JsonHelper();
+    private ResponseValidationHelper responseValidationHelper = new ResponseValidationHelper();
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
@@ -112,13 +111,13 @@ public class ApplicationManager {
         Assert.assertNotNull(postResponse.getBody());
     }
 
-    public String generateRandomString(int count){
-        String randomString =  RandomStringUtils.random(count, true, true);
+    public String generateRandomString(int amount){
+        String randomString =  RandomStringUtils.random(amount, true, true);
         return randomString;
     }
 
-    public String generateRandomNumber(int count){
-        String randomNumber =  RandomStringUtils.random(count, false, true);
+    public String generateRandomNumber(int amount){
+        String randomNumber =  RandomStringUtils.random(amount, false, true);
         return randomNumber;
     }
 
@@ -137,7 +136,7 @@ public class ApplicationManager {
 
     public TelenorHelper getTelenorHelper() { return telenorHelper; }
 
-    public JsonHelper getJsonHelper() { return jsonHelper; }
+    public ResponseValidationHelper getResponseValidationHelper() { return responseValidationHelper; }
 
 //    public MailHelper mail(){
 //        if(mailHelper == null){

@@ -1,13 +1,15 @@
 package appmanager;
 
 import io.restassured.response.Response;
-import model.telenor.auth_authenticate.Address;
-import model.telenor.auth_authenticate.AuthAuthenticate;
-import model.telenor.auth_authenticate.Imagesstatus;
-import model.telenor.clientDiPAccounts2.Accountt;
-import model.telenor.clientDiPAccounts2.ClientDiPAccounts;
-import model.telenor.clientImages.Image;
-import model.telenor.clientInfo.ClientInfo;
+import model.telenor.login.accountHistoryList.AccountHistoryList;
+import model.telenor.login.accountHistoryList.AccountHistoryList_;
+import model.telenor.login.auth_authenticate.Address;
+import model.telenor.login.auth_authenticate.AuthAuthenticate;
+import model.telenor.login.auth_authenticate.Imagesstatus;
+import model.telenor.login.clientDiPAccounts2.Accountt;
+import model.telenor.login.clientDiPAccounts2.ClientDiPAccounts;
+import model.telenor.login.clientImages.Image;
+import model.telenor.login.clientInfo.ClientInfo;
 import model.telenor.registration.mailsac.Mailsacc;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -262,6 +264,25 @@ public class TelenorHelper {
             break;
         }
         return link_link;
+    }
+
+    public void checkAllFieldsInTelenorHomePageAccountHistoryListResponse(AccountHistoryList accountHistoryList) {
+        List<AccountHistoryList_> accountHistoryList1 = accountHistoryList.getAccountHistoryList();
+        for (AccountHistoryList_ accountHistoryList_ :accountHistoryList1){
+            assertThat(accountHistoryList_.getAmount(), equalTo(200000));
+            assertThat(accountHistoryList_.getCcyId(), equalTo(348));
+            assertThat(accountHistoryList_.getCcySymbol(), equalTo("Ft"));
+            assertThat(accountHistoryList_.getFinType(), equalTo("C"));
+            assertThat(accountHistoryList_.getFullName(), equalTo("Telenor"));
+            assertThat(accountHistoryList_.getId(), equalTo(489029));
+            assertThat(accountHistoryList_.getItemDateISO(), equalTo("2021-01-20 13:21:00.684949 Europe/Kiev"));
+            assertThat(accountHistoryList_.getStateId(), equalTo(100));
+            assertThat(accountHistoryList_.getTypeId(), equalTo(10));
+            assertThat(accountHistoryList_.getTypeName(), equalTo("DiP transfer"));
+            assertThat(accountHistoryList_.getAccCcyId(), equalTo(348));
+            assertThat(accountHistoryList_.getAccCcySymbol(), equalTo("Ft"));
+            assertThat(accountHistoryList_.getAccAmount(), equalTo(200000));
+        }
     }
 
 }

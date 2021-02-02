@@ -1,4 +1,4 @@
-package model.telenor.clientImages;
+package model.telenor.login.clientImages;
 
 public class Image {
 

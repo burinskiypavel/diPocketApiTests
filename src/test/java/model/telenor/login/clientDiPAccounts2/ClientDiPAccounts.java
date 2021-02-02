@@ -1,10 +1,9 @@
 
-package model.telenor.clientDiPAccounts2;
+package model.telenor.login.clientDiPAccounts2;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import model.telenor.clientDiPAccounts2.Accountt;
 
 public class ClientDiPAccounts {
 

@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class JsonHelper extends HelperBase {
+public class ResponseValidationHelper extends HelperBase {
 
     public void checkStatusCodeIs200(Response res) {
         assertThat(res.getStatusCode(), equalTo(200));
@@ -15,6 +15,10 @@ public class JsonHelper extends HelperBase {
         assertThat(res.getBody().jsonPath().get(item), equalTo(value));
     }
     public void checkResponseHasItemWithValue(Response res, String item, int value) {
+        assertThat(res.getBody().jsonPath().get(item), equalTo(value));
+    }
+
+    public void checkResponseHasItemWithValue(Response res, String item, boolean value) {
         assertThat(res.getBody().jsonPath().get(item), equalTo(value));
     }
 }

@@ -21,9 +21,9 @@ public class TelenorCheckBalanceTest extends TestBase {
                 .post(app.dipocket3_intranet+"/WebServices/v1/anonymous/bandBalance");
         res.then().log().all();
 
-        app.getJsonHelper().checkStatusCodeIs200(res);
-        app.getJsonHelper().checkResponseHasItemWithValue(res, "publicToken", "512047269");
-        app.getJsonHelper().checkResponseHasItemWithValue(res, "ccy", "HUF");
-        app.getJsonHelper().checkResponseHasItemWithValue(res, "availableBalance", 200000);
+        app.getResponseValidationHelper().checkStatusCodeIs200(res);
+        app.getResponseValidationHelper().checkResponseHasItemWithValue(res, "publicToken", "512047269");
+        app.getResponseValidationHelper().checkResponseHasItemWithValue(res, "ccy", "HUF");
+        app.getResponseValidationHelper().checkResponseHasItemWithValue(res, "availableBalance", 200000);
     }
 }

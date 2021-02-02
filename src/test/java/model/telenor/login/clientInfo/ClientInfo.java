@@ -1,4 +1,4 @@
-package model.telenor.clientInfo;
+package model.telenor.login.clientInfo;
 
 public class ClientInfo {
     private int id;

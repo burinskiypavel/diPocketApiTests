@@ -1,10 +1,10 @@
 
-package model.telenor.auth_authenticate;
+package model.telenor.login.auth_authenticate;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RegAddress {
+public class MailAddress {
 
     @SerializedName("typeId")
     @Expose
