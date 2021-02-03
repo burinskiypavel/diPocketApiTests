@@ -1,9 +1,11 @@
 package telenor;
 
+import appmanager.GoogleSheetsHelper;
 import base.TestBase;
 import org.testng.annotations.Test;
 
 import java.io.*;
+import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
@@ -15,11 +17,12 @@ public class TelenorRegistrationTest extends TestBase {
     String token = null;
 
     @Test(priority = 1)
-    public void test_WebServices_v1_registration_checkPhoneAndToken() throws SQLException, ClassNotFoundException, IOException {
-        token = app.getTelenorHelper().getTokenFromFile("files/telenor/tokensForTelenorRegistration.txt");
+    public void test_WebServices_v1_registration_checkPhoneAndToken() throws SQLException, ClassNotFoundException, IOException, GeneralSecurityException {
+        //token = app.getTelenorHelper().getTokenFromFile("files/telenor/tokensForTelenorRegistration.txt");
+        token = GoogleSheetsHelper.start();
+        System.out.println("token: " + token);
         app.getDbHelper().deleteClientFromDBTelenor(app.telenorRegistrationPhone);
-        System.out.println("hello");
-        given()
+        given().log().uri().log().headers().log().body()
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .queryParam("value", "com.cs.dipocketback.pojo.telenor.TelenorRequest@6d1f8ef7")
@@ -38,7 +41,7 @@ public class TelenorRegistrationTest extends TestBase {
 
     @Test(priority = 2)
     public void test_WebServices_v1_registration_sendSMSCodeForPhone(){
-        given()
+        given().log().uri().log().headers().log().body()
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .queryParam("value", "com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@51ceb0d3")
@@ -56,7 +59,7 @@ public class TelenorRegistrationTest extends TestBase {
     @Test(priority = 3)
     public void test_WebServices_v1_registration_checkCodeForPhone() throws SQLException, ClassNotFoundException {
         smsCode = app.getDbHelper().getSMSCodeFromDBTelenor(app.telenorRegistrationPhone);
-        given()
+        given().log().uri().log().headers().log().body()
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .queryParam("value", "com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@4b430f10")
@@ -74,7 +77,7 @@ public class TelenorRegistrationTest extends TestBase {
 
     @Test(priority = 4)
     public void test_WebServices_v1_registration_registerTelenorClient() {
-        given()
+        given().log().uri().log().headers().log().body()
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .queryParam("value", "com.cs.dipocketback.pojo.registration.RegSavepointData@541a8ad0")
@@ -121,7 +124,7 @@ public class TelenorRegistrationTest extends TestBase {
     public void test_confirm_email_link_from_mailsac() throws InterruptedException {
         String link_link = app.getTelenorHelper().getEmailConfirmationRegistrationTelenorLinkFromMailSac();
         System.out.println("link_link: " + link_link);
-        given()
+        given().log().uri().log().headers().log().body()
                 .when()
                 .get(link_link)
                 .then()
