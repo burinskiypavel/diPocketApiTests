@@ -15,6 +15,7 @@ import java.io.IOException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 
 public class TelenorFullRegistrationTest extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
@@ -69,6 +70,7 @@ public class TelenorFullRegistrationTest extends TestBase {
         res.then().log().all();
 
         Assert.assertEquals(res.getStatusCode(), 200);
+        res.then().body("communicationTileList[0].message", equalTo("When you have a minute please complete your registration by making selfies and scanning your documents - you will enjoy the full benefits of application.  Please answer the secret question to proceed (case sensitive)"));
         assertThat(res.getBody().jsonPath().get("communicationTileList[0].message"), hasItem("When you have a minute please complete your registration by making selfies and scanning your documents - you will enjoy the full benefits of application.  Please answer the secret question to proceed (case sensitive)"));
         assertThat(res.getBody().jsonPath().get("communicationTileList[0].shortName"), equalTo("Registration"));
     }
@@ -85,7 +87,8 @@ public class TelenorFullRegistrationTest extends TestBase {
         res.then().log().all();
 
         assertThat(res.getStatusCode(), equalTo(200));
-        assertThat(res.getBody().jsonPath().get(""), equalTo(nullValue()));
+        res.then().body("", empty());
+        assertThat(res.getBody().jsonPath().get(""),  equalTo(nullValue()));
     }
 
     @Test(priority = 5)
