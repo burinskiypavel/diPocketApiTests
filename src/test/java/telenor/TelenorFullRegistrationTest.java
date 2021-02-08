@@ -69,7 +69,7 @@ public class TelenorFullRegistrationTest extends TestBase {
         res.then().log().all();
 
         Assert.assertEquals(res.getStatusCode(), 200);
-        assertThat(res.getBody().jsonPath().get("communicationTileList[0].message"), equalTo("When you have a minute please complete your registration by making selfies and scanning your documents - you will enjoy the full benefits of application.  Please answer the secret question to proceed (case sensitive)"));
+        assertThat(res.getBody().jsonPath().get("communicationTileList[0].message"), hasItem("When you have a minute please complete your registration by making selfies and scanning your documents - you will enjoy the full benefits of application.  Please answer the secret question to proceed (case sensitive)"));
         assertThat(res.getBody().jsonPath().get("communicationTileList[0].shortName"), equalTo("Registration"));
     }
 
@@ -85,7 +85,7 @@ public class TelenorFullRegistrationTest extends TestBase {
         res.then().log().all();
 
         assertThat(res.getStatusCode(), equalTo(200));
-        assertThat(res.getBody().jsonPath().get(""),equalTo(null));
+        assertThat(res.getBody().jsonPath().get(""), equalTo(nullValue()));
     }
 
     @Test(priority = 5)
@@ -224,7 +224,7 @@ public class TelenorFullRegistrationTest extends TestBase {
                 .auth().preemptive().basic(app.fullRegistrationTelenorLoginPhone, smsCode)
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
-                .header("clisessionid", "5244014")
+                .header("clisessionid", cliSessionId)
                 .when()
                 .get(app.dipocket3_intranet+"/WebServices/v1/clientProfile/clientImages");
         res.then().log().all();
