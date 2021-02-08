@@ -84,6 +84,15 @@ public class TelenorHelper {
         assertThat(clientInfo.isClientBanned(), equalTo(false));
     }
 
+    public void checkAllRowsInTelenorFullRegClientInfoResponse(ClientInfo clientInfo) {
+        assertThat(clientInfo.getClientFirstName(), equalTo("Pavel"));
+        assertThat(clientInfo.getClientLastName(), equalTo("TestQA"));
+        assertThat(clientInfo.getPresentedLogin(), equalTo("380980316499"));
+        assertThat(clientInfo.getMainPhone(), equalTo("380980316499"));
+        assertThat(clientInfo.getEmail(), equalTo("pavelqaemail@mailsac.com"));
+        assertThat(clientInfo.getCcyCode(), equalTo("HUF"));
+    }
+
     public void checkAllFieldsFromTelenorClientDiPAccounts2Response(ClientDiPAccounts clientDiPAccounts) {
         SoftAssert softAssert = new SoftAssert();
         List<Accountt> accounts = clientDiPAccounts.getAccounts();
@@ -115,6 +124,23 @@ public class TelenorHelper {
             assertThat(accountt.getCanUnblockVirtualCard(), equalTo(false));
         }
         softAssert.assertAll();
+    }
+
+    public int getPlasticCardIdFromTelenorClientDiPAccounts2Response(ClientDiPAccounts clientDiPAccounts) {
+        int plasticCardId = 0;
+        List<Accountt> accounts = clientDiPAccounts.getAccounts();
+        for(Accountt accountt : accounts) {
+            plasticCardId = accountt.getPlasticCardId();
+        }
+        return plasticCardId;
+    }
+
+    public void checkFieldsInTelenorFullRegAuthAuthenticateResponse(AuthAuthenticate authAuthenticate) {
+        assertThat(authAuthenticate.getClientFirstName(), equalTo("Pavel"));
+        assertThat(authAuthenticate.getClientLastName(), equalTo("TestQA"));
+        assertThat(authAuthenticate.getPresentedLogin(), equalTo("380980316499"));
+        assertThat(authAuthenticate.getMainPhone(), equalTo("380980316499"));
+        assertThat(authAuthenticate.getEmail(), equalTo("pavelqaemail@mailsac.com"));
     }
 
     public void checkFieldsInTelenorAuthAuthenticateResponse(AuthAuthenticate authAuthenticate) {
@@ -205,6 +231,18 @@ public class TelenorHelper {
                 listOfData.add(d);
             }
             return listOfData;
+        }
+
+    }
+
+    public static String readFileReturnString(String path) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String data = null;
+            String d;
+            while ((d = br.readLine()) != null) {
+                data = d;
+            }
+            return data;
         }
     }
 

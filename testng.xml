@@ -174,4 +174,22 @@
         </classes>
     </test>
 
+    <test name="TelenorWrongPasswordTest">
+        <classes>
+            <class name="telenor.TelenorWrongPasswordTest"/>
+        </classes>
+    </test>
+
+    <test name="UserBannedFromBOTest">
+        <classes>
+            <class name="telenor.TelenorUserBannedFromBOTest"/>
+        </classes>
+    </test>
+
+    <test name="TelenorFullRegistrationTest">
+        <classes>
+            <class name="telenor.TelenorFullRegistrationTest"/>
+        </classes>
+    </test>
+
 </suite>

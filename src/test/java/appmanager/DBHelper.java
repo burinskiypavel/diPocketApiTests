@@ -7,7 +7,8 @@ public class DBHelper extends HelperBase {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-        String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"' and SITE = 'DIPOCKET'";
+        //String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"' and SITE = 'DIPOCKET'";
+        String query = "select * from VERIFYCODE where SRCID  = 'DIPOCKET:"+number+"'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -32,7 +33,8 @@ public class DBHelper extends HelperBase {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-        String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"' and SITE = 'TELENOR'";
+        //String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"' and SITE = 'TELENOR'";
+        String query = "select * from VERIFYCODE where SRCID  = 'TELENOR:"+number+"'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
