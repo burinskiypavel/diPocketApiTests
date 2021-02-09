@@ -68,10 +68,11 @@ public class TelenorFullRegistrationTest extends TestBase {
                 .when()
                 .get(app.dipocket3_intranet+"/WebServices/v1/tile/messages");
         res.then().log().all();
+        String actualMessage = res.getBody().jsonPath().getString("communicationTileList[0].message");
 
         Assert.assertEquals(res.getStatusCode(), 200);
-        res.then().body("communicationTileList[0].message", equalTo("When you have a minute please complete your registration by making selfies and scanning your documents - you will enjoy the full benefits of application.  Please answer the secret question to proceed (case sensitive)"));
-        assertThat(res.getBody().jsonPath().get("communicationTileList[0].message"), hasItem("When you have a minute please complete your registration by making selfies and scanning your documents - you will enjoy the full benefits of application.  Please answer the secret question to proceed (case sensitive)"));
+        assertThat(actualMessage, containsString("When you have a minute please complete your registration by making selfies and scanning your documents - you will enjoy the full benefits of application."));
+        assertThat(actualMessage, containsString("Please answer the secret question to proceed (case sensitive)"));
         assertThat(res.getBody().jsonPath().get("communicationTileList[0].shortName"), equalTo("Registration"));
     }
 
@@ -87,8 +88,8 @@ public class TelenorFullRegistrationTest extends TestBase {
         res.then().log().all();
 
         assertThat(res.getStatusCode(), equalTo(200));
-        res.then().body("", empty());
-        assertThat(res.getBody().jsonPath().get(""),  equalTo(nullValue()));
+        res.then().assertThat().body("", empty());
+        //assertThat(res.getBody().jsonPath().get(""),  equalTo(nullValue()));
     }
 
     @Test(priority = 5)
