@@ -180,7 +180,7 @@
         </classes>
     </test>
 
-    <test name="UserBannedFromBOTest">
+    <test name="TelenorUserBannedFromBOTest">
         <classes>
             <class name="telenor.TelenorUserBannedFromBOTest"/>
         </classes>
