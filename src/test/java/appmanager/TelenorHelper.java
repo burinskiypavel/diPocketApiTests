@@ -1,6 +1,8 @@
 package appmanager;
 
 import io.restassured.response.Response;
+import model.telenor.cardOperation.unblockCard.clientDiPAccounts2.Account;
+import model.telenor.cardOperation.unblockCard.clientDiPAccounts2.ClientDiPAccounts2UnblockCard;
 import model.telenor.login.accountHistoryList.AccountHistoryList;
 import model.telenor.login.accountHistoryList.AccountHistoryList_;
 import model.telenor.login.auth_authenticate.Address;
@@ -120,6 +122,41 @@ public class TelenorHelper {
             assertThat(accountt.getCanReorderPlastic(), equalTo(false));
             assertThat(accountt.getPlasticCardStatus(), equalTo("ACTIVE"));
             assertThat(accountt.getCanUnblockPlasticCard(), equalTo(false));
+            assertThat(accountt.getCanLinkPlastic(), equalTo(false));
+            assertThat(accountt.getCanUnblockVirtualCard(), equalTo(false));
+        }
+        softAssert.assertAll();
+    }
+
+    public void checkAllFieldsFromTelenorClientDiPAccounts2ResponseUnblockCard(ClientDiPAccounts2UnblockCard clientDiPAccounts2UnblockCard) {
+        SoftAssert softAssert = new SoftAssert();
+        List<Account> accounts = clientDiPAccounts2UnblockCard.getAccounts();
+        for(Account accountt : accounts) {
+            assertThat(accountt.getAccountId(), equalTo(9434));
+            assertThat(accountt.getAccountName(), equalTo("Band 512047269"));
+            softAssert.assertEquals(accountt.getCcy(), "HUF");
+            assertThat(accountt.getCcyId(), equalTo(348));
+            assertThat(accountt.getBalance(), equalTo(200000));
+            assertThat(accountt.getAvailableBalance(), equalTo(200000));
+            assertThat(accountt.getBlocked(), equalTo(0));
+            //assertThat(accountt.getPlasticCardId(), equalTo(14932));
+            //assertThat(accountt.getPlasticMaskedPan(), equalTo("545598******6620"));
+            softAssert.assertTrue(accountt.getMain().equals(true), "Main is not true");
+            assertThat(accountt.getIsDefault(), equalTo(true));
+            assertThat(accountt.getOwn(), equalTo(true));
+            assertThat(accountt.getShared(), equalTo(false));
+            assertThat(accountt.getCanOpenVirtualCard(), equalTo(true));
+            assertThat(accountt.getCanOpenPlasticCard(), equalTo(true));
+            assertThat(accountt.getIsMyShared(), equalTo(false));
+            assertThat(accountt.getIsSupervised(), equalTo(false));
+            assertThat(accountt.getOwnerId(), equalTo(30943));
+            assertThat(accountt.getState(), equalTo("ACTIVE"));
+            assertThat(accountt.getCanReorderVirtual(), equalTo(false));
+            assertThat(accountt.getCanReorderPlastic(), equalTo(false));
+            //assertThat(accountt.getPlasticCardStatus(), equalTo("ACTIVE"));
+            assertThat(accountt.getUnblockPlasticCardId(), equalTo(14932));
+            assertThat(accountt.getCanUnblockPlasticCard(), equalTo(true));// false
+            assertThat(accountt.getUnblockPlasticMaskedPan(), equalTo("545598******6620"));
             assertThat(accountt.getCanLinkPlastic(), equalTo(false));
             assertThat(accountt.getCanUnblockVirtualCard(), equalTo(false));
         }

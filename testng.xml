@@ -192,4 +192,16 @@
         </classes>
     </test>
 
+    <test name="TelenorBlockCardTest">
+        <classes>
+            <class name="telenor.TelenorBlockCardTest"/>
+        </classes>
+    </test>
+
+    <test name="TelenorUnblockCardTest">
+        <classes>
+            <class name="telenor.TelenorUnblockCardTest"/>
+        </classes>
+    </test>
+
 </suite>
