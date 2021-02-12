@@ -204,6 +204,12 @@
         </classes>
     </test>
 
+    <test name="TelenorChangeEmailTest">
+        <classes>
+            <class name="telenor.TelenorChangeEmailTest"/>
+        </classes>
+    </test>
+
     <test name="TelenorChangeSecretAnswerTest">
         <classes>
             <class name="telenor.TelenorChangeSecretAnswerTest"/>

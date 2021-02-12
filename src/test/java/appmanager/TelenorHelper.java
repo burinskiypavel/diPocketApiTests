@@ -341,6 +341,28 @@ public class TelenorHelper {
         return link_link;
     }
 
+    public String getChageEmailConfirmationTelenorLinkFromMailSac() throws InterruptedException {
+        Thread.sleep(4000);
+        Response res = given()
+                .header("Mailsac-Key", "k_T2K6ywY25Cej6ZsycegCoZNgAporSLPGeyCI")
+                .when()
+                .get("https://mailsac.com/api/addresses/telenorchangeemailtest@mailsac.com/messages");
+
+        res.then().log().all();
+        Assert.assertEquals(res.getStatusCode(), 200);
+        Mailsacc[] mailsacc = res.as(Mailsacc[].class);
+
+        List<Mailsacc> mailsaccс = Arrays.asList(mailsacc);
+        String link_link = null;
+        for (int i = 0; i < mailsaccс.size(); i++){
+            List<String> emailLinks = mailsaccс.get(i) .getLinks();
+            System.out.println("link: " + emailLinks.get(0));
+            link_link = emailLinks.get(0);
+            break;
+        }
+        return link_link;
+    }
+
     public void checkAllFieldsInTelenorHomePageAccountHistoryListResponse(AccountHistoryList accountHistoryList) {
         List<AccountHistoryList_> accountHistoryList1 = accountHistoryList.getAccountHistoryList();
         for (AccountHistoryList_ accountHistoryList_ :accountHistoryList1){
