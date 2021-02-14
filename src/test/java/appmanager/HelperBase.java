@@ -23,4 +23,9 @@ public class HelperBase {
         }
         return prop;
     }
+
+    public static void waiter(int sec) throws InterruptedException {
+        int second = sec * 1000;
+        Thread.sleep(second);
+    }
 }
