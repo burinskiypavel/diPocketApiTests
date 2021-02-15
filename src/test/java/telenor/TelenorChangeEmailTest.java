@@ -95,7 +95,7 @@ public class TelenorChangeEmailTest extends TestBase {
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .when()
-                .post(app.dipocket3_intranet+"/WebServices/v1/clientProfile/clientInfo")
+                .get(app.dipocket3_intranet+"/WebServices/v1/clientProfile/clientInfo")
                 .then().log().all()
                 .assertThat().statusCode(200)
                 .assertThat().body("email", equalTo(newEmail))
