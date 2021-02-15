@@ -15,6 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TelenorBlockCardTest extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
+    String secretAnswer = "QA";
 
     @Test(priority = 1)
     public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode(){
@@ -131,7 +132,7 @@ public class TelenorBlockCardTest extends TestBase {
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
-                        "  \"secAnswer\" : \"QA\"\n" +
+                        "  \"secAnswer\" : \""+secretAnswer+"\"\n" +
                         "}")
                 .when()
                 .post(app.dipocket3_intranet+"/WebServices/v1/clientProfile/checkSecAnswAttempts");
@@ -149,7 +150,7 @@ public class TelenorBlockCardTest extends TestBase {
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
-                .header("secretanswer", "QA")
+                .header("secretanswer", secretAnswer)
                 .body("{\n" +
                         "  \"accountId\" : 9434\n" +
                         "}\n")
