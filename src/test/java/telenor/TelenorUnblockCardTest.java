@@ -5,9 +5,6 @@ import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import model.telenor.cardOperation.unblockCard.clientDiPAccounts2.ClientDiPAccounts2UnblockCard;
 import model.telenor.login.auth_authenticate.AuthAuthenticate;
-import model.telenor.login.clientDiPAccounts2.ClientDiPAccounts;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -19,6 +16,7 @@ import static org.hamcrest.Matchers.*;
 public class TelenorUnblockCardTest extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
+    String secretAnswer = "QA";
 
     @Test(priority = 1)
     public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode(){
@@ -132,7 +130,7 @@ public class TelenorUnblockCardTest extends TestBase {
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
-                        "  \"secAnswer\" : \"QA\"\n" +
+                        "  \"secAnswer\" : \""+secretAnswer+"\"\n" +
                         "}")
                 .when()
                 .post(app.dipocket3_intranet+"/WebServices/v1/clientProfile/checkSecAnswAttempts");
@@ -150,7 +148,7 @@ public class TelenorUnblockCardTest extends TestBase {
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
-                .header("secretanswer", "QA")
+                .header("secretanswer", secretAnswer)
                 .body("{\n" +
                         "  \"publicToken\" : \"512047269\",\n" +
                         "  \"accountId\" : 9434\n" +
