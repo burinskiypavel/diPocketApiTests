@@ -24,71 +24,74 @@
 
 
 
-    <test name="RegistrationTest">
-        <classes>
-            <class name="registration.RegistrationTest"/>
-        </classes>
-    </test>
 
-    <test name="HomePageWithAlreadyExistClientTest">
-    <classes>
-        <class name="homePage.HomePageWithAlreadyExistClientTest"/>
-    </classes>
-    </test>
 
-    <test name="TDSV1BioAcceptTest">
-        <classes>
-            <class name="tds.TDSV1BioAcceptTest"/>
-        </classes>
-    </test>
 
-<!--    <test name="TDSV1BioDeclineTest">-->
+<!--    <test name="RegistrationTest">-->
 <!--        <classes>-->
-<!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+<!--            <class name="registration.RegistrationTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="TDSV1SmsDeclineTest">
-        <classes>
-            <class name="tds.TDSV1SmsDeclineTest"/>
-        </classes>
-    </test>
+<!--    <test name="HomePageWithAlreadyExistClientTest">-->
+<!--    <classes>-->
+<!--        <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
+<!--    </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV1SmsAcceptTest">
-        <classes>
-            <class name="tds.TDSV1SmsAcceptTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV1BioAcceptTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV1BioAcceptTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV1PareqAllFieldsTest">
-        <classes>
-            <class name="tds.TDSV1PareqAllFieldsTest"/>
-        </classes>
-    </test>
+<!--&lt;!&ndash;    <test name="TDSV1BioDeclineTest">&ndash;&gt;-->
+<!--&lt;!&ndash;        <classes>&ndash;&gt;-->
+<!--&lt;!&ndash;            <class name="tds.TDSV1BioDeclineTest"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        </classes>&ndash;&gt;-->
+<!--&lt;!&ndash;    </test>&ndash;&gt;-->
 
-    <test name="TDSV2BrowserAppAcceptTest">
-        <classes>
-            <class name="tds.TDSV2BrowserAppAcceptTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV1SmsDeclineTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2BrowserAppCancelTest">
-        <classes>
-            <class name="tds.TDSV2BrowserAppCancelTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV1SmsAcceptTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2BrowserAppDeclineTest">
-        <classes>
-            <class name="tds.TDSV2BrowserAppDeclineTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV1PareqAllFieldsTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2BrowserAppSmsInsteadAcceptTest">
-        <classes>
-            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2BrowserAppAcceptTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="TDSV2BrowserAppCancelTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="TDSV2BrowserAppDeclineTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="TDSV2BrowserAppSmsInsteadAcceptTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TDSV2CReqAllFieldsTest">
         <classes>
@@ -96,124 +99,124 @@
         </classes>
     </test>
 
-    <test name="TDSV2NativeOOBAppTest">
-        <classes>
-            <class name="tds.TDSV2NativeOOBAppTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2NativeOOBAppTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2NativeOOBAppTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2NativeOOBHtmlAcceptTest">
-        <classes>
-            <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2NativeOOBHtmlAcceptTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2NativeOOBHtmlDeclineTest">
-        <classes>
-            <class name="tds.TDSV2NativeOOBHtmlDeclineTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2NativeOOBHtmlDeclineTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2NativeOOBHtmlDeclineTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2NativeSmsAcceptTest">
-        <classes>
-            <class name="tds.TDSV2NativeSmsAcceptTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2NativeSmsAcceptTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2NativeSmsAcceptTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2NativeSmsHtmlAcceptTest">
-        <classes>
-            <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2NativeSmsHtmlAcceptTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2NativeSmsInccodeTest">
-        <classes>
-            <class name="tds.TDSV2NativeSmsInccodeTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2NativeSmsInccodeTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2NativeSmsInccodeTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">
-        <classes>
-            <class name="tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2NativeIncorrectTranTest">
-        <classes>
-            <class name="tds.TDSV2NativeIncorrectTranTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2NativeIncorrectTranTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2NativeIncorrectTranTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV2AreqAllFieldTest">
-        <classes>
-            <class name="tds.TDSV2AreqAllFieldTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV2AreqAllFieldTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV2AreqAllFieldTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TDSV1BioDeclineTest">
-        <classes>
-            <class name="tds.TDSV1BioDeclineTest"/>
-        </classes>
-    </test>
+<!--    <test name="TDSV1BioDeclineTest">-->
+<!--        <classes>-->
+<!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorHomePageTest">
-        <classes>
-            <class name="telenor.TelenorHomePageTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorHomePageTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorHomePageTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorRegistrationTest">
-        <classes>
-            <class name="telenor.TelenorRegistrationTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorRegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorCheckBalanceTest">
-        <classes>
-            <class name="telenor.TelenorCheckBalanceTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorCheckBalanceTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorCheckBalanceTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorWrongPasswordTest">
-        <classes>
-            <class name="telenor.TelenorWrongPasswordTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorWrongPasswordTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorWrongPasswordTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorUserBannedFromBOTest">
-        <classes>
-            <class name="telenor.TelenorUserBannedFromBOTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorUserBannedFromBOTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorUserBannedFromBOTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorFullRegistrationTest">
-        <classes>
-            <class name="telenor.TelenorFullRegistrationTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorFullRegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorFullRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorBlockCardTest">
-        <classes>
-            <class name="telenor.TelenorBlockCardTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorBlockCardTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorBlockCardTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorUnblockCardTest">
-        <classes>
-            <class name="telenor.TelenorUnblockCardTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorUnblockCardTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorUnblockCardTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorChangeEmailTest">
-        <classes>
-            <class name="telenor.TelenorChangeEmailTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorChangeEmailTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorChangeEmailTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorChangeSecretAnswerTest">
-        <classes>
-            <class name="telenor.TelenorChangeSecretAnswerTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorChangeSecretAnswerTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorChangeSecretAnswerTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
