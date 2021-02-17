@@ -2,7 +2,8 @@ package tds;
 
 import base.TestBase;
 import io.restassured.response.Response;
-import model.*;
+import model.BackgroundARes;
+import model.FinalCResDecline;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
@@ -82,7 +83,7 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
         Assert.assertEquals(backgroundARes.getAuthenticationType(), "02");
         Assert.assertEquals(backgroundARes.getMessageType(), "ARes");
         Assert.assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroundARes.getTransStatus(), "B"); // should be C
+        Assert.assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
     @Test(priority = 2)

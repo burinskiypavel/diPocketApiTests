@@ -9,10 +9,9 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.blankOrNullString;
 
-public class TelenorChangePINTest extends TestBase {
-    String smsCode = "111111"; //app.generateRandomNumber(6);
+public class TelenorWrongSecretAnswerTest extends TestBase {
+    String smsCode = "111111"; // app.generateRandomNumber(6);
     String cliSessionId = null;
-    String secretAnswer = "QA";
 
     @Test(priority = 1)
     public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode(){
@@ -47,7 +46,7 @@ public class TelenorChangePINTest extends TestBase {
         Assert.assertEquals(res.getStatusCode(), 200);
         res.then().assertThat().body("clientFirstName", equalTo("Pavel"));
         res.then().assertThat().body("clientLastName", equalTo("TestQA"));
-        res.then().assertThat().body("mainPhone", equalTo(app.telenorRegistrationPhone));
+        res.then().assertThat().body("mainPhone", equalTo("380980316499"));
     }
 
     @Test(priority = 3)
@@ -58,7 +57,7 @@ public class TelenorChangePINTest extends TestBase {
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
-                        "  \"secAnswer\" : \""+secretAnswer+"\"\n" +
+                        "  \"secAnswer\" : \"QA\"\n" +
                         "}")
                 .when()
                 .post(app.dipocket3_intranet+"/WebServices/v1/clientProfile/checkSecAnswAttempts")
@@ -69,22 +68,19 @@ public class TelenorChangePINTest extends TestBase {
     }
 
     @Test(priority = 4)
-    public void test_WebServices_v1_account_changeCardPin(){
+    public void test_WebServices_v1_auth_unblockClient(){
         given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic(app.fullRegistrationTelenorLoginPhone, smsCode)
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
-                .header("secretanswer", secretAnswer)
-                .body("{\n" +
-                        "  \"pin\" : \"3366\",\n" +   // Band PIN from sms 3366
-                        "  \"oldPin\" : \"1234\",\n" +
-                        "  \"accountId\" : 9464\n" +
-                        "}\n")
+                .header("secretanswer", "test")
+                .body("")
                 .when()
-                .post(app.dipocket3_intranet+"/WebServices/v1/account/changeCardPin")
+                .post(app.dipocket3_intranet+"/WebServices/v1/auth/unblockClient")
                 .then().log().all()
-                .assertThat().statusCode(200)
-                .assertThat().body(blankOrNullString());
+                .assertThat().statusCode(400)
+                .assertThat().body("errCode", equalTo("-1"))
+                .assertThat().body("errDesc", equalTo("Wrong Secret Answer"));
     }
 }
