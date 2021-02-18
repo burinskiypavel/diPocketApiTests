@@ -34,7 +34,7 @@ public class TelenorNewPINsAreNotMatchedUITest extends TestBase {
     }
 
     @Test(priority = 1)
-    public void newPINsAreNotMatchedTest() throws InterruptedException {
+    public void testNewPINsAreNotMatched() throws InterruptedException {
         String popupMessage = navigateToTelenorAndLogin(phone, smsCode);
         gotoManageSecurityPage();
         gotoChangePINPage();
