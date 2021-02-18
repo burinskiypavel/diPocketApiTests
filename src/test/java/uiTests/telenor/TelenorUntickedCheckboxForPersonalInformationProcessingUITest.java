@@ -35,7 +35,7 @@ public class TelenorUntickedCheckboxForPersonalInformationProcessingUITest exten
     }
 
     @Test(priority = 1)
-    public void untickedCheckboxForPersonalInformationProcessing() throws SQLException, ClassNotFoundException, InterruptedException {
+    public void untickedCheckboxForPersonalInformationProcessingTest() throws SQLException, ClassNotFoundException, InterruptedException {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
         type(By.name("publicToken"), token);
