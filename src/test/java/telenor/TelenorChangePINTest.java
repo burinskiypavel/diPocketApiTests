@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.blankOrNullString;
 public class TelenorChangePINTest extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
-    String secretAnswer = "QA";
+    String secretAnswer = "qa";
 
     @Test(priority = 1)
     public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode(){
@@ -77,9 +77,9 @@ public class TelenorChangePINTest extends TestBase {
                 .header("clisessionid", cliSessionId)
                 .header("secretanswer", secretAnswer)
                 .body("{\n" +
-                        "  \"pin\" : \"3366\",\n" +   // Band PIN from sms 3366
-                        "  \"oldPin\" : \"1234\",\n" +
-                        "  \"accountId\" : 9464\n" +
+                        "  \"pin\" : \"2173\",\n" + // Band PIN from sms 2173
+                        "  \"oldPin\" : \"1111\",\n" +  //old pin 1234
+                        "  \"accountId\" : 9467\n" +
                         "}\n")
                 .when()
                 .post(app.dipocket3_intranet+"/WebServices/v1/account/changeCardPin")
