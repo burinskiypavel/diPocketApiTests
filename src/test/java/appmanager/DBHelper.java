@@ -163,4 +163,35 @@ public class DBHelper extends HelperBase {
         ResultSet rs= stmt.executeQuery(query);
         con.close();
     }
+
+    public String getTelenorStateIdFromDB() throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select t.*, t.rowid from CIB_OUT_TRAN t\n" +
+                "where BENEFNAME = 'QA Test'\n" +
+                "order by id desc";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        String stateId = null;
+        while (rs.next()){
+            if(rs.isFirst()){
+                String id = rs.getString(1);
+                String tranId = rs.getString(2);
+                stateId = rs.getString(3);
+
+                System. out.println("id: " + id+" tranId: " + tranId + " stateId: " + stateId);
+            }
+
+        }
+        con.close();
+        return stateId;
+    }
 }

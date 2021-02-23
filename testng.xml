@@ -219,6 +219,12 @@
         </classes>
     </test>
 
+    <test name="TelenorOffloadFundsTest">
+        <classes>
+            <class name="telenor.TelenorOffloadFundsTest"/>
+        </classes>
+    </test>
+
     <test name="TelenorNewPINsAreNotMatchedUITest">
         <classes>
             <class name="uiTests.telenor.TelenorNewPINsAreNotMatchedUITest"/>
