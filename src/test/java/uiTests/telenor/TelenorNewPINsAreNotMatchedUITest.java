@@ -49,7 +49,7 @@ public class TelenorNewPINsAreNotMatchedUITest extends TestBase {
 
     @Test(priority = 2)
     public void testWrongOldPIN() throws InterruptedException {
-        if(isElementNotPresent(By.id("pin_new"))){
+        if(isElementPresent(By.id("pin_new"))){
             type(By.id("pin_new"), "1111");
             type(By.id("pin_confirm"), "1234");
             String hex = getColorOfElement(By.id("pin_confirm"), "border-color");
@@ -75,7 +75,7 @@ public class TelenorNewPINsAreNotMatchedUITest extends TestBase {
         return driver.findElement(locator).isEnabled();
     }
 
-    public boolean isElementNotPresent(By locator) {
+    public boolean isElementPresent(By locator) {
         return driver.findElements(locator).size() != 0;
     }
 
