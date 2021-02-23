@@ -40,11 +40,43 @@ public class TelenorNewPINsAreNotMatchedUITest extends TestBase {
         gotoChangePINPage();
         type(By.id("pin_new"), "1234");
         type(By.id("pin_confirm"), "1111");
-        String hex = getColorOfElement();
+        String hex = getColorOfElement(By.id("pin_confirm"), "border-color");
 
         assertThat(hex, equalTo("#ff422a"));
-        Assert.assertFalse(driver.findElement(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")).isEnabled());
+        Assert.assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
         assertThat(popupMessage, equalTo("Your one time password sent to "+expectedPhone+". If you didn't receive SMS in 2-3 minutes, please request password once again."));
+    }
+
+    @Test(priority = 2)
+    public void testWrongOldPIN() throws InterruptedException {
+        if(isElementNotPresent(By.id("pin_new"))){
+            type(By.id("pin_new"), "1111");
+            type(By.id("pin_confirm"), "1234");
+            String hex = getColorOfElement(By.id("pin_confirm"), "border-color");
+
+            assertThat(hex, equalTo("#ff422a"));
+            Assert.assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
+        }
+        else {
+            String popupMessage = navigateToTelenorAndLogin(phone, smsCode);
+            gotoManageSecurityPage();
+            gotoChangePINPage();
+            type(By.id("pin_new"), "1111");
+            type(By.id("pin_confirm"), "1234");
+            String hex = getColorOfElement(By.id("pin_confirm"), "border-color");
+
+            assertThat(hex, equalTo("#ff422a"));
+            Assert.assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
+            assertThat(popupMessage, equalTo("Your one time password sent to "+expectedPhone+". If you didn't receive SMS in 2-3 minutes, please request password once again."));
+        }
+    }
+
+    public boolean isButtonEnabled(By locator) {
+        return driver.findElement(locator).isEnabled();
+    }
+
+    public boolean isElementNotPresent(By locator) {
+        return driver.findElements(locator).size() != 0;
     }
 
     public void type(By locator, String text){
@@ -97,10 +129,10 @@ public class TelenorNewPINsAreNotMatchedUITest extends TestBase {
         return popup;
     }
 
-    public String getColorOfElement() throws InterruptedException {
+    public String getColorOfElement(By locator, String cssValue) throws InterruptedException {
         Thread.sleep(3000);
 
-        String color =  driver.findElement(By.id("pin_confirm")).getCssValue("border-color");
+        String color =  driver.findElement(locator).getCssValue(cssValue);
 
         System.out.println("color: " + color);
         String hex = Color.fromString(color).asHex();
