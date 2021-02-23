@@ -19,6 +19,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String maskedPan = "545598******5804";
+    String now2 = null;
 
     @Test(priority = 1)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
@@ -91,6 +92,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
 
     @Test(priority = 2)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -133,7 +135,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
 
     @Test(priority = 3)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
-        String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
+        //String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
