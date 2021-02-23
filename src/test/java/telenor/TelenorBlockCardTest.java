@@ -82,7 +82,7 @@ public class TelenorBlockCardTest extends TestBase {
         res.then().log().all();
 
         Assert.assertEquals(res.getStatusCode(), 200);
-        assertThat(res.getBody().jsonPath().get("unreadMessageCount"),equalTo(1));
+        assertThat(res.getBody().jsonPath().get("unreadMessageCount"),equalTo(0));
     }
 
     @Test(priority = 5)
