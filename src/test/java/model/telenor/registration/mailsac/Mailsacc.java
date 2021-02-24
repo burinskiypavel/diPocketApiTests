@@ -67,9 +67,9 @@ public class Mailsacc {
     @SerializedName("links")
     @Expose
     private List<String> links = null;
-    @SerializedName("spam")
-    @Expose
-    private Integer spam;
+//    @SerializedName("spam")
+//    @Expose
+//    private Integer spam;
 
     public String getId() {
         return id;
@@ -231,12 +231,12 @@ public class Mailsacc {
         this.links = links;
     }
 
-    public Integer getSpam() {
-        return spam;
-    }
-
-    public void setSpam(Integer spam) {
-        this.spam = spam;
-    }
+//    public Integer getSpam() {
+//        return spam;
+//    }
+//
+//    public void setSpam(Integer spam) {
+//        this.spam = spam;
+//    }
 
 }
