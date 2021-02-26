@@ -22,7 +22,8 @@ public class TelenorOffloadFundsTest extends TestBase {
     String offloadFundsLoginPhone =  "$5_" + offloadFundsPhone;
 
     @Test(priority = 1)
-    public void test_CustomerServicesDev_v1_card_cashLoad(){
+    public void test_CustomerServicesDev_v1_card_cashLoad() throws SQLException, ClassNotFoundException {
+        app.getDbHelper().unbanClientFromDBTelenor(offloadFundsPhone);
         Response res = given().log().uri().log().headers().log().body()
                 .header("content-type", "application/json")
                 .header("Authorization", "Basic SEVMTE9QQVk6U2RPQzVFTg==")

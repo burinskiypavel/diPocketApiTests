@@ -194,4 +194,23 @@ public class DBHelper extends HelperBase {
         con.close();
         return stateId;
     }
+
+    public void unbanClientFromDBTelenor(String phone) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "update client set stateid = 1 where MAINPHONE = '"+phone+"' and site = 'TELENOR'";
+        String commit = "commit";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        Statement stmt = con.createStatement();
+
+        stmt.executeQuery(query);
+
+        stmt.executeQuery(commit);
+        con.close();
+    }
 }
