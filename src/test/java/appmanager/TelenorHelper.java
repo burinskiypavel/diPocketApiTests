@@ -370,7 +370,7 @@ public class TelenorHelper {
             assertThat(accountHistoryList_.getCcyId(), equalTo(348));
             assertThat(accountHistoryList_.getCcySymbol(), equalTo("Ft"));
             assertThat(accountHistoryList_.getFinType(), equalTo("C"));
-            assertThat(accountHistoryList_.getFullName(), equalTo("Telenor"));
+            //assertThat(accountHistoryList_.getFullName(), equalTo("Telenor"));
             assertThat(accountHistoryList_.getId(), equalTo(489029));
             assertThat(accountHistoryList_.getItemDateISO(), equalTo("2021-01-20 13:21:00.684949 Europe/Kiev"));
             assertThat(accountHistoryList_.getStateId(), equalTo(100));
