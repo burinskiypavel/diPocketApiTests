@@ -27,10 +27,10 @@ public class TelenorNewPINsAreNotMatchedUITest extends TestBase {
 
     @BeforeClass
     public void start(){
-//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
-        WebDriverManager.chromedriver().version("88").setup();
+        //chromeOptions.addArguments("--headless");
+        //WebDriverManager.chromedriver().version("88").setup();
         //driver = new ChromeDriver(chromeOptions);
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();

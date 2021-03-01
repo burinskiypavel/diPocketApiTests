@@ -237,4 +237,10 @@
         </classes>
     </test>
 
+    <test name="TelenorRegistrationVerificationWithInvalidTokenUITest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenUITest"/>
+        </classes>
+    </test>
+
 </suite>
