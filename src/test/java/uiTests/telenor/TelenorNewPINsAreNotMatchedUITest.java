@@ -1,6 +1,7 @@
 package uiTests.telenor;
 
 import base.TestBase;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,8 +27,11 @@ public class TelenorNewPINsAreNotMatchedUITest extends TestBase {
 
     @BeforeClass
     public void start(){
-        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        WebDriverManager.chromedriver().version("88").setup();
+        //driver = new ChromeDriver(chromeOptions);
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);
