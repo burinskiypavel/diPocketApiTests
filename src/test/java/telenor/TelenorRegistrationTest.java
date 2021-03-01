@@ -122,7 +122,8 @@ public class TelenorRegistrationTest extends TestBase {
 
     @Test(priority = 5)
     public void test_confirm_email_link_from_mailsac() throws InterruptedException {
-        String link_link = app.getTelenorHelper().getEmailConfirmationRegistrationTelenorLinkFromMailSac();
+        //String link_link = app.getTelenorHelper().getEmailConfirmationRegistrationTelenorLinkFromMailSac();
+        String link_link = app.getTelenorHelper().getEmailConfirmationTelenorLinkFromMailSac("pavelqaemail@mailsac.com");
         System.out.println("link_link: " + link_link);
         given().log().uri().log().headers().log().body()
                 .when()

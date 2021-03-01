@@ -104,7 +104,8 @@ public class TelenorChangeEmailTest extends TestBase {
 
     @Test(priority = 6)
     public void test_confirm_email_link_from_mailsac() throws InterruptedException {
-        String link_link = app.getTelenorHelper().getChageEmailConfirmationTelenorLinkFromMailSac();
+        //String link_link = app.getTelenorHelper().getChageEmailConfirmationTelenorLinkFromMailSac();
+        String link_link = app.getTelenorHelper().getEmailConfirmationTelenorLinkFromMailSac("telenorchangeemailtest@mailsac.com");
         System.out.println("link_link: " + link_link);
         given().log().uri().log().headers().log().body()
                 .when()
