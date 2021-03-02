@@ -243,4 +243,10 @@
         </classes>
     </test>
 
+    <test name="TelenorRegistrationVerificationWithInvalidPhoneTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidPhoneTest"/>
+        </classes>
+    </test>
+
 </suite>

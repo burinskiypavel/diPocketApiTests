@@ -8,12 +8,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
-public class TelenorRegistrationVerificationWithInvalidTokenUITest extends UITestBase {
-    String token = "111111111";
-    String phone = "447459005207";
+public class TelenorRegistrationVerificationWithInvalidPhoneTest extends UITestBase {
+    String token = "513886198";
+    String phone = "000000000000";
 
     @Test(priority = 1)
-    public void testRegistrationVerificationWithInvalidToken() {
+    public void testVerificationWithInvalidPhone() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
         type(By.name("publicToken"), token);
@@ -24,6 +24,6 @@ public class TelenorRegistrationVerificationWithInvalidTokenUITest extends UITes
         closePopUp();
 
         assertTrue(isPopUpClosed());
-        assertThat(popUpMessage, equalTo("Card number is invalid. Please enter the correct card number"));
+        assertThat(popUpMessage, equalTo("Sorry but a mobile phone number should be from a EEA country, Canada, Switzerland or the USA"));
     }
 }

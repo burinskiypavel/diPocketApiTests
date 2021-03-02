@@ -31,7 +31,7 @@ public class ApplicationManager {
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
-    public String dipocket3_intranet = null;
+    public String dipocket3_intranet = "https://dipocket3.intranet:8900";
     public String telenorLoginPhone = null;
     public String loginPhone = null;
     public String telenorRegistrationPhone = "380980316499";
@@ -59,7 +59,7 @@ public class ApplicationManager {
         pan = dbHelper.prop.getProperty("tds.pan");
         TDSBaseUrl = dbHelper.prop.getProperty("tds.base.url");
         telenorSite = "TELENOR";
-        dipocket3_intranet = "https://dipocket3.intranet:8900";
+        //dipocket3_intranet = "https://dipocket3.intranet:8900";
         telenorLoginPhone = dbHelper.prop.getProperty("mobile.registration.phoneNumber");
         loginPhone = "$5_" + telenorLoginPhone; //$5_380685448615
         //telenorRegistrationPhone = "380980316499";
