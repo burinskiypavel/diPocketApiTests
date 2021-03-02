@@ -249,4 +249,10 @@
         </classes>
     </test>
 
+    <test name="TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest"/>
+        </classes>
+    </test>
+
 </suite>

@@ -8,12 +8,13 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
-public class TelenorRegistrationVerificationWithInvalidPhoneTest extends UITestBase {
+public class TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest extends UITestBase {
     String token = "513886198";
-    String phone = "000000000000";
+    String phone = "380661470959";
+    String expectedPhone = "38 066 147 0959";
 
     @Test(priority = 1)
-    public void testRegistrationVerificationWithInvalidPhone() {
+    public void testRegistrationVerifyPhoneFieldWithAlreadyUsedData() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
         type(By.name("publicToken"), token);
@@ -23,7 +24,8 @@ public class TelenorRegistrationVerificationWithInvalidPhoneTest extends UITestB
         String popUpMessage = getTextFromPopUp();
         closePopUp();
 
-        assertTrue(isPopUpClosed());
-        assertThat(popUpMessage, equalTo("Sorry but a mobile phone number should be from a EEA country, Canada, Switzerland or the USA"));
+        assertTrue(isPopUpClosed2());
+        checkThatAfterRedirectionPhoneNumberDisplayedInPhoneField(expectedPhone);
+        assertThat(popUpMessage, equalTo("We are redirecting you to LOGIN as you are already registered"));
     }
 }

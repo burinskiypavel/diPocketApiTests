@@ -22,8 +22,8 @@ public class UITestBase {
 
     protected final ApplicationManager app = new ApplicationManager();
 
-    WebDriver driver;
-    WebDriverWait wait;
+    public WebDriver driver;
+    public WebDriverWait wait;
 
     @BeforeClass
     public void start(){
@@ -51,6 +51,16 @@ public class UITestBase {
     public boolean isPopUpClosed(){
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")));
         if(driver.findElements(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")).size() == 1){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean isPopUpClosed2(){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")));
+        if(driver.findElements(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")).size() == 0){
             return true;
         }
         else {
@@ -224,5 +234,10 @@ public class UITestBase {
         Thread.sleep(3000);
         String smsCode = app.getDbHelper().getSMSCodeFromDBTelenor(phone);
         return smsCode;
+    }
+
+    public void checkThatAfterRedirectionPhoneNumberDisplayedInPhoneField(String phone) {
+        String loginPhoneNumber = driver.findElement(By.id("phone_number")).getAttribute("value");
+        assertThat(loginPhoneNumber, equalTo(phone));
     }
 }
