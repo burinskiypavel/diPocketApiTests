@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TelenorUntickedCheckboxForPersonalInformationProcessingUITest extends UITestBase {
     String token = "515161232";
-    String phone = "380502128463";
+    String phone = "380502128464";
     String smsCode = null;
 
     @Test(priority = 1)

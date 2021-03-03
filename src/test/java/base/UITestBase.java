@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -12,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
@@ -26,9 +30,18 @@ public class UITestBase {
     public WebDriverWait wait;
 
     @BeforeClass
-    public void start(){
+    public void start() {
         app.initStart();
         app.init();
+
+        //selenium server works
+//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+//        DesiredCapabilities caps = new DesiredCapabilities();
+//        caps.setCapability("browser", "chrome");
+//        ChromeOptions options = new ChromeOptions();
+//        options.merge(caps);
+//        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+
         System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         //chromeOptions.addArguments("--headless");
