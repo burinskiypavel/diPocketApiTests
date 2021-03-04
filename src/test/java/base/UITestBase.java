@@ -253,4 +253,12 @@ public class UITestBase {
         String loginPhoneNumber = driver.findElement(By.id("phone_number")).getAttribute("value");
         assertThat(loginPhoneNumber, equalTo(phone));
     }
+
+    public boolean isElementHasRedColor(By locator) {
+        if(driver.findElements(locator).size() == 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
