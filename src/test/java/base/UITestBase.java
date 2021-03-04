@@ -185,7 +185,7 @@ public class UITestBase {
     }
 
     public String getColorOfElement(By locator, String cssValue) throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
         String color =  driver.findElement(locator).getCssValue(cssValue);
 

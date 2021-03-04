@@ -20,9 +20,9 @@ public class TelenorNewPINsAreNotMatchedUITest extends UITestBase {
         gotoChangePINPage();
         type(By.id("pin_new"), "1234");
         type(By.id("pin_confirm"), "1111");
-        String hex = getColorOfElement(By.id("pin_confirm"), "border-color");
+        String hexColor = getColorOfElement(By.id("pin_confirm"), "border-color");
 
-        assertThat(hex, equalTo("#ff422a"));
+        assertThat(hexColor, equalTo(app.hexRedColor));
         assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
         assertThat(popupMessage, equalTo("Your one time password sent to "+expectedPhone+". If you didn't receive SMS in 2-3 minutes, please request password once again."));
     }
@@ -32,9 +32,9 @@ public class TelenorNewPINsAreNotMatchedUITest extends UITestBase {
         if(isElementPresent(By.id("pin_new"))){
             type(By.id("pin_new"), "1111");
             type(By.id("pin_confirm"), "1234");
-            String hex = getColorOfElement(By.id("pin_confirm"), "border-color");
+            String hexColor = getColorOfElement(By.id("pin_confirm"), "border-color");
 
-            assertThat(hex, equalTo("#ff422a"));
+            assertThat(hexColor, equalTo(app.hexRedColor));
             assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
         }
         else {
@@ -43,9 +43,9 @@ public class TelenorNewPINsAreNotMatchedUITest extends UITestBase {
             gotoChangePINPage();
             type(By.id("pin_new"), "1111");
             type(By.id("pin_confirm"), "1234");
-            String hex = getColorOfElement(By.id("pin_confirm"), "border-color");
+            String hexColor = getColorOfElement(By.id("pin_confirm"), "border-color");
 
-            assertThat(hex, equalTo("#ff422a"));
+            assertThat(hexColor, equalTo(app.hexRedColor));
             assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
             assertThat(popupMessage, equalTo("Your one time password sent to "+expectedPhone+". If you didn't receive SMS in 2-3 minutes, please request password once again."));
         }

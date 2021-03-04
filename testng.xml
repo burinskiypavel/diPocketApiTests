@@ -261,4 +261,10 @@
         </classes>
     </test>
 
+    <test name="TelenorRegistrationVerificationWithIncopliteDataTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationWithIncopliteDataTest"/>
+        </classes>
+    </test>
+
 </suite>

@@ -38,6 +38,7 @@ public class ApplicationManager {
     public String fullRegistrationTelenorLoginPhone = null;
     public String bannedPhone = "380639348839";
     public String loginBannedPhone = null;
+    public String hexRedColor = "#ff422a";
 
     //private MailHelper mailHelper;
 
