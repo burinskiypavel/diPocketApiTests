@@ -9,7 +9,7 @@ import static org.testng.Assert.assertTrue;
 public class TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformationTest extends UITestBase {
 
     @Test(priority = 1)
-    public void testRegistrationVerificationWithInvalidPhone() {
+    public void testRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformation() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
         type(By.name("publicToken"), "513886198");
