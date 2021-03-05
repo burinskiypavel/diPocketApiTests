@@ -3,11 +3,8 @@ package base;
 import appmanager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -15,10 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -63,6 +57,11 @@ public class UITestBase {
         driver.findElement(By.cssSelector("div.uk-modal-dialog button.uk-modal-close")).click();
     }
 
+    public void closePopUp2(By locator) {
+        //wait.until(ExpectedConditions.elementToBeClickable(locator));
+        driver.findElements(locator).get(1).click();
+    }
+
     public boolean isPopUpClosed(){
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")));
         if(driver.findElements(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")).size() == 1){
@@ -83,16 +82,25 @@ public class UITestBase {
         }
     }
 
+    public boolean isPopUpClosed3(By locator){
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")));
+        if(driver.findElements(locator).size() == 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
     public String getTextFromPopUp() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='false']")));
         return driver.findElement(By.cssSelector("div.uk-modal-content")).getText();
     }
 
-    public String getTextFromPopUp2() {
-        List<WebElement> elements = driver.findElements(By.cssSelector("div.uk-modal-dialog div.uk-modal-content"));
-        return driver.findElement(By.cssSelector("div.uk-modal-dialog div.uk-modal-content")).getText();
+    public String getTextFromPopUp2(By locator) {
+        return driver.findElement(locator).getText();
     }
-
 
     public void submitRegistrationForm() {
         driver.findElement(By.cssSelector("button[data-dpwa-action='register-complete']")).click();

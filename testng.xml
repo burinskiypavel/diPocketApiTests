@@ -225,45 +225,51 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="TelenorNewPINsAreNotMatchedUITest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorNewPINsAreNotMatchedUITest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorNewPINsAreNotMatchedUITest">
+        <classes>
+            <class name="uiTests.telenor.TelenorNewPINsAreNotMatchedUITest"/>
+        </classes>
+    </test>
 
-<!--    <test name="TelenorUntickedCheckboxForPersonalInformationProcessingUITest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorUntickedCheckboxForPersonalInformationProcessingUITest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorUntickedCheckboxForPersonalInformationProcessingUITest">
+        <classes>
+            <class name="uiTests.telenor.TelenorUntickedCheckboxForPersonalInformationProcessingUITest"/>
+        </classes>
+    </test>
 
-<!--    <test name="TelenorRegistrationVerificationWithInvalidTokenUITest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenUITest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorRegistrationVerificationWithInvalidTokenUITest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenUITest"/>
+        </classes>
+    </test>
 
-<!--    <test name="TelenorRegistrationVerificationWithInvalidPhoneTest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidPhoneTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorRegistrationVerificationWithInvalidPhoneTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidPhoneTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformationTest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformationTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformationTest"/>
+        </classes>
+    </test>
 
     <test name="TelenorRegistrationVerificationWithIncopliteDataTest">
         <classes>
             <class name="uiTests.telenor.TelenorRegistrationVerificationWithIncopliteDataTest"/>
+        </classes>
+    </test>
+
+    <test name="TelenorLoginVerificationWithEmptyPhoneFieldTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorLoginVerificationWithEmptyPhoneFieldTest"/>
         </classes>
     </test>
 
