@@ -52,9 +52,9 @@ public class UITestBase {
         driver.quit();
     }
 
-    public void closePopUp() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.uk-modal-dialog button.uk-modal-close")));
-        driver.findElement(By.cssSelector("div.uk-modal-dialog button.uk-modal-close")).click();
+    public void closePopUp(By locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+        driver.findElement(locator).click();
     }
 
     public void closePopUp2(By locator) {
@@ -72,9 +72,21 @@ public class UITestBase {
         }
     }
 
-    public boolean isPopUpClosed2(){
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")));
-        if(driver.findElements(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")).size() == 0){
+    public boolean isPopUpClosed2(String id){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[id='" + id + "'][aria-hidden='false']")));
+        if(driver.findElements(By.cssSelector("div[id='" + id + "'][aria-hidden='true']")).size() > 0)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean isPopUpClosedRedirection(String id){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[id='" + id + "'][aria-hidden='true']")));
+        if(driver.findElements(By.cssSelector("div[id='" + id + "'][aria-hidden='true']")).size() == 0)
+        {
             return true;
         }
         else {
@@ -99,6 +111,7 @@ public class UITestBase {
     }
 
     public String getTextFromPopUp2(By locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
         return driver.findElement(locator).getText();
     }
 

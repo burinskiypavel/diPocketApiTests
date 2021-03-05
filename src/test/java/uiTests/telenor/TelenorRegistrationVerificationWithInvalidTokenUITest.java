@@ -12,7 +12,7 @@ public class TelenorRegistrationVerificationWithInvalidTokenUITest extends UITes
     String token = "111111111";
     String phone = "447459005207";
 
-    @Test(priority = 1)
+    @Test
     public void testRegistrationVerificationWithInvalidToken() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
@@ -21,7 +21,7 @@ public class TelenorRegistrationVerificationWithInvalidTokenUITest extends UITes
         clickCheckbox(By.id("agreeProcessInfo"));
         submitPublicTokenAndPhone();
         String popUpMessage = getTextFromPopUp();
-        closePopUp();
+        closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
 
         assertTrue(isPopUpClosed());
         assertThat(popUpMessage, equalTo("Card number is invalid. Please enter the correct card number"));

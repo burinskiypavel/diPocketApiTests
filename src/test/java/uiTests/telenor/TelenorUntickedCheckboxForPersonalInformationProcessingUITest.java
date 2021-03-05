@@ -14,7 +14,7 @@ public class TelenorUntickedCheckboxForPersonalInformationProcessingUITest exten
     String phone = "380502128464";
     String smsCode = null;
 
-    @Test(priority = 1)
+    @Test
     public void testUntickedCheckboxForPersonalInformationProcessing() throws SQLException, ClassNotFoundException, InterruptedException {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
@@ -28,7 +28,7 @@ public class TelenorUntickedCheckboxForPersonalInformationProcessingUITest exten
         fillRegisterForm();
         submitRegistrationForm();
         String popUpMessage = getTextFromPopUp();
-        closePopUp();
+        closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
 
         checkThatUntickedCheckboxesHasRedColor();
         assertThat(popUpMessage, equalTo("There is something missing - we marked in red all fields that require your attention"));

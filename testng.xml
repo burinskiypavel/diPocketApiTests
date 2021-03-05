@@ -273,4 +273,10 @@
         </classes>
     </test>
 
+    <test name="TelenorLoginVerificationPhoneFieldWithNotRegisteredPhoneTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorLoginVerificationPhoneFieldWithNotRegisteredPhoneTest"/>
+        </classes>
+    </test>
+
 </suite>

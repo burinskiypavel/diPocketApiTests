@@ -13,7 +13,7 @@ public class TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest extends 
     String phone = "380661470959";
     String expectedPhone = "38 066 147 0959";
 
-    @Test(priority = 1)
+    @Test
     public void testRegistrationVerifyPhoneFieldWithAlreadyUsedData() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
@@ -22,9 +22,9 @@ public class TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest extends 
         clickCheckbox(By.id("agreeProcessInfo"));
         submitPublicTokenAndPhone();
         String popUpMessage = getTextFromPopUp();
-        closePopUp();
+        closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
 
-        assertTrue(isPopUpClosed2());
+        assertTrue(isPopUpClosedRedirection("dpwa-alert"));
         checkThatAfterRedirectionPhoneNumberDisplayedInPhoneField(expectedPhone);
         assertThat(popUpMessage, equalTo("We are redirecting you to LOGIN as you are already registered"));
     }

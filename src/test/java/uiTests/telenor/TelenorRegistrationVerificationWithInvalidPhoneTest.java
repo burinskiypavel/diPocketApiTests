@@ -12,7 +12,7 @@ public class TelenorRegistrationVerificationWithInvalidPhoneTest extends UITestB
     String token = "513886198";
     String phone = "000000000000";
 
-    @Test(priority = 1)
+    @Test
     public void testRegistrationVerificationWithInvalidPhone() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
@@ -21,7 +21,7 @@ public class TelenorRegistrationVerificationWithInvalidPhoneTest extends UITestB
         clickCheckbox(By.id("agreeProcessInfo"));
         submitPublicTokenAndPhone();
         String popUpMessage = getTextFromPopUp();
-        closePopUp();
+        closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
 
         assertTrue(isPopUpClosed());
         assertThat(popUpMessage, equalTo("Sorry but a mobile phone number should be from a EEA country, Canada, Switzerland or the USA"));
