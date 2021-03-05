@@ -3,6 +3,7 @@ package base;
 import appmanager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,6 +18,7 @@ import org.testng.annotations.BeforeClass;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -57,8 +59,8 @@ public class UITestBase {
     }
 
     public void closePopUp() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.uk-modal-close")));
-        driver.findElement(By.cssSelector("button.uk-modal-close")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.uk-modal-dialog button.uk-modal-close")));
+        driver.findElement(By.cssSelector("div.uk-modal-dialog button.uk-modal-close")).click();
     }
 
     public boolean isPopUpClosed(){
@@ -87,7 +89,8 @@ public class UITestBase {
     }
 
     public String getTextFromPopUp2() {
-        return driver.findElement(By.cssSelector("div.uk-modal-content")).getText();
+        List<WebElement> elements = driver.findElements(By.cssSelector("div.uk-modal-dialog div.uk-modal-content"));
+        return driver.findElement(By.cssSelector("div.uk-modal-dialog div.uk-modal-content")).getText();
     }
 
 
@@ -106,6 +109,11 @@ public class UITestBase {
     public void gotoRegisterPaymentBandPage() {
         driver.findElement(By.cssSelector("a[href='/en/register']")).click();
         waitForSeveralItems(new String[]{"Register payment band", "Login data", "Card number"});
+    }
+
+    public void gotoLoginPage() {
+        driver.findElement(By.cssSelector("a[href='/en/login']")).click();
+        waitForSeveralItems(new String[]{"Login", "Phone"});
     }
 
     public void waitForSeveralItems(String mas []){
