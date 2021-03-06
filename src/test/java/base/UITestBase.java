@@ -95,7 +95,7 @@ public class UITestBase {
     }
 
     public boolean isPopUpClosed3(By locator){
-        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
         if(driver.findElements(locator).size() == 0){
             return true;
         }
