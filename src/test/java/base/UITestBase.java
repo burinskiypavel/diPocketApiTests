@@ -242,6 +242,8 @@ public class UITestBase {
     }
 
     public void fillRegisterForm() {
+        waitForSeveralItems(new String[]{"Name", "Surname"});
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("firstName")));
         driver.findElement(By.id("firstName")).sendKeys("Pavel");
         driver.findElement(By.id("lastName")).sendKeys("auto qa");
         driver.findElement(By.id("birthDateAsDate")).sendKeys("2000-01-01");
@@ -262,8 +264,8 @@ public class UITestBase {
 
     public void submitSmsCode() {
         driver.findElement(By.cssSelector("button[data-dpwa-action='register-verify-code']")).click();
-        waitForSeveralItems(new String[]{"Name", "Surname"});
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("firstName")));
+        //waitForSeveralItems(new String[]{"Name", "Surname"});
+        //wait.until(ExpectedConditions.elementToBeClickable(By.id("firstName")));
     }
 
     public void fillSmsCode(String smsCode) {
