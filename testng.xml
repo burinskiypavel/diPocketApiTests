@@ -273,6 +273,12 @@
         </classes>
     </test>
 
+    <test name="TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest"/>
+        </classes>
+    </test>
+
     <test name="TelenorLoginVerificationWithEmptyPhoneFieldTest">
         <classes>
             <class name="uiTests.telenor.TelenorLoginVerificationWithEmptyPhoneFieldTest"/>
