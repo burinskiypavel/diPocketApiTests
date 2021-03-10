@@ -279,6 +279,12 @@
         </classes>
     </test>
 
+    <test name="TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest"/>
+        </classes>
+    </test>
+
     <test name="TelenorLoginVerificationWithEmptyPhoneFieldTest">
         <classes>
             <class name="uiTests.telenor.TelenorLoginVerificationWithEmptyPhoneFieldTest"/>

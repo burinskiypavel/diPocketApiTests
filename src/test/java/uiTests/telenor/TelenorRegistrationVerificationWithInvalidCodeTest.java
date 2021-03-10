@@ -12,7 +12,7 @@ public class TelenorRegistrationVerificationWithInvalidCodeTest extends UITestBa
     String phone = "380502128465";
     String smsCode = "000000";
 
-    @Test
+    @Test(enabled = false)
     public void testRegistrationVerificationWithInvalidCode() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
