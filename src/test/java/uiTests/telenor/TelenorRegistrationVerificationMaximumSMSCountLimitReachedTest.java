@@ -127,4 +127,22 @@ public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest exte
 
         assertThat(popUpMessage, equalTo("We are really, really sorry but we cannot register you as you are not yet 18 y.o."));
     }
+
+    @Test(priority = 6)
+    public void testVerifyDateOfBirthFieldWithInvalidData() throws InterruptedException, SQLException, ClassNotFoundException {
+        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        gotoRegisterPaymentBandPage();
+        type(By.name("publicToken"), token);
+        type(By.id("mainPhone"), phone);
+        clickCheckbox(By.id("agreeProcessInfo"));
+        submitPublicTokenAndPhone();
+        smsCode = getSMSCodeFromDBTelenorAndWait(phone);
+        fillSmsCode(smsCode);
+        submitSmsCode();
+        fillRegisterForm("Pavel", "auto qa", "1111/13/40", "la@mail.com", "Symsca str, 15", "Symsca str, 15", "Kharkiv", "France", "123456", "QA");
+        submitRegistrationForm();
+        String birthDateBorderColor = getColorOfElement(By.id("birthDateAsDate"), "border-color");
+
+        assertThat(birthDateBorderColor,equalTo(app.hexRedColor));
+    }
 }
