@@ -25,7 +25,7 @@ public class TelenorUntickedCheckboxForPersonalInformationProcessingUITest exten
         smsCode = getSMSCodeFromDBTelenorAndWait(phone);
         fillSmsCode(smsCode);
         submitSmsCode();
-        fillRegisterForm("Pavel", "auto qa", "2000-01-01", "la@mail.com", "Symsca str, 15", "Symsca str, 15", "Kharkiv", "France", "123456", "QA");
+        fillRegisterFormEmptyCheckboxes("Pavel", "auto qa", "2000-01-01", "la@mail.com", "Symsca str, 15", "Symsca str, 15", "Kharkiv", "France", "123456", "QA");
         submitRegistrationForm();
         String popUpMessage = getTextFromPopUp();
         closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));

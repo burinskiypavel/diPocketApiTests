@@ -10,11 +10,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest extends UITestBase {
-    String token = "515161232";
+    String token = "515104759";
     String phone = "38050" + app.generateRandomNumber(7);
     String smsCode = null;
 
-    @Test
+    @Test(priority = 1)
     public void testRegistrationVerificationWithInvalidCode() {
         smsCode = "000000";
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
@@ -31,7 +31,7 @@ public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest exte
         assertThat(popUpMessage, equalTo("Entered verification code is incorrect. Please, try again"));
     }
 
-    @Test
+    @Test(priority = 2)
     public void testUntickedCheckboxForPersonalInformationProcessing() throws SQLException, ClassNotFoundException, InterruptedException {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
@@ -42,7 +42,7 @@ public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest exte
         smsCode = getSMSCodeFromDBTelenorAndWait(phone);
         fillSmsCode(smsCode);
         submitSmsCode();
-        fillRegisterForm("Pavel", "auto qa", "2000-01-01", "la@mail.com", "Symsca str, 15", "Symsca str, 15", "Kharkiv", "France", "123456", "QA");
+        fillRegisterFormEmptyCheckboxes("Pavel", "auto qa", "2000-01-01", "la@mail.com", "Symsca str, 15", "Symsca str, 15", "Kharkiv", "France", "123456", "QA");
         submitRegistrationForm();
         String popUpMessage = getTextFromPopUp();
         closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
@@ -51,7 +51,7 @@ public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest exte
         assertThat(popUpMessage, equalTo("There is something missing - we marked in red all fields that require your attention"));
     }
 
-    @Test
+    @Test(priority = 3)
     public void testVerificationRegisterFormWithEmptyFilds() throws InterruptedException, SQLException, ClassNotFoundException {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
@@ -88,7 +88,7 @@ public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest exte
         assertThat(popUpMessage, equalTo("There is something missing - we marked in red all fields that require your attention"));
     }
 
-    @Test
+    @Test(priority = 4)
     public void testRegistrationVerificationWithInvalidEmailData() throws InterruptedException, SQLException, ClassNotFoundException {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
@@ -107,5 +107,24 @@ public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest exte
 
         assertThat(emailBorderColor, equalTo(app.hexRedColor));
         assertThat(popUpMessage, equalTo("There is something missing - we marked in red all fields that require your attention"));
+    }
+
+    @Test(priority = 5)
+    public void testVerifyThatItsImpossibleToRegisterIfUserAgeLessThan18() throws InterruptedException, SQLException, ClassNotFoundException {
+        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        gotoRegisterPaymentBandPage();
+        type(By.name("publicToken"), token);
+        type(By.id("mainPhone"), phone);
+        clickCheckbox(By.id("agreeProcessInfo"));
+        submitPublicTokenAndPhone();
+        smsCode = getSMSCodeFromDBTelenorAndWait(phone);
+        fillSmsCode(smsCode);
+        submitSmsCode();
+        fillRegisterForm("Pavel", "auto qa", "2020/09/09", "la@mail.com", "Symsca str, 15", "Symsca str, 15", "Kharkiv", "France", "123456", "QA");
+        submitRegistrationForm();
+        String popUpMessage = getTextFromPopUp();
+        closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
+
+        assertThat(popUpMessage, equalTo("We are really, really sorry but we cannot register you as you are not yet 18 y.o."));
     }
 }

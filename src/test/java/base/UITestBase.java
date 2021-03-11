@@ -257,6 +257,26 @@ public class UITestBase {
         //new Select(driver.findElement(By.id("sqs"))).selectByVisibleText("My dream job as a child");
         selectFromSelect(By.id("sqs"), "My dream job as a child");
         driver.findElement(By.id("secAnswer")).sendKeys(secAnswer);
+
+        driver.findElement(By.id("agreeTerms")).click();
+        driver.findElement(By.id("agreeTariffs")).click();
+    }
+
+    public void fillRegisterFormEmptyCheckboxes(String firstName, String lastName, String birthDate, String email, String streetLine1, String streetLine2, String city, String country, String postcode, String secAnswer) {
+        waitForSeveralItems(new String[]{"Name", "Surname"});
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("firstName")));
+        driver.findElement(By.id("firstName")).sendKeys(firstName);
+        driver.findElement(By.id("lastName")).sendKeys(lastName);
+        driver.findElement(By.id("birthDateAsDate")).sendKeys(birthDate);
+        driver.findElement(By.id("email")).sendKeys(email);
+        driver.findElement(By.id("street-line-1")).sendKeys(streetLine1);
+        driver.findElement(By.id("street-line-2")).sendKeys(streetLine2);
+        driver.findElement(By.id("city")).sendKeys(city);
+        selectFromSelect(By.id("country"), country);
+        driver.findElement(By.id("postcode")).sendKeys(postcode);
+        //new Select(driver.findElement(By.id("sqs"))).selectByVisibleText("My dream job as a child");
+        selectFromSelect(By.id("sqs"), "My dream job as a child");
+        driver.findElement(By.id("secAnswer")).sendKeys(secAnswer);
     }
 
     public void selectFromSelect(By locator, String text) {
