@@ -12,7 +12,7 @@ public class TelenorLoginVerificationPhoneFieldWithIncompletePhoneTest extends U
     String phone = "3806344";
 
     @Test
-    public void testLoginVerificationPhoneFieldWithIncompletePhon() {
+    public void testLoginVerificationPhoneFieldWithIncompletePhone() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoLoginPage();
         type(By.id("phone_number"), phone);

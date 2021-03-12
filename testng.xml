@@ -313,4 +313,10 @@
         </classes>
     </test>
 
+    <test name="TelenorLoginVerificationWithEmptyOneTimePasswordFieldTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorLoginVerificationWithEmptyOneTimePasswordFieldTest"/>
+        </classes>
+    </test>
+
 </suite>
