@@ -313,4 +313,8 @@ public class UITestBase {
             return false;
         }
     }
+
+    public String getAttributeValue(By locator) {
+        return driver.findElement(locator).getAttribute("value");
+    }
 }

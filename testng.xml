@@ -307,4 +307,10 @@
         </classes>
     </test>
 
+    <test name="TelenorLoginVerificationFillPhoneFieldWithForbiddenCharactersTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorLoginVerificationFillPhoneFieldWithForbiddenCharactersTest"/>
+        </classes>
+    </test>
+
 </suite>
