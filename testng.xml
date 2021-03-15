@@ -319,4 +319,10 @@
         </classes>
     </test>
 
+    <test name="TelenorLoginVerificationWithInvalidDataInOneTimePasswordFieldTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorLoginVerificationWithInvalidDataInOneTimePasswordFieldTest"/>
+        </classes>
+    </test>
+
 </suite>
