@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
 public class TelenorRegistrationVerificationWithInvalidPhoneTest extends UITestBase {
-    String token = "513886198";
+    String token = "514826821";
     String phone = "000000000000";
 
     @Test

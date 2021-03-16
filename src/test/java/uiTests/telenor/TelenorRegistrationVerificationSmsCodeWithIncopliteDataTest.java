@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertFalse;
 
 public class TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest extends UITestBase {
-    String token = "515104759";
+    String token = "514826821";
     String phone = "380502128466";
     String smsCode = "12345";
 

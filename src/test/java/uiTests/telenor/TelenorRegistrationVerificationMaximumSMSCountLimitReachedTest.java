@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest extends UITestBase {
-    String token = "515104759";
+    String token = "514826821";
     String phone = "38050" + app.generateRandomNumber(7);
     String smsCode = null;
 
