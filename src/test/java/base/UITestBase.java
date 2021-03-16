@@ -165,6 +165,11 @@ public class UITestBase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'Change PIN')]")));
     }
 
+    public void gotoFullRegistrationPage() {
+        driver.findElement(By.cssSelector("a[href='/en/security/fdd']")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[contains(text(), 'Your selfie')]")));
+    }
+
     public void type(By locator, String text){
         driver.findElement(locator).click();
         driver.findElement(locator).clear();
@@ -172,6 +177,10 @@ public class UITestBase {
     }
 
     public void click(By locator){
+        driver.findElement(locator).click();
+    }
+
+    public void pressConfirm(By locator){
         driver.findElement(locator).click();
     }
 
@@ -212,6 +221,34 @@ public class UITestBase {
         driver.findElement(By.id("dpwa-login")).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href='/en/logout']")));
         return popup;
+    }
+
+    public void navigateToTelenorAndLogin2(String phone, String smsCode) {
+        basicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        driver.findElement(By.cssSelector("a[href='/en/login']")).click();
+        driver.findElement(By.id("phone_number")).sendKeys(phone);
+        driver.findElement(By.cssSelector("button.request-otp")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.uk-modal-dialog")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.uk-text-right button.uk-modal-close")));
+
+        driver.findElement(By.cssSelector("div.uk-text-right button.uk-modal-close")).click();
+
+
+        given().log().uri().log().headers().log().body()
+                .header("content-type", "application/json; charset=utf-8")
+                .header("site", app.telenorSite)
+                .body("{\n" +
+                        "  \"phoneNumber\" : \""+phone+"\"\n" +
+                        "}")
+                .when()
+                .post(app.dipocket3_intranet+"/TestServices/v1/telenor/sendOtpForPhone/"+smsCode+"")
+                .then().log().all()
+                .statusCode(200);
+
+
+        driver.findElement(By.id("password")).sendKeys(smsCode);
+        driver.findElement(By.id("dpwa-login")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href='/en/logout']")));
     }
 
     public String getColorOfElement(By locator, String cssValue) throws InterruptedException {

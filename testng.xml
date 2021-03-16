@@ -325,4 +325,10 @@
         </classes>
     </test>
 
+    <test name="TelenorNegativeVerificationFullRegistrationPageTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorNegativeVerificationFullRegistrationPageTest"/>
+        </classes>
+    </test>
+
 </suite>
