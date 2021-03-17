@@ -101,7 +101,8 @@ public class GoogleSheetsHelper {
             }
 
             for(int i = 0; i < values.size(); i++){
-                if(!values.contains("Expired")){
+                //if(!values.contains("Expired")){
+                if(!values.contains("Expired") && values.contains("Pavel autotests")){
                     if(values.get(i).contains("Expired")){
                         System.out.println("Expired: " + values.get(i));
                         number = i;
