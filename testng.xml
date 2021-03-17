@@ -277,11 +277,11 @@
         </classes>
     </test>
 
-    <test name="TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest">
-        <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest">-->
+<!--        <classes>-->
+<!--            <class name="uiTests.telenor.TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest">
         <classes>

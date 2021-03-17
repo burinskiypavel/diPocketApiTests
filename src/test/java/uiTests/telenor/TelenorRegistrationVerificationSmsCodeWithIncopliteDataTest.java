@@ -14,7 +14,7 @@ public class TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest extends
     String phone = "380502128466";
     String smsCode = "12345";
 
-    @Test
+    @Test(enabled = false)
     public void testRegistrationVerificationSmsCodeWithIncopliteData() {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();

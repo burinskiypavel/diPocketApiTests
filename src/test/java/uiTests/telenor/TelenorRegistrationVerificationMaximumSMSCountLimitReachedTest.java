@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertFalse;
 
 public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest extends UITestBase {
     String token = "514826821";
@@ -144,5 +145,20 @@ public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest exte
         String birthDateBorderColor = getColorOfElement(By.id("birthDateAsDate"), "border-color");
 
         assertThat(birthDateBorderColor,equalTo(app.hexRedColor));
+    }
+
+    @Test(priority = 7)
+    public void testRegistrationVerificationSmsCodeWithIncopliteData() {
+        smsCode = "12345";
+        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        gotoRegisterPaymentBandPage();
+        type(By.name("publicToken"), token);
+        type(By.id("mainPhone"), phone);
+        clickCheckbox(By.id("agreeProcessInfo"));
+        submitPublicTokenAndPhone();
+        fillSmsCode(smsCode);
+        submitSmsCode();
+
+        assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='register-verify-code']")));
     }
 }
