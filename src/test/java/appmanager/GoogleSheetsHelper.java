@@ -26,6 +26,7 @@ public class GoogleSheetsHelper {
     private static String APPLICATION_NAME = "Google Sheets Example";
     private static String SPREADSHEET_ID = "1uYgbLvp7xrNSqLgH0hc8hAaqAnHbHs17mJStn1tCcmE";
     private static int index;
+    private static int indexx = 0;
     public static String token;
     public static int number = 0;
     public static  int indexForUpdate;
@@ -101,8 +102,12 @@ public class GoogleSheetsHelper {
             }
 
             for(int i = 0; i < values.size(); i++){
-                //if(!values.contains("Expired")){
-                if(!values.contains("Expired") && values.contains("Pavel autotests")){
+                if(values.get(i).contains("Pavel autotests") && !values.get(i).contains("Expired")){
+                    indexx = i;
+                    break;
+                }
+                if(!values.contains("Expired")){
+                //if(!values.contains("Expired") && values.contains("Pavel autotests")){
                     if(values.get(i).contains("Expired")){
                         System.out.println("Expired: " + values.get(i));
                         number = i;
@@ -112,13 +117,25 @@ public class GoogleSheetsHelper {
                 }
             }
 
-            index = number + 1;
-            token = (String) values.get(index).get(0);
-            System.out.println("index " + index);
-            System.out.println("right token " + token);
+            if(indexx == 0) {
+                index = number + 1;
+                token = (String) values.get(index).get(0);
+                System.out.println("index " + index);
+                System.out.println("right token " + token);
+            }
+            else {
+                token = (String) values.get(indexx).get(0);
+                System.out.println("index " + indexx);
+                System.out.println("right token " + token);
+            }
         }
 
-        indexForUpdate = index + 2;
+        if(indexx == 0) {
+            indexForUpdate = index + 2;
+        }
+        else {
+            indexForUpdate = indexx + 2;
+        }
 
         ValueRange body = new ValueRange()
                 .setValues(Arrays.asList(
