@@ -331,4 +331,10 @@
         </classes>
     </test>
 
+    <test name="TelenorNegativeCheckBalanceTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorNegativeCheckBalanceTest"/>
+        </classes>
+    </test>
+
 </suite>
