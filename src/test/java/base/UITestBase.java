@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import sun.awt.windows.ThemeReader;
 
 import java.sql.SQLException;
 
@@ -165,9 +166,13 @@ public class UITestBase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'Change PIN')]")));
     }
 
-    public void gotoFullRegistrationPage() {
+    public void gotoFullRegistrationPage() throws InterruptedException {
+        //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3[contains(text(), 'Full Registration')]")));
+        //wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='/en/security/fdd']")));
+        Thread.sleep(1000);
         driver.findElement(By.cssSelector("a[href='/en/security/fdd']")).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[contains(text(), 'Your selfie')]")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3[contains(text(), 'Your selfie')]")));
+        Thread.sleep(500);
     }
 
     public void type(By locator, String text){
