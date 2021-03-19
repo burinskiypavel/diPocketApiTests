@@ -337,4 +337,10 @@
         </classes>
     </test>
 
+    <test name="TelenorTopUpTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorTopUpTest"/>
+        </classes>
+    </test>
+
 </suite>
