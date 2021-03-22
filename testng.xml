@@ -343,4 +343,10 @@
         </classes>
     </test>
 
+    <test name="TelenorManageSecurityNegativeTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorManageSecurityNegativeTest"/>
+        </classes>
+    </test>
+
 </suite>
