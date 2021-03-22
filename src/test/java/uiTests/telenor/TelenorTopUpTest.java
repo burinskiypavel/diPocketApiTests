@@ -25,11 +25,42 @@ public class TelenorTopUpTest extends UITestBase {
 
     @Test(priority = 2)
     public void testCheckFieldTopUpAmountWithoutData() throws InterruptedException {
+        if(isElementPresent(By.id("dpwa-amount"))){
+            type(By.id("dpwa-amount"), "");
+            click(By.cssSelector("button[data-dpwa-action='dpwa-topup']"));
+            String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
+
+            assertThat(hexColor, equalTo(app.hexRedColor));
+        } else {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
         type(By.id("dpwa-amount"), "");
         click(By.cssSelector("button[data-dpwa-action='dpwa-topup']"));
         String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
 
         assertThat(hexColor, equalTo(app.hexRedColor));
+        }
+    }
+
+    @Test(priority = 3)
+    public void testCheckFieldTopUpAmountWithInvalidData() {
+        if(isElementPresent(By.id("dpwa-amount"))){
+            type(By.id("dpwa-amount"), "-0.00");
+            click(By.cssSelector("button[data-dpwa-action='dpwa-topup']"));
+            String popUpMessage = getTextFromPopUp();
+            closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+
+            assertTrue(isPopUpClosed());
+            assertThat(popUpMessage,equalTo("Sorry, something went wrong - please try again"));
+        } else {
+
+        navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+        type(By.id("dpwa-amount"), "-0.00");
+        click(By.cssSelector("button[data-dpwa-action='dpwa-topup']"));
+        String popUpMessage = getTextFromPopUp();
+        closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+
+        assertTrue(isPopUpClosed());
+        assertThat(popUpMessage,equalTo("Sorry, something went wrong - please try again"));
+        }
     }
 }
