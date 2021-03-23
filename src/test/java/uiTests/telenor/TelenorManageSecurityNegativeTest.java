@@ -24,4 +24,24 @@ public class TelenorManageSecurityNegativeTest extends UITestBase {
 
         assertThat(hexColor, equalTo(app.hexRedColor));
     }
+
+    @Test(priority = 2)
+    public void testEmptyFieldUseYourOwnQuestion() throws InterruptedException {
+        navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+        gotoManageSecurityPage();
+        gotoChangeSecretAnswer();
+        type(By.id("secAnswer"), "qa");
+        pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
+        waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
+        selectFromSelect(By.id("sqs"), "Use your own question");
+        type(By.id("sqc"), "");
+        type(By.id("secAnswer"), "");
+
+        pressConfirm(By.cssSelector("button[data-dpwa-action='change-secret-answer-confirm']"));
+        String useUourOwnAuestionHexColor = getColorOfElement(By.id("sqc"), "border-color");
+        String secAnswerHexColor = getColorOfElement(By.id("secAnswer"), "border-color");
+
+        assertThat(useUourOwnAuestionHexColor, equalTo(app.hexRedColor));
+        assertThat(secAnswerHexColor, equalTo(app.hexRedColor));
+    }
 }
