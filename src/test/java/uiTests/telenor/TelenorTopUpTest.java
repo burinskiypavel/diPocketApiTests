@@ -11,7 +11,7 @@ import static org.testng.Assert.assertTrue;
 public class TelenorTopUpTest extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false) // moved to API tests
     public void testCheckFieldTopUpAmountWithDataGreaterThanHUF45000() {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
         type(By.id("dpwa-amount"), "11111111");
@@ -41,7 +41,7 @@ public class TelenorTopUpTest extends UITestBase {
         }
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, enabled = false) // moved to API tests
     public void testCheckFieldTopUpAmountWithInvalidData() {
         if(isElementPresent(By.id("dpwa-amount"))){
             type(By.id("dpwa-amount"), "-0.00");
