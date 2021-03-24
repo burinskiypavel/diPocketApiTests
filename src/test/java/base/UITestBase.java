@@ -166,6 +166,11 @@ public class UITestBase {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("secAnswer")));
     }
 
+    public void gotoChangeEmail() {
+        driver.findElement(By.xpath("//a[contains(text(), 'Change E-mail')]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("email")));
+    }
+
     public void gotoManageSecurityPage() {
         driver.findElement(By.cssSelector("a[href='/en/cabinet/security']")).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'Change PIN')]")));

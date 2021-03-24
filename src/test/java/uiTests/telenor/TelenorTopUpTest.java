@@ -25,20 +25,12 @@ public class TelenorTopUpTest extends UITestBase {
 
     @Test(priority = 2)
     public void testCheckFieldTopUpAmountWithoutData() throws InterruptedException {
-        if(isElementPresent(By.id("dpwa-amount"))){
-            type(By.id("dpwa-amount"), "");
-            click(By.cssSelector("button[data-dpwa-action='dpwa-topup']"));
-            String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
-
-            assertThat(hexColor, equalTo(app.hexRedColor));
-        } else {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
         type(By.id("dpwa-amount"), "");
         click(By.cssSelector("button[data-dpwa-action='dpwa-topup']"));
         String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
 
         assertThat(hexColor, equalTo(app.hexRedColor));
-        }
     }
 
     @Test(priority = 3, enabled = false) // moved to API tests
