@@ -225,6 +225,12 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="TelenorChangePINTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorChangePINTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 <!--    <test name="TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF45000Test">-->
 <!--        <classes>-->
 <!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF45000Test"/>-->
