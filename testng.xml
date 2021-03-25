@@ -373,4 +373,10 @@
         </classes>
     </test>
 
+    <test name="TelenorEmptyFieldEmailTest">
+        <classes>
+            <class name="uiTests.telenor.manageSecurity.TelenorEmptyFieldEmailTest"/>
+        </classes>
+    </test>
+
 </suite>
