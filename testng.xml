@@ -201,6 +201,12 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest">-->
+<!--        <classes>-->
+<!--            <class name="telenor.TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 <!--    <test name="TelenorUnblockCardTest">-->
 <!--        <classes>-->
 <!--            <class name="telenor.TelenorUnblockCardTest"/>-->
