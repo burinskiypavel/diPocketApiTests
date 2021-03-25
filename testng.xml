@@ -39,12 +39,6 @@
 <!--    </classes>-->
 <!--    </test>-->
 
-<!--    <test name="TDSV1BioAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1BioAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
 <!--&lt;!&ndash;    <test name="TDSV1BioDeclineTest">&ndash;&gt;-->
 <!--&lt;!&ndash;        <classes>&ndash;&gt;-->
 <!--&lt;!&ndash;            <class name="tds.TDSV1BioDeclineTest"/>&ndash;&gt;-->
@@ -62,6 +56,12 @@
 <!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
+
+    <!--    <test name="TDSV1BioAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
 <!--    <test name="TDSV1PareqAllFieldsTest">-->
 <!--        <classes>-->

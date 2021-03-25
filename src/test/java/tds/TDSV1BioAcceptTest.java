@@ -22,7 +22,8 @@ public class TDSV1BioAcceptTest extends TestBase {
     String tranId = null;
 
     @Test(priority = 24)
-    public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
+    public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() throws InterruptedException {
+        HelperBase.waiter(6);
         System.out.println("txid: " + randomTXID + " pan: " + app.pan);
         given().log().uri().log().headers().log().body()
                 .header("Content-Type", "application/xml")
