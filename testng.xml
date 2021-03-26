@@ -207,6 +207,12 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--        <test name="TelenorUnblockPaymentBandWithInvalidDataTest">-->
+<!--            <classes>-->
+<!--                <class name="telenor.TelenorUnblockPaymentBandWithInvalidDataTest"/>-->
+<!--            </classes>-->
+<!--        </test>-->
+
 <!--    <test name="TelenorUnblockCardTest">-->
 <!--        <classes>-->
 <!--            <class name="telenor.TelenorUnblockCardTest"/>-->
