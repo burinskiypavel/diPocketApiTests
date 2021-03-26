@@ -116,7 +116,7 @@ public class TDSV1BioDeclineTest extends TestBase {
         given().log().uri().log().headers().log().body()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : " + randomTXID + "\n" +
+                        "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
                 .when()
                 .post("/DiPocket3ds/acs/tranStatus.v1")
@@ -163,7 +163,7 @@ public class TDSV1BioDeclineTest extends TestBase {
         given().log().uri().log().headers().log().body()
                 .header("Content-Type", "application/json")
                 .body("{\n" +
-                        "\t\"txId\" : " + randomTXID + "\n" +
+                        "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
                 .when()
                 .post("/DiPocket3ds/acs/tranStatus.v1")
