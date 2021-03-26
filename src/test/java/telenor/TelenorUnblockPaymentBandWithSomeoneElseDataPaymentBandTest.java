@@ -151,7 +151,7 @@ public class TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest extends
                 .header("clisessionid", cliSessionId)
                 .header("secretanswer", secretAnswer)
                 .body("{\n" +
-                        "  \"publicToken\" : \"513736152\",\n" + //512047269
+                        "  \"publicToken\" : \"513855360\",\n" +
                         "  \"accountId\" : 9434\n" +
                         "}\n")
                 .when()

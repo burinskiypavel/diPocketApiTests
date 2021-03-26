@@ -195,7 +195,7 @@ public class DBHelper extends HelperBase {
         return stateId;
     }
 
-    public void unbanClientFromDBTelenor(String phone) throws SQLException, ClassNotFoundException {
+    public void activateClientFromDBTelenor(String phone) throws SQLException, ClassNotFoundException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");

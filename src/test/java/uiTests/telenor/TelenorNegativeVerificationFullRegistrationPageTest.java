@@ -16,7 +16,7 @@ public class TelenorNegativeVerificationFullRegistrationPageTest extends UITestB
     @Test(priority = 1, enabled = false)
     public void testVerificationWithInvalidDataYourTemporarySecretAnswerField() throws SQLException, ClassNotFoundException, InterruptedException {
             app.getDbHelper().blockClientFromDBTelenor(phone);
-            app.getDbHelper().unbanClientFromDBTelenor(phone);
+            app.getDbHelper().activateClientFromDBTelenor(phone);
             navigateToTelenorAndLogin2(phone, smsCode);
             gotoFullRegistrationPage();
             click(By.cssSelector("button[data-dpwa-image-id='selfie-neutral']"));
@@ -32,7 +32,7 @@ public class TelenorNegativeVerificationFullRegistrationPageTest extends UITestB
     @Test(priority = 2)
     public void testVerificationWithEmptyYourTemporarySecretAnswerField() throws InterruptedException, SQLException, ClassNotFoundException {
             app.getDbHelper().blockClientFromDBTelenor(phone);
-            app.getDbHelper().unbanClientFromDBTelenor(phone);
+            app.getDbHelper().activateClientFromDBTelenor(phone);
             navigateToTelenorAndLogin2(phone, smsCode);
             gotoFullRegistrationPage();
             click(By.cssSelector("button[data-dpwa-image-id='selfie-neutral']"));
