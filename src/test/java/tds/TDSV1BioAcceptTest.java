@@ -23,15 +23,15 @@ public class TDSV1BioAcceptTest extends TestBase {
 
     @Test(priority = 24)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() throws InterruptedException {
-        HelperBase.waiter(6);
-        System.out.println("txid: " + randomTXID + " pan: " + app.pan);
+        //HelperBase.waiter(6);
+        System.out.println("app.TDSBaseUrl: " + app.TDSBaseUrl + " txid: " + randomTXID + " pan: " + app.pan);
         given().log().uri().log().headers().log().body()
                 .header("Content-Type", "application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
                         "        <txId>" + randomTXID + "</txId>\n" +
-                        "        <pan>" + app.pan + "</pan>\n" +
+                        "        <pan>5455980836095804</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
                         "        <deviceCategory>0</deviceCategory>\n" +
@@ -43,7 +43,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.chName", equalTo(""))
@@ -62,7 +62,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
                         "      <txId>" + randomTXID + "</txId>\n" +
-                        "      <pan>" + app.pan + "</pan>\n" +
+                        "      <pan>5455980836095804</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
                         "      <acqBIN>501900</acqBIN>\n" +
                         "      <merchant>CH</merchant>\n" +
@@ -86,7 +86,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth.v1");
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all();
         String response = res.asString();
@@ -119,7 +119,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "\t\"txId\" : " + randomTXID + "\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/tranStatus.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -166,7 +166,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "\t\"txId\" : " + randomTXID + "\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/tranStatus.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -196,7 +196,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth.v1")
+                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
                 .then()
                 .log().all()
                 .statusCode(200)
