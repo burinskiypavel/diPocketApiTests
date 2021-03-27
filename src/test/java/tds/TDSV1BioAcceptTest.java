@@ -111,7 +111,7 @@ public class TDSV1BioAcceptTest extends TestBase {
 
     @Test(priority = 26)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() throws InterruptedException {
-        HelperBase.waiter(6);
+        //HelperBase.waiter(6);
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
                 .header("Content-Type", "application/json")
