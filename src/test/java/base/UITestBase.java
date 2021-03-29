@@ -241,6 +241,7 @@ public class UITestBase {
     public void navigateToTelenorAndLogin2(String phone, String smsCode) {
         basicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         driver.findElement(By.cssSelector("a[href='/en/login']")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("phone_number")));
         driver.findElement(By.id("phone_number")).sendKeys(phone);
         driver.findElement(By.cssSelector("button.request-otp")).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.uk-modal-dialog")));
