@@ -23,7 +23,7 @@ public class TelenorTopUpTest extends UITestBase {
         assertThat(popUpMessage, equalTo("The amount you entered is above the maximum limit, which is HUF 45000.00 for this type of transaction"));
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, enabled = false)
     public void testCheckFieldTopUpAmountWithoutData() throws InterruptedException {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
         type(By.id("dpwa-amount"), "");
