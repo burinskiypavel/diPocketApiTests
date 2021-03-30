@@ -2,16 +2,18 @@ package base;
 
 import appmanager.ApplicationManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import sun.awt.windows.ThemeReader;
 
 import java.sql.SQLException;
 
@@ -369,5 +371,17 @@ public class UITestBase {
 
     public String getAttributeValue(By locator) {
         return driver.findElement(locator).getAttribute("value");
+    }
+
+    public void pressBackSpace() {
+        Actions actions = new Actions(driver);
+        Action seriesOfActions = actions
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys(Keys.BACK_SPACE)
+                .build();
+        seriesOfActions.perform() ;
     }
 }
