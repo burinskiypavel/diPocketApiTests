@@ -391,4 +391,10 @@
         </classes>
     </test>
 
+    <test name="UnblockPaymentBandWithIncompleteDataTest">
+        <classes>
+            <class name="uiTests.telenor.manageSecurity.UnblockPaymentBandWithIncompleteDataTest"/>
+        </classes>
+    </test>
+
 </suite>

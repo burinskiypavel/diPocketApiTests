@@ -175,7 +175,8 @@ public class UITestBase {
 
     public void gotoManageSecurityPage() {
         driver.findElement(By.cssSelector("a[href='/en/cabinet/security']")).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'Change PIN')]")));
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'Change PIN')]")));
+        waitForSeveralItems(new String[]{"Change Secret answer", "Change E-mail"});
     }
 
     public void gotoFullRegistrationPage() throws InterruptedException {
