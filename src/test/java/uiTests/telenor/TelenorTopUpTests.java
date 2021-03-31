@@ -91,4 +91,30 @@ public class TelenorTopUpTests extends UITestBase {
             assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='dpwa-topup']")));
         }
     }
+
+    @Test(priority = 5, enabled = false) //BUG Error message is not displayed
+    public void testCheckFieldTopUpAmountWithDataLessThan200Forints() throws InterruptedException {
+        if(isElementPresent(By.id("dpwa-amount"))){
+            type(By.id("dpwa-amount"), "199");
+            String popUpMessage = getTextFromPopUp();
+            String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
+            closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+
+            assertTrue(isPopUpClosed());
+            assertThat(popUpMessage,equalTo("Minimum top-up amount is Ft 200, maximum Ft 45000"));
+            assertThat(hexColor, equalTo(app.hexRedColor));
+
+        } else {
+
+            navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+            type(By.id("dpwa-amount"), "199");
+            String popUpMessage = getTextFromPopUp();
+            String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
+            closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+
+            assertTrue(isPopUpClosed());
+            assertThat(popUpMessage,equalTo("Minimum top-up amount is Ft 200, maximum Ft 45000"));
+            assertThat(hexColor, equalTo(app.hexRedColor));
+        }
+    }
 }
