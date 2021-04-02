@@ -9,13 +9,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TelenorManageSecurityNegativeTest extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
+    String secAnswer = "QA";
 
     @Test(priority = 1)
     public void testEmptyFieldSecretAnswer() throws InterruptedException {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
         gotoManageSecurityPage();
         gotoChangeSecretAnswer();
-        type(By.id("secAnswer"), "qa");
+        type(By.id("secAnswer"), secAnswer);
         pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
         waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
         type(By.id("secAnswer"), "");
@@ -43,7 +44,7 @@ public class TelenorManageSecurityNegativeTest extends UITestBase {
             navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
             gotoManageSecurityPage();
             gotoChangeSecretAnswer();
-            type(By.id("secAnswer"), "qa");
+            type(By.id("secAnswer"), secAnswer);
             pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
             waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
             selectFromSelect(By.id("sqs"), "Use your own question");
