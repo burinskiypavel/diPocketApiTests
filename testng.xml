@@ -367,11 +367,11 @@
         </classes>
     </test>
 
-    <test name="TelenorTopUpTests">
-        <classes>
-            <class name="uiTests.telenor.TelenorTopUpTests"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorTopUpTests">-->
+<!--        <classes>-->
+<!--            <class name="uiTests.telenor.TelenorTopUpTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TelenorManageSecurityNegativeTest">
         <classes>
