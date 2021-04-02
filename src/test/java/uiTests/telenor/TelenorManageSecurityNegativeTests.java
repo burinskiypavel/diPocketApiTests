@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TelenorManageSecurityNegativeTest extends UITestBase {
+public class TelenorManageSecurityNegativeTests extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String secAnswer = "QA";
 
@@ -41,6 +41,7 @@ public class TelenorManageSecurityNegativeTest extends UITestBase {
             assertThat(secAnswerHexColor, equalTo(app.hexRedColor));
 
         } else {
+
             navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
             gotoManageSecurityPage();
             gotoChangeSecretAnswer();
