@@ -367,11 +367,11 @@
         </classes>
     </test>
 
-<!--    <test name="TelenorTopUpTests">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorTopUpTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorTopUpTests">
+        <classes>
+            <class name="uiTests.telenor.TelenorTopUpTests"/>
+        </classes>
+    </test>
 
     <test name="TelenorManageSecurityNegativeTest">
         <classes>
@@ -379,11 +379,11 @@
         </classes>
     </test>
 
-<!--    <test name="TelenorChangeEmailWithInvalidDataTest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorChangeEmailWithInvalidDataTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorChangeEmailWithInvalidDataTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorChangeEmailWithInvalidDataTest"/>
+        </classes>
+    </test>
 
     <test name="TelenorEmptyFieldEmailTest">
         <classes>
