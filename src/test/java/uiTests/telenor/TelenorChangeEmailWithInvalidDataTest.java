@@ -34,7 +34,8 @@ public class TelenorChangeEmailWithInvalidDataTest extends UITestBase {
             assertThat(hexColor, equalTo(app.hexRedColor));
 
         } else {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+
+        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         gotoChangeEmail();
         type(By.id("email"), email);

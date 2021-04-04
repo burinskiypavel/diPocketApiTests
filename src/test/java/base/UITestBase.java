@@ -268,6 +268,7 @@ public class UITestBase {
         driver.findElement(By.id("password")).sendKeys(smsCode);
         driver.findElement(By.id("dpwa-login")).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href='/en/logout']")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("dpwa-amount")));
     }
 
     public String getColorOfElement(By locator, String cssValue) throws InterruptedException {

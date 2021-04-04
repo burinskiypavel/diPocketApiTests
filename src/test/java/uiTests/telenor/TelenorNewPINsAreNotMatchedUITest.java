@@ -9,8 +9,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertFalse;
 
 public class TelenorNewPINsAreNotMatchedUITest extends UITestBase {
-    String phone = "380980316499";
-    String expectedPhone = "38 098 031 6499";
+    String phone = "380636083315";
+    String expectedPhone = "38 063 608 3315"; //38 098 031 6499
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
     @Test(priority = 1)
@@ -38,6 +38,7 @@ public class TelenorNewPINsAreNotMatchedUITest extends UITestBase {
             assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
         }
         else {
+
             String popupMessage = navigateToTelenorAndLogin(phone, smsCode);
             gotoManageSecurityPage();
             gotoChangePINPage();

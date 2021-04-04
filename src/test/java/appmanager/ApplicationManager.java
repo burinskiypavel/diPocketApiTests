@@ -35,6 +35,7 @@ public class ApplicationManager {
     public String telenorLoginPhone = null;
     public String loginPhone = null;
     public String telenorRegistrationPhone = "380980316499";
+    public String telenorRegistrationPhone2 = "380636083315";
     public String fullRegistrationTelenorLoginPhone = null;
     public String bannedPhone = "380639348839";
     public String loginBannedPhone = null;

@@ -12,7 +12,7 @@ public class TelenorEmptyFieldEmailTest extends UITestBase {
 
     @Test(priority = 1)
     public void testEmptyFieldEmail() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         gotoChangeEmail();
         waitForSeveralItems(new String[]{"Confirm", "Cancel", "Change E-mail"});

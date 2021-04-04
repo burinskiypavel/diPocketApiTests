@@ -9,11 +9,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TelenorManageSecurityNegativeTests extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
-    String secAnswer = "qa";
+    String secAnswer = "QA";
 
     @Test(priority = 1)
     public void testEmptyFieldSecretAnswer() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         gotoChangeSecretAnswer();
         type(By.id("secAnswer"), secAnswer);
@@ -42,7 +42,7 @@ public class TelenorManageSecurityNegativeTests extends UITestBase {
 
         } else {
 
-            navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+            navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
             gotoManageSecurityPage();
             gotoChangeSecretAnswer();
             type(By.id("secAnswer"), secAnswer);

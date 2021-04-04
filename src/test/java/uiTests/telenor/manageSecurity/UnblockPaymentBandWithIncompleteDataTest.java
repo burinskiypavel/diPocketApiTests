@@ -12,13 +12,13 @@ public class UnblockPaymentBandWithIncompleteDataTest extends UITestBase {
 
     @Test(priority = 1)
     public void testUnblockPaymentBandWithIncompleteData() {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         if(isElementPresent(By.cssSelector("a[href='/en/security/block']"))){
             click(By.cssSelector("a[href='/en/security/block']"));
             waitForSeveralItems(new String[]{"Confirm", "Cancel"});
             click(By.cssSelector("button[data-dpwa-action='band-block-confirm']"));
-            type(By.id("secAnswer"), "qa");
+            type(By.id("secAnswer"), "QA");
             click(By.cssSelector("button[data-dpwa-action='sa-send']"));
 
             //gotoManageSecurityPage();

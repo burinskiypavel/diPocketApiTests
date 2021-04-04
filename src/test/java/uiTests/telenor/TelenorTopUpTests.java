@@ -15,7 +15,7 @@ public class TelenorTopUpTests extends UITestBase {
 
     @Test(priority = 1) // moved to API tests
     public void testCheckFieldTopUpAmountWithDataGreaterThanHUF45000() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         type(By.id("dpwa-amount"), "150001");
         String popUpMessage = getTextFromPopUp();
         String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
@@ -40,7 +40,7 @@ public class TelenorTopUpTests extends UITestBase {
 
         } else {
 
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         type(By.id("dpwa-amount"), "-0.00");
         String popUpMessage = getTextFromPopUp();
         String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
@@ -67,7 +67,7 @@ public class TelenorTopUpTests extends UITestBase {
 
         } else {
 
-            navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+            navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
             click(By.id("dpwa-amount"));
             pressBackSpace();
             String popUpMessage = getTextFromPopUp();
@@ -87,7 +87,7 @@ public class TelenorTopUpTests extends UITestBase {
 
         } else {
 
-            navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+            navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
             assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='dpwa-topup']")));
         }
     }
@@ -106,7 +106,7 @@ public class TelenorTopUpTests extends UITestBase {
 
         } else {
 
-            navigateToTelenorAndLogin2(app.telenorRegistrationPhone, smsCode);
+            navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
             type(By.id("dpwa-amount"), "199");
             String popUpMessage = getTextFromPopUp();
             String hexColor = getColorOfElement(By.id("dpwa-amount"), "border-color");
