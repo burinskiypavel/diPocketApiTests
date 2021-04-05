@@ -2,40 +2,55 @@ package uiTests.telenor.manageSecurity;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.testng.Assert.assertFalse;
 
 public class UnblockPaymentBandWithIncompleteDataTest extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
-    @Test(priority = 1)
-    public void testUnblockPaymentBandWithIncompleteData() {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
-        gotoManageSecurityPage();
-        if(isElementPresent(By.cssSelector("a[href='/en/security/block']"))){
-            click(By.cssSelector("a[href='/en/security/block']"));
-            waitForSeveralItems(new String[]{"Confirm", "Cancel"});
-            click(By.cssSelector("button[data-dpwa-action='band-block-confirm']"));
-            type(By.id("secAnswer"), "QA");
-            click(By.cssSelector("button[data-dpwa-action='sa-send']"));
+    @DataProvider
+    public Iterator<Object[]> unblockPaymentBandWithIncompleteData(){
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"12345678"});
+        list.add(new Object[] {"12345"});
+        list.add(new Object[] {""});
+        return list.iterator();
+    }
 
-            //gotoManageSecurityPage();
-            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='/en/security/unblock']")));
-            click(By.cssSelector("a[href='/en/security/unblock']"));
-            waitForSeveralItems(new String[]{"Card number", "Cancel", "Unblock"});
-            type(By.id("publicToken"), "12345678");
+    @Test(dataProvider = "unblockPaymentBandWithIncompleteData")
+    public void testUnblockPaymentBandWithIncompleteData(String token) {
+        if(isElementPresent(By.id("publicToken"))){
+            type(By.id("publicToken"), token);
 
             assertFalse(isButtonEnabled(By.xpath("//button[@data-dpwa-action='unblock-card']")));
 
         } else {
 
-            click(By.cssSelector("a[href='/en/security/unblock']"));
-            waitForSeveralItems(new String[]{"Card number", "Cancel", "Unblock"});
-            type(By.id("publicToken"), "12345678");
+            navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
+            gotoManageSecurityPage();
+            if(isElementPresent(By.cssSelector("a[href='/en/security/block']"))){
+                blockPaymentBandTelenor("QA");
+                click(By.cssSelector("a[href='/en/security/unblock']"));
+                waitForSeveralItems(new String[]{"Card number", "Cancel", "Unblock"});
+                type(By.id("publicToken"), token);
 
-            assertFalse(isButtonEnabled(By.xpath("//button[@data-dpwa-action='unblock-card']")));
+                assertFalse(isButtonEnabled(By.xpath("//button[@data-dpwa-action='unblock-card']")));
+
+            } else {
+
+                click(By.cssSelector("a[href='/en/security/unblock']"));
+                waitForSeveralItems(new String[]{"Card number", "Cancel", "Unblock"});
+                type(By.id("publicToken"), token);
+
+                assertFalse(isButtonEnabled(By.xpath("//button[@data-dpwa-action='unblock-card']")));
+            }
         }
+
     }
 }

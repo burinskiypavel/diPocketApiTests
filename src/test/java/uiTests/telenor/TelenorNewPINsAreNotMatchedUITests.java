@@ -17,7 +17,7 @@ public class TelenorNewPINsAreNotMatchedUITests extends UITestBase {
         String popupMessage = navigateToTelenorAndLogin(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         if(isElementPresent(By.cssSelector("a[href='/en/security/unblock']"))) {
-            unblockPaymentTelenor("514-614-250", "QA");
+            unblockPaymentBandTelenor("514-614-250", "QA");
         }
         gotoChangePINPage();
         type(By.id("pin_new"), "1234");
@@ -45,7 +45,7 @@ public class TelenorNewPINsAreNotMatchedUITests extends UITestBase {
             String popupMessage = navigateToTelenorAndLogin(app.telenorRegistrationPhone2, smsCode);
             gotoManageSecurityPage();
             if(isElementPresent(By.cssSelector("a[href='/en/security/unblock']"))) {
-                unblockPaymentTelenor("514-614-250", "QA");
+                unblockPaymentBandTelenor("514-614-250", "QA");
             }
             gotoChangePINPage();
             type(By.id("pin_new"), "1111");

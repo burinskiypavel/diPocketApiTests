@@ -16,7 +16,7 @@ public class TelenorChangeEmailWithInvalidDataTest extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
     @DataProvider
-    public Iterator<Object[]> ChangeEmailWithInvalidData(){
+    public Iterator<Object[]> changeEmailWithInvalidData(){
         List<Object[]> list = new ArrayList<Object[]>();
         list.add(new Object[] {"vikarez@"});
         list.add(new Object[] {"vika20gmail."});
@@ -24,7 +24,7 @@ public class TelenorChangeEmailWithInvalidDataTest extends UITestBase {
         return list.iterator();
     }
 
-    @Test(dataProvider = "ChangeEmailWithInvalidData")
+    @Test(dataProvider = "changeEmailWithInvalidData")
     public void testChangeEmailWithInvalidData(String email) throws InterruptedException {
         if(isElementPresent(By.id("email"))){
             type(By.id("email"), email);
