@@ -259,9 +259,9 @@
 
 
 
-    <test name="TelenorNewPINsAreNotMatchedUITest">
+    <test name="TelenorNewPINsAreNotMatchedUITests">
         <classes>
-            <class name="uiTests.telenor.TelenorNewPINsAreNotMatchedUITest"/>
+            <class name="uiTests.telenor.TelenorNewPINsAreNotMatchedUITests"/>
         </classes>
     </test>
 

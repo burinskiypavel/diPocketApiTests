@@ -8,15 +8,17 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertFalse;
 
-public class TelenorNewPINsAreNotMatchedUITest extends UITestBase {
-    String phone = "380636083315";
+public class TelenorNewPINsAreNotMatchedUITests extends UITestBase {
     String expectedPhone = "38 063 608 3315"; //38 098 031 6499
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
     @Test(priority = 1)
     public void testNewPINsAreNotMatched() throws InterruptedException {
-        String popupMessage = navigateToTelenorAndLogin(phone, smsCode);
+        String popupMessage = navigateToTelenorAndLogin(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
+        if(isElementPresent(By.cssSelector("a[href='/en/security/unblock']"))) {
+            unblockPaymentTelenor("514-614-250", "QA");
+        }
         gotoChangePINPage();
         type(By.id("pin_new"), "1234");
         type(By.id("pin_confirm"), "1111");
@@ -37,10 +39,14 @@ public class TelenorNewPINsAreNotMatchedUITest extends UITestBase {
             assertThat(hexColor, equalTo(app.hexRedColor));
             assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
         }
+
         else {
 
-            String popupMessage = navigateToTelenorAndLogin(phone, smsCode);
+            String popupMessage = navigateToTelenorAndLogin(app.telenorRegistrationPhone2, smsCode);
             gotoManageSecurityPage();
+            if(isElementPresent(By.cssSelector("a[href='/en/security/unblock']"))) {
+                unblockPaymentTelenor("514-614-250", "QA");
+            }
             gotoChangePINPage();
             type(By.id("pin_new"), "1111");
             type(By.id("pin_confirm"), "1234");

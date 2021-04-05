@@ -386,4 +386,16 @@ public class UITestBase {
                 .build();
         seriesOfActions.perform() ;
     }
+
+    public void unblockPaymentTelenor(String token, String secAnswer) {
+        click(By.cssSelector("a[href='/en/security/unblock']"));
+        waitForSeveralItems(new String[]{"Unblock", "Cancel", "For security reasons, to unblock your payment band please enter your 9-digits payment band token"});
+        type(By.id("publicToken"), token);
+
+        click(By.cssSelector("button[data-dpwa-action='unblock-card']"));
+        type(By.id("secAnswer"), secAnswer);
+        click(By.cssSelector("button[data-dpwa-action='sa-send']"));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='/en/security/block']")));
+    }
 }
