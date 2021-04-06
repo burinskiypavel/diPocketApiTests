@@ -409,4 +409,11 @@
         </classes>
     </test>
 
+    <test name="LinkNewPaymentBandWithSomeoneElseDataPaymentBandTest">
+        <classes>
+            <class name="uiTests.telenor.manageSecurity.LinkNewPaymentBandWithSomeoneElseDataPaymentBandTest"/>
+        </classes>
+    </test>
+
+
 </suite>
