@@ -393,6 +393,7 @@ public class UITestBase {
         type(By.id("publicToken"), token);
 
         click(By.cssSelector("button[data-dpwa-action='unblock-card']"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("secAnswer")));
         type(By.id("secAnswer"), secAnswer);
         click(By.cssSelector("button[data-dpwa-action='sa-send']"));
 
@@ -403,6 +404,7 @@ public class UITestBase {
         click(By.cssSelector("a[href='/en/security/block']"));
         waitForSeveralItems(new String[]{"Confirm", "Cancel"});
         click(By.cssSelector("button[data-dpwa-action='band-block-confirm']"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("secAnswer")));
         type(By.id("secAnswer"), secAnswer);
         click(By.cssSelector("button[data-dpwa-action='sa-send']"));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='/en/security/unblock']")));
