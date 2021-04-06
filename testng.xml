@@ -403,4 +403,10 @@
         </classes>
     </test>
 
+    <test name="LinkNewPaymentBandWithIncompleteDataTest">
+        <classes>
+            <class name="uiTests.telenor.manageSecurity.LinkNewPaymentBandWithIncompleteDataTest"/>
+        </classes>
+    </test>
+
 </suite>
