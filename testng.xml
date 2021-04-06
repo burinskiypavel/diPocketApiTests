@@ -397,4 +397,10 @@
         </classes>
     </test>
 
+    <test name="LinkNewPaymentBandWithEmptyDataTest">
+        <classes>
+            <class name="uiTests.telenor.manageSecurity.LinkNewPaymentBandWithEmptyDataTest"/>
+        </classes>
+    </test>
+
 </suite>
