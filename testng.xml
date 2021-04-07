@@ -313,9 +313,9 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest">
+    <test name="TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationMaximumSMSCountLimitReachedTest"/>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests"/>
         </classes>
     </test>
 
