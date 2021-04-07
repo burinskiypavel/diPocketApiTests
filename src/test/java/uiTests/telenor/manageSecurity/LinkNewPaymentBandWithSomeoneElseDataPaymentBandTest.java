@@ -11,7 +11,7 @@ public class LinkNewPaymentBandWithSomeoneElseDataPaymentBandTest extends UITest
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
     @Test
-    public void testLinkNewPaymentBandWithSomeoneElseDataPaymentBand() throws InterruptedException {
+    public void testLinkNewPaymentBandWithSomeoneElseDataPaymentBand() {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         if (isElementPresent(By.cssSelector("a[href='/en/security/block']"))) {
@@ -20,8 +20,7 @@ public class LinkNewPaymentBandWithSomeoneElseDataPaymentBandTest extends UITest
             waitForSeveralItems(new String[]{"To link your payment band please enter your 9-digits payment band token", "Cancel", "Link new payment band", "Card number"});
             type(By.id("token"), "513855360");
             click(By.cssSelector("button[data-dpwa-action='band-relink']"));
-//            type(By.id("secAnswer"), "QA");
-//            pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
+            //answerYourSecretQuestion("QA");
             String popUpMessage = getTextFromPopUp();
 
             assertThat(popUpMessage, equalTo("Sorry, something went wrong - please try again"));
@@ -32,10 +31,8 @@ public class LinkNewPaymentBandWithSomeoneElseDataPaymentBandTest extends UITest
             waitForSeveralItems(new String[]{"To link your payment band please enter your 9-digits payment band token", "Cancel", "Link new payment band", "Card number"});
             type(By.id("token"), "513855360");
             click(By.cssSelector("button[data-dpwa-action='band-relink']"));
-            type(By.id("secAnswer"), "QA");
-            pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
+            answerYourSecretQuestion("QA");
             String popUpMessage = getTextFromPopUp();
-
 
             assertThat(popUpMessage, equalTo("Sorry, something went wrong - please try again"));
         }

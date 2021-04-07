@@ -409,4 +409,10 @@ public class UITestBase {
         click(By.cssSelector("button[data-dpwa-action='sa-send']"));
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='/en/security/unblock']")));
     }
+
+    public void answerYourSecretQuestion(String secAnswer) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("secAnswer")));
+        type(By.id("secAnswer"), secAnswer);
+        pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
+    }
 }
