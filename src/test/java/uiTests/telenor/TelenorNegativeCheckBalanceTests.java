@@ -2,14 +2,13 @@ package uiTests.telenor;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
-public class TelenorNegativeCheckBalanceTest extends UITestBase {
+public class TelenorNegativeCheckBalanceTests extends UITestBase {
 
     @Test(priority = 1)
     public void testCheckEmptyCardNumberField() throws InterruptedException {
