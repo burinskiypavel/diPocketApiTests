@@ -16,8 +16,7 @@ public class TelenorManageSecurityNegativeTests extends UITestBase {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         gotoChangeSecretAnswer();
-        type(By.id("secAnswer"), secAnswer);
-        pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
+        answerYourSecretQuestion(secAnswer);
         waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
         type(By.id("secAnswer"), "");
         pressConfirm(By.cssSelector("button[data-dpwa-action='change-secret-answer-confirm']"));
@@ -45,8 +44,7 @@ public class TelenorManageSecurityNegativeTests extends UITestBase {
             navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
             gotoManageSecurityPage();
             gotoChangeSecretAnswer();
-            type(By.id("secAnswer"), secAnswer);
-            pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
+            answerYourSecretQuestion(secAnswer);
             waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
             selectFromSelect(By.id("sqs"), "Use your own question");
             type(By.id("sqc"), "");
