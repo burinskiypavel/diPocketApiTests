@@ -355,9 +355,9 @@
         </classes>
     </test>
 
-    <test name="TelenorNegativeVerificationFullRegistrationPageTest">
+    <test name="TelenorNegativeVerificationFullRegistrationPageTests">
         <classes>
-            <class name="uiTests.telenor.TelenorNegativeVerificationFullRegistrationPageTest"/>
+            <class name="uiTests.telenor.TelenorNegativeVerificationFullRegistrationPageTests"/>
         </classes>
     </test>
 

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TelenorNegativeVerificationFullRegistrationPageTest extends UITestBase {
+public class TelenorNegativeVerificationFullRegistrationPageTests extends UITestBase {
     String phone = "380684764228";
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
