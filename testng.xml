@@ -183,9 +183,9 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="TelenorUserBannedFromBOTest">-->
+<!--    <test name="TelenorLoginWithUserBannedFromBOTest">-->
 <!--        <classes>-->
-<!--            <class name="telenor.TelenorUserBannedFromBOTest"/>-->
+<!--            <class name="telenor.TelenorLoginWithUserBannedFromBOTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
@@ -271,9 +271,9 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="TelenorRegistrationVerificationWithInvalidTokenUITest">
+    <test name="TelenorRegistrationVerificationWithInvalidTokenTest">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenUITest"/>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenTest"/>
         </classes>
     </test>
 
