@@ -391,33 +391,33 @@
         </classes>
     </test>
 
-    <test name="UnblockPaymentBandWithIncompleteDataTest">
+    <test name="TelenorUnblockPaymentBandWithIncompleteDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.UnblockPaymentBandWithIncompleteDataTest"/>
+            <class name="uiTests.telenor.manageSecurity.TelenorUnblockPaymentBandWithIncompleteDataTest"/>
         </classes>
     </test>
 
-    <test name="LinkNewPaymentBandWithEmptyDataTest">
+    <test name="TelenorLinkNewPaymentBandWithEmptyDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.LinkNewPaymentBandWithEmptyDataTest"/>
+            <class name="uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithEmptyDataTest"/>
         </classes>
     </test>
 
-    <test name="LinkNewPaymentBandWithIncompleteDataTest">
+    <test name="TelenorLinkNewPaymentBandWithIncompleteDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.LinkNewPaymentBandWithIncompleteDataTest"/>
+            <class name="uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithIncompleteDataTest"/>
         </classes>
     </test>
 
-    <test name="LinkNewPaymentBandWithSomeoneElseDataPaymentBandTest">
+    <test name="TelenorLinkNewPaymentBandWithSomeoneElseDataPaymentBandTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.LinkNewPaymentBandWithSomeoneElseDataPaymentBandTest"/>
+            <class name="uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithSomeoneElseDataPaymentBandTest"/>
         </classes>
     </test>
 
-    <test name="LinkNewPaymentBandWithInvalidDataTest">
+    <test name="TelenorLinkNewPaymentBandWithInvalidDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.LinkNewPaymentBandWithInvalidDataTest"/>
+            <class name="uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithInvalidDataTest"/>
         </classes>
     </test>
 

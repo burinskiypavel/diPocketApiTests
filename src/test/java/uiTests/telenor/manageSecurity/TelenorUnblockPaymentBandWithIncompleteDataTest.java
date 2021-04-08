@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertFalse;
 
-public class UnblockPaymentBandWithIncompleteDataTest extends UITestBase {
+public class TelenorUnblockPaymentBandWithIncompleteDataTest extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
     @DataProvider

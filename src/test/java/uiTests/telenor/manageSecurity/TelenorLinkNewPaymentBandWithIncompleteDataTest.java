@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class LinkNewPaymentBandWithIncompleteDataTest extends UITestBase {
+public class TelenorLinkNewPaymentBandWithIncompleteDataTest extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
     @Test

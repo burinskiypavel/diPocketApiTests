@@ -7,34 +7,32 @@ import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class LinkNewPaymentBandWithSomeoneElseDataPaymentBandTest extends UITestBase {
+public class TelenorLinkNewPaymentBandWithEmptyDataTest extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
     @Test
-    public void testLinkNewPaymentBandWithSomeoneElseDataPaymentBand() {
+    public void testLinkNewPaymentBandWithEmptyData() throws InterruptedException {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         if (isElementPresent(By.cssSelector("a[href='/en/security/block']"))) {
             blockPaymentBandTelenor("QA");
             click(By.cssSelector("a[href='/en/security/relink']"));
             waitForSeveralItems(new String[]{"To link your payment band please enter your 9-digits payment band token", "Cancel", "Link new payment band", "Card number"});
-            type(By.id("token"), "513855360");
+            type(By.id("token"), "");
             click(By.cssSelector("button[data-dpwa-action='band-relink']"));
-            //answerYourSecretQuestion("QA");
-            String popUpMessage = getTextFromPopUp();
+            String hexColor = getColorOfElement(By.id("token"), "border-color");
 
-            assertThat(popUpMessage, equalTo("Sorry, something went wrong - please try again"));
+            assertThat(hexColor, equalTo(app.hexRedColor));
 
         } else {
 
             click(By.cssSelector("a[href='/en/security/relink']"));
             waitForSeveralItems(new String[]{"To link your payment band please enter your 9-digits payment band token", "Cancel", "Link new payment band", "Card number"});
-            type(By.id("token"), "513855360");
+            type(By.id("token"), "");
             click(By.cssSelector("button[data-dpwa-action='band-relink']"));
-            answerYourSecretQuestion("QA");
-            String popUpMessage = getTextFromPopUp();
+            String hexColor = getColorOfElement(By.id("token"), "border-color");
 
-            assertThat(popUpMessage, equalTo("Sorry, something went wrong - please try again"));
+            assertThat(hexColor, equalTo(app.hexRedColor));
         }
     }
 }
