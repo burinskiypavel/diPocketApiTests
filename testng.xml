@@ -221,13 +221,13 @@
 
 <!--    <test name="TelenorChangeEmailTest">-->
 <!--        <classes>-->
-<!--            <class name="telenor.TelenorChangeEmailTest"/>-->
+<!--            <class name="telenor.manageSecurity.TelenorChangeEmailTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="TelenorChangeSecretAnswerTest">-->
 <!--        <classes>-->
-<!--            <class name="telenor.TelenorChangeSecretAnswerTest"/>-->
+<!--            <class name="telenor.manageSecurity.TelenorChangeSecretAnswerTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
@@ -239,7 +239,7 @@
 
 <!--    <test name="TelenorChangePINTest">-->
 <!--        <classes>-->
-<!--            <class name="telenor.TelenorChangePINTest"/>-->
+<!--            <class name="telenor.manageSecurity.TelenorChangePINTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 

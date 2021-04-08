@@ -1,4 +1,4 @@
-package telenor;
+package telenor.manageSecurity;
 
 import base.TestBase;
 import io.restassured.response.Response;
@@ -9,9 +9,11 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.blankOrNullString;
 
-public class TelenorChangeSecretAnswerTest extends TestBase {
-    String smsCode = app.generateRandomNumber(6);
+public class TelenorChangeEmailTest extends TestBase {
+    String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
+    String newEmail = "telenorchangeemailtest@mailsac.com";
+    String secretAnswer = "QA";
 
     @Test(priority = 1)
     public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode(){
@@ -46,7 +48,7 @@ public class TelenorChangeSecretAnswerTest extends TestBase {
         Assert.assertEquals(res.getStatusCode(), 200);
         res.then().assertThat().body("clientFirstName", equalTo("Pavel"));
         res.then().assertThat().body("clientLastName", equalTo("TestQA"));
-        res.then().assertThat().body("mainPhone", equalTo("380980316499"));
+        res.then().assertThat().body("mainPhone", equalTo(app.telenorRegistrationPhone));
     }
 
     @Test(priority = 3)
@@ -57,7 +59,7 @@ public class TelenorChangeSecretAnswerTest extends TestBase {
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
-                        "  \"secAnswer\" : \"QA\"\n" +
+                        "  \"secAnswer\" : \""+secretAnswer+"\"\n" +
                         "}")
                 .when()
                 .post(app.dipocket3_intranet+"/WebServices/v1/clientProfile/checkSecAnswAttempts")
@@ -68,21 +70,50 @@ public class TelenorChangeSecretAnswerTest extends TestBase {
     }
 
     @Test(priority = 4)
-    public void test_WebServices_v1_clientProfile_updateAnswer(){
+    public void test_WebServices_v1_clientProfile_verifyEmail(){
         given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic(app.fullRegistrationTelenorLoginPhone, smsCode)
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
-                .header("secretanswer", "QA")
+                .header("secretanswer", secretAnswer)
                 .body("{\n" +
-                        "  \"secQuestion\" : \"QA\",\n" +
-                        "  \"secAnswer\" : \"qa\"\n" +
+                        "  \"value\" : \""+newEmail+"\"\n" +
                         "}\n")
                 .when()
-                .post(app.dipocket3_intranet+"/WebServices/v1/clientProfile/updateAnswer")
+                .post(app.dipocket3_intranet+"/WebServices/v1/clientProfile/verifyEmail")
                 .then().log().all()
                 .assertThat().statusCode(200)
                 .assertThat().body(blankOrNullString());
+    }
+
+    @Test(priority = 5)
+    public void test_WebServices_v1_clientProfile_clientInfo(){
+        given().log().uri().log().headers().log().body()
+                .auth().preemptive().basic(app.fullRegistrationTelenorLoginPhone, smsCode)
+                .header("content-type", "application/json; charset=utf-8")
+                .header("site", app.telenorSite)
+                .header("clisessionid", cliSessionId)
+                .when()
+                .get(app.dipocket3_intranet+"/WebServices/v1/clientProfile/clientInfo")
+                .then().log().all()
+                .assertThat().statusCode(200)
+                .assertThat().body("email", equalTo(newEmail))
+                .assertThat().body("fullName", equalTo("Pavel TestQA"));
+    }
+
+    @Test(priority = 6)
+    public void test_confirm_email_link_from_mailsac() throws InterruptedException {
+        //String link_link = app.getTelenorHelper().getChageEmailConfirmationTelenorLinkFromMailSac();
+        String link_link = app.getTelenorHelper().getEmailConfirmationTelenorLinkFromMailSac("telenorchangeemailtest@mailsac.com");
+        System.out.println("link_link: " + link_link);
+        given().log().uri().log().headers().log().body()
+                .when()
+                .get(link_link)
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("html.body.div.div.div.p", equalTo("You have successfully confirmed your email address"))
+                .body("html.body.div.div.div.h2", equalTo("Thank you!"));
     }
 }

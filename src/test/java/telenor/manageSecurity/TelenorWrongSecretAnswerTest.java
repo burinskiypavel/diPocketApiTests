@@ -1,4 +1,4 @@
-package telenor;
+package telenor.manageSecurity;
 
 import base.TestBase;
 import io.restassured.response.Response;
@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.blankOrNullString;
 
 public class TelenorWrongSecretAnswerTest extends TestBase {
     String smsCode = "111111"; // app.generateRandomNumber(6);
