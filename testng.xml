@@ -197,7 +197,7 @@
 
 <!--    <test name="TelenorBlockCardTest">-->
 <!--        <classes>-->
-<!--            <class name="telenor.TelenorBlockCardTest"/>-->
+<!--            <class name="telenor.cardOperation.TelenorBlockCardTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
@@ -215,7 +215,7 @@
 
 <!--    <test name="TelenorUnblockCardTest">-->
 <!--        <classes>-->
-<!--            <class name="telenor.TelenorUnblockCardTest"/>-->
+<!--            <class name="telenor.cardOperation.TelenorUnblockCardTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
@@ -233,7 +233,7 @@
 
 <!--    <test name="TelenorOffloadFundsTest">-->
 <!--        <classes>-->
-<!--            <class name="telenor.TelenorOffloadFundsTest"/>-->
+<!--            <class name="telenor.cardOperation.TelenorOffloadFundsTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 

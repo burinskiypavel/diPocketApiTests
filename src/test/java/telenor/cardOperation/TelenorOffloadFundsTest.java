@@ -1,4 +1,4 @@
-package telenor;
+package telenor.cardOperation;
 
 import base.TestBase;
 import io.restassured.mapper.ObjectMapperType;
