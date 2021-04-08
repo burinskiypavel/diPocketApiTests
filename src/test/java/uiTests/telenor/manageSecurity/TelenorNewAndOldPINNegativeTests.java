@@ -1,4 +1,4 @@
-package uiTests.telenor;
+package uiTests.telenor.manageSecurity;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertFalse;
 
-public class TelenorNewPINsAreNotMatchedUITests extends UITestBase {
+public class TelenorNewAndOldPINNegativeTests extends UITestBase {
     String expectedPhone = "38 063 608 3315"; //38 098 031 6499
     String smsCode = "111111"; //app.generateRandomNumber(6);
 

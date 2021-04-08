@@ -1,4 +1,4 @@
-package uiTests.telenor;
+package uiTests.telenor.manageSecurity;
 
 import base.UITestBase;
 import org.openqa.selenium.By;

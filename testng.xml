@@ -259,9 +259,9 @@
 
 
 
-    <test name="TelenorNewPINsAreNotMatchedUITests">
+    <test name="TelenorNewAndOldPINNegativeTests">
         <classes>
-            <class name="uiTests.telenor.TelenorNewPINsAreNotMatchedUITests"/>
+            <class name="uiTests.telenor.manageSecurity.TelenorNewAndOldPINNegativeTests"/>
         </classes>
     </test>
 
@@ -375,13 +375,13 @@
 
     <test name="TelenorManageSecurityNegativeTests">
         <classes>
-            <class name="uiTests.telenor.TelenorManageSecurityNegativeTests"/>
+            <class name="uiTests.telenor.manageSecurity.TelenorManageSecurityNegativeTests"/>
         </classes>
     </test>
 
     <test name="TelenorChangeEmailWithInvalidDataTest">
         <classes>
-            <class name="uiTests.telenor.TelenorChangeEmailWithInvalidDataTest"/>
+            <class name="uiTests.telenor.manageSecurity.TelenorChangeEmailWithInvalidDataTest"/>
         </classes>
     </test>
 
