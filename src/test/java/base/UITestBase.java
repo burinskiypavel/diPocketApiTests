@@ -12,6 +12,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -179,6 +180,14 @@ public class UITestBase {
         waitForSeveralItems(new String[]{"Change Secret answer", "Change E-mail"});
     }
 
+    public void gotoOffloadFundsPage() {
+        driver.findElement(By.cssSelector("a[href='/en/cabinet/offload']")).click();
+        waitForSeveralItems(new String[]{"Beneficiary", "Name", "Surname", "Account #", "If you confirm, you will irrevocably lose all the extra functionality available to registered customers and you will not be able to register again with the same mobile number"});
+        Assert.assertTrue(isButtonEnabled(By.cssSelector("a[href='/en/cabinet']")));
+        Assert.assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='offload-confirm']")));
+        Assert.assertTrue(isElementPresent(By.name("agreeDelete")));
+    }
+
     public void gotoFullRegistrationPage() throws InterruptedException {
         //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3[contains(text(), 'Full Registration')]")));
         //wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='/en/security/fdd']")));
@@ -204,6 +213,10 @@ public class UITestBase {
 
     public boolean isButtonEnabled(By locator) {
         return driver.findElement(locator).isEnabled();
+    }
+
+    public boolean isCheckboxSelected(By locator){
+        return driver.findElement(locator).isSelected();
     }
 
     public boolean isElementPresent(By locator) {

@@ -40,6 +40,7 @@ public class ApplicationManager {
     public String bannedPhone = "380639348839";
     public String loginBannedPhone = null;
     public String hexRedColor = "#ff422a";
+    public String offloadFundsPhone = "380932485981";
 
     //private MailHelper mailHelper;
 

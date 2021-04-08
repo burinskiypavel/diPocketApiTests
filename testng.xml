@@ -421,5 +421,11 @@
         </classes>
     </test>
 
+    <test name="TelenorOffloadFundsWithoutDataInAccountFieldTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorOffloadFundsWithoutDataInAccountFieldTest"/>
+        </classes>
+    </test>
+
 
 </suite>

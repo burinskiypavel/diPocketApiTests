@@ -18,12 +18,11 @@ import static org.hamcrest.Matchers.blankOrNullString;
 public class TelenorOffloadFundsTest extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
-    String offloadFundsPhone = "380932485981";
-    String offloadFundsLoginPhone =  "$5_" + offloadFundsPhone;
+    String offloadFundsLoginPhone =  "$5_" + app.offloadFundsPhone;
 
     @Test(priority = 1)
     public void test_CustomerServicesDev_v1_card_cashLoad() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().activateClientFromDBTelenor(offloadFundsPhone);
+        app.getDbHelper().activateClientFromDBTelenor(app.offloadFundsPhone);
         Response res = given().log().uri().log().headers().log().body()
                 .header("content-type", "application/json")
                 .header("Authorization", "Basic SEVMTE9QQVk6U2RPQzVFTg==")
@@ -49,7 +48,7 @@ public class TelenorOffloadFundsTest extends TestBase {
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .body("{\n" +
-                        "  \"phoneNumber\" : \""+offloadFundsPhone+"\"\n" +
+                        "  \"phoneNumber\" : \""+app.offloadFundsPhone+"\"\n" +
                         "}")
                 .when()
                 .post(app.dipocket3_intranet+"/TestServices/v1/telenor/sendOtpForPhone/"+smsCode+"");
@@ -126,7 +125,7 @@ public class TelenorOffloadFundsTest extends TestBase {
                 .then().log().all()
                 .assertThat().statusCode(200)
                 .assertThat().body("trnCcy", equalTo("HUF"));
-//                .assertThat().body("trnAmount", equalTo(200000))
+                //.assertThat().body("trnAmount", equalTo(200000))
     }
 
     @Test(priority = 7)
