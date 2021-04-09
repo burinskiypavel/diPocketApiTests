@@ -135,6 +135,9 @@ public class UITestBase {
     public void gotoRegisterPaymentBandPage() {
         driver.findElement(By.cssSelector("a[href='/en/register']")).click();
         waitForSeveralItems(new String[]{"Register payment band", "Login data", "Card number"});
+        Assert.assertTrue(isButtonEnabled(By.cssSelector("a[href='/en/']")));
+        Assert.assertTrue(isButtonEnabled(By.cssSelector("button[data-dpwa-action='register-check']")));
+        Assert.assertTrue(isElementPresent(By.id("agreeProcessInfo")));
     }
 
     public void gotoLoginPage() {

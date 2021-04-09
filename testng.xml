@@ -427,5 +427,11 @@
         </classes>
     </test>
 
+    <test name="TelenorRegistrationVerificationWithTokenIsAlreadyLinkedWithAccountTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationWithTokenIsAlreadyLinkedWithAccountTest"/>
+        </classes>
+    </test>
+
 
 </suite>
