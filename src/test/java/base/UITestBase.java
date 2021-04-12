@@ -110,6 +110,7 @@ public class UITestBase {
 
 
     public String getTextFromPopUp() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Ok')]")));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='false']")));
         return driver.findElement(By.cssSelector("div.uk-modal-content")).getText();
     }
