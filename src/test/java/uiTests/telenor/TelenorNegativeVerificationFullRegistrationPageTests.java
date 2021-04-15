@@ -13,10 +13,10 @@ public class TelenorNegativeVerificationFullRegistrationPageTests extends UITest
     String phone = "380684764228";
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 1)
     public void testVerificationWithInvalidDataYourTemporarySecretAnswerField() throws SQLException, ClassNotFoundException, InterruptedException {
-            app.getDbHelper().blockClientFromDBTelenor(phone);
-            app.getDbHelper().activateClientFromDBTelenor(phone);
+            //app.getDbHelper().blockClientFromDBTelenor(phone);
+            //app.getDbHelper().activateClientFromDBTelenor(phone);
             navigateToTelenorAndLogin2(phone, smsCode);
             gotoFullRegistrationPage();
             click(By.cssSelector("button[data-dpwa-image-id='selfie-neutral']"));
