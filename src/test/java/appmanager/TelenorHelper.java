@@ -32,28 +32,28 @@ public class TelenorHelper {
         assertThat(images[0].getTypeId(), equalTo("1"));
         //assertThat(images[0].getBase64Image(), equalTo("/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a\r\nHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy\r\nMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAB4AKADASIA\r\nAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA\r\nAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3\r\nODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm\r\np6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA\r\nAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx\r\nBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK\r\nU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3\r\nuLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDL2j0o\r\nKClLjNIXGaCRNo9KPLz2pdwp6sM9aBiCHnipkiBpVIz1qZMUhgsI9KmEPtTkxUykUARCPHaniOpB\r\nt60uRQA0IKdsHSgMPWnBxQAhjFRmMVNvFNLCmBAyD0qB0FWXYVAzCgRAyj0qJkqdmFRMwzQJlaRQ\r\nAeKzZhzWjM4wazZnGetMB5n96PO96ohzS7sikMvCb3p6y+9UVY5qVTQMvpPxVlJ/esxSamRiKQGq\r\ns2ak87FZyScVIHJoAvfaPel8/wB6ohqC1AFv7R70oufeqOTSg5oAvfafekNz71RycUm40AW2uM96\r\nha4warnNQsTTAsNPUDz80wkmoWzQIJp+OtZs1xnvU1weKyrhyKBmqIz1p6xe1aK2vtUgtfagRnrG\r\nfSpUhOa0EtMnpVhbQelAzOWI+lPEZrTW0HpUgtQe1IDLVD6VKENaK2mD0qQWg9KBmYIzS+UTWp9m\r\nHpTha+1AGV5Z9KXyyeorU+yj0o+yj0oAyjD7U3yTWyLUUn2T2oEYphPpTGgPpW2bUc8Uw2w9KYGE\r\nYjUTRHHStxrUelQvajnigDm7pODWRPGTziuqu7bGeKyZbbnpQB0ioKlCUiCp1WgSESPParCR+1Ig\r\nqdaBiCMelPEYpwFPUUgGhB6U8IKcB608CgCLZTggp9AFAxNg9KUR04U8LzQBHs9qQx+1WNtIVoEV\r\nWTnpUbJx0q4yj0qvIKAKzJxUDpVthUMgpgZF2M9qyJV5rZuz1rIlHNAG0hqwlV0HNWExQSTJzU6g\r\nVClTLQMlApw601aeB3oGOAooozSAXvThTBUgFAxypUgWkXjFSLQAu2mEYqXtTSKBER6Yqs4NWTUM\r\nlMCuwqCXgVYbiqsx4oAyrs9aypetaN2ck1mvyaANtOtTpUCVPHTJROnBqdahSp05pDJVFSDiowKe\r\nKBi0UhNJnNADhUi1EKepoAmFSCogaeW4oAfupjPxUZeo2egB7NULtSM/FRM1ACOaqTnANTO1Vbhv\r\nloEZNy3J5qg55q1cN8xqkx5oA3UParCGqak96sI1UTcuxkVOpFU0ap1akMtBuacGqvupwfNAyYtm\r\nk7VHvFLu4pDJAQKeDzUAbmnq2KAJwcc0hc1FuxSF+KAHs+Kid6QvUbNzQApamFuKYSaaTTEKze9U\r\n7l/lOKnY1SuWwDRYDMnOSaqk1NKeahzk0Aaiv05qwj980UVo0STo49amV6KKgEP305X96KKRQ7f7\r\n04NRRQA7dTg9FFIYm/3ppfPeiigBvmUhbNFFMBpYUxmoopiI2NUbphiiijqIypD1qNfvCiihAf/Z"));
         assertThat(images[0].getBase64Image(), equalTo("/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a\r\nHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy\r\nMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAB8AH0DASIA\r\nAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA\r\nAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3\r\nODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm\r\np6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA\r\nAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx\r\nBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK\r\nU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3\r\nuLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDmaKKK\r\n8M/XAooooAKKKKACiiigApQxUgqSCOhBwaSigB7TSuMNLIw9GckUyiimCVgooopAFKKSgUAFFFFA\r\nBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABSikoFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQ\r\nAUCigUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABQKKBQAUUUUAFFFFABRRRQAUUUUAFFFF\r\nABRRRQAUUUUAFAooFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUCigUAFFFFABRRRQAUUU\r\nUAFFFFABRRRQAUUUUAFFFFABQKKBQAUU512uR6UmKAEopcUYoASilxRigBKKXFGKAEopcUYoASil\r\nxRigBKKXFGKAEoFLiigD/9k="));
-        assertThat(images[0].getStateID(), equalTo("0"));
+        assertThat(images[0].getStateID(), equalTo("10"));//0
         assertThat(images[0].getImageType(), equalTo("SELFIE"));
-        assertThat(images[0].getImageState(), equalTo("NEW"));
+        assertThat(images[0].getImageState(), equalTo("APPROVED"));
 
         assertThat(images[1].getTypeId(), equalTo("2"));
         assertThat(images[1].getBase64Image(), equalTo("/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a\r\nHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy\r\nMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAB4AKADASIA\r\nAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA\r\nAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3\r\nODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm\r\np6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA\r\nAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx\r\nBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK\r\nU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3\r\nuLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDM2CkK\r\nCnFx69abvX1oJE2e1LsyaAw9aepGaBgIgalSGlUjirCYNIBqRVMsPtT0xUwIoGQiPtipAgzUgxRk\r\nUAIsY9KXyxmlDCnBhQA3yxTGTnpU24U0sKAIGSoHUZqy7Cq7MKYiBlFRsuM1OzCoWYUCK8igLWbP\r\n1NaMrjBrMmcZPNMB/nUedVLefWlDHPWkMvCapFl96oAmpVJ4pDLyz+9WY5+nNZqk1MjEUAaqTe9S\r\nCbHes5H4qQPmgC95/vQZ+OtUg5pCxoAufaMd6UXHvVHJpRkUAXjc003PvVIsaaWJoAttcj1qFrj5\r\nutV2JqJiaYFhrioWn96iOTULZzQIJp+OtZs83Xmp7gnBrJuHIzQBrCM08Rn0rRW29qkFrQBnLHUy\r\nRVoJacjip0tAO1IZnLEcdKeIjWotr7U8WvtQBlrG1Sqp9K0hac9KkFoPSgZmCM0vlH0rU+yj0pRa\r\n+1IDLERNL5RrUFr7UfZcUwMoxH0phiNbItKT7IPSgRimE+lMaEntW4bUelRm1HpTAw2iPpUTx+1b\r\nrWo9Kge1XHSgDm7lODWRPESeldVd23HSsmW2GelAHRqmalVPakUdBU6LQIEQelWFjpFX2qZRQMBG\r\nPSnhBmlAqQCkAwIM9KkCU4CnADFAEeylC8080oFAxNgpdgpwp6ikBGEpDGPSp9tBWmIqtGKjZOKt\r\nlagcc0wKzJx0qB09RVtqhkHFAGReKOayJV56VsXnesmYc0AbKVYSoE4qdKCSdamSok5qZenSgokF\r\nPApq0+gBwxRRRSAKeOaYKkUHrQMcFqQLSLUgFABikIwakxxTTQIhaq7irLdagkHOaYFdhzUMuMVY\r\nfiqsx4oAyrvvWVKea0rtutZbnJoA21qdKgTrViOmSidKnWoUqdRmkMkWpO1MWnjpQMWkzQeKTNAD\r\nhUimogeaepxQBMDUgNQqQafuGKQEhIHemM9Rl6jZqYDmaoZGzSM9RM9ACOfU1VmPympmaqlw3BoE\r\nZV03JrPY81buD8xqk3NMDcU1ZQ96pq1WEbvTZKLsZzU69apo9Tq1IZZVqfuGKrb6cHoGTE5NHeot\r\n/NLupDJQaeDVcNUitQBMD3oL1FuHrSF+KAHs1RM9NLZqNjQA5npjNxTCeaYTTAVmqpcv8pqdjVG5\r\nPymgRmznmqrGppTyagzzxQDNRGqwr+lFFW1qSWEeplf3oopDHh6cH4ooqbDHbqcGoooQDg1OD0UU\r\nDEL00ye9FFADfMppfNFFAhMimMaKKAImbmqN03FFFMDLkbrUS/eoooW4mf/Z"));
-        assertThat(images[1].getStateID(), equalTo("0"));
+        assertThat(images[1].getStateID(), equalTo("10"));//0
         assertThat(images[1].getImageType(), equalTo("PHOTOID"));
-        assertThat(images[1].getImageState(), equalTo("NEW"));
+        assertThat(images[1].getImageState(), equalTo("APPROVED"));
 
         assertThat(images[2].getTypeId(), equalTo("3"));
         assertThat(images[2].getBase64Image(), equalTo("/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a\r\nHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy\r\nMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAB4AKADASIA\r\nAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA\r\nAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3\r\nODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm\r\np6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA\r\nAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx\r\nBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK\r\nU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3\r\nuLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDM2Ck2\r\nDsKcZBmkLgnigkQJ7UCPJpQwp6EUDBYhUqxChSKsJigY1YhnpU6w05cCpgVoAiEWO1PEfNSfLml4\r\nFIBoQZpwQZo3CnKw9aAEMYx0qNoxUxcU0stMCBk9agZRVl296gdqBEDIPSomQY6VOzLUTuM9aAKs\r\nq4Ws6YZJzWlK4xWZO4yaYkO86jzqpbzS7jj3pDLwmNSLLVBSc1KpNAF9JsGrCT1mqTUyMRSGaqTZ\r\nFSCb3rOSSpA/FAF7z6Uz1RDnFG4mgC59o96Bcc9ao5pc0AXvtPvSG596o7jTSTTAuNc1C9x71WYm\r\no2JxQBO0+T1qFp6iJNQvmgBZp8L1rMmuOvNTzk4rKuH5oFY1RGTziniM9a0FtvapVtRjpQBnrFUq\r\nxHNaK2ntU62gwOKBmcsR9KeIj6Vpraj0qQWo9KAMtY2zUoQ+laItfapBaCkMzBGcUvlGtQWopRbC\r\ngDL8o+lL5Rx0rU+y80fZfagDKMXtTTEa2Ba0fZR6UCMUxH0NMMJNbbWwqM2o9KYGG0R9KjeLjpW4\r\n1qPSoHtR6UAc3cxkA1kTxk9q6q7tgM8cVky23PSgDo0TmpVShBU6CglAiVOkdIi1Oo4oKECU8IKc\r\nBTwKQDQgz0p4SnAU8YoAi2YpwQU+gUDECcdKUIPSninAUAR+XzR5dThaQigCqyVGycVcK8VA/WmI\r\nqsnFQMnWrZ6VDIOKAMi8HWsiVRmtm771kS8mgRspVhKgUc1OlAiwtSpUSip1FAyQU4U1etSCgYoF\r\nLRSUAL3pwFNFPUUhjlWpFWkWpRQAbaaRUnamkUxETc1Xcdast1xUD9aAK5FQS8CrDnmq0x4oAybs\r\n5zWVLwa0btutZr8mmI21qdKrpVhKCUTpU61CnSp1oKJVx6U/tTBTxSAWig0lAxRUimogakU80ASj\r\nrUoqFTzT94xQA8t701n4qIvUbPQA9myahduaQvUbPQA1zVWY4U1MzZqpcNwaYjJuX5NUGPzVauG+\r\nY1SJ5oA3UPNWENU1arCNVNEl2M5FWFOBVJHqdHpWGWgacGqsHp4ekMmLUVFvpd3vQMlBpwNQAnNP\r\nDc0gJw1G7NRb8U0vx1oAkZ8d6iZ6aW96jY8UAKz00vxTGNMJpiFZsVSuZPlNWGPFUbk/KaYGbO2S\r\naqseamlPJqDOTSQGqr89anR6KK0sQWFephJRRU2KH76cHzRRSYIdu96eGoopDFD04PRRQMQye9NM\r\nlFFADS9NL0UUCEzTCaKKaEyNjVG6bjmiinYDKlPU1EvLCiiktxn/2Q=="));
-        assertThat(images[2].getStateID(), equalTo("0"));
+        assertThat(images[2].getStateID(), equalTo("10"));
         assertThat(images[2].getImageType(), equalTo("PROOFOFADDRESS"));
-        assertThat(images[2].getImageState(), equalTo("NEW"));
+        assertThat(images[2].getImageState(), equalTo("APPROVED"));
 
         assertThat(images[3].getTypeId(), equalTo("4"));
         //assertThat(images[3].getBase64Image(), equalTo("/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a\r\nHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy\r\nMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAB4AKADASIA\r\nAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA\r\nAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3\r\nODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm\r\np6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA\r\nAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx\r\nBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK\r\nU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3\r\nuLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDL2YpC\r\ngpxcetNLj8aBBsFHlilDD1pysM9aAFWOpUiHpQrDtVhMcUhjVhGelTLCPSnpiphjFAEQiGKeE9qk\r\nGKMigBAg9KXYKUMM04MKAGmMYphj9qm3DFNLD1pgQMg9KgZB6VZdhUDMKAICoqNkGamZhULuKBFa\r\nUcGs6cDmtGZxisyZxk0ASed70nnVSDketKHNAF4Tc9akE1UFJqZTmkMupMfWrMc/vWcualUkUAay\r\nTZ70/wA/FZyOakDk0AXvP96PPx3qluzQWOKALZuPelFx71Ry2aMmgC/9o96Q3PvVEsaaWNAFx7nj\r\nrUBuOKrsTUbHBpgTvce9QtP71EaifIoAJ5+OKzJp8EnNT3BOOtZVw+CaANURnPtThEc1pLa+1SLa\r\nD0oAz1j9qlWI+laCWntVhbQelAGcsRx0p4iNaS2ox0qQWgx0pAZio3pUioeeK0ha47VILUelAzME\r\nZpfKJrU+y+1KLUelILmWIj6UvlnHStT7L7UfZaYGWYvamGE9hWwLX2o+y+1AGKYT6VGYT6VuNaj0\r\nqM2ox0oEYZiI7VE8ZNbjWox0qF7UelMDm7pCFPFZE0ZJ6Zrqru2AzxWTLbDPSgDo1jqZU9qRBU6r\r\nmgQJGKmWMYoRfWplGKBgEHpTggp4FOApANCc1IEpQKeBQMZsoC0/FKBSGJspfLpw9KeozQBH5ftS\r\nGOrG2kK0xMqslRlKuMvtVdxjNMRVaOoWSrZqCQcUAZN4vWsiVRmti74rJlzzQBtIasJVdKsJQInS\r\nplFQoKmWgZIKeBTRzT8UAOAooFGfakAtKKaKkUUDHKtSqvNNHFSCgBcU0ipMU0igCFuRVdxVlqgk\r\n60xEBHNQS9KsMRVaY8UAZN2eTWVKa0rtuTzWW/LUAbi1OlV06VYSmIsJUy4qFKnWkBIKkFMXmn96\r\nBi0hoJpKAHLUi1CDUimkMmWpBUSmnFhigCTdTGf3qMvUbPTEPL1C7ZFNLVGz0ANc1Vnbg1M7VUuG\r\n+WgDKum5NZ7HnNW7hjk1TbrQBuKeasIcVTU+9WEaqZJdQ1OpqojVMrcUhlkNinhqrb6eHpDJScmi\r\no91G4UASg4p4NVwakVvWgCYGgtxUW+kZ+KAHlqiZ6QtmomNADmemM3FMJ5ppNMBS1Url/lNWGNUb\r\no/LQIzZ2yTVUnmppW+Y1D/FQBqI/PNWEfpRRVkosK9SrJRRUjHh6cHoopMY7fTg1FFIY4PS76KKd\r\ngDzKaXoooAbvppaiikAhYetMY0UUxEbHmqF0wx1oopgZch5NRLy1FFAH/9k="));
         assertThat(images[0].getBase64Image(), equalTo("/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a\r\nHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy\r\nMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAB8AH0DASIA\r\nAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA\r\nAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3\r\nODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm\r\np6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA\r\nAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx\r\nBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK\r\nU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3\r\nuLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDmaKKK\r\n8M/XAooooAKKKKACiiigApQxUgqSCOhBwaSigB7TSuMNLIw9GckUyiimCVgooopAFKKSgUAFFFFA\r\nBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABSikoFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQ\r\nAUCigUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABQKKBQAUUUUAFFFFABRRRQAUUUUAFFFF\r\nABRRRQAUUUUAFAooFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUCigUAFFFFABRRRQAUUU\r\nUAFFFFABRRRQAUUUUAFFFFABQKKBQAUU512uR6UmKAEopcUYoASilxRigBKKXFGKAEopcUYoASil\r\nxRigBKKXFGKAEoFLiigD/9k="));
-        assertThat(images[3].getStateID(), equalTo("0"));
+        assertThat(images[3].getStateID(), equalTo("10"));
         assertThat(images[3].getImageType(), equalTo("SELFIE2"));
-        assertThat(images[3].getImageState(), equalTo("NEW"));
+        assertThat(images[3].getImageState(), equalTo("APPROVED"));
     }
 
     public void checkAllRowsOfTelenorClientInfoResponse(ClientInfo clientInfo) {
@@ -75,7 +75,7 @@ public class TelenorHelper {
         assertThat(clientInfo.getCcyCode(), equalTo("HUF"));
         assertThat(clientInfo.getBirthDate(), equalTo("946677600000"));
         assertThat(clientInfo.getBirthDateAsDate(), equalTo("2000-01-01"));
-        assertThat(clientInfo.getDdStatus(), equalTo("PSDD"));
+        assertThat(clientInfo.getDdStatus(), equalTo("FDD"));
         assertThat(clientInfo.getCardholderName(), equalTo("Pavel Test"));
         assertThat(clientInfo.isRegisteredAddrAsmail(), equalTo(true));
         assertThat(clientInfo.getCardholderNameState(), equalTo("VERIFIED"));
@@ -212,7 +212,7 @@ public class TelenorHelper {
 
         assertThat(authAuthenticate.getBirthDate(), equalTo("946677600000"));
         assertThat(authAuthenticate.getBirthDateAsDate(), equalTo("2000-01-01"));
-        assertThat(authAuthenticate.getDdStatus(), equalTo("PSDD"));
+        assertThat(authAuthenticate.getDdStatus(), equalTo("FDD"));
         assertThat(authAuthenticate.getCardholderName(), equalTo("Pavel Test"));
         assertThat(authAuthenticate.getClientIsNew(), equalTo(false));
         assertThat(authAuthenticate.getCardholderNameState(), equalTo("VERIFIED"));
@@ -220,29 +220,29 @@ public class TelenorHelper {
         List<Imagesstatus> imagesstatuses = Collections.singletonList(authAuthenticate.getImagesStatus().get(0));
         for(Imagesstatus imagesstatus : imagesstatuses){
             assertThat(imagesstatus.getTypeId(), equalTo(1));
-            assertThat(imagesstatus.getStateID(), equalTo(0));
+            assertThat(imagesstatus.getStateID(), equalTo(10));
             assertThat(imagesstatus.getImageType(), equalTo("SELFIE"));
-            assertThat(imagesstatus.getImageState(), equalTo("NEW"));
+            assertThat(imagesstatus.getImageState(), equalTo("APPROVED"));
             break;
         }
 
         Imagesstatus imagesstatus1 = authAuthenticate.getImagesStatus().get(1);
         assertThat(imagesstatus1.getTypeId(), equalTo(2));
-        assertThat(imagesstatus1.getStateID(), equalTo(0));
+        assertThat(imagesstatus1.getStateID(), equalTo(10));
         assertThat(imagesstatus1.getImageType(), equalTo("PHOTOID"));
-        assertThat(imagesstatus1.getImageState(), equalTo("NEW"));
+        assertThat(imagesstatus1.getImageState(), equalTo("APPROVED"));
 
         Imagesstatus imagesstatus2 = authAuthenticate.getImagesStatus().get(2);
         assertThat(imagesstatus2.getTypeId(), equalTo(3));
-        assertThat(imagesstatus2.getStateID(), equalTo(0));
+        assertThat(imagesstatus2.getStateID(), equalTo(10));
         assertThat(imagesstatus2.getImageType(), equalTo("PROOFOFADDRESS"));
-        assertThat(imagesstatus2.getImageState(), equalTo("NEW"));
+        assertThat(imagesstatus2.getImageState(), equalTo("APPROVED"));
 
         Imagesstatus imagesstatus3 = authAuthenticate.getImagesStatus().get(3);
         assertThat(imagesstatus3.getTypeId(), equalTo(4));
-        assertThat(imagesstatus3.getStateID(), equalTo(0));
+        assertThat(imagesstatus3.getStateID(), equalTo(10));
         assertThat(imagesstatus3.getImageType(), equalTo("SELFIE2"));
-        assertThat(imagesstatus3.getImageState(), equalTo("NEW"));
+        assertThat(imagesstatus3.getImageState(), equalTo("APPROVED"));
     }
 
     public void read_write() throws IOException {
