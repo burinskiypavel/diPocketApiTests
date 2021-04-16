@@ -232,4 +232,25 @@ public class DBHelper extends HelperBase {
         stmt.executeQuery(commit);
         con.close();
     }
+
+    public void unblockClientFromBOFromDBTelenor() throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+
+        String query2 = "commit";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection connection = DriverManager.getConnection(dbUrl, username, password);
+
+        CallableStatement myCall = connection.prepareCall("{call PKB_CLIENTPROFILE.UNBLOCKCLIENT(CLIENT_ID=>'31751',UNBLOCK_REASON=>'test',TICKET_ID=>'null')}");
+        myCall.executeUpdate();
+
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs2= stmt.executeQuery(query2);
+
+        connection.close();
+    }
 }
