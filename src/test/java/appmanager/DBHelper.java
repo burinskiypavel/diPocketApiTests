@@ -244,7 +244,7 @@ public class DBHelper extends HelperBase {
 
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
-        CallableStatement myCall = connection.prepareCall("{call PKB_CLIENTPROFILE.UNBLOCKCLIENT(CLIENT_ID=>'31751',UNBLOCK_REASON=>'test',TICKET_ID=>'null')}");
+        CallableStatement myCall = connection.prepareCall("{call PKB_CLIENTPROFILE.UNBLOCKCLIENT(p_Username=>'DIPCBO1',p_ClientID=>31751,p_UnblockReason=>'test',p_TicketID=>null)}");
         myCall.executeUpdate();
 
         Statement stmt = connection.createStatement();
