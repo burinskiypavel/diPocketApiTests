@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF45000Test extends TestBase {
+public class TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
 
@@ -103,6 +103,6 @@ public class TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF45000Test extends
                 .then().log().all()
                 .assertThat().statusCode(400)
                 .assertThat().body("errCode", equalTo("DIP-00216"))
-                .assertThat().body("errDesc", equalTo("The amount you entered is above the maximum limit, which is HUF 45000.00 for this type of transaction"));
+                .assertThat().body("errDesc", equalTo("The amount you entered is above the maximum limit, which is HUF 150000.00 for this type of transaction"));
     }
 }

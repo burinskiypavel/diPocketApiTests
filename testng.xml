@@ -243,9 +243,9 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF45000Test">-->
+<!--    <test name="TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test">-->
 <!--        <classes>-->
-<!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF45000Test"/>-->
+<!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
