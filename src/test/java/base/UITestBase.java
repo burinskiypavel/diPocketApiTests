@@ -316,6 +316,12 @@ public class UITestBase {
         assertThat(hex2, equalTo("#ff422a")); //red
     }
 
+    public void checkThatUntickedCheckboxHasRedColor(By locator) throws InterruptedException {
+        String hexColor = getColorOfElement(locator, "color");
+
+        assertThat(hexColor, equalTo("#ff0000")); //red
+    }
+
     public void fillRegisterForm(String firstName, String lastName, String birthDate, String email, String streetLine1, String streetLine2, String city, String country, String postcode, String secAnswer) {
         waitForSeveralItems(new String[]{"Name", "Surname"});
         wait.until(ExpectedConditions.elementToBeClickable(By.id("firstName")));

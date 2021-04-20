@@ -265,11 +265,11 @@
         </classes>
     </test>
 
-<!--    <test name="TelenorUntickedCheckboxForPersonalInformationProcessingUITest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorUntickedCheckboxForPersonalInformationProcessingUITest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="TelenorRegistrationVerificationUntickedCheckboxForPersonalInformationProcessingTest">
+        <classes>
+            <class name="uiTests.telenor.TelenorRegistrationVerificationUntickedCheckboxForPersonalInformationProcessingTest"/>
+        </classes>
+    </test>
 
     <test name="TelenorRegistrationVerificationWithInvalidTokenTest">
         <classes>

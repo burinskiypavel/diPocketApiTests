@@ -33,7 +33,7 @@ public class TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests ext
     }
 
     @Test(priority = 2)
-    public void testUntickedCheckboxForPersonalInformationProcessing() throws SQLException, ClassNotFoundException, InterruptedException {
+    public void testRegistrationVerificationWithEmpty2CheckBoxes() throws SQLException, ClassNotFoundException, InterruptedException {
         gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         gotoRegisterPaymentBandPage();
         type(By.name("publicToken"), token);
