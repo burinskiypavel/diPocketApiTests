@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
-public class TelenorNegativeCheckBalanceTests extends UITestBase {
+public class TelenorCheckBalanceNegativeTests extends UITestBase {
 
     @Test(priority = 1)
     public void testCheckEmptyCardNumberField() throws InterruptedException {

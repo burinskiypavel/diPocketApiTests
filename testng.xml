@@ -355,15 +355,15 @@
         </classes>
     </test>
 
-    <test name="TelenorNegativeVerificationFullRegistrationPageTests">
+    <test name="TelenorFullRegistrationPageNegativeVerificationTests">
         <classes>
-            <class name="uiTests.telenor.TelenorNegativeVerificationFullRegistrationPageTests"/>
+            <class name="uiTests.telenor.TelenorFullRegistrationPageNegativeVerificationTests"/>
         </classes>
     </test>
 
-    <test name="TelenorNegativeCheckBalanceTests">
+    <test name="TelenorCheckBalanceNegativeTests">
         <classes>
-            <class name="uiTests.telenor.TelenorNegativeCheckBalanceTests"/>
+            <class name="uiTests.telenor.TelenorCheckBalanceNegativeTests"/>
         </classes>
     </test>
 
