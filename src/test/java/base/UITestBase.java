@@ -173,6 +173,14 @@ public class UITestBase {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("secAnswer")));
     }
 
+    public void gotoForgotSecretAnswer() {
+        driver.findElement(By.xpath("//a[contains(text(), 'Forgot secret answer')]")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("email")));
+        waitForSeveralItems(new String[]{"Secret answer reset", "Please enter your email to reset your secret answer"});
+        Assert.assertTrue(isButtonEnabled(By.cssSelector("button[data-dpwa-action='sa-reset-request']")));
+        Assert.assertTrue(isButtonEnabled(By.xpath("//a[contains(text(), 'Back')]")));
+    }
+
     public void gotoChangeEmail() {
         driver.findElement(By.xpath("//a[contains(text(), 'Change E-mail')]")).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.id("email")));

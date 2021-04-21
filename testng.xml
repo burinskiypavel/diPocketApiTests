@@ -433,5 +433,11 @@
         </classes>
     </test>
 
+    <test name="TelenorSecretAnswerResetLeaveEmailFieldEmptyTest">
+        <classes>
+            <class name="uiTests.telenor.manageSecurity.TelenorSecretAnswerResetLeaveEmailFieldEmptyTest"/>
+        </classes>
+    </test>
+
 
 </suite>
