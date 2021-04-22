@@ -153,6 +153,18 @@ public class UITestBase {
         }
     }
 
+    public void waitForSeveralItems2(String mas []){
+        wait = new WebDriverWait(driver, 20);
+        for(int i = 0; i < mas.length; i++){
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mas[i])));
+        }
+    }
+
+    public void waitFor(By locator){
+        wait = new WebDriverWait(driver, 20);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
     public void gotoTelenorSiteAndDoneBasicAuth(String url, String login, String password) {
         //driver.navigate().to("https://dipocket:LeprechauN@telenor-test.dipocket.org");
         driver.navigate().to("https://"+login+":"+password+"@"+url+"");
@@ -175,8 +187,8 @@ public class UITestBase {
 
     public void gotoForgotSecretAnswer() {
         driver.findElement(By.xpath("//a[contains(text(), 'Forgot secret answer')]")).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("email")));
         waitForSeveralItems(new String[]{"Secret answer reset", "Please enter your email to reset your secret answer"});
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("email")));
         Assert.assertTrue(isButtonEnabled(By.cssSelector("button[data-dpwa-action='sa-reset-request']")));
         Assert.assertTrue(isButtonEnabled(By.xpath("//a[contains(text(), 'Back')]")));
     }
