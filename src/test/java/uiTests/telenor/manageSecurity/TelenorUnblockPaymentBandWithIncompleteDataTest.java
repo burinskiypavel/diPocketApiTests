@@ -24,7 +24,7 @@ public class TelenorUnblockPaymentBandWithIncompleteDataTest extends UITestBase 
     }
 
     @Test(dataProvider = "unblockPaymentBandWithIncompleteData")
-    public void testUnblockPaymentBandWithIncompleteData(String token) {
+    public void testUnblockPaymentBandWithIncompleteData(String token) throws InterruptedException {
         if(isElementPresent(By.id("publicToken"))){
             type(By.id("publicToken"), token);
 

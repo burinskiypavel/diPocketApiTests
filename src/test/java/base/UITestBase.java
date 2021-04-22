@@ -198,7 +198,10 @@ public class UITestBase {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("email")));
     }
 
-    public void gotoManageSecurityPage() {
+    public void gotoManageSecurityPage() throws InterruptedException {
+        Thread.sleep(400);
+        waitForSeveralItems(new String[]{"Top-up", "Manage security", "Card activity", "Your profile"});
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='/en/cabinet/security']")));
         driver.findElement(By.cssSelector("a[href='/en/cabinet/security']")).click();
         //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'Change PIN')]")));
         waitForSeveralItems(new String[]{"Change Secret answer", "Change E-mail"});

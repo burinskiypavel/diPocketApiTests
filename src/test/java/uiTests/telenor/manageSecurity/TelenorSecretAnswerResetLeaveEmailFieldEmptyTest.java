@@ -12,7 +12,7 @@ public class TelenorSecretAnswerResetLeaveEmailFieldEmptyTest extends UITestBase
     String smsCode = app.generateRandomNumber(6);
 
     @Test
-    public void testSecretAnswerResetLeaveEmailFieldEmpty() {
+    public void testSecretAnswerResetLeaveEmailFieldEmpty() throws InterruptedException {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         gotoChangeSecretAnswer();

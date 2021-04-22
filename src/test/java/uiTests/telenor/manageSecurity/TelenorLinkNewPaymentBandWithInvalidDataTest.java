@@ -11,7 +11,7 @@ public class TelenorLinkNewPaymentBandWithInvalidDataTest extends UITestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
 
     @Test
-    public void testLinkNewPaymentBandWithInvalidData() {
+    public void testLinkNewPaymentBandWithInvalidData() throws InterruptedException {
         navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
         gotoManageSecurityPage();
         if (isElementPresent(By.cssSelector("a[href='/en/security/block']"))) {
