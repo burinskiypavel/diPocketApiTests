@@ -1,11 +1,9 @@
 package tds;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroudResponse;
 import model.Entry;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -16,14 +14,14 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV1BioAcceptTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
 
     @Test(priority = 24)
-    public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() throws InterruptedException {
-        //HelperBase.waiter(6);
+    public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         System.out.println("app.TDSBaseUrl: " + app.TDSBaseUrl + " txid: " + randomTXID + " pan: " + app.pan);
         given().log().uri().log().headers().log().body()
                 .header("Content-Type", "application/xml")
@@ -31,7 +29,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
                         "        <txId>" + randomTXID + "</txId>\n" +
-                        "        <pan>5455980836095804</pan>\n" +
+                        "        <pan>" + app.pan + "</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
                         "        <deviceCategory>0</deviceCategory>\n" +
@@ -43,13 +41,12 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
-                .then()
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.chName", equalTo(""))
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
-                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"))
-                .log().all();
+                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
     @Test(priority = 25)
@@ -62,7 +59,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
                         "      <txId>" + randomTXID + "</txId>\n" +
-                        "      <pan>5455980836095804</pan>\n" +
+                        "      <pan>" + app.pan + "</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
                         "      <acqBIN>501900</acqBIN>\n" +
                         "      <merchant>CH</merchant>\n" +
@@ -86,7 +83,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all();
         String response = res.asString();
@@ -102,16 +99,15 @@ public class TDSV1BioAcceptTest extends TestBase {
         String[] masName = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
         String[] masValue = {randomTXID, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
-        Assert.assertEquals(res.getStatusCode(), 200);
+        assertEquals(res.getStatusCode(), 200);
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
-        Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-        Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
+        assertEquals(backgroudResponse.getDataStatus(), "0");
+        assertEquals(backgroudResponse.getPageId(), "bio-web.html");
     }
 
     @Test(priority = 26)
-    public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() throws InterruptedException {
-        //HelperBase.waiter(6);
+    public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
                 .header("Content-Type", "application/json")
@@ -119,9 +115,8 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
-                .then()
-                .log().all()
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/tranStatus.v1")
+                .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("AWAITING"));
     }
@@ -137,7 +132,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         res.then().log().all();
         tranId = res.asString();
         System.out.println("tranId " + tranId);
-        Assert.assertEquals(res.getStatusCode(), 200);
+        assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 28)
@@ -154,7 +149,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
 
         response.then().log().all();
-        Assert.assertEquals(response.getStatusCode(), 200);
+        assertEquals(response.getStatusCode(), 200);
     }
 
     @Test(priority = 29)
@@ -166,9 +161,8 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/tranStatus.v1")
-                .then()
-                .log().all()
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/tranStatus.v1")
+                .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("ACCEPTED"));
     }
@@ -196,9 +190,8 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
-                .then()
-                .log().all()
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundPares.paresStatus", equalTo("Y"));
     }
