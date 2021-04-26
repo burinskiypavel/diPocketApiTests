@@ -180,9 +180,10 @@ public class UITestBase {
         driver.findElement(By.xpath("//a[contains(text(), 'Change PIN')]")).click();
     }
 
-    public void gotoChangeSecretAnswer() {
+    public void gotoChangeSecretAnswer() throws InterruptedException {
+        Thread.sleep(400);
         driver.findElement(By.xpath("//a[contains(text(), 'Change Secret answer')]")).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("secAnswer")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("secAnswer")));
     }
 
     public void gotoForgotSecretAnswer() {
