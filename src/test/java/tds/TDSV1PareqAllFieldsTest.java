@@ -4,7 +4,6 @@ import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroudResponse;
 import model.Entry;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -15,6 +14,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV1PareqAllFieldsTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
@@ -26,8 +26,8 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
-                        "        <txId>"+randomTXID+"</txId>\n" +
-                        "        <pan>"+app.pan+"</pan>\n" +
+                        "        <txId>" + randomTXID + "</txId>\n" +
+                        "        <pan>" + app.pan + "</pan>\n" +
                         "        <acqBIN>412321</acqBIN>\n" +
                         "        <merID>501-string-value</merID>\n" +
                         "        <deviceCategory>0</deviceCategory>\n" +
@@ -40,9 +40,8 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "</backgroundRequest>")
                 .when()
                 .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
-                .then()
+                .then().log().all()
                 .statusCode(200)
-                .log().all()
                 .body("backgroundResponse.backgroundVeres.chName", equalTo(""))
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
                 .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
@@ -56,8 +55,8 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
-                        "      <txId>"+randomTXID+"</txId>\n" +
-                        "      <pan>"+app.pan+"</pan>\n" +
+                        "      <txId>" + randomTXID + "</txId>\n" +
+                        "      <pan>" + app.pan + "</pan>\n" +
                         "      <expiry>3306</expiry>\n" +
                         "      <acqBIN>501900</acqBIN>\n" +
                         "      <merchant>CH</merchant>\n" +
@@ -73,7 +72,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "      <purchaseRecurFreq>4</purchaseRecurFreq>\n" +
                         "      <purchaseRecurEnd>20200520</purchaseRecurEnd>\n" +
                         "      <purchaseInstallments>2</purchaseInstallments>\n" +
-                        "      <purchaseDate>"+now+"</purchaseDate>\n" +
+                        "      <purchaseDate>" + now + "</purchaseDate>\n" +
                         "      <channel>0</channel>\n" +
                         "      <sID>2</sID>\n" +
                         "      <xid>IWN8Tpt4ft1QcNIxvuMP80MAFmY=</xid>\n" +
@@ -103,10 +102,10 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
         String[] masName = {"TXID", "CONFIRM_TITLE", "SMS_SWITCH_MESSAGE", "CONFIRM_MESSAGE", "CONFIRM_MESSAGE_DONE", "SMS_MESSAGE", "CANCEL_TEXT"};
         String[] masValue = {randomTXID, "Confirm with mobile App", "Don’t have App at hand?", "To confirm the transaction, please open, review and confirm the notification we sent to your up and go App", "When done, you need to return to this screen and tap ‘Continue’", "Confirm with SMS code", "Cancel"};
 
-        Assert.assertEquals(res.getStatusCode(), 200);
+        assertEquals(res.getStatusCode(), 200);
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
-        Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-        Assert.assertEquals(backgroudResponse.getPageId(), "bio-web.html");
+        assertEquals(backgroudResponse.getDataStatus(), "0");
+        assertEquals(backgroudResponse.getPageId(), "bio-web.html");
     }
 }
