@@ -3,7 +3,6 @@ package tds;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroundARes;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -13,6 +12,7 @@ import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV2AreqAllFieldTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
@@ -26,7 +26,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundAReq>\n" +
-                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <acsTransID>" + randomAcsTransId + "</acsTransID>\n" +
                         "      <threeDSCompInd>Y</threeDSCompInd>\n" +
                         "      <threeDSRequestorAuthenticationInd>01</threeDSRequestorAuthenticationInd>\n" +
                         "      <threeDSRequestorAuthenticationInfo>\n" +
@@ -123,7 +123,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
                         "    \t</sdkUiType>\n" +
                         "      </deviceRenderOptions>\n" +
                         "      <dsReferenceNumber>EMVCo1234567</dsReferenceNumber>\n" +
-                        "      <dsTransID>"+dsTransId+"</dsTransID>\n" +
+                        "      <dsTransID>" + dsTransId + "</dsTransID>\n" +
                         "      <dsURL>integration test</dsURL>\n" +
                         "      <payTokenInd>false</payTokenInd>\n" +
                         "      <purchaseInstalData>2</purchaseInstalData>\n" +
@@ -154,7 +154,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
                         "      <purchaseAmount>6000</purchaseAmount>\n" +
                         "      <purchaseCurrency>840</purchaseCurrency>\n" +
                         "      <purchaseExponent>2</purchaseExponent>\n" +
-                        "      <purchaseDate>"+now+"</purchaseDate>\n" +
+                        "      <purchaseDate>" + now + "</purchaseDate>\n" +
                         "      <recurringExpiry>20190127</recurringExpiry>\n" +
                         "      <recurringFrequency>30</recurringFrequency>\n" +
                         "      <sdkAppID>012569</sdkAppID>\n" +
@@ -165,7 +165,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                     .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
@@ -176,10 +176,10 @@ public class TDSV2AreqAllFieldTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResAllFieldsObject(document);
 
-        Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "N");
-        Assert.assertEquals(backgroundARes.getMessageType(), "ARes");
-        Assert.assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroundARes.getTransStatus(), "Y");
+        assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
+        assertEquals(backgroundARes.getAcsChallengeMandated(), "N");
+        assertEquals(backgroundARes.getMessageType(), "ARes");
+        assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
+        assertEquals(backgroundARes.getTransStatus(), "Y");
     }
 }
