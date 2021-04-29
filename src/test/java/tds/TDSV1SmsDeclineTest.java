@@ -4,7 +4,6 @@ import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroudResponse;
 import model.Entry;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -15,6 +14,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV1SmsDeclineTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
@@ -41,13 +41,12 @@ public class TDSV1SmsDeclineTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
-                .then()
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.chName", equalTo("DON'TTOUCH"))
                 .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
-                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"))
-                .log().all();
+                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
     @Test(priority = 39)
@@ -84,7 +83,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -102,8 +101,8 @@ public class TDSV1SmsDeclineTest extends TestBase {
 
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
-        Assert.assertEquals(backgroudResponse.getDataStatus(), "0");
-        Assert.assertEquals(backgroudResponse.getPageId(), "sms_web.html");
+        assertEquals(backgroudResponse.getDataStatus(), "0");
+        assertEquals(backgroudResponse.getPageId(), "sms_web.html");
     }
 
     @Test(priority = 40)
@@ -116,7 +115,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
         res.then().log().all();
         tranId = res.asString();
         System.out.println("tranId " + tranId);
-        Assert.assertEquals(res.getStatusCode(), 200);
+        assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 41)
@@ -137,9 +136,8 @@ public class TDSV1SmsDeclineTest extends TestBase {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth.v1")
-                .then()
-                .log().all()
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundPares.paresStatus", equalTo("N"));
     }
