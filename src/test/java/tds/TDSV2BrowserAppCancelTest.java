@@ -6,7 +6,6 @@ import model.BackgroundARes;
 import model.BackgroundCRes;
 import model.Entry;
 import model.FinalCRes;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -17,11 +16,11 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV2BrowserAppCancelTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
-    String pan = "5455980836095804";
 
     @Test(priority = 56)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
@@ -31,7 +30,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundAReq>\n" +
-                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <acsTransID>" + randomAcsTransId + "</acsTransID>\n" +
                         "      <threeDSCompInd>Y</threeDSCompInd>\n" +
                         "      <threeDSRequestorAuthenticationInd>01</threeDSRequestorAuthenticationInd>\n" +
                         "      <threeDSRequestorID>1000</threeDSRequestorID>\n" +
@@ -52,10 +51,10 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                         "      <browserTZ>-120</browserTZ>\n" +
                         "      <browserUserAgent>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36</browserUserAgent>\n" +
                         "      <cardExpiryDate>3205</cardExpiryDate>\n" +
-                        "      <acctNumber>"+pan+"</acctNumber>\n" +
+                        "      <acctNumber>" + app.pan + "</acctNumber>\n" +
                         "      <deviceChannel>02</deviceChannel>\n" +
                         "      <dsReferenceNumber>EMVCo1234567</dsReferenceNumber>\n" +
-                        "      <dsTransID>"+dsTransId+"</dsTransID>\n" +
+                        "      <dsTransID>" + dsTransId + "</dsTransID>\n" +
                         "      <dsURL>integration test</dsURL>\n" +
                         "      <mcc>0000</mcc>\n" +
                         "      <merchantCountryCode>246</merchantCountryCode>\n" +
@@ -67,11 +66,11 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                         "      <purchaseAmount>6000</purchaseAmount>\n" +
                         "      <purchaseCurrency>840</purchaseCurrency>\n" +
                         "      <purchaseExponent>2</purchaseExponent>\n" +
-                        "      <purchaseDate>"+now+"</purchaseDate>\n" +
+                        "      <purchaseDate>" + now + "</purchaseDate>\n" +
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all()
                 .statusCode(200)
@@ -83,12 +82,12 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
-        Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
-        Assert.assertEquals(backgroundARes.getAuthenticationType(), "02");
-        Assert.assertEquals(backgroundARes.getMessageType(), "ARes");
-        Assert.assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroundARes.getTransStatus(), "C");
+        assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
+        assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
+        assertEquals(backgroundARes.getAuthenticationType(), "02");
+        assertEquals(backgroundARes.getMessageType(), "ARes");
+        assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
+        assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
     @Test(priority = 57)
@@ -98,14 +97,14 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
-                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <acsTransID>" + randomAcsTransId + "</acsTransID>\n" +
                         "      <challengeWindowSize>03</challengeWindowSize>\n" +
                         "      <messageType>CReq</messageType>\n" +
                         "      <messageVersion>2.1.0</messageVersion>\n" +
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -123,11 +122,11 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
 
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
-        Assert.assertEquals(backgroudCres.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(backgroudCres.getMessageType(), "CRes");
-        Assert.assertEquals(backgroudCres.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroudCres.getPageId(), "bio-web.html");
-        Assert.assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
+        assertEquals(backgroudCres.getAcsTransID(), randomAcsTransId);
+        assertEquals(backgroudCres.getMessageType(), "CRes");
+        assertEquals(backgroudCres.getMessageVersion(), "2.1.0");
+        assertEquals(backgroudCres.getPageId(), "bio-web.html");
+        assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
     @Test(priority = 58)
@@ -137,7 +136,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
-                        "      <acsTransID>"+randomAcsTransId+"</acsTransID>\n" +
+                        "      <acsTransID>" + randomAcsTransId + "</acsTransID>\n" +
                         "      <challengeWindowSize>03</challengeWindowSize>\n" +
                         "      <messageType>CReq</messageType>\n" +
                         "      <messageVersion>2.1.0</messageVersion>\n" +
@@ -153,7 +152,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all()
                 .statusCode(200)
@@ -164,10 +163,10 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         FinalCRes finalCRes = app.getXmlHelper().parseXmlResponseReturnFinalCResObject(document);
 
-        Assert.assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(finalCRes.getMessageType(), "CRes");
-        Assert.assertEquals(finalCRes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(finalCRes.getTransStatus(), "N");
-        Assert.assertEquals(finalCRes.getChallengeCompletionInd(), "Y");
+        assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
+        assertEquals(finalCRes.getMessageType(), "CRes");
+        assertEquals(finalCRes.getMessageVersion(), "2.1.0");
+        assertEquals(finalCRes.getTransStatus(), "N");
+        assertEquals(finalCRes.getChallengeCompletionInd(), "Y");
     }
 }
