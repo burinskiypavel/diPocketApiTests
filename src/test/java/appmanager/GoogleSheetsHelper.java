@@ -74,7 +74,7 @@ public class GoogleSheetsHelper {
 //                .setValueInputOption("RAW")
 //                .execute();
 
-        String range = "List1!A2:D260";
+        String range = "List1!A2:D290";
 
         ValueRange response = sheetsService.spreadsheets().values()
                 .get(SPREADSHEET_ID, range)

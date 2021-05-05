@@ -13,13 +13,16 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class TelenorRegistrationTest extends TestBase {
     String smsCode = null;
-    //String token = "512252941";
     String token = null;
 
     @Test(priority = 1)
     public void test_WebServices_v1_registration_checkPhoneAndToken() throws SQLException, ClassNotFoundException, IOException, GeneralSecurityException {
         //token = app.getTelenorHelper().getTokenFromFile("files/telenor/tokensForTelenorRegistration.txt");
-        token = GoogleSheetsHelper.start();
+        //token = GoogleSheetsHelper.start();
+
+        app.getTelenorHelper().createCardForToken();
+        token = app.getDbHelper().getTelenorTokenFromDB();
+
         System.out.println("token: " + token);
         app.getDbHelper().deleteClientFromDBTelenor(app.telenorRegistrationPhone);
         given().log().uri().log().headers().log().body()

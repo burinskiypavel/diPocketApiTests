@@ -1,5 +1,7 @@
 package appmanager;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.io.FileInputStream;
 
 public class HelperBase {
@@ -24,8 +26,8 @@ public class HelperBase {
         return prop;
     }
 
-    public static void waiter(int sec) throws InterruptedException {
-        int second = sec * 1000;
-        Thread.sleep(second);
+    public String generateRandomString(int amount){
+        String randomString =  RandomStringUtils.random(amount, true, true);
+        return randomString;
     }
 }

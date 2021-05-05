@@ -457,4 +457,10 @@
         </classes>
     </test>
 
+<!--    <test name="BankTransferDipocketTest">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.bankTransfer.BankTransferDipocketTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 </suite>

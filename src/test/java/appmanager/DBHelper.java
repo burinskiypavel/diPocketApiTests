@@ -253,4 +253,38 @@ public class DBHelper extends HelperBase {
 
         connection.close();
     }
+
+    public String getTelenorTokenFromDB() throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select t.*, t.rowid from gps_card t\n" +
+                "where cardcreatedat is not null\n" +
+                "order by cardcreatedat desc";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        String publicToken = null;
+        while (rs.next()){
+            if(rs.isFirst()){
+                String id = rs.getString(1);
+                String stateId = rs.getString(2);
+                String accountId = rs.getString(3);
+                publicToken = rs.getString(14);
+
+
+                System. out.println("id: " + id+" stateId: " + stateId + " accountId: " + accountId + " publicToken: " + publicToken);
+                break;
+            }
+
+        }
+        con.close();
+        return publicToken;
+    }
 }

@@ -26,7 +26,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TelenorHelper {
+public class TelenorHelper extends HelperBase {
 
     public void checkAllFieldsOfTelenorClientImagesResponse(Image[] images) {
         assertThat(images[0].getTypeId(), equalTo("1"));
@@ -406,5 +406,22 @@ public class TelenorHelper {
         }
     }
 
+    public void createCardForToken(){
+        given().log().uri().log().headers().log().body()
+                .header("content-type", "application/json")
+                .header("Authorization", "Basic VEVEOmN0MTAyMDMw")
+                .body("{\n" +
+                        "\"requestId\": \"7fad7ade-84ba-409c-857d-" + generateRandomString(12) + "\",\n" +
+                        "\"clientId\": \"4153\",\n" +
+                        "\"program\": \"TELENOR\",\n" +
+                        "\"currencyCode\": \"HUF\",\n" +
+                        "\"cardType\": \"PLASTIC\",\n" +
+                        "\"accountId\": \"\"\n" +
+                        "}")
+                .when()
+                .post("https://lvov.csltd.com.ua/CustomerServicesDev/v1/card/create")
+                .then().log().all()
+                .statusCode(400);
+    }
 }
 
