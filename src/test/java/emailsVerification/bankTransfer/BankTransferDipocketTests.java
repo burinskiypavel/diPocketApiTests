@@ -13,30 +13,34 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BankTransferDipocketTests extends TestBase {
 
+    public String body(int landId){
+        return "{\n" +
+                "\"id\": 30457,\n" +
+                "\"clientFirstName\": \"Salat\",\n" +
+                "\"clientLastName\": \"Test\",\n" +
+                "\"countryId\": 826,\n" +
+                "\"langId\": "+landId+",\n" +
+                "\"mainPhone\": \"380661470959\",\n" +
+                "\"email\": \"testdipocket@gmail.com\",\n" +
+                "\"currencyId\": 978,\n" +
+                "\"site\": \"DIPOCKET\",\n" +
+                "\"siteEnum\": \"DIPOCKET\",\n" +
+                "\"programNickName\": \"DIPOCKET\"\n" +
+                "}";
+    }
+
     @Test(priority = 1)
     public void testBankTransferDipocketEN() throws InterruptedException, MessagingException, IOException {
         given()
                 .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "\"id\": 30457,\n" +
-                        "\"clientFirstName\": \"Salat\",\n" +
-                        "\"clientLastName\": \"Test\",\n" +
-                        "\"countryId\": 826,\n" +
-                        "\"langId\": 1,\n" +
-                        "\"mainPhone\": \"380661470959\",\n" +
-                        "\"email\": \"testdipocket@gmail.com\",\n" +
-                        "\"currencyId\": 978,\n" +
-                        "\"site\": \"DIPOCKET\",\n" +
-                        "\"siteEnum\": \"DIPOCKET\",\n" +
-                        "\"programNickName\": \"DIPOCKET\"\n" +
-                        "}")
+                .body(body(1))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
                 .then().log().all()
                 .statusCode(200);
 
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
         String emailSender =  EmailIMAPHelper3.getEmailSender("pop.gmail.com", "testdipocket@gmail.com", "password1<");
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
 
         System.out.println("email text:  " + emailText);
         System.out.println("email sender:  " + emailSender);
@@ -56,26 +60,14 @@ public class BankTransferDipocketTests extends TestBase {
     public void testBankTransferDipocketUA() throws InterruptedException, MessagingException, IOException {
         given()
                 .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "\"id\": 30457,\n" +
-                        "\"clientFirstName\": \"Salat\",\n" +
-                        "\"clientLastName\": \"Test\",\n" +
-                        "\"countryId\": 826,\n" +
-                        "\"langId\": 2,\n" +
-                        "\"mainPhone\": \"380661470959\",\n" +
-                        "\"email\": \"testdipocket@gmail.com\",\n" +
-                        "\"currencyId\": 978,\n" +
-                        "\"site\": \"DIPOCKET\",\n" +
-                        "\"siteEnum\": \"DIPOCKET\",\n" +
-                        "\"programNickName\": \"DIPOCKET\"\n" +
-                        "}")
+                .body(body(2))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
                 .then().log().all()
                 .statusCode(200);
 
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
         String emailSender =  EmailIMAPHelper3.getEmailSender("pop.gmail.com", "testdipocket@gmail.com", "password1<");
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
 
         System.out.println("email text:  " + emailText);
         System.out.println("email sender:  " + emailSender);
@@ -95,35 +87,21 @@ public class BankTransferDipocketTests extends TestBase {
     public void testBankTransferDipocketPL() throws InterruptedException, MessagingException, IOException {
         given()
                 .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "\"id\": 30457,\n" +
-                        "\"clientFirstName\": \"Salat\",\n" +
-                        "\"clientLastName\": \"Test\",\n" +
-                        "\"countryId\": 826,\n" +
-                        "\"langId\": 3,\n" +
-                        "\"mainPhone\": \"380661470959\",\n" +
-                        "\"email\": \"testdipocket@gmail.com\",\n" +
-                        "\"currencyId\": 978,\n" +
-                        "\"site\": \"DIPOCKET\",\n" +
-                        "\"siteEnum\": \"DIPOCKET\",\n" +
-                        "\"programNickName\": \"DIPOCKET\"\n" +
-                        "}")
+                .body(body(3))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
                 .then().log().all()
                 .statusCode(200);
 
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
         String emailSender =  EmailIMAPHelper3.getEmailSender("pop.gmail.com", "testdipocket@gmail.com", "password1<");
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
 
         System.out.println("email text:  " + emailText);
         System.out.println("email sender:  " + emailSender);
 
-        //String emailBody = emailText.substring(13, 126);
         String emailBody = app.getTelenorHelper().cutText(emailText, 13, 126);
         System.out.println("email body:  " + emailBody);
 
-        //String emailFooter = emailText.substring(127);
         String emailFooter = app.getTelenorHelper().cutText(emailText, 127);
 
         System.out.println("email footer:  " + emailFooter);

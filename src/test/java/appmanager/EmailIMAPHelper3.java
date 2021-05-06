@@ -26,7 +26,7 @@ public class EmailIMAPHelper3 {
             store.connect(host, user, password);
 
             Folder emailFolder = store.getFolder("INBOX");
-            emailFolder.open(Folder.READ_ONLY);
+            emailFolder.open(Folder.READ_WRITE);  //READ_ONLY
 
             Message[] messages = emailFolder.getMessages();
             System.out.println("messages.length---" + messages.length);
@@ -73,10 +73,10 @@ public class EmailIMAPHelper3 {
                 }
                 System.out.println("Message: " + messageContent);
 
-
+                message.setFlag(Flags.Flag.DELETED, true);
             }
 
-            emailFolder.close(false);
+            emailFolder.close(true);//false
             store.close();
 
         } catch (MessagingException e) {
