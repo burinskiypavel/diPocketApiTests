@@ -10,8 +10,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static io.restassured.RestAssured.given;
 
-public class EmailIMAPHelper {
+
+public class EmailIMAPHelper extends HelperBase {
     public static String getLinkFromEmailAfterRegistration(String host, String user,
                                                            String password) throws InterruptedException {
         String emailLink = null;
@@ -131,6 +133,18 @@ public class EmailIMAPHelper {
         }
 
         return emailLink;
+    }
+
+    public static String getEmailFooterText(String emailText, int begin) {
+        String emailFooter = cutText(emailText, begin);
+        System.out.println("email footer:  " + emailFooter);
+        return emailFooter;
+    }
+
+    public static String getEmailBodyText(String emailText, int begin, int end) {
+        String emailBody = cutText(emailText, begin, end);
+        System.out.println("email body:  " + emailBody);
+        return emailBody;
     }
 
 

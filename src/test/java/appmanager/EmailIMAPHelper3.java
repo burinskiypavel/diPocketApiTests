@@ -10,7 +10,7 @@ public class EmailIMAPHelper3 {
     public static String getTextFromEmail(String host, String user,
                                           String password) throws InterruptedException, MessagingException, IOException {
         String result = "";
-        Thread.sleep(4000);
+        Thread.sleep(3000);
 
         try {
 
@@ -85,26 +85,26 @@ public class EmailIMAPHelper3 {
             e.printStackTrace();
         }
 
+        System.out.println("email text:  " + result);
         return result;
     }
 
-    public static String getEmailSender(String host, String user,
-                                          String password) throws InterruptedException, MessagingException, IOException {
+    public static String getEmailSender(String user, String password) throws InterruptedException, MessagingException, IOException {
         String result = "";
-        Thread.sleep(4000);
+        Thread.sleep(3000);
 
         try {
 
             Properties properties = new Properties();
 
-            properties.put("mail.imap.host", host);
+            properties.put("mail.imap.host", "pop.gmail.com");
             properties.put("mail.imap.port", "993");
             properties.put("mail.imap.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
 
             Store store = emailSession.getStore("imaps");
 
-            store.connect(host, user, password);
+            store.connect("pop.gmail.com", user, password);
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
@@ -131,8 +131,6 @@ public class EmailIMAPHelper3 {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
-
         return result;
     }
 

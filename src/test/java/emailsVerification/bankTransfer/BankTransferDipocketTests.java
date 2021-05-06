@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 import javax.mail.MessagingException;
 import java.io.IOException;
 
+import static appmanager.EmailIMAPHelper.getEmailBodyText;
+import static appmanager.EmailIMAPHelper.getEmailFooterText;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,27 +31,24 @@ public class BankTransferDipocketTests extends TestBase {
                 "}";
     }
 
-    @Test(priority = 1)
-    public void testBankTransferDipocketEN() throws InterruptedException, MessagingException, IOException {
+    public void postSendBankTransferEmail(int landId) {
         given()
                 .header("Content-Type", "application/json")
-                .body(body(1))
+                .body(body(landId))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
                 .then().log().all()
                 .statusCode(200);
+    }
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender("pop.gmail.com", "testdipocket@gmail.com", "password1<");
+    @Test(priority = 1)
+    public void testBankTransferDipocketEN() throws InterruptedException, MessagingException, IOException {
+        postSendBankTransferEmail(1);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender("testdipocket@gmail.com", "password1<");
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
-
-        System.out.println("email text:  " + emailText);
-        System.out.println("email sender:  " + emailSender);
-
-        String emailBody = app.getTelenorHelper().cutText(emailText, 50, 158);
-        System.out.println("email body:  " + emailBody);
-
-        String emailFooter = app.getTelenorHelper().cutText(emailText, 159);
-        System.out.println("email footer:  " + emailFooter);
+        String emailBody = getEmailBodyText(emailText, 50, 158);
+        String emailFooter = getEmailFooterText(emailText, 159);
 
         assertThat(emailSender, equalTo("customer.service@dipocket.org"));
         assertThat(emailBody, equalTo("As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
@@ -58,25 +57,12 @@ public class BankTransferDipocketTests extends TestBase {
 
     @Test(priority = 2)
     public void testBankTransferDipocketUA() throws InterruptedException, MessagingException, IOException {
-        given()
-                .header("Content-Type", "application/json")
-                .body(body(2))
-                .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
-                .then().log().all()
-                .statusCode(200);
+        postSendBankTransferEmail(2);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender("pop.gmail.com", "testdipocket@gmail.com", "password1<");
+        String emailSender =  EmailIMAPHelper3.getEmailSender("testdipocket@gmail.com", "password1<");
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
-
-        System.out.println("email text:  " + emailText);
-        System.out.println("email sender:  " + emailSender);
-
-        String emailBody = app.getTelenorHelper().cutText(emailText, 44, 154);
-        System.out.println("email body:  " + emailBody);
-
-        String emailFooter = app.getTelenorHelper().cutText(emailText, 155);
-        System.out.println("email footer:  " + emailFooter);
+        String emailBody = getEmailBodyText(emailText, 44, 154);
+        String emailFooter = getEmailFooterText(emailText, 155);
 
         assertThat(emailSender, equalTo("customer.service@dipocket.org"));
         assertThat(emailBody, equalTo("В додатку знаходиться замовлене Вами підтвердження банківського переказу. З повагою, Відділ підтримки клієнтів"));
@@ -85,29 +71,29 @@ public class BankTransferDipocketTests extends TestBase {
 
     @Test(priority = 3, enabled = false)
     public void testBankTransferDipocketPL() throws InterruptedException, MessagingException, IOException {
-        given()
-                .header("Content-Type", "application/json")
-                .body(body(3))
-                .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
-                .then().log().all()
-                .statusCode(200);
+        postSendBankTransferEmail(3);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender("pop.gmail.com", "testdipocket@gmail.com", "password1<");
+        String emailSender =  EmailIMAPHelper3.getEmailSender("testdipocket@gmail.com", "password1<");
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
-
-        System.out.println("email text:  " + emailText);
-        System.out.println("email sender:  " + emailSender);
-
-        String emailBody = app.getTelenorHelper().cutText(emailText, 13, 126);
-        System.out.println("email body:  " + emailBody);
-
-        String emailFooter = app.getTelenorHelper().cutText(emailText, 127);
-
-        System.out.println("email footer:  " + emailFooter);
+        String emailBody = getEmailBodyText(emailText, 13, 126);
+        String emailFooter = getEmailFooterText(emailText, 127);
 
         assertThat(emailSender, equalTo("customer.service@dipocket.org"));
         assertThat(emailBody, equalTo("W załączniku znajduje się zamówione potwierdzenie przelewu bankowego. Z wyrazami szacunku, Zespół Obsługi Klienta"));
         assertThat(emailFooter, equalTo("DiPocket® DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Masterсard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 4)
+    public void testBankTransferDipocketRU() throws InterruptedException, MessagingException, IOException {
+        postSendBankTransferEmail(4);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender("testdipocket@gmail.com", "password1<");
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
+        String emailBody = getEmailBodyText(emailText, 49, 169);
+        String emailFooter = getEmailFooterText(emailText, 170);
+
+        assertThat(emailSender, equalTo("customer.service@dipocket.org"));
+        assertThat(emailBody, equalTo("В приложении находится подтверждение банковского перевода, которое Вы заказывали. С уважением, Служба поддержки клиентов"));
+        assertThat(emailFooter, equalTo("DiPocket® Для вашего спокойствия, DiPocket UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 }
