@@ -26,6 +26,16 @@ public class HelperBase {
         return prop;
     }
 
+    public String cutText(String text, int begin, int end){
+        String cutText = text.substring(begin, end);
+        return cutText;
+    }
+
+    public String cutText(String text, int begin){
+        String cutText = text.substring(begin);
+        return cutText;
+    }
+
     public String generateRandomString(int amount){
         String randomString =  RandomStringUtils.random(amount, true, true);
         return randomString;

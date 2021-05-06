@@ -457,9 +457,9 @@
         </classes>
     </test>
 
-<!--    <test name="BankTransferDipocketTest">-->
+<!--    <test name="EmailsVerificationBankTransferDipocketTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.bankTransfer.BankTransferDipocketTest"/>-->
+<!--            <class name="emailsVerification.bankTransfer.BankTransferDipocketTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 

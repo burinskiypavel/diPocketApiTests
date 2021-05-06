@@ -421,7 +421,8 @@ public class TelenorHelper extends HelperBase {
                 .when()
                 .post("https://lvov.csltd.com.ua/CustomerServicesDev/v1/card/create")
                 .then().log().all()
-                .statusCode(400);
+                .statusCode(400)
+                .body("errDesc", equalTo("Card not found"));
     }
 }
 
