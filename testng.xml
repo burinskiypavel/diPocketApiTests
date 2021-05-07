@@ -463,4 +463,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--        <test name="EmailsVerificationBankTransferDiscontuTests">-->
+<!--            <classes>-->
+<!--                <class name="emailsVerification.bankTransfer.BankTransferDiscontuTests"/>-->
+<!--            </classes>-->
+<!--        </test>-->
+
 </suite>

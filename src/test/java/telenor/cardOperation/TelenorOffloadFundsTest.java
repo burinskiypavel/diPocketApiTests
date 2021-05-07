@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.blankOrNullString;
 
 public class TelenorOffloadFundsTest extends TestBase {
-    String smsCode = "111111"; //app.generateRandomNumber(6);
+    String smsCode = app.generateRandomNumber(6);
     String cliSessionId = null;
     String offloadFundsLoginPhone =  "$5_" + app.offloadFundsPhone;
 
@@ -125,7 +125,6 @@ public class TelenorOffloadFundsTest extends TestBase {
                 .then().log().all()
                 .assertThat().statusCode(200)
                 .assertThat().body("trnCcy", equalTo("HUF"));
-                //.assertThat().body("trnAmount", equalTo(200000))
     }
 
     @Test(priority = 7)
