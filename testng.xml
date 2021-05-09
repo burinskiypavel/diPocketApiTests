@@ -421,11 +421,12 @@
         </classes>
     </test>
 
-    <test name="TelenorOffloadFundsWithoutDataInAccountFieldTest">
-        <classes>
-            <class name="uiTests.telenor.TelenorOffloadFundsWithoutDataInAccountFieldTest"/>
-        </classes>
-    </test>
+<!--    not able to do OffloadFunds in telenor-->
+<!--    <test name="TelenorOffloadFundsWithoutDataInAccountFieldTest">-->
+<!--        <classes>-->
+<!--            <class name="uiTests.telenor.TelenorOffloadFundsWithoutDataInAccountFieldTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TelenorRegistrationVerificationWithTokenIsAlreadyLinkedWithAccountTest">
         <classes>
