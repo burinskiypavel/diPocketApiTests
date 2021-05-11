@@ -71,6 +71,11 @@ public class EmailIMAPHelper3 {
                         messageContent = content.toString();
                     }
                 }
+
+                if (message.isMimeType("text/html")){
+                    String html = message.getContent().toString();
+                    result = org.jsoup.Jsoup.parse(html).text();
+                }
                 System.out.println("Message: " + messageContent);
 
                 message.setFlag(Flags.Flag.DELETED, true);

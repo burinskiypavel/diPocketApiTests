@@ -470,4 +470,10 @@
 <!--            </classes>-->
 <!--        </test>-->
 
+<!--            <test name="EmailsVerificationChangeEmailDipocketTestss">-->
+<!--                <classes>-->
+<!--                    <class name="emailsVerification.changeEmail.ChangeEmailDipocketTests"/>-->
+<!--                </classes>-->
+<!--            </test>-->
+
 </suite>
