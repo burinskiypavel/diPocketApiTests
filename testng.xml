@@ -476,4 +476,10 @@
 <!--                </classes>-->
 <!--            </test>-->
 
+<!--                <test name="EmailsVerificationChangeEmailTelenorTests">-->
+<!--                    <classes>-->
+<!--                        <class name="emailsVerification.changeEmail.ChangeEmailTelenorTests"/>-->
+<!--                    </classes>-->
+<!--                </test>-->
+
 </suite>
