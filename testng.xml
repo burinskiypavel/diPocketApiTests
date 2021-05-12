@@ -470,6 +470,19 @@
 <!--            </classes>-->
 <!--        </test>-->
 
+<!--            <test name="EmailsVerificationBankTransferPlayITTests">-->
+<!--                <classes>-->
+<!--                    <class name="emailsVerification.bankTransfer.BankTransferPlayITTests"/>-->
+<!--                </classes>-->
+<!--            </test>-->
+
+<!--    <test name="EmailsVerificationBankTransferUpAndGoTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.bankTransfer.BankTransferUpAndGoTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+
 <!--            <test name="EmailsVerificationChangeEmailDipocketTestss">-->
 <!--                <classes>-->
 <!--                    <class name="emailsVerification.changeEmail.ChangeEmailDipocketTests"/>-->

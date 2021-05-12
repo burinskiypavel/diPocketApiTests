@@ -55,20 +55,6 @@ public class BankTransferDiscontuTests extends TestBase {
         assertThat(emailFooter, equalTo("DiPocket® discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2, enabled = false)
-    public void testBankTransferDiscontuUA() throws InterruptedException, MessagingException, IOException {
-        postSendBankTransferEmail(2);
-
-        String emailSender =  EmailIMAPHelper3.getEmailSender("testdipocket@gmail.com", "password1<");
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
-        String emailBody = getEmailBodyText(emailText, 44, 154);
-        String emailFooter = getEmailFooterText(emailText, 155);
-
-        assertThat(emailSender, equalTo("customer.service@dipocket.org"));
-        assertThat(emailBody, equalTo("В додатку знаходиться замовлене Вами підтвердження банківського переказу. З повагою, Відділ підтримки клієнтів"));
-        assertThat(emailFooter, equalTo("DiPocket® Для Вашого спокою, DiPocket UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
-    }
-
     @Test(priority = 3, enabled = false) // bug footer is not coorect
     public void testBankTransferDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(2);
@@ -81,19 +67,5 @@ public class BankTransferDiscontuTests extends TestBase {
         assertThat(emailSender, equalTo("customer.service@dipocket.org"));
         assertThat(emailBody, equalTo("W załączniku znajduje się zamówione potwierdzenie przelewu bankowego. Z wyrazami szacunku, Zespół Obsługi Klienta"));
         assertThat(emailFooter, equalTo("DiPocket® discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Masterсard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 4,enabled = false)
-    public void testBankTransferDiscontuRU() throws InterruptedException, MessagingException, IOException {
-        postSendBankTransferEmail(4);
-
-        String emailSender =  EmailIMAPHelper3.getEmailSender("testdipocket@gmail.com", "password1<");
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
-        String emailBody = getEmailBodyText(emailText, 49, 169);
-        String emailFooter = getEmailFooterText(emailText, 170);
-
-        assertThat(emailSender, equalTo("customer.service@dipocket.org"));
-        assertThat(emailBody, equalTo("В приложении находится подтверждение банковского перевода, которое Вы заказывали. С уважением, Служба поддержки клиентов"));
-        assertThat(emailFooter, equalTo("DiPocket® Для вашего спокойствия, DiPocket UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 }
