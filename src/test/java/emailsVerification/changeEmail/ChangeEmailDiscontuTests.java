@@ -24,7 +24,7 @@ public class ChangeEmailDiscontuTests extends TestBase {
     public String body(int landId){
         return "{\n" +
                 "\"id\": 31019,\n" +
-                "\"clientFirstName\": \"Salat\",\n" +
+                "\"clientFirstName\": \""+firstName+"\",\n" +
                 "\"clientLastName\": \"Sergeyt\",\n" +
                 "\"countryId\": 826,\n" +
                 "\"langId\": "+landId+",\n" +
