@@ -67,11 +67,11 @@ public class ChangeEmailTelenorTests extends TestBase {
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 0, 218);
-        String emailFooter = getEmailFooterText(emailText, 219);
+        String emailBody = getEmailBodyText(emailText, 0, 233);
+        String emailFooter = getEmailFooterText(emailText, 234);
 
         assertThat(emailSender, equalTo(emailFrom));
         assertThat(emailBody, equalTo("Ми отримали запит на верифікацію Вашої електронної адреси приєднану до вашого облікового запису "+site+". Будь ласка, перейдіть за цим посиланням , щоб підтвердити Ваш запит та завершити зміни. З повагою, Відділ підтримки клієнтів"));
-        assertThat(emailFooter, equalTo(""+SITE_REG+" Для Вашого спокою, DiPocket UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
