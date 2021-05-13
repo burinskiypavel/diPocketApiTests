@@ -32,7 +32,7 @@ public class ChangeEmailTelenorTests extends TestBase {
                 "}";
     }
 
-    public void postSendChangeEmailEmail(int landId) {
+    public void postSendChangeEmail(int landId) {
         given()
                 .header("Content-Type", "application/json")
                 .body(body(landId))
@@ -44,7 +44,7 @@ public class ChangeEmailTelenorTests extends TestBase {
 
     @Test(priority = 1)
     public void testChangeEmailTelenorEN() throws InterruptedException, MessagingException, IOException {
-        postSendChangeEmailEmail(1);
+        postSendChangeEmail(1);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender("testdipocket@gmail.com", "password1<");
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");
@@ -58,7 +58,7 @@ public class ChangeEmailTelenorTests extends TestBase {
 
     @Test(priority = 2, enabled = false)
     public void testChangeEmailTelenorHU() throws InterruptedException, MessagingException, IOException {
-        postSendChangeEmailEmail(2);
+        postSendChangeEmail(2);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender("testdipocket@gmail.com", "password1<");
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", "testdipocket@gmail.com", "password1<");

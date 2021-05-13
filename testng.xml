@@ -495,4 +495,10 @@
 <!--                    </classes>-->
 <!--                </test>-->
 
+<!--                    <test name="EmailsVerificationChangeEmailDiscontuTests">-->
+<!--                        <classes>-->
+<!--                            <class name="emailsVerification.changeEmail.ChangeEmailDiscontuTests"/>-->
+<!--                        </classes>-->
+<!--                    </test>-->
+
 </suite>
