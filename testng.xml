@@ -476,6 +476,12 @@
 <!--                </classes>-->
 <!--            </test>-->
 
+<!--                <test name="EmailsVerificationBankTransferSnowAttackTests">-->
+<!--                    <classes>-->
+<!--                        <class name="emailsVerification.bankTransfer.BankTransferSnowAttackTests"/>-->
+<!--                    </classes>-->
+<!--                </test>-->
+
 <!--    <test name="EmailsVerificationBankTransferUpAndGoTests">-->
 <!--        <classes>-->
 <!--            <class name="emailsVerification.bankTransfer.BankTransferUpAndGoTests"/>-->
@@ -500,5 +506,11 @@
 <!--                            <class name="emailsVerification.changeEmail.ChangeEmailDiscontuTests"/>-->
 <!--                        </classes>-->
 <!--                    </test>-->
+
+<!--                        <test name="EmailsVerificationChangeEmailUpAndGoTests">-->
+<!--                            <classes>-->
+<!--                                <class name="emailsVerification.changeEmail.ChangeEmailUpAndGoTests"/>-->
+<!--                            </classes>-->
+<!--                        </test>-->
 
 </suite>
