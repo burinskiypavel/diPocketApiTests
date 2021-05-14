@@ -2,60 +2,56 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestingSuite" parallel="none">
 
-<!--    <test name="DiPocketAPITests">-->
-<!--        <classes>-->
-<!--            <class name="registration.RegistrationTest"/>-->
-<!--            <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
+    <!--    <test name="DiPocketAPITests">-->
+    <!--        <classes>-->
+    <!--            <class name="registration.RegistrationTest"/>-->
+    <!--            <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
 
-<!--            <class name="tds.TDSV1BioAcceptTest"/>-->
-<!--            <class name="tds.TDSV1BioDeclineTest"/>-->
-<!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
-<!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
-<!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
+    <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
+    <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+    <!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
+    <!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
+    <!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
 
-<!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
-<!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
-<!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
-<!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
-<!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
+    <!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
+    <!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
+    <!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
+    <!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
+    <!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
 
-<!--        </classes>-->
-<!--    </test>-->
-
-
+    <!--        </classes>-->
+    <!--    </test>-->
 
 
+    <!--    <test name="RegistrationTest">-->
+    <!--        <classes>-->
+    <!--            <class name="registration.RegistrationTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
+    <!--    <test name="HomePageWithAlreadyExistClientTest">-->
+    <!--    <classes>-->
+    <!--        <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
+    <!--    </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="RegistrationTest">-->
-<!--        <classes>-->
-<!--            <class name="registration.RegistrationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--&lt;!&ndash;    <test name="TDSV1BioDeclineTest">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <classes>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <class name="tds.TDSV1BioDeclineTest"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;        </classes>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </test>&ndash;&gt;-->
 
-<!--    <test name="HomePageWithAlreadyExistClientTest">-->
-<!--    <classes>-->
-<!--        <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
-<!--    </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV1SmsDeclineTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--&lt;!&ndash;    <test name="TDSV1BioDeclineTest">&ndash;&gt;-->
-<!--&lt;!&ndash;        <classes>&ndash;&gt;-->
-<!--&lt;!&ndash;            <class name="tds.TDSV1BioDeclineTest"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        </classes>&ndash;&gt;-->
-<!--&lt;!&ndash;    </test>&ndash;&gt;-->
-
-<!--    <test name="TDSV1SmsDeclineTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="TDSV1SmsAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV1SmsAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
     <!--    <test name="TDSV1BioAcceptTest">-->
     <!--        <classes>-->
@@ -63,200 +59,197 @@
     <!--        </classes>-->
     <!--    </test>-->
 
-<!--    <test name="TDSV1PareqAllFieldsTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV1PareqAllFieldsTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2BrowserAppAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2BrowserAppAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2BrowserAppCancelTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2BrowserAppCancelTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2BrowserAppDeclineTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2BrowserAppDeclineTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2BrowserAppSmsInsteadAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2BrowserAppSmsInsteadAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2CReqAllFieldsTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2CReqAllFieldsTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2NativeOOBAppTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeOOBAppTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2NativeOOBAppTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2NativeOOBAppTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2NativeOOBHtmlAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2NativeOOBHtmlAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2NativeOOBHtmlDeclineTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeOOBHtmlDeclineTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2NativeOOBHtmlDeclineTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2NativeOOBHtmlDeclineTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2NativeSmsAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeSmsAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2NativeSmsAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2NativeSmsAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2NativeSmsHtmlAcceptTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2NativeSmsHtmlAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2NativeSmsInccodeTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeSmsInccodeTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2NativeSmsInccodeTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2NativeSmsInccodeTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2NativeIncorrectTranTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2NativeIncorrectTranTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2NativeIncorrectTranTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2NativeIncorrectTranTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV2AreqAllFieldTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV2AreqAllFieldTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV2AreqAllFieldTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV2AreqAllFieldTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TDSV1BioDeclineTest">-->
-<!--        <classes>-->
-<!--            <class name="tds.TDSV1BioDeclineTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TDSV1BioDeclineTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorHomePageTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.TelenorHomePageTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorHomePageTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.TelenorHomePageTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorRegistrationTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.TelenorRegistrationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorRegistrationTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.TelenorRegistrationTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorCheckBalanceTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.TelenorCheckBalanceTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorCheckBalanceTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.TelenorCheckBalanceTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorWrongPasswordTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.TelenorWrongPasswordTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorWrongPasswordTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.TelenorWrongPasswordTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorLoginWithUserBannedFromBOTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.TelenorLoginWithUserBannedFromBOTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorLoginWithUserBannedFromBOTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.TelenorLoginWithUserBannedFromBOTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorFullRegistrationTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.TelenorFullRegistrationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorFullRegistrationTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.TelenorFullRegistrationTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorBlockCardTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.cardOperation.TelenorBlockCardTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorBlockCardTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.cardOperation.TelenorBlockCardTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--        <test name="TelenorUnblockPaymentBandWithInvalidDataTest">-->
-<!--            <classes>-->
-<!--                <class name="telenor.TelenorUnblockPaymentBandWithInvalidDataTest"/>-->
-<!--            </classes>-->
-<!--        </test>-->
+    <!--        <test name="TelenorUnblockPaymentBandWithInvalidDataTest">-->
+    <!--            <classes>-->
+    <!--                <class name="telenor.TelenorUnblockPaymentBandWithInvalidDataTest"/>-->
+    <!--            </classes>-->
+    <!--        </test>-->
 
-<!--    <test name="TelenorUnblockCardTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.cardOperation.TelenorUnblockCardTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorUnblockCardTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.cardOperation.TelenorUnblockCardTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorChangeEmailTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.manageSecurity.TelenorChangeEmailTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorChangeEmailTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.manageSecurity.TelenorChangeEmailTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorChangeSecretAnswerTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.manageSecurity.TelenorChangeSecretAnswerTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorChangeSecretAnswerTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.manageSecurity.TelenorChangeSecretAnswerTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorOffloadFundsTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.cardOperation.TelenorOffloadFundsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorOffloadFundsTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.cardOperation.TelenorOffloadFundsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorChangePINTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.manageSecurity.TelenorChangePINTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorChangePINTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.manageSecurity.TelenorChangePINTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test">-->
-<!--        <classes>-->
-<!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorCheckFieldTopUpAmountWithInvalidDataTest">-->
-<!--        <classes>-->
-<!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithInvalidDataTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-
-
+    <!--    <test name="TelenorCheckFieldTopUpAmountWithInvalidDataTest">-->
+    <!--        <classes>-->
+    <!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithInvalidDataTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
 
     <test name="TelenorNewAndOldPINNegativeTests">
@@ -301,17 +294,17 @@
         </classes>
     </test>
 
-<!--    <test name="TelenorRegistrationVerificationWithInvalidCodeTest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidCodeTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorRegistrationVerificationWithInvalidCodeTest">-->
+    <!--        <classes>-->
+    <!--            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidCodeTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-<!--    <test name="TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest">-->
+    <!--        <classes>-->
+    <!--            <class name="uiTests.telenor.TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
     <test name="TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests">
         <classes>
@@ -421,12 +414,12 @@
         </classes>
     </test>
 
-<!--    not able to do OffloadFunds in telenor-->
-<!--    <test name="TelenorOffloadFundsWithoutDataInAccountFieldTest">-->
-<!--        <classes>-->
-<!--            <class name="uiTests.telenor.TelenorOffloadFundsWithoutDataInAccountFieldTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    not able to do OffloadFunds in telenor-->
+    <!--    <test name="TelenorOffloadFundsWithoutDataInAccountFieldTest">-->
+    <!--        <classes>-->
+    <!--            <class name="uiTests.telenor.TelenorOffloadFundsWithoutDataInAccountFieldTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
     <test name="TelenorRegistrationVerificationWithTokenIsAlreadyLinkedWithAccountTest">
         <classes>
@@ -464,23 +457,23 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--        <test name="EmailsVerificationBankTransferDiscontuTests">-->
-<!--            <classes>-->
-<!--                <class name="emailsVerification.bankTransfer.BankTransferDiscontuTests"/>-->
-<!--            </classes>-->
-<!--        </test>-->
+<!--    <test name="EmailsVerificationBankTransferDiscontuTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.bankTransfer.BankTransferDiscontuTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-<!--            <test name="EmailsVerificationBankTransferPlayITTests">-->
-<!--                <classes>-->
-<!--                    <class name="emailsVerification.bankTransfer.BankTransferPlayITTests"/>-->
-<!--                </classes>-->
-<!--            </test>-->
+<!--    <test name="EmailsVerificationBankTransferPlayITTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.bankTransfer.BankTransferPlayITTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-<!--                <test name="EmailsVerificationBankTransferSnowAttackTests">-->
-<!--                    <classes>-->
-<!--                        <class name="emailsVerification.bankTransfer.BankTransferSnowAttackTests"/>-->
-<!--                    </classes>-->
-<!--                </test>-->
+<!--    <test name="EmailsVerificationBankTransferSnowAttackTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.bankTransfer.BankTransferSnowAttackTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 <!--    <test name="EmailsVerificationBankTransferUpAndGoTests">-->
 <!--        <classes>-->
@@ -489,28 +482,34 @@
 <!--    </test>-->
 
 
-<!--            <test name="EmailsVerificationChangeEmailDipocketTestss">-->
-<!--                <classes>-->
-<!--                    <class name="emailsVerification.changeEmail.ChangeEmailDipocketTests"/>-->
-<!--                </classes>-->
-<!--            </test>-->
+<!--    <test name="EmailsVerificationChangeEmailDipocketTestss">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.changeEmail.ChangeEmailDipocketTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-<!--                <test name="EmailsVerificationChangeEmailTelenorTests">-->
-<!--                    <classes>-->
-<!--                        <class name="emailsVerification.changeEmail.ChangeEmailTelenorTests"/>-->
-<!--                    </classes>-->
-<!--                </test>-->
+<!--    <test name="EmailsVerificationChangeEmailTelenorTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.changeEmail.ChangeEmailTelenorTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-<!--                    <test name="EmailsVerificationChangeEmailDiscontuTests">-->
-<!--                        <classes>-->
-<!--                            <class name="emailsVerification.changeEmail.ChangeEmailDiscontuTests"/>-->
-<!--                        </classes>-->
-<!--                    </test>-->
+<!--    <test name="EmailsVerificationChangeEmailDiscontuTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.changeEmail.ChangeEmailDiscontuTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-<!--                        <test name="EmailsVerificationChangeEmailUpAndGoTests">-->
-<!--                            <classes>-->
-<!--                                <class name="emailsVerification.changeEmail.ChangeEmailUpAndGoTests"/>-->
-<!--                            </classes>-->
-<!--                        </test>-->
+<!--    <test name="EmailsVerificationChangeEmailUpAndGoTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.changeEmail.ChangeEmailUpAndGoTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="EmailsVerificationChangeEmailPlayITTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.changeEmail.ChangeEmailPlayITTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
