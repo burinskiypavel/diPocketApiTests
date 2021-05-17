@@ -4,7 +4,6 @@ import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroundARes;
 import model.FinalCResDecline;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -14,6 +13,7 @@ import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV2CReqAllFieldsTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
@@ -67,7 +67,7 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
@@ -78,12 +78,12 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
-        Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
-        Assert.assertEquals(backgroundARes.getAuthenticationType(), "02");
-        Assert.assertEquals(backgroundARes.getMessageType(), "ARes");
-        Assert.assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroundARes.getTransStatus(), "C");
+        assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
+        assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
+        assertEquals(backgroundARes.getAuthenticationType(), "02");
+        assertEquals(backgroundARes.getMessageType(), "ARes");
+        assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
+        assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
     @Test(priority = 2)
@@ -130,7 +130,7 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("https://lvov.csltd.com.ua/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -139,11 +139,11 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         FinalCResDecline finalCResDecline = app.getXmlHelper().parseXmlResponseReturnFinalCResDeclineObject(document);
 
-        Assert.assertEquals(finalCResDecline.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(finalCResDecline.getMessageType(), "CRes");
-        Assert.assertEquals(finalCResDecline.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(finalCResDecline.getTransStatus(), "N");
-        Assert.assertEquals(finalCResDecline.getTransStatusReason(), "26");
-        Assert.assertEquals(finalCResDecline.getChallengeCompletionInd(), "Y");
+        assertEquals(finalCResDecline.getAcsTransID(), randomAcsTransId);
+        assertEquals(finalCResDecline.getMessageType(), "CRes");
+        assertEquals(finalCResDecline.getMessageVersion(), "2.1.0");
+        assertEquals(finalCResDecline.getTransStatus(), "N");
+        assertEquals(finalCResDecline.getTransStatusReason(), "26");
+        assertEquals(finalCResDecline.getChallengeCompletionInd(), "Y");
     }
    }

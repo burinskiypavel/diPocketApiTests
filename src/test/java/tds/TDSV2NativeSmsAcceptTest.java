@@ -3,7 +3,6 @@ package tds;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.*;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -15,6 +14,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV2NativeSmsAcceptTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
@@ -77,7 +77,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"))
@@ -90,12 +90,12 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
-        Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
-        Assert.assertEquals(backgroundARes.getAuthenticationType(), "02");
-        Assert.assertEquals(backgroundARes.getMessageType(), "ARes");
-        Assert.assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroundARes.getTransStatus(), "C");
+        assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
+        assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
+        assertEquals(backgroundARes.getAuthenticationType(), "02");
+        assertEquals(backgroundARes.getMessageType(), "ARes");
+        assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
+        assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
     @Test(priority = 2)
@@ -113,7 +113,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -122,11 +122,11 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         NativeSms nativeSms = app.getXmlHelper().parseXmlReturnNativeSmsObject(document);
 
-        Assert.assertEquals(nativeSms.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(nativeSms.getAcsCounterAtoS(), "000");
-        Assert.assertEquals(nativeSms.getAcsUiType(), "01");
-        Assert.assertEquals(nativeSms.getChallengeInfoHeader(), "Confirm with SMS code");
-        Assert.assertEquals(nativeSms.getChallengeInfoLabel(), "Enter the Code here");
+        assertEquals(nativeSms.getAcsTransID(), randomAcsTransId);
+        assertEquals(nativeSms.getAcsCounterAtoS(), "000");
+        assertEquals(nativeSms.getAcsUiType(), "01");
+        assertEquals(nativeSms.getChallengeInfoHeader(), "Confirm with SMS code");
+        assertEquals(nativeSms.getChallengeInfoLabel(), "Enter the Code here");
 
         assertThat(nativeSms.getChallengeInfoText(), equalTo("To confirm the transaction, please enter below the Code we sent by SMS to 4984\\n\\n\n" +
                 "Card # 545598******8066\\n\\n\n" +
@@ -135,12 +135,12 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
                         "Amount 102.00 USD\\n\\n"
                 ));
 
-        Assert.assertEquals(nativeSms.getIssuerImage(), "https://dipocket.org/img/dip-logo.png");
-        Assert.assertEquals(nativeSms.getPsImage(), "https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mc_bc_othermarks_idcheck_thmb.png");
-        Assert.assertEquals(nativeSms.getMessageType(), "CRes");
-        Assert.assertEquals(nativeSms.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(nativeSms.getSubmitAuthenticationLabel(), "Submit");
-        Assert.assertEquals(nativeSms.getChallengeCompletionInd(), "N");
+        assertEquals(nativeSms.getIssuerImage(), "https://dipocket.org/img/dip-logo.png");
+        assertEquals(nativeSms.getPsImage(), "https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mc_bc_othermarks_idcheck_thmb.png");
+        assertEquals(nativeSms.getMessageType(), "CRes");
+        assertEquals(nativeSms.getMessageVersion(), "2.1.0");
+        assertEquals(nativeSms.getSubmitAuthenticationLabel(), "Submit");
+        assertEquals(nativeSms.getChallengeCompletionInd(), "N");
     }
 
     @Test(priority = 3)
@@ -153,7 +153,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
         res.then().log().all();
         tranId = res.asString();
         System.out.println("tranId " + tranId);
-        Assert.assertEquals(res.getStatusCode(), 200);
+        assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 4)
@@ -166,7 +166,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
         res.then().log().all();
         sms = res.asString();
         System.out.println("sms " + sms);
-        Assert.assertEquals(res.getStatusCode(), 200);
+        assertEquals(res.getStatusCode(), 200);
     }
 
     @Test(priority = 5)
@@ -185,7 +185,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -194,10 +194,10 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         FinalCRes finalCRes = app.getXmlHelper().parseXmlResponseReturnFinalCResObject(document);
 
-        Assert.assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(finalCRes.getMessageType(), "CRes");
-        Assert.assertEquals(finalCRes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(finalCRes.getTransStatus(), "Y");
-        Assert.assertEquals(finalCRes.getChallengeCompletionInd(), "Y");
+        assertEquals(finalCRes.getAcsTransID(), randomAcsTransId);
+        assertEquals(finalCRes.getMessageType(), "CRes");
+        assertEquals(finalCRes.getMessageVersion(), "2.1.0");
+        assertEquals(finalCRes.getTransStatus(), "Y");
+        assertEquals(finalCRes.getChallengeCompletionInd(), "Y");
     }
 }

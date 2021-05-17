@@ -3,7 +3,6 @@ package tds;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroundAResDecline;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -13,6 +12,7 @@ import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV2NativeIncorrectTranTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
@@ -70,7 +70,7 @@ public class TDSV2NativeIncorrectTranTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
@@ -81,10 +81,10 @@ public class TDSV2NativeIncorrectTranTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         BackgroundAResDecline backgroundAResDecline = app.getXmlHelper().parseXmlResponseReturnBackgroundAResDeclinedObject(document);
 
-        Assert.assertEquals(backgroundAResDecline.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(backgroundAResDecline.getMessageType(), "ARes");
-        Assert.assertEquals(backgroundAResDecline.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroundAResDecline.getTransStatus(), "N");
-        Assert.assertEquals(backgroundAResDecline.getTransStatusReason(), "07");
+        assertEquals(backgroundAResDecline.getAcsTransID(), randomAcsTransId);
+        assertEquals(backgroundAResDecline.getMessageType(), "ARes");
+        assertEquals(backgroundAResDecline.getMessageVersion(), "2.1.0");
+        assertEquals(backgroundAResDecline.getTransStatus(), "N");
+        assertEquals(backgroundAResDecline.getTransStatusReason(), "07");
     }
 }

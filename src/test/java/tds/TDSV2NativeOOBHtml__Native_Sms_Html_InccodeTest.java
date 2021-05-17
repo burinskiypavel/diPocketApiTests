@@ -3,7 +3,6 @@ package tds;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.*;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -14,6 +13,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
@@ -69,7 +69,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("02"))
@@ -82,12 +82,12 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
         Document document = app.getXmlHelper().initXmlParsing(response);
         BackgroundARes backgroundARes = app.getXmlHelper().parseXmlResponseReturnBackgroundAResObject(document);
 
-        Assert.assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
-        Assert.assertEquals(backgroundARes.getAuthenticationType(), "02");
-        Assert.assertEquals(backgroundARes.getMessageType(), "ARes");
-        Assert.assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(backgroundARes.getTransStatus(), "C");
+        assertEquals(backgroundARes.getAcsTransID(), randomAcsTransId);
+        assertEquals(backgroundARes.getAcsChallengeMandated(), "Y");
+        assertEquals(backgroundARes.getAuthenticationType(), "02");
+        assertEquals(backgroundARes.getMessageType(), "ARes");
+        assertEquals(backgroundARes.getMessageVersion(), "2.1.0");
+        assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
     @Test(priority = 2)
@@ -106,7 +106,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -124,13 +124,13 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
 
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
-        Assert.assertEquals(oobBackgroundCRes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(oobBackgroundCRes.getAcsCounterAtoS(), "000");
-        Assert.assertEquals(oobBackgroundCRes.getAcsUiType(), "05");
-        Assert.assertEquals(oobBackgroundCRes.getMessageType(), "CRes");
-        Assert.assertEquals(oobBackgroundCRes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(oobBackgroundCRes.getPageId(), "bio-oob.html");
-        Assert.assertEquals(oobBackgroundCRes.getChallengeCompletionInd(), "N");
+        assertEquals(oobBackgroundCRes.getAcsTransID(), randomAcsTransId);
+        assertEquals(oobBackgroundCRes.getAcsCounterAtoS(), "000");
+        assertEquals(oobBackgroundCRes.getAcsUiType(), "05");
+        assertEquals(oobBackgroundCRes.getMessageType(), "CRes");
+        assertEquals(oobBackgroundCRes.getMessageVersion(), "2.1.0");
+        assertEquals(oobBackgroundCRes.getPageId(), "bio-oob.html");
+        assertEquals(oobBackgroundCRes.getChallengeCompletionInd(), "N");
     }
 
     @Test(priority = 3)
@@ -150,7 +150,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -168,13 +168,13 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
 
         app.getXmlHelper().checkTextInCollectionEntryName(listEnty, masName);
         app.getXmlHelper().checkTextInCollectionEntryValue(listEnty, masValue);
-        Assert.assertEquals(oobBackgroundCRes.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(oobBackgroundCRes.getAcsCounterAtoS(), "001");
-        Assert.assertEquals(oobBackgroundCRes.getAcsUiType(), "05");
-        Assert.assertEquals(oobBackgroundCRes.getMessageType(), "CRes");
-        Assert.assertEquals(oobBackgroundCRes.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(oobBackgroundCRes.getPageId(), "sms_oob.html");
-        Assert.assertEquals(oobBackgroundCRes.getChallengeCompletionInd(), "N");
+        assertEquals(oobBackgroundCRes.getAcsTransID(), randomAcsTransId);
+        assertEquals(oobBackgroundCRes.getAcsCounterAtoS(), "001");
+        assertEquals(oobBackgroundCRes.getAcsUiType(), "05");
+        assertEquals(oobBackgroundCRes.getMessageType(), "CRes");
+        assertEquals(oobBackgroundCRes.getMessageVersion(), "2.1.0");
+        assertEquals(oobBackgroundCRes.getPageId(), "sms_oob.html");
+        assertEquals(oobBackgroundCRes.getChallengeCompletionInd(), "N");
     }
 
     @Test(priority = 4)
@@ -194,7 +194,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl +"/DiPocket3ds/acs/bgAuth");
+                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -206,11 +206,11 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
 
         System.out.println(listEnty);
 
-        Assert.assertEquals(finalCResDecline.getAcsTransID(), randomAcsTransId);
-        Assert.assertEquals(finalCResDecline.getMessageType(), "CRes");
-        Assert.assertEquals(finalCResDecline.getMessageVersion(), "2.1.0");
-        Assert.assertEquals(finalCResDecline.getTransStatus(), "N");
-        Assert.assertEquals(finalCResDecline.getTransStatusReason(), "01");
-        Assert.assertEquals(finalCResDecline.getChallengeCompletionInd(), "Y");
+        assertEquals(finalCResDecline.getAcsTransID(), randomAcsTransId);
+        assertEquals(finalCResDecline.getMessageType(), "CRes");
+        assertEquals(finalCResDecline.getMessageVersion(), "2.1.0");
+        assertEquals(finalCResDecline.getTransStatus(), "N");
+        assertEquals(finalCResDecline.getTransStatusReason(), "01");
+        assertEquals(finalCResDecline.getChallengeCompletionInd(), "Y");
     }
 }
