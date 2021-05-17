@@ -512,9 +512,9 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--        <test name="EmailsVerificationChangePhoneDipocketTests">-->
+<!--        <test name="EmailsVerificationChangePhoneTests">-->
 <!--            <classes>-->
-<!--                <class name="emailsVerification.changePhone.ChangePhoneDipocketTests"/>-->
+<!--                <class name="emailsVerification.changePhone.ChangePhoneTests"/>-->
 <!--            </classes>-->
 <!--        </test>-->
 
