@@ -61,7 +61,7 @@ public class ChangeEmailTelenorTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2, enabled = false) //bug body is not correct
+    @Test(priority = 2)
     public void testChangeEmailTelenorHU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(2);
 
@@ -71,7 +71,7 @@ public class ChangeEmailTelenorTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 234);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Kedves "+firstName+", Megkaptuk a "+site+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az ügyfélszolgálat csapata"));
+        assertThat(emailBody, equalTo("Kedves "+firstName+", Megkaptuk a "+site+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
