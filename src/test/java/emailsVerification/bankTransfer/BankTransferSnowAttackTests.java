@@ -61,7 +61,7 @@ public class BankTransferSnowAttackTests extends TestBase {
         assertThat(emailFooter, equalTo("DiPocket® "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2, enabled = false) //нету ® после дикокет в футере,  нету докуметации на венгерском футер и боди
+    @Test(priority = 2, enabled = false) //нету докуметации на венгерском футер и боди
     public void testBankTransferSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(5);
 
@@ -71,7 +71,7 @@ public class BankTransferSnowAttackTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 169);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Kedves "+firstName+", Kívánsága szerint, csatolva találja az Ön banki átutalásának megerősítése. Üdvözlettel, az Ügyfélszolgálati csapat"));
         assertThat(emailFooter, equalTo("DiPocket® "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }

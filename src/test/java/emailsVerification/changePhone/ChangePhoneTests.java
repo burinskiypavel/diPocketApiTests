@@ -131,4 +131,18 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailBody, equalTo("Witaj, "+firstName+"! Numer telefonu powiązany z Twoim kontem discontu został zmieniony na: "+newPhone+". Jeśli nie zmieniałeś numeru telefonu, kliknij w ten link aby zablokować konto i zabezpieczyć Twoje środki. Następnie skontaktuj się z nami w wybranym momencie, aby bezpiecznie odblokować Twoje konto. Z wyrazami szacunku, Dział Obsługi Klienta"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 7)
+    public void testChangePhonePlayITEN() throws InterruptedException, MessagingException, IOException {
+        postSendChangePhoneMailRealFlow(1, "PLAYIT");
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
+        String emailBody = getEmailBodyText(emailText, 39, 377);
+        String emailFooter = getEmailFooterText(emailText, 378);
+
+        assertThat(emailSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your PlayIT account was changed to: 12345678. If you didn't change it, please  click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
 }

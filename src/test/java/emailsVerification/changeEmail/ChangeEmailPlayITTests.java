@@ -61,7 +61,7 @@ public class ChangeEmailPlayITTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2, enabled = false)//bug body is not correct
+    @Test(priority = 2, enabled = false)//bug footer is not correct
     public void testChangeEmailPlayITHU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(5);
 
@@ -71,7 +71,7 @@ public class ChangeEmailPlayITTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 277);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Здравствуйте, "+firstName+"! Мы получили запрос на верификацию адреса электронной почты, которая указана в Вашей учетной записи. Пожалуйста, перейдите по этой ссылке , чтобы подтвердить изменение. С уважением, Служба поддержки клиентов"));
-        assertThat(emailFooter, equalTo(""+SITE_REG+" Для вашего спокойствия, "+site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailBody, equalTo("Kedves "+firstName+", Megkaptuk a "+site+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+", a DiPocket UAB támogatásával, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
