@@ -104,31 +104,31 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" Для вашего спокойствия, "+site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 5, enabled = false)
+    @Test(priority = 5)
     public void testLegalEmailDiscontuEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, "DISCONTU");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 41, 380);
-        String emailFooter = getEmailFooterText(emailText, 381);
+        String emailBody = getEmailBodyText(emailText, 28, 169);
+        String emailFooter = getEmailFooterText(emailText, 170);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your discontu account was changed to: 12345678. If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected discontu legal documents. Thank you for using discontu. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 6, enabled = false)
+    @Test(priority = 6)
     public void testLegalEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(3, "DISCONTU");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 0, 336);
-        String emailFooter = getEmailFooterText(emailText, 337);
+        String emailBody = getEmailBodyText(emailText, 0, 146);
+        String emailFooter = getEmailFooterText(emailText, 147);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Witaj, "+firstName+"! Numer telefonu powiązany z Twoim kontem discontu został zmieniony na: "+newPhone+". Jeśli nie zmieniałeś numeru telefonu, kliknij w ten link aby zablokować konto i zabezpieczyć Twoje środki. Następnie skontaktuj się z nami w wybranym momencie, aby bezpiecznie odblokować Twoje konto. Z wyrazami szacunku, Dział Obsługi Klienta"));
+        assertThat(emailBody, equalTo("Witaj "+firstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu discontu. Z wyrazami szacunku, Dział Prawny"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
