@@ -132,17 +132,17 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 7, enabled = false)
+    @Test(priority = 7)
     public void testLegalEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, "PLAYIT");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 39, 377);
-        String emailFooter = getEmailFooterText(emailText, 378);
+        String emailBody = getEmailBodyText(emailText, 26, 163);
+        String emailFooter = getEmailFooterText(emailText, 164);
 
-        assertThat(emailSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
-        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your PlayIT account was changed to: 12345678. If you didn't change it, please  click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailSender, equalTo("PlayIT Card <playitcard@dipocket.org>"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected PlayIT legal documents. Thank you for using PlayIT. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
