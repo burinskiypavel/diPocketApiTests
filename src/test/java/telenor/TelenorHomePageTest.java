@@ -96,7 +96,6 @@ public class TelenorHomePageTest extends TestBase {
         res.then().log().all();
 
         Assert.assertEquals(res.getStatusCode(), 200);
-        assertThat(res.getBody().jsonPath().get("unreadMessageCount"),equalTo(0));
     }
 
     @Test(priority = 5)
@@ -133,7 +132,7 @@ public class TelenorHomePageTest extends TestBase {
 
         assertThat(res.getStatusCode(), equalTo(200));
         assertThat(res.getBody().jsonPath().get("trnCcy"),equalTo("HUF"));
-        assertThat(res.getBody().jsonPath().get("trnAmount"),equalTo(200000));
+        assertThat(res.getBody().jsonPath().get("trnAmount"),equalTo(151000));
     }
 
     @Test(priority = 7)

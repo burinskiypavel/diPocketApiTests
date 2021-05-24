@@ -105,8 +105,8 @@ public class TelenorHelper extends HelperBase {
             assertThat(accountt.getAccountName(), equalTo("Band 512047269"));
             softAssert.assertEquals(accountt.getCcy(), "HUF");
             assertThat(accountt.getCcyId(), equalTo(348));
-            assertThat(accountt.getBalance(), equalTo(200000));
-            assertThat(accountt.getAvailableBalance(), equalTo(200000));
+            assertThat(accountt.getBalance(), equalTo(151000));
+            assertThat(accountt.getAvailableBalance(), equalTo(151000));
             assertThat(accountt.getBlocked(), equalTo(0));
             assertThat(accountt.getPlasticCardId(), equalTo(14932));
             assertThat(accountt.getPlasticMaskedPan(), equalTo("545598******6620"));
@@ -390,19 +390,20 @@ public class TelenorHelper extends HelperBase {
     public void checkAllFieldsInTelenorHomePageAccountHistoryListResponse(AccountHistoryList accountHistoryList) {
         List<AccountHistoryList_> accountHistoryList1 = accountHistoryList.getAccountHistoryList();
         for (AccountHistoryList_ accountHistoryList_ :accountHistoryList1){
-            assertThat(accountHistoryList_.getAmount(), equalTo(200000));
+            assertThat(accountHistoryList_.getAmount(), equalTo(49000));
             assertThat(accountHistoryList_.getCcyId(), equalTo(348));
             assertThat(accountHistoryList_.getCcySymbol(), equalTo("Ft"));
-            assertThat(accountHistoryList_.getFinType(), equalTo("C"));
+            assertThat(accountHistoryList_.getFinType(), equalTo("D"));
             //assertThat(accountHistoryList_.getFullName(), equalTo("Telenor"));
-            assertThat(accountHistoryList_.getId(), equalTo(489029));
-            assertThat(accountHistoryList_.getItemDateISO(), equalTo("2021-01-20 13:21:00.684949 Europe/Kiev"));
+            assertThat(accountHistoryList_.getId(), equalTo(596016));
+            //assertThat(accountHistoryList_.getItemDateISO(), equalTo("2021-05-20 22:01:13.376647 Europe/Kiev"));
             assertThat(accountHistoryList_.getStateId(), equalTo(100));
             assertThat(accountHistoryList_.getTypeId(), equalTo(10));
-            assertThat(accountHistoryList_.getTypeName(), equalTo("DiP transfer"));
+            assertThat(accountHistoryList_.getTypeName(), equalTo("Fee"));
             assertThat(accountHistoryList_.getAccCcyId(), equalTo(348));
             assertThat(accountHistoryList_.getAccCcySymbol(), equalTo("Ft"));
-            assertThat(accountHistoryList_.getAccAmount(), equalTo(200000));
+            //assertThat(accountHistoryList_.getAccAmount(), equalTo(200000));
+            break;
         }
     }
 
