@@ -524,4 +524,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="EmailsVerificationStatementEmailTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.statement.StatementEmailTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 </suite>
