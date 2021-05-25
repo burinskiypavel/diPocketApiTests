@@ -118,31 +118,31 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 6, enabled = false)
+    @Test(priority = 6)
     public void testEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(3, "DISCONTU");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 0, 146);
-        String emailFooter = getEmailFooterText(emailText, 147);
+        String emailBody = getEmailBodyText(emailText, 0, 153);
+        String emailFooter = getEmailFooterText(emailText, 154);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Witaj "+firstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu discontu. Z wyrazami szacunku, Dział Prawny"));
+        assertThat(emailBody, equalTo("Witaj "+firstName+", W załączniku znajduje się zamówiony wyciąg z konta discontu. Dziękujemy za korzystanie z serwisu discontu. Z wyrazami szacunku, Dział Prawny"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 7, enabled = false)
+    @Test(priority = 7)
     public void testStatementEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, "PLAYIT");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 26, 163);
-        String emailFooter = getEmailFooterText(emailText, 164);
+        String emailBody = getEmailBodyText(emailText, 26, 164);
+        String emailFooter = getEmailFooterText(emailText, 165);
 
-        assertThat(emailSender, equalTo("PlayIT Card <playitcard@dipocket.org>"));
-        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected PlayIT legal documents. Thank you for using PlayIT. With kind regards, Legal Team"));
+        assertThat(emailSender, equalTo("PlayIT Card <statements@dipocket.org>"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached your PlayIT account statement(s). Thank you for using PlayIT. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
