@@ -4,8 +4,8 @@
 
     <!--    <test name="DiPocketAPITests">-->
     <!--        <classes>-->
-    <!--            <class name="registration.RegistrationTest"/>-->
-    <!--            <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
+    <!--            <class name="dipocket.registration.RegistrationTest"/>-->
+    <!--            <class name="dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
 
     <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
     <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
@@ -25,13 +25,13 @@
 
     <!--    <test name="RegistrationTest">-->
     <!--        <classes>-->
-    <!--            <class name="registration.RegistrationTest"/>-->
+    <!--            <class name="dipocket.registration.RegistrationTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="HomePageWithAlreadyExistClientTest">-->
     <!--    <classes>-->
-    <!--        <class name="homePage.HomePageWithAlreadyExistClientTest"/>-->
+    <!--        <class name="dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
     <!--    </classes>-->
     <!--    </test>-->
 

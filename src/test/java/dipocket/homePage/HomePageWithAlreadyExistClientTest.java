@@ -1,4 +1,4 @@
-package homePage;
+package dipocket.homePage;
 
 import appmanager.HelperBase;
 import base.TestBase;

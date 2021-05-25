@@ -1,4 +1,4 @@
-package homePage;
+package dipocket.homePage;
 
 import appmanager.HelperBase;
 import base.TestBase;
@@ -10,7 +10,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.testng.Assert.assertEquals;
 
 public class HomePageTest extends TestBase {

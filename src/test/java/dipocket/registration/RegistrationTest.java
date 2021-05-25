@@ -1,7 +1,7 @@
-package registration;
+package dipocket.registration;
 
-import appmanager.HelperBase;
 import appmanager.EmailIMAPHelper;
+import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
