@@ -4,7 +4,6 @@ import appmanager.HelperBase;
 import appmanager.EmailIMAPHelper;
 import base.TestBase;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -12,6 +11,7 @@ import java.sql.SQLException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.testng.Assert.assertEquals;
 
 public class RegistrationTest extends TestBase {
     String smsCode = null;
@@ -25,8 +25,7 @@ public class RegistrationTest extends TestBase {
                 .queryParam("langID", "4")
                 .when()
                 .get( HelperBase.prop.getProperty("mobile.base.url")+"references/availableCountries")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200)
                 .body("countryList.code", hasItems("AU", "MK", "JP"))
                 .body("countryList.name", hasItems("Австралия", "Македония", "Япония"));
@@ -39,11 +38,10 @@ public class RegistrationTest extends TestBase {
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .when()
                     .get(HelperBase.prop.getProperty("mobile.base.url")+"references/languages")
-                    .then()
+                    .then().log().all()
                     .statusCode(200)
                     .body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"))
-                    .body("langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"))
-                    .log().all();
+                    .body("langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"));
         }
 
     @Test(priority = 3)
@@ -53,11 +51,10 @@ public class RegistrationTest extends TestBase {
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"references/appConfig?platform=android&version=2.2.9&langCode=rus")
-                .then()
+                .then().log().all()
                 .statusCode(200)
                 .body("versionColor", equalTo("WHITE"))
-                .body("appParams.isAccountCreationEnabled", equalTo(true))
-                .log().all();
+                .body("appParams.isAccountCreationEnabled", equalTo(true));
     }
 
     @Test(priority = 4)
@@ -67,10 +64,9 @@ public class RegistrationTest extends TestBase {
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/loadSavePointData2?devUUID="+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"")
-                .then()
+                .then().log().all()
                 .statusCode(200)
-                .body("isInvited", equalTo(false))
-                .log().all();
+                .body("isInvited", equalTo(false));
     }
 
     @Test(priority = 5)
@@ -83,9 +79,8 @@ public class RegistrationTest extends TestBase {
                         "}")
                 .when()
                 .post(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"")
-                .then()
-                .statusCode(200)
-                .log().all();
+                .then().log().all()
+                .statusCode(200);
     }
 
     @Test(priority = 6)
@@ -96,10 +91,9 @@ public class RegistrationTest extends TestBase {
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"references/verifyPhone?phone="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"")
-                .then()
+                .then().log().all()
                 .statusCode(200)
-                .body("value", equalTo(true))
-                .log().all();
+                .body("value", equalTo(true));
     }
 
     @Test(priority = 7)
@@ -112,8 +106,8 @@ public class RegistrationTest extends TestBase {
         res.then().log().all();
         int statusCode = res.getStatusCode();
         String topCountriesHash = res.path("topCountriesHash").toString();
-        Assert.assertEquals(statusCode, 200);
-        Assert.assertEquals(topCountriesHash, "bd04afc0873b80500461aeb5fdf682e720d8b0b307566569d785ec269caf80a6");
+        assertEquals(statusCode, 200);
+        assertEquals(topCountriesHash, "bd04afc0873b80500461aeb5fdf682e720d8b0b307566569d785ec269caf80a6");
         res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Италия", "Австрия", "Украина", "Бельгия", "Болгария", "Венгрия", "Германия", "Чехия"));
     }
 
@@ -145,8 +139,7 @@ public class RegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/registrationSavePoint2?value=com.cs.dipocketback.pojo.registration.RegSavepointData@7ae86ada")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200);
     }
 
@@ -157,11 +150,10 @@ public class RegistrationTest extends TestBase {
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"&code="+smsCode+"")
-                .then()
+                .then().log().all()
                 .statusCode(200)
                 .body("isInvited", equalTo(false))
-                .body("smsCode", equalTo(smsCode))
-                .log().all();
+                .body("smsCode", equalTo(smsCode));
     }
 
     @Test(priority = 10)
@@ -213,10 +205,8 @@ public class RegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/registrationSavePoint2?value=com.cs.dipocketback.pojo.registration.RegSavepointData@c248ad3")
-                .then()
-                .statusCode(200)
-                .log().all();
-
+                .then().log().all()
+                .statusCode(200);
     }
 
     @Test(priority = 11)
@@ -233,9 +223,8 @@ public class RegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/clientImage?value=com.cs.dipocketback.pojo.registration.RegImageData@4ea8388f")
-                .then()
-                .statusCode(200)
-                .log().all();
+                .then().log().all()
+                .statusCode(200);
     }
 
     @Test(priority = 12)
@@ -287,9 +276,8 @@ public class RegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/registrationSavePoint2?value=com.cs.dipocketback.pojo.registration.RegSavepointData@23a8b3b2")
-                .then()
-                .statusCode(200)
-                .log().all();
+                .then().log().all()
+                .statusCode(200);
     }
 
         @Test(priority = 13)
@@ -306,9 +294,8 @@ public class RegistrationTest extends TestBase {
                             "}")
                     .when()
                     .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/clientImage?value=com.cs.dipocketback.pojo.registration.RegImageData@65a534c2")
-                    .then()
-                    .statusCode(200)
-                    .log().all();
+                    .then().log().all()
+                    .statusCode(200);
         }
 
     @Test(priority = 14)
@@ -318,11 +305,10 @@ public class RegistrationTest extends TestBase {
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"references/questions?langId=4&countryId=616")
-                .then()
+                .then().log().all()
                 .statusCode(200)
                 .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"))
-                .body("checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"))
-                .log().all();
+                .body("checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
     }
 
     @Test(priority = 15)
@@ -375,9 +361,8 @@ public class RegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/registrationSavePoint2?value=com.cs.dipocketback.pojo.registration.RegSavepointData@7f2e6e63")
-                .then()
-                .statusCode(200)
-                .log().all();
+                .then().log().all()
+                .statusCode(200);
     }
 
     @Test(priority = 16)
@@ -387,9 +372,8 @@ public class RegistrationTest extends TestBase {
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/sendTermsAndConditions?deviceUUID="+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"")
-                .then()
-                .statusCode(200)
-                .log().all();
+                .then().log().all()
+                .statusCode(200);
     }
 
     @Test(priority = 17)
@@ -451,11 +435,9 @@ public class RegistrationTest extends TestBase {
                         "}")
                 .when()
                 .post(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/registerNewClient2?value=com.cs.dipocketback.pojo.registration.RegSavepointData@382cf589")
-                .then()
+                .then().log().all()
                 .statusCode(200)
-                .body("resultCode", equalTo(0))
-                .log().all();
-
+                .body("resultCode", equalTo(0));
     }
 
     @Test(priority = 18)
@@ -465,11 +447,9 @@ public class RegistrationTest extends TestBase {
         given()
                 .when()
                 .get(link)
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200)
                 .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
                 .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"));
     }
-
 }
