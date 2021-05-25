@@ -4,7 +4,6 @@ import appmanager.HelperBase;
 import base.TestBase;
 import config.Properties;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -12,6 +11,7 @@ import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
+import static org.testng.Assert.assertEquals;
 
 public class HomePageTest extends TestBase {
     String cliSessionId = null;
@@ -31,10 +31,9 @@ public class HomePageTest extends TestBase {
                         "}")
                 .when()
                 .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
-                .then()
+                .then().log().all()
                 .statusCode(400)
-                .body("errCode", equalTo("DIP-00591"))
-                .log().all();
+                .body("errCode", equalTo("DIP-00591"));
     }
 
     @Test(priority = 19)
@@ -58,7 +57,7 @@ public class HomePageTest extends TestBase {
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
         int StatusCode = res.getStatusCode();
-        Assert.assertEquals(StatusCode, 200);
+        assertEquals(StatusCode, 200);
     }
 
     @Test(priority = 20)
@@ -70,11 +69,10 @@ public class HomePageTest extends TestBase {
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/clientInfo2")
-                .then()
+                .then().log().all()
                 .statusCode(200)
                 .body("clientFirstName", equalTo("Pavel"))
-                .body("clientLastName", equalTo("Burinsky"))
-                .log().all();
+                .body("clientLastName", equalTo("Burinsky"));
     }
 
     @Test(priority = 21)
@@ -86,15 +84,14 @@ public class HomePageTest extends TestBase {
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/clientConfig")
-                .then()
+                .then().log().all()
                 .statusCode(200)
                 .body("payeeCurrencyHash", notNullValue())
                 .body("payeePaymentTypeHash", notNullValue())
                 .body("bankTransferReasonHash", notNullValue())
                 .body("avlCurrencyForNewAccHash", notNullValue())
                 .body("dipTransferCurrencyHash", notNullValue())
-                .body("availCategoriesHash", notNullValue())
-                .log().all();
+                .body("availCategoriesHash", notNullValue());
     }
 
     @Test(priority = 22)
@@ -106,11 +103,10 @@ public class HomePageTest extends TestBase {
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"accounts/clientDiPAccounts2?walletId=null")
-                .then()
+                .then().log().all()
                 .statusCode(200)
                 .body("accounts.state", equalTo(Arrays.asList("ACTIVE")))
-                .body("accounts.ccy", equalTo(Arrays.asList("PLN")))
-                .log().all();
+                .body("accounts.ccy", equalTo(Arrays.asList("PLN")));
     }
 
     @Test(priority = 23)
@@ -122,10 +118,8 @@ public class HomePageTest extends TestBase {
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"tile/getMessages2")
-                .then()
+                .then().log().all()
                 .statusCode(200)
-                .body("communicationTileList.shortName", equalTo(Arrays.asList("Подтвердить email")))
-                .log().all();
+                .body("communicationTileList.shortName", equalTo(Arrays.asList("Подтвердить email")));
     }
-
 }
