@@ -536,4 +536,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="EmailsVerificationResetPasswordTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.resetPassword.ResetPasswordTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 </suite>

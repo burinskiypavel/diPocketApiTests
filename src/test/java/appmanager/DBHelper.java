@@ -287,4 +287,77 @@ public class DBHelper extends HelperBase {
         con.close();
         return publicToken;
     }
+
+    public String getClientIdFromDB(String email) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select ID from Client Where EMAIL = '"+email+"'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        String id = null;
+        while (rs.next()){
+                 id = rs.getString(1);
+
+                System. out.println("id: " + id);
+                break;
+        }
+        con.close();
+        return id;
+    }
+
+    public String getLangIdFromDB(String email) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select LANGID from Client Where EMAIL = '"+email+"'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        String langId = null;
+        while (rs.next()){
+            langId = rs.getString(1);
+
+            System. out.println("langId: " + langId);
+            break;
+        }
+        con.close();
+        return langId;
+    }
+
+    public void updateClientLanguageFromDB(String email, String langId) throws SQLException, ClassNotFoundException {
+        String currentLangId = getLangIdFromDB(email);
+
+        if(!currentLangId.equals(langId)){
+            System.out.println("currentLangId and langId are not equals!");
+
+            String id = getClientIdFromDB(email);
+
+            String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+            String username = prop.getProperty("db.username");
+            String password = prop.getProperty("db.password");
+            String query = "update Client set LANGID = "+langId+" where ID = "+id+"";
+            String commit = "commit";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(dbUrl, username, password);
+            Statement stmt = con.createStatement();
+
+            stmt.executeQuery(query);
+            stmt.executeQuery(commit);
+            con.close();
+        }
+        else {
+            System.out.println("currentLangId and langId are equals!");
+        }
+    }
 }
