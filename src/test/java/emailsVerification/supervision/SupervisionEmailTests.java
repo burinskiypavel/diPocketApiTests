@@ -20,7 +20,6 @@ public class SupervisionEmailTests extends TestBase {
     String testEmail = "testdipocket@gmail.com";
     String pass = "password1<";
     String SITE_REG = "DiPocket®";
-    String newPhone = "12345678";
 
     public String body(int landId, final String site){
         return "{\n" +
@@ -76,17 +75,17 @@ public class SupervisionEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" Для Вашого спокою, "+site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 3, enabled = false)
+    @Test(priority = 3)
     public void testSupervisionEmailDipocketPL() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(3, "DIPOCKET");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 0, 336);
-        String emailFooter = getEmailFooterText(emailText, 337);
+        String emailBody = getEmailBodyText(emailText, 0, 436);
+        String emailFooter = getEmailFooterText(emailText, 437);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Witaj, "+firstName+"! Numer telefonu powiązany z Twoim kontem "+site+" został zmieniony na: "+newPhone+". Jeśli nie zmieniałeś numeru telefonu, kliknij w ten link aby zablokować konto i zabezpieczyć Twoje środki. Następnie skontaktuj się z nami w wybranym momencie, aby bezpiecznie odblokować Twoje konto. Z wyrazami szacunku, Dział Obsługi Klienta"));
+        assertThat(emailBody, equalTo("Witaj "+firstName+", W załączeniu znajduje się sekcja Warunków i Zasad korzystania (\"Warunki korzystania\"), dotycząca Kont Nadzorowanych. Zaakceptowałeś ją wraz z pozostałą częścią Warunków korzystania, jednak chcemy raz jeszcze zwrócić na nią Twoją uwagę teraz, gdy rozpoczynasz korzystanie z Konta Nadzorowanego, a w tej sekcji znajdziesz szczegółowe zapisy dotyczące roli i odpowiedzialności Opiekuna Konta. Z wyrazami szacunku, Dział Prawny"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
