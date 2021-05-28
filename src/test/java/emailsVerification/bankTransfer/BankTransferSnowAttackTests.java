@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BankTransferSnowAttackTests extends TestBase {
-    String site = "SnowAttack";
+    String site = "Snow Attack";
     String firstName = "Salat";
     String emailFrom = "customer.service@dipocket.org";
     String testEmail = "testdipocket@gmail.com";
@@ -47,7 +47,7 @@ public class BankTransferSnowAttackTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 1, enabled = false) // нету ® после дикокет в футере
+    @Test(priority = 1, enabled = false) // bub incorrect word SnowAttack
     public void testBankTransferSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(1);
 
@@ -58,7 +58,7 @@ public class BankTransferSnowAttackTests extends TestBase {
 
         assertThat(emailSender, equalTo(emailFrom));
         assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
-        assertThat(emailFooter, equalTo("DiPocket® "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 2, enabled = false) //нету докуметации на венгерском футер и боди
@@ -72,6 +72,6 @@ public class BankTransferSnowAttackTests extends TestBase {
 
         assertThat(emailSender, equalTo(emailFrom));
         assertThat(emailBody, equalTo("Kedves "+firstName+", Kívánsága szerint, csatolva találja az Ön banki átutalásának megerősítése. Üdvözlettel, az Ügyfélszolgálati csapat"));
-        assertThat(emailFooter, equalTo("DiPocket® "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailFooter, equalTo(""+firstName+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
