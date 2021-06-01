@@ -147,7 +147,7 @@ public class UITestBase {
     }
 
     public void waitForSeveralItems(String mas []){
-        wait = new WebDriverWait(driver, 20);
+        wait = new WebDriverWait(driver, 25);
         for(int i = 0; i < mas.length; i++){
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(), '"+mas[i]+"')]")));
         }
@@ -222,7 +222,7 @@ public class UITestBase {
         Thread.sleep(1000);
         driver.findElement(By.cssSelector("a[href='/en/security/fdd']")).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3[contains(text(), 'Your selfie')]")));
-        Thread.sleep(500);
+        Thread.sleep(1000);//500
     }
 
     public void type(By locator, String text){
