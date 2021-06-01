@@ -3,12 +3,12 @@ package appmanager;
 import java.sql.*;
 
 public class DBHelper extends HelperBase {
-    public String getSMSCodeFromDB(String number) throws ClassNotFoundException, SQLException {
+    public String getSMSCodeFromDB(String number, final String site) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
         //String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"' and SITE = 'DIPOCKET'";
-        String query = "select * from VERIFYCODE where SRCID  = 'DIPOCKET:"+number+"'";
+        String query = "select * from VERIFYCODE where SRCID  = '" + site + ":" +number+"'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
