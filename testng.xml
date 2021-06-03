@@ -252,11 +252,11 @@
     <!--    </test>-->
 
 
-    <test name="TelenorNewAndOldPINNegativeTests">
-        <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorNewAndOldPINNegativeTests"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorNewAndOldPINNegativeTests">-->
+<!--        <classes>-->
+<!--            <class name="uiTests.telenor.manageSecurity.TelenorNewAndOldPINNegativeTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TelenorRegistrationVerificationUntickedCheckboxForPersonalInformationProcessingTest">
         <classes>
