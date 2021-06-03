@@ -219,10 +219,10 @@ public class UITestBase {
     public void gotoFullRegistrationPage() throws InterruptedException {
         //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3[contains(text(), 'Full Registration')]")));
         //wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='/en/security/fdd']")));
-        Thread.sleep(1000);
+        Thread.sleep(1300);
         driver.findElement(By.cssSelector("a[href='/en/security/fdd']")).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3[contains(text(), 'Your selfie')]")));
-        Thread.sleep(1000);//500
+        Thread.sleep(1300);//500
     }
 
     public void type(By locator, String text){
