@@ -118,7 +118,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test(priority = 6)
-    public void testEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(3, "DISCONTU");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
