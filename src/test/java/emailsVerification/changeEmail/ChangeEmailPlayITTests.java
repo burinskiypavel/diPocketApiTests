@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ChangeEmailPlayITTests extends TestBase {
     String site = "PlayIT";
-    String firstName = "Salat";
+    String firstName = "Pavel";
     String emailFrom = "PlayIT Card <customer.service@dipocket.org>";
     String testEmail = "testdipocket@gmail.com";
     String pass = "password1<";
@@ -25,10 +25,10 @@ public class ChangeEmailPlayITTests extends TestBase {
         return "{\n" +
                 "\"id\": 30457,\n" +
                 "\"clientFirstName\": \""+firstName+"\",\n" +
-                "\"clientLastName\": \"Test\",\n" +
+                "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
                 "\"langId\": "+landId+",\n" +
-                "\"mainPhone\": \"380661470959\",\n" +
+                "\"mainPhone\": \"380685448615\",\n" +
                 "\"email\": \""+testEmail+"\",\n" +
                 "\"currencyId\": 978,\n" +
                 "\"site\": \"PLAYIT\",\n" +

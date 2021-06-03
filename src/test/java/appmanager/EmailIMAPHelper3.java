@@ -10,7 +10,7 @@ public class EmailIMAPHelper3 {
     public static String getTextFromEmail(String host, String user,
                                           String password) throws InterruptedException, MessagingException, IOException {
         String result = "";
-        Thread.sleep(4000);
+        Thread.sleep(2000);
 
         try {
 
@@ -96,7 +96,7 @@ public class EmailIMAPHelper3 {
 
     public static String getEmailSender(String user, String password) throws InterruptedException, MessagingException, IOException {
         String result = "";
-        Thread.sleep(4000);
+        Thread.sleep(5000);
 
         try {
 
