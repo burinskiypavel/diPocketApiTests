@@ -58,7 +58,7 @@ public class DBHelper extends HelperBase {
         return smsCode;
     }
 
-    public void deleteClientFromDB(String number) throws SQLException, ClassNotFoundException {
+    public void deleteClientFromDB(String number, final String site) throws SQLException, ClassNotFoundException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
@@ -69,7 +69,7 @@ public class DBHelper extends HelperBase {
 
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
-        CallableStatement myCall = connection.prepareCall("{call PKI_CLIENT.CLEARCLIENTBYPHONE(p_Site=>'DIPOCKET',p_Phone=>'"+number+"')}");
+        CallableStatement myCall = connection.prepareCall("{call PKI_CLIENT.CLEARCLIENTBYPHONE(p_Site=>'" + site + "',p_Phone=>'" +number+"')}");
         myCall.executeUpdate();
 
         Statement stmt = connection.createStatement();

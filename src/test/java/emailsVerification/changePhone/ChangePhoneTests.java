@@ -145,4 +145,18 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your PlayIT account was changed to: 12345678. If you didn't change it, please  click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 8, enabled = false)
+    public void testChangePhoneUpAndGoEN() throws InterruptedException, MessagingException, IOException {
+        postSendChangePhoneMailRealFlow(1, "UPANDGO");
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
+        String emailBody = getEmailBodyText(emailText, 42, 382);
+        String emailFooter = getEmailFooterText(emailText, 383);
+
+        assertThat(emailSender, equalTo("wsparcie@upcard.pl"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your up and go account was changed to: 12345678. If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" up and go is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
 }

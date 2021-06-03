@@ -18,7 +18,7 @@ public class RegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "DIPOCKET");
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
