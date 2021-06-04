@@ -15,21 +15,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LegalEmailTests extends TestBase {
     String site = "DiPocket";
-    String firstName = "Salat";
+    String firstName = "Pavel";
     String emailFrom = "legal.team@dipocket.org";
     String testEmail = "testdipocket@gmail.com";
     String pass = "password1<";
     String SITE_REG = "DiPocket®";
-    String newPhone = "12345678";
 
     public String body(int landId, final String site){
         return "{\n" +
                 "\"id\": 30457,\n" +
                 "\"clientFirstName\": \"" + firstName + "\",\n" +
-                "\"clientLastName\": \"Test\",\n" +
+                "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
                 "\"langId\": " + landId + ",\n" +
-                "\"mainPhone\": \"380661470959\",\n" +
+                "\"mainPhone\": \"380685448615\",\n" +
                 "\"email\": \"" + testEmail + "\",\n" +
                 "\"currencyId\": 978,\n" +
                 "\"site\": \"" + site + "\",\n" +
