@@ -159,4 +159,46 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected up and go legal documents. Thank you for using up and go. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" up and go is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 9, enabled = false)
+    public void testLegalEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
+        postSendLegalEmail(2, "UPANDGO");
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
+        String emailBody = getEmailBodyText(emailText, 29, 174);
+        String emailFooter = getEmailFooterText(emailText, 175);
+
+        assertThat(emailSender, equalTo("regulacje@upcard.pl"));
+        assertThat(emailBody, equalTo("Вітаємо, "+firstName+"! В додатку знаходяться юридичні документи, що Ви запитали. Дякуємо за користування додатком up and go. З повагою, Юридичний відділ"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" Для Вашого спокою, up and go працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 10, enabled = false)
+    public void testLegalEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
+        postSendLegalEmail(3, "UPANDGO");
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
+        String emailBody = getEmailBodyText(emailText, 0, 147);
+        String emailFooter = getEmailFooterText(emailText, 148);
+
+        assertThat(emailSender, equalTo("regulacje@upcard.pl"));
+        assertThat(emailBody, equalTo("Witaj "+firstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu up and go. Z wyrazami szacunku, Dział Prawny"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" up and go dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 11, enabled = false)
+    public void testLegalEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
+        postSendLegalEmail(4, "UPANDGO");
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
+        String emailBody = getEmailBodyText(emailText, 29, 183);
+        String emailFooter = getEmailFooterText(emailText, 184);
+
+        assertThat(emailSender, equalTo("regulacje@upcard.pl"));
+        assertThat(emailBody, equalTo("Здравствуйте, "+firstName+"! В приложении находятся юридические документы, которые Вы заказывали. Спасибо за пользование up and go. С уважением, Юридический отдел"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" Для вашего спокойствия, up and go осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+    }
 }
