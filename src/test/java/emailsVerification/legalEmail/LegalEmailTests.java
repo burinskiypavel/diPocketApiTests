@@ -145,4 +145,18 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected PlayIT legal documents. Thank you for using PlayIT. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 8, enabled = false)
+    public void testLegalEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
+        postSendLegalEmail(1, "UPANDGO");
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
+        String emailBody = getEmailBodyText(emailText, 29, 172);
+        String emailFooter = getEmailFooterText(emailText, 173);
+
+        assertThat(emailSender, equalTo("regulacje@upcard.pl"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected up and go legal documents. Thank you for using up and go. With kind regards, Legal Team"));
+        assertThat(emailFooter, equalTo(""+SITE_REG+" up and go is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
 }
