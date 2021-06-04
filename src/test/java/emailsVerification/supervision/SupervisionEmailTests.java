@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SupervisionEmailTests extends TestBase {
     String site = "DiPocket";
-    String firstName = "Salat";
+    String firstName = "Pavel";
     String emailFrom = "legal.team@dipocket.org";
     String testEmail = "testdipocket@gmail.com";
     String pass = "password1<";
@@ -25,10 +25,10 @@ public class SupervisionEmailTests extends TestBase {
         return "{\n" +
                 "\"id\": 30457,\n" +
                 "\"clientFirstName\": \"" + firstName + "\",\n" +
-                "\"clientLastName\": \"Test\",\n" +
+                "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
                 "\"langId\": " + landId + ",\n" +
-                "\"mainPhone\": \"380661470959\",\n" +
+                "\"mainPhone\": \"380685448615\",\n" +
                 "\"email\": \"" + testEmail + "\",\n" +
                 "\"currencyId\": 978,\n" +
                 "\"site\": \"" + site + "\",\n" +
@@ -71,7 +71,7 @@ public class SupervisionEmailTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 487);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Вітаємо, Salat! В додатку знаходиться розділ \"Умови та Правила користування додатком DiPocket\" (\"Правила користування\"), який стосується Опіки за рахунком. Ви прийняли їх разом з іншою частиною Правил користування, але зараз ми хочемо ще раз звернути на них Вашу увагу, адже Ви розпочинаєте користуватися Опікунськими рахунками, а в цьому розділі знаходиться більш детальна інформація про роль та відповідальність Опікуна рахунку. З повагою, Юридичний відділ"));
+        assertThat(emailBody, equalTo("Вітаємо, "+firstName+"! В додатку знаходиться розділ \"Умови та Правила користування додатком DiPocket\" (\"Правила користування\"), який стосується Опіки за рахунком. Ви прийняли їх разом з іншою частиною Правил користування, але зараз ми хочемо ще раз звернути на них Вашу увагу, адже Ви розпочинаєте користуватися Опікунськими рахунками, а в цьому розділі знаходиться більш детальна інформація про роль та відповідальність Опікуна рахунку. З повагою, Юридичний відділ"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" Для Вашого спокою, "+site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
@@ -99,7 +99,7 @@ public class SupervisionEmailTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 296);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Здравствуйте, Salat! В приложении находится раздел \"Условий пользования приложением DiPocket\" об опеке. Вы уже приняли эти условия в момент регистрации, но мы хотим напомнить Вам детали перед началом использования этой функциональности. С уважением, Юридический отдел"));
+        assertThat(emailBody, equalTo("Здравствуйте, "+firstName+"! В приложении находится раздел \"Условий пользования приложением DiPocket\" об опеке. Вы уже приняли эти условия в момент регистрации, но мы хотим напомнить Вам детали перед началом использования этой функциональности. С уважением, Юридический отдел"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" Для вашего спокойствия, "+site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
