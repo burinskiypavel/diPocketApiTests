@@ -26,7 +26,7 @@ public class ResetPasswordTests extends TestBase {
     public String body(String testEmail){
         return "{\n" +
                 "  \"email\": \""+testEmail+"\",\n" +
-                "  \"phoneNumber\": \"380661470959\",\n" +
+                "  \"phoneNumber\": \"380685448615\",\n" + // 380661470959
                 "  \"url\": \"google.com\"\n" +
                 "}";
     }
