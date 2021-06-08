@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ResetPasswordTests extends TestBase {
     String site = "DiPocket";
-    String firstName = "Salat";
+    String firstName = "Pavel";//Salat
     String emailFrom = "customer.service@dipocket.org";
     String testEmail = "testdipocket@gmail.com";
     String pass = "password1<";
