@@ -47,17 +47,17 @@ public class SupervisionEmailTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 1)
     public void testSupervisionEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, "DIPOCKET");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 41, 380);
-        String emailFooter = getEmailFooterText(emailText, 381);
+        String emailBody = getEmailBodyText(emailText, 0, 398);
+        String emailFooter = getEmailFooterText(emailText, 399);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your "+site+" account was changed to: 12345678. If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", Please find attached the section of "+site+" Terms and Conditions (the “T&Cs”) regulating Supervised accounts. It is the same that you have already agreed to as part of the T&Cs, but we want to draw your attention on it now that you will start using a Supervised account since it contains important provisions on the Supervisor’s role and responsibilities. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
