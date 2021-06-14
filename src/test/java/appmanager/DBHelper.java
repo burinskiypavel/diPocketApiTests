@@ -288,11 +288,11 @@ public class DBHelper extends HelperBase {
         return publicToken;
     }
 
-    public String getClientIdFromDB(String email) throws ClassNotFoundException, SQLException {
+    public String getClientIdFromDB(String email, final String site) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-        String query = "select ID from Client Where EMAIL = '"+email+"'";
+        String query = "select ID from Client Where EMAIL = '"+email+ "' and Site = '" + site + "'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
@@ -311,11 +311,11 @@ public class DBHelper extends HelperBase {
         return id;
     }
 
-    public String getLangIdFromDB(String email) throws ClassNotFoundException, SQLException {
+    public String getLangIdFromDB(String email, final String site) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-        String query = "select LANGID from Client Where EMAIL = '"+email+"'";
+        String query = "select LANGID from Client Where EMAIL = '"+email+ "' and Site = '" + site + "'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
@@ -334,18 +334,18 @@ public class DBHelper extends HelperBase {
         return langId;
     }
 
-    public void updateClientLanguageFromDB(String email, String langId) throws SQLException, ClassNotFoundException {
-        String currentLangId = getLangIdFromDB(email);
+    public void updateClientLanguageFromDB(String email, String langId, String site) throws SQLException, ClassNotFoundException {
+        String currentLangId = getLangIdFromDB(email, site);
 
         if(!currentLangId.equals(langId)){
             System.out.println("currentLangId and langId are not equals!");
 
-            String id = getClientIdFromDB(email);
+            String id = getClientIdFromDB(email, site);
 
             String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
             String username = prop.getProperty("db.username");
             String password = prop.getProperty("db.password");
-            String query = "update Client set LANGID = "+langId+" where ID = "+id+"";
+            String query = "update Client set LANGID = "+langId+" where ID = "+id+ " and Site = '" + site + "'";
             String commit = "commit";
 
             Class.forName("oracle.jdbc.driver.OracleDriver");

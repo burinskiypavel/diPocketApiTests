@@ -43,7 +43,7 @@ public class ResetPasswordTests extends TestBase {
 
     @Test(priority = 1)
     public void testResetPasswordDipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(testEmail, "1");
+        app.getDbHelper().updateClientLanguageFromDB(testEmail, "1", "DIPOCKET");
         postSendResetPasswordEmail("DIPOCKET");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
@@ -58,7 +58,7 @@ public class ResetPasswordTests extends TestBase {
 
     @Test(priority = 2)
     public void testResetPasswordDipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(testEmail, "3");
+        app.getDbHelper().updateClientLanguageFromDB(testEmail, "3", "DIPOCKET");
         postSendResetPasswordEmail("DIPOCKET");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);

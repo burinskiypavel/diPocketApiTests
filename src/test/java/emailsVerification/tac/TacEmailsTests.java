@@ -44,7 +44,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test(priority = 1)
     public void testTacDipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(testEmail, "1");
+        app.getDbHelper().updateClientLanguageFromDB(testEmail, "1", "DIPOCKET");
         postSendTacEmail("DIPOCKET");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
@@ -59,7 +59,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test(priority = 2)
     public void testTacDipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(testEmail, "3");
+        app.getDbHelper().updateClientLanguageFromDB(testEmail, "3", "DIPOCKET");
         postSendTacEmail("DIPOCKET");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
@@ -72,17 +72,18 @@ public class TacEmailsTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 3, enabled = false)
-    public void tesTacDiscontuEN() throws InterruptedException, MessagingException, IOException {
+    @Test(priority = 3)
+    public void tesTacDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(testEmail, "1", "DISCONTU");
         postSendTacEmail("DISCONTU");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 28, 169);
-        String emailFooter = getEmailFooterText(emailText, 170);
+        String emailBody = getEmailBodyText(emailText, 28, 1624);
+        String emailFooter = getEmailFooterText(emailText, 1625);
 
-        assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected discontu legal documents. Thank you for using discontu. With kind regards, Legal Team"));
+        assertThat(emailSender, equalTo("legal.team@dipocket.org"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", Please find attached \"discontu_Terms_and_Conditions\" (the \"T&Cs\"). It is important that you familiarise yourself with these documents and in particular that you review in detail \"discontu_at_a_Glance\", which summarises the key clauses applicable to your discontu account and also includes our current pricing and transaction limits. With regard to Personal Information, we ask you to please read the section in the T&C’s titled 'Personal Information' - we will process any Information you provide to us according those terms. By providing it to us, you are agreeing for us to process it, including any sensitive data for the purposes described in the Agreement subject to a number of rights you have to be informed about how your Information is processed, to correct any errors, to object to any processing, to restrict processing or have Information erased or to instruct us to copy or transfer Information as you direct. If you accept the T&Cs, please click on this link and proceed with the registration process through discontu mobile App. The T&Cs may only be changed upon 2 months notice to you, following which, if you have not objected, you will be deemed to have accepted the new terms. IMPORTANT: to expedite registration you may choose to start using the App even if you have not clicked on the link above. However, if you do not click on it within a week of accessing the App, your discontu account will be temporarily blocked until such time as you have clicked on the link and confirmed your agreement to having read and accepted the T&C’s. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
