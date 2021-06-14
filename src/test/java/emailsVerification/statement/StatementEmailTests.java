@@ -47,17 +47,17 @@ public class StatementEmailTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 1)
     public void testStatementEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, "DIPOCKET");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 41, 380);
-        String emailFooter = getEmailFooterText(emailText, 381);
+        String emailBody = getEmailBodyText(emailText, 28, 170);
+        String emailFooter = getEmailFooterText(emailText, 171);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your "+site+" account was changed to: 12345678. If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached your "+site+" account statement(s). Thank you for using "+site+". With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
