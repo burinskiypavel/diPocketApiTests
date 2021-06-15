@@ -21,7 +21,6 @@ public class ResetPasswordTests extends TestBase {
     String testEmail = "testdipocket@gmail.com";
     String pass = "password1<";
     String SITE_REG = "DiPocket®";
-    String newPhone = "12345678";
 
     public String body(String testEmail){
         return "{\n" +
@@ -71,21 +70,22 @@ public class ResetPasswordTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 3, enabled = false)
-    public void tesResetPasswordDiscontuEN() throws InterruptedException, MessagingException, IOException {
+    @Test(priority = 3)
+    public void tesResetPasswordDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(testEmail, "1", "DISCONTU");
         postSendResetPasswordEmail("DISCONTU");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 28, 169);
-        String emailFooter = getEmailFooterText(emailText, 170);
+        String emailBody = getEmailBodyText(emailText, 28, 217);
+        String emailFooter = getEmailFooterText(emailText, 218);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected discontu legal documents. Thank you for using discontu. With kind regards, Legal Team"));
+        assertThat(emailBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 6, enabled = false)
+    @Test(priority = 4, enabled = false)
     public void testResetPasswordDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postSendResetPasswordEmail("DISCONTU");
 
@@ -99,7 +99,7 @@ public class ResetPasswordTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 7, enabled = false)
+    @Test(priority = 5, enabled = false)
     public void testResetPasswordPlayITEN() throws InterruptedException, MessagingException, IOException {
         postSendResetPasswordEmail("PLAYIT");
 
