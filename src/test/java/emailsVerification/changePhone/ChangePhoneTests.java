@@ -20,11 +20,11 @@ public class ChangePhoneTests extends TestBase {
     String testEmail = "testdipocket@gmail.com";
     String pass = "password1<";
     String SITE_REG = "DiPocket®";
-    String newPhone = "12345678";
+    String newPhone = "12345679";
 
     public String body(int landId, final String site){
         return "{\n" +
-                "\"id\": 30457,\n" +
+                "\"id\": 32717,\n" +
                 "\"clientFirstName\": \"" + firstName + "\",\n" +
                 "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
@@ -58,7 +58,7 @@ public class ChangePhoneTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 381);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your "+site+" account was changed to: 12345678. If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your "+site+" account was changed to: "+newPhone+". If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
@@ -114,7 +114,7 @@ public class ChangePhoneTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 381);
 
         assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your discontu account was changed to: 12345678. If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your discontu account was changed to: "+newPhone+". If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
@@ -142,7 +142,7 @@ public class ChangePhoneTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 378);
 
         assertThat(emailSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
-        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your PlayIT account was changed to: 12345678. If you didn't change it, please  click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Dear "+firstName+", The mobile phone number associated with your PlayIT account was changed to: "+newPhone+". If you didn't change it, please  click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
