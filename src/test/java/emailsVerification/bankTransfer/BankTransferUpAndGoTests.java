@@ -23,7 +23,7 @@ public class BankTransferUpAndGoTests extends TestBase {
 
     public String body(int landId, String firstName){
         return "{\n" +
-                "\"id\": 31019,\n" +
+                "\"id\": 32727,\n" +
                 "\"clientFirstName\": \""+firstName+"\",\n" +
                 "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +

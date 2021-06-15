@@ -23,7 +23,7 @@ public class BankTransferPlayITTests extends TestBase {
 
     public String body(int landId){
         return "{\n" +
-                "\"id\": 31019,\n" +
+                "\"id\": 32732,\n" +
                 "\"clientFirstName\": \""+firstName+"\",\n" +
                 "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +

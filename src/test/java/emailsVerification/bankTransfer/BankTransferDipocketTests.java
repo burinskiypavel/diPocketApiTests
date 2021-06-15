@@ -23,7 +23,7 @@ public class BankTransferDipocketTests extends TestBase {
 
     public String body(int landId){
         return "{\n" +
-                "\"id\": 30457,\n" +
+                "\"id\": 32726,\n" +
                 "\"clientFirstName\": \""+firstName+"\",\n" +
                 "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
