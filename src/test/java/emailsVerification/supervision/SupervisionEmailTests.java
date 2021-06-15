@@ -23,7 +23,7 @@ public class SupervisionEmailTests extends TestBase {
 
     public String body(int landId, final String site){
         return "{\n" +
-                "\"id\": 30457,\n" +
+                "\"id\": 32717,\n" +
                 "\"clientFirstName\": \"" + firstName + "\",\n" +
                 "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
