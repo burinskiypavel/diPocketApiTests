@@ -41,6 +41,15 @@ public class ApplicationManager {
     public String loginBannedPhone = null;
     public String hexRedColor = "#ff422a";
     public String offloadFundsPhone = "380932485981";
+    public String emailsVerificationsFirstName = null;
+    public String emailsVerificationsLastName = null;
+    public String emailsVerificationsPhoneNumber = null;
+    public String emailsVerificationsEmail = null;
+    public String emailsVerificationsPass = null;
+    public String SITE_REG = "DiPocket®";
+    public String mobile_site = null;
+    public String emailsVerificationsCountryId = null;
+    public String emailsVerificationsCurrencyId = null;
 
     //private MailHelper mailHelper;
 
@@ -68,56 +77,64 @@ public class ApplicationManager {
         //telenorRegistrationPhone = "380980316499";
         fullRegistrationTelenorLoginPhone = "$5_" + telenorRegistrationPhone;
         loginBannedPhone = "$5_" + bannedPhone;
+        emailsVerificationsFirstName = HelperBase.prop.getProperty("emailsVerifications.firstName");
+        emailsVerificationsLastName = HelperBase.prop.getProperty("emailsVerifications.lastName");
+        emailsVerificationsPhoneNumber = HelperBase.prop.getProperty("emailsVerifications.phoneNumber");
+        emailsVerificationsEmail = HelperBase.prop.getProperty("emailsVerifications.email");
+        emailsVerificationsPass = HelperBase.prop.getProperty("emailsVerifications.pass");
+        mobile_site = HelperBase.prop.getProperty("mobile.site");
+        emailsVerificationsCountryId = HelperBase.prop.getProperty("emailsVerifications.countryId");
+        emailsVerificationsCurrencyId = HelperBase.prop.getProperty("emailsVerifications.currencyId");
     }
 
     public void init() {
         RestAssured.useRelaxedHTTPSValidation();
     }
 
-    public void unirest() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException, UnirestException {
-        //unirest ssl
-        SSLContext sslcontext = SSLContexts.custom()
-                .loadTrustMaterial(null, new TrustSelfSignedStrategy())
-                .build();
-
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext,SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setSSLSocketFactory(sslsf)
-                .build();
-        Unirest.setHttpClient(httpclient);
-
-        HttpResponse<JsonNode> postResponse = Unirest.put("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/registrationSavePoint2?value=com.cs.dipocketback.pojo.registration.RegSavepointData@7ae86ada")
-                .header("site", "DIPOCKET")
-                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
-                .header("Content-Type", "application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"mainPhone\" : \"380685448615\",\n" +
-                        "  \"stepNo\" : 1,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"336052\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
-                .asJson();
-        //.asString();
-        //.getBody();
-        System.out.println(postResponse.getBody());
-        //bearer = postResponse.getBody().getObject().getString("bearer");
-        //System.out.println("bearer " + postResponse.getBody().getObject().getString("bearer"));
-        Assert.assertNotNull(postResponse.getBody());
-    }
+//    public void unirest() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException, UnirestException {
+//        //unirest ssl
+//        SSLContext sslcontext = SSLContexts.custom()
+//                .loadTrustMaterial(null, new TrustSelfSignedStrategy())
+//                .build();
+//
+//        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext,SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+//        CloseableHttpClient httpclient = HttpClients.custom()
+//                .setSSLSocketFactory(sslsf)
+//                .build();
+//        Unirest.setHttpClient(httpclient);
+//
+//        HttpResponse<JsonNode> postResponse = Unirest.put("https://dipocket3.intranet:8900/ClientServices/v1/userRegistration/registrationSavePoint2?value=com.cs.dipocketback.pojo.registration.RegSavepointData@7ae86ada")
+//                .header("site", "DIPOCKET")
+//                .header("deviceuuid", "eC10LFCnS1mDsuNoQaa-KH")
+//                .header("Content-Type", "application/json")
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \"eC10LFCnS1mDsuNoQaa-KH\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"mainPhone\" : \"380685448615\",\n" +
+//                        "  \"stepNo\" : 1,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \"336052\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
+//                .asJson();
+//        //.asString();
+//        //.getBody();
+//        System.out.println(postResponse.getBody());
+//        //bearer = postResponse.getBody().getObject().getString("bearer");
+//        //System.out.println("bearer " + postResponse.getBody().getObject().getString("bearer"));
+//        Assert.assertNotNull(postResponse.getBody());
+//    }
 
     public String generateRandomString(int amount){
         String randomString =  RandomStringUtils.random(amount, true, true);
