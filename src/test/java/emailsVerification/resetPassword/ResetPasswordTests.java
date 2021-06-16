@@ -100,17 +100,18 @@ public class ResetPasswordTests extends TestBase {
         assertThat(emailFooter, equalTo(""+SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 5, enabled = false)
-    public void testResetPasswordPlayITEN() throws InterruptedException, MessagingException, IOException {
+    @Test(priority = 5)
+    public void testResetPasswordPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(testEmail, "1", "PLAYIT");
         postSendResetPasswordEmail("PLAYIT");
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
-        String emailBody = getEmailBodyText(emailText, 26, 163);
-        String emailFooter = getEmailFooterText(emailText, 164);
+        String emailBody = getEmailBodyText(emailText, 0, 191);
+        String emailFooter = getEmailFooterText(emailText, 192);
 
-        assertThat(emailSender, equalTo("PlayIT Card <playitcard@dipocket.org>"));
-        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached selected PlayIT legal documents. Thank you for using PlayIT. With kind regards, Legal Team"));
+        assertThat(emailSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
+        assertThat(emailBody, equalTo("We received a request to reset the password associated with your account. Please click on this  link  to confirm your request and finalise the change. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
