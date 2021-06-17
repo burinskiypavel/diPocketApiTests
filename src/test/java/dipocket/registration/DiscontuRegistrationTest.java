@@ -21,7 +21,7 @@ public class DiscontuRegistrationTest extends TestBase {
         app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "DISCONTU");
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .queryParam("langID", "4")
                 .when()
                 .get( HelperBase.prop.getProperty("mobile.base.url")+"references/availableCountries")
@@ -35,7 +35,7 @@ public class DiscontuRegistrationTest extends TestBase {
         public void test_ClientServices_v1_references_languages(){
             given()
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                    .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                    .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                     .when()
                     .get(HelperBase.prop.getProperty("mobile.base.url")+"references/languages")
                     .then().log().all()
@@ -48,7 +48,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_appConfig(){
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"references/appConfig?platform=android&version=2.2.9&langCode=rus")
                 .then().log().all()
@@ -61,7 +61,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_loadSavePointData2() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/loadSavePointData2?devUUID="+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"")
                 .then().log().all()
@@ -73,7 +73,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .body("{\n" +
                         "  \"smsNumber\" : 1\n" +
                         "}")
@@ -88,7 +88,7 @@ public class DiscontuRegistrationTest extends TestBase {
         smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "DISCONTU");
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"references/verifyPhone?phone="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"")
                 .then().log().all()
@@ -100,7 +100,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_topCountries() {
         Response res = given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"references/topCountries?langID=4");
         res.then().log().all();
@@ -115,7 +115,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -147,7 +147,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"&code="+smsCode+"")
                 .then().log().all()
@@ -160,7 +160,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -213,7 +213,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_clientImage() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -231,7 +231,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2__() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -284,7 +284,7 @@ public class DiscontuRegistrationTest extends TestBase {
         public void test_ClientServices_v1_userRegistration_clientImage__() {
             given()
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                    .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                    .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                     .header("Content-Type", "application/json")
                     .body("{\n" +
                             "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -302,7 +302,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_questions() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"references/questions?langId=4&countryId=616")
                 .then().log().all()
@@ -315,7 +315,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2___() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -369,7 +369,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_sendTermsAndConditions() {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .when()
                 .put(HelperBase.prop.getProperty("mobile.base.url")+"userRegistration/sendTermsAndConditions?deviceUUID="+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"")
                 .then().log().all()
@@ -380,7 +380,7 @@ public class DiscontuRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registerNewClient2(){
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site2"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
