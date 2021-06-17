@@ -15,25 +15,21 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BankTransferPlayITTests extends TestBase {
     String site = "PlayIT";
-    String firstName = "Pavel";
-    String emailFrom = "PlayIT Card <customer.service@dipocket.org>";
-    String testEmail = "testdipocket@gmail.com";
-    String pass = "password1<";
-    String SITE_REG = "DiPocket®";
+    String expectedEmailSender = "PlayIT Card <customer.service@dipocket.org>";
 
     public String body(int landId){
         return "{\n" +
                 "\"id\": 32732,\n" +
-                "\"clientFirstName\": \""+firstName+"\",\n" +
-                "\"clientLastName\": \"Burinsky\",\n" +
-                "\"countryId\": 826,\n" +
+                "\"clientFirstName\": \""+app.emailsVerificationsFirstName+"\",\n" +
+                "\"clientLastName\": \""+app.emailsVerificationsLastName+"\",\n" +
+                "\"countryId\": "+app.emailsVerificationsCountryId+",\n" +
                 "\"langId\": "+landId+",\n" +
-                "\"mainPhone\": \"380685448615\",\n" +
-                "\"email\": \""+testEmail+"\",\n" +
-                "\"currencyId\": 978,\n" +
-                "\"site\": \"PLAYIT\",\n" +
-                "\"siteEnum\": \"PLAYIT\",\n" +
-                "\"programNickName\": \"PLAYIT\"\n" +
+                "\"mainPhone\": \""+app.emailsVerificationsPhoneNumber+"\",\n" +
+                "\"email\": \""+app.emailsVerificationsEmail+"\",\n" +
+                "\"currencyId\": "+app.emailsVerificationsCurrencyId+",\n" +
+                "\"site\": \""+app.mobile_site_playIt+"\",\n" +
+                "\"siteEnum\": \""+app.mobile_site_playIt+"\",\n" +
+                "\"programNickName\": \""+app.mobile_site_playIt+"\"\n" +
                 "}";
     }
 
@@ -51,27 +47,27 @@ public class BankTransferPlayITTests extends TestBase {
     public void testBankTransferPlayITEN() throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(1);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 36, 156);
         String emailFooter = getEmailFooterText(emailText, 157);
 
-        assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
-        assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailSender, equalTo(expectedEmailSender));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 2, enabled = false) // нету документации для боди для венгерсткого языка, футер не совпадает
     public void testBankTransferPlayITHU() throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(5);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 36, 156);
         String emailFooter = getEmailFooterText(emailText, 157);
 
-        assertThat(emailSender, equalTo(emailFrom));
-        assertThat(emailBody, equalTo("Dear "+firstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
-        assertThat(emailFooter, equalTo(""+SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailSender, equalTo(expectedEmailSender));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }

@@ -48,6 +48,10 @@ public class ApplicationManager {
     public String emailsVerificationsPass = null;
     public String SITE_REG = "DiPocket®";
     public String mobile_site = null;
+    public String mobile_site_discontu = null;
+    public String mobile_site_playIt = null;
+    public String mobile_site_upAndGo = null;
+    public String mobile_site_snowAttack = null;
     public String emailsVerificationsCountryId = null;
     public String emailsVerificationsCurrencyId = null;
 
@@ -83,6 +87,10 @@ public class ApplicationManager {
         emailsVerificationsEmail = HelperBase.prop.getProperty("emailsVerifications.email");
         emailsVerificationsPass = HelperBase.prop.getProperty("emailsVerifications.pass");
         mobile_site = HelperBase.prop.getProperty("mobile.site");
+        mobile_site_discontu = HelperBase.prop.getProperty("mobile.site.discontu");
+        mobile_site_playIt = HelperBase.prop.getProperty("mobile.site.playIt");
+        mobile_site_upAndGo = HelperBase.prop.getProperty("mobile.site.upAndGo");
+        mobile_site_snowAttack = HelperBase.prop.getProperty("mobile.site.snowAttack");
         emailsVerificationsCountryId = HelperBase.prop.getProperty("emailsVerifications.countryId");
         emailsVerificationsCurrencyId = HelperBase.prop.getProperty("emailsVerifications.currencyId");
     }
