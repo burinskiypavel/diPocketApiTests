@@ -54,6 +54,8 @@ public class ApplicationManager {
     public String mobile_site_snowAttack = null;
     public String emailsVerificationsCountryId = null;
     public String emailsVerificationsCurrencyId = null;
+    public String expectedEmailSender_upAndGo = "wsparcie@upcard.pl";
+    public String expectedEmailSender_playIt = "PlayIT Card <customer.service@dipocket.org>";
 
     //private MailHelper mailHelper;
 
