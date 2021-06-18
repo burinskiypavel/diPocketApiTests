@@ -22,9 +22,9 @@ public class ChangePhoneTests extends TestBase {
     String SITE_REG = "DiPocket®";
     String newPhone = "12345679";
 
-    public String body(int landId, final String site){
+    public String body(int landId, String site, int id){
         return "{\n" +
-                "\"id\": 32717,\n" +
+                "\"id\": " + id + ",\n" +
                 "\"clientFirstName\": \"" + firstName + "\",\n" +
                 "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
@@ -38,10 +38,10 @@ public class ChangePhoneTests extends TestBase {
                 "}";
     }
 
-    public void postSendChangePhoneMailRealFlow(int landId, String site) {
+    public void postSendChangePhoneMailRealFlow(int landId, String site, int id) {
         given()
                 .header("Content-Type", "application/json")
-                .body(body(landId, site))
+                .body(body(landId, site, id))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendChangePhoneMailRealFlow?newPhoneNumber="+newPhone+"")
                 .then().log().all()
@@ -50,7 +50,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 1)
     public void testChangePhoneDipocketEN() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(1, "DIPOCKET");
+        postSendChangePhoneMailRealFlow(1, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -64,7 +64,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 2)
     public void testChangePhoneDipocketUA() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(2, "DIPOCKET");
+        postSendChangePhoneMailRealFlow(2, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -78,7 +78,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 3)
     public void testChangePhoneDipocketPL() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(3, "DIPOCKET");
+        postSendChangePhoneMailRealFlow(3, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -92,7 +92,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 4)
     public void testChangePhoneDipocketRU() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(4, "DIPOCKET");
+        postSendChangePhoneMailRealFlow(4, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -106,7 +106,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 5)
     public void testChangePhoneDiscontuEN() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(1, "DISCONTU");
+        postSendChangePhoneMailRealFlow(1, "DISCONTU", 32717);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -120,7 +120,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 6)
     public void testChangePhoneDiscontuPL() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(3, "DISCONTU");
+        postSendChangePhoneMailRealFlow(3, "DISCONTU", 32717);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -134,7 +134,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 7)
     public void testChangePhonePlayITEN() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(1, "PLAYIT");
+        postSendChangePhoneMailRealFlow(1, "PLAYIT", 32732);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -148,7 +148,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 8, enabled = false)
     public void testChangePhoneUpAndGoEN() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(1, "UPANDGO");
+        postSendChangePhoneMailRealFlow(1, "UPANDGO", 32727);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -162,7 +162,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 9, enabled = false)
     public void testChangePhoneUpAndGoUA() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(2, "UPANDGO");
+        postSendChangePhoneMailRealFlow(2, "UPANDGO", 32727);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -176,7 +176,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 10, enabled = false)
     public void testChangePhoneUpAndGoPL() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(3, "UPANDGO");
+        postSendChangePhoneMailRealFlow(3, "UPANDGO", 32727);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -190,7 +190,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(priority = 11, enabled = false)
     public void testChangePhoneUpAndGoRU() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(4, "UPANDGO");
+        postSendChangePhoneMailRealFlow(4, "UPANDGO", 32727);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
