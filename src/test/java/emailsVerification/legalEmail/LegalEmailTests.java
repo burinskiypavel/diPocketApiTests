@@ -17,9 +17,9 @@ public class LegalEmailTests extends TestBase {
     String site = "DiPocket";
     String expectedEmailSender = "legal.team@dipocket.org";
 
-    public String body(int landId, final String site){
+    public String body(int landId, String site, int id){
         return "{\n" +
-                "\"id\": 32717,\n" +
+                "\"id\": " + id + ",\n" +
                 "\"clientFirstName\": \"" + app.emailsVerificationsFirstName + "\",\n" +
                 "\"clientLastName\": \""+app.emailsVerificationsLastName+"\",\n" +
                 "\"countryId\": "+app.emailsVerificationsCountryId+",\n" +
@@ -33,10 +33,10 @@ public class LegalEmailTests extends TestBase {
                 "}";
     }
 
-    public void postSendLegalEmail(int landId, String site) {
+    public void postSendLegalEmail(int landId, String site, int id) {
         given()
                 .header("Content-Type", "application/json")
-                .body(body(landId, site))
+                .body(body(landId, site, id))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendLegalEmail")
                 .then().log().all()
@@ -45,7 +45,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 1)
     public void testLegalEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(1, "DIPOCKET");
+        postSendLegalEmail(1, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -59,7 +59,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 2)
     public void testLegalEmailDipocketUA() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(2, "DIPOCKET");
+        postSendLegalEmail(2, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -73,7 +73,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 3)
     public void testLegalEmailDipocketPL() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(3, "DIPOCKET");
+        postSendLegalEmail(3, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -87,7 +87,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 4)
     public void testLegalEmailDipocketRU() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(4, "DIPOCKET");
+        postSendLegalEmail(4, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -101,7 +101,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 5)
     public void testLegalEmailDiscontuEN() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(1, "DISCONTU");
+        postSendLegalEmail(1, "DISCONTU", 32717);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -115,7 +115,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 6)
     public void testLegalEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(3, "DISCONTU");
+        postSendLegalEmail(3, "DISCONTU", 32717);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -129,7 +129,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 7)
     public void testLegalEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(1, "PLAYIT");
+        postSendLegalEmail(1, "PLAYIT", 32732);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -143,7 +143,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 8, enabled = false)
     public void testLegalEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(1, "UPANDGO");
+        postSendLegalEmail(1, "UPANDGO", 32727);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -157,7 +157,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 9, enabled = false)
     public void testLegalEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(2, "UPANDGO");
+        postSendLegalEmail(2, "UPANDGO", 32727);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -171,7 +171,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 10, enabled = false)
     public void testLegalEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(3, "UPANDGO");
+        postSendLegalEmail(3, "UPANDGO", 32727);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -185,7 +185,7 @@ public class LegalEmailTests extends TestBase {
 
     @Test(priority = 11, enabled = false)
     public void testLegalEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
-        postSendLegalEmail(4, "UPANDGO");
+        postSendLegalEmail(4, "UPANDGO", 32727);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
