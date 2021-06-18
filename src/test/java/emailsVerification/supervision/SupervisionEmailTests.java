@@ -21,9 +21,9 @@ public class SupervisionEmailTests extends TestBase {
     String pass = "password1<";
     String SITE_REG = "DiPocket®";
 
-    public String body(int landId, final String site){
+    public String body(int landId, String site, int id){
         return "{\n" +
-                "\"id\": 32717,\n" +
+                "\"id\": " + id + ",\n" +
                 "\"clientFirstName\": \"" + firstName + "\",\n" +
                 "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
@@ -37,10 +37,10 @@ public class SupervisionEmailTests extends TestBase {
                 "}";
     }
 
-    public void postSupervisionEmail(int landId, String site) {
+    public void postSupervisionEmail(int landId, String site, int id) {
         given()
                 .header("Content-Type", "application/json")
-                .body(body(landId, site))
+                .body(body(landId, site, id))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendSupervisionEmail")
                 .then().log().all()
@@ -49,7 +49,7 @@ public class SupervisionEmailTests extends TestBase {
 
     @Test(priority = 1)
     public void testSupervisionEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(1, "DIPOCKET");
+        postSupervisionEmail(1, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -63,7 +63,7 @@ public class SupervisionEmailTests extends TestBase {
 
     @Test(priority = 2)
     public void testSupervisionEmailDipocketUA() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(2, "DIPOCKET");
+        postSupervisionEmail(2, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -77,7 +77,7 @@ public class SupervisionEmailTests extends TestBase {
 
     @Test(priority = 3)
     public void testSupervisionEmailDipocketPL() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(3, "DIPOCKET");
+        postSupervisionEmail(3, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -91,7 +91,7 @@ public class SupervisionEmailTests extends TestBase {
 
     @Test(priority = 4)
     public void testSupervisionEmailDipocketRU() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(4, "DIPOCKET");
+        postSupervisionEmail(4, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -105,7 +105,7 @@ public class SupervisionEmailTests extends TestBase {
 
     @Test(priority = 5)
     public void testSupervisionEmailDiscontuEN() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(1, "DISCONTU");
+        postSupervisionEmail(1, "DISCONTU", 32717);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -119,7 +119,7 @@ public class SupervisionEmailTests extends TestBase {
 
     @Test(priority = 6)
     public void testSupervisionEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(3, "DISCONTU");
+        postSupervisionEmail(3, "DISCONTU", 32717);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -133,7 +133,7 @@ public class SupervisionEmailTests extends TestBase {
 
     @Test(priority = 7)
     public void testSupervisionEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(1, "PLAYIT");
+        postSupervisionEmail(1, "PLAYIT", 32732);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
