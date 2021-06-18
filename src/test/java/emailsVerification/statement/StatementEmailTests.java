@@ -21,9 +21,9 @@ public class StatementEmailTests extends TestBase {
     String pass = "password1<";
     String SITE_REG = "DiPocket®";
 
-    public String body(int landId, final String site){
+    public String body(int landId, String site, int id){
         return "{\n" +
-                "\"id\": 32717,\n" +
+                "\"id\": " + id + ",\n" +
                 "\"clientFirstName\": \"" + firstName + "\",\n" +
                 "\"clientLastName\": \"Burinsky\",\n" +
                 "\"countryId\": 826,\n" +
@@ -37,10 +37,10 @@ public class StatementEmailTests extends TestBase {
                 "}";
     }
 
-    public void postStatementEmail(int landId, String site) {
+    public void postStatementEmail(int landId, String site, int id) {
         given()
                 .header("Content-Type", "application/json")
-                .body(body(landId, site))
+                .body(body(landId, site, id))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendStatementEmail")
                 .then().log().all()
@@ -49,7 +49,7 @@ public class StatementEmailTests extends TestBase {
 
     @Test(priority = 1)
     public void testStatementEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
-        postStatementEmail(1, "DIPOCKET");
+        postStatementEmail(1, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -63,7 +63,7 @@ public class StatementEmailTests extends TestBase {
 
     @Test(priority = 2)
     public void testStatementEmailDipocketUA() throws InterruptedException, MessagingException, IOException {
-        postStatementEmail(2, "DIPOCKET");
+        postStatementEmail(2, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -77,7 +77,7 @@ public class StatementEmailTests extends TestBase {
 
     @Test(priority = 3)
     public void testStatementEmailDipocketPL() throws InterruptedException, MessagingException, IOException {
-        postStatementEmail(3, "DIPOCKET");
+        postStatementEmail(3, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -91,7 +91,7 @@ public class StatementEmailTests extends TestBase {
 
     @Test(priority = 4)
     public void testStatementEmailDipocketRU() throws InterruptedException, MessagingException, IOException {
-        postStatementEmail(4, "DIPOCKET");
+        postStatementEmail(4, "DIPOCKET", 32761);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -105,7 +105,7 @@ public class StatementEmailTests extends TestBase {
 
     @Test(priority = 5)
     public void testStatementEmailDiscontuEN() throws InterruptedException, MessagingException, IOException {
-        postStatementEmail(1, "DISCONTU");
+        postStatementEmail(1, "DISCONTU", 32717);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -119,7 +119,7 @@ public class StatementEmailTests extends TestBase {
 
     @Test(priority = 6)
     public void testStatementEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
-        postStatementEmail(3, "DISCONTU");
+        postStatementEmail(3, "DISCONTU", 32717);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
@@ -133,7 +133,7 @@ public class StatementEmailTests extends TestBase {
 
     @Test(priority = 7)
     public void testStatementEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
-        postStatementEmail(1, "PLAYIT");
+        postStatementEmail(1, "PLAYIT", 32732);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(testEmail, pass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", testEmail, pass);
