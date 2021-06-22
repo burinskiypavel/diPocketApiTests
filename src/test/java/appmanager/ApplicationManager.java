@@ -56,6 +56,7 @@ public class ApplicationManager {
     public String emailsVerificationsCurrencyId = null;
     public String expectedEmailSender_upAndGo = "wsparcie@upcard.pl";
     public String expectedEmailSender_playIt = "PlayIT Card <customer.service@dipocket.org>";
+    public String mobile_login_deviceuuid_tds = "380730000069-AutoTest-Login";
 
     //private MailHelper mailHelper;
 

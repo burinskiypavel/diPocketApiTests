@@ -1,5 +1,6 @@
 package tds;
 
+import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.BackgroudResponse;
@@ -10,6 +11,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -19,6 +21,54 @@ import static org.testng.Assert.assertEquals;
 public class TDSV1BioAcceptTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
+    String cliSessionId = null;
+
+    @Test(priority = 18)
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
+        app.getDbHelper().deleteClientDeviceFromDB(app.mobile_login_deviceuuid_tds);
+        given().log().all()
+                .when()
+                .auth().preemptive().basic("10_380730000069", "a111111")
+                .header("deviceuuid", app.mobile_login_deviceuuid_tds)
+                .header("site", app.mobile_site_upAndGo)
+                .header("content-type", "application/json; charset=UTF-8")
+                .body("{\n" +
+                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
+                        "  \"devType\" : \"android\",\n" +
+                        "  \"deviceUUID\" : \""+ app.mobile_login_deviceuuid_tds+"\",\n" +
+                        "  \"appVersion\" : \"1.1.11\"\n" +
+                        "}")
+                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp")
+                .then().log().all()
+                .statusCode(400)
+                //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
+                .body("errCode", equalTo("DIP-00591"));
+    }
+
+    @Test(priority = 19)
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380730000069", app.mobile_login_deviceuuid_tds, "UPANDGO");
+        Response res =  given().log().all()
+                .auth().preemptive().basic("10_380730000069", "a111111")
+                .header("deviceuuid", app.mobile_login_deviceuuid_tds)
+                .header("site", app.mobile_site_upAndGo)
+                .header("content-type", "application/json; charset=UTF-8")
+                .body("{\n" +
+                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
+                        "  \"devType\" : \"android\",\n" +
+                        "  \"deviceUUID\" : \""+ app.mobile_login_deviceuuid_tds+"\",\n" +
+                        "  \"appVersion\" : \"1.1.11\",\n" +
+                        "  \"otp\" : \""+loginSMSCode+"\"\n" +
+                        "}")
+                .when()
+                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp");
+        cliSessionId = res.getHeader("cliSessionId");
+        System.out.println(res.getHeaders());
+        System.out.println("cliSessionId " + cliSessionId);
+        app.getDbHelper().storeDataToTheFile("files\\tds\\cliSessionId.txt",cliSessionId);
+        int StatusCode = res.getStatusCode();
+        assertEquals(StatusCode, 200);
+    }
 
     @Test(priority = 24)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
@@ -140,12 +190,10 @@ public class TDSV1BioAcceptTest extends TestBase {
         System.out.println("tranId: " + tranId);
         Response response = given().log().uri().log().headers().log().body()
                 .when()
-                .auth()
-                .preemptive()
-                .basic("380730000069", "a111111")
+                .auth().preemptive().basic("10_380730000069", "a111111")
                 .header("Content-Type", "application/json")
                 .header("SITE", "UPANDGO")
-                .header("ClISESSIONID", "123456")
+                .header("ClISESSIONID", cliSessionId)
                 .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
 
         response.then().log().all();

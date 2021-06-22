@@ -40,7 +40,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 19)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380980316499", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380980316499", HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
         Response res =  given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
                 .header("site", HelperBase.prop.getProperty("mobile.site"))

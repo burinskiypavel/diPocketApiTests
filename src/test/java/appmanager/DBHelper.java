@@ -100,13 +100,13 @@ public class DBHelper extends HelperBase {
         connection.close();
     }
 
-    public String getClientDeviceFromDB(String number, String uuid) throws ClassNotFoundException, SQLException {
+    public String getClientDeviceFromDB(String number, String uuid, String site) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
         String query = "select ID from CLIENTDEVICE\n" +
                 "where uuid = '"+uuid+"'\n" +
-                "and clientid = (select id from client where MAINPHONE = '"+number+"' and site = 'DIPOCKET')";
+                "and clientid = (select id from client where MAINPHONE = '"+number+ "' and site = '" + site + "')";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -126,8 +126,8 @@ public class DBHelper extends HelperBase {
         return clientDevice;
     }
 
-    public String getLoginSMSFromDB(String number, String uuid) throws ClassNotFoundException, SQLException {
-        String clienDevice = getClientDeviceFromDB(number, uuid);
+    public String getLoginSMSFromDB(String number, String uuid, String site) throws ClassNotFoundException, SQLException {
+        String clienDevice = getClientDeviceFromDB(number, uuid, site);
 
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
