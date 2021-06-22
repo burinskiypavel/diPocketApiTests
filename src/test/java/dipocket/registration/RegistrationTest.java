@@ -16,6 +16,7 @@ import static org.testng.Assert.assertEquals;
 public class RegistrationTest extends TestBase {
     String smsCode = null;
     String countryId = "616";
+    String currencyId = "985";
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
@@ -170,7 +171,7 @@ public class RegistrationTest extends TestBase {
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
                         "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
                         "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : 985,\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
                         "  \"stepNo\" : 2,\n" +
@@ -241,7 +242,7 @@ public class RegistrationTest extends TestBase {
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
                         "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
                         "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : 985,\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
                         "  \"stepNo\" : 3,\n" +
@@ -326,7 +327,7 @@ public class RegistrationTest extends TestBase {
                         "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
                         "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
                         "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : 985,\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
                         "  \"stepNo\" : 4,\n" +
@@ -391,7 +392,7 @@ public class RegistrationTest extends TestBase {
                         "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
                         "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
                         "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : 985,\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
                         "  \"secAnswer\" : \"***\",\n" +
