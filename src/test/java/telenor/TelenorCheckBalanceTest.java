@@ -24,6 +24,6 @@ public class TelenorCheckBalanceTest extends TestBase {
         app.getResponseValidationHelper().checkStatusCodeIs200(res);
         app.getResponseValidationHelper().checkResponseHasItemWithValue(res, "publicToken", "512047269");
         app.getResponseValidationHelper().checkResponseHasItemWithValue(res, "ccy", "HUF");
-        app.getResponseValidationHelper().checkResponseHasItemWithValue(res, "availableBalance", 151000);
+        app.getResponseValidationHelper().checkResponseHasItemWithValue(res, "availableBalance", 102000);
     }
 }
