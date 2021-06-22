@@ -41,6 +41,18 @@
     <!--&lt;!&ndash;        </classes>&ndash;&gt;-->
     <!--&lt;!&ndash;    </test>&ndash;&gt;-->
 
+    <!--    <test name="TDSV1BioAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+    <!--    <test name="TDSV1BioDeclineTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
     <!--    <test name="TDSV1SmsDeclineTest">-->
     <!--        <classes>-->
     <!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
@@ -50,12 +62,6 @@
     <!--    <test name="TDSV1SmsAcceptTest">-->
     <!--        <classes>-->
     <!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
-    <!--        </classes>-->
-    <!--    </test>-->
-
-    <!--    <test name="TDSV1BioAcceptTest">-->
-    <!--        <classes>-->
-    <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
@@ -146,12 +152,6 @@
     <!--    <test name="TDSV2AreqAllFieldTest">-->
     <!--        <classes>-->
     <!--            <class name="tds.TDSV2AreqAllFieldTest"/>-->
-    <!--        </classes>-->
-    <!--    </test>-->
-
-    <!--    <test name="TDSV1BioDeclineTest">-->
-    <!--        <classes>-->
-    <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
