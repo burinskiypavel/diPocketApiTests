@@ -105,7 +105,7 @@ public class TelenorHelper extends HelperBase {
             assertThat(accountt.getAccountName(), equalTo("Band 512047269"));
             softAssert.assertEquals(accountt.getCcy(), "HUF");
             assertThat(accountt.getCcyId(), equalTo(348));
-            assertThat(accountt.getBalance(), equalTo(151000));
+            assertThat(accountt.getBalance(), equalTo(151000));//check not null and greater that 0
             assertThat(accountt.getAvailableBalance(), equalTo(151000));
             assertThat(accountt.getBlocked(), equalTo(0));
             assertThat(accountt.getPlasticCardId(), equalTo(14932));

@@ -2,7 +2,10 @@ package appmanager;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import java.io.FileInputStream;
+import java.io.*;
+import java.nio.CharBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HelperBase {
     public static java.util.Properties prop = new java.util.Properties();
@@ -39,5 +42,38 @@ public class HelperBase {
     public String generateRandomString(int amount){
         String randomString =  RandomStringUtils.random(amount, true, true);
         return randomString;
+    }
+
+    public void storeDataToTheFile(String path, String text){
+        try(FileWriter writer = new FileWriter(path, false))
+        {
+            writer.write(text);
+
+            writer.flush();
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String getDateFromFileDef(String path) {
+        String table = null;
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                table = line;
+                //table.add("\r\n");
+
+
+                //StringBuilder result = new StringBuilder();
+                //  result.append('\n').append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return table;
     }
 }
