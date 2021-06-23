@@ -57,6 +57,9 @@ public class ApplicationManager {
     public String expectedEmailSender_upAndGo = "wsparcie@upcard.pl";
     public String expectedEmailSender_playIt = "PlayIT Card <customer.service@dipocket.org>";
     public String mobile_login_deviceuuid_tds = "380730000069-AutoTest-Login";
+    public String tds_phone = "380730000069";
+    public String tds_pass = "a111111";
+
 
     //private MailHelper mailHelper;
 

@@ -3,6 +3,7 @@ package tds;
 import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.response.Response;
+
 import model.BackgroudResponse;
 import model.Entry;
 import org.testng.annotations.Test;
@@ -28,7 +29,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         app.getDbHelper().deleteClientDeviceFromDB(app.mobile_login_deviceuuid_tds);
         given().log().all()
                 .when()
-                .auth().preemptive().basic("10_380730000069", "a111111")
+                .auth().preemptive().basic("10_" + app.tds_phone, app.tds_pass)
                 .header("deviceuuid", app.mobile_login_deviceuuid_tds)
                 .header("site", app.mobile_site_upAndGo)
                 .header("content-type", "application/json; charset=UTF-8")
@@ -47,9 +48,9 @@ public class TDSV1BioAcceptTest extends TestBase {
 
     @Test(priority = 19)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380730000069", app.mobile_login_deviceuuid_tds, "UPANDGO");
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(app.tds_phone, app.mobile_login_deviceuuid_tds, "UPANDGO");
         Response res =  given().log().all()
-                .auth().preemptive().basic("10_380730000069", "a111111")
+                .auth().preemptive().basic("10_" + app.tds_phone, app.tds_pass)
                 .header("deviceuuid", app.mobile_login_deviceuuid_tds)
                 .header("site", app.mobile_site_upAndGo)
                 .header("content-type", "application/json; charset=UTF-8")
@@ -190,9 +191,9 @@ public class TDSV1BioAcceptTest extends TestBase {
         System.out.println("tranId: " + tranId);
         Response response = given().log().uri().log().headers().log().body()
                 .when()
-                .auth().preemptive().basic("10_380730000069", "a111111")
+                .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)
                 .header("Content-Type", "application/json")
-                .header("SITE", "UPANDGO")
+                .header("SITE", app.mobile_site_upAndGo)
                 .header("ClISESSIONID", cliSessionId)
                 .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
 

@@ -143,9 +143,9 @@ public class TDSV1BioDeclineTest extends TestBase {
         System.out.println("cliSessionId: " + cliSessionId);
         Response response = given().log().uri().log().headers().log().body()
                 .when()
-                .auth().preemptive().basic("10_380730000069", "a111111")
+                .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)
                 .header("Content-Type", "application/json")
-                .header("SITE", "UPANDGO")
+                .header("SITE", app.mobile_site_upAndGo)
                 .header("ClISESSIONID", cliSessionId)
                 .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranDecline");
 
