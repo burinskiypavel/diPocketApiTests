@@ -52,6 +52,7 @@ public class ApplicationManager {
     public String mobile_site_playIt = null;
     public String mobile_site_upAndGo = null;
     public String mobile_site_snowAttack = null;
+    public String mobile_site_festival = "FESTIVAL";
     public String emailsVerificationsCountryId = null;
     public String emailsVerificationsCurrencyId = null;
     public String expectedEmailSender_upAndGo = "wsparcie@upcard.pl";
