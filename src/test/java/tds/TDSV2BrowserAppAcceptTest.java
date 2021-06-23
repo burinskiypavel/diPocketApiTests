@@ -154,14 +154,14 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
 
     @Test(priority = 53)
     public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() {
+        String cliSessionId = app.getDbHelper().getDateFromFileDef("files\\tds\\cliSessionId.txt");
+        System.out.println("cliSessionId: " + cliSessionId);
         Response response = given()
                 .when()
-                .auth()
-                .preemptive()
-                .basic("380730000069", "a111111")
+                .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)
                 .header("Content-Type", "application/json")
-                .header("SITE", "UPANDGO")
-                .header("ClISESSIONID", "123456")
+                .header("SITE", app.mobile_site_upAndGo)
+                .header("ClISESSIONID", cliSessionId)
                 .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
 
         response.then().log().all();
