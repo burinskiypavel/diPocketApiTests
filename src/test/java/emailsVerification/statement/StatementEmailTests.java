@@ -140,4 +140,60 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your PlayIT account statement(s). Thank you for using PlayIT. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 8, enabled = false)
+    public void testStatementEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
+        postStatementEmail(1, app.mobile_site_upAndGo, 32727);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 28, 170);
+        String emailFooter = getEmailFooterText(emailText, 171);
+
+        assertThat(emailSender, equalTo("zestawienia@upcard.pl"));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your up and go account statement(s). Thank you for using up and go. With kind regards, Legal Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" up and go is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 9, enabled = false)
+    public void testStatementEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
+        postStatementEmail(2, app.mobile_site_upAndGo, 32727);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 28, 191);
+        String emailFooter = getEmailFooterText(emailText, 192);
+
+        assertThat(emailSender, equalTo("zestawienia@upcard.pl"));
+        assertThat(emailBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлена Вами банківська виписка по рахунку up and go. Дякуємо за користування додатком up and go. З повагою, Юридичний відділ"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, up and go працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 10)
+    public void testStatementEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
+        postStatementEmail(3, app.mobile_site_upAndGo, 32727);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 0, 155);
+        String emailFooter = getEmailFooterText(emailText, 156);
+
+        assertThat(emailSender, equalTo("zestawienia@upcard.pl"));
+        assertThat(emailBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączniku znajduje się zamówiony wyciąg z konta up and go. Dziękujemy za korzystanie z serwisu up and go. Z wyrazami szacunku, Dział Prawny"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" up and go dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 11, enabled = false)
+    public void testStatementEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
+        postStatementEmail(4, app.mobile_site_upAndGo, 32727);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 0, 146);
+        String emailFooter = getEmailFooterText(emailText, 147);
+
+        assertThat(emailSender, equalTo("zestawienia@upcard.pl"));
+        assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! К письму прикреплена выписка по счету, которую Вы заказывали. Спасибо за пользование up and go. С уважением, Юридический отдел"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+site+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+    }
 }
