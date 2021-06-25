@@ -2,6 +2,7 @@ package emailsVerification.legalEmail;
 
 import appmanager.EmailIMAPHelper3;
 import base.TestBase;
+import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
@@ -35,7 +36,7 @@ public class LegalEmailTests extends TestBase {
 
     public void postSendLegalEmail(int landId, String site, int id) {
         given()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body(body(landId, site, id))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendLegalEmail")

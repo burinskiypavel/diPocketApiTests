@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ChangePhoneTests extends TestBase {
     String site = "DiPocket";
-    String emailFrom = "customer.service@dipocket.org";
+    String expectedEmailSender = "customer.service@dipocket.org";
     String newPhone = "new phone";
 
     public String body(int landId, String site, int id){
@@ -36,7 +36,7 @@ public class ChangePhoneTests extends TestBase {
 
     public void postSendChangePhoneMailRealFlow(int landId, String site, int id) {
         given()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body(body(landId, site, id))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendChangePhoneMail")
@@ -53,7 +53,7 @@ public class ChangePhoneTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 41, 381);
         String emailFooter = getEmailFooterText(emailText, 382);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", The mobile phone number associated with your "+site+" account was changed to: "+newPhone+". If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -67,7 +67,7 @@ public class ChangePhoneTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 359);
         String emailFooter = getEmailFooterText(emailText, 360);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! Номер телефону, приєднаний до вашого облікового запису "+site+", було змінено на "+newPhone+". Якщо Ви цього не робили, будь ласка, натисніть на це посилання , щоб заблокувати обліковий запис та захистити свої кошти. Після цього Ви можете зв'язатися з нами для відновлення доступу. З повагою, Відділ підтримки клієнтів"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -81,7 +81,7 @@ public class ChangePhoneTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 337);
         String emailFooter = getEmailFooterText(emailText, 338);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Witaj, "+app.emailsVerificationsFirstName+"! Numer telefonu powiązany z Twoim kontem "+site+" został zmieniony na: "+newPhone+". Jeśli nie zmieniałeś numeru telefonu, kliknij w ten link aby zablokować konto i zabezpieczyć Twoje środki. Następnie skontaktuj się z nami w wybranym momencie, aby bezpiecznie odblokować Twoje konto. Z wyrazami szacunku, Dział Obsługi Klienta"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
@@ -95,7 +95,7 @@ public class ChangePhoneTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 362);
         String emailFooter = getEmailFooterText(emailText, 363);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! Номер телефона, указанный для Вашей учетной записи был изменен. Новое значение: "+newPhone+". Если Вы этого не делали, перейдите по этой ссылке , чтобы заблокировать вашу учетную запись и защитить свои средства. После этого Вы можете связаться с нами для возобновления доступа. С уважением, Служба поддержки клиентов"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -109,7 +109,7 @@ public class ChangePhoneTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 41, 381);
         String emailFooter = getEmailFooterText(emailText, 382);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", The mobile phone number associated with your discontu account was changed to: "+newPhone+". If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -123,7 +123,7 @@ public class ChangePhoneTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 337);
         String emailFooter = getEmailFooterText(emailText, 338);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Witaj, "+app.emailsVerificationsFirstName+"! Numer telefonu powiązany z Twoim kontem discontu został zmieniony na: "+newPhone+". Jeśli nie zmieniałeś numeru telefonu, kliknij w ten link aby zablokować konto i zabezpieczyć Twoje środki. Następnie skontaktuj się z nami w wybranym momencie, aby bezpiecznie odblokować Twoje konto. Z wyrazami szacunku, Dział Obsługi Klienta"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }

@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StatementEmailTests extends TestBase {
     String site = "DiPocket";
-    String emailFrom = "statements@dipocket.org";
+    String expectedEmailSender = "statements@dipocket.org";
 
     public String body(int landId, String site, int id){
         return "{\n" +
@@ -35,7 +35,7 @@ public class StatementEmailTests extends TestBase {
 
     public void postStatementEmail(int landId, String site, int id) {
         given()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body(body(landId, site, id))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendStatementEmail")
@@ -52,7 +52,7 @@ public class StatementEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 170);
         String emailFooter = getEmailFooterText(emailText, 171);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your "+site+" account statement(s). Thank you for using "+site+". With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -66,7 +66,7 @@ public class StatementEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 191);
         String emailFooter = getEmailFooterText(emailText, 192);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлена Вами банківська виписка по рахунку "+site+". Дякуємо за користування додатком "+site+". З повагою, Юридичний відділ"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -80,7 +80,7 @@ public class StatementEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 153);
         String emailFooter = getEmailFooterText(emailText, 154);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączniku znajduje się zamówiony wyciąg z konta DiPocket. Dziękujemy za korzystanie z serwisu DiPocket. Z wyrazami szacunku, Dział Prawny"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
@@ -94,7 +94,7 @@ public class StatementEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 146);
         String emailFooter = getEmailFooterText(emailText, 147);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! К письму прикреплена выписка по счету, которую Вы заказывали. Спасибо за пользование "+site+". С уважением, Юридический отдел"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -108,7 +108,7 @@ public class StatementEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 170);
         String emailFooter = getEmailFooterText(emailText, 171);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your discontu account statement(s). Thank you for using discontu. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -122,7 +122,7 @@ public class StatementEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 153);
         String emailFooter = getEmailFooterText(emailText, 154);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączniku znajduje się zamówiony wyciąg z konta discontu. Dziękujemy za korzystanie z serwisu discontu. Z wyrazami szacunku, Dział Prawny"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }

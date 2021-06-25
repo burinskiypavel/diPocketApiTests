@@ -15,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SupervisionEmailTests extends TestBase {
     String site = "DiPocket";
-    String emailFrom = "legal.team@dipocket.org";
+    String expectedEmailSender = "legal.team@dipocket.org";
 
     public String body(int landId, String site, int id){
         return "{\n" +
@@ -35,7 +35,7 @@ public class SupervisionEmailTests extends TestBase {
 
     public void postSupervisionEmail(int landId, String site, int id) {
         given()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body(body(landId, site, id))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendSupervisionEmail")
@@ -52,7 +52,7 @@ public class SupervisionEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 398);
         String emailFooter = getEmailFooterText(emailText, 399);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached the section of "+site+" Terms and Conditions (the “T&Cs”) regulating Supervised accounts. It is the same that you have already agreed to as part of the T&Cs, but we want to draw your attention on it now that you will start using a Supervised account since it contains important provisions on the Supervisor’s role and responsibilities. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -66,7 +66,7 @@ public class SupervisionEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 486);
         String emailFooter = getEmailFooterText(emailText, 487);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться розділ \"Умови та Правила користування додатком DiPocket\" (\"Правила користування\"), який стосується Опіки за рахунком. Ви прийняли їх разом з іншою частиною Правил користування, але зараз ми хочемо ще раз звернути на них Вашу увагу, адже Ви розпочинаєте користуватися Опікунськими рахунками, а в цьому розділі знаходиться більш детальна інформація про роль та відповідальність Опікуна рахунку. З повагою, Юридичний відділ"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -80,7 +80,7 @@ public class SupervisionEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 436);
         String emailFooter = getEmailFooterText(emailText, 437);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączeniu znajduje się sekcja Warunków i Zasad korzystania (\"Warunki korzystania\"), dotycząca Kont Nadzorowanych. Zaakceptowałeś ją wraz z pozostałą częścią Warunków korzystania, jednak chcemy raz jeszcze zwrócić na nią Twoją uwagę teraz, gdy rozpoczynasz korzystanie z Konta Nadzorowanego, a w tej sekcji znajdziesz szczegółowe zapisy dotyczące roli i odpowiedzialności Opiekuna Konta. Z wyrazami szacunku, Dział Prawny"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
@@ -94,7 +94,7 @@ public class SupervisionEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 295);
         String emailFooter = getEmailFooterText(emailText, 296);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находится раздел \"Условий пользования приложением DiPocket\" об опеке. Вы уже приняли эти условия в момент регистрации, но мы хотим напомнить Вам детали перед началом использования этой функциональности. С уважением, Юридический отдел"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -108,7 +108,7 @@ public class SupervisionEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 398);
         String emailFooter = getEmailFooterText(emailText, 399);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached the section of discontu Terms and Conditions (the “T&Cs”) regulating Supervised accounts. It is the same that you have already agreed to as part of the T&Cs, but we want to draw your attention on it now that you will start using a Supervised account since it contains important provisions on the Supervisor’s role and responsibilities. With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -122,7 +122,7 @@ public class SupervisionEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 436);
         String emailFooter = getEmailFooterText(emailText, 437);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączeniu znajduje się sekcja Warunków i Zasad korzystania (\"Warunki korzystania\"), dotycząca Kont Nadzorowanych. Zaakceptowałeś ją wraz z pozostałą częścią Warunków korzystania, jednak chcemy raz jeszcze zwrócić na nią Twoją uwagę teraz, gdy rozpoczynasz korzystanie z Konta Nadzorowanego, a w tej sekcji znajdziesz szczegółowe zapisy dotyczące roli i odpowiedzialności Opiekuna Konta. Z wyrazami szacunku, Dział Prawny"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }

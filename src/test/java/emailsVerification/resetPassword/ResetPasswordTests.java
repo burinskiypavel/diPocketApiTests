@@ -16,19 +16,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ResetPasswordTests extends TestBase {
     String site = "DiPocket";
-    String emailFrom = "customer.service@dipocket.org";
+    String expectedEmailSender = "customer.service@dipocket.org";
 
     public String body(String testEmail){
         return "{\n" +
                 "  \"email\": \""+testEmail+"\",\n" +
-                "  \"phoneNumber\": \""+app.emailsVerificationsPhoneNumber+"\",\n" + // 380661470959
+                "  \"phoneNumber\": \""+app.emailsVerificationsPhoneNumber+"\",\n" +
                 "  \"url\": \"google.com\"\n" +
                 "}";
     }
 
     public void postSendResetPasswordEmail(String site) {
         given()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body(body(app.emailsVerificationsEmail))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendEmailForResetClientPassword?site="+site+"")
@@ -46,7 +46,7 @@ public class ResetPasswordTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 217);
         String emailFooter = getEmailFooterText(emailText, 218);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -61,7 +61,7 @@ public class ResetPasswordTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 156);
         String emailFooter = getEmailFooterText(emailText, 157);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
@@ -76,7 +76,7 @@ public class ResetPasswordTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 28, 217);
         String emailFooter = getEmailFooterText(emailText, 218);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" discontu is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -91,7 +91,7 @@ public class ResetPasswordTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 0, 156);
         String emailFooter = getEmailFooterText(emailText, 157);
 
-        assertThat(emailSender, equalTo(emailFrom));
+        assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" discontu dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
