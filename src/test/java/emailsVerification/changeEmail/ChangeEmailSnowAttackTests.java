@@ -1,4 +1,4 @@
-package emailsVerification.bankTransfer;
+package emailsVerification.changeEmail;
 
 import appmanager.EmailIMAPHelper3;
 import base.TestBase;
@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class BankTransferSnowAttackTests extends TestBase {
+public class ChangeEmailSnowAttackTests extends TestBase {
     String site = "Snow Attack";
     String expectedEmailSender = "customer.service@dipocket.org";
 
@@ -33,41 +33,41 @@ public class BankTransferSnowAttackTests extends TestBase {
                 "}";
     }
 
-    public void postSendBankTransferEmail(int landId) {
+    public void postSendChangeEmail(int landId) {
         given()
                 .header("Content-Type", "application/json")
                 .body(body(landId))
                 .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
+                .post( app.dipocket3_intranet+"/EmailService/sendChangeEmail")
                 .then().log().all()
                 .statusCode(200);
     }
 
     @Test(priority = 1, enabled = false) // bug incorrect word SnowAttack in footer and subject
-    public void testBankTransferSnowAttackEN() throws InterruptedException, MessagingException, IOException {
-        postSendBankTransferEmail(1);
+    public void testChangeEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
+        postSendChangeEmail(1);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 40, 160);
-        String emailFooter = getEmailFooterText(emailText, 161);
+        String emailBody = getEmailBodyText(emailText, 48, 265);
+        String emailFooter = getEmailFooterText(emailText, 266);
 
         assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", We received your request to verify the email address associated with your "+site+" account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2) //bug incorrect word SnowAttack in footer and subject
-    public void testBankTransferSnowAttackHU() throws InterruptedException, MessagingException, IOException {
-        postSendBankTransferEmail(5);
+    @Test(priority = 2, enabled = false) //bug incorrect word SnowAttack in footer and subject
+    public void testChangeEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
+        postSendChangeEmail(5);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 40, 168);
+        String emailBody = getEmailBodyText(emailText, 48, 168);
         String emailFooter = getEmailFooterText(emailText, 169);
 
         assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja az Ön banki átutalásának megerősítése. Üdvözlettel, az Ügyfélszolgálati csapat"));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a "+site+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
