@@ -500,6 +500,12 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="EmailsVerificationChangeEmailSnowAttackTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.changeEmail.ChangeEmailSnowAttackTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 <!--    <test name="EmailsVerificationChangeEmailUpAndGoTests">-->
 <!--        <classes>-->
 <!--            <class name="emailsVerification.changeEmail.ChangeEmailUpAndGoTests"/>-->
