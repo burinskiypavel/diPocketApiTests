@@ -169,7 +169,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, up and go працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 10)
+    @Test(priority = 10, enabled = false)
     public void testStatementEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(3, app.mobile_site_upAndGo, 32727);
 

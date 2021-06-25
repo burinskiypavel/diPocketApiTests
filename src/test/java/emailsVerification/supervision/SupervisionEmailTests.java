@@ -141,7 +141,7 @@ public class SupervisionEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" PlayIT is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 8)
+    @Test(priority = 8, enabled = false)
     public void testSupervisionEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_upAndGo, 32727);
 
@@ -155,7 +155,7 @@ public class SupervisionEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" up and go is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 9)
+    @Test(priority = 9, enabled = false)
     public void testSupervisionEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(2, app.mobile_site_upAndGo, 32727);
 
@@ -169,7 +169,7 @@ public class SupervisionEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, up and go працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 10)
+    @Test(priority = 10, enabled = false)
     public void testSupervisionEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(3, app.mobile_site_upAndGo, 32727);
 
