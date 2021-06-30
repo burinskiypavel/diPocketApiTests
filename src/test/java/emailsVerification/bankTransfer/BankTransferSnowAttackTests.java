@@ -43,28 +43,28 @@ public class BankTransferSnowAttackTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 1, enabled = false) // bug incorrect word SnowAttack in footer and subject
+    @Test(priority = 1)
     public void testBankTransferSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(1);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 40, 160);
-        String emailFooter = getEmailFooterText(emailText, 161);
+        String emailBody = getEmailBodyText(emailText, 41, 161);
+        String emailFooter = getEmailFooterText(emailText, 162);
 
         assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2) //bug incorrect word SnowAttack in footer and subject
+    @Test(priority = 2, enabled = false) //bug incorrect HU footer
     public void testBankTransferSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(5);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 40, 168);
-        String emailFooter = getEmailFooterText(emailText, 169);
+        String emailBody = getEmailBodyText(emailText, 41, 169);
+        String emailFooter = getEmailFooterText(emailText, 170);
 
         assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja az Ön banki átutalásának megerősítése. Üdvözlettel, az Ügyfélszolgálati csapat"));
