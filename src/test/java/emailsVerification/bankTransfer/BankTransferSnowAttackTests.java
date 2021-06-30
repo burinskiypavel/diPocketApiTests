@@ -57,7 +57,7 @@ public class BankTransferSnowAttackTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2, enabled = false) //bug incorrect HU footer
+    @Test(priority = 2, enabled = false) //bug incorrect HU footer and body
     public void testBankTransferSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(5);
 
