@@ -198,21 +198,21 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, up and go осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 12, enabled = false) // bug incorrect word SnowAttack in footer and subject
-    public void testChangePhoneSnowAttackN() throws InterruptedException, MessagingException, IOException {
+    @Test(priority = 12)
+    public void testChangePhoneSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site_snowAttack, 32855);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 43, 386);
-        String emailFooter = getEmailFooterText(emailText, 387);
+        String emailBody = getEmailBodyText(emailText, 44, 388);
+        String emailFooter = getEmailFooterText(emailText, 389);
 
         assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", The mobile phone number associated with your Snow Attack account was changed to: "+newPhone+". If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", The mobile phone number associated with your Snow Attack account was changed to: "+newPhone+". If you didn't change it, please  click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Snow Attack is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 13, enabled = false) //bug incorrect word SnowAttack in footer and subject
+    @Test(priority = 13, enabled = false) //bug incorrect footer and body
     public void testChangePhoneSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(5, app.mobile_site_snowAttack, 32855);
 
