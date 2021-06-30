@@ -196,4 +196,18 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! К письму прикреплена выписка по счету, которую Вы заказывали. Спасибо за пользование up and go. С уважением, Юридический отдел"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, up and go осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 12)
+    public void testStatementEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
+        postStatementEmail(1, app.mobile_site_snowAttack, 32855);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 31, 179);
+        String emailFooter = getEmailFooterText(emailText, 180);
+
+        assertThat(emailSender, equalTo(expectedEmailSender));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your Snow Attack account statement(s). Thank you for using Snow Attack. With kind regards, Legal Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Snow Attack is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
 }
