@@ -2,10 +2,14 @@ package emailsVerification.bankTransfer;
 
 import appmanager.EmailIMAPHelper3;
 import base.TestBase;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
 import static appmanager.EmailIMAPHelper.getEmailFooterText;
@@ -33,69 +37,37 @@ public class BankTransferDipocketTests extends TestBase {
                 "}";
     }
 
-    public void postSendBankTransferEmail(int landId) {
+    public void postSendBankTransferEmail(int langId) {
         given()
                 .header("Content-Type", "application/json")
-                .body(body(landId))
+                .body(body(langId))
                 .when()
                 .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
                 .then().log().all()
                 .statusCode(200);
     }
 
-    @Test(priority = 1)
-    public void testBankTransferDipocketEN() throws InterruptedException, MessagingException, IOException {
-        postSendBankTransferEmail(1);
-
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 38, 158);
-        String emailFooter = getEmailFooterText(emailText, 159);
-
-        assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    @DataProvider
+    public Iterator<Object[]> BankTransfer(){
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"EN", 1, app.emailsVerificationsEmail, app.emailsVerificationsPass, 38, 158, 159, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team", ""+app.SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {"UA", 2, app.emailsVerificationsEmail, app.emailsVerificationsPass, 28, 154, 155, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлене Вами підтвердження банківського переказу. З повагою, Відділ підтримки клієнтів", ""+app.SITE_REG+" Для Вашого спокою, "+site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {"PL", 3, app.emailsVerificationsEmail,  app.emailsVerificationsPass, 0, 126, 127, "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajduje się zamówione potwierdzenie przelewu bankowego. Z wyrazami szacunku, Zespół Obsługi Klienta", ""+app.SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {"PL", 4, app.emailsVerificationsEmail, app.emailsVerificationsPass, 28, 169, 170, "Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находится подтверждение банковского перевода, которое Вы заказывали. С уважением, Служба поддержки клиентов", ""+app.SITE_REG+" Для вашего спокойствия, "+site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"});
+        return list.iterator();
     }
 
-    @Test(priority = 2)
-    public void testBankTransferDipocketUA() throws InterruptedException, MessagingException, IOException {
-        postSendBankTransferEmail(2);
+    @Test(dataProvider = "BankTransfer")
+    public void testBankTransferDipocket(String lang, int langId, String email, String pass, int bodyBegin, int bodyEnd, int footerEnd, String expectedEmailBody, String expectedEmailFooter) throws InterruptedException, MessagingException, IOException {
+        postSendBankTransferEmail(langId);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 28, 154);
-        String emailFooter = getEmailFooterText(emailText, 155);
-
-        assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлене Вами підтвердження банківського переказу. З повагою, Відділ підтримки клієнтів"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 3)
-    public void testBankTransferDipocketPL() throws InterruptedException, MessagingException, IOException {
-        postSendBankTransferEmail(3);
-
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 0, 126);
-        String emailFooter = getEmailFooterText(emailText, 127);
+        String emailSender =  EmailIMAPHelper3.getEmailSender(email, pass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", email, pass);
+        String emailBody = getEmailBodyText(emailText, bodyBegin , bodyEnd);
+        String emailFooter = getEmailFooterText(emailText, footerEnd);
 
         assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączniku znajduje się zamówione potwierdzenie przelewu bankowego. Z wyrazami szacunku, Zespół Obsługi Klienta"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 4)
-    public void testBankTransferDipocketRU() throws InterruptedException, MessagingException, IOException {
-        postSendBankTransferEmail(4);
-
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 28, 169);
-        String emailFooter = getEmailFooterText(emailText, 170);
-
-        assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находится подтверждение банковского перевода, которое Вы заказывали. С уважением, Служба поддержки клиентов"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailBody, equalTo(expectedEmailBody));
+        assertThat(emailFooter, equalTo(expectedEmailFooter));
     }
 }
