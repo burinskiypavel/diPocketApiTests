@@ -196,4 +196,18 @@ public class SupervisionEmailTests extends TestBase {
         assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находится раздел \"Условий пользования приложением DiPocket\" об опеке. Вы уже приняли эти условия в момент регистрации, но мы хотим напомнить Вам детали перед началом использования этой функциональности. С уважением, Юридический отдел"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, up and go осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 12, enabled = false)//bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
+    public void testSupervisionEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
+        postSupervisionEmail(1, app.mobile_site_snowAttack, 32855);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 0, 398);
+        String emailFooter = getEmailFooterText(emailText, 399);
+
+        assertThat(emailSender, equalTo(expectedEmailSender));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached the section of "+site+" Terms and Conditions (the “T&Cs”) regulating Supervised accounts. It is the same that you have already agreed to as part of the T&Cs, but we want to draw your attention on it now that you will start using a Supervised account since it contains important provisions on the Supervisor’s role and responsibilities. With kind regards, Legal Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
 }

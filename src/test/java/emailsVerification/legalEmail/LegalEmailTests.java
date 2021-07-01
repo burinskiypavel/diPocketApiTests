@@ -197,4 +197,18 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находятся юридические документы, которые Вы заказывали. Спасибо за пользование up and go. С уважением, Юридический отдел"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, up and go осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 12, enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
+    public void testLegalEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
+        postSendLegalEmail(1, app.mobile_site_snowAttack, 32855);
+
+        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 28, 169);
+        String emailFooter = getEmailFooterText(emailText, 170);
+
+        assertThat(emailSender, equalTo(expectedEmailSender));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+site+" legal documents. Thank you for using "+site+". With kind regards, Legal Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
 }
