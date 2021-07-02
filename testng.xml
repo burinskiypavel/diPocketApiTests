@@ -451,36 +451,11 @@
         </classes>
     </test>
 
-<!--    <test name="EmailsVerificationBankTransferDipocketTests">-->
+<!--    <test name="EmailsVerificationBankTransferTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.bankTransfer.BankTransferDipocketTests"/>-->
+<!--            <class name="emailsVerification.bankTransfer.BankTransferTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-
-<!--    <test name="EmailsVerificationBankTransferDiscontuTests">-->
-<!--        <classes>-->
-<!--            <class name="emailsVerification.bankTransfer.BankTransferDiscontuTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationBankTransferPlayITTests">-->
-<!--        <classes>-->
-<!--            <class name="emailsVerification.bankTransfer.BankTransferPlayITTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationBankTransferSnowAttackTests">-->
-<!--        <classes>-->
-<!--            <class name="emailsVerification.bankTransfer.BankTransferSnowAttackTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationBankTransferUpAndGoTests">-->
-<!--        <classes>-->
-<!--            <class name="emailsVerification.bankTransfer.BankTransferUpAndGoTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
 
 <!--    <test name="EmailsVerificationChangeEmailDipocketTestss">-->
 <!--        <classes>-->
