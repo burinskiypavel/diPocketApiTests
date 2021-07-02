@@ -60,6 +60,11 @@ public class ApplicationManager {
     public String mobile_login_deviceuuid_tds = "380730000069-AutoTest-Login";
     public String tds_phone = "380730000069";
     public String tds_pass = "a111111";
+    public String site = "DiPocket";
+    public String site_discontu = "discontu";
+    public String site_PlayIT = "PlayIT";
+    public String site_upAndGo = "up and go";
+    public String site_SnowAttack = "Snow Attack";
 
 
     //private MailHelper mailHelper;
