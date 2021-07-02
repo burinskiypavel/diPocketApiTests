@@ -2,6 +2,7 @@ package emailsVerification.tac;
 
 import appmanager.EmailIMAPHelper3;
 import base.TestBase;
+import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
@@ -29,12 +30,20 @@ public class TacEmailsTests extends TestBase {
     }
 
     public void postSendTacEmail(String site) {
+        RequestSpecification requestSpec = given()
+                .baseUri(app.dipocket3_intranet)
+                .contentType("application/json");
+
+
         given()
-                .contentType("application/json")
+                .spec(requestSpec)
+                //.contentType("application/json")
                 .body(body(app.emailsVerificationsEmail, site))
-                .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendTacEmail")
-                .then().log().all()
+
+        .when()
+                .post( "/EmailService/sendTacEmail")
+                .then()
+                .log().all()
                 .statusCode(200);
     }
 
@@ -99,7 +108,8 @@ public class TacEmailsTests extends TestBase {
     }
 
     @Test(priority = 5, enabled = false)
-    public void testTacPlayITEN() throws InterruptedException, MessagingException, IOException {
+    public void testTacPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
         postSendTacEmail(app.mobile_site_playIt);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
