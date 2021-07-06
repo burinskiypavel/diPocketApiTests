@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class BankTransferDipocket2Tests extends TestBase {
+public class BankTransferDipocketTests extends TestBase {
     String site = "DiPocket";
     String expectedEmailSender = "customer.service@dipocket.org";
 
