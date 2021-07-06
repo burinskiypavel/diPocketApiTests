@@ -1,24 +1,13 @@
 package appmanager;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
-import org.testng.Assert;
 
-import javax.net.ssl.SSLContext;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static io.restassured.RestAssured.given;
 
 public class ApplicationManager {
     //public static java.util.Properties prop = new java.util.Properties();
@@ -65,6 +54,7 @@ public class ApplicationManager {
     public String site_PlayIT = "PlayIT";
     public String site_upAndGo = "up and go";
     public String site_SnowAttack = "Snow Attack";
+    public RequestSpecification requestSpecDipocketRegistration;
 
 
     //private MailHelper mailHelper;
@@ -105,6 +95,9 @@ public class ApplicationManager {
         mobile_site_snowAttack = HelperBase.prop.getProperty("mobile.site.snowAttack");
         emailsVerificationsCountryId = HelperBase.prop.getProperty("emailsVerifications.countryId");
         emailsVerificationsCurrencyId = HelperBase.prop.getProperty("emailsVerifications.currencyId");
+
+        requestSpecDipocketRegistration = given()
+                .baseUri(HelperBase.prop.getProperty("mobile.base.url"));
     }
 
     public void init() {
