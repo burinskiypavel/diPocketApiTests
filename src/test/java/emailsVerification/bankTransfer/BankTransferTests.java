@@ -69,7 +69,7 @@ public class BankTransferTests extends TestBase {
     }
 
     @Test(dataProvider = "BankTransfer")
-    public void testBankTransferDipocket(String site, String lang, int langId, int id, String email, String pass, int bodyBegin, int bodyEnd, int footerEnd, String expectedEmailSender, String expectedEmailBody, String expectedEmailFooter) throws InterruptedException, MessagingException, IOException {
+    public void testBankTransfer(String site, String lang, int langId, int id, String email, String pass, int bodyBegin, int bodyEnd, int footerEnd, String expectedEmailSender, String expectedEmailBody, String expectedEmailFooter) throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(langId, site, id);
 
         String emailSender =  EmailIMAPHelper3.getEmailSender(email, pass);
