@@ -55,6 +55,7 @@ public class ApplicationManager {
     public String site_upAndGo = "up and go";
     public String site_SnowAttack = "Snow Attack";
     public RequestSpecification requestSpecDipocketRegistration;
+    public RequestSpecification requestSpecEmailVerification;
 
 
     //private MailHelper mailHelper;
@@ -99,6 +100,10 @@ public class ApplicationManager {
         requestSpecDipocketRegistration = given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site"));
+
+        requestSpecEmailVerification = given()
+                .baseUri(dipocket3_intranet)
+                .contentType("application/json");
     }
 
     public void init() {

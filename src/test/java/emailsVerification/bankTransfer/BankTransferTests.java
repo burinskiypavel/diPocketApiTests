@@ -40,11 +40,12 @@ public class BankTransferTests extends TestBase {
 
     public void postSendBankTransferEmail(int langId, String site, int id) {
         given()
-                .contentType("application/json")
+                .spec(app.requestSpecEmailVerification)
                 .body(body(langId,site, id))
                 .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendBankTransferEmail")
-                .then().log().all()
+                .post( "/EmailService/sendBankTransferEmail")
+                .then()
+                .log().all()
                 .statusCode(200);
     }
 
