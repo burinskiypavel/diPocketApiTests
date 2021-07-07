@@ -1,6 +1,6 @@
 package emailsVerification.tac;
 
-import appmanager.EmailIMAPHelper3;
+import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.Test;
@@ -52,8 +52,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site);
         postSendTacEmail(app.mobile_site);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 1523);
         String emailFooter = getEmailFooterText(emailText, 1524);
 
@@ -67,8 +67,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site);
         postSendTacEmail(app.mobile_site);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 1504);
         String emailFooter = getEmailFooterText(emailText, 1505);
 
@@ -82,8 +82,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site);
         postSendTacEmail(app.mobile_site);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 1703);
         String emailFooter = getEmailFooterText(emailText, 1704);
 
@@ -97,8 +97,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site);
         postSendTacEmail(app.mobile_site);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 1490);
         String emailFooter = getEmailFooterText(emailText, 1491);
 
@@ -112,8 +112,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_discontu);
         postSendTacEmail(app.mobile_site_discontu);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 1624);
         String emailFooter = getEmailFooterText(emailText, 1625);
 
@@ -127,8 +127,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_discontu);
         postSendTacEmail(app.mobile_site_discontu);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 1750);
         String emailFooter = getEmailFooterText(emailText, 1751);
 
@@ -142,8 +142,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
         postSendTacEmail(app.mobile_site_playIt);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 26, 163);
         String emailFooter = getEmailFooterText(emailText, 164);
 
@@ -157,8 +157,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_upAndGo);
         postSendTacEmail(app.mobile_site_upAndGo);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 1523);
         String emailFooter = getEmailFooterText(emailText, 1524);
 
@@ -172,8 +172,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site_upAndGo);
         postSendTacEmail(app.mobile_site_upAndGo);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 1576);
         String emailFooter = getEmailFooterText(emailText, 1577);
 
@@ -187,8 +187,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_upAndGo);
         postSendTacEmail(app.mobile_site_upAndGo);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 1703);
         String emailFooter = getEmailFooterText(emailText, 1704);
 
@@ -202,8 +202,8 @@ public class TacEmailsTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site_upAndGo);
         postSendTacEmail(app.mobile_site_upAndGo);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 1551);
         String emailFooter = getEmailFooterText(emailText, 1552);
 

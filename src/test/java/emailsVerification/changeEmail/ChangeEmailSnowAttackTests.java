@@ -1,6 +1,6 @@
 package emailsVerification.changeEmail;
 
-import appmanager.EmailIMAPHelper3;
+import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import org.testng.annotations.Test;
 
@@ -47,8 +47,8 @@ public class ChangeEmailSnowAttackTests extends TestBase {
     public void testChangeEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(1);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 49, 271);
         String emailFooter = getEmailFooterText(emailText, 272);
 
@@ -61,8 +61,8 @@ public class ChangeEmailSnowAttackTests extends TestBase {
     public void testChangeEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(5);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 49, 286);
         String emailFooter = getEmailFooterText(emailText, 287);
 

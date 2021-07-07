@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 
-public class EmailIMAPHelper3 {
+public class EmailVerificationHelper {
     public static String getTextFromEmail(String host, String user,
                                           String password) throws InterruptedException, MessagingException, IOException {
         String result = "";

@@ -1,6 +1,6 @@
 package emailsVerification.changePhone;
 
-import appmanager.EmailIMAPHelper3;
+import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import org.testng.annotations.Test;
 
@@ -47,8 +47,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneDipocketEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site, 32761);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 41, 381);
         String emailFooter = getEmailFooterText(emailText, 382);
 
@@ -61,8 +61,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneDipocketUA() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(2, app.mobile_site, 32761);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 359);
         String emailFooter = getEmailFooterText(emailText, 360);
 
@@ -75,8 +75,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneDipocketPL() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(3, app.mobile_site, 32761);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 337);
         String emailFooter = getEmailFooterText(emailText, 338);
 
@@ -89,8 +89,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneDipocketRU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(4, app.mobile_site, 32761);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 362);
         String emailFooter = getEmailFooterText(emailText, 363);
 
@@ -103,8 +103,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneDiscontuEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site_discontu, 32717);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 41, 381);
         String emailFooter = getEmailFooterText(emailText, 382);
 
@@ -117,8 +117,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(3, app.mobile_site_discontu, 32717);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 337);
         String emailFooter = getEmailFooterText(emailText, 338);
 
@@ -131,8 +131,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhonePlayITEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site_playIt, 32732);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 39, 378);
         String emailFooter = getEmailFooterText(emailText, 379);
 
@@ -145,8 +145,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 42, 382);
         String emailFooter = getEmailFooterText(emailText, 383);
 
@@ -159,8 +159,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(2, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 360);
         String emailFooter = getEmailFooterText(emailText, 361);
 
@@ -173,8 +173,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(3, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 337);
         String emailFooter = getEmailFooterText(emailText, 338);
 
@@ -187,8 +187,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(4, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 362);
         String emailFooter = getEmailFooterText(emailText, 363);
 
@@ -201,8 +201,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site_snowAttack, 32855);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 44, 388);
         String emailFooter = getEmailFooterText(emailText, 389);
 
@@ -215,8 +215,8 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(5, app.mobile_site_snowAttack, 32855);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 43, 168);
         String emailFooter = getEmailFooterText(emailText, 169);
 

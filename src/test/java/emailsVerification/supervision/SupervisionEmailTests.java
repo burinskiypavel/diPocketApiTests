@@ -1,6 +1,6 @@
 package emailsVerification.supervision;
 
-import appmanager.EmailIMAPHelper3;
+import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import org.testng.annotations.Test;
 
@@ -47,8 +47,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site, 32761);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 398);
         String emailFooter = getEmailFooterText(emailText, 399);
 
@@ -61,8 +61,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailDipocketUA() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(2, app.mobile_site, 32761);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 486);
         String emailFooter = getEmailFooterText(emailText, 487);
 
@@ -75,8 +75,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailDipocketPL() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(3, app.mobile_site, 32761);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 436);
         String emailFooter = getEmailFooterText(emailText, 437);
 
@@ -89,8 +89,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailDipocketRU() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(4, app.mobile_site, 32761);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 295);
         String emailFooter = getEmailFooterText(emailText, 296);
 
@@ -103,8 +103,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailDiscontuEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_discontu, 32717);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 398);
         String emailFooter = getEmailFooterText(emailText, 399);
 
@@ -117,8 +117,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(3, app.mobile_site_discontu, 32717);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 436);
         String emailFooter = getEmailFooterText(emailText, 437);
 
@@ -131,8 +131,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_playIt, 32732);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 396);
         String emailFooter = getEmailFooterText(emailText, 397);
 
@@ -145,8 +145,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 399);
         String emailFooter = getEmailFooterText(emailText, 400);
 
@@ -159,8 +159,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(2, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 488);
         String emailFooter = getEmailFooterText(emailText, 489);
 
@@ -173,8 +173,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(3, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 436);
         String emailFooter = getEmailFooterText(emailText, 437);
 
@@ -187,8 +187,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(4, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 28, 295);
         String emailFooter = getEmailFooterText(emailText, 296);
 
@@ -201,8 +201,8 @@ public class SupervisionEmailTests extends TestBase {
     public void testSupervisionEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_snowAttack, 32855);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 398);
         String emailFooter = getEmailFooterText(emailText, 399);
 

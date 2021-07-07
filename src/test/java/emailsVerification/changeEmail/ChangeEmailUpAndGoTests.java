@@ -1,6 +1,6 @@
 package emailsVerification.changeEmail;
 
-import appmanager.EmailIMAPHelper3;
+import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import org.testng.annotations.Test;
 
@@ -47,8 +47,8 @@ public class ChangeEmailUpAndGoTests extends TestBase {
     public void testChangeEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(1);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 47, 267);
         String emailFooter = getEmailFooterText(emailText, 268);
 
@@ -61,8 +61,8 @@ public class ChangeEmailUpAndGoTests extends TestBase {
     public void testChangeEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(2);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 276);
         String emailFooter = getEmailFooterText(emailText, 277);
 
@@ -75,8 +75,8 @@ public class ChangeEmailUpAndGoTests extends TestBase {
     public void testChangeEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(3);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 0, 211);
         String emailFooter = getEmailFooterText(emailText, 212);
 
@@ -89,8 +89,8 @@ public class ChangeEmailUpAndGoTests extends TestBase {
     public void testChangeEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(4);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 256);
         String emailFooter = getEmailFooterText(emailText, 257);
 

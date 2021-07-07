@@ -1,6 +1,6 @@
 package emailsVerification.bankTransfer;
 
-import appmanager.EmailIMAPHelper3;
+import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -72,8 +72,8 @@ public class BankTransferTests extends TestBase {
     public void testBankTransfer(String site, String lang, int langId, int id, String email, String pass, int bodyBegin, int bodyEnd, int footerEnd, String expectedEmailSender, String expectedEmailBody, String expectedEmailFooter) throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(langId, site, id);
 
-        String emailSender =  EmailIMAPHelper3.getEmailSender(email, pass);
-        String emailText =  EmailIMAPHelper3.getTextFromEmail("pop.gmail.com", email, pass);
+        String emailSender =  EmailVerificationHelper.getEmailSender(email, pass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
         String emailBody = getEmailBodyText(emailText, bodyBegin , bodyEnd);
         String emailFooter = getEmailFooterText(emailText, footerEnd);
 
