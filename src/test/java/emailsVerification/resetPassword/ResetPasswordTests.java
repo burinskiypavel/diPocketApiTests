@@ -28,11 +28,12 @@ public class ResetPasswordTests extends TestBase {
 
     public void postSendResetPasswordEmail(String site) {
         given()
-                .contentType("application/json")
+                .spec(app.requestSpecEmailVerification)
                 .body(body(app.emailsVerificationsEmail))
                 .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendEmailForResetClientPassword?site="+site+"")
-                .then().log().all()
+                .post( "/EmailService/sendEmailForResetClientPassword?site="+site+"")
+                .then()
+                .log().all()
                 .statusCode(200);
     }
 
