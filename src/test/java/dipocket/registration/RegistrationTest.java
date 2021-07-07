@@ -24,7 +24,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .queryParam("langID", "4")
                 .when()
                 .get( "references/availableCountries")
@@ -39,7 +38,6 @@ public class RegistrationTest extends TestBase {
             given()
                     .spec(app.requestSpecDipocketRegistration)
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                    .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .when()
                     .get("references/languages")
                     .then().log().all()
@@ -53,7 +51,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get("references/appConfig?platform=android&version=2.2.9&langCode=rus")
                 .then().log().all()
@@ -67,7 +64,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get("userRegistration/loadSavePointData2?devUUID="+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"")
                 .then().log().all()
@@ -80,7 +76,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .body("{\n" +
                         "  \"smsNumber\" : 1\n" +
                         "}")
@@ -96,7 +91,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get("references/verifyPhone?phone="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"")
                 .then().log().all()
@@ -109,14 +103,11 @@ public class RegistrationTest extends TestBase {
         Response res = given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get("references/topCountries?langID=4");
         res.then().log().all();
         int statusCode = res.getStatusCode();
-        //String topCountriesHash = res.path("topCountriesHash").toString();
         assertEquals(statusCode, 200);
-        //assertEquals(topCountriesHash, "bd04afc0873b80500461aeb5fdf682e720d8b0b307566569d785ec269caf80a6");
         res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Италия", "Австрия", "Украина", "Бельгия", "Болгария", "Венгрия", "Германия", "Чехия"));
     }
 
@@ -125,7 +116,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -158,7 +148,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get("userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"&code="+smsCode+"")
                 .then().log().all()
@@ -172,7 +161,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -226,7 +214,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -245,7 +232,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -299,7 +285,6 @@ public class RegistrationTest extends TestBase {
             given()
                     .spec(app.requestSpecDipocketRegistration)
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                    .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("Content-Type", "application/json")
                     .body("{\n" +
                             "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -318,7 +303,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .get("references/questions?langId=4&countryId="+countryId+"")
                 .then().log().all()
@@ -332,7 +316,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -387,7 +370,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .when()
                 .put("userRegistration/sendTermsAndConditions?deviceUUID="+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"")
                 .then().log().all()
@@ -399,7 +381,6 @@ public class RegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("Content-Type", "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
