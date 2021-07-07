@@ -36,11 +36,12 @@ public class ChangeEmailTelenorTests extends TestBase {
 
     public void postSendChangeEmail(int landId) {
         given()
-                .header("Content-Type", "application/json")
+                .spec(app.requestSpecEmailVerification)
                 .body(body(landId))
                 .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendChangeEmail")
-                .then().log().all()
+                .post( "/EmailService/sendChangeEmail")
+                .then()
+                .log().all()
                 .statusCode(200);
     }
 

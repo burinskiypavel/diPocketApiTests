@@ -14,7 +14,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ChangeEmailSnowAttackTests extends TestBase {
-    String site = "Snow Attack";
     String expectedEmailSender = "customer.service@dipocket.org";
 
     public String body(int landId){
@@ -35,11 +34,12 @@ public class ChangeEmailSnowAttackTests extends TestBase {
 
     public void postSendChangeEmail(int landId) {
         given()
-                .header("Content-Type", "application/json")
+                .spec(app.requestSpecEmailVerification)
                 .body(body(landId))
                 .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendChangeEmail")
-                .then().log().all()
+                .post( "/EmailService/sendChangeEmail")
+                .then()
+                .log().all()
                 .statusCode(200);
     }
 
@@ -53,8 +53,8 @@ public class ChangeEmailSnowAttackTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 272);
 
         assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", We received your request to verify the email address associated with your "+site+" account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", We received your request to verify the email address associated with your "+app.site_SnowAttack+" account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 2, enabled = false) //bug incorrect in footer and body
@@ -67,7 +67,7 @@ public class ChangeEmailSnowAttackTests extends TestBase {
         String emailFooter = getEmailFooterText(emailText, 287);
 
         assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a "+site+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a "+app.site_SnowAttack+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
