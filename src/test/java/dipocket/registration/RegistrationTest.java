@@ -114,9 +114,9 @@ public class RegistrationTest extends TestBase {
                 .get("references/topCountries?langID=4");
         res.then().log().all();
         int statusCode = res.getStatusCode();
-        String topCountriesHash = res.path("topCountriesHash").toString();
+        //String topCountriesHash = res.path("topCountriesHash").toString();
         assertEquals(statusCode, 200);
-        assertEquals(topCountriesHash, "bd04afc0873b80500461aeb5fdf682e720d8b0b307566569d785ec269caf80a6");
+        //assertEquals(topCountriesHash, "bd04afc0873b80500461aeb5fdf682e720d8b0b307566569d785ec269caf80a6");
         res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Италия", "Австрия", "Украина", "Бельгия", "Болгария", "Венгрия", "Германия", "Чехия"));
     }
 
