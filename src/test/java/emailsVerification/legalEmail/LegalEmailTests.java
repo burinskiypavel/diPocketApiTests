@@ -35,11 +35,12 @@ public class LegalEmailTests extends TestBase {
 
     public void postSendLegalEmail(int landId, String site, int id) {
         given()
-                .contentType("application/json")
+                .spec(app.requestSpecEmailVerification)
                 .body(body(landId, site, id))
                 .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendLegalEmail")
-                .then().log().all()
+                .post( "/EmailService/sendLegalEmail")
+                .then()
+                .log().all()
                 .statusCode(200);
     }
 
