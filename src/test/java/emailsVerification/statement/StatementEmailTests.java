@@ -35,11 +35,12 @@ public class StatementEmailTests extends TestBase {
 
     public void postStatementEmail(int landId, String site, int id) {
         given()
-                .contentType("application/json")
+                .spec(app.requestSpecEmailVerification)
                 .body(body(landId, site, id))
                 .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendStatementEmail")
-                .then().log().all()
+                .post( "/EmailService/sendStatementEmail")
+                .then()
+                .log().all()
                 .statusCode(200);
     }
 

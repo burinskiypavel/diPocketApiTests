@@ -35,11 +35,12 @@ public class SupervisionEmailTests extends TestBase {
 
     public void postSupervisionEmail(int landId, String site, int id) {
         given()
-                .contentType("application/json")
+                .spec(app.requestSpecEmailVerification)
                 .body(body(landId, site, id))
                 .when()
-                .post( app.dipocket3_intranet+"/EmailService/sendSupervisionEmail")
-                .then().log().all()
+                .post( "/EmailService/sendSupervisionEmail")
+                .then()
+                .log().all()
                 .statusCode(200);
     }
 

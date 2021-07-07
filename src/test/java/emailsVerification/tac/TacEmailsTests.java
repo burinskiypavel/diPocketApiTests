@@ -31,16 +31,10 @@ public class TacEmailsTests extends TestBase {
     }
 
     public void postSendTacEmail(String site) {
-        RequestSpecification requestSpec = given()
-                .baseUri(app.dipocket3_intranet)
-                .contentType("application/json");
-
-
         given()
-                .spec(requestSpec)
+                .spec(app.requestSpecEmailVerification)
                 .body(body(app.emailsVerificationsEmail, site))
-
-        .when()
+                .when()
                 .post( "/EmailService/sendTacEmail")
                 .then()
                 .log().all()
