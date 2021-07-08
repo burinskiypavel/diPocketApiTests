@@ -17,10 +17,11 @@ public class RegistrationTest extends TestBase {
     String smsCode = null;
     String countryId = "616";
     String currencyId = "985";
+    String site = "DIPOCKET";
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "DIPOCKET");
+        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .queryParam("langID", "4")
@@ -60,8 +61,9 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_loadSavePointData2() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
+                .queryParam("devUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .when()
-                .get("userRegistration/loadSavePointData2?devUUID="+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"")
+                .get("userRegistration/loadSavePointData2")
                 .then().log().all()
                 .statusCode(200)
                 .body("isInvited", equalTo(false));
@@ -71,22 +73,25 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
         given()
                 .spec(app.requestSpecDipocketRegistration)
+                .queryParam("langID", "4")
+                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
                 .body("{\n" +
                         "  \"smsNumber\" : 1\n" +
                         "}")
                 .when()
-                .post("userRegistration/sendSMSCodeForPhone?langId=4&phoneNum="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"")
+                .post("userRegistration/sendSMSCodeForPhone")
                 .then().log().all()
                 .statusCode(200);
     }
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "DIPOCKET");
+        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
                 .spec(app.requestSpecDipocketRegistration)
+                .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
                 .when()
-                .get("references/verifyPhone?phone="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"")
+                .get("references/verifyPhone")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo(true));
@@ -96,8 +101,9 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_topCountries() {
         Response res = given()
                 .spec(app.requestSpecDipocketRegistration)
+                .queryParam("langID", "4")
                 .when()
-                .get("references/topCountries?langID=4");
+                .get("references/topCountries");
         res.then().log().all();
         int statusCode = res.getStatusCode();
         assertEquals(statusCode, 200);
@@ -108,7 +114,7 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -139,8 +145,11 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
+                .queryParam("langID", "4")
+                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("code", smsCode)
                 .when()
-                .get("userRegistration/checkPhoneAndLoadSavePoint?langId=4&phoneNum="+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"&code="+smsCode+"")
+                .get("userRegistration/checkPhoneAndLoadSavePoint")
                 .then().log().all()
                 .statusCode(200)
                 .body("isInvited", equalTo(false))
@@ -151,7 +160,7 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -203,7 +212,7 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_clientImage() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
-                .header("Content-Type", "application/json")
+                .contentType( "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -220,7 +229,7 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2__() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -289,8 +298,10 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_questions() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
+                .queryParam("langID", "4")
+                .queryParam("countryId", countryId)
                 .when()
-                .get("references/questions?langId=4&countryId="+countryId+"")
+                .get("references/questions")
                 .then().log().all()
                 .statusCode(200)
                 .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"))
@@ -301,7 +312,7 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2___() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -354,8 +365,9 @@ public class RegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_sendTermsAndConditions() {
         given()
                 .spec(app.requestSpecDipocketRegistration)
+                .queryParam("deviceUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .when()
-                .put("userRegistration/sendTermsAndConditions?deviceUUID="+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"")
+                .put("userRegistration/sendTermsAndConditions")
                 .then().log().all()
                 .statusCode(200);
     }
@@ -376,7 +388,7 @@ public class RegistrationTest extends TestBase {
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
-                        "  \"secAnswer\" : \"***\",\n" +
+                        "  \"secAnswer\" : \"QA\",\n" +
                         "  \"pin\" : \""+ app.generateRandomString(8)+"\",\n" +
                         "  \"stepNo\" : 4,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
