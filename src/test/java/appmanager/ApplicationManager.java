@@ -55,6 +55,7 @@ public class ApplicationManager {
     public String site_upAndGo = "up and go";
     public String site_SnowAttack = "Snow Attack";
     public RequestSpecification requestSpecDipocketRegistration;
+    public RequestSpecification requestSpecDiscontuRegistration;
     public RequestSpecification requestSpecEmailVerification;
 
 
@@ -100,6 +101,11 @@ public class ApplicationManager {
         requestSpecDipocketRegistration = given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+
+        requestSpecDiscontuRegistration = given()
+                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecEmailVerification = given()
