@@ -206,7 +206,7 @@ public class TacEmailsTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(enabled = false)
+    @Test(enabled = false)//bug Tac Snow Attack EN email body is not correct
     public void testTacSnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", "SNOW_ATTACK");
         postSendTacEmail("SNOW_ATTACK");
