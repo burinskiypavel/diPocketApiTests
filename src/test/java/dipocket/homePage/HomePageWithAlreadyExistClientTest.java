@@ -16,12 +16,11 @@ import static org.testng.Assert.assertEquals;
 public class HomePageWithAlreadyExistClientTest extends TestBase {
     String cliSessionId = null;
 
-    @Test(priority = 18)
+    @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
         given()
-                .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .spec(app.requestSpecDipocketHomePage)
                 .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .header("content-type", "application/json; charset=UTF-8")
                 .body("{\n" +
@@ -31,19 +30,18 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
                         "  \"appVersion\" : \"2.2.7\"\n" +
                         "}")
                 .when()
-                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
+                .post( "homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
                 .then().log().all()
                 .statusCode(400)
                 .body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
                 .body("errCode", equalTo("DIP-00591"));
     }
 
-    @Test(priority = 19)
+    @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
         String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380980316499", HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
         Response res =  given()
-                .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .spec(app.requestSpecDipocketHomePage)
                 .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .header("content-type", "application/json; charset=UTF-8")
                 .body("{\n" +
@@ -54,7 +52,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
                 .when()
-                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe");
+                .post( "homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe");
         cliSessionId = res.getHeader("cliSessionId");
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
@@ -62,30 +60,28 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
         assertEquals(StatusCode, 200);
     }
 
-    @Test(priority = 20)
+    @Test(priority = 3)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
-                .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .spec(app.requestSpecDipocketHomePage)
                 .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/clientInfo2")
+                .get("clientProfile/clientInfo2")
                 .then().log().all()
                 .statusCode(200)
                 .body("clientFirstName", equalTo("Pavel"))
                 .body("clientLastName", equalTo("Burinsky"));
     }
 
-    @Test(priority = 21)
+    @Test(priority = 4)
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
-                .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .spec(app.requestSpecDipocketHomePage)
                 .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/clientConfig")
+                .get("clientProfile/clientConfig")
                 .then().log().all()
                 .statusCode(200)
                 .body("payeeCurrencyHash", notNullValue())
@@ -96,30 +92,28 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
                 .body("availCategoriesHash", notNullValue());
     }
 
-    @Test(priority = 22)
+    @Test(priority = 5)
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
-                .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .spec(app.requestSpecDipocketHomePage)
                 .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(HelperBase.prop.getProperty("mobile.base.url")+"accounts/clientDiPAccounts2?walletId=null")
+                .get("accounts/clientDiPAccounts2?walletId=null")
                 .then().log().all()
                 .statusCode(200)
                 .body("accounts.state", equalTo(Arrays.asList("ACTIVE")))
                 .body("accounts.ccy", equalTo(Arrays.asList("PLN")));
     }
 
-    @Test(priority = 23)
+    @Test(priority = 6)
     public void test_ClientServices_v1_tile_getMessage2(){
         given()
-                .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .spec(app.requestSpecDipocketHomePage)
                 .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(HelperBase.prop.getProperty("mobile.base.url")+"tile/getMessages2")
+                .get("tile/getMessages2")
                 .then().log().all()
                 .statusCode(200)
                 .body("unreadMessageCount", equalTo(0));

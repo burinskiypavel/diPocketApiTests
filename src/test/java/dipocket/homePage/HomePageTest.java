@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 public class HomePageTest extends TestBase {
     String cliSessionId = null;
 
-    @Test(priority = 18)
+    @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
@@ -37,7 +37,7 @@ public class HomePageTest extends TestBase {
                 .body("errCode", equalTo("DIP-00591"));
     }
 
-    @Test(priority = 19)
+    @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
         String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380685448615", Properties.deviceuuid2, "DIPOCKET");
         Response res =  given()
@@ -61,7 +61,7 @@ public class HomePageTest extends TestBase {
         assertEquals(StatusCode, 200);
     }
 
-    @Test(priority = 20)
+    @Test(priority = 3)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
@@ -76,7 +76,7 @@ public class HomePageTest extends TestBase {
                 .body("clientLastName", equalTo("Burinsky"));
     }
 
-    @Test(priority = 21)
+    @Test(priority = 4)
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
@@ -95,7 +95,7 @@ public class HomePageTest extends TestBase {
                 .body("availCategoriesHash", notNullValue());
     }
 
-    @Test(priority = 22)
+    @Test(priority = 5)
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
@@ -110,7 +110,7 @@ public class HomePageTest extends TestBase {
                 .body("accounts.ccy", equalTo(Arrays.asList("PLN")));
     }
 
-    @Test(priority = 23)
+    @Test(priority = 6)
     public void test_ClientServices_v1_tile_getMessage2(){
         given()
                 .header("deviceuuid", Properties.deviceuuid2)
