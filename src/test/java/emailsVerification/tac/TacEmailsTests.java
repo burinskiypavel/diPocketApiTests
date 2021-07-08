@@ -24,7 +24,7 @@ public class TacEmailsTests extends TestBase {
         return "{\n" +
                 "  \"email\": \""+testEmail+"\",\n" +
                 "  \"phoneNumber\": \""+app.emailsVerificationsPhoneNumber+"\",\n" +
-                "  \"programNickName\": \""+site+"\",\n" +
+                //"  \"programNickName\": \""+site+"\",\n" +
                 "  \"site\": \""+site+"\",\n" +
                 "  \"url\": \"google.com\"\n" +
                 "}";
@@ -195,6 +195,21 @@ public class TacEmailsTests extends TestBase {
     public void testTacUpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site_upAndGo);
         postSendTacEmail(app.mobile_site_upAndGo);
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 29, 1551);
+        String emailFooter = getEmailFooterText(emailText, 1552);
+
+        assertThat(emailSender, equalTo(expectedUpAndGoSender));
+        assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! Ознакомьтесь с прикрепленным файлом \""+app.site_upAndGo+"_Terms_and_Conditions\". Обратите внимание на документ \""+app.site_upAndGo+"_at_a_Glance\", в нём вы найдете ключевые правила пользования "+app.site_upAndGo+", актуальные цены и тарифы. Относительно личных данных, просьба обратить внимание на раздел \"Personal Information\" в \""+app.site_upAndGo+"_Terms_and_Conditions\", поскольку вся личная информация будет обрабатываться согласно этим условиям. Предоставляя нам информацию (включая конфиденциальную), вы даёте согласие на ее обработку в целях, описанных в Договоре. Вы имеете право быть в курсе использования данных, чтобы иметь возможность исправить ошибки, чтобы отказаться от обработки или остановить обработку, или удалить информацию или проинструктировать нас о копировании или передачи информации по Вашему указанию. Если Вы принимаете \"Условия пользования приложением "+app.site_upAndGo+"\",  перейдите по этой ссылке и закончите регистрацию в приложении, если еще не закончили. \""+app.site_upAndGo+"_Terms_and_Conditions\" остаются неизменными до тех пор, пока не будет уведомлено об обратном. Уведомление об изменении условий будет выслано, по меньшей мере, за два месяца, чтобы дать Вам возможность ознакомится и принять их. ВАЖНО: можно закончить регистрацию без перехода по ссылке выше. Но, если вы не сделаете этого в течение 7 дней после получения доступа к приложению, учетная запись в up and go будет заблокирована до тех пор, пока Вы не перейдете по ссылке, принимая таким образом \""+app.site_upAndGo+"_Terms_and_Conditions\". С уважением, Юридический отдел"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(enabled = false)
+    public void testTacSnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", "SNOW_ATTACK");
+        postSendTacEmail("SNOW_ATTACK");
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);

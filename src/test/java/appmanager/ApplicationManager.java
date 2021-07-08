@@ -99,7 +99,8 @@ public class ApplicationManager {
 
         requestSpecDipocketRegistration = given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"));
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecEmailVerification = given()
                 .baseUri(dipocket3_intranet)
