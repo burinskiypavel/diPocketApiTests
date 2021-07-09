@@ -211,4 +211,18 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your "+app.site_SnowAttack+" account statement(s). Thank you for using "+app.site_SnowAttack+". With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 13, enabled = false)// too much SnowAttack in body
+    public void testStatementEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
+        postStatementEmail(5, app.mobile_site_snowAttack, 32855);
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 31, 208);
+        String emailFooter = getEmailFooterText(emailText, 209);
+
+        assertThat(emailSender, equalTo(expectedSender));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a számlakivonatát (számlakivonatait). Köszönjük, hogy a "+app.site_SnowAttack+" alkalmazást használja. Üdvözlettel, Jogi csapat"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
+    }
 }
