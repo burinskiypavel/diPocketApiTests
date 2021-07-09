@@ -57,7 +57,7 @@ public class ChangeEmailSnowAttackTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2, enabled = false) //bug incorrect in footer and body
+    @Test(priority = 2,enabled = false) //bug incorrect body
     public void testChangeEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(5);
 
@@ -68,6 +68,6 @@ public class ChangeEmailSnowAttackTests extends TestBase {
 
         assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a "+app.site_SnowAttack+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
     }
 }
