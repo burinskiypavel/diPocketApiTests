@@ -30,7 +30,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
                         "  \"appVersion\" : \"2.2.7\"\n" +
                         "}")
                 .when()
-                .post( "homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
+                .post( "homePage/authenticateMobileApp")
                 .then().log().all()
                 .statusCode(400)
                 .body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
@@ -52,7 +52,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
                 .when()
-                .post( "homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe");
+                .post( "homePage/authenticateMobileApp");
         cliSessionId = res.getHeader("cliSessionId");
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);

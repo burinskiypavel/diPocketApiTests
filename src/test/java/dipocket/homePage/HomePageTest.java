@@ -31,7 +31,7 @@ public class HomePageTest extends TestBase {
                         "  \"appVersion\" : \"2.2.7\"\n" +
                         "}")
                 .when()
-                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe")
+                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp")
                 .then().log().all()
                 .statusCode(400)
                 .body("errCode", equalTo("DIP-00591"));
@@ -53,7 +53,7 @@ public class HomePageTest extends TestBase {
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
                 .when()
-                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp?value=com.cs.dipocketback.pojo.push.DeviceInfo@3f3e6bbe");
+                .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp");
         cliSessionId = res.getHeader("cliSessionId");
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
