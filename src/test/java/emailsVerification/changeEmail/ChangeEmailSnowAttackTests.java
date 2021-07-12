@@ -57,7 +57,7 @@ public class ChangeEmailSnowAttackTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2,enabled = false) //bug incorrect body
+    @Test(priority = 2,enabled = false) //bug  Change Email(Play IT, Snow Attack) HU email has incorrect body
     public void testChangeEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(5);
 
