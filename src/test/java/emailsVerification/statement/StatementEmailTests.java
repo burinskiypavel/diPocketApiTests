@@ -212,14 +212,14 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 13, enabled = false)// too much SnowAttack in body
+    @Test(priority = 13)
     public void testStatementEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(5, app.mobile_site_snowAttack, 32855);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 31, 208);
-        String emailFooter = getEmailFooterText(emailText, 209);
+        String emailBody = getEmailBodyText(emailText, 31, 196);
+        String emailFooter = getEmailFooterText(emailText, 197);
 
         assertThat(emailSender, equalTo(expectedSender));
         assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a számlakivonatát (számlakivonatait). Köszönjük, hogy a "+app.site_SnowAttack+" alkalmazást használja. Üdvözlettel, Jogi csapat"));
