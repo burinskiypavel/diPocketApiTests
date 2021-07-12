@@ -213,31 +213,31 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 13, enabled = false) //bug incorrect body
+    @Test(priority = 13)
     public void testChangePhoneSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(5, app.mobile_site_snowAttack, 32855);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 43, 168);
-        String emailFooter = getEmailFooterText(emailText, 169);
+        String emailBody = getEmailBodyText(emailText, 44, 419);
+        String emailFooter = getEmailFooterText(emailText, 420);
 
         assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a Snow Attack fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A Snow Attack számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Snow Attack, a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 14, enabled = false) //bug incorrect footer and body
+    @Test(priority = 14)
     public void testChangePhonePlayItHU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(5, app.mobile_site_playIt, 32732);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 43, 168);
-        String emailFooter = getEmailFooterText(emailText, 169);
+        String emailBody = getEmailBodyText(emailText, 39, 409);
+        String emailFooter = getEmailFooterText(emailText, 410);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a Snow Attack fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A PlayIT számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 }
