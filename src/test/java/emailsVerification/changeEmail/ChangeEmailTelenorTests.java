@@ -16,7 +16,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ChangeEmailTelenorTests extends TestBase {
     String site = "Telenor";
     String expectedEmailSender = "telenorwallet@dipocket.org";
-    String SITE_REG_telenor = "Telenor®";
 
     public String body(int landId){
         return "{\n" +
@@ -45,7 +44,7 @@ public class ChangeEmailTelenorTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 1)// incorect SITE_REG Telenor
+    @Test(priority = 1)
     public void testChangeEmailTelenorEN() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(1);
 
@@ -56,7 +55,7 @@ public class ChangeEmailTelenorTests extends TestBase {
 
         assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", We received your request to verify the email address associated with your "+site+" account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
-        assertThat(emailFooter, equalTo(""+SITE_REG_telenor+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 2)
@@ -70,6 +69,6 @@ public class ChangeEmailTelenorTests extends TestBase {
 
         assertThat(emailSender, equalTo(expectedEmailSender));
         assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a "+site+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
-        assertThat(emailFooter, equalTo(""+SITE_REG_telenor+" "+site+" is powered by DiPocket UAB, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+site+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
     }
 }
