@@ -16,6 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class StatementEmailTests extends TestBase {
     String expectedSender = "statements@dipocket.org";
     String expectedUpAndGoSender = "zestawienia@upcard.pl";
+    String expectedPlayITSender = "PlayIT Card <statements@dipocket.org>";
 
     public String body(int landId, String site, int id){
         return "{\n" +
@@ -137,12 +138,26 @@ public class StatementEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 26, 164);
         String emailFooter = getEmailFooterText(emailText, 165);
 
-        assertThat(emailSender, equalTo("PlayIT Card <statements@dipocket.org>"));
+        assertThat(emailSender, equalTo(expectedPlayITSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your "+app.site_PlayIT+" account statement(s). Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 8, enabled = false)
+    @Test(priority = 8)
+    public void testStatementEmailPlayITHU() throws InterruptedException, MessagingException, IOException {
+        postStatementEmail(5, app.mobile_site_playIt, 32732);
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 26, 186);
+        String emailFooter = getEmailFooterText(emailText, 187);
+
+        assertThat(emailSender, equalTo(expectedPlayITSender));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a számlakivonatát (számlakivonatait). Köszönjük, hogy a PlayIT alkalmazást használja. Üdvözlettel, Jogi csapat"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 9, enabled = false)
     public void testStatementEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site_upAndGo, 32727);
 
@@ -156,7 +171,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 9, enabled = false)
+    @Test(priority = 10, enabled = false)
     public void testStatementEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(2, app.mobile_site_upAndGo, 32727);
 
@@ -170,7 +185,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 10, enabled = false)
+    @Test(priority = 11, enabled = false)
     public void testStatementEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(3, app.mobile_site_upAndGo, 32727);
 
@@ -184,7 +199,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 11, enabled = false)
+    @Test(priority = 12, enabled = false)
     public void testStatementEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(4, app.mobile_site_upAndGo, 32727);
 
@@ -198,7 +213,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 12)
+    @Test(priority = 13)
     public void testStatementEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site_snowAttack, 32855);
 
@@ -212,7 +227,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 13)
+    @Test(priority = 14)
     public void testStatementEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(5, app.mobile_site_snowAttack, 32855);
 
@@ -224,19 +239,5 @@ public class StatementEmailTests extends TestBase {
         assertThat(emailSender, equalTo(expectedSender));
         assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a számlakivonatát (számlakivonatait). Köszönjük, hogy a "+app.site_SnowAttack+" alkalmazást használja. Üdvözlettel, Jogi csapat"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 14, enabled = false)// to much PlayIT in body
-    public void testStatementEmailPlayITHU() throws InterruptedException, MessagingException, IOException {
-        postStatementEmail(5, app.mobile_site_playIt, 32732);
-
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 26, 193);
-        String emailFooter = getEmailFooterText(emailText, 194);
-
-        assertThat(emailSender, equalTo("PlayIT Card <statements@dipocket.org>"));
-        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a számlakivonatát (számlakivonatait). Köszönjük, hogy a PlayIT alkalmazást használja. Üdvözlettel, Jogi csapat"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 }
