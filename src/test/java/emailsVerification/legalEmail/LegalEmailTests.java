@@ -16,6 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class LegalEmailTests extends TestBase {
     String expectedSender = "legal.team@dipocket.org";
     String expectedUpAngGoSender = "regulacje@upcard.pl";
+    String expectedPlayITSender = "PlayIT Card <playitcard@dipocket.org>";
 
     public String body(int landId, String site, int id){
         return "{\n" +
@@ -137,12 +138,26 @@ public class LegalEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 26, 163);
         String emailFooter = getEmailFooterText(emailText, 164);
 
-        assertThat(emailSender, equalTo("PlayIT Card <playitcard@dipocket.org>"));
+        assertThat(emailSender, equalTo(expectedPlayITSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_PlayIT+" legal documents. Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 8, enabled = false)
+    @Test(priority = 8)
+    public void testLegalEmailPlayITHU() throws InterruptedException, MessagingException, IOException {
+        postSendLegalEmail(5, app.mobile_site_playIt, 32732);
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 26, 171);
+        String emailFooter = getEmailFooterText(emailText, 172);
+
+        assertThat(emailSender, equalTo(expectedPlayITSender));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a jogi dokumentumokat. Köszönjük, hogy a PlayIT alkalmazást használja. Üdvözlettel, Jogi csapat"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 9, enabled = false)
     public void testLegalEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site_upAndGo, 32727);
 
@@ -156,7 +171,7 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 9, enabled = false)
+    @Test(priority = 10, enabled = false)
     public void testLegalEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(2, app.mobile_site_upAndGo, 32727);
 
@@ -170,7 +185,7 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 10, enabled = false)
+    @Test(priority = 11, enabled = false)
     public void testLegalEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(3, app.mobile_site_upAndGo, 32727);
 
@@ -184,7 +199,7 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 11, enabled = false)
+    @Test(priority = 12, enabled = false)
     public void testLegalEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(4, app.mobile_site_upAndGo, 32727);
 
@@ -198,7 +213,7 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 12, enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
+    @Test(priority = 13, enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
     public void testLegalEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site_snowAttack, 32855);
 
