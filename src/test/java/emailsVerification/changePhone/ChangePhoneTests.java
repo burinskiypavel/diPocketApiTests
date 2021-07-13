@@ -16,6 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ChangePhoneTests extends TestBase {
     String expectedSender = "customer.service@dipocket.org";
     String expectedUpAndGoSender = "wsparcie@upcard.pl";
+    String expectedPlayITSender = "PlayIT Card <customer.service@dipocket.org>";
     String newPhone = "new phone";
 
     public String body(int landId, String site, int id){
@@ -138,12 +139,26 @@ public class ChangePhoneTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 39, 378);
         String emailFooter = getEmailFooterText(emailText, 379);
 
-        assertThat(emailSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
+        assertThat(emailSender, equalTo(expectedPlayITSender));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", The mobile phone number associated with your PlayIT account was changed to: "+newPhone+". If you didn't change it, please  click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 8, enabled = false)
+    @Test(priority = 8)
+    public void testChangePhonePlayITHU() throws InterruptedException, MessagingException, IOException {
+        postSendChangePhoneMailRealFlow(5, app.mobile_site_playIt, 32732);
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 39, 409);
+        String emailFooter = getEmailFooterText(emailText, 410);
+
+        assertThat(emailSender, equalTo(expectedPlayITSender));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A PlayIT számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 9, enabled = false)
     public void testChangePhoneUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site_upAndGo, 32727);
 
@@ -157,7 +172,7 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 9, enabled = false)
+    @Test(priority = 10, enabled = false)
     public void testChangePhoneUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(2, app.mobile_site_upAndGo, 32727);
 
@@ -171,7 +186,7 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 10, enabled = false)
+    @Test(priority = 11, enabled = false)
     public void testChangePhoneUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(3, app.mobile_site_upAndGo, 32727);
 
@@ -185,7 +200,7 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 11, enabled = false)
+    @Test(priority = 12, enabled = false)
     public void testChangePhoneUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(4, app.mobile_site_upAndGo, 32727);
 
@@ -199,7 +214,7 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 12)
+    @Test(priority = 13)
     public void testChangePhoneSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site_snowAttack, 32855);
 
@@ -213,7 +228,7 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 13)
+    @Test(priority = 14)
     public void testChangePhoneSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(5, app.mobile_site_snowAttack, 32855);
 
@@ -225,19 +240,5 @@ public class ChangePhoneTests extends TestBase {
         assertThat(emailSender, equalTo(expectedSender));
         assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A Snow Attack számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Snow Attack, a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 14)
-    public void testChangePhonePlayItHU() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(5, app.mobile_site_playIt, 32732);
-
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 39, 409);
-        String emailFooter = getEmailFooterText(emailText, 410);
-
-        assertThat(emailSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
-        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A PlayIT számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 }
