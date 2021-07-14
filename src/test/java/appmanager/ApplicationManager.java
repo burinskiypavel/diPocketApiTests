@@ -58,6 +58,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecDiscontuRegistration;
     public RequestSpecification requestSpecDipocketHomePage;
     public RequestSpecification requestSpecEmailVerification;
+    public RequestSpecification requestSpecTelenor;
 
 
     //private MailHelper mailHelper;
@@ -117,6 +118,9 @@ public class ApplicationManager {
         requestSpecEmailVerification = given()
                 .baseUri(dipocket3_intranet)
                 .contentType("application/json");
+
+        requestSpecTelenor = given()
+                .baseUri(dipocket3_intranet);
     }
 
     public void init() {
