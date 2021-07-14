@@ -481,6 +481,12 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="EmailsVerificationChangeEmailSodexoTests">-->
+<!--        <classes>-->
+<!--            <class name="emailsVerification.changeEmail.ChangeEmailSodexoTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 <!--    <test name="EmailsVerificationChangeEmailUpAndGoTests">-->
 <!--        <classes>-->
 <!--            <class name="emailsVerification.changeEmail.ChangeEmailUpAndGoTests"/>-->
