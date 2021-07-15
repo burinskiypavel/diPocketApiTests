@@ -13,8 +13,6 @@ public class TelenorCheckBalanceTest extends TestBase {
     public void test_WebServices_v1_anonymous_bandBalance(){
         given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .body("{\n" +
                         "  \"publicToken\" : \""+token+"\"\n" +
                         "}\n")
