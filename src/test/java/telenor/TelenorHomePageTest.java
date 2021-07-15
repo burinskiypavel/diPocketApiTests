@@ -27,8 +27,6 @@ public class TelenorHomePageTest extends TestBase {
         System.out.println("smsCod:" + smsCode);
         given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .body("{\n" +
                         "  \"phoneNumber\" : \""+app.telenorLoginPhone+"\"\n" +
                         "}")
@@ -55,8 +53,6 @@ public class TelenorHomePageTest extends TestBase {
                 .auth().preemptive().basic(app.loginPhone, smsCode)
                 .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
                 //.header("authorization", basicAuthorization)
-                .header("site", app.telenorSite)
-                .header("content-type", "application/json; charset=utf-8")
                 .when()
                 .post("/WebServices/v1/auth/authenticate");
 
@@ -75,8 +71,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("/WebServices/v1/account/clientDiPAccounts2");
@@ -92,8 +86,6 @@ public class TelenorHomePageTest extends TestBase {
         given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("/WebServices/v1/tile/messages")
@@ -107,8 +99,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
                         "  \"value\" : \"14932\"\n" +
@@ -126,8 +116,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
                         "  \"trnCcy\" : \"HUF\"\n" +
@@ -146,8 +134,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
                         "  \"accountId\" : 9434\n" +
@@ -166,8 +152,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
                         "  \"accountId\" : 9434\n" +
@@ -188,8 +172,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("/WebServices/v1/clientProfile/clientImages");
@@ -205,8 +187,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
                         "  \"secAnswer\" : \""+secretAnswer+"\"\n" +
@@ -225,8 +205,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .header("secretanswer", secretAnswer)
                 .body("{\n" +
@@ -246,8 +224,6 @@ public class TelenorHomePageTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("/WebServices/v1/clientProfile/clientInfo");

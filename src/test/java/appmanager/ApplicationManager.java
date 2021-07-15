@@ -120,7 +120,9 @@ public class ApplicationManager {
                 .contentType("application/json");
 
         requestSpecTelenor = given()
-                .baseUri(dipocket3_intranet);
+                .baseUri(dipocket3_intranet)
+                .header("site", telenorSite)
+                .contentType("application/json; charset=utf-8");
     }
 
     public void init() {
