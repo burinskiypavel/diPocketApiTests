@@ -186,4 +186,17 @@ public class ResetPasswordTests extends TestBase {
         assertThat(emailBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
+
+    @Test(priority = 11)
+    public void testResetPasswordSodexo() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        //app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", "SODEXO");
+        postSendResetPasswordEmail("SODEXO");
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 63, 701);
+
+        //assertThat(emailSender, equalTo(expectedSender));
+        assertThat(emailBody, equalTo("Otrzymaliśmy prośbę o zresetowanie hasła powiązanego z Twoim Profilem Wirtualnej Karty Sodexo. Kliknij w ten link lub kliknij w przycisk poniżej, by potwierdzić prośbę i zakończyć proces. Pozdrawiamy, Zespół Wirtualnej Karty Sodexo Centrum Obsługi Klienta +48 (22) 535 11 11 | info.svc.pl@sodexo.com We received a request to reset the password associated with your Virtual Sodexo Card Profile. Please click on this link or click button below, to confirm your request and finalize the change. With kind regards, Virtual Sodexo Card Team Customer Service Center +48 (22) 535 11 11 | info.svc.pl@sodexo.com powered by DiPocket (dipocket.org)"));
+    }
 }
