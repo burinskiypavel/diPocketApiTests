@@ -4,20 +4,20 @@
 
     <!--    <test name="DiPocketAPITests">-->
     <!--        <classes>-->
-    <!--            <class name="dipocket.registration.RegistrationTest"/>-->
-    <!--            <class name="dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
+    <!--            <class name="tests.dipocket.registration.RegistrationTest"/>-->
+    <!--            <class name="tests.dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
 
-    <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
-    <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
-    <!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
-    <!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
-    <!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
+    <!--            <class name="tests.tds.TDSV1BioAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV1BioDeclineTest"/>-->
+    <!--            <class name="tests.tds.TDSV1SmsDeclineTest"/>-->
+    <!--            <class name="tests.tds.TDSV1SmsAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV1PareqAllFieldsTest"/>-->
 
-    <!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
-    <!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
-    <!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
-    <!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
-    <!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
+    <!--            <class name="tests.tds.TDSV2BrowserAppAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV2BrowserAppCancelTest"/>-->
+    <!--            <class name="tests.tds.TDSV2BrowserAppDeclineTest"/>-->
+    <!--            <class name="tests.tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV2CReqAllFieldsTest"/>-->
 
     <!--        </classes>-->
     <!--    </test>-->
@@ -25,133 +25,133 @@
 
     <!--    <test name="RegistrationTest">-->
     <!--        <classes>-->
-    <!--            <class name="dipocket.registration.RegistrationTest"/>-->
+    <!--            <class name="tests.dipocket.registration.RegistrationTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="HomePageWithAlreadyExistClientTest">-->
     <!--    <classes>-->
-    <!--        <class name="dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
+    <!--        <class name="tests.dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
     <!--    </classes>-->
     <!--    </test>-->
 
     <!--&lt;!&ndash;    <test name="TDSV1BioDeclineTest">&ndash;&gt;-->
     <!--&lt;!&ndash;        <classes>&ndash;&gt;-->
-    <!--&lt;!&ndash;            <class name="tds.TDSV1BioDeclineTest"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <class name="tests.tds.TDSV1BioDeclineTest"/>&ndash;&gt;-->
     <!--&lt;!&ndash;        </classes>&ndash;&gt;-->
     <!--&lt;!&ndash;    </test>&ndash;&gt;-->
 
     <!--    <test name="TDSV1BioAcceptTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV1BioAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV1BioAcceptTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV1BioDeclineTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV1BioDeclineTest"/>-->
+    <!--            <class name="tests.tds.TDSV1BioDeclineTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV1SmsDeclineTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV1SmsDeclineTest"/>-->
+    <!--            <class name="tests.tds.TDSV1SmsDeclineTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV1SmsAcceptTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV1SmsAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV1SmsAcceptTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV1PareqAllFieldsTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV1PareqAllFieldsTest"/>-->
+    <!--            <class name="tests.tds.TDSV1PareqAllFieldsTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2BrowserAppAcceptTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2BrowserAppAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV2BrowserAppAcceptTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2BrowserAppCancelTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2BrowserAppCancelTest"/>-->
+    <!--            <class name="tests.tds.TDSV2BrowserAppCancelTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2BrowserAppDeclineTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2BrowserAppDeclineTest"/>-->
+    <!--            <class name="tests.tds.TDSV2BrowserAppDeclineTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2BrowserAppSmsInsteadAcceptTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV2BrowserAppSmsInsteadAcceptTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2CReqAllFieldsTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2CReqAllFieldsTest"/>-->
+    <!--            <class name="tests.tds.TDSV2CReqAllFieldsTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2NativeOOBAppTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2NativeOOBAppTest"/>-->
+    <!--            <class name="tests.tds.TDSV2NativeOOBAppTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2NativeOOBHtmlAcceptTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2NativeOOBHtmlAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV2NativeOOBHtmlAcceptTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2NativeOOBHtmlDeclineTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2NativeOOBHtmlDeclineTest"/>-->
+    <!--            <class name="tests.tds.TDSV2NativeOOBHtmlDeclineTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2NativeSmsAcceptTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2NativeSmsAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV2NativeSmsAcceptTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2NativeSmsHtmlAcceptTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2NativeSmsHtmlAcceptTest"/>-->
+    <!--            <class name="tests.tds.TDSV2NativeSmsHtmlAcceptTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2NativeSmsInccodeTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2NativeSmsInccodeTest"/>-->
+    <!--            <class name="tests.tds.TDSV2NativeSmsInccodeTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>-->
+    <!--            <class name="tests.tds.TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2NativeIncorrectTranTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2NativeIncorrectTranTest"/>-->
+    <!--            <class name="tests.tds.TDSV2NativeIncorrectTranTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TDSV2AreqAllFieldTest">-->
     <!--        <classes>-->
-    <!--            <class name="tds.TDSV2AreqAllFieldTest"/>-->
+    <!--            <class name="tests.tds.TDSV2AreqAllFieldTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
@@ -453,85 +453,85 @@
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.bankTransfer.BankTransferTests"/>-->
+<!--            <class name="tests.emailsVerification.bankTransfer.BankTransferTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationChangeEmailDipocketTestss">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.changeEmail.ChangeEmailDipocketTests"/>-->
+<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailDipocketTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationChangeEmailTelenorTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.changeEmail.ChangeEmailTelenorTests"/>-->
+<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailTelenorTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationChangeEmailDiscontuTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.changeEmail.ChangeEmailDiscontuTests"/>-->
+<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailDiscontuTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationChangeEmailSnowAttackTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.changeEmail.ChangeEmailSnowAttackTests"/>-->
+<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailSnowAttackTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationChangeEmailSodexoTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.changeEmail.ChangeEmailSodexoTests"/>-->
+<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailSodexoTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationChangeEmailUpAndGoTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.changeEmail.ChangeEmailUpAndGoTests"/>-->
+<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailUpAndGoTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationChangeEmailPlayITTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.changeEmail.ChangeEmailPlayITTests"/>-->
+<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailPlayITTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--        <test name="EmailsVerificationChangePhoneTests">-->
 <!--            <classes>-->
-<!--                <class name="emailsVerification.changePhone.ChangePhoneTests"/>-->
+<!--                <class name="tests.emailsVerification.changePhone.ChangePhoneTests"/>-->
 <!--            </classes>-->
 <!--        </test>-->
 
 <!--    <test name="EmailsVerificationLegalEmailTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.legalEmail.LegalEmailTests"/>-->
+<!--            <class name="tests.emailsVerification.legalEmail.LegalEmailTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationStatementEmailTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.statement.StatementEmailTests"/>-->
+<!--            <class name="tests.emailsVerification.statement.StatementEmailTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationSupervisionEmailTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.supervision.SupervisionEmailTests"/>-->
+<!--            <class name="tests.emailsVerification.supervision.SupervisionEmailTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationResetPasswordTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.resetPassword.ResetPasswordTests"/>-->
+<!--            <class name="tests.emailsVerification.resetPassword.ResetPasswordTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="EmailsVerificationTacEmailsTests">-->
 <!--        <classes>-->
-<!--            <class name="emailsVerification.tac.TacEmailsTests"/>-->
+<!--            <class name="tests.emailsVerification.tac.TacEmailsTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
