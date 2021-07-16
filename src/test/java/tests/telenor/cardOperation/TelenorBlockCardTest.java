@@ -38,7 +38,6 @@ public class TelenorBlockCardTest extends TestBase {
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(app.loginPhone, smsCode)
                 .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
-                .queryParam("value", "org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterResponse@7211c1e4")
                 .when()
                 .post("/WebServices/v1/auth/authenticate");
 
