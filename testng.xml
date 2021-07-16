@@ -157,97 +157,97 @@
 
     <!--    <test name="TelenorHomePageTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.TelenorHomePageTest"/>-->
+    <!--            <class name="tests.telenor.TelenorHomePageTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorRegistrationTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.TelenorRegistrationTest"/>-->
+    <!--            <class name="tests.telenor.TelenorRegistrationTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorCheckBalanceTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.TelenorCheckBalanceTest"/>-->
+    <!--            <class name="tests.telenor.TelenorCheckBalanceTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorWrongPasswordTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.TelenorWrongPasswordTest"/>-->
+    <!--            <class name="tests.telenor.TelenorWrongPasswordTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorLoginWithUserBannedFromBOTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.TelenorLoginWithUserBannedFromBOTest"/>-->
+    <!--            <class name="tests.telenor.TelenorLoginWithUserBannedFromBOTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorFullRegistrationTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.TelenorFullRegistrationTest"/>-->
+    <!--            <class name="tests.telenor.TelenorFullRegistrationTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorBlockCardTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.cardOperation.TelenorBlockCardTest"/>-->
+    <!--            <class name="tests.telenor.cardOperation.TelenorBlockCardTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest"/>-->
+    <!--            <class name="tests.telenor.TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--        <test name="TelenorUnblockPaymentBandWithInvalidDataTest">-->
     <!--            <classes>-->
-    <!--                <class name="telenor.TelenorUnblockPaymentBandWithInvalidDataTest"/>-->
+    <!--                <class name="tests.telenor.TelenorUnblockPaymentBandWithInvalidDataTest"/>-->
     <!--            </classes>-->
     <!--        </test>-->
 
     <!--    <test name="TelenorUnblockCardTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.cardOperation.TelenorUnblockCardTest"/>-->
+    <!--            <class name="tests.telenor.cardOperation.TelenorUnblockCardTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorChangeEmailTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.manageSecurity.TelenorChangeEmailTest"/>-->
+    <!--            <class name="tests.telenor.manageSecurity.TelenorChangeEmailTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorChangeSecretAnswerTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.manageSecurity.TelenorChangeSecretAnswerTest"/>-->
+    <!--            <class name="tests.telenor.manageSecurity.TelenorChangeSecretAnswerTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorOffloadFundsTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.cardOperation.TelenorOffloadFundsTest"/>-->
+    <!--            <class name="tests.telenor.cardOperation.TelenorOffloadFundsTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorChangePINTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.manageSecurity.TelenorChangePINTest"/>-->
+    <!--            <class name="tests.telenor.manageSecurity.TelenorChangePINTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test"/>-->
+    <!--            <class name="tests.telenor.topup.TelenorCheckFieldTopUpAmountWithDataGreaterThanHUF150000Test"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorCheckFieldTopUpAmountWithInvalidDataTest">-->
     <!--        <classes>-->
-    <!--            <class name="telenor.topup.TelenorCheckFieldTopUpAmountWithInvalidDataTest"/>-->
+    <!--            <class name="tests.telenor.topup.TelenorCheckFieldTopUpAmountWithInvalidDataTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
@@ -414,7 +414,7 @@
         </classes>
     </test>
 
-    <!--    not able to do OffloadFunds in telenor-->
+    <!--    not able to do OffloadFunds in tests.telenor-->
     <!--    <test name="TelenorOffloadFundsWithoutDataInAccountFieldTest">-->
     <!--        <classes>-->
     <!--            <class name="uiTests.telenor.TelenorOffloadFundsWithoutDataInAccountFieldTest"/>-->

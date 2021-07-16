@@ -1,4 +1,4 @@
-package telenor.manageSecurity;
+package tests.telenor.manageSecurity;
 
 import base.TestBase;
 import io.restassured.response.Response;

@@ -1,4 +1,4 @@
-package telenor;
+package tests.telenor;
 
 import appmanager.TelenorHelper;
 import base.TestBase;

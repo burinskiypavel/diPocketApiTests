@@ -1,4 +1,4 @@
-package telenor;
+package tests.telenor;
 
 import base.TestBase;
 import org.testng.annotations.Test;

@@ -1,4 +1,4 @@
-package telenor;
+package tests.telenor.cardOperation;
 
 import base.TestBase;
 import io.restassured.mapper.ObjectMapperType;
@@ -11,10 +11,9 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
-public class TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest extends TestBase {
+public class TelenorUnblockCardTest extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
     String secretAnswer = "QA";
@@ -143,20 +142,20 @@ public class TelenorUnblockPaymentBandWithSomeoneElseDataPaymentBandTest extends
 
     @Test(priority = 8)
     public void test_WebServices_v1_account_unblockCard(){
-        given().log().uri().log().headers().log().body()
+        Response res = given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic(app.loginPhone, smsCode)
                 .header("content-type", "application/json; charset=utf-8")
                 .header("site", app.telenorSite)
                 .header("clisessionid", cliSessionId)
                 .header("secretanswer", secretAnswer)
                 .body("{\n" +
-                        "  \"publicToken\" : \"513855360\",\n" +
+                        "  \"publicToken\" : \"512047269\",\n" +
                         "  \"accountId\" : 9434\n" +
                         "}\n")
                 .when()
-                .post(app.dipocket3_intranet+"/WebServices/v1/account/unblockCard")
-                .then().log().all()
-                .assertThat().statusCode(400)
-                .assertThat().body("errDesc", equalTo("Sorry, something went wrong - please try again"));
+                .post(app.dipocket3_intranet+"/WebServices/v1/account/unblockCard");
+        res.then().log().all();
+
+        assertThat(res.getStatusCode(), equalTo(200));
     }
 }

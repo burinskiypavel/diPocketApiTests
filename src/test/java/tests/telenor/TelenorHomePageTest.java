@@ -1,4 +1,4 @@
-package telenor;
+package tests.telenor;
 
 import base.TestBase;
 import io.restassured.mapper.ObjectMapperType;
@@ -8,7 +8,6 @@ import model.telenor.login.auth_authenticate.AuthAuthenticate;
 import model.telenor.login.clientDiPAccounts2.ClientDiPAccounts;
 import model.telenor.login.clientImages.Image;
 import model.telenor.login.clientInfo.ClientInfo;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 

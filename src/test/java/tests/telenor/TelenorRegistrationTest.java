@@ -1,6 +1,5 @@
-package telenor;
+package tests.telenor;
 
-import appmanager.GoogleSheetsHelper;
 import base.TestBase;
 import org.testng.annotations.Test;
 
