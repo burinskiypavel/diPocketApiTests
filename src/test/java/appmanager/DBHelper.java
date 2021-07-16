@@ -360,4 +360,52 @@ public class DBHelper extends HelperBase {
             System.out.println("currentLangId and langId are equals!");
         }
     }
+
+    public String getCurrentEmailFromDB(String email, String site) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select * from Client where email = '"+email+"' and site = '"+site+"'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        String currrentEmail = null;
+        while (rs.next()){
+            currrentEmail = rs.getString(6);
+
+            System. out.println("email: " + currrentEmail);
+            break;
+        }
+        con.close();
+        return currrentEmail;
+    }
+
+    public void updateEmailForTelenorFromDB(String email, String site, String newEmail, String phone) throws SQLException, ClassNotFoundException {
+        String currentEmail = getCurrentEmailFromDB(email, site);
+
+        if(currentEmail.equals(email)){
+            System.out.println("currentEmail and email are equals!");
+
+            String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+            String username = prop.getProperty("db.username");
+            String password = prop.getProperty("db.password");
+            String query = "update Client set EMAIL = '"+newEmail+"' where MAINPHONE = '"+phone+"'";
+            String commit = "commit";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(dbUrl, username, password);
+            Statement stmt = con.createStatement();
+
+            stmt.executeQuery(query);
+            stmt.executeQuery(commit);
+            con.close();
+        }
+        else {
+            System.out.println("currentEmail and email are not equals!");
+        }
+    }
 }
