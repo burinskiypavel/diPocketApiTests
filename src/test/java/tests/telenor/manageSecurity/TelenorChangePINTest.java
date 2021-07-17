@@ -104,6 +104,8 @@ public class TelenorChangePINTest extends TestBase {
 
     @Test(priority = 6)
     public void test_WebServices_v1_account_changeCardPin(){
+        String newPin = app.generateRandomNumber(4);
+        System.out.println("newPin: " +  newPin);
         given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(offloadFundsLoginPhone, smsCode)
@@ -111,7 +113,7 @@ public class TelenorChangePINTest extends TestBase {
                 .header("secretanswer", secretAnswer)
                 .body("{\n" +
                         "  \"pin\" : \""+bandPIN+"\",\n" + // Band PIN from sms 2173
-                        "  \"oldPin\" : \"1111\",\n" +  //old pin 1234
+                        "  \"oldPin\" : \""+newPin+"\",\n" +  //old pin 1234
                         "  \"accountId\" : "+accountId+"\n" +  //was 9467
                         "}\n")
                 .when()
