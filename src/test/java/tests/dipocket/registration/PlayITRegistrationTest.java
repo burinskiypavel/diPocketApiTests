@@ -21,7 +21,7 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        //app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
+        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
                 .spec(app.requestSpecPlayITRegistration)
                 .queryParam("langID", "4")
