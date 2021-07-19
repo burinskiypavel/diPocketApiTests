@@ -25,34 +25,32 @@ public class TelenorRegistrationTest extends TestBase {
         System.out.println("token: " + token);
         app.getDbHelper().deleteClientFromDBTelenor(app.telenorRegistrationPhone);
         given().log().uri().log().headers().log().body()
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
+                .spec(app.requestSpecTelenor)
                 .queryParam("value", "com.cs.dipocketback.pojo.telenor.TelenorRequest@6d1f8ef7")
                 .body("{\n" +
                         "  \"publicToken\" : \""+token+"\",\n" +
                         "  \"phoneNumber\" : \""+app.telenorRegistrationPhone+"\"\n" +
                         "}")
                 .when()
-                .post(app.dipocket3_intranet+"/WebServices/v1/registration/checkPhoneAndToken")
+                .post("/WebServices/v1/registration/checkPhoneAndToken")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("validPhone", equalTo(true))
-                .body("validToken", equalTo(true));
+                .body("validPhone", equalTo(true),
+                        "validToken", equalTo(true));
     }
 
     @Test(priority = 2)
     public void test_WebServices_v1_registration_sendSMSCodeForPhone(){
         given().log().uri().log().headers().log().body()
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
+                .spec(app.requestSpecTelenor)
                 .queryParam("value", "com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@51ceb0d3")
                 .body("{\n" +
                         "  \"langId\" : 1,\n" +
                         "  \"phoneNumber\" : \""+app.telenorRegistrationPhone+"\"\n" +
                         "}")
                 .when()
-                .post(app.dipocket3_intranet+"/WebServices/v1/registration/sendSMSCodeForPhone")
+                .post("/WebServices/v1/registration/sendSMSCodeForPhone")
                 .then()
                 .log().all()
                 .statusCode(200);
@@ -62,8 +60,7 @@ public class TelenorRegistrationTest extends TestBase {
     public void test_WebServices_v1_registration_checkCodeForPhone() throws SQLException, ClassNotFoundException {
         smsCode = app.getDbHelper().getSMSCodeFromDBTelenor(app.telenorRegistrationPhone);
         given().log().uri().log().headers().log().body()
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
+                .spec(app.requestSpecTelenor)
                 .queryParam("value", "com.cs.dipocketback.pojo.registration.VerifyPhoneRequest@4b430f10")
                 .body("{\n" +
                         "  \"langId\" : 1,\n" +
@@ -71,7 +68,7 @@ public class TelenorRegistrationTest extends TestBase {
                         "  \"code\" : \""+smsCode+"\"\n" +
                         "}")
                 .when()
-                .post(app.dipocket3_intranet+"/WebServices/v1/registration/checkCodeForPhone")
+                .post("/WebServices/v1/registration/checkCodeForPhone")
                 .then()
                 .log().all()
                 .statusCode(200);
@@ -80,8 +77,7 @@ public class TelenorRegistrationTest extends TestBase {
     @Test(priority = 4)
     public void test_WebServices_v1_registration_registerTelenorClient() {
         given().log().uri().log().headers().log().body()
-                .header("content-type", "application/json; charset=utf-8")
-                .header("site", app.telenorSite)
+                .spec(app.requestSpecTelenor)
                 .queryParam("value", "com.cs.dipocketback.pojo.registration.RegSavepointData@541a8ad0")
                 .body("{\n" +
                         "  \"langId\" : 1,\n" +
@@ -116,7 +112,7 @@ public class TelenorRegistrationTest extends TestBase {
                         "  \"attachedCardIds\" : [ ]\n" +
                         "}")
                 .when()
-                .post(app.dipocket3_intranet+"/WebServices/v1/registration/registerTelenorClient")
+                .post("/WebServices/v1/registration/registerTelenorClient")
                 .then()
                 .log().all()
                 .statusCode(200);
