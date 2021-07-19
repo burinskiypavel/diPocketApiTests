@@ -40,7 +40,7 @@ public class TelenorChangeEmailTest extends TestBase {
         Response res = given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTelenor)
                 .auth().preemptive().basic(offloadFundsLoginPhone, smsCode)
-                .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
+                .accept("application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
                 .when()
                 .post("/WebServices/v1/auth/authenticate");
 
