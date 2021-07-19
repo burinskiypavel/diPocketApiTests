@@ -254,200 +254,200 @@
 
     <test name="TelenorNewAndOldPINNegativeTests">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorNewAndOldPINNegativeTests"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorNewAndOldPINNegativeTests"/>
         </classes>
     </test>
 
     <test name="TelenorRegistrationVerificationUntickedCheckboxForPersonalInformationProcessingTest">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationUntickedCheckboxForPersonalInformationProcessingTest"/>
+            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationUntickedCheckboxForPersonalInformationProcessingTest"/>
         </classes>
     </test>
 
     <test name="TelenorRegistrationVerificationWithInvalidTokenTest">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenTest"/>
+            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenTest"/>
         </classes>
     </test>
 
     <test name="TelenorRegistrationVerificationWithInvalidPhoneTest">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidPhoneTest"/>
+            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithInvalidPhoneTest"/>
         </classes>
     </test>
 
     <test name="TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest"/>
+            <class name="tests.uiTests.telenor.TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest"/>
         </classes>
     </test>
 
     <test name="TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformationTest">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformationTest"/>
+            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformationTest"/>
         </classes>
     </test>
 
     <test name="TelenorRegistrationVerificationWithIncopliteDataTest">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationWithIncopliteDataTest"/>
+            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithIncopliteDataTest"/>
         </classes>
     </test>
 
     <!--    <test name="TelenorRegistrationVerificationWithInvalidCodeTest">-->
     <!--        <classes>-->
-    <!--            <class name="uiTests.telenor.TelenorRegistrationVerificationWithInvalidCodeTest"/>-->
+    <!--            <class name="TelenorRegistrationVerificationWithInvalidCodeTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <!--    <test name="TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest">-->
     <!--        <classes>-->
-    <!--            <class name="uiTests.telenor.TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest"/>-->
+    <!--            <class name="TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <test name="TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests"/>
+            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests"/>
         </classes>
     </test>
 
     <test name="TelenorLoginVerificationWithEmptyPhoneFieldTest">
         <classes>
-            <class name="uiTests.telenor.TelenorLoginVerificationWithEmptyPhoneFieldTest"/>
+            <class name="tests.uiTests.telenor.TelenorLoginVerificationWithEmptyPhoneFieldTest"/>
         </classes>
     </test>
 
     <test name="TelenorLoginVerificationPhoneFieldWithNotRegisteredPhoneTest">
         <classes>
-            <class name="uiTests.telenor.TelenorLoginVerificationPhoneFieldWithNotRegisteredPhoneTest"/>
+            <class name="tests.uiTests.telenor.TelenorLoginVerificationPhoneFieldWithNotRegisteredPhoneTest"/>
         </classes>
     </test>
 
     <test name="TelenorLoginVerificationPhoneFieldWithIncompletePhoneTest">
         <classes>
-            <class name="uiTests.telenor.TelenorLoginVerificationPhoneFieldWithIncompletePhoneTest"/>
+            <class name="tests.uiTests.telenor.TelenorLoginVerificationPhoneFieldWithIncompletePhoneTest"/>
         </classes>
     </test>
 
     <test name="TelenorLoginVerificationFillPhoneFieldWithForbiddenCharactersTest">
         <classes>
-            <class name="uiTests.telenor.TelenorLoginVerificationFillPhoneFieldWithForbiddenCharactersTest"/>
+            <class name="tests.uiTests.telenor.TelenorLoginVerificationFillPhoneFieldWithForbiddenCharactersTest"/>
         </classes>
     </test>
 
     <test name="TelenorLoginVerificationWithEmptyOneTimePasswordFieldTest">
         <classes>
-            <class name="uiTests.telenor.TelenorLoginVerificationWithEmptyOneTimePasswordFieldTest"/>
+            <class name="tests.uiTests.telenor.TelenorLoginVerificationWithEmptyOneTimePasswordFieldTest"/>
         </classes>
     </test>
 
     <test name="TelenorLoginVerificationWithInvalidDataInOneTimePasswordFieldTest">
         <classes>
-            <class name="uiTests.telenor.TelenorLoginVerificationWithInvalidDataInOneTimePasswordFieldTest"/>
+            <class name="tests.uiTests.telenor.TelenorLoginVerificationWithInvalidDataInOneTimePasswordFieldTest"/>
         </classes>
     </test>
 
     <test name="TelenorFullRegistrationPageNegativeVerificationTests">
         <classes>
-            <class name="uiTests.telenor.TelenorFullRegistrationPageNegativeVerificationTests"/>
+            <class name="tests.uiTests.telenor.TelenorFullRegistrationPageNegativeVerificationTests"/>
         </classes>
     </test>
 
     <test name="TelenorCheckBalanceNegativeTests">
         <classes>
-            <class name="uiTests.telenor.TelenorCheckBalanceNegativeTests"/>
+            <class name="tests.uiTests.telenor.TelenorCheckBalanceNegativeTests"/>
         </classes>
     </test>
 
     <test name="TelenorTopUpTests">
         <classes>
-            <class name="uiTests.telenor.TelenorTopUpTests"/>
+            <class name="tests.uiTests.telenor.TelenorTopUpTests"/>
         </classes>
     </test>
 
     <test name="TelenorManageSecurityNegativeTests">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorManageSecurityNegativeTests"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorManageSecurityNegativeTests"/>
         </classes>
     </test>
 
     <test name="TelenorChangeEmailWithInvalidDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorChangeEmailWithInvalidDataTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorChangeEmailWithInvalidDataTest"/>
         </classes>
     </test>
 
     <test name="TelenorEmptyFieldEmailTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorEmptyFieldEmailTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorEmptyFieldEmailTest"/>
         </classes>
     </test>
 
     <test name="TelenorUnblockPaymentBandWithIncompleteDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorUnblockPaymentBandWithIncompleteDataTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorUnblockPaymentBandWithIncompleteDataTest"/>
         </classes>
     </test>
 
     <test name="TelenorLinkNewPaymentBandWithEmptyDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithEmptyDataTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithEmptyDataTest"/>
         </classes>
     </test>
 
     <test name="TelenorLinkNewPaymentBandWithIncompleteDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithIncompleteDataTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithIncompleteDataTest"/>
         </classes>
     </test>
 
     <test name="TelenorLinkNewPaymentBandWithSomeoneElseDataPaymentBandTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithSomeoneElseDataPaymentBandTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithSomeoneElseDataPaymentBandTest"/>
         </classes>
     </test>
 
     <test name="TelenorLinkNewPaymentBandWithInvalidDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithInvalidDataTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorLinkNewPaymentBandWithInvalidDataTest"/>
         </classes>
     </test>
 
-    <!--    not able to do OffloadFunds in tests.telenor-->
+    <!--    not able to do OffloadFunds in telenor-->
     <!--    <test name="TelenorOffloadFundsWithoutDataInAccountFieldTest">-->
     <!--        <classes>-->
-    <!--            <class name="uiTests.telenor.TelenorOffloadFundsWithoutDataInAccountFieldTest"/>-->
+    <!--            <class name="tests.uiTests.telenor.TelenorOffloadFundsWithoutDataInAccountFieldTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
     <test name="TelenorRegistrationVerificationWithTokenIsAlreadyLinkedWithAccountTest">
         <classes>
-            <class name="uiTests.telenor.TelenorRegistrationVerificationWithTokenIsAlreadyLinkedWithAccountTest"/>
+            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithTokenIsAlreadyLinkedWithAccountTest"/>
         </classes>
     </test>
 
     <test name="TelenorSecretAnswerResetLeaveEmailFieldEmptyTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorSecretAnswerResetLeaveEmailFieldEmptyTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorSecretAnswerResetLeaveEmailFieldEmptyTest"/>
         </classes>
     </test>
 
     <test name="TelenorSecretAnswerResetFillEmailFieldWithInvalidDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorSecretAnswerResetFillEmailFieldWithInvalidDataTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorSecretAnswerResetFillEmailFieldWithInvalidDataTest"/>
         </classes>
     </test>
 
     <test name="TelenorSecretAnswerResetLeaveSecretAnswerFieldEmptyTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorSecretAnswerResetLeaveSecretAnswerFieldEmptyTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorSecretAnswerResetLeaveSecretAnswerFieldEmptyTest"/>
         </classes>
     </test>
 
     <test name="TelenorSecretAnswerResetFillSecretAnswerFieldWithInvalidDataTest">
         <classes>
-            <class name="uiTests.telenor.manageSecurity.TelenorSecretAnswerResetFillSecretAnswerFieldWithInvalidDataTest"/>
+            <class name="tests.uiTests.telenor.manageSecurity.TelenorSecretAnswerResetFillSecretAnswerFieldWithInvalidDataTest"/>
         </classes>
     </test>
 
