@@ -15,10 +15,13 @@ import static org.testng.Assert.assertEquals;
 
 public class PlayITRegistrationTest extends TestBase {
     String smsCode = null;
+    String countryId = "826";
+    String currencyId = "348";
+    String site = "PLAYIT";
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "PLAYIT");
+        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", HelperBase.prop.getProperty("mobile.site2"))
@@ -85,7 +88,7 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "PLAYIT");
+        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", HelperBase.prop.getProperty("mobile.site2"))
@@ -168,8 +171,8 @@ public class PlayITRegistrationTest extends TestBase {
                         "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
                         "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"countryId\" : 826,\n" +
-                        "  \"currencyId\" : 348,\n" +
+                        "  \"countryId\" : "+countryId+",\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 826,\n" +
                         "  \"stepNo\" : 2,\n" +
@@ -180,7 +183,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"regAddress\" : {\n" +
                         "    \"typeId\" : 3,\n" +
@@ -188,7 +191,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"attachedCardsList\" : [ ],\n" +
                         "  \"smsCode\" : \"" + smsCode + "\",\n" +
@@ -199,7 +202,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"attachedCardIds\" : [ ]\n" +
                         "}")
@@ -239,8 +242,8 @@ public class PlayITRegistrationTest extends TestBase {
                         "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
                         "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"countryId\" : 826,\n" +
-                        "  \"currencyId\" : 348,\n" +
+                        "  \"countryId\" : "+countryId+",\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 826,\n" +
                         "  \"stepNo\" : 3,\n" +
@@ -251,7 +254,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"regAddress\" : {\n" +
                         "    \"typeId\" : 3,\n" +
@@ -259,7 +262,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"attachedCardsList\" : [ ],\n" +
                         "  \"smsCode\" : \"" + smsCode + "\",\n" +
@@ -270,7 +273,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"attachedCardIds\" : [ ]\n" +
                         "}")
@@ -304,7 +307,7 @@ public class PlayITRegistrationTest extends TestBase {
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", HelperBase.prop.getProperty("mobile.site2"))
                 .when()
-                .get(HelperBase.prop.getProperty("mobile.base.url")+"references/questions?langId=4&countryId=826")
+                .get(HelperBase.prop.getProperty("mobile.base.url")+"references/questions?langId=4&countryId="+countryId+"")
                 .then().log().all()
                 .statusCode(200)
                 .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"))
@@ -324,8 +327,8 @@ public class PlayITRegistrationTest extends TestBase {
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
                         "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
                         "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
-                        "  \"countryId\" : 826,\n" +
-                        "  \"currencyId\" : 348,\n" +
+                        "  \"countryId\" : "+countryId+",\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 826,\n" +
                         "  \"stepNo\" : 4,\n" +
@@ -336,7 +339,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"regAddress\" : {\n" +
                         "    \"typeId\" : 3,\n" +
@@ -344,7 +347,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"attachedCardsList\" : [ ],\n" +
                         "  \"smsCode\" : \"" + smsCode + "\",\n" +
@@ -355,7 +358,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"attachedCardIds\" : [ ]\n" +
                         "}")
@@ -389,8 +392,8 @@ public class PlayITRegistrationTest extends TestBase {
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
                         "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
                         "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
-                        "  \"countryId\" : 826,\n" +
-                        "  \"currencyId\" : 348,\n" +
+                        "  \"countryId\" : "+countryId+",\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 826,\n" +
                         "  \"secAnswer\" : \"***\",\n" +
@@ -403,7 +406,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"regAddress\" : {\n" +
                         "    \"typeId\" : 3,\n" +
@@ -411,7 +414,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"attachedCardsList\" : [ ],\n" +
                         "  \"smsCode\" : \""+smsCode+"\",\n" +
@@ -429,7 +432,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "    \"streetLine2\" : \"\",\n" +
                         "    \"city\" : \"Xxxx\",\n" +
                         "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : 826\n" +
+                        "    \"countryId\" : "+countryId+"\n" +
                         "  },\n" +
                         "  \"attachedCardIds\" : [ ]\n" +
                         "}")
