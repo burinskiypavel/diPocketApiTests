@@ -56,6 +56,7 @@ public class ApplicationManager {
     public String site_SnowAttack = "Snow Attack";
     public RequestSpecification requestSpecDipocketRegistration;
     public RequestSpecification requestSpecDiscontuRegistration;
+    public RequestSpecification requestSpecPlayITRegistration;
     public RequestSpecification requestSpecDipocketHomePage;
     public RequestSpecification requestSpecEmailVerification;
     public RequestSpecification requestSpecTelenor;
@@ -108,6 +109,11 @@ public class ApplicationManager {
         requestSpecDiscontuRegistration = given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site.discontu"))
+                .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+
+        requestSpecPlayITRegistration = given()
+                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.playIt"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecDipocketHomePage = given()
