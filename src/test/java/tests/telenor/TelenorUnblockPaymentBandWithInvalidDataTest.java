@@ -5,7 +5,6 @@ import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import model.telenor.cardOperation.unblockCard.clientDiPAccounts2.ClientDiPAccounts2UnblockCard;
 import model.telenor.login.auth_authenticate.AuthAuthenticate;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
