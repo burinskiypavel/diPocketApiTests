@@ -1,5 +1,6 @@
 package tests.telenor.manageSecurity;
 
+import appmanager.EmailIMAPHelper;
 import base.TestBase;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -14,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 public class TelenorChangeEmailTest extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
-    String newEmail = "telenorchangeemailtest2@mailsac.com";
+    String newEmail = "testdipocket@gmail.com";
     String secretAnswer = "QA";
     String offloadFundsLoginPhone =  "$5_" + app.offloadFundsPhone;
 
@@ -105,7 +106,7 @@ public class TelenorChangeEmailTest extends TestBase {
                 .body("fullName", equalTo("Test QA"));
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, enabled = false)
     public void test_confirm_email_link_from_mailsac() throws InterruptedException {
         //String link_link = app.getTelenorHelper().getChageEmailConfirmationTelenorLinkFromMailSac();
         String link_link = app.getTelenorHelper().getEmailConfirmationTelenorLinkFromMailSac(newEmail);
@@ -115,6 +116,19 @@ public class TelenorChangeEmailTest extends TestBase {
                 .get(link_link)
                 .then()
                 .log().all()
+                .statusCode(200)
+                .body("html.body.div.div.div.p", equalTo("You have successfully confirmed your email address"))
+                .body("html.body.div.div.div.h2", equalTo("Thank you!"));
+    }
+
+    @Test(priority = 7)
+    public void testEmailLink() throws InterruptedException {
+        String link = EmailIMAPHelper.getLinkFromEmailAfterChangeEmailTelenor("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
+        System.out.println("link_link " + link);
+        given()
+                .when()
+                .get(link)
+                .then().log().all()
                 .statusCode(200)
                 .body("html.body.div.div.div.p", equalTo("You have successfully confirmed your email address"))
                 .body("html.body.div.div.div.h2", equalTo("Thank you!"));
