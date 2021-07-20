@@ -50,6 +50,7 @@ public class EmailVerificationHelper {
                 if (contentType.contains("multipart")) {
                     Multipart multiPart = (Multipart) message.getContent();
                     int numberOfParts = multiPart.getCount();
+                    System.out.println("numberOfParts: " + numberOfParts);
                     for (int partCount = 0; partCount < numberOfParts; partCount++) { //was numberOfParts-1
 
                         MimePart part = (MimePart) multiPart.getBodyPart(partCount);
