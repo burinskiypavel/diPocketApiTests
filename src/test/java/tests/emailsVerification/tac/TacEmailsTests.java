@@ -23,7 +23,7 @@ public class TacEmailsTests extends TestBase {
         return "{\n" +
                 "  \"email\": \""+testEmail+"\",\n" +
                 "  \"phoneNumber\": \""+app.emailsVerificationsPhoneNumber+"\",\n" +
-                //"  \"programNickName\": \""+site+"\",\n" +
+                "  \"programNickName\": \""+site+"\",\n" +
                 "  \"site\": \""+site+"\",\n" +
                 "  \"url\": \"google.com\"\n" +
                 "}";
@@ -130,9 +130,24 @@ public class TacEmailsTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(enabled = false)
+    @Test(enabled = false) // incorrect body
     public void testTacPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
+        postSendTacEmail(app.mobile_site_playIt);
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 26, 163);
+        String emailFooter = getEmailFooterText(emailText, 164);
+
+        assertThat(emailSender, equalTo("PlayIT Card <playitcard@tests.dipocket.org>"));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_PlayIT+" legal documents. Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(enabled = false) //incorrect body
+    public void testTacPlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_playIt);
         postSendTacEmail(app.mobile_site_playIt);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
