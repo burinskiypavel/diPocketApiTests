@@ -94,7 +94,7 @@ public class TelenorHelper extends HelperBase {
         assertThat(clientInfo.getClientLastName(), equalTo("TestQA"));
         assertThat(clientInfo.getPresentedLogin(), equalTo("380980316499"));
         assertThat(clientInfo.getMainPhone(), equalTo("380980316499"));
-        assertThat(clientInfo.getEmail(), equalTo("pavelqaemail@mailsac.com"));
+        assertThat(clientInfo.getEmail(), equalTo("telenorchangeemailtest@mailsac.com"));//pavelqaemail@mailsac.com
         assertThat(clientInfo.getCcyCode(), equalTo("HUF"));
     }
 
@@ -180,7 +180,7 @@ public class TelenorHelper extends HelperBase {
         assertThat(authAuthenticate.getClientLastName(), equalTo("TestQA"));
         assertThat(authAuthenticate.getPresentedLogin(), equalTo("380980316499"));
         assertThat(authAuthenticate.getMainPhone(), equalTo("380980316499"));
-        assertThat(authAuthenticate.getEmail(), equalTo("pavelqaemail@mailsac.com"));
+        assertThat(authAuthenticate.getEmail(), equalTo("telenorchangeemailtest@mailsac.com"));//pavelqaemail@mailsac.com
     }
 
     public void checkFieldsInTelenorAuthAuthenticateResponse(AuthAuthenticate authAuthenticate) {
