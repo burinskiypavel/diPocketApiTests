@@ -156,7 +156,7 @@ public class EmailIMAPHelper extends HelperBase {
             emailFolder.getMessages();
 
             int count = 0;
-            while(emailFolder.getMessages().length == 0 && count < 90){
+            while(emailFolder.getMessages().length == 0 && count < 95){
                 Thread.sleep(1000);
                 count++;
             }
@@ -185,6 +185,7 @@ public class EmailIMAPHelper extends HelperBase {
                 if (contentType.contains("multipart")) {
                     Multipart multiPart = (Multipart) message.getContent();
                     int numberOfParts = multiPart.getCount();
+                    System.out.println("numberOfParts: " + numberOfParts);
                     for (int partCount = 0; partCount < numberOfParts; partCount++) { //was numberOfParts-1
 
                         MimePart part = (MimePart) multiPart.getBodyPart(partCount);
