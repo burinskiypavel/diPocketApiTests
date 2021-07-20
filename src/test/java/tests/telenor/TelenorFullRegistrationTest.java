@@ -21,7 +21,7 @@ public class TelenorFullRegistrationTest extends TestBase {
     String smsCode = "111111"; //app.generateRandomNumber(6);
     String cliSessionId = null;
     int plasticCardId = 0;
-    String secAnswer = "QA";
+    String secAnswer = "qa";
 
     @Test(priority = 1)
     public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode(){
