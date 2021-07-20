@@ -33,7 +33,7 @@ public class EmailIMAPHelper extends HelperBase {
             store.connect(host, user, password);
 
             Folder emailFolder = store.getFolder("INBOX");
-            emailFolder.open(Folder.READ_ONLY);
+            emailFolder.open(Folder.READ_WRITE);//READ_ONLY
 
             Message[] messages = emailFolder.getMessages();
             System.out.println("messages.length---" + messages.length);
@@ -57,6 +57,7 @@ public class EmailIMAPHelper extends HelperBase {
                 if (contentType.contains("multipart")) {
                     Multipart multiPart = (Multipart) message.getContent();
                     int numberOfParts = multiPart.getCount();
+                    System.out.println("numberOfParts: " + numberOfParts);
                     for (int partCount = 0; partCount < numberOfParts-3; partCount++) { //was numberOfParts-1
 
                         MimePart part = (MimePart) multiPart.getBodyPart(partCount);
@@ -120,10 +121,10 @@ public class EmailIMAPHelper extends HelperBase {
                 }
                 System.out.println("Message: " + messageContent);
 
-
+                message.setFlag(Flags.Flag.DELETED, true);
             }
 
-            emailFolder.close(false);
+            emailFolder.close(true); //false
             store.close();
 
         } catch (MessagingException e) {
