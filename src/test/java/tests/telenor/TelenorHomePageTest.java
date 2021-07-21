@@ -125,7 +125,7 @@ public class TelenorHomePageTest extends TestBase {
 
         assertThat(res.getStatusCode(), equalTo(200));
         assertThat(res.path("trnCcy"),equalTo("HUF"));
-        assertThat(res.path("trnAmount"),equalTo(102000));
+        assertThat(res.path("trnAmount"),equalTo(53000));//102000
     }
 
     @Test(priority = 7)
