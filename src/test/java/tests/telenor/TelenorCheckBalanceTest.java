@@ -23,6 +23,6 @@ public class TelenorCheckBalanceTest extends TestBase {
                 .statusCode(200)
                 .body("publicToken", equalTo("512047269"))
                 .body("ccy", equalTo("HUF"))
-                .body("availableBalance", equalTo(102000));
+                .body("availableBalance", equalTo(53000));//102000
     }
 }
