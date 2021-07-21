@@ -140,24 +140,24 @@ public class TacEmailsTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 26, 163);
         String emailFooter = getEmailFooterText(emailText, 164);
 
-        assertThat(emailSender, equalTo("PlayIT Card <playitcard@tests.dipocket.org>"));
+        assertThat(emailSender, equalTo("PlayIT Card <playitcard@dipocket.org>"));
         assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_PlayIT+" legal documents. Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team"));
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(enabled = false) //incorrect body
+    @Test
     public void testTacPlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_playIt);
         postSendTacEmail(app.mobile_site_playIt);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 26, 163);
-        String emailFooter = getEmailFooterText(emailText, 164);
+        String emailBody = getEmailBodyText(emailText, 26, 1907);
+        String emailFooter = getEmailFooterText(emailText, 1908);
 
-        assertThat(emailSender, equalTo("PlayIT Card <playitcard@tests.dipocket.org>"));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_PlayIT+" legal documents. Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(emailSender, equalTo("PlayIT Card <playitcard@dipocket.org>"));
+        assertThat(emailBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Lásd a csatolt „"+app.site_PlayIT+"_Terms_and_Conditions” (a „T&Cs”) dokumentumot. Fontos, hogy megismerkedjen ezekkel a dokumentumokkal és különösen fontos, hogy részletesen áttekintse az 'E-pénztárca használati feltételei' címűt, amely összegezi az Ön PlayIT fiókjára vonatkozó legfontosabb tudnivalókat, és tartalmazza az aktuális árainkat és a tranzakciós limiteket is. A Személyi adatokkal kapcsolatban kérjük, hogy olvassa el a Használati feltételek 'Személyi adatok' szakaszát – az ebben foglalt feltételek szerint kezelünk minden Ön által megadott információt. Azáltal, hogy információt szolgáltat nekünk, Ön beleegyezik abba, hogy azokat – beleértve a bizalmas adatokat – kezeljük és felhasználjuk a Megállapodásban leírt célokra, és amelyekkel kapcsolatban Ön számos jogosultsággal rendelkezik, úgy mint tájékoztatásra az Ön adatainak kezelési módjáról, valamint jog a hibák kijavítására, a kezelés elutasítására, a kezelés korlátozására, az adatai töröltetésére, vagy utasítani bennünket, hogy másoljuk vagy továbbítsuk adatait az Ön utasításai szerint. Ha elfogadja a Használati feltételeket, kérjük, kattintson erre  a hivatkozásra , és folytassa a regisztrációt a PlayIT mobilalkalmazás segítségével. A Használati feltételek módosítása csak 2 hónappal korábban, előzetesen megküldött értesítés után lehetséges, amely 2 hónap lejártával, ha nem kifogásolta, úgy tekintendő, hogy Ön az új feltételeket elfogadta. FONTOS: a regisztráció felgyorsítása érdekében választhatja, hogy megkezdi az alkalmazás használatát, még ha nem is kattintott a fenti hivatkozásra. Ha azonban nem kattintasz rá az alkalmazás megnyitását követő egy héten belül, akkor a PlayIT fiókod ideiglenesen blokkolva lesz mindaddig, amíg rá nem kattintasz a hivatkozásra, és meg nem erősítetted a megállapodást arról, hogy elolvastad és elfogadtad a Használati feltételeket. Üdvözlettel, Jogi csapat"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a "+app.site_PlayIT+" Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(enabled = false)
