@@ -184,6 +184,8 @@ public class UITestBase {
         Thread.sleep(400);
         driver.findElement(By.xpath("//a[contains(text(), 'Change Secret answer')]")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("secAnswer")));
+        waitForSeveralItems(new String[]{"Forgot secret answer"});
+        Assert.assertTrue(isElementPresent(By.xpath("//a[contains(text(), 'Forgot secret answer')]")));
     }
 
     public void gotoForgotSecretAnswer() {
@@ -206,6 +208,7 @@ public class UITestBase {
         driver.findElement(By.cssSelector("a[href='/en/cabinet/security']")).click();
         //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(), 'Change PIN')]")));
         waitForSeveralItems(new String[]{"Change Secret answer", "Change E-mail"});
+        Assert.assertTrue(isElementPresent(By.xpath("//*[contains(text(), 'Change Secret answer')]")));
     }
 
     public void gotoOffloadFundsPage() {
