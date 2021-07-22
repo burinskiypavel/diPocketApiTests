@@ -24,21 +24,21 @@ public class TDSV1BioAcceptTest extends TestBase {
     String tranId = null;
     String cliSessionId = null;
 
-    @Test(priority = 18)
+    @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientDeviceFromDB(app.mobile_login_deviceuuid_tds);
         given().log().all()
-                .when()
                 .auth().preemptive().basic("10_" + app.tds_phone, app.tds_pass)
                 .header("deviceuuid", app.mobile_login_deviceuuid_tds)
                 .header("site", app.mobile_site_upAndGo)
-                .header("content-type", "application/json; charset=UTF-8")
+                .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
                         "  \"deviceUUID\" : \""+ app.mobile_login_deviceuuid_tds+"\",\n" +
                         "  \"appVersion\" : \"1.1.11\"\n" +
                         "}")
+                .when()
                 .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp")
                 .then().log().all()
                 .statusCode(400)
@@ -46,14 +46,14 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .body("errCode", equalTo("DIP-00591"));
     }
 
-    @Test(priority = 19)
+    @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
         String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(app.tds_phone, app.mobile_login_deviceuuid_tds, "UPANDGO");
         Response res =  given().log().all()
                 .auth().preemptive().basic("10_" + app.tds_phone, app.tds_pass)
                 .header("deviceuuid", app.mobile_login_deviceuuid_tds)
                 .header("site", app.mobile_site_upAndGo)
-                .header("content-type", "application/json; charset=UTF-8")
+                .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
@@ -71,11 +71,11 @@ public class TDSV1BioAcceptTest extends TestBase {
         assertEquals(StatusCode, 200);
     }
 
-    @Test(priority = 24)
+    @Test(priority = 3)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         System.out.println("app.TDSBaseUrl: " + app.TDSBaseUrl + " txid: " + randomTXID + " pan: " + app.pan);
         given().log().uri().log().headers().log().body()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
@@ -92,20 +92,20 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .post("/DiPocket3ds/acs/bgAuth.v1")
                 .then().log().all()
                 .statusCode(200)
-                .body("backgroundResponse.backgroundVeres.chName", equalTo(""))
-                .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
-                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
+                .body("backgroundResponse.backgroundVeres.chName", equalTo(""),
+                        "backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"),
+                                "backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
-    @Test(priority = 25)
+    @Test(priority = 4)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
         Response res = given().log().uri().log().headers().log().body()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
@@ -134,7 +134,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1");
+                .post("/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all();
         String response = res.asString();
@@ -157,11 +157,11 @@ public class TDSV1BioAcceptTest extends TestBase {
         assertEquals(backgroudResponse.getPageId(), "bio-web.html");
     }
 
-    @Test(priority = 26)
+    @Test(priority = 5)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
@@ -172,7 +172,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 27)
+    @Test(priority = 6)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         System.out.println("txid: " + randomTXID);
         Response res = given().log().uri().log().headers().log().body()
@@ -186,26 +186,26 @@ public class TDSV1BioAcceptTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 28)
+    @Test(priority = 7)
     public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() {
         System.out.println("tranId: " + tranId);
         Response response = given().log().uri().log().headers().log().body()
-                .when()
                 .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .header("SITE", app.mobile_site_upAndGo)
                 .header("ClISESSIONID", cliSessionId)
+                .when()
                 .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
 
         response.then().log().all();
         assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 29)
+    @Test(priority = 8)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
@@ -216,11 +216,11 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .body("value", equalTo("ACCEPTED"));
     }
 
-    @Test(priority = 30)
+    @Test(priority = 9)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPageResponse>\n" +
@@ -239,7 +239,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .post("/DiPocket3ds/acs/bgAuth.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundPares.paresStatus", equalTo("Y"));

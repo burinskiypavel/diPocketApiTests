@@ -60,6 +60,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecDipocketHomePage;
     public RequestSpecification requestSpecEmailVerification;
     public RequestSpecification requestSpecTelenor;
+    public RequestSpecification requestSpecTDS;
 
 
     //private MailHelper mailHelper;
@@ -129,6 +130,10 @@ public class ApplicationManager {
                 .baseUri(dipocket3_intranet)
                 .header("site", telenorSite)
                 .contentType("application/json; charset=utf-8");
+
+        requestSpecTDS = given()
+                .baseUri(TDSBaseUrl)
+                .contentType("application/xml");
     }
 
     public void init() {
