@@ -22,7 +22,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
     @Test(priority = 47)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
@@ -39,19 +39,19 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .post("/DiPocket3ds/acs/bgAuth.v1")
                 .then().log().all()
                 .statusCode(200)
-                .body("backgroundResponse.backgroundVeres.chName", equalTo(""))
-                .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
-                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
+                .body("backgroundResponse.backgroundVeres.chName", equalTo(""),
+                        "backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"),
+                                "backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
     @Test(priority = 48)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
@@ -86,7 +86,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1");
+                .post("/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all();
         String response = res.asString();
