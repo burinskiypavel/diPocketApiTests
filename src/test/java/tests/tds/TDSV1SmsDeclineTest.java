@@ -24,7 +24,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
     @Test(priority = 38)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
@@ -41,12 +41,12 @@ public class TDSV1SmsDeclineTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .post("/DiPocket3ds/acs/bgAuth.v1")
                 .then().log().all()
                 .statusCode(200)
-                .body("backgroundResponse.backgroundVeres.chName", equalTo("DON'TTOUCH"))
-                .body("backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"))
-                .body("backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
+                .body("backgroundResponse.backgroundVeres.chName", equalTo("DON'TTOUCH"),
+                        "backgroundResponse.backgroundVeres.enrollStatus", equalTo("Y"),
+                                "backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
     @Test(priority = 39)
@@ -54,7 +54,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
@@ -83,7 +83,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1");
+                .post("/DiPocket3ds/acs/bgAuth.v1");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -108,8 +108,8 @@ public class TDSV1SmsDeclineTest extends TestBase {
     @Test(priority = 40)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
+                .contentType("application/json")
                 .when()
-                .header("Content-Type", "application/json")
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
 
         res.then().log().all();
@@ -121,7 +121,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
     @Test(priority = 41)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
         given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPageResponse>\n" +
@@ -136,7 +136,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth.v1")
+                .post("/DiPocket3ds/acs/bgAuth.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundPares.paresStatus", equalTo("N"));
