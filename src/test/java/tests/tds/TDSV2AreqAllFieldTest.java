@@ -22,7 +22,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundAReq>\n" +
@@ -165,7 +165,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post("/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                     .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
