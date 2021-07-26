@@ -156,7 +156,7 @@ public class EmailIMAPHelper extends HelperBase {
             emailFolder.getMessages();
 
             int count = 0;
-            while(emailFolder.getMessages().length == 0 && count < 95){
+            while(emailFolder.getMessages().length == 0 && count < 120){
                 Thread.sleep(1000);
                 count++;
             }
