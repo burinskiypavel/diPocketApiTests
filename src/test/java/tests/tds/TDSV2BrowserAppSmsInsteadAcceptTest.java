@@ -30,7 +30,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundAReq>\n" +
@@ -74,7 +74,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post("/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
         .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
@@ -96,7 +96,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 67)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
@@ -107,7 +107,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post("/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -136,7 +136,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 68)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
         given()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
                         "}")
@@ -151,7 +151,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 69)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
@@ -179,7 +179,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post("/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -208,7 +208,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 70)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
         given()
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
                         "}")
@@ -222,8 +222,8 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 71)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
+                .contentType("application/json")
                 .when()
-                .header("Content-Type", "application/json")
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
 
         res.then().log().all();
@@ -235,8 +235,8 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 72)
     public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
         Response res = given()
+                .contentType("application/json")
                 .when()
-                .header("Content-Type", "application/json")
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/sms?tranId=" + tranId + "");
 
         res.then().log().all();
@@ -248,7 +248,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 73)
     public void test_CReq_DiPocket3ds_acs_bgAuth__() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
@@ -268,7 +268,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post("/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
