@@ -3,6 +3,8 @@ package appmanager;
 import javax.mail.*;
 import javax.mail.internet.MimePart;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -128,6 +130,51 @@ public class EmailVerificationHelper {
 
                 result = String.valueOf(message.getFrom()[0]);
 
+
+            }
+
+            emailFolder.close(false);
+            store.close();
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static List<String> getEmailSenderAndSubject(String user, String password) throws InterruptedException, MessagingException, IOException {
+        List<String> result = new ArrayList<String>();
+        Thread.sleep(5000);
+
+        try {
+
+            Properties properties = new Properties();
+
+            properties.put("mail.imap.host", "pop.gmail.com");
+            properties.put("mail.imap.port", "993");
+            properties.put("mail.imap.starttls.enable", "true");
+            Session emailSession = Session.getDefaultInstance(properties);
+
+            Store store = emailSession.getStore("imaps");
+
+            store.connect("pop.gmail.com", user, password);
+
+            Folder emailFolder = store.getFolder("INBOX");
+            emailFolder.open(Folder.READ_ONLY);
+
+            Message[] messages = emailFolder.getMessages();
+            System.out.println("messages.length---" + messages.length);
+
+            for (int i = 0, n = messages.length; i < n; i++) {
+                Message message = messages[i];
+                System.out.println("---------------------------------");
+                System.out.println("Email Number " + (i + 1));
+                System.out.println("Subject: " + message.getSubject());
+                System.out.println("Received Date: " + message.getReceivedDate());
+                System.out.println("From: " + message.getFrom()[0]);
+
+                result.add(String.valueOf(message.getFrom()[0]));
+                result.add(message.getSubject());
 
             }
 
