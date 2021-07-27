@@ -28,7 +28,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String pan4TestSMS = "5455980666358066";
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundAReq>\n" +
@@ -77,12 +77,12 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post("/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
-                .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"))
-                .body("backgroundResponse2.backgroundARes.acsRenderingType.acsUiTemplate", equalTo("01"))
-                .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
+                .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"),
+                        "backgroundResponse2.backgroundARes.acsRenderingType.acsUiTemplate", equalTo("01"),
+                                "backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
 
         String response = res.asString();
         System.out.println(res.asString());
@@ -101,7 +101,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
     @Test(priority = 2)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
@@ -113,7 +113,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post("/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -146,8 +146,8 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
     @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
+                .contentType("application/json")
                 .when()
-                .header("Content-Type", "application/json")
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
 
         res.then().log().all();
@@ -159,8 +159,8 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
     @Test(priority = 4)
     public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
         Response res = given()
+                .contentType("application/json")
                 .when()
-                .header("Content-Type", "application/json")
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/sms?tranId=" + tranId + "");
 
         res.then().log().all();
@@ -172,7 +172,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
     @Test(priority = 5)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
-                .header("Content-Type", "application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest2>\n" +
                         "   <backgroundCReq>\n" +
@@ -185,7 +185,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/bgAuth");
+                .post("/DiPocket3ds/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
