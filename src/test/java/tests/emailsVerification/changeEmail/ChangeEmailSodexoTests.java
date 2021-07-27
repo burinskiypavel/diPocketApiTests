@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.List;
 
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
 import static io.restassured.RestAssured.given;
@@ -45,13 +46,17 @@ public class ChangeEmailSodexoTests extends TestBase {
 
     @Test(priority = 1)//bug incorrect email sender
     public void testChangeEmailSodexoPLEN() throws InterruptedException, MessagingException, IOException {
-        postSendChangeEmail(2);
+        postSendChangeEmail(1);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 94, 724);
+        String actualBody = getEmailBodyText(emailText, 94, 724);
 
-        //assertThat(emailSender, equalTo(expectedEmailSender));
-        assertThat(emailBody, equalTo("Pavel Burinsky, Potwierdź adres mailowy powiązany z Twoim Profilem Wirtualnej Karty Sodexo. Kliknij w ten link, aby potwierdzić i zakończyć proces. Pozdrawiamy, Zespół Wirtualnej Karty Sodexo Centrum Obsługi Klienta +48 (22) 535 11 11 | info.svc.pl@sodexo.com Your Virtual Sodexo Card profile - email address verification request Pavel Burinsky, Verify the email address associated with your Virtual Sodexo Card Profile. Please click on this link to confirm and finalize the process. With kind regards, Virtual Sodexo Card Team Customer Service Center +48 (22) 535 11 11 | info.svc.pl@sodexo.com powered by DiPocket (dipocket.org)"));
+        //assertThat(actualSender, equalTo(expectedEmailSender));
+        assertThat(actualSubject, equalTo(""+site+" - email address verification request"));
+        assertThat(actualBody, equalTo(""+app.emailsVerificationsFirstName+" Burinsky, Potwierdź adres mailowy powiązany z Twoim Profilem Wirtualnej Karty Sodexo. Kliknij w ten link, aby potwierdzić i zakończyć proces. Pozdrawiamy, Zespół Wirtualnej Karty Sodexo Centrum Obsługi Klienta +48 (22) 535 11 11 | info.svc.pl@sodexo.com Your Virtual Sodexo Card profile - email address verification request "+app.emailsVerificationsFirstName+" Burinsky, Verify the email address associated with your Virtual Sodexo Card Profile. Please click on this link to confirm and finalize the process. With kind regards, Virtual Sodexo Card Team Customer Service Center +48 (22) 535 11 11 | info.svc.pl@sodexo.com powered by DiPocket (dipocket.org)"));
     }
 }
