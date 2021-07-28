@@ -3,6 +3,7 @@ package tests.emailsVerification.legalEmail;
 import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -157,18 +158,20 @@ public class LegalEmailTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 9, enabled = false)
+    @Test(priority = 9)
     public void testLegalEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site_upAndGo, 32727);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        //String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 172);
         String emailFooter = getEmailFooterText(emailText, 173);
 
-        assertThat(emailSender, equalTo(expectedUpAngGoSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_upAndGo+" legal documents. Thank you for using "+app.site_upAndGo+". With kind regards, Legal Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        SoftAssert softAssert = new SoftAssert();
+        //softAssert.assertEquals(emailSender, expectedUpAngGoSender, "Sender is not correct");
+        softAssert.assertEquals(emailBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_upAndGo+" legal documents. Thank you for using "+app.site_upAndGo+". With kind regards, Legal Team", "Body is not correct");
+        softAssert.assertEquals(emailFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
     }
 
     @Test(priority = 10, enabled = false)
