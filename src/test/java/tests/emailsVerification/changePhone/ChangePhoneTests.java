@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.List;
 
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
 import static appmanager.EmailIMAPHelper.getEmailFooterText;
@@ -50,56 +51,72 @@ public class ChangePhoneTests extends TestBase {
     public void testChangePhoneDipocketEN() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(1, app.mobile_site, 32761);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 41, 381);
-        String emailFooter = getEmailFooterText(emailText, 382);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", The mobile phone number associated with your "+app.site+" account was changed to: "+newPhone+". If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 41, 381);
+        String actualFooter = getEmailFooterText(emailText, 382);
+
+        assertThat(actualSender, equalTo(expectedSender));
+        assertThat(actualSubject, equalTo(""+app.site+" - change of mobile phone number"));
+        assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", The mobile phone number associated with your "+app.site+" account was changed to: "+newPhone+". If you didn't change it, please click on this link , to block your account and protect your money. You can then contact us at your earliest convenience so that we can safely reactivate your account. With kind regards, Customer Service Team"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 2)
     public void testChangePhoneDipocketUA() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(2, app.mobile_site, 32761);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 28, 359);
-        String emailFooter = getEmailFooterText(emailText, 360);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! Номер телефону, приєднаний до вашого облікового запису "+app.site+", було змінено на "+newPhone+". Якщо Ви цього не робили, будь ласка, натисніть на це посилання , щоб заблокувати обліковий запис та захистити свої кошти. Після цього Ви можете зв'язатися з нами для відновлення доступу. З повагою, Відділ підтримки клієнтів"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 28, 359);
+        String actualFooter = getEmailFooterText(emailText, 360);
+
+        assertThat(actualSender, equalTo(expectedSender));
+        assertThat(actualSubject, equalTo(""+app.site+" - зміна номеру телефона"));
+        assertThat(actualBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! Номер телефону, приєднаний до вашого облікового запису "+app.site+", було змінено на "+newPhone+". Якщо Ви цього не робили, будь ласка, натисніть на це посилання , щоб заблокувати обліковий запис та захистити свої кошти. Після цього Ви можете зв'язатися з нами для відновлення доступу. З повагою, Відділ підтримки клієнтів"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 3)
     public void testChangePhoneDipocketPL() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(3, app.mobile_site, 32761);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 0, 337);
-        String emailFooter = getEmailFooterText(emailText, 338);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Witaj, "+app.emailsVerificationsFirstName+"! Numer telefonu powiązany z Twoim kontem "+app.site+" został zmieniony na: "+newPhone+". Jeśli nie zmieniałeś numeru telefonu, kliknij w ten link aby zablokować konto i zabezpieczyć Twoje środki. Następnie skontaktuj się z nami w wybranym momencie, aby bezpiecznie odblokować Twoje konto. Z wyrazami szacunku, Dział Obsługi Klienta"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 0, 337);
+        String actualFooter = getEmailFooterText(emailText, 338);
+
+        assertThat(actualSender, equalTo(expectedSender));
+        assertThat(actualSubject, equalTo(""+app.site+" - zmiana numeru telefonu"));
+        assertThat(actualBody, equalTo("Witaj, "+app.emailsVerificationsFirstName+"! Numer telefonu powiązany z Twoim kontem "+app.site+" został zmieniony na: "+newPhone+". Jeśli nie zmieniałeś numeru telefonu, kliknij w ten link aby zablokować konto i zabezpieczyć Twoje środki. Następnie skontaktuj się z nami w wybranym momencie, aby bezpiecznie odblokować Twoje konto. Z wyrazami szacunku, Dział Obsługi Klienta"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 4)
     public void testChangePhoneDipocketRU() throws InterruptedException, MessagingException, IOException {
         postSendChangePhoneMailRealFlow(4, app.mobile_site, 32761);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 28, 362);
-        String emailFooter = getEmailFooterText(emailText, 363);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! Номер телефона, указанный для Вашей учетной записи был изменен. Новое значение: "+newPhone+". Если Вы этого не делали, перейдите по этой ссылке , чтобы заблокировать вашу учетную запись и защитить свои средства. После этого Вы можете связаться с нами для возобновления доступа. С уважением, Служба поддержки клиентов"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 28, 362);
+        String actualFooter = getEmailFooterText(emailText, 363);
+
+        assertThat(actualSender, equalTo(expectedSender));
+        assertThat(actualSubject, equalTo(""+app.site+" - изменение номера телефона"));
+        assertThat(actualBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! Номер телефона, указанный для Вашей учетной записи был изменен. Новое значение: "+newPhone+". Если Вы этого не делали, перейдите по этой ссылке , чтобы заблокировать вашу учетную запись и защитить свои средства. После этого Вы можете связаться с нами для возобновления доступа. С уважением, Служба поддержки клиентов"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 5)
