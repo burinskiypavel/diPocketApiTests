@@ -7,6 +7,7 @@ import org.testng.asserts.SoftAssert;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.List;
 
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
 import static appmanager.EmailIMAPHelper.getEmailFooterText;
@@ -50,14 +51,20 @@ public class LegalEmailTests extends TestBase {
     public void testLegalEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site, 32761);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 28, 169);
-        String emailFooter = getEmailFooterText(emailText, 170);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site+" legal documents. Thank you for using "+app.site+". With kind regards, Legal Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 28, 169);
+        String actualFooter = getEmailFooterText(emailText, 170);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualSender, expectedSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Your "+app.site+" Legal Documents", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site+" legal documents. Thank you for using "+app.site+". With kind regards, Legal Team", "Body is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
     }
 
     @Test(priority = 2)
@@ -106,14 +113,18 @@ public class LegalEmailTests extends TestBase {
     public void testLegalEmailDiscontuEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site_discontu, 32717);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 28, 169);
-        String emailFooter = getEmailFooterText(emailText, 170);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_discontu+" legal documents. Thank you for using "+app.site_discontu+". With kind regards, Legal Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 28, 169);
+        String actualFooter = getEmailFooterText(emailText, 170);
+
+        assertThat(actualSender, equalTo(expectedSender));
+        assertThat(actualSubject, equalTo("Your "+app.site_discontu+" Legal Documents"));
+        assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_discontu+" legal documents. Thank you for using "+app.site_discontu+". With kind regards, Legal Team"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 6)
@@ -134,14 +145,18 @@ public class LegalEmailTests extends TestBase {
     public void testLegalEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site_playIt, 32732);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 26, 163);
-        String emailFooter = getEmailFooterText(emailText, 164);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedPlayITSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_PlayIT+" legal documents. Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 26, 163);
+        String actualFooter = getEmailFooterText(emailText, 164);
+
+        assertThat(actualSender, equalTo(expectedPlayITSender));
+        assertThat(actualSubject, equalTo("Your "+app.site_PlayIT+" Legal Documents"));
+        assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_PlayIT+" legal documents. Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 8)
@@ -162,13 +177,17 @@ public class LegalEmailTests extends TestBase {
     public void testLegalEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site_upAndGo, 32727);
 
-        //String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailBody = getEmailBodyText(emailText, 29, 172);
         String emailFooter = getEmailFooterText(emailText, 173);
 
         SoftAssert softAssert = new SoftAssert();
-        //softAssert.assertEquals(emailSender, expectedUpAngGoSender, "Sender is not correct");
+        //softAssert.assertEquals(actualSender, expectedUpAngGoSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Your "+app.site_upAndGo+" Legal Documents", "Subject is not correct");
         softAssert.assertEquals(emailBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_upAndGo+" legal documents. Thank you for using "+app.site_upAndGo+". With kind regards, Legal Team", "Body is not correct");
         softAssert.assertEquals(emailFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
