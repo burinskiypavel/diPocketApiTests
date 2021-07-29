@@ -182,46 +182,50 @@ public class LegalEmailTests extends TestBase {
         String actualSubject = senderAndSubject.get(1);
 
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 29, 172);
-        String emailFooter = getEmailFooterText(emailText, 173);
+        String actualBody = getEmailBodyText(emailText, 29, 172);
+        String actualFooter = getEmailFooterText(emailText, 173);
 
         SoftAssert softAssert = new SoftAssert();
         //softAssert.assertEquals(actualSender, expectedUpAngGoSender, "Sender is not correct");
         softAssert.assertEquals(actualSubject, "Your "+app.site_upAndGo+" Legal Documents", "Subject is not correct");
-        softAssert.assertEquals(emailBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_upAndGo+" legal documents. Thank you for using "+app.site_upAndGo+". With kind regards, Legal Team", "Body is not correct");
-        softAssert.assertEquals(emailFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_upAndGo+" legal documents. Thank you for using "+app.site_upAndGo+". With kind regards, Legal Team", "Body is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
     }
 
-    @Test(priority = 10, enabled = false)
+    @Test(priority = 10)
     public void testLegalEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(2, app.mobile_site_upAndGo, 32727);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 29, 174);
-        String emailFooter = getEmailFooterText(emailText, 175);
+        String actualBody = getEmailBodyText(emailText, 29, 174);
+        String actualFooter = getEmailFooterText(emailText, 175);
 
-        assertThat(emailSender, equalTo(expectedUpAngGoSender));
-        assertThat(emailBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходяться юридичні документи, що Ви запитали. Дякуємо за користування додатком "+app.site_upAndGo+". З повагою, Юридичний відділ"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
+        SoftAssert softAssert = new SoftAssert();
+        //softAssert.assertEquals(emailSender, expectedUpAngGoSender, "Sender is not correct");
+        softAssert.assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходяться юридичні документи, що Ви запитали. Дякуємо за користування додатком "+app.site_upAndGo+". З повагою, Юридичний відділ", "Body is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
     }
 
-    @Test(priority = 11, enabled = false)
+    @Test(priority = 11)
     public void testLegalEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(3, app.mobile_site_upAndGo, 32727);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 0, 147);
-        String emailFooter = getEmailFooterText(emailText, 148);
+        String actualBody = getEmailBodyText(emailText, 0, 147);
+        String actualFooter = getEmailFooterText(emailText, 148);
 
-        assertThat(emailSender, equalTo(expectedUpAngGoSender));
-        assertThat(emailBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu "+app.site_upAndGo+". Z wyrazami szacunku, Dział Prawny"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+        SoftAssert softAssert = new SoftAssert();
+        //softAssert.assertEquals(emailSender, expectedUpAngGoSender, "Sender is not correct");
+        softAssert.assertEquals(actualBody, "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu "+app.site_upAndGo+". Z wyrazami szacunku, Dział Prawny", "Body is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
     }
 
-    @Test(priority = 12, enabled = false)
+    @Test(priority = 12)
     public void testLegalEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(4, app.mobile_site_upAndGo, 32727);
 
@@ -230,9 +234,11 @@ public class LegalEmailTests extends TestBase {
         String emailBody = getEmailBodyText(emailText, 29, 183);
         String emailFooter = getEmailFooterText(emailText, 184);
 
-        assertThat(emailSender, equalTo(expectedUpAngGoSender));
-        assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находятся юридические документы, которые Вы заказывали. Спасибо за пользование "+app.site_upAndGo+". С уважением, Юридический отдел"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+        SoftAssert softAssert = new SoftAssert();
+        //softAssert.assertEquals(emailSender, expectedUpAngGoSender, "Sender is not correct");
+        softAssert.assertEquals(emailBody, "Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находятся юридические документы, которые Вы заказывали. Спасибо за пользование "+app.site_upAndGo+". С уважением, Юридический отдел", "Boody is not correct");
+        softAssert.assertEquals(emailFooter, ""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
     }
 
     @Test(priority = 13, enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
