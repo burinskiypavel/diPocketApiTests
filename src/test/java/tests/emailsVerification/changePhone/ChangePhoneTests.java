@@ -187,8 +187,9 @@ public class ChangePhoneTests extends TestBase {
         String actualFooter = getEmailFooterText(emailText, 410);
 
         assertThat(actualSender, equalTo(expectedPlayITSender));
-        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A PlayIT számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(actualSubject, equalTo(""+app.site_PlayIT+" – mobilszám változás kérés"));
+        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A "+app.site_PlayIT+" számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a "+app.site_PlayIT+" Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 9)
@@ -302,8 +303,9 @@ public class ChangePhoneTests extends TestBase {
         String actualFooter = getEmailFooterText(emailText, 420);
 
         assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A Snow Attack számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Snow Attack, a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(actualSubject, equalTo(""+app.site_SnowAttack+" – mobilszám változás kérés"));
+        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A "+app.site_SnowAttack+" számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(priority = 15, enabled = false)//bugs: incorrect sender, Change Phone Sodexo has ${LAST NAME} and ${NEW_PHONE_NUMBER} in the body
