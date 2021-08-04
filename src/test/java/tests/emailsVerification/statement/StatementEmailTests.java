@@ -46,7 +46,7 @@ public class StatementEmailTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 1)// incorrect subject
+    @Test// incorrect subject
     public void testStatementEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site, 32761);
 
@@ -64,7 +64,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2)
+    @Test
     public void testStatementEmailDipocketUA() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(2, app.mobile_site, 32761);
 
@@ -82,7 +82,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 3)
+    @Test
     public void testStatementEmailDipocketPL() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(3, app.mobile_site, 32761);
 
@@ -100,7 +100,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 4)
+    @Test
     public void testStatementEmailDipocketRU() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(4, app.mobile_site, 32761);
 
@@ -118,7 +118,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 5)
+    @Test
     public void testStatementEmailDiscontuEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site_discontu, 32717);
 
@@ -136,7 +136,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 6)
+    @Test
     public void testStatementEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(3, app.mobile_site_discontu, 32717);
 
@@ -154,7 +154,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 7)
+    @Test
     public void testStatementEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site_playIt, 32732);
 
@@ -172,7 +172,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 8)
+    @Test
     public void testStatementEmailPlayITHU() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(5, app.mobile_site_playIt, 32732);
 
@@ -190,7 +190,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 9)
+    @Test
     public void testStatementEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site_upAndGo, 32727);
 
@@ -208,7 +208,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 10)
+    @Test
     public void testStatementEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(2, app.mobile_site_upAndGo, 32727);
 
@@ -226,7 +226,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 11)
+    @Test
     public void testStatementEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(3, app.mobile_site_upAndGo, 32727);
 
@@ -244,7 +244,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 12)
+    @Test
     public void testStatementEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(4, app.mobile_site_upAndGo, 32727);
 
@@ -262,7 +262,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 13)// incorrect subject
+    @Test// incorrect subject
     public void testStatementEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site_snowAttack, 32855);
 
@@ -280,7 +280,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 14)// incorrect subject
+    @Test// incorrect subject
     public void testStatementEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(5, app.mobile_site_snowAttack, 32855);
 
