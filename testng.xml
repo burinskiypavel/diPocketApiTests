@@ -457,45 +457,9 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="EmailsVerificationChangeEmailDipocketTestss">-->
+<!--    <test name="EmailsVerificationChangeEmailTests">-->
 <!--        <classes>-->
-<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailDipocketTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationChangeEmailTelenorTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailTelenorTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationChangeEmailDiscontuTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailDiscontuTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationChangeEmailSnowAttackTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailSnowAttackTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationChangeEmailSodexoTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailSodexoTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationChangeEmailUpAndGoTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailUpAndGoTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="EmailsVerificationChangeEmailPlayITTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailPlayITTests"/>-->
+<!--            <class name="tests.emailsVerification.changeEmail.ChangeEmailTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
