@@ -42,6 +42,7 @@ public class ApplicationManager {
     public String mobile_site_upAndGo = null;
     public String mobile_site_snowAttack = null;
     public String mobile_site_festival = "FESTIVAL";
+    public String mobile_site_sodexo = "SODEXO";
     public String emailsVerificationsCountryId = null;
     public String emailsVerificationsCurrencyId = null;
     public String expectedEmailSender_upAndGo = "wsparcie@upcard.pl";
@@ -54,6 +55,8 @@ public class ApplicationManager {
     public String site_PlayIT = "PlayIT";
     public String site_upAndGo = "up and go";
     public String site_SnowAttack = "Snow Attack";
+    public String site_Sodexo = "Sodexo";
+    public String site_Telenor = "Telenor";
     public RequestSpecification requestSpecDipocketRegistration;
     public RequestSpecification requestSpecDiscontuRegistration;
     public RequestSpecification requestSpecPlayITRegistration;
