@@ -144,7 +144,7 @@ public class EmailVerificationHelper {
 
     public static List<String> getEmailSenderAndSubject(String user, String password) throws InterruptedException, MessagingException, IOException {
         List<String> result = new ArrayList<String>();
-        Thread.sleep(5000);
+        Thread.sleep(5500);
 
         try {
 
