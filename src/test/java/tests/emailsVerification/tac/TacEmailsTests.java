@@ -30,12 +30,33 @@ public class TacEmailsTests extends TestBase {
                 "}";
     }
 
+    public String body2(String testEmail, String site){
+        return "{\n" +
+                "  \"email\": \""+testEmail+"\",\n" +
+                "  \"phoneNumber\": \"380932485981\",\n" +
+                "  \"programNickName\": \""+site+"\",\n" +
+                "  \"site\": \""+site+"\",\n" +
+                "  \"url\": \"google.com\"\n" +
+                "}";
+    }
+
     public void postSendTacEmail(String site) {
         given()
                 .spec(app.requestSpecEmailVerification)
                 .body(body(app.emailsVerificationsEmail, site))
                 .when()
                 .post( "/EmailService/sendTacEmail")
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
+    public void postSendTacTelenorEmail(String site) {
+        given()
+                .spec(app.requestSpecEmailVerification)
+                .body(body2(app.emailsVerificationsEmail, site))
+                .when()
+                .post( "/EmailService/sendTacTelenorEmail")
                 .then()
                 .log().all()
                 .statusCode(200);
@@ -297,5 +318,24 @@ public class TacEmailsTests extends TestBase {
         assertThat(emailSender, equalTo(expectedUpAndGoSender));
         assertThat(emailBody, equalTo(""));
         assertThat(emailFooter, equalTo(""));
+    }
+
+    @Test(enabled = false)// 400 error
+    public void testTacTelenorEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.telenorSite);
+        postSendTacTelenorEmail(app.telenorSite);
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 29, 1630);
+        String actualFooter = getEmailFooterText(emailText, 1631);
+
+        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+        assertThat(actualSubject, equalTo(""+app.site_upAndGo+" Terms and Conditions - PLEASE DO NOT DISCARD"));
+        assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached Terms_and_Conditions\" (the \"T&Cs\"). It is important that you familiarise yourself with these documents and in particular that you review in detail \"up and go_at_a_Glance\", which summarises the key clauses applicable to your up and go account and also includes our current pricing and transaction limits. With regard to Personal Information, we ask you to please read the section in the T&C’s titled 'Personal Information' - we will process any Information you provide to us according those terms. By providing it to us, you are agreeing for us to process it, including any sensitive data for the purposes described in the Agreement subject to a number of rights you have to be informed about how your Information is processed, to correct any errors, to object to any processing, to restrict processing or have Information erased or to instruct us to copy or transfer Information as you direct. If you accept the T&Cs, please click on this link and proceed with the registration process through up and go mobile App. The T&Cs may only be changed upon 2 months notice to you, following which, if you have not objected, you will be deemed to have accepted the new terms. IMPORTANT: to expedite registration you may choose to start using the App even if you have not clicked on the link above. However, if you do not click on it within a week of accessing the App, your up and go account will be temporarily blocked until such time as you have clicked on the link and confirmed your agreement to having read and accepted the T&C’s. With kind regards, Legal Team"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 }
