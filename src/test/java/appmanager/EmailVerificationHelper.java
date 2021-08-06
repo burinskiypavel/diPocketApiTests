@@ -144,7 +144,7 @@ public class EmailVerificationHelper {
 
     public static List<String> getEmailSenderAndSubject(String user, String password) throws InterruptedException, MessagingException, IOException {
         List<String> result = new ArrayList<String>();
-        Thread.sleep(5500);
+        //Thread.sleep(5500);
 
         try {
 
@@ -161,6 +161,13 @@ public class EmailVerificationHelper {
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
+
+            int count = 0;
+            while(emailFolder.getMessages().length == 0 && count < 120){
+                Thread.sleep(1000);
+                count++;
+            }
+            System.out.println("count:" + count);
 
             Message[] messages = emailFolder.getMessages();
             System.out.println("messages.length---" + messages.length);
