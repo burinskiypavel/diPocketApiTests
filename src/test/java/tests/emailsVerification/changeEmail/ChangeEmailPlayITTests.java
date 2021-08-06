@@ -62,7 +62,7 @@ public class ChangeEmailPlayITTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 2, enabled = false)//bug Change Email(Play IT, Snow Attack) HU email has incorrect body and subject
+    @Test(priority = 2)
     public void testChangeEmailPlayITHU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(5);
 
@@ -71,12 +71,12 @@ public class ChangeEmailPlayITTests extends TestBase {
         String actualSubject = senderAndSubject.get(1);
 
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 44, 276);
-        String actualFooter = getEmailFooterText(emailText, 277);
+        String actualBody = getEmailBodyText(emailText, 44, 262);
+        String actualFooter = getEmailFooterText(emailText, 263);
 
         assertThat(actualSender, equalTo(expectedEmailSender));
-        assertThat(actualSubject, equalTo(""+app.site_PlayIT+" - email cím megerősítés kérés"));
-        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a "+app.site_PlayIT+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
+        assertThat(actualSubject, equalTo(""+app.site_PlayIT+" – email cím megerősítés kérés"));
+        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk az email cím megerősítés kérését a "+app.site_PlayIT+" számlájával kapcsolatban. Kérjük az alábbi linkre klikkelve erősítse meg a kérését és véglegesítse a változtatást. Üdvözlettel, Ügyfélszolgálati csoport"));
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 }
