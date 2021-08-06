@@ -46,7 +46,7 @@ public class StatementEmailTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test// incorrect subject
+    @Test
     public void testStatementEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site, 32761);
 
@@ -59,7 +59,7 @@ public class StatementEmailTests extends TestBase {
         String actualFooter = getEmailFooterText(emailText, 171);
 
         assertThat(actualSender, equalTo(expectedSender));
-        //assertThat(actualSubject, equalTo("Your "+app.site+" account statement"));
+        assertThat(actualSubject, equalTo("Your "+app.site+" account statement"));
         assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your "+app.site+" account statement(s). Thank you for using "+app.site+". With kind regards, Legal Team"));
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
@@ -262,7 +262,7 @@ public class StatementEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test// incorrect subject
+    @Test
     public void testStatementEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(1, app.mobile_site_snowAttack, 32855);
 
@@ -275,12 +275,12 @@ public class StatementEmailTests extends TestBase {
         String actualFooter = getEmailFooterText(emailText, 180);
 
         assertThat(actualSender, equalTo(expectedSender));
-        //assertThat(actualSubject, equalTo("Your "+app.site_SnowAttack+" account statement"));
+        assertThat(actualSubject, equalTo("Your "+app.site_SnowAttack+" account statement"));
         assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your "+app.site_SnowAttack+" account statement(s). Thank you for using "+app.site_SnowAttack+". With kind regards, Legal Team"));
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test// incorrect subject
+    @Test
     public void testStatementEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postStatementEmail(5, app.mobile_site_snowAttack, 32855);
 
@@ -293,7 +293,7 @@ public class StatementEmailTests extends TestBase {
         String actualFooter = getEmailFooterText(emailText, 197);
 
         assertThat(actualSender, equalTo(expectedSender));
-        //assertThat(actualSubject, equalTo("AZ Ön "+app.site_SnowAttack+" számlakivonata"));
+        assertThat(actualSubject, equalTo("AZ Ön "+app.site_SnowAttack+" számlakivonata"));
         assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a számlakivonatát (számlakivonatait). Köszönjük, hogy a "+app.site_SnowAttack+" alkalmazást használja. Üdvözlettel, Jogi csapat"));
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
     }
