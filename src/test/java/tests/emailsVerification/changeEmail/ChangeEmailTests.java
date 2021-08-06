@@ -174,7 +174,7 @@ public class ChangeEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 8, enabled = false)//bug Change Email(Play IT, Snow Attack) HU email has incorrect body and subject
+    @Test(priority = 8)
     public void testChangeEmailPlayITHU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(5, app.mobile_site_playIt, 32732);
 
@@ -183,12 +183,12 @@ public class ChangeEmailTests extends TestBase {
         String actualSubject = senderAndSubject.get(1);
 
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 44, 276);
-        String actualFooter = getEmailFooterText(emailText, 277);
+        String actualBody = getEmailBodyText(emailText, 44, 262);
+        String actualFooter = getEmailFooterText(emailText, 263);
 
         assertThat(actualSender, equalTo(expectedPlayITSender));
-        assertThat(actualSubject, equalTo(""+app.site_PlayIT+" - email cím megerősítés kérés"));
-        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a "+app.site_PlayIT+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
+        assertThat(actualSubject, equalTo(""+app.site_PlayIT+" – email cím megerősítés kérés"));
+        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk az email cím megerősítés kérését a "+app.site_PlayIT+" számlájával kapcsolatban. Kérjük az alábbi linkre klikkelve erősítse meg a kérését és véglegesítse a változtatást. Üdvözlettel, Ügyfélszolgálati csoport"));
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
     }
 
@@ -210,7 +210,7 @@ public class ChangeEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 10, enabled = false) //bug  Change Email(Play IT, Snow Attack) HU email has incorrect body and subject
+    @Test(priority = 10)
     public void testChangeEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendChangeEmail(5, app.mobile_site_snowAttack, 32855);
 
@@ -219,12 +219,12 @@ public class ChangeEmailTests extends TestBase {
         String actualSubject = senderAndSubject.get(1);
 
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 49, 286);
-        String actualFooter = getEmailFooterText(emailText, 287);
+        String actualBody = getEmailBodyText(emailText, 49, 272);
+        String actualFooter = getEmailFooterText(emailText, 273);
 
         assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo(""+app.site_SnowAttack+" - email cím megerősítés kérés"));
-        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk a "+app.site_SnowAttack+" fiókjához tartozó e-mail cím megerősítésére vonatkozó kérését. Kérjük, kattintson erre a hivatkozásra a kérése megerősítéséhez és a módosítás véglegesítéséhez. Üdvözlettel, az Ügyfélszolgálati csapat"));
+        assertThat(actualSubject, equalTo(""+app.site_SnowAttack+" – email cím megerősítés kérés"));
+        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Megkaptuk az email cím megerősítés kérését a "+app.site_SnowAttack+" számlájával kapcsolatban. Kérjük az alábbi linkre klikkelve erősítse meg a kérését és véglegesítse a változtatást. Üdvözlettel, Ügyfélszolgálati csoport"));
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
     }
 
