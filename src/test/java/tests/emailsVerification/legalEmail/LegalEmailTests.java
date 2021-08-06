@@ -213,7 +213,7 @@ public class LegalEmailTests extends TestBase {
         softAssert.assertAll();
     }
 
-    @Test(priority = 10)// subject is not correct
+    @Test(priority = 10)
     public void testLegalEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(2, app.mobile_site_upAndGo, 32727);
 
@@ -227,7 +227,7 @@ public class LegalEmailTests extends TestBase {
 
         SoftAssert softAssert = new SoftAssert();
         //softAssert.assertEquals(actualSender, expectedUpAngGoSender, "Sender is not correct");
-        //softAssert.assertEquals(actualSubject, "Ваші юридичні документи "+app.site_upAndGo+"", "Subject is not correct");
+        softAssert.assertEquals(actualSubject, "Ваші юридичні документи "+app.site_upAndGo+"", "Subject is not correct");
         softAssert.assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходяться юридичні документи, що Ви запитали. Дякуємо за користування додатком "+app.site_upAndGo+". З повагою, Юридичний відділ", "Body is not correct");
         softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
