@@ -308,21 +308,19 @@ public class ChangePhoneTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 15, enabled = false)//bugs: incorrect sender, Change Phone Sodexo has ${LAST NAME} and ${NEW_PHONE_NUMBER} in the body
+    @Test(priority = 15)//bug incorrect sender
     public void testChangePhoneSodexo() throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(1, "SODEXO", 32762);
+        postSendChangePhoneMailRealFlow(1, app.mobile_site_sodexo, 32762);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
 
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 44, 419);
-        String actualFooter = getEmailFooterText(emailText, 420);
+        String actualBody = getEmailBodyText(emailText, 95, 854);
 
-        //assertThat(emailSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo("Sodexo - change of mobile phone number"));
-        assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", A  számlájához kapcsolt mobilszám megváltozott erre: new phone Ha nem Ön kezdeményezte a változtatást, akkor klikkelje erre a linkre, hogy a számlája letiltásra kerüljön és a pénze védve legyen. Később felveheti velünk a kapcsolatot egy Önnek kényelmes időpontban, hogy biztonságosan újra-aktiváljuk a számláját. Üdvözlettel, Ügyfélszolgálati csoport"));
-        //assertThat(actualFooter, equalTo(""+app.SITE_REG+" a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
+        //assertThat(actualSender, equalTo(expectedSender));
+        assertThat(actualSubject, equalTo(""+app.site_Sodexo+" - change of mobile phone number"));
+        assertThat(actualBody, equalTo(""+app.emailsVerificationsFirstName+" Burinsky, Numer telefonu przypisany do Twojego Profilu Wirtualnej Karty Sodexo został zmieniony na: new phone Jeśli do zmiany doszło bez Twojej wiedzy, Kliknij w ten link lub kliknij w przycisk poniżej by zablokować konto i ochronić zgromadzone na nim środki. Pozdrawiamy, Zespół Wirtualnej Karty Sodexo Centrum Obsługi Klienta +48 (22) 535 11 11 | info.svc.pl@sodexo.com "+app.emailsVerificationsFirstName+" Burinsky, The mobile phone number associated with your Virtual Sodexo Card Profile was changed to: new phone If you didn't change it, please click on this link or click button below, to block your account and protect your money. With kind regards, Virtual Sodexo Card Team Customer Service Center +48 (22) 535 11 11 | info.svc.pl@sodexo.com powered by DiPocket (dipocket.org)"));
     }
 }
