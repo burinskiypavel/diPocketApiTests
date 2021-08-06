@@ -205,7 +205,7 @@ public class ResetPasswordTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 8, enabled = false)// body is not correct
+    @Test(priority = 8)
     public void testResetPasswordUpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site_upAndGo);
         postSendResetPasswordEmail(app.mobile_site_upAndGo);
@@ -215,12 +215,12 @@ public class ResetPasswordTests extends TestBase {
         String actualSubject = senderAndSubject.get(1);
 
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 0, 156);
-        String actualFooter = getEmailFooterText(emailText, 157);
+        String actualBody = getEmailBodyText(emailText, 2, 158);
+        String actualFooter = getEmailFooterText(emailText, 159);
 
         //assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo("Запит на зміну паролю"));
-        assertThat(actualBody, equalTo(""));
+        assertThat(actualBody, equalTo("Ми отримали запит на зміну паролю за Вашим особистим рахунком. Будь-ласка клікніть це посилання, щоб підтвердити зміну. З повагою, Відділ підтримки клієнтів"));
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 

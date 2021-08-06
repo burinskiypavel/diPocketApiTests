@@ -139,7 +139,7 @@ public class TacEmailsTests extends TestBase {
     }
 
     @Test
-    public void tesTacDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+    public void testTacDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_discontu);
         postSendTacEmail(app.mobile_site_discontu);
 
