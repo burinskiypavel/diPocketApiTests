@@ -290,19 +290,23 @@ public class TacEmailsTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(enabled = false)//bug Tac Snow Attack EN email body is not correct
+    @Test//incorrect subject
     public void testTacSnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", "SNOW_ATTACK");
-        postSendTacEmail("SNOW_ATTACK");
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_snowAttack);
+        postSendTacEmail(app.mobile_site_snowAttack);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 29, 1551);
-        String emailFooter = getEmailFooterText(emailText, 1552);
+        String actualBody = getEmailBodyText(emailText, 31, 1329);
+        String actualFooter = getEmailFooterText(emailText, 1330);
 
-        assertThat(emailSender, equalTo(expectedUpAndGoSender));
-        assertThat(emailBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! Ознакомьтесь с прикрепленным файлом \""+app.site_upAndGo+"_Terms_and_Conditions\". Обратите внимание на документ \""+app.site_upAndGo+"_at_a_Glance\", в нём вы найдете ключевые правила пользования "+app.site_upAndGo+", актуальные цены и тарифы. Относительно личных данных, просьба обратить внимание на раздел \"Personal Information\" в \""+app.site_upAndGo+"_Terms_and_Conditions\", поскольку вся личная информация будет обрабатываться согласно этим условиям. Предоставляя нам информацию (включая конфиденциальную), вы даёте согласие на ее обработку в целях, описанных в Договоре. Вы имеете право быть в курсе использования данных, чтобы иметь возможность исправить ошибки, чтобы отказаться от обработки или остановить обработку, или удалить информацию или проинструктировать нас о копировании или передачи информации по Вашему указанию. Если Вы принимаете \"Условия пользования приложением "+app.site_upAndGo+"\",  перейдите по этой ссылке и закончите регистрацию в приложении, если еще не закончили. \""+app.site_upAndGo+"_Terms_and_Conditions\" остаются неизменными до тех пор, пока не будет уведомлено об обратном. Уведомление об изменении условий будет выслано, по меньшей мере, за два месяца, чтобы дать Вам возможность ознакомится и принять их. ВАЖНО: можно закончить регистрацию без перехода по ссылке выше. Но, если вы не сделаете этого в течение 7 дней после получения доступа к приложению, учетная запись в up and go будет заблокирована до тех пор, пока Вы не перейдете по ссылке, принимая таким образом \""+app.site_upAndGo+"_Terms_and_Conditions\". С уважением, Юридический отдел"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+        assertThat(actualSender, equalTo("legal.team@dipocket.org"));
+        //assertThat(actualSubject, equalTo(""));
+        assertThat(actualBody, equalTo("Please find attached DiPocket Terms and Conditions for Festivals’ Customers and the Festivals’ Payment Band Terms and Conditions. It is important that you familiarise yourself with these documents and in particular that you review in detail the Festivals’ Payment Band Terms and Conditions, which summarises the key clauses applicable to your Festivals’ payment band and also includes our current pricing and transaction limits. With regard to Personal Information, we ask you to please read the section in the T&C’s titled 'Personal Information' - we will process any Information you provide to us according those terms. By providing it to us, you are agreeing for us to process it, including any sensitive data for the purposes described in the Agreement subject to a number of rights you have to be informed about how your Information is processed, to correct any errors, to object to any processing, to restrict processing or have Information erased or to instruct us to copy or transfer Information as you direct. If you accept the T&Cs, please click on this link and proceed with the registration process Thank you for registering your Festivals’ Payment Band - enjoy its safety and convenience at the festival and wherever your active lifestyle takes you to! With kind regards, DiPocket Team"));
+        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test(enabled = false)// приходит письмо Регистрация виртуальной карты - подтвердите свой e-mail
