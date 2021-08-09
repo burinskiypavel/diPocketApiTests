@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
@@ -71,10 +72,18 @@ public class TacEmailsTests extends TestBase {
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
 
+        List<String>actualFilesNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 28, 1523);
         String actualFooter = getEmailFooterText(emailText, 1524);
 
+        List<String>expectedFilesNames = new ArrayList<>();
+        expectedFilesNames.add("Limits Table.pdf");
+        expectedFilesNames.add("Tariff Table.pdf");
+        expectedFilesNames.add("General Terms and Conditions.pdf");
+
+        assertThat(actualFilesNames, equalTo(expectedFilesNames));
         assertThat(actualSender, equalTo(expectedSender));
         assertThat(actualSubject, equalTo(""+app.site+" Terms and Conditions - PLEASE DO NOT DISCARD"));
         assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached \""+app.site+"_Terms_and_Conditions\" (the \"T&Cs\"), Tariff Table and Limits Table. It is important that you familiarise yourself with these documents and in particular with our current pricing and transaction limits. With regard to Personal Information, we ask you to please read the section in the T&C’s titled 'Personal Information' - we will process any Information you provide to us according those terms. By providing it to us, you are agreeing for us to process it, including any sensitive data for the purposes described in the Agreement subject to a number of rights you have to be informed about how your Information is processed, to correct any errors, to object to any processing, to restrict processing or have Information erased or to instruct us to copy or transfer Information as you direct. If you accept the T&Cs, please click on this link and proceed with the registration process through DiPocket mobile App. The T&Cs may only be changed upon 2 months notice to you, following which, if you have not objected, you will be deemed to have accepted the new terms. IMPORTANT: to expedite registration you may choose to start using the App even if you have not clicked on the link above. However, if you do not click on it within a week of accessing the App, your DiPocket account will be temporarily blocked until such time as you have clicked on the link and confirmed your agreement to having read and accepted the T&C’s. With kind regards, Legal Team"));

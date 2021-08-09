@@ -97,6 +97,79 @@ public class EmailVerificationHelper {
         return result;
     }
 
+    public static List<String> getFileNameFromEmail(String host, String user,
+                                          String password) throws InterruptedException, MessagingException, IOException {
+        List<String> pdf = new ArrayList<String>();
+
+        try {
+
+            Properties properties = new Properties();
+
+            properties.put("mail.imap.host", host);
+            properties.put("mail.imap.port", "993");
+            properties.put("mail.imap.starttls.enable", "true");
+            Session emailSession = Session.getDefaultInstance(properties);
+
+            Store store = emailSession.getStore("imaps");
+
+            store.connect(host, user, password);
+
+            Folder emailFolder = store.getFolder("INBOX");
+            emailFolder.open(Folder.READ_ONLY);
+
+            Message[] messages = emailFolder.getMessages();
+            System.out.println("messages.length---" + messages.length);
+
+            for (int i = 0, n = messages.length; i < n; i++) {
+                Message message = messages[i];
+                System.out.println("---------------------------------");
+                System.out.println("Email Number " + (i + 1));
+                System.out.println("Subject: " + message.getSubject());
+                System.out.println("Received Date: " + message.getReceivedDate());
+                System.out.println("From: " + message.getFrom()[0]);
+
+                String contentType = message.getContentType();
+                String messageContent = "";
+
+
+                if (contentType.contains("multipart")) {
+                    Multipart multiPart = (Multipart) message.getContent();
+                    int numberOfParts = multiPart.getCount();
+                    System.out.println("numberOfParts: " + numberOfParts);
+                    for (int partCount = 0; partCount < numberOfParts; partCount++) {
+
+                        MimePart part = (MimePart) multiPart.getBodyPart(partCount);
+
+                        if(part.isMimeType("APPLICATION/OCTET-STREAM")){
+                            pdf.add(part.getFileName());
+                            //pdf = part.getContentType();
+                            System.out.println("File name: " + part.getFileName());
+                            //System.out.println(part.getContentType());
+                        }
+
+                    }
+                } else if (contentType.contains("text/plain")
+                        || contentType.contains("text/html")) {
+                    Object content = message.getContent();
+                    if (content != null) {
+                        messageContent = content.toString();
+                    }
+                }
+
+            }
+
+            emailFolder.close(false);
+            store.close();
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return pdf;
+    }
+
     public static String getEmailSender(String user, String password) throws InterruptedException, MessagingException, IOException {
         String result = "";
         Thread.sleep(5000);
