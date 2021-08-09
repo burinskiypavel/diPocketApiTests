@@ -1,5 +1,7 @@
 package appmanager;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
+
 import javax.mail.*;
 import javax.mail.internet.MimePart;
 import java.io.IOException;
@@ -141,10 +143,12 @@ public class EmailVerificationHelper {
                         MimePart part = (MimePart) multiPart.getBodyPart(partCount);
 
                         if(part.isMimeType("APPLICATION/OCTET-STREAM")){
-                            pdf.add(part.getFileName());
-                            //pdf = part.getContentType();
-                            System.out.println("File name: " + part.getFileName());
-                            //System.out.println(part.getContentType());
+
+                            //pdf.add( part.getFileName());
+                            String name = part.getFileName();
+                            String realFileName = MimeUtility.decodeText(name);
+                            pdf.add(realFileName);
+                            System.out.println("File name: " + realFileName);
                         }
 
                     }
