@@ -493,10 +493,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="EmailsVerificationTacEmailsTests">
-        <classes>
-            <class name="tests.emailsVerification.tac.TacEmailsTests"/>
-        </classes>
-    </test>
+<!--    <test name="EmailsVerificationTacEmailsTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.tac.TacEmailsTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
