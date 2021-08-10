@@ -1,6 +1,6 @@
 package appmanager;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
+//import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 import javax.mail.*;
 import javax.mail.internet.MimePart;
@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import static javax.mail.internet.MimeUtility.decodeText;
 
 
 public class EmailVerificationHelper {
@@ -146,7 +148,7 @@ public class EmailVerificationHelper {
 
                             //pdf.add( part.getFileName());
                             String name = part.getFileName();
-                            String realFileName = MimeUtility.decodeText(name);
+                            String realFileName = decodeText(name);
                             pdf.add(realFileName);
                             System.out.println("File name: " + realFileName);
                         }
