@@ -208,17 +208,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionUpAndGoEN() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionUpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_upAndGo);
         postSupervisionEmail(1, app.mobile_site_upAndGo, 32727);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 0, 399);
         String actualFooter = getEmailFooterText(emailText, 400);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Supervised Accounts T&Cs.pdf")));
         //assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo(""+app.site_upAndGo+" Terms and Conditions - PLEASE DO NOT DISCARD"));
         assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached the section of "+app.site_upAndGo+" Terms and Conditions (the “T&Cs”) regulating Supervised accounts. It is the same that you have already agreed to as part of the T&Cs, but we want to draw your attention on it now that you will start using a Supervised account since it contains important provisions on the Supervisor’s role and responsibilities. With kind regards, Legal Team"));
@@ -226,17 +228,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionUpAndGoUA() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionUpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site_upAndGo);
         postSupervisionEmail(2, app.mobile_site_upAndGo, 32727);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 29, 488);
         String actualFooter = getEmailFooterText(emailText, 489);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Умови використання рахунків під опікою.pdf")));
         //assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo("Правила та Умови користування додатком "+app.site_upAndGo+" - будь ласка, збережіть це повідомлення"));
         assertThat(actualBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться розділ \"Умови та Правила користування додатком up and go\" (\"Правила користування\"), який стосується Опіки за рахунком. Ви прийняли їх разом з іншою частиною Правил користування, але зараз ми хочемо ще раз звернути на них Вашу увагу, адже Ви розпочинаєте користуватися Опікунськими рахунками, а в цьому розділі знаходиться більш детальна інформація про роль та відповідальність Опікуна рахунку. З повагою, Юридичний відділ"));
@@ -244,17 +248,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionUpAndGoPL() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionUpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_upAndGo);
         postSupervisionEmail(3, app.mobile_site_upAndGo, 32727);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 0, 436);
         String actualFooter = getEmailFooterText(emailText, 437);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Konta Nadzorowane - warunki ogólne.pdf")));
         //assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo("Zasady i Warunki korzystania z aplikacji "+app.site_upAndGo+" - PROSIMY O ZACHOWANIE TEJ WIADOMOŚCI"));
         assertThat(actualBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączeniu znajduje się sekcja Warunków i Zasad korzystania (\"Warunki korzystania\"), dotycząca Kont Nadzorowanych. Zaakceptowałeś ją wraz z pozostałą częścią Warunków korzystania, jednak chcemy raz jeszcze zwrócić na nią Twoją uwagę teraz, gdy rozpoczynasz korzystanie z Konta Nadzorowanego, a w tej sekcji znajdziesz szczegółowe zapisy dotyczące roli i odpowiedzialności Opiekuna Konta. Z wyrazami szacunku, Dział Prawny"));
@@ -262,17 +268,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionUpAndGoRU() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionUpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site_upAndGo);
         postSupervisionEmail(4, app.mobile_site_upAndGo, 32727);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 29, 297);
         String actualFooter = getEmailFooterText(emailText, 298);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Условия использования счетов под опекой.pdf")));
         //assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo("Условия пользования приложением "+app.site_upAndGo+" - пожалуйста, сохраните это сообщение"));
         assertThat(actualBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находится раздел \"Условий пользования приложением "+app.site_upAndGo+"\" об опеке. Вы уже приняли эти условия в момент регистрации, но мы хотим напомнить Вам детали перед началом использования этой функциональности. С уважением, Юридический отдел"));
