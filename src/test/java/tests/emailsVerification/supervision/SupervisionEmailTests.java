@@ -50,7 +50,7 @@ public class SupervisionEmailTests extends TestBase {
     @Test
     public void testSupervisionDipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site);
-        postSupervisionEmail(1, app.mobile_site, 33464);
+        postSupervisionEmail(1, app.mobile_site, Integer.parseInt(app.getDbHelper().getClientIdFromDB(app.emailsVerificationsEmail, app.mobile_site)));
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -70,7 +70,7 @@ public class SupervisionEmailTests extends TestBase {
     @Test
     public void testSupervisionDipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site);
-        postSupervisionEmail(2, app.mobile_site, 33464);
+        postSupervisionEmail(2, app.mobile_site, Integer.parseInt(app.getDbHelper().getClientIdFromDB(app.emailsVerificationsEmail, app.mobile_site)));
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -90,7 +90,7 @@ public class SupervisionEmailTests extends TestBase {
     @Test
     public void testSupervisionDipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site);
-        postSupervisionEmail(3, app.mobile_site, 33464);
+        postSupervisionEmail(3, app.mobile_site, Integer.parseInt(app.getDbHelper().getClientIdFromDB(app.emailsVerificationsEmail, app.mobile_site)));
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -110,7 +110,7 @@ public class SupervisionEmailTests extends TestBase {
     @Test
     public void testSupervisionDipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site);
-        postSupervisionEmail(4, app.mobile_site, 33464);
+        postSupervisionEmail(4, app.mobile_site, Integer.parseInt(app.getDbHelper().getClientIdFromDB(app.emailsVerificationsEmail, app.mobile_site)));
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
