@@ -128,17 +128,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionDiscontuEN() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(1, app.mobile_site_discontu, 32717);
+    public void testSupervisionDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_discontu);
+        postSupervisionEmail(1, app.mobile_site_discontu, 33062);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 0, 398);
         String actualFooter = getEmailFooterText(emailText, 399);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Supervised Accounts T&Cs.pdf")));
         assertThat(actualSender, equalTo(expectedSender));
         assertThat(actualSubject, equalTo(""+app.site_discontu+" Terms and Conditions - PLEASE DO NOT DISCARD"));
         assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached the section of "+app.site_discontu+" Terms and Conditions (the “T&Cs”) regulating Supervised accounts. It is the same that you have already agreed to as part of the T&Cs, but we want to draw your attention on it now that you will start using a Supervised account since it contains important provisions on the Supervisor’s role and responsibilities. With kind regards, Legal Team"));
@@ -146,17 +148,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionDiscontuPL() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(3, app.mobile_site_discontu, 32717);
+    public void testSupervisionDiscontuPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_discontu);
+        postSupervisionEmail(3, app.mobile_site_discontu, 33062);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 0, 436);
         String actualFooter = getEmailFooterText(emailText, 437);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Konta Nadzorowane - warunki ogólne.pdf")));
         assertThat(actualSender, equalTo(expectedSender));
         assertThat(actualSubject, equalTo("Zasady i Warunki korzystania z aplikacji "+app.site_discontu+" - PROSIMY O ZACHOWANIE TEJ WIADOMOŚCI"));
         assertThat(actualBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączeniu znajduje się sekcja Warunków i Zasad korzystania (\"Warunki korzystania\"), dotycząca Kont Nadzorowanych. Zaakceptowałeś ją wraz z pozostałą częścią Warunków korzystania, jednak chcemy raz jeszcze zwrócić na nią Twoją uwagę teraz, gdy rozpoczynasz korzystanie z Konta Nadzorowanego, a w tej sekcji znajdziesz szczegółowe zapisy dotyczące roli i odpowiedzialności Opiekuna Konta. Z wyrazami szacunku, Dział Prawny"));
