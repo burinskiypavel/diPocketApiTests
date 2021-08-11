@@ -168,17 +168,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionPlayITEN() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
         postSupervisionEmail(1, app.mobile_site_playIt, 32732);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 0, 396);
         String actualFooter = getEmailFooterText(emailText, 397);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Supervised Accounts T&Cs.pdf")));
         assertThat(actualSender, equalTo("PlayIT Card <playitcard@dipocket.org>"));
         assertThat(actualSubject, equalTo(""+app.site_PlayIT+" Terms and Conditions - PLEASE DO NOT DISCARD"));
         assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached the section of "+app.site_PlayIT+" Terms and Conditions (the “T&Cs”) regulating Supervised accounts. It is the same that you have already agreed to as part of the T&Cs, but we want to draw your attention on it now that you will start using a Supervised account since it contains important provisions on the Supervisor’s role and responsibilities. With kind regards, Legal Team"));
@@ -186,17 +188,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionPlayITHU() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionPlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_playIt);
         postSupervisionEmail(5, app.mobile_site_playIt, 32732);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 0, 247);
         String actualFooter = getEmailFooterText(emailText, 248);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Felügyelt számlák használati feltételei.pdf")));
         assertThat(actualSender, equalTo("PlayIT Card <playitcard@dipocket.org>"));
         assertThat(actualSubject, equalTo(""+app.site_PlayIT+" használatának feltételei – KÉRJÜK, NE DOBJA EL"));
         assertThat(actualBody, equalTo("Kedves "+app.emailsVerificationsFirstName+", Csatolva találja \"A "+app.site_PlayIT+" alkalmazás felügyelt számlák használati feltételei\". Regisztrációkor már elfogadta ezeket a feltételeket, de emlékeztetni szeretnénk a részletekre, mielőtt ezt a funkciót használná. Üdvözlettel, Jogi csapat"));
