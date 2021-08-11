@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
@@ -46,17 +48,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailDipocketEN() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(1, app.mobile_site, 32761);
+    public void testSupervisionDipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site);
+        postSupervisionEmail(1, app.mobile_site, 33464);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 0, 398);
         String actualFooter = getEmailFooterText(emailText, 399);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Supervised Accounts T&Cs.pdf")));
         assertThat(actualSender, equalTo(expectedSender));
         assertThat(actualSubject, equalTo(""+app.site+" Terms and Conditions - PLEASE DO NOT DISCARD"));
         assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", Please find attached the section of "+app.site+" Terms and Conditions (the “T&Cs”) regulating Supervised accounts. It is the same that you have already agreed to as part of the T&Cs, but we want to draw your attention on it now that you will start using a Supervised account since it contains important provisions on the Supervisor’s role and responsibilities. With kind regards, Legal Team"));
@@ -64,17 +68,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailDipocketUA() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(2, app.mobile_site, 32761);
+    public void testSupervisionDipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site);
+        postSupervisionEmail(2, app.mobile_site, 33464);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 28, 486);
         String actualFooter = getEmailFooterText(emailText, 487);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Умови використання рахунків під опікою.pdf")));
         assertThat(actualSender, equalTo(expectedSender));
         assertThat(actualSubject, equalTo("Правила та Умови користування додатком "+app.site+" - будь ласка, збережіть це повідомлення"));
         assertThat(actualBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться розділ \"Умови та Правила користування додатком "+app.site+"\" (\"Правила користування\"), який стосується Опіки за рахунком. Ви прийняли їх разом з іншою частиною Правил користування, але зараз ми хочемо ще раз звернути на них Вашу увагу, адже Ви розпочинаєте користуватися Опікунськими рахунками, а в цьому розділі знаходиться більш детальна інформація про роль та відповідальність Опікуна рахунку. З повагою, Юридичний відділ"));
@@ -82,17 +88,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailDipocketPL() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(3, app.mobile_site, 32761);
+    public void testSupervisionDipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site);
+        postSupervisionEmail(3, app.mobile_site, 33464);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 0, 436);
         String actualFooter = getEmailFooterText(emailText, 437);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Konta Nadzorowane - warunki ogólne.pdf")));
         assertThat(actualSender, equalTo(expectedSender));
         assertThat(actualSubject, equalTo("Zasady i Warunki korzystania z aplikacji "+app.site+" - PROSIMY O ZACHOWANIE TEJ WIADOMOŚCI"));
         assertThat(actualBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączeniu znajduje się sekcja Warunków i Zasad korzystania (\"Warunki korzystania\"), dotycząca Kont Nadzorowanych. Zaakceptowałeś ją wraz z pozostałą częścią Warunków korzystania, jednak chcemy raz jeszcze zwrócić na nią Twoją uwagę teraz, gdy rozpoczynasz korzystanie z Konta Nadzorowanego, a w tej sekcji znajdziesz szczegółowe zapisy dotyczące roli i odpowiedzialności Opiekuna Konta. Z wyrazami szacunku, Dział Prawny"));
@@ -100,17 +108,19 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailDipocketRU() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(4, app.mobile_site, 32761);
+    public void testSupervisionDipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site);
+        postSupervisionEmail(4, app.mobile_site, 33464);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualBody = getEmailBodyText(emailText, 28, 295);
         String actualFooter = getEmailFooterText(emailText, 296);
 
+        assertThat(actualAttachedFileNames, equalTo(Arrays.asList("Условия использования счетов под опекой.pdf")));
         assertThat(actualSender, equalTo(expectedSender));
         assertThat(actualSubject, equalTo("Условия пользования приложением "+app.site+" - пожалуйста, сохраните это сообщение"));
         assertThat(actualBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находится раздел \"Условий пользования приложением "+app.site+"\" об опеке. Вы уже приняли эти условия в момент регистрации, но мы хотим напомнить Вам детали перед началом использования этой функциональности. С уважением, Юридический отдел"));
@@ -118,7 +128,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailDiscontuEN() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionDiscontuEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_discontu, 32717);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -136,7 +146,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailDiscontuPL() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionDiscontuPL() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(3, app.mobile_site_discontu, 32717);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -154,7 +164,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailPlayITEN() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionPlayITEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_playIt, 32732);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -172,7 +182,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailPlayITHU() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionPlayITHU() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(5, app.mobile_site_playIt, 32732);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -190,7 +200,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailUpAndGoEN() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionUpAndGoEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_upAndGo, 32727);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -208,7 +218,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailUpAndGoUA() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionUpAndGoUA() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(2, app.mobile_site_upAndGo, 32727);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -226,7 +236,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailUpAndGoPL() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionUpAndGoPL() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(3, app.mobile_site_upAndGo, 32727);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -244,7 +254,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionEmailUpAndGoRU() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionUpAndGoRU() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(4, app.mobile_site_upAndGo, 32727);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -262,7 +272,7 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test(enabled = false)//bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
-    public void testSupervisionEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
+    public void testSupervisionSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(1, app.mobile_site_snowAttack, 32855);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
