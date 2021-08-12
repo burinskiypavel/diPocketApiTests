@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ResetSecretAnswerTests extends TestBase {
-    String expectedSender = "customer.service@dipocket.org";
+    String expectedSender = "telenorwallet@dipocket.org";
 
 
     public void postSendResetPasswordEmail() {
