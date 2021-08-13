@@ -22,6 +22,7 @@ public class TacEmailsTests extends TestBase {
     String expectedDiscontuSender = "legal.team@dipocket.org";
     String expectedUpAndGoSender = "regulacje@upcard.pl";
     String expectedPlayITSender = "PlayIT Card <playitcard@dipocket.org>";
+    String expectedSnowAttackSender = "legal.team@dipocket.org";
 
     public String body(String testEmail, String site){
         return "{\n" +
@@ -344,10 +345,32 @@ public class TacEmailsTests extends TestBase {
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("General Terms and Conditions.pdf", "Card Terms and Conditions.pdf"), "Attachments are not correct");
-        softAssert.assertEquals(actualSender, "legal.team@dipocket.org", "Sender is not correct");
+        softAssert.assertEquals(actualSender, expectedSnowAttackSender, "Sender is not correct");
         softAssert.assertEquals(actualSubject, "Festivals Payment Band Terms and Conditions - PLEASE DO NOT DISCARD", "Subject is not correct");
         softAssert.assertEquals(actualBody, "Please find attached DiPocket Terms and Conditions for Festivals’ Customers and the Festivals’ Payment Band Terms and Conditions. It is important that you familiarise yourself with these documents and in particular that you review in detail the Festivals’ Payment Band Terms and Conditions, which summarises the key clauses applicable to your Festivals’ payment band and also includes our current pricing and transaction limits. With regard to Personal Information, we ask you to please read the section in the T&C’s titled 'Personal Information' - we will process any Information you provide to us according those terms. By providing it to us, you are agreeing for us to process it, including any sensitive data for the purposes described in the Agreement subject to a number of rights you have to be informed about how your Information is processed, to correct any errors, to object to any processing, to restrict processing or have Information erased or to instruct us to copy or transfer Information as you direct. If you accept the T&Cs, please click on this link and proceed with the registration process Thank you for registering your Festivals’ Payment Band - enjoy its safety and convenience at the festival and wherever your active lifestyle takes you to! With kind regards, DiPocket Team", "Body is not correct");
         softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
+    }
+
+    @Test//incorrect body
+    public void testTacSnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_snowAttack);
+        postSendTacEmail(app.mobile_site_snowAttack);
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 31, 1329);
+        String actualFooter = getEmailFooterText(emailText, 1330);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("Kártyaszerződési feltételek.pdf", "Általános szerződési feltételek.pdf"), "");
+        softAssert.assertEquals(actualSender, expectedSnowAttackSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "A fesztivál-okoskarkötő használatának feltételei – KÉRJÜK, NE DOBJA EL", "Subject is not correct");
+        //softAssert.assertEquals(actualBody, "", "Body is not correct");
+        //softAssert.assertEquals(actualFooter, "", "Footer is not correct");
         softAssert.assertAll();
     }
 
