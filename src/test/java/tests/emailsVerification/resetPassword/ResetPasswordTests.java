@@ -258,7 +258,22 @@ public class ResetPasswordTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11, enabled = false)//bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
+    public void testResetPasswordSnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_snowAttack);
+        postSendResetPasswordEmail(app.mobile_site_snowAttack);
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 28, 217);
+        String emailFooter = getEmailFooterText(emailText, 218);
+
+        assertThat(emailSender, equalTo(expectedSender));
+        assertThat(emailBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 12)
     public void testResetPasswordSodexo() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         //app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", "SODEXO");
         postSendResetPasswordEmail("SODEXO");

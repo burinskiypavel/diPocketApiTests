@@ -273,9 +273,23 @@ public class LegalEmailTests extends TestBase {
         softAssert.assertAll();
     }
 
-    @Test(priority = 13, enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
+    @Test(priority = 13,enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
     public void testLegalEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site_snowAttack, 32855);
+
+        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailBody = getEmailBodyText(emailText, 28, 169);
+        String emailFooter = getEmailFooterText(emailText, 170);
+
+        assertThat(emailSender, equalTo(expectedSender));
+        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_SnowAttack+" legal documents. Thank you for using "+app.site_SnowAttack+". With kind regards, Legal Team"));
+        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+    }
+
+    @Test(priority = 14, enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
+    public void testLegalEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
+        postSendLegalEmail(5, app.mobile_site_snowAttack, 32855);
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
