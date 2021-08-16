@@ -273,18 +273,24 @@ public class LegalEmailTests extends TestBase {
         softAssert.assertAll();
     }
 
-    @Test(priority = 13,enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
+    @Test(priority = 13)
     public void testLegalEmailSnowAttackEN() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(1, app.mobile_site_snowAttack, 32855);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 28, 169);
-        String emailFooter = getEmailFooterText(emailText, 170);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_SnowAttack+" legal documents. Thank you for using "+app.site_SnowAttack+". With kind regards, Legal Team"));
-        assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 31, 178);
+        String actualFooter = getEmailFooterText(emailText, 179);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualSender, expectedSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Your "+app.site_SnowAttack+" Legal Documents", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_SnowAttack+" legal documents. Thank you for using "+app.site_SnowAttack+". With kind regards, Legal Team", "Boody is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
     }
 
     @Test(priority = 14, enabled = false) //bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
