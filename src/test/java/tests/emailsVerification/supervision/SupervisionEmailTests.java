@@ -305,7 +305,7 @@ public class SupervisionEmailTests extends TestBase {
         assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(enabled = false)//bug Legal, Supervision, Reset Password there are no send emails for Snow Attack users
+    @Test(enabled = false)//incorrect body, subject
     public void testSupervisionSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSupervisionEmail(5, app.mobile_site_snowAttack, 32855);
 
