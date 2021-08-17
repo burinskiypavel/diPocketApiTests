@@ -505,4 +505,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="EmailsVerificationLegalAttachmentsTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 </suite>

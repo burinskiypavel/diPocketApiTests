@@ -6,11 +6,9 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.testng.Assert.assertEquals;
 
 public class LegalAttachmentsTests extends TestBase {
@@ -18,15 +16,15 @@ public class LegalAttachmentsTests extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        app.getDbHelper().deleteClientDeviceFromDB("380633192217-AutoTest-Login");
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
-                .header("content-type", "application/json; charset=UTF-8")
+                .auth().preemptive().basic("380633192217", "pasword1")
+                .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
+                        "  \"deviceUUID\" : \"380633192217-AutoTest-Login\",\n" +
                         "  \"appVersion\" : \"2.2.7\"\n" +
                         "}")
                 .when()
@@ -39,15 +37,15 @@ public class LegalAttachmentsTests extends TestBase {
 
     @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380980316499", HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380633192217", "380633192217-AutoTest-Login", "DIPOCKET");
         Response res =  given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
-                .header("content-type", "application/json; charset=UTF-8")
+                .auth().preemptive().basic("380633192217", "pasword1")
+                .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
+                        "  \"deviceUUID\" : \"380633192217-AutoTest-Login\",\n" +
                         "  \"appVersion\" : \"2.2.7\",\n" +
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
@@ -64,7 +62,7 @@ public class LegalAttachmentsTests extends TestBase {
     public void test_clientProfile_getLegalDocumentList(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .auth().preemptive().basic("380633192217", "pasword1")
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/getLegalDocumentList")
@@ -76,15 +74,15 @@ public class LegalAttachmentsTests extends TestBase {
     public void test_clientProfile_sendLegalInfo2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .auth().preemptive().basic("380633192217", "pasword1")
                 .header("clisessionid", ""+cliSessionId+"")
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"documentList\": [\n" +
                         "    {\n" +
                         "      \"nameForClient\": \"Тарифы\",\n" +
-                        "      \"nameForEmail\": \"testdipocket@gmail.com\",\n" +
-                        "      \"selected\": false,\n" +
+                        "      \"nameForEmail\": \"testdipocket2@gmail.com\",\n" + //pas: pasword12!
+                        "      \"selected\": true,\n" +
                         "      \"type\": \"Tariff Table\"\n" +
                         "    }\n" +
                         "  ]\n" +
