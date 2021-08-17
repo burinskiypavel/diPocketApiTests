@@ -1,0 +1,97 @@
+package tests.emailsVerification.legalEmail;
+
+import appmanager.HelperBase;
+import base.TestBase;
+import io.restassured.response.Response;
+import org.testng.annotations.Test;
+
+import java.sql.SQLException;
+import java.util.Arrays;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.testng.Assert.assertEquals;
+
+public class LegalAttachmentsTests extends TestBase {
+    String cliSessionId = null;
+
+    @Test(priority = 1)
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
+        app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        given()
+                .spec(app.requestSpecDipocketHomePage)
+                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .header("content-type", "application/json; charset=UTF-8")
+                .body("{\n" +
+                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
+                        "  \"devType\" : \"android\",\n" +
+                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
+                        "  \"appVersion\" : \"2.2.7\"\n" +
+                        "}")
+                .when()
+                .post( "homePage/authenticateMobileApp")
+                .then().log().all()
+                .statusCode(400)
+                .body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
+                .body("errCode", equalTo("DIP-00591"));
+    }
+
+    @Test(priority = 2)
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380980316499", HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
+        Response res =  given()
+                .spec(app.requestSpecDipocketHomePage)
+                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .header("content-type", "application/json; charset=UTF-8")
+                .body("{\n" +
+                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
+                        "  \"devType\" : \"android\",\n" +
+                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
+                        "  \"appVersion\" : \"2.2.7\",\n" +
+                        "  \"otp\" : \""+loginSMSCode+"\"\n" +
+                        "}")
+                .when()
+                .post( "homePage/authenticateMobileApp");
+        cliSessionId = res.getHeader("cliSessionId");
+        System.out.println(res.getHeaders());
+        System.out.println("cliSessionId " + cliSessionId);
+        int StatusCode = res.getStatusCode();
+        assertEquals(StatusCode, 200);
+    }
+
+    @Test(priority = 3)
+    public void test_clientProfile_getLegalDocumentList(){
+        given()
+                .spec(app.requestSpecDipocketHomePage)
+                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .header("clisessionid", ""+cliSessionId+"")
+                .when()
+                .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/getLegalDocumentList")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 4)
+    public void test_clientProfile_sendLegalInfo2(){
+        given()
+                .spec(app.requestSpecDipocketHomePage)
+                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .header("clisessionid", ""+cliSessionId+"")
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"documentList\": [\n" +
+                        "    {\n" +
+                        "      \"nameForClient\": \"Тарифы\",\n" +
+                        "      \"nameForEmail\": \"testdipocket@gmail.com\",\n" +
+                        "      \"selected\": false,\n" +
+                        "      \"type\": \"Tariff Table\"\n" +
+                        "    }\n" +
+                        "  ]\n" +
+                        "}")
+                .when()
+                .post(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/sendLegalInfo2")
+                .then().log().all()
+                .statusCode(200);
+    }
+}
