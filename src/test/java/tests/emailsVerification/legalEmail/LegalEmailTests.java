@@ -293,17 +293,23 @@ public class LegalEmailTests extends TestBase {
         softAssert.assertAll();
     }
 
-    @Test(priority = 14, enabled = false) //incorrect subject, body,
+    @Test(priority = 14)
     public void testLegalEmailSnowAttackHU() throws InterruptedException, MessagingException, IOException {
         postSendLegalEmail(5, app.mobile_site_snowAttack, 32855);
 
-        String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailBody = getEmailBodyText(emailText, 28, 169);
-        String actualFooter = getEmailFooterText(emailText, 170);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
 
-        assertThat(emailSender, equalTo(expectedSender));
-        assertThat(emailBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_SnowAttack+" legal documents. Thank you for using "+app.site_SnowAttack+". With kind regards, Legal Team"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 31, 181);
+        String actualFooter = getEmailFooterText(emailText, 182);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualSender, expectedSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Az Ön "+app.site_SnowAttack+" jogi dokumentumai", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Kedves "+app.emailsVerificationsFirstName+"! Kívánsága szerint, csatolva találja a jogi dokumentumokat. Köszönjük, hogy a Snow Attack alkalmazást használja. Üdvözlettel, Jogi csapat", "Boody is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
     }
 }
