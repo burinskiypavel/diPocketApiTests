@@ -1,11 +1,19 @@
 package tests.emailsVerification.legalEmail;
 
+import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
+import static appmanager.EmailIMAPHelper.getEmailBodyText;
+import static appmanager.EmailIMAPHelper.getEmailFooterText;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -13,6 +21,8 @@ import static org.testng.Assert.assertEquals;
 
 public class LegalAttachmentsTests extends TestBase {
     String cliSessionId = null;
+    String email = "testdipocket2@gmail.com";
+    String pass = "pasword12!";
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
@@ -31,7 +41,7 @@ public class LegalAttachmentsTests extends TestBase {
                 .post( "homePage/authenticateMobileApp")
                 .then().log().all()
                 .statusCode(400)
-                .body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
+                //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
                 .body("errCode", equalTo("DIP-00591"));
     }
 
@@ -78,7 +88,8 @@ public class LegalAttachmentsTests extends TestBase {
     }
 
     @Test(priority = 4)
-    public void test_clientProfile_sendLegalInfo2(){
+    public void test_clientProfile_sendLegalInfo2_DipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic("380633192217", "pasword1")
@@ -98,5 +109,21 @@ public class LegalAttachmentsTests extends TestBase {
                 .post("clientProfile/sendLegalInfo2")
                 .then().log().all()
                 .statusCode(200);
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        String actualBody = getEmailBodyText(emailText, 28, 181);
+        String actualFooter = getEmailFooterText(emailText, 182);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList( "Тарифы.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualSender, "legal.team@dipocket.org", "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Документы "+app.site+"", "Subject is not correct");
+        softAssert.assertEquals(actualBody,"Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находятся юридические документы, которые Вы заказывали. Спасибо за пользование "+app.site+". С уважением, Юридический отдел", "Body is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для вашего спокойствия, "+app.site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
     }
 }
