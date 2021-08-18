@@ -25,17 +25,21 @@ public class LegalAttachmentsTests extends TestBase {
     String pass = "pasword12!";
 
     @Test(priority = 1)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
+    public void test_login() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientDeviceFromDB("380633192217-AutoTest-Login");
         app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
+        cliSessionId = login("380633192217", "pasword1", "380633192217-AutoTest-Login", "DIPOCKET");
+    }
+
+    public String login(String phone, String pass, final String deviceUUID, String site) throws ClassNotFoundException, SQLException {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic("380633192217", "pasword1")
+                .auth().preemptive().basic(phone, pass)
                 .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \"380633192217-AutoTest-Login\",\n" +
+                        "  \"deviceUUID\" : \"" + deviceUUID + "\",\n" +
                         "  \"appVersion\" : \"2.2.7\"\n" +
                         "}")
                 .when()
@@ -44,29 +48,29 @@ public class LegalAttachmentsTests extends TestBase {
                 .statusCode(400)
                 //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
                 .body("errCode", equalTo("DIP-00591"));
-    }
 
-    @Test(priority = 2)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380633192217", "380633192217-AutoTest-Login", "DIPOCKET");
+
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, deviceUUID, site);
+
         Response res =  given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic("380633192217", "pasword1")
+                .auth().preemptive().basic(phone, pass)
                 .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \"380633192217-AutoTest-Login\",\n" +
+                        "  \"deviceUUID\" : \""+deviceUUID+"\",\n" +
                         "  \"appVersion\" : \"2.2.7\",\n" +
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
                 .when()
                 .post( "homePage/authenticateMobileApp");
-        cliSessionId = res.getHeader("cliSessionId");
+        String cliSessionId = res.getHeader("cliSessionId");
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
         int StatusCode = res.getStatusCode();
         assertEquals(StatusCode, 200);
+        return cliSessionId;
     }
 
     @Test(priority = 3)
@@ -151,6 +155,28 @@ public class LegalAttachmentsTests extends TestBase {
         softAssert.assertEquals(actualSubject, "Your "+app.site+" Legal Documents", "Subject is not correct");
         softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site+" legal documents. Thank you for using "+app.site+". With kind regards, Legal Team", "Body is not correct");
         softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 6)
+    public void test_clientProfile_sendLegalInfo2_DipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(email, "3", app.mobile_site);
+        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Tabela Opłat");
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        String actualBody = getEmailBodyText(emailText, 0, 146);
+        String actualFooter = getEmailFooterText(emailText, 147);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList( "Tabela Opłat.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualSender, "legal.team@dipocket.org", "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Twoje dokumenty prawne "+app.site+"", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu "+app.site+". Z wyrazami szacunku, Dział Prawny", "Footer is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
     }
 }
