@@ -1,6 +1,5 @@
 package tests.emailsVerification.legalEmail;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -9,6 +8,7 @@ import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.testng.Assert.assertEquals;
 
 public class LegalAttachmentsTests extends TestBase {
@@ -65,9 +65,16 @@ public class LegalAttachmentsTests extends TestBase {
                 .auth().preemptive().basic("380633192217", "pasword1")
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/getLegalDocumentList")
+                .get("clientProfile/getLegalDocumentList")
                 .then().log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body("documentList.type", hasItems("Tariff Table", "Limits Table", "General Terms and Conditions",
+                        "Supervised Accounts T&Cs", "Privacy Policy", "Complaints Policy", "E-wallet terms of usage",
+                        "DiPocket Card Transaction Dispute Declaration"),
+                        "documentList.nameForClient", hasItems("Тарифы", "Лимиты", "Общие условия", "Условия использования счетов под опекой",
+                                "Политика конфиденциальности", "Политика жалоб", "Условия пользования электронным кошельком",
+                        "Бланк для споров по операциям с карточками DiPocket"),
+                        "documentList.selected", hasItems(false, false, false, false, false, false, false, false));
     }
 
     @Test(priority = 4)
@@ -88,7 +95,7 @@ public class LegalAttachmentsTests extends TestBase {
                         "  ]\n" +
                         "}")
                 .when()
-                .post(HelperBase.prop.getProperty("mobile.base.url")+"clientProfile/sendLegalInfo2")
+                .post("clientProfile/sendLegalInfo2")
                 .then().log().all()
                 .statusCode(200);
     }
