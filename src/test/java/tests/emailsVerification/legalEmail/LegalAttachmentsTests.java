@@ -87,18 +87,16 @@ public class LegalAttachmentsTests extends TestBase {
                         "documentList.selected", hasItems(false, false, false, false, false, false, false, false));
     }
 
-    @Test(priority = 4)
-    public void test_clientProfile_sendLegalInfo2_DipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
+    public void sendLegalInfo2(String phone, String pass, String cliSessionId, final String nameForClient) {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic("380633192217", "pasword1")
-                .header("clisessionid", ""+cliSessionId+"")
+                .auth().preemptive().basic(phone, pass)
+                .header("clisessionid", cliSessionId)
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"documentList\": [\n" +
                         "    {\n" +
-                        "      \"nameForClient\": \"Тарифы\",\n" +
+                        "      \"nameForClient\": \"" + nameForClient + "\",\n" +
                         "      \"nameForEmail\": \"testdipocket2@gmail.com\",\n" + //pas: pasword12!
                         "      \"selected\": true,\n" +
                         "      \"type\": \"Tariff Table\"\n" +
@@ -109,6 +107,34 @@ public class LegalAttachmentsTests extends TestBase {
                 .post("clientProfile/sendLegalInfo2")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    @Test(priority = 4)
+    public void test_clientProfile_sendLegalInfo2_DipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
+        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Тарифы");
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        String actualBody = getEmailBodyText(emailText, 28, 181);
+        String actualFooter = getEmailFooterText(emailText, 182);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList( "Тарифы.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualSender, "legal.team@dipocket.org", "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Документы "+app.site+"", "Subject is not correct");
+        softAssert.assertEquals(actualBody,"Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находятся юридические документы, которые Вы заказывали. Спасибо за пользование "+app.site+". С уважением, Юридический отдел", "Body is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для вашего спокойствия, "+app.site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 5, enabled = false)
+    public void test_clientProfile_sendLegalInfo2_DipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site);
+        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Tariffs");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
         String actualSender = senderAndSubject.get(0);
