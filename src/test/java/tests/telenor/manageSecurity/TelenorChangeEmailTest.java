@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.blankOrNullString;
 import static org.testng.Assert.assertEquals;
 
 public class TelenorChangeEmailTest extends TestBase {
-    String smsCode = "111111"; //app.generateRandomNumber(6);
+    String smsCode = app.generateRandomNumber(6);
     String cliSessionId = null;
     String newEmail = "testdipocket@gmail.com";
     String secretAnswer = "QA";
@@ -21,6 +21,7 @@ public class TelenorChangeEmailTest extends TestBase {
 
     @Test(priority = 1)
     public void test_TestServices_v1_telenor_sendOtpForPhone_smsCode() throws SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", "TELENOR");
         app.getDbHelper().updateEmailForTelenorFromDB(newEmail, "TELENOR", "telenorchangeemailtest3@mailsac.com", "380932485981");
         System.out.println("smsCod:" + smsCode);
         given().log().uri().log().headers().log().body()
