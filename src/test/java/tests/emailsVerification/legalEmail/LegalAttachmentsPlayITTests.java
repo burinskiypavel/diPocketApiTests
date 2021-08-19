@@ -40,7 +40,7 @@ public class LegalAttachmentsPlayITTests extends TestBase {
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
                         "  \"deviceUUID\" : \""+ deviceuuid+"\",\n" +
-                        "  \"appVersion\" : \"1.1.11\"\n" +
+                        "  \"appVersion\" : \"1.4.9\"\n" +
                         "}")
                 .when()
                 .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp")
@@ -62,7 +62,7 @@ public class LegalAttachmentsPlayITTests extends TestBase {
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
                         "  \"deviceUUID\" : \""+ deviceuuid+"\",\n" +
-                        "  \"appVersion\" : \"1.1.11\",\n" +
+                        "  \"appVersion\" : \"1.4.9\",\n" +
                         "  \"otp\" : \""+loginSMSCode+"\"\n" +
                         "}")
                 .when()
