@@ -83,12 +83,8 @@ public class LegalAttachmentsTests extends TestBase {
                 .get("clientProfile/getLegalDocumentList")
                 .then().log().all()
                 .statusCode(200)
-                .body("documentList.type", hasItems("Tariff Table", "Limits Table", "General Terms and Conditions",
-                        "Supervised Accounts T&Cs", "Privacy Policy", "Complaints Policy", "E-wallet terms of usage",
-                        "DiPocket Card Transaction Dispute Declaration"),
-                        "documentList.nameForClient", hasItems("Тарифы", "Лимиты", "Общие условия", "Условия использования счетов под опекой",
-                                "Политика конфиденциальности", "Политика жалоб", "Условия пользования электронным кошельком",
-                        "Бланк для споров по операциям с карточками DiPocket"),
+                .body("documentList.type", hasItems("Tariff Table", "Limits Table", "General Terms and Conditions", "Supervised Accounts T&Cs", "Privacy Policy", "Complaints Policy", "E-wallet terms of usage", "DiPocket Card Transaction Dispute Declaration"),
+                        "documentList.nameForClient", hasItems("Тарифы", "Лимиты", "Общие условия", "Условия использования счетов под опекой", "Политика конфиденциальности", "Политика жалоб", "Условия пользования электронным кошельком", "Бланк для споров по операциям с карточками DiPocket"),
                         "documentList.selected", hasItems(false, false, false, false, false, false, false, false));
     }
 
