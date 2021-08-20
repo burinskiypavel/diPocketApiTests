@@ -19,7 +19,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.testng.Assert.assertEquals;
 
-public class LegalAttachmentsTests extends TestBase {
+public class LegalAttachmentsDipocketTests extends TestBase {
     String cliSessionId = null;
     String email = "testdipocket2@gmail.com";
     String pass = "pasword12!";

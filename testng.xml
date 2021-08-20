@@ -505,9 +505,9 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="EmailsVerificationLegalAttachmentsTests">-->
+<!--    <test name="EmailsVerificationLegalAttachmentsDipocketTests">-->
 <!--        <classes>-->
-<!--            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsTests"/>-->
+<!--            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsDipocketTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
