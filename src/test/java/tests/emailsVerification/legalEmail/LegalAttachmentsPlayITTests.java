@@ -92,9 +92,9 @@ public class LegalAttachmentsPlayITTests extends TestBase {
                 .get("clientProfile/getLegalDocumentList")
                 .then().log().all()
                 .statusCode(200)
-                .body("documentList.type", hasItems("Tariff Table", "Limits Table", "General Terms and Conditions", "Supervised Accounts T&Cs", "Privacy Policy", "Complaints Policy", "E-wallet terms of usage", "DiPocket Card Transaction Dispute Declaration"),
-                        "documentList.nameForClient", hasItems("Тарифы", "Лимиты", "Общие условия", "Условия использования счетов под опекой", "Политика конфиденциальности", "Политика жалоб", "Условия пользования электронным кошельком", "Бланк для споров по операциям с карточками DiPocket"),
-                        "documentList.selected", hasItems(false, false, false, false, false, false, false, false));
+                .body("documentList.type", hasItems("General Terms and Conditions", "General Terms and Conditions", "Supervised Accounts T&Cs",  "Complaints Policy", "E-wallet terms of usage", "DiPocket Card Transaction Dispute Declaration"),
+                        "documentList.nameForClient", hasItems("Условия пользования картами", "Общие условия", "Условия использования счетов под опекой", "Политика конфиденциальности", "Политика жалоб", "Условия пользования электронным кошельком", "Бланк для споров по операциям с карточками DiPocket"),
+                        "documentList.selected", hasItems(false, false, false, false, false, false, false));
     }
 
     public void sendLegalInfo2(String phone, String pass, String cliSessionId, final String nameForClient) {
