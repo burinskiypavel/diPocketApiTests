@@ -396,7 +396,7 @@ public class TelenorHelper extends HelperBase {
             assertThat(accountHistoryList_.getCcySymbol(), equalTo("Ft"));
             assertThat(accountHistoryList_.getFinType(), equalTo("D"));
             //assertThat(accountHistoryList_.getFullName(), equalTo("Telenor"));
-            assertThat(accountHistoryList_.getId(), equalTo(616828));
+            assertThat(accountHistoryList_.getId(), equalTo(618061));
             //assertThat(accountHistoryList_.getItemDateISO(), equalTo("2021-05-20 22:01:13.376647 Europe/Kiev"));
             assertThat(accountHistoryList_.getStateId(), equalTo(100));
             assertThat(accountHistoryList_.getTypeId(), equalTo(10));
