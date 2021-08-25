@@ -23,7 +23,8 @@ public class TelenorFullRegistrationPageNegativeVerificationTests extends UITest
         waitForSeveralItems(new String[]{"Confirmation", "To proceed, please answer your secret question (case sensitive)", "Forgot secret answer", "Cancel", "Confirm"});
         type(By.id("secAnswer"), "la");
         pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
-        waitForSeveralItems(new String[]{"Sorry, wrong answer - please, pay attention (the secret answer is case sensitive)"});
+        Thread.sleep(3500);
+        //waitForSeveralItems(new String[]{"Sorry, wrong answer - please, pay attention (the secret answer is case sensitive)"});
         String popUpMessage = getTextFromPopUp2(By.cssSelector("div.uk-form-row div.uk-h4"));
 
         assertThat(popUpMessage, equalTo("Sorry, wrong answer - please, pay attention (the secret answer is case sensitive)"));
