@@ -531,4 +531,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="EmailsVerificationStatementAttachmentsDipocketTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.statement.StatementAttachmentsDipocketTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 </suite>
