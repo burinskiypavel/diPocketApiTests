@@ -537,10 +537,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="EmailsVerificationStatementAttachmentsUpAndGoTests">
-        <classes>
-            <class name="tests.emailsVerification.statement.StatementAttachmentsUpAndGoTests"/>
-        </classes>
-    </test>
+<!--    <test name="EmailsVerificationStatementAttachmentsUpAndGoTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.statement.StatementAttachmentsUpAndGoTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
