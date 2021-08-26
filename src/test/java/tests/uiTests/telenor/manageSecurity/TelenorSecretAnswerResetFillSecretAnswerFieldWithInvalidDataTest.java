@@ -17,7 +17,7 @@ public class TelenorSecretAnswerResetFillSecretAnswerFieldWithInvalidDataTest ex
     @Test
     public void testSecretAnswerResetFillSecretAnswerFieldWithInvalidData() throws SQLException, ClassNotFoundException, InterruptedException {
         app.getDbHelper().blockClientFromDBTelenor(phone);
-        app.getDbHelper().unblockClientFromBOFromDBTelenor();
+        app.getDbHelper().unblockClientFromBOFromDBTelenor("31751");
         navigateToTelenorAndLogin2(phone, smsCode);
         gotoManageSecurityPage();
         gotoChangeSecretAnswer();

@@ -233,7 +233,7 @@ public class DBHelper extends HelperBase {
         con.close();
     }
 
-    public void unblockClientFromBOFromDBTelenor() throws SQLException, ClassNotFoundException {
+    public void unblockClientFromBOFromDBTelenor(String clientID) throws SQLException, ClassNotFoundException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
@@ -244,7 +244,28 @@ public class DBHelper extends HelperBase {
 
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
-        CallableStatement myCall = connection.prepareCall("{call PKB_CLIENTPROFILE.UNBLOCKCLIENT(p_Username=>'DIPCBO1',p_ClientID=>31751,p_UnblockReason=>'test',p_TicketID=>null)}");
+        CallableStatement myCall = connection.prepareCall("{call PKB_CLIENTPROFILE.UNBLOCKCLIENT(p_Username=>'DIPCBO1',p_ClientID=>" + clientID + ",p_UnblockReason=>'test',p_TicketID=>null)}");
+        myCall.executeUpdate();
+
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs2= stmt.executeQuery(query2);
+
+        connection.close();
+    }
+
+    public void blockClientFromBOFromDBTelenor(String clientID) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+
+        String query2 = "commit";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection connection = DriverManager.getConnection(dbUrl, username, password);
+
+        CallableStatement myCall = connection.prepareCall("{call PKB_CLIENTPROFILE.BLOCKCLIENT(p_Username=>'DIPCBO1',p_ClientID=>" + clientID + ",p_BlockReason=>'test',p_TicketID=>null)}");
         myCall.executeUpdate();
 
         Statement stmt = connection.createStatement();
@@ -288,7 +309,7 @@ public class DBHelper extends HelperBase {
         return publicToken;
     }
 
-    public String getClientIdFromDB(String email, final String site) throws ClassNotFoundException, SQLException {
+    public String getClientIdFromDB(String email, String site) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
@@ -407,5 +428,30 @@ public class DBHelper extends HelperBase {
         else {
             System.out.println("currentEmail and email are not equals!");
         }
+    }
+
+    public int getClientStateIDFromDBTelenor(String phone, String site) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select STATEID from client  where MAINPHONE = '"+phone+"' and site = '"+site+"'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        int stateID = 0;
+        while (rs.next()){
+            stateID = rs.getInt(1);
+
+            System. out.println("stateID : " + stateID);
+            break;
+        }
+        con.close();
+        return stateID;
     }
 }

@@ -15,8 +15,14 @@ public class TelenorFullRegistrationPageNegativeVerificationTests extends UITest
 
     @Test(priority = 1)
     public void testVerificationWithInvalidDataYourTemporarySecretAnswerField() throws SQLException, ClassNotFoundException, InterruptedException {
-        app.getDbHelper().blockClientFromDBTelenor(phone);
-        app.getDbHelper().unblockClientFromBOFromDBTelenor();
+        app.getDbHelper().blockClientFromBOFromDBTelenor("31751");
+//        int stateID =  app.getDbHelper().getClientStateIDFromDBTelenor(phone, "TELENOR");
+//        if(stateID == 1){
+//            app.getDbHelper().blockClientFromDBTelenor(phone);
+//        }
+
+        //app.getDbHelper().blockClientFromDBTelenor(phone);
+        app.getDbHelper().unblockClientFromBOFromDBTelenor("31751");
         navigateToTelenorAndLogin2(phone, smsCode);
         gotoFullRegistrationPage();
         click(By.cssSelector("button[data-dpwa-image-id='selfie-neutral']"));
@@ -30,14 +36,14 @@ public class TelenorFullRegistrationPageNegativeVerificationTests extends UITest
 
         assertThat(popUpMessage, equalTo("Sorry, wrong answer - please, pay attention (the secret answer is case sensitive)"));
 
-        type(By.id("secAnswer"), "la");
+        type(By.id("secAnswer"), "lala");
         pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
         waitForSeveralItems(new String[]{"Sorry, wrong answer - please, pay attention, next wrong input will block your account"});
         String popUpMessage2 = getTextFromPopUp2(By.cssSelector("div.uk-form-row div.uk-h4"));
 
         assertThat(popUpMessage2, equalTo("Sorry, wrong answer - please, pay attention, next wrong input will block your account"));
 
-        type(By.id("secAnswer"), "la");
+        type(By.id("secAnswer"), "lalala");
         pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
         waitForSeveralItems(new String[]{"Your account is blocked.", "Please, contact our call-center and stay in an area with good data connection - WiFi or 3G or higher.", "Data charges from your phone operator may apply when using mobile data"});
     }
