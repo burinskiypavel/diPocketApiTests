@@ -20,7 +20,8 @@ public class TelenorFullRegistrationPageNegativeVerificationTests extends UITest
         navigateToTelenorAndLogin2(phone, smsCode);
         gotoFullRegistrationPage();
         click(By.cssSelector("button[data-dpwa-image-id='selfie-neutral']"));
-        waitForSeveralItems(new String[]{"Confirmation", "To proceed, please answer your secret question (case sensitive)", "Forgot secret answer", "Cancel", "Confirm"});
+        Thread.sleep(3500);
+        //waitForSeveralItems(new String[]{"Confirmation", "To proceed, please answer your secret question (case sensitive)", "Forgot secret answer", "Cancel", "Confirm"});
         type(By.id("secAnswer"), "la");
         pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
         Thread.sleep(3500);
