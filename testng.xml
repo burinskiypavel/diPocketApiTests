@@ -543,4 +543,10 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="EmailsVerificationStatementAttachmentsPlayITTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.statement.StatementAttachmentsPlayITTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 </suite>
