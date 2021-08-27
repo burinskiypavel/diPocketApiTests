@@ -315,6 +315,46 @@ public class UITestBase {
         wait.until(ExpectedConditions.elementToBeClickable(By.id("dpwa-amount")));
     }
 
+    public void navigateToTelenorAndDone2IncorrectLoginAndThenSuccessfulLogin(String phone, String incorrectSmsCode, String smsCode) {
+        basicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        click(By.cssSelector("a[href='/en/login']"));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("phone_number")));
+        type(By.id("phone_number"), phone);
+        click(By.cssSelector("button.request-otp"));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.uk-modal-dialog")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.uk-text-right button.uk-modal-close")));
+
+        click(By.cssSelector("div.uk-text-right button.uk-modal-close"));
+
+        type(By.id("password"), incorrectSmsCode);
+        click(By.id("dpwa-login"));
+
+        waitForSeveralItems(new String[]{"Login or password is incorrect"});
+        closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+
+        click(By.id("dpwa-login"));
+
+        waitForSeveralItems(new String[]{"Login or password is incorrect"});
+        closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+
+        given().log().uri().log().headers().log().body()
+                .contentType("application/json; charset=utf-8")
+                .header("site", app.telenorSite)
+                .body("{\n" +
+                        "  \"phoneNumber\" : \""+phone+"\"\n" +
+                        "}")
+                .when()
+                .post(app.dipocket3_intranet+"/TestServices/v1/telenor/sendOtpForPhone/"+smsCode+"")
+                .then().log().all()
+                .statusCode(200);
+
+        type(By.id("password"), smsCode);
+        click(By.id("dpwa-login"));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href='/en/logout']")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("dpwa-amount")));
+    }
+
     public String getColorOfElement(By locator, String cssValue) throws InterruptedException {
         Thread.sleep(2000);
 
