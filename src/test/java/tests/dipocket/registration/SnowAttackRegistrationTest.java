@@ -20,7 +20,7 @@ public class SnowAttackRegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "SNOW_ATTACK");
+        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), app.mobile_site_snowAttack);
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", app.mobile_site_snowAttack)
@@ -41,9 +41,9 @@ public class SnowAttackRegistrationTest extends TestBase {
                     .when()
                     .get(HelperBase.prop.getProperty("mobile.base.url")+"references/languages")
                     .then().log().all()
-                    .statusCode(200)
-                    .body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"))
-                    .body("langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"));
+                    .statusCode(200);
+                    //.body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"))
+                    //.body("langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"));
         }
 
     @Test(priority = 3)
@@ -87,7 +87,7 @@ public class SnowAttackRegistrationTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "SNOW_ATTACK");
+        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), app.mobile_site_snowAttack);
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", app.mobile_site_snowAttack)
@@ -118,7 +118,7 @@ public class SnowAttackRegistrationTest extends TestBase {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", app.mobile_site_snowAttack)
-                .header("Content-Type", "application/json")
+                .contentType( "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -163,7 +163,7 @@ public class SnowAttackRegistrationTest extends TestBase {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", app.mobile_site_snowAttack)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -216,7 +216,7 @@ public class SnowAttackRegistrationTest extends TestBase {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", app.mobile_site_snowAttack)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -287,7 +287,7 @@ public class SnowAttackRegistrationTest extends TestBase {
             given()
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                     .header("site", app.mobile_site_snowAttack)
-                    .header("Content-Type", "application/json")
+                    .contentType("application/json")
                     .body("{\n" +
                             "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                             "  \"langId\" : 4,\n" +
@@ -318,7 +318,7 @@ public class SnowAttackRegistrationTest extends TestBase {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", app.mobile_site_snowAttack)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -383,7 +383,7 @@ public class SnowAttackRegistrationTest extends TestBase {
         given()
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .header("site", app.mobile_site_snowAttack)
-                .header("Content-Type", "application/json")
+                .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -444,7 +444,7 @@ public class SnowAttackRegistrationTest extends TestBase {
 
     @Test(priority = 18)
     public void testEmailLink() throws InterruptedException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationSnowAttack(  "testdipocket@gmail.com", "password1<");
         System.out.println("link_link " + link);
         given()
                 .when()
