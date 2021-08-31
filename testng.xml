@@ -23,13 +23,19 @@
     <!--    </test>-->
 
 
-    <!--    <test name="RegistrationTest">-->
+    <!--    <test name="DipocketRegistrationTest">-->
     <!--        <classes>-->
     <!--            <class name="tests.dipocket.registration.RegistrationTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
-    <!--    <test name="HomePageWithAlreadyExistClientTest">-->
+<!--        <test name="SnowAttackRegistrationTest">-->
+<!--            <classes>-->
+<!--                <class name="tests.dipocket.registration.SnowAttackRegistrationTest"/>-->
+<!--            </classes>-->
+<!--        </test>-->
+
+    <!--    <test name="DipocketHomePageWithAlreadyExistClientTest">-->
     <!--    <classes>-->
     <!--        <class name="tests.dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
     <!--    </classes>-->
