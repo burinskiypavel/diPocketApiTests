@@ -288,8 +288,8 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionSnowAttackEN() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(1, app.mobile_site_snowAttack, 32855);
+    public void testSupervisionSnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        postSupervisionEmail(1, app.mobile_site_snowAttack, Integer.parseInt(app.getDbHelper().getClientIdFromDB(app.emailsVerificationsEmail, app.mobile_site_snowAttack)));
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -306,8 +306,8 @@ public class SupervisionEmailTests extends TestBase {
     }
 
     @Test
-    public void testSupervisionSnowAttackHU() throws InterruptedException, MessagingException, IOException {
-        postSupervisionEmail(5, app.mobile_site_snowAttack, 32855);
+    public void testSupervisionSnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        postSupervisionEmail(5, app.mobile_site_snowAttack, Integer.parseInt(app.getDbHelper().getClientIdFromDB(app.emailsVerificationsEmail, app.mobile_site_snowAttack)));
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
