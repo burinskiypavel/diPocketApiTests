@@ -410,8 +410,9 @@ public class TelenorHelper extends HelperBase {
 
     public void createCardForToken(){
         given().log().uri().log().headers().log().body()
-                .header("content-type", "application/json")
-                .header("Authorization", "Basic VEVEOmN0MTAyMDMw")
+                .contentType("application/json")
+                .auth().preemptive().basic("AQ", "EtKQZXS") //  vMFV55m
+                //.header("Authorization", "Basic VEVEOmN0MTAyMDMw")
                 .body("{\n" +
                         "\"requestId\": \"7fad7ade-84ba-409c-857d-" + generateRandomString(12) + "\",\n" +
                         "\"clientId\": \"4153\",\n" +
