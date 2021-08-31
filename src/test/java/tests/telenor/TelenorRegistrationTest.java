@@ -19,7 +19,7 @@ public class TelenorRegistrationTest extends TestBase {
         //token = app.getTelenorHelper().getTokenFromFile("files/telenor/tokensForTelenorRegistration.txt");
         //token = GoogleSheetsHelper.start();
 
-        //app.getTelenorHelper().createCardForToken();
+        app.getTelenorHelper().createCardForToken();
         token = app.getDbHelper().getTelenorTokenFromDB();
 
         System.out.println("token: " + token);
