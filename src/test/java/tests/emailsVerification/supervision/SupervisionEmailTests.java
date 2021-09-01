@@ -170,7 +170,7 @@ public class SupervisionEmailTests extends TestBase {
     @Test
     public void testSupervisionPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
-        postSupervisionEmail(1, app.mobile_site_playIt, 32732);
+        postSupervisionEmail(1, app.mobile_site_playIt, Integer.parseInt(app.getDbHelper().getClientIdFromDB(app.emailsVerificationsEmail, app.mobile_site_playIt)));
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -190,7 +190,7 @@ public class SupervisionEmailTests extends TestBase {
     @Test
     public void testSupervisionPlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_playIt);
-        postSupervisionEmail(5, app.mobile_site_playIt, 32732);
+        postSupervisionEmail(5, app.mobile_site_playIt, Integer.parseInt(app.getDbHelper().getClientIdFromDB(app.emailsVerificationsEmail, app.mobile_site_playIt)));
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
