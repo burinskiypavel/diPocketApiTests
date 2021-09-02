@@ -22,7 +22,10 @@ import static org.testng.Assert.assertEquals;
 public class StatementAttachmentsDipocketTests extends TestBase {
     String cliSessionId = null;
     String email = "testdipocket3@gmail.com";
-    String pass = "pasword12!";
+    String emailPass = "pasword12!";
+    String phone = "380980316499";
+    String pass = "reset246740";
+    String expectedSender = "statements@dipocket.org";
 
     @Test(priority = 1)
     public void test_dashBoard_customerStatementRequestList() throws SQLException, ClassNotFoundException {
@@ -30,12 +33,12 @@ public class StatementAttachmentsDipocketTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site);
         //app.getDbHelper().updateEmailForTelenorFromDB("burinskiypavel@gmail.com", "DIPOCKET", "testdipocket3@gmail.com", "380980316499");
 
-        cliSessionId = login("380980316499", "reset246740", "380980316499-AutoTest-Login", "DIPOCKET");
+        cliSessionId = login(phone, pass, "380980316499-AutoTest-Login", "DIPOCKET");
 
 
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic("380980316499", "reset246740")
+                .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("/dashBoard/customerStatementRequestList")
@@ -52,7 +55,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
                 .header("clisessionid", cliSessionId)
                 .contentType("application/json")
                 .body("{\n" +
-                        "  \"reportTypeId\": 0,\n" +
+                        "  \"reportTypeId\": 1,\n" +
                         "  \"statementRequestList\": [\n" +
                         "    {\n" +
                         "      \"month\": \"07\",\n" +
@@ -66,21 +69,21 @@ public class StatementAttachmentsDipocketTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 2, enabled = false)// problem, letter without attachment
+    @Test(priority = 2)
     public void test_dashBoard_sendCustomerStatements_DipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
-        sendCustomerStatements("380980316499", "reset246740", "" + cliSessionId + "");
+        sendCustomerStatements(phone, pass, "" + cliSessionId + "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 0, 146);
         String actualFooter = getEmailFooterText(emailText, 147);
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList(""), "File name is not correct");
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-07.2021.pdf"), "File name is not correct");
         softAssert.assertEquals(actualSender, "statements@dipocket.org", "Sender is not correct");
         softAssert.assertEquals(actualSubject, "Выписка по счету "+app.site+"", "Subject is not correct");
         softAssert.assertEquals(actualBody,"Здравствуйте, "+app.emailsVerificationsFirstName+"! К письму прикреплена выписка по счету, которую Вы заказывали. Спасибо за пользование "+app.site+". С уважением, Юридический отдел", "Body is not correct");
@@ -88,71 +91,73 @@ public class StatementAttachmentsDipocketTests extends TestBase {
         softAssert.assertAll();
     }
 
-    @Test(priority = 3, enabled = false)
-    public void test_clientProfile_sendLegalInfo2_DipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+    @Test(priority = 3)
+    public void test_dashBoard_sendCustomerStatements_DipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site);
-        sendCustomerStatements("380633192217", "pasword1", "" + cliSessionId + "");
+        sendCustomerStatements(phone, pass, "" + cliSessionId + "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
-        String actualBody = getEmailBodyText(emailText, 28, 169);
-        String actualFooter = getEmailFooterText(emailText, 170);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        String actualBody = getEmailBodyText(emailText, 28, 170);
+        String actualFooter = getEmailFooterText(emailText, 171);
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList( "Tariff Table.pdf"), "File name is not correct");
-        softAssert.assertEquals(actualSender, "legal.team@dipocket.org", "Sender is not correct");
-        softAssert.assertEquals(actualSubject, "Your "+app.site+" Legal Documents", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site+" legal documents. Thank you for using "+app.site+". With kind regards, Legal Team", "Body is not correct");
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-07.2021.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualSender, expectedSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Your "+app.site+" account statement", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your "+app.site+" account statement(s). Thank you for using "+app.site+". With kind regards, Legal Team", "Body is not correct");
         softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
     }
 
-    @Test(priority = 4, enabled = false)
-    public void test_clientProfile_sendLegalInfo2_DipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+
+    @Test(priority = 4)
+    public void test_dashBoard_sendCustomerStatements_DipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "3", app.mobile_site);
-        sendCustomerStatements("380633192217", "pasword1", "" + cliSessionId + "");
+        sendCustomerStatements(phone, pass, "" + cliSessionId + "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
-        String actualBody = getEmailBodyText(emailText, 0, 146);
-        String actualFooter = getEmailFooterText(emailText, 147);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        String actualBody = getEmailBodyText(emailText, 0, 153);
+        String actualFooter = getEmailFooterText(emailText, 154);
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList( "Tabela Opłat.pdf"), "File name is not correct");
-        softAssert.assertEquals(actualSender, "legal.team@dipocket.org", "Sender is not correct");
-        softAssert.assertEquals(actualSubject, "Twoje dokumenty prawne "+app.site+"", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu "+app.site+". Z wyrazami szacunku, Dział Prawny", "Body is not correct");
-        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-07.2021.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualSender, expectedSender);
+        softAssert.assertEquals(actualSubject, "Twój wyciąg z konta "+app.site+"");
+        softAssert.assertEquals(actualBody, "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajduje się zamówiony wyciąg z konta "+app.site+". Dziękujemy za korzystanie z serwisu "+app.site+". Z wyrazami szacunku, Dział Prawny");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT");
         softAssert.assertAll();
     }
 
-    @Test(priority = 5, enabled = false)
-    public void test_clientProfile_sendLegalInfo2_DipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+    @Test(priority = 5)
+    public void test_dashBoard_sendCustomerStatements_DipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "2", app.mobile_site);
-        sendCustomerStatements("380633192217", "pasword1", "" + cliSessionId + "");
+        sendCustomerStatements(phone, pass, "" + cliSessionId + "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
-        String actualBody = getEmailBodyText(emailText, 28, 172);
-        String actualFooter = getEmailFooterText(emailText, 173);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        String actualBody = getEmailBodyText(emailText, 28, 191);
+        String actualFooter = getEmailFooterText(emailText, 192);
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList( "Тарифи.pdf"), "File name is not correct");
-        softAssert.assertEquals(actualSender, "legal.team@dipocket.org", "Sender is not correct");
-        softAssert.assertEquals(actualSubject, "Ваші юридичні документи "+app.site+"", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходяться юридичні документи, що Ви запитали. Дякуємо за користування додатком "+app.site+". З повагою, Юридичний відділ", "Body is not correct");
-        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для Вашого спокою, "+app.site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-07.2021.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualSender, expectedSender);
+        softAssert.assertEquals(actualSubject, "Виписка по рахунку "+app.site+"");
+        softAssert.assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлена Вами банківська виписка по рахунку "+app.site+". Дякуємо за користування додатком "+app.site+". З повагою, Юридичний відділ");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для Вашого спокою, "+app.site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT");
         softAssert.assertAll();
     }
+
 
     public String login(String phone, String pass, final String deviceUUID, String site) throws ClassNotFoundException, SQLException {
         given()
