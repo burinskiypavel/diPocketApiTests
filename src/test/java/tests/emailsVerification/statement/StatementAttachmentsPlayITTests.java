@@ -29,7 +29,7 @@ public class StatementAttachmentsPlayITTests extends TestBase {
     //String phone = "380633192217";
     String expectedPlayITSender = "PlayIT Card <playitcard@dipocket.org>";
 
-    String pass = "526986";
+    String pass = "pasword1";
     String phone = "380685448615";
     String deviceuuid = "380685448615-AutoTest-Login";
 
