@@ -18,20 +18,17 @@ import static appmanager.EmailIMAPHelper.getEmailFooterText;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 public class StatementAttachmentsPlayITTests extends TestBase {
     String cliSessionId = null;
-    //String email = "testdipocket2@gmail.com";
-    //String emailPass = "pasword12!";
-    //String pass = "pasword1";
-    //String deviceuuid = "380633192217-AutoTest-Login";
-    //String phone = "380633192217";
-    String expectedPlayITSender = "PlayIT Card <playitcard@dipocket.org>";
-
+    String expectedPlayITSender = "PlayIT Card <statements@dipocket.org>";
+    String email = "testdipocket2@gmail.com";
+    String emailPass = "pasword12!";
     String pass = "pasword1";
-    String phone = "380685448615";
-    String deviceuuid = "380685448615-AutoTest-Login";
+    String deviceuuid = "380633192217-AutoTest-Login";
+    String phone = "380633192217";
 
 
     @Test(priority = 1)
@@ -52,7 +49,6 @@ public class StatementAttachmentsPlayITTests extends TestBase {
                 .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp")
                 .then().log().all()
                 .statusCode(400)
-                //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
                 .body("errCode", equalTo("DIP-00591"));
 
         String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, deviceuuid, "PLAYIT");
@@ -79,10 +75,6 @@ public class StatementAttachmentsPlayITTests extends TestBase {
 
     @Test(priority = 2)
     public void test_dashBoard_customerStatementRequestList() throws SQLException, ClassNotFoundException {
-        //app.getDbHelper().deleteClientDeviceFromDB("380980316499-AutoTest-Login");
-        //app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site_upAndGo);
-
-
         given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site.playIt"))
@@ -93,7 +85,7 @@ public class StatementAttachmentsPlayITTests extends TestBase {
                 .get("/dashBoard/customerStatementRequestList")
                 .then().log().all()
                 .statusCode(200)
-                .body("statementRequestList.month", hasItems("07", "06"),
+                .body("statementRequestList.month", hasItems("08"),
                         "statementRequestList.year", hasItems("2021"));
     }
 
@@ -106,10 +98,10 @@ public class StatementAttachmentsPlayITTests extends TestBase {
                 .header("clisessionid", cliSessionId)
                 .contentType("application/json")
                 .body("{\n" +
-                        "  \"reportTypeId\": 0,\n" +
+                        "  \"reportTypeId\": 1,\n" +
                         "  \"statementRequestList\": [\n" +
                         "    {\n" +
-                        "      \"month\": \"07\",\n" +
+                        "      \"month\": \"08\",\n" +
                         "      \"year\": \"2021\"\n" +
                         "    }\n" +
                         "  ]\n" +
@@ -120,47 +112,48 @@ public class StatementAttachmentsPlayITTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 3, enabled = false) // problem, letter without attachment
+    @Test(priority = 3)
     public void test_dashBoard_sendCustomerStatements_PlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
+        app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site_playIt);
         sendCustomerStatements(phone, pass, "" + cliSessionId + "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 26, 163);
-        String actualFooter = getEmailFooterText(emailText, 164);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        String actualBody = getEmailBodyText(emailText, 26, 164);
+        String actualFooter = getEmailFooterText(emailText, 165);
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList( "Card Terms and Conditions.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-08.2021.pdf"), "File name is not correct");
         softAssert.assertEquals(actualSender, expectedPlayITSender, "Sender is not correct");
-        softAssert.assertEquals(actualSubject, "Your "+app.site_PlayIT+" Legal Documents", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_PlayIT+" legal documents. Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team", "Body is not correct");
+        softAssert.assertEquals(actualSubject, "Your "+app.site_PlayIT+" account statement", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your "+app.site_PlayIT+" account statement(s). Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team", "Body is not correct");
         softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
     }
 
-    @Test(priority = 4, enabled = false)
+    @Test(priority = 4)
     public void test_dashBoard_sendCustomerStatements_PlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_playIt);
+        app.getDbHelper().updateClientLanguageFromDB(email, "5", app.mobile_site_playIt);
         sendCustomerStatements(phone, pass, "" + cliSessionId + "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 26, 171);
-        String actualFooter = getEmailFooterText(emailText, 172);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        String actualBody = getEmailBodyText(emailText, 26, 186);
+        String actualFooter = getEmailFooterText(emailText, 187);
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList( "Kártyaszerződési feltételek.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-08.2021.pdf"), "File name is not correct");
         softAssert.assertEquals(actualSender, expectedPlayITSender, "Sender is not correct");
-        softAssert.assertEquals(actualSubject, "Az Ön "+app.site_PlayIT+" jogi dokumentumai", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a jogi dokumentumokat. Köszönjük, hogy a PlayIT alkalmazást használja. Üdvözlettel, Jogi csapat", "Body is not correct");
-        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a "+app.site_PlayIT+" Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertEquals(actualSubject, "AZ Ön "+app.site_PlayIT+" számlakivonata", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a számlakivonatát (számlakivonatait). Köszönjük, hogy a PlayIT alkalmazást használja. Üdvözlettel, Jogi csapat", "Body is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
     }
+
 }
