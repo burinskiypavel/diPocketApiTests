@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -149,8 +150,8 @@ public class TDSV2NativeOOBHtmlAcceptTest extends TestBase {
     }
 
     @Test(priority = 4)
-    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() {
-        String cliSessionId = app.getDbHelper().getDateFromFileDef("files\\tds\\cliSessionId.txt");
+    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() throws SQLException, ClassNotFoundException {
+        String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         System.out.println("cliSessionId: " + cliSessionId);
         Response response = given()
                 .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)

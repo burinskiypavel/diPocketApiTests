@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -146,9 +147,9 @@ public class TDSV2NativeOOBAppTest extends TestBase {
     }
 
     @Test(priority = 4)
-    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() {
+    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() throws SQLException, ClassNotFoundException {
         System.out.println("tranId: " + tranId);
-        String cliSessionId = app.getDbHelper().getDateFromFileDef("files\\tds\\cliSessionId.txt");
+        String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         System.out.println("cliSessionId: " + cliSessionId);
         Response response = given()
                 .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)

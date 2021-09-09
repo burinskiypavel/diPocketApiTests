@@ -10,6 +10,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -21,7 +22,7 @@ public class TDSV1BioDeclineTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
 
-    @Test(priority = 31)
+    @Test(priority = 1)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         System.out.println("txid: " + randomTXID + " pan: " + app.pan);
         baseURI = app.TDSBaseUrl;
@@ -51,7 +52,7 @@ public class TDSV1BioDeclineTest extends TestBase {
                                 "backgroundResponse.backgroundVeres.chName", equalTo(""));
     }
 
-    @Test(priority = 32)
+    @Test(priority = 2)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
@@ -107,7 +108,7 @@ public class TDSV1BioDeclineTest extends TestBase {
         assertEquals(backgroudResponse.getPageId(), "bio-web.html");
     }
 
-    @Test(priority = 33)
+    @Test(priority = 3)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
@@ -122,7 +123,7 @@ public class TDSV1BioDeclineTest extends TestBase {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 34)
+    @Test(priority = 4)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         System.out.println("txid: " + randomTXID);
         Response res = given().log().uri().log().headers().log().body()
@@ -136,10 +137,10 @@ public class TDSV1BioDeclineTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 35)
-    public void test_tranDecline_ClientServices_v1_tds_tranId_tranDecline() {
+    @Test(priority = 5)
+    public void test_tranDecline_ClientServices_v1_tds_tranId_tranDecline() throws SQLException, ClassNotFoundException {
         System.out.println("tranId: " + tranId);
-        String cliSessionId = app.getDbHelper().getDateFromFileDef("files\\tds\\cliSessionId.txt");
+        String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         System.out.println("cliSessionId: " + cliSessionId);
         given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)
@@ -153,7 +154,7 @@ public class TDSV1BioDeclineTest extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 36)
+    @Test(priority = 6)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
@@ -169,7 +170,7 @@ public class TDSV1BioDeclineTest extends TestBase {
                 .body("value", equalTo("DECLINED"));
     }
 
-    @Test(priority = 37)
+    @Test(priority = 7)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()

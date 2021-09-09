@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -20,7 +21,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String tranId = null;
 
-    @Test(priority = 49)
+    @Test(priority = 1)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -86,7 +87,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
         assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 50)
+    @Test(priority = 2)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -125,7 +126,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
         assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 51)
+    @Test(priority = 3)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
         given()
                 .contentType("application/json")
@@ -139,7 +140,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 52)
+    @Test(priority = 4)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
                 .contentType("application/json")
@@ -152,9 +153,9 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 53)
-    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() {
-        String cliSessionId = app.getDbHelper().getDateFromFileDef("files\\tds\\cliSessionId.txt");
+    @Test(priority = 5)
+    public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() throws SQLException, ClassNotFoundException {
+        String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         System.out.println("cliSessionId: " + cliSessionId);
         Response response = given()
                 .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)
@@ -168,7 +169,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
         assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 54)
+    @Test(priority = 6)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
         given()
                 .contentType("application/json")
@@ -182,7 +183,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
                 .body("value", equalTo("ACCEPTED"));
     }
 
-    @Test(priority = 55)
+    @Test(priority = 7)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
