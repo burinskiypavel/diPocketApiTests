@@ -3,6 +3,8 @@ package appmanager;
 //import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimePart;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -99,6 +101,66 @@ public class EmailVerificationHelper {
 
         System.out.println("email text:  " + result);
         return result;
+    }
+
+    public static void getTextFromEmailYahoo(String user,
+                                          String password) throws InterruptedException, MessagingException, IOException {
+        //String host = "imap.mail.yahoo.com";
+        // Sender's email ID needs to be mentioned
+        String from = "testdipocket@yahoo.com";
+        String pass ="pasword12!";
+        // Recipient's email ID needs to be mentioned.
+        String to = "testdipocket@gmail.com";
+        String host = "pop.mail.yahoo.com";
+
+        // Get system properties
+        Properties properties = System.getProperties();
+        // Setup mail server
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.user", from);
+        properties.put("mail.smtp.password", pass);
+        properties.put("mail.smtp.port", "465");  //587
+        properties.put("mail.smtp.auth", "true");
+
+        // Get the default Session object.
+        Session session = Session.getDefaultInstance(properties);
+
+        Store store = session.getStore("pop3");
+
+        store.connect(host, user, password);
+
+        Folder emailFolder = store.getFolder("INBOX");
+        emailFolder.open(Folder.READ_WRITE);  //READ_ONLY
+
+        Message[] messages = emailFolder.getMessages();
+
+        try{
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(session);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO,
+                    new InternetAddress(to));
+
+            // Set Subject: header field
+            message.setSubject("This is the Subject Line!");
+
+            // Now set the actual message
+            message.setText("This is actual message");
+
+            // Send message
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, from, pass);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+            System.out.println("Sent message successfully....");
+        }catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
     }
 
     public static List<String> getFileNameFromEmail(String host, String user,
