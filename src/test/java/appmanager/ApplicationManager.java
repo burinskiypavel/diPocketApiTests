@@ -61,6 +61,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecDipocketRegistration;
     public RequestSpecification requestSpecDiscontuRegistration;
     public RequestSpecification requestSpecPlayITRegistration;
+    public RequestSpecification requestSpecUpAndGoRegistration;
     public RequestSpecification requestSpecSnowAttackRegistration;
     public RequestSpecification requestSpecDipocketHomePage;
     public RequestSpecification requestSpecEmailVerification;
@@ -68,6 +69,8 @@ public class ApplicationManager {
     public RequestSpecification requestSpecTDS;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
+    public String registrationPhone = "380636083315";
+    public String registrationEmail = "testdipocket4@gmail.com";
 
 
     //private MailHelper mailHelper;
@@ -122,6 +125,11 @@ public class ApplicationManager {
         requestSpecPlayITRegistration = given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site.playIt"))
+                .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+
+        requestSpecUpAndGoRegistration = given()
+                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .header("site", HelperBase.prop.getProperty("mobile.site.upAndGo"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecSnowAttackRegistration = given()

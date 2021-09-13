@@ -29,11 +29,17 @@
     <!--        </classes>-->
     <!--    </test>-->
 
-    <test name="PlayITRegistrationTest">
-        <classes>
-            <class name="tests.dipocket.registration.PlayITRegistrationTest"/>
-        </classes>
-    </test>
+<!--    <test name="PlayITRegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.dipocket.registration.PlayITRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="UpAndGoRegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.dipocket.registration.UpAndGoRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 <!--        <test name="SnowAttackRegistrationTest">-->
 <!--            <classes>-->
