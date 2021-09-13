@@ -29,6 +29,12 @@
     <!--        </classes>-->
     <!--    </test>-->
 
+    <test name="PlayITRegistrationTest">
+        <classes>
+            <class name="tests.dipocket.registration.PlayITRegistrationTest"/>
+        </classes>
+    </test>
+
 <!--        <test name="SnowAttackRegistrationTest">-->
 <!--            <classes>-->
 <!--                <class name="tests.dipocket.registration.SnowAttackRegistrationTest"/>-->

@@ -4,6 +4,7 @@ import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class PlayITRegistrationTest extends TestBase {
     String smsCode = null;
@@ -21,7 +23,7 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
+        app.getDbHelper().deleteClientFromDB(app.playITRegistrationPhone, site);
         given()
                 .spec(app.requestSpecPlayITRegistration)
                 .queryParam("langID", "4")
@@ -42,8 +44,7 @@ public class PlayITRegistrationTest extends TestBase {
                     .get("references/languages")
                     .then().log().all()
                     .statusCode(200)
-                    .body("languageList.name", hasItems("English", "Polski"))
-                    .body("langHash", equalTo("1e43be1453a8784fc9790aaa6506240a9bad4640becb318a4fd5c9078a47b9f5"));
+                    .body("languageList.name", hasItems("English", "Magyar"));
         }
 
     @Test(priority = 3)
@@ -77,7 +78,7 @@ public class PlayITRegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecPlayITRegistration)
                 .queryParam("langID", "4")
-                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("phoneNum", app.playITRegistrationPhone)
                 .body("{\n" +
                         "  \"smsNumber\" : 1\n" +
                         "}")
@@ -90,10 +91,10 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
+        smsCode = app.getDbHelper().getSMSCodeFromDB(app.playITRegistrationPhone, site);
         given()
                 .spec(app.requestSpecPlayITRegistration)
-                .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("phone", app.playITRegistrationPhone)
                 .when()
                 .get("references/verifyPhone")
                 .then()
@@ -110,10 +111,8 @@ public class PlayITRegistrationTest extends TestBase {
                 .get("references/topCountries?langID=4");
         res.then().log().all();
         int statusCode = res.getStatusCode();
-        String topCountriesHash = res.path("topCountriesHash").toString();
         assertEquals(statusCode, 200);
-        assertEquals(topCountriesHash, "39adbb214b125ad1af4fadd17ff5abeba8bc1affc231408f04bbcd0a2c9d2bc0");
-        res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Украина", "Франция", "Литва", "Норвегия"));
+        res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Украина", "Финляндия"));
     }
 
     @Test(priority = 8)
@@ -124,7 +123,7 @@ public class PlayITRegistrationTest extends TestBase {
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+                        "  \"mainPhone\" : \""+ app.playITRegistrationPhone+"\",\n" +
                         "  \"stepNo\" : 1,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
                         "  \"address\" : {\n" +
@@ -153,7 +152,7 @@ public class PlayITRegistrationTest extends TestBase {
         given()
                 .spec(app.requestSpecPlayITRegistration)
                 .queryParam("langID", "4")
-                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("phoneNum", app.playITRegistrationPhone)
                 .queryParam("code", smsCode)
                 .when()
                 .get("userRegistration/checkPhoneAndLoadSavePoint")
@@ -174,7 +173,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "  \"langId\" : 4,\n" +
                         "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+                        "  \"mainPhone\" : \""+ app.playITRegistrationPhone+"\",\n" +
                         "  \"countryId\" : "+countryId+",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
@@ -244,7 +243,7 @@ public class PlayITRegistrationTest extends TestBase {
                         "  \"langId\" : 4,\n" +
                         "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+                        "  \"mainPhone\" : \""+ app.playITRegistrationPhone+"\",\n" +
                         "  \"countryId\" : "+countryId+",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
@@ -287,7 +286,7 @@ public class PlayITRegistrationTest extends TestBase {
                 .statusCode(200);
     }
 
-        @Test(priority = 13)
+        @Test(priority = 13, enabled = false)
         public void test_ClientServices_v1_userRegistration_clientImage__() {
             given()
                     .contentType("application/json")
@@ -314,8 +313,8 @@ public class PlayITRegistrationTest extends TestBase {
                 .get("references/questions")
                 .then().log().all()
                 .statusCode(200)
-                .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"))
-                .body("checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
+                .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_GB"))
+                .body("checkboxList.typeId[1]", equalTo("DATA_PROCESSING"));
     }
 
     @Test(priority = 15)
@@ -328,8 +327,8 @@ public class PlayITRegistrationTest extends TestBase {
                         "  \"langId\" : 4,\n" +
                         "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
+                        "  \"mainPhone\" : \""+ app.playITRegistrationPhone+"\",\n" +
+                        "  \"email\" : \""+ app.playITRegistrationEmail+"\",\n" +
                         "  \"countryId\" : "+countryId+",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
@@ -388,22 +387,20 @@ public class PlayITRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registerNewClient2(){
         given()
                 .spec(app.requestSpecPlayITRegistration)
-                //.header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                //.header("site", HelperBase.prop.getProperty("mobile.site2"))
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
                         "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
                         "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
+                        "  \"mainPhone\" : \""+ app.playITRegistrationPhone+"\",\n" +
+                        "  \"email\" : \""+ app.playITRegistrationEmail+"\",\n" +
                         "  \"countryId\" : "+countryId+",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 826,\n" +
-                        "  \"secAnswer\" : \"***\",\n" +
-                        "  \"pin\" : \""+ app.generateRandomString(8)+"\",\n" +
+                        "  \"secAnswer\" : \"QA\",\n" +
+                        "  \"pin\" : \"pasword1\",\n" +
                         "  \"stepNo\" : 4,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
                         "  \"address\" : {\n" +
@@ -451,15 +448,17 @@ public class PlayITRegistrationTest extends TestBase {
     }
 
     @Test(priority = 18)
-    public void testEmailLink() throws InterruptedException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
+    public void testEmailLink() throws InterruptedException, SQLException, ClassNotFoundException {
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationSnowAttack(  "testdipocket4@gmail.com", "pasword12!");
         System.out.println("link_link " + link);
         given()
                 .when()
                 .get(link)
                 .then().log().all()
-                .statusCode(200)
-                .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
-                .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"));
+                .statusCode(200);
+                //.body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
+                //.body("html.body.div.div.div.h2", equalTo("Большое спасибо!"));
+
+        assertTrue(app.getDbHelper().iSClientExistInDB(app.playITRegistrationPhone, "PLAYIT"));
     }
 }

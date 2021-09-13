@@ -66,6 +66,8 @@ public class ApplicationManager {
     public RequestSpecification requestSpecEmailVerification;
     public RequestSpecification requestSpecTelenor;
     public RequestSpecification requestSpecTDS;
+    public String playITRegistrationPhone = "380636083315";
+    public String playITRegistrationEmail = "testdipocket4@gmail.com";
 
 
     //private MailHelper mailHelper;

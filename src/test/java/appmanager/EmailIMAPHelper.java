@@ -211,7 +211,7 @@ public class EmailIMAPHelper extends HelperBase {
                             String[] results2 = linkStr.split("\"> ");
 
                             String linkStr2 = results2[0];
-                            String DescriptionTxt2  = results2[1];
+                            //String DescriptionTxt2  = results2[1];
 
                             //String lin = linkStr.substring(258, 2062);
 

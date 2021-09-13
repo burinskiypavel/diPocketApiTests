@@ -454,4 +454,42 @@ public class DBHelper extends HelperBase {
         con.close();
         return stateID;
     }
+
+    public boolean iSClientExistInDB(String phone, String site) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select * from client  where MAINPHONE = '"+phone+"' and site = '"+site+"'";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        int id = 0;
+        int mainPhone = 0;
+        boolean bool = false;
+        String email = null;
+        while (rs.next()){
+            id = rs.getInt(1);
+            mainPhone = rs.getInt(5);
+            email = rs.getString(6);
+
+            //System. out.println("mainPhone : " + mainPhone);
+            System. out.println("email : " + email);
+            System. out.println("id : " + id);
+            break;
+        }
+        con.close();
+//        if(mainPhone == 0){
+//            return bool;
+//        }
+
+        if(id > 0){
+            bool = true;
+            return bool;
+        }
+        return bool;
+    }
 }
