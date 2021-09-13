@@ -14,7 +14,7 @@ public class TelenorFullRegistrationPageNegativeVerificationTests extends UITest
     String smsCode = app.generateRandomNumber(6);
     String wrongSmsCode = "111111";
 
-    @Test(priority = 0)
+    @Test(priority = 0, enabled = false)
     public void testVerificationWithInvalidDataYourTemporarySecretAnswerField2() throws SQLException, ClassNotFoundException, InterruptedException {
         //app.getDbHelper().blockClientFromBOFromDBTelenor("31751");
 
@@ -88,7 +88,7 @@ public class TelenorFullRegistrationPageNegativeVerificationTests extends UITest
         waitForSeveralItems(new String[]{"Your account is blocked.", "Please, contact our call-center and stay in an area with good data connection - WiFi or 3G or higher.", "Data charges from your phone operator may apply when using mobile data"});
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2,enabled = false)
     public void testVerificationWithEmptyYourTemporarySecretAnswerField() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getDbHelper().activateClientFromDBTelenor(phone);
         navigateToTelenorAndLogin2(phone, smsCode);
