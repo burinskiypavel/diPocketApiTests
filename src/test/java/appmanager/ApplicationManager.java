@@ -64,8 +64,10 @@ public class ApplicationManager {
     public RequestSpecification requestSpecUpAndGoRegistration;
     public RequestSpecification requestSpecSnowAttackRegistration;
     public RequestSpecification requestSpecDipocketHomePage;
+    public RequestSpecification requestSpecSnowAttackHomePage;
     public RequestSpecification requestSpecEmailVerification;
     public RequestSpecification requestSpecTelenor;
+    public RequestSpecification requestSpecSnowAttack;
     public RequestSpecification requestSpecTDS;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
@@ -142,6 +144,11 @@ public class ApplicationManager {
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
 
+        requestSpecSnowAttackHomePage = given()
+                .baseUri(dipocket3_intranet)
+                .header("site", HelperBase.prop.getProperty("mobile.site.snowAttack"));
+                //.header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+
         requestSpecEmailVerification = given()
                 .baseUri(dipocket3_intranet)
                 .contentType("application/json");
@@ -149,6 +156,11 @@ public class ApplicationManager {
         requestSpecTelenor = given()
                 .baseUri(dipocket3_intranet)
                 .header("site", telenorSite)
+                .contentType("application/json; charset=utf-8");
+
+        requestSpecSnowAttack = given()
+                .baseUri(dipocket3_intranet)
+                .header("site", mobile_site_snowAttack)
                 .contentType("application/json; charset=utf-8");
 
         requestSpecTDS = given()

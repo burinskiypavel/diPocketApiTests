@@ -549,6 +549,12 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="EmailsVerificationLegalAttachmentsSnowAttackTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsSnowAttackTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 <!--    <test name="EmailsVerificationStatementAttachmentsDipocketTests">-->
 <!--        <classes>-->
 <!--            <class name="tests.emailsVerification.statement.StatementAttachmentsDipocketTests"/>-->

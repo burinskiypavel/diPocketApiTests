@@ -1,7 +1,6 @@
 package appmanager;
 
 import io.restassured.response.Response;
-import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
@@ -57,6 +56,25 @@ public class Login_RegistrationHelper extends HelperBase {
         //dbHelper.storeDataToTheFile("files\\tds\\cliSessionId.txt",cliSessionId);
         int StatusCode = res.getStatusCode();
         assertEquals(StatusCode, 200);
+        return cliSessionId;
+    }
+
+    public String loginSnowAttack(String phone, String pass) {
+        Response res = given().log().uri().log().headers().log().body()
+                .baseUri("https://dipocket3.intranet:8900")
+                .header("site", "SNOW_ATTACK")
+                .contentType("application/json; charset=utf-8")
+                .auth().preemptive().basic("11_" + phone, pass)
+                .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
+                .when()
+                .post("/WebServices/v1/homePage/authenticateWithSca");
+
+        String cliSessionId = res.getHeader("cliSessionId");
+        System.out.println(res.getHeaders());
+        System.out.println("cliSessionId " + cliSessionId);
+        res.then().log().all();
+
+        assertEquals(res.getStatusCode(), 200);
         return cliSessionId;
     }
 }
