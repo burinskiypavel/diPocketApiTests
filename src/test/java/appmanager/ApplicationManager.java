@@ -63,6 +63,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecPlayITRegistration;
     public RequestSpecification requestSpecUpAndGoRegistration;
     public RequestSpecification requestSpecSnowAttackRegistration;
+    public RequestSpecification requestSpecSodexoRegistration;
     public RequestSpecification requestSpecDipocketHomePage;
     public RequestSpecification requestSpecSnowAttackHomePage;
     public RequestSpecification requestSpecEmailVerification;
@@ -137,6 +138,11 @@ public class ApplicationManager {
         requestSpecSnowAttackRegistration = given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site.snowAttack"))
+                .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+
+        requestSpecSodexoRegistration = given()
+                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .header("site", mobile_site_sodexo)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecDipocketHomePage = given()

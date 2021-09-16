@@ -47,6 +47,12 @@
 <!--            </classes>-->
 <!--        </test>-->
 
+<!--    <test name="SodexoRegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.dipocket.registration.SodexoRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
     <!--    <test name="DipocketHomePageWithAlreadyExistClientTest">-->
     <!--    <classes>-->
     <!--        <class name="tests.dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
