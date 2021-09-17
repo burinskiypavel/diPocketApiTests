@@ -46,7 +46,7 @@ public class LegalAttachmentsDipocketTests extends TestBase {
     @Test(priority = 2)
     public void test_clientProfile_sendLegalInfo2_DipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
-        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Тарифы", email, "Tariff Table", HelperBase.prop.getProperty("mobile.site"));
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Тарифы", email, "Tariff Table", HelperBase.prop.getProperty("mobile.site"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
@@ -68,7 +68,7 @@ public class LegalAttachmentsDipocketTests extends TestBase {
     @Test(priority = 3)
     public void test_clientProfile_sendLegalInfo2_DipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site);
-        app.getAttachmentHelper().sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Tariff Table", email, "Tariff Table", HelperBase.prop.getProperty("mobile.site"));
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Tariff Table", email, "Tariff Table", HelperBase.prop.getProperty("mobile.site"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
@@ -90,7 +90,7 @@ public class LegalAttachmentsDipocketTests extends TestBase {
     @Test(priority = 4)
     public void test_clientProfile_sendLegalInfo2_DipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "3", app.mobile_site);
-        app.getAttachmentHelper().sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Tabela Opłat", email, "Tariff Table", HelperBase.prop.getProperty("mobile.site"));
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Tabela Opłat", email, "Tariff Table", HelperBase.prop.getProperty("mobile.site"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
@@ -112,7 +112,7 @@ public class LegalAttachmentsDipocketTests extends TestBase {
     @Test(priority = 5)
     public void test_clientProfile_sendLegalInfo2_DipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "2", app.mobile_site);
-        app.getAttachmentHelper().sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Тарифи", "email", "Tariff Table", HelperBase.prop.getProperty("mobile.site"));
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Тарифи", "email", "Tariff Table", HelperBase.prop.getProperty("mobile.site"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
