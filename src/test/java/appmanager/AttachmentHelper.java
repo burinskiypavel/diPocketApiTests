@@ -27,10 +27,10 @@ public class AttachmentHelper extends HelperBase {
                 .statusCode(200);
     }
 
-    public void sendLegalInfo2(String phone, String pass, String cliSessionId, final String nameForClient, final String nameForEmail, final String type) {
+    public void sendLegalInfo2(String phone, String pass, String cliSessionId, String nameForClient, String nameForEmail, String type, String site) {
         given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .header("site", site)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
                 .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", cliSessionId)
