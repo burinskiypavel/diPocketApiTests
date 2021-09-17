@@ -26,4 +26,28 @@ public class AttachmentHelper extends HelperBase {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void sendLegalInfo2(String phone, String pass, String cliSessionId, final String nameForClient, final String nameForEmail, final String type) {
+        given()
+                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
+                .auth().preemptive().basic(phone, pass)
+                .header("clisessionid", cliSessionId)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"documentList\": [\n" +
+                        "    {\n" +
+                        "      \"nameForClient\": \"" + nameForClient + "\",\n" +
+                        "      \"nameForEmail\": \"" + nameForEmail + "\",\n" +
+                        "      \"selected\": true,\n" +
+                        "      \"type\": \"" + type + "\"\n" +
+                        "    }\n" +
+                        "  ]\n" +
+                        "}")
+                .when()
+                .post("clientProfile/sendLegalInfo2")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

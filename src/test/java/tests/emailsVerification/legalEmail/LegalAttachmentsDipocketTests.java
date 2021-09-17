@@ -2,7 +2,6 @@ package tests.emailsVerification.legalEmail;
 
 import appmanager.EmailVerificationHelper;
 import base.TestBase;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -15,24 +14,24 @@ import java.util.List;
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
 import static appmanager.EmailIMAPHelper.getEmailFooterText;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.testng.Assert.assertEquals;
 
 public class LegalAttachmentsDipocketTests extends TestBase {
     String cliSessionId = null;
     String email = "testdipocket2@gmail.com";
-    String pass = "pasword12!";
+    String emailPass = "pasword12!";
+    String phone =  "380633192217";
+    String pass = "pasword1";
+    String deviceUUID = "380633192217-AutoTest-Login";
 
     @Test(priority = 1)
     public void test_clientProfile_getLegalDocumentList() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientDeviceFromDB("380633192217-AutoTest-Login");
         app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
-        cliSessionId = login("380633192217", "pasword1", "380633192217-AutoTest-Login", "DIPOCKET");
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, deviceUUID);
 
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic("380633192217", "pasword1")
+                .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("clientProfile/getLegalDocumentList")
@@ -43,38 +42,16 @@ public class LegalAttachmentsDipocketTests extends TestBase {
                         "documentList.selected", hasItems(false, false, false, false, false, false, false, false));
     }
 
-    public void sendLegalInfo2(String phone, String pass, String cliSessionId, final String nameForClient) {
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", cliSessionId)
-                .contentType("application/json")
-                .body("{\n" +
-                        "  \"documentList\": [\n" +
-                        "    {\n" +
-                        "      \"nameForClient\": \"" + nameForClient + "\",\n" +
-                        "      \"nameForEmail\": \"testdipocket2@gmail.com\",\n" + //pas: pasword12!
-                        "      \"selected\": true,\n" +
-                        "      \"type\": \"Tariff Table\"\n" +
-                        "    }\n" +
-                        "  ]\n" +
-                        "}")
-                .when()
-                .post("clientProfile/sendLegalInfo2")
-                .then().log().all()
-                .statusCode(200);
-    }
-
     @Test(priority = 2)
     public void test_clientProfile_sendLegalInfo2_DipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
-        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Тарифы");
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Тарифы", email, "Tariff Table");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 28, 181);
         String actualFooter = getEmailFooterText(emailText, 182);
 
@@ -90,13 +67,13 @@ public class LegalAttachmentsDipocketTests extends TestBase {
     @Test(priority = 3)
     public void test_clientProfile_sendLegalInfo2_DipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site);
-        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Tariff Table");
+        app.getAttachmentHelper().sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Tariff Table", email, "Tariff Table");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 28, 169);
         String actualFooter = getEmailFooterText(emailText, 170);
 
@@ -112,13 +89,13 @@ public class LegalAttachmentsDipocketTests extends TestBase {
     @Test(priority = 4)
     public void test_clientProfile_sendLegalInfo2_DipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "3", app.mobile_site);
-        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Tabela Opłat");
+        app.getAttachmentHelper().sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Tabela Opłat", email, "Tariff Table");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 0, 146);
         String actualFooter = getEmailFooterText(emailText, 147);
 
@@ -134,13 +111,13 @@ public class LegalAttachmentsDipocketTests extends TestBase {
     @Test(priority = 5)
     public void test_clientProfile_sendLegalInfo2_DipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "2", app.mobile_site);
-        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Тарифи");
+        app.getAttachmentHelper().sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Тарифи", "email", "Tariff Table");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 28, 172);
         String actualFooter = getEmailFooterText(emailText, 173);
 
@@ -151,47 +128,5 @@ public class LegalAttachmentsDipocketTests extends TestBase {
         softAssert.assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходяться юридичні документи, що Ви запитали. Дякуємо за користування додатком "+app.site+". З повагою, Юридичний відділ", "Body is not correct");
         softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для Вашого спокою, "+app.site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
-    }
-
-    public String login(String phone, String pass, final String deviceUUID, String site) throws ClassNotFoundException, SQLException {
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .contentType("application/json; charset=UTF-8")
-                .body("{\n" +
-                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
-                        "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \"" + deviceUUID + "\",\n" +
-                        "  \"appVersion\" : \"2.2.7\"\n" +
-                        "}")
-                .when()
-                .post( "homePage/authenticateMobileApp")
-                .then().log().all()
-                .statusCode(400)
-                //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
-                .body("errCode", equalTo("DIP-00591"));
-
-
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, deviceUUID, site);
-
-        Response res =  given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .contentType("application/json; charset=UTF-8")
-                .body("{\n" +
-                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
-                        "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+deviceUUID+"\",\n" +
-                        "  \"appVersion\" : \"2.2.7\",\n" +
-                        "  \"otp\" : \""+loginSMSCode+"\"\n" +
-                        "}")
-                .when()
-                .post( "homePage/authenticateMobileApp");
-        String cliSessionId = res.getHeader("cliSessionId");
-        System.out.println(res.getHeaders());
-        System.out.println("cliSessionId " + cliSessionId);
-        int StatusCode = res.getStatusCode();
-        assertEquals(StatusCode, 200);
-        return cliSessionId;
     }
 }
