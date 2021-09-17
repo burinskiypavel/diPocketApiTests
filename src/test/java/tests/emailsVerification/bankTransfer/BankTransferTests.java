@@ -33,7 +33,7 @@ public class BankTransferTests extends TestBase {
                 "\"currencyId\": "+app.emailsVerificationsCurrencyId+",\n" +
                 "\"site\": \""+site+"\",\n" +
                 "\"siteEnum\": \""+site+"\",\n" +
-                "\"programNickName\": \""+site+"\"\n" +
+                "\"programNickName\": null\n" +
                 "}";
     }
 
