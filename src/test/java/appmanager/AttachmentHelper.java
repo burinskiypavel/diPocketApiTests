@@ -4,12 +4,12 @@ import static io.restassured.RestAssured.given;
 
 public class AttachmentHelper extends HelperBase {
 
-    public void sendCustomerStatements(String phone, String pass, String cliSessionId, String month, String year, String site, String deviceuuid) {
+    public void sendCustomerStatements(String phone, String pass, String cliSessionId, String month, String year, String site, String deviceuuid, String prefix) {
         given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", site)
                 .header("deviceuuid", deviceuuid)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prefix + phone, pass)
                 .header("clisessionid", cliSessionId)
                 .contentType("application/json")
                 .body("{\n" +

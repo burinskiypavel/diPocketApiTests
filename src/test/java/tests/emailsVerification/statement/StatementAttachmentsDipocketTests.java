@@ -46,7 +46,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
     @Test(priority = 2)
     public void test_dashBoard_sendCustomerStatements_DipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", app.mobile_site, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", app.mobile_site, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
@@ -68,7 +68,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
     @Test(priority = 3)
     public void test_dashBoard_sendCustomerStatements_DipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "06", "2021", app.mobile_site, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "06", "2021", app.mobile_site, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
@@ -90,7 +90,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
     @Test(priority = 4)
     public void test_dashBoard_sendCustomerStatements_DipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "3", app.mobile_site);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "05", "2021", app.mobile_site, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "05", "2021", app.mobile_site, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
@@ -112,7 +112,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
     @Test(priority = 5)
     public void test_dashBoard_sendCustomerStatements_DipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, "2", app.mobile_site);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "04", "2021", app.mobile_site, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "04", "2021", app.mobile_site, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);

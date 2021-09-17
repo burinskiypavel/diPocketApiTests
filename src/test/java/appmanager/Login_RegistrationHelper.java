@@ -37,7 +37,6 @@ public class Login_RegistrationHelper extends HelperBase {
                 //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
                 .body("errCode", equalTo("DIP-00591"));
 
-
         String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, site);
 
         Response res =  given()
@@ -54,6 +53,52 @@ public class Login_RegistrationHelper extends HelperBase {
                         "}")
                 .when()
                 .post( "homePage/authenticateMobileApp");
+        cliSessionId = res.getHeader("cliSessionId");
+        System.out.println(res.getHeaders());
+        System.out.println("cliSessionId " + cliSessionId);
+        int StatusCode = res.getStatusCode();
+        assertEquals(StatusCode, 200);
+        return cliSessionId;
+    }
+
+    public String loginPlayIT(String phone, String pass, final String deviceUUID) throws ClassNotFoundException, SQLException {
+        String cliSessionId = null;
+        String site = "PLAYIT";
+        baseURI = HelperBase.prop.getProperty("mobile.base.url");
+        dbHelper.deleteClientDeviceFromDB(deviceUUID);
+
+        given().log().all()
+                .auth().preemptive().basic("9_" + phone, pass)
+                .header("deviceuuid", deviceUUID)
+                .header("site", site)
+                .contentType("application/json; charset=UTF-8")
+                .body("{\n" +
+                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
+                        "  \"devType\" : \"android\",\n" +
+                        "  \"deviceUUID\" : \"" + deviceUUID + "\",\n" +
+                        "  \"appVersion\" : \"1.4.9\"\n" +
+                        "}")
+                .when()
+                .post("homePage/authenticateMobileApp")
+                .then().log().all()
+                .statusCode(400)
+                .body("errCode", equalTo("DIP-00591"));
+
+        String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, "PLAYIT");
+        Response res = given().log().all()
+                .auth().preemptive().basic("9_" + phone, pass)
+                .header("deviceuuid", deviceUUID)
+                .header("site", site)
+                .contentType("application/json; charset=UTF-8")
+                .body("{\n" +
+                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
+                        "  \"devType\" : \"android\",\n" +
+                        "  \"deviceUUID\" : \"" + deviceUUID + "\",\n" +
+                        "  \"appVersion\" : \"1.4.9\",\n" +
+                        "  \"otp\" : \"" + loginSMSCode + "\"\n" +
+                        "}")
+                .when()
+                .post("homePage/authenticateMobileApp");
         cliSessionId = res.getHeader("cliSessionId");
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
