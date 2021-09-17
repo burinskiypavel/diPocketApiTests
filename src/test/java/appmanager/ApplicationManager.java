@@ -18,6 +18,7 @@ public class ApplicationManager {
     private TelenorHelper telenorHelper = new TelenorHelper();
     private ResponseValidationHelper responseValidationHelper = new ResponseValidationHelper();
     private Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+    private AttachmentHelper attachmentHelper = new AttachmentHelper();
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
@@ -252,6 +253,10 @@ public class ApplicationManager {
 
     public Login_RegistrationHelper getLogin_registrationHelper() {
         return login_registrationHelper;
+    }
+
+    public AttachmentHelper getAttachmentHelper() {
+        return attachmentHelper;
     }
 
 //    public MailHelper mail(){
