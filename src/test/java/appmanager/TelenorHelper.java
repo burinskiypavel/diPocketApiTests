@@ -391,12 +391,12 @@ public class TelenorHelper extends HelperBase {
     public void checkAllFieldsInTelenorHomePageAccountHistoryListResponse(AccountHistoryList accountHistoryList) {
         List<AccountHistoryList_> accountHistoryList1 = accountHistoryList.getAccountHistoryList();
         for (AccountHistoryList_ accountHistoryList_ :accountHistoryList1){
-            assertThat(accountHistoryList_.getAmount(), equalTo(49000));
+            assertThat(accountHistoryList_.getAmount(), equalTo(4000));
             assertThat(accountHistoryList_.getCcyId(), equalTo(348));
             assertThat(accountHistoryList_.getCcySymbol(), equalTo("Ft"));
             assertThat(accountHistoryList_.getFinType(), equalTo("D"));
             //assertThat(accountHistoryList_.getFullName(), equalTo("Telenor"));
-            assertThat(accountHistoryList_.getId(), equalTo(618061));
+            assertThat(accountHistoryList_.getId(), equalTo(619614));
             //assertThat(accountHistoryList_.getItemDateISO(), equalTo("2021-05-20 22:01:13.376647 Europe/Kiev"));
             assertThat(accountHistoryList_.getStateId(), equalTo(100));
             assertThat(accountHistoryList_.getTypeId(), equalTo(10));
