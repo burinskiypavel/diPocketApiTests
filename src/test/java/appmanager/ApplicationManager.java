@@ -142,7 +142,7 @@ public class ApplicationManager {
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecSodexoRegistration = given()
-                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .baseUri(HelperBase.prop.getProperty("web.base.url"))
                 .header("site", mobile_site_sodexo)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
