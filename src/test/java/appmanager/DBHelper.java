@@ -332,6 +332,29 @@ public class DBHelper extends HelperBase {
         return id;
     }
 
+    public int getClientIdFromDB2(String email, String site) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select ID from Client Where EMAIL = '"+email+ "' and Site = '" + site + "'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        int id = 0;
+        while (rs.next()){
+            id = rs.getInt(1);
+
+            System. out.println("id: " + id);
+            break;
+        }
+        con.close();
+        return id;
+    }
+
     public String getLangIdFromDB(String email, final String site) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
