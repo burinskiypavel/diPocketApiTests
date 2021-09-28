@@ -45,6 +45,7 @@ public class ApplicationManager {
     public String mobile_site_snowAttack = null;
     public String mobile_site_festival = "FESTIVAL";
     public String mobile_site_sodexo = "SODEXO";
+    public String mobile_site_getsby = "GETSBY";
     public String emailsVerificationsCountryId = null;
     public String emailsVerificationsCurrencyId = null;
     public String expectedEmailSender_upAndGo = "wsparcie@upcard.pl";
@@ -65,6 +66,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecUpAndGoRegistration;
     public RequestSpecification requestSpecSnowAttackRegistration;
     public RequestSpecification requestSpecSodexoRegistration;
+    public RequestSpecification requestSpecGetsbyRegistration;
     public RequestSpecification requestSpecDipocketHomePage;
     public RequestSpecification requestSpecSnowAttackHomePage;
     public RequestSpecification requestSpecEmailVerification;
@@ -144,6 +146,11 @@ public class ApplicationManager {
         requestSpecSodexoRegistration = given()
                 .baseUri(HelperBase.prop.getProperty("web.base.url"))
                 .header("site", mobile_site_sodexo)
+                .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+
+        requestSpecGetsbyRegistration = given()
+                .baseUri(HelperBase.prop.getProperty("web.base.url"))
+                .header("site", mobile_site_getsby)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecDipocketHomePage = given()
