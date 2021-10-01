@@ -68,16 +68,6 @@ public class BankTransferTests extends TestBase {
         return list.iterator();
     }
 
-//    @DataProvider
-//    public Iterator<Object[]> BankTransferUpAndGo(){
-//        List<Object[]> list = new ArrayList<Object[]>();
-//        list.add(new Object[] {app.mobile_site_upAndGo, "EN", 1, 32727, app.emailsVerificationsEmail, app.emailsVerificationsPass, 39, 159, 160, expectedUpAndGoSender, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your bank transfer confirmation. With kind regards, Customer Service Team", ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", ""+app.site_upAndGo+" - bank transfer confirmation"});
-//        list.add(new Object[] {app.mobile_site_upAndGo, "UA", 2, 32727, app.emailsVerificationsEmail, app.emailsVerificationsPass, 29, 155, 156, expectedUpAndGoSender, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлене Вами підтвердження банківського переказу. З повагою, Відділ підтримки клієнтів", ""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", ""+app.site_upAndGo+" - підтвердження банківського переказу"});
-//        list.add(new Object[] {app.mobile_site_upAndGo, "PL", 3, 32727, app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 126, 127, expectedUpAndGoSender, "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajduje się zamówione potwierdzenie przelewu bankowego. Z wyrazami szacunku, Zespół Obsługi Klienta", ""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT", ""+app.site_upAndGo+" - potwierdzenie przelewu bankowego"});
-//        list.add(new Object[] {app.mobile_site_upAndGo, "RU", 4, 32727, app.emailsVerificationsEmail, app.emailsVerificationsPass, 29, 170, 171, expectedUpAndGoSender, "Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находится подтверждение банковского перевода, которое Вы заказывали. С уважением, Служба поддержки клиентов", ""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT", ""+app.site_upAndGo+" - подтверждение банковского перевода"});
-//        return list.iterator();
-//    }
-
     @Test(dataProvider = "BankTransfer")
     public void testBankTransfer(String site, String lang, int langId, int id, String email, String pass, int bodyBegin, int bodyEnd, int footerEnd, String expectedEmailSender, String expectedEmailBody, String expectedEmailFooter, String expectedEmailSubject) throws InterruptedException, MessagingException, IOException {
         postSendBankTransferEmail(langId, site, id);
@@ -99,24 +89,4 @@ public class BankTransferTests extends TestBase {
         softAssert.assertEquals(actualFooter, expectedEmailFooter, "Footer is not correct");
         softAssert.assertAll();
     }
-
-//    @Test(dataProvider = "BankTransferUpAndGo")
-//    public void testBankTransferUpAndGo(String site, String lang, int langId, int id, String email, String pass, int bodyBegin, int bodyEnd, int footerEnd, String expectedEmailSender, String expectedEmailBody, String expectedEmailFooter, String expectedEmailSubject) throws InterruptedException, MessagingException, IOException {
-//        postSendBankTransferEmail(langId, site, id);
-//
-//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-//        String actualSender = senderAndSubject.get(0);
-//        String actualSubject = senderAndSubject.get(1);
-//
-//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
-//        String actualBody = getEmailBodyText(emailText, bodyBegin , bodyEnd);
-//        String actualFooter = getEmailFooterText(emailText, footerEnd);
-//
-//        SoftAssert softAssert = new SoftAssert();
-//        //softAssert.assertEquals(actualSender, expectedEmailSender, "Sender is not correct");
-//        softAssert.assertEquals(actualSubject, expectedEmailSubject, "Subject is not correct");
-//        softAssert.assertEquals(actualBody, expectedEmailBody, "Body is not correct");
-//        softAssert.assertEquals(actualFooter, expectedEmailFooter, "Footer is not correct");
-//        softAssert.assertAll();
-//    }
 }
