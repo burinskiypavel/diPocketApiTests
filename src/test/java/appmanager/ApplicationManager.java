@@ -139,7 +139,7 @@ public class ApplicationManager {
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecSnowAttackRegistration = given()
-                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .baseUri(HelperBase.prop.getProperty("web.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site.snowAttack"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
