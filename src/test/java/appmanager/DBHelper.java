@@ -3,6 +3,8 @@ package appmanager;
 import java.sql.*;
 
 public class DBHelper extends HelperBase {
+    String nulll = null;
+
     public String getSMSCodeFromDB(String number, final String site) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
@@ -429,9 +431,28 @@ public class DBHelper extends HelperBase {
     }
 
     public void updateEmailForTelenorFromDB(String email, String site, String newEmail, String phone) throws SQLException, ClassNotFoundException {
+//        String currentNewEmail = getCurrentEmailFromDB(newEmail, site);
+//        if(currentNewEmail.equals(newEmail)){
+//            System.out.println("currentNewEmail not null!");
+//
+//            String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+//            String username = prop.getProperty("db.username");
+//            String password = prop.getProperty("db.password");
+//            String query = "update Client set EMAIL = '"+email+"' where MAINPHONE = '"+phone+"'";
+//            String commit = "commit";
+//
+//            Class.forName("oracle.jdbc.driver.OracleDriver");
+//            Connection con = DriverManager.getConnection(dbUrl, username, password);
+//            Statement stmt = con.createStatement();
+//
+//            stmt.executeQuery(query);
+//            stmt.executeQuery(commit);
+//            con.close();
+//        }
+
         String currentEmail = getCurrentEmailFromDB(email, site);
 
-        if(currentEmail.equals(email)){
+        if(email.equals(currentEmail)){
             System.out.println("currentEmail and email are equals!");
 
             String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
