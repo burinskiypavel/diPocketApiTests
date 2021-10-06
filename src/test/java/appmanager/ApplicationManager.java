@@ -1,6 +1,8 @@
 package appmanager;
 
 import io.restassured.RestAssured;
+import io.restassured.config.HttpClientConfig;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -73,6 +75,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecTelenor;
     public RequestSpecification requestSpecSnowAttack;
     public RequestSpecification requestSpecTDS;
+    public RestAssuredConfig configTimeout;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
     public String registrationPhone = "380636083315";
@@ -95,6 +98,11 @@ public class ApplicationManager {
 //    }
 
     public void initStart() {
+        configTimeout = RestAssured.config()
+                .httpClient(HttpClientConfig.httpClientConfig()
+                        .setParam("http.socket.timeout", 9000)
+                        .setParam("http.connection.timeout", 9000));
+
         dbHelper.prop = dbHelper.loadDataFromConfigFile();
         pan = dbHelper.prop.getProperty("tds.pan");
         TDSBaseUrl = dbHelper.prop.getProperty("tds.base.url");
@@ -178,6 +186,7 @@ public class ApplicationManager {
                 .contentType("application/json; charset=utf-8");
 
         requestSpecTDS = given()
+                .config(configTimeout)
                 .baseUri(TDSBaseUrl)
                 .contentType("application/xml");
     }

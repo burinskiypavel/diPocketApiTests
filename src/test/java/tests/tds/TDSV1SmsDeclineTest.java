@@ -108,6 +108,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
     @Test(priority = 40)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
+                .config(app.configTimeout)
                 .contentType("application/json")
                 .when()
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");

@@ -1,6 +1,5 @@
 package tests.tds;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.response.Response;
 
@@ -113,6 +112,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
+                .config(app.configTimeout)
                 .contentType("application/json")
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
@@ -128,6 +128,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         System.out.println("txid: " + randomTXID);
         Response res = given().log().uri().log().headers().log().body()
+                .config(app.configTimeout)
                 .when()
                 .header("Content-Type", "application/json")
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
@@ -143,6 +144,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         System.out.println("tranId: " + tranId);
         String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         Response response = given().log().uri().log().headers().log().body()
+                .config(app.configTimeout)
                 .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)
                 .contentType("application/json")
                 .header("SITE", app.mobile_site_upAndGo)
@@ -158,6 +160,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
+                .config(app.configTimeout)
                 .contentType("application/json")
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
