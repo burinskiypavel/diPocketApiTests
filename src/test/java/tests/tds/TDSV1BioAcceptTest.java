@@ -112,13 +112,12 @@ public class TDSV1BioAcceptTest extends TestBase {
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/tranStatus.v1")
+                .post("/DiPocket3ds/acs/tranStatus.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("AWAITING"));
@@ -160,13 +159,12 @@ public class TDSV1BioAcceptTest extends TestBase {
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/tranStatus.v1")
+                .post("/DiPocket3ds/acs/tranStatus.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("ACCEPTED"));

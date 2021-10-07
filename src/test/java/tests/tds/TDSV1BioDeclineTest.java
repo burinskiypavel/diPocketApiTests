@@ -27,8 +27,7 @@ public class TDSV1BioDeclineTest extends TestBase {
         System.out.println("txid: " + randomTXID + " pan: " + app.pan);
         baseURI = app.TDSBaseUrl;
         given().log().uri().log().headers().log().body()
-                .config(app.configTimeout)
-                .contentType("application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "    <backgroundVereq>\n" +
@@ -58,8 +57,7 @@ public class TDSV1BioDeclineTest extends TestBase {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
         Response res = given().log().uri().log().headers().log().body()
-                .config(app.configTimeout)
-                .contentType("application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPareq>\n" +
@@ -114,8 +112,7 @@ public class TDSV1BioDeclineTest extends TestBase {
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
@@ -163,8 +160,7 @@ public class TDSV1BioDeclineTest extends TestBase {
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
@@ -180,8 +176,7 @@ public class TDSV1BioDeclineTest extends TestBase {
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
-                .config(app.configTimeout)
-                .contentType("application/xml")
+                .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
                         "   <backgroundPageResponse>\n" +

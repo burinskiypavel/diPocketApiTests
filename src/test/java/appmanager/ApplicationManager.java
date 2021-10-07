@@ -75,6 +75,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecTelenor;
     public RequestSpecification requestSpecSnowAttack;
     public RequestSpecification requestSpecTDS;
+    public RequestSpecification requestSpecTDSJson;
     public RestAssuredConfig configTimeout;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
@@ -189,6 +190,11 @@ public class ApplicationManager {
                 .config(configTimeout)
                 .baseUri(TDSBaseUrl)
                 .contentType("application/xml");
+
+        requestSpecTDSJson = given()
+                .config(configTimeout)
+                .baseUri(TDSBaseUrl)
+                .contentType("application/json");
     }
 
     public void init() {

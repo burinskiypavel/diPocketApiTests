@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 public class TDSV1PareqAllFieldsTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
 
-    @Test(priority = 47)
+    @Test(priority = 1)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         given()
                 .spec(app.requestSpecTDS)
@@ -47,7 +47,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                                 "backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
-    @Test(priority = 48)
+    @Test(priority = 2)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()

@@ -21,7 +21,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
     String tranId = null;
     String pan4TestSMS = "5455980666358066";
 
-    @Test(priority = 38)
+    @Test(priority = 1)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         given()
                 .spec(app.requestSpecTDS)
@@ -49,7 +49,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
                                 "backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
-    @Test(priority = 39)
+    @Test(priority = 2)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
@@ -105,7 +105,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
         assertEquals(backgroudResponse.getPageId(), "sms_web.html");
     }
 
-    @Test(priority = 40)
+    @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
                 .config(app.configTimeout)
@@ -119,7 +119,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 41)
+    @Test(priority = 4)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
         given()
                 .spec(app.requestSpecTDS)

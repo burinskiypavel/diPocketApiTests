@@ -22,7 +22,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
 
-    @Test(priority = 56)
+    @Test(priority = 1)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
@@ -90,7 +90,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
         assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 57)
+    @Test(priority = 2)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -129,7 +129,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
         assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 58)
+    @Test(priority = 3)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)

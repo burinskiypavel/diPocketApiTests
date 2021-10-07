@@ -22,7 +22,7 @@ public class TDSV1SmsAcceptTest extends TestBase {
     String pan4TestSMS = "5455980666358066";
     String sms = null;
 
-    @Test(priority = 42)
+    @Test(priority = 1)
     public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
         given()
                 .spec(app.requestSpecTDS)
@@ -50,7 +50,7 @@ public class TDSV1SmsAcceptTest extends TestBase {
                                 "backgroundResponse.backgroundVeres.chName", equalTo("DON'TTOUCH"));
     }
 
-    @Test(priority = 43)
+    @Test(priority = 2)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         String nowAsExpected = app.getTimeStamp("dd.MM.YYYY HH:mm");
@@ -106,7 +106,7 @@ public class TDSV1SmsAcceptTest extends TestBase {
         assertEquals(backgroudResponse.getPageId(), "sms_web.html");
     }
 
-    @Test(priority = 44)
+    @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
                 .config(app.configTimeout)
@@ -120,7 +120,7 @@ public class TDSV1SmsAcceptTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 45)
+    @Test(priority = 4)
     public void test_getSMS_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
                 .config(app.configTimeout)
@@ -134,7 +134,7 @@ public class TDSV1SmsAcceptTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 46)
+    @Test(priority = 5)
     public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
         given()
                 .spec(app.requestSpecTDS)
