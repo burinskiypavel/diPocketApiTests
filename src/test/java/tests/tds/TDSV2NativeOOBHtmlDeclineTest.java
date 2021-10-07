@@ -136,6 +136,7 @@ public class TDSV2NativeOOBHtmlDeclineTest extends TestBase {
     @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
+                .config(app.configTimeout)
                 .contentType("application/json")
                 .when()
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
@@ -151,6 +152,7 @@ public class TDSV2NativeOOBHtmlDeclineTest extends TestBase {
         String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         System.out.println("cliSessionId: " + cliSessionId);
         Response response = given()
+                .config(app.configTimeout)
                 .auth().preemptive().basic("10_"+app.tds_phone, app.tds_pass)
                 .contentType("application/json")
                 .header("SITE", app.mobile_site_upAndGo)

@@ -146,6 +146,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
     @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
+                .config(app.configTimeout)
                 .contentType("application/json")
                 .when()
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
@@ -159,6 +160,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
     @Test(priority = 4)
     public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
         Response res = given()
+                .config(app.configTimeout)
                 .contentType("application/json")
                 .when()
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/sms?tranId=" + tranId + "");

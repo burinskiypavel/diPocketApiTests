@@ -101,8 +101,8 @@ public class ApplicationManager {
     public void initStart() {
         configTimeout = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
-                        .setParam("http.socket.timeout", 17000)
-                        .setParam("http.connection.timeout", 17000));
+                        .setParam("http.socket.timeout", 21000)
+                        .setParam("http.connection.timeout", 21000));
 
         dbHelper.prop = dbHelper.loadDataFromConfigFile();
         pan = dbHelper.prop.getProperty("tds.pan");
