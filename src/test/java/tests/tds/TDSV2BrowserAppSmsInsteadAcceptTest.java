@@ -26,7 +26,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     String tranId = null;
     String sms = null;
 
-    @Test(priority = 66)
+    @Test(priority = 1)
     public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
@@ -93,7 +93,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
         assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 67)
+    @Test(priority = 2)
     public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -133,7 +133,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
         assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 68)
+    @Test(priority = 3)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
         given()
                 .contentType("application/json")
@@ -148,7 +148,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     }
 
 
-    @Test(priority = 69)
+    @Test(priority = 4)
     public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -205,7 +205,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
         assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 70)
+    @Test(priority = 5)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
         given()
                 .contentType("application/json")
@@ -219,7 +219,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 71)
+    @Test(priority = 6)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
                 .contentType("application/json")
@@ -232,7 +232,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 72)
+    @Test(priority = 7)
     public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
         Response res = given()
                 .contentType("application/json")
@@ -245,7 +245,7 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 73)
+    @Test(priority = 8)
     public void test_CReq_DiPocket3ds_acs_bgAuth__() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
