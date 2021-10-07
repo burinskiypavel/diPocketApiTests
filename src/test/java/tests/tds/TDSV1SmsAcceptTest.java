@@ -121,7 +121,7 @@ public class TDSV1SmsAcceptTest extends TestBase {
     }
 
     @Test(priority = 4)
-    public void test_getSMS_TDSTestServices_v1_tranId_txId_randomTXID() {
+    public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
         Response res = given()
                 .config(app.configTimeout)
                 .contentType("application/json")
