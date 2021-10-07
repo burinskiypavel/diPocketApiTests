@@ -128,8 +128,8 @@ public class TDSV1BioAcceptTest extends TestBase {
         System.out.println("txid: " + randomTXID);
         Response res = given().log().uri().log().headers().log().body()
                 .config(app.configTimeout)
+                .contentType("application/json")
                 .when()
-                .header("Content-Type", "application/json")
                 .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
 
         res.then().log().all();
