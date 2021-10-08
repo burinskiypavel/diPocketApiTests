@@ -136,13 +136,14 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 3)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
         given()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                //.config(app.configTimeout)
+                //.contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/tranStatus")
+                .post("/DiPocket3ds/acs/tranStatus")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("AWAITING"));
@@ -209,13 +210,14 @@ public class TDSV2BrowserAppSmsInsteadAcceptTest extends TestBase {
     @Test(priority = 5)
     public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
         given()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                //.config(app.configTimeout)
+                //.contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
                         "}")
                 .when()
-                .post(app.TDSBaseUrl+"/DiPocket3ds/acs/tranStatus")
+                .post("/DiPocket3ds/acs/tranStatus")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("AWAITING"));
