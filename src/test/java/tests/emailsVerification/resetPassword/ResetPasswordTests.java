@@ -4,6 +4,7 @@ import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -43,83 +44,82 @@ public class ResetPasswordTests extends TestBase {
     }
 
     @DataProvider
-    public Iterator<Object[]> ResetPassword() throws SQLException, ClassNotFoundException {
+    public Iterator<Object[]> ResetPassword() {
         List<Object[]> list = new ArrayList<Object[]>();
-        list.add(new Object[] {app.mobile_site, "EN", 1, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site), app.emailsVerificationsEmail, app.emailsVerificationsPass, 28, 169, 170, expectedSender, "Your "+app.site+" Legal Documents", "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site+" legal documents. Thank you for using "+app.site+". With kind regards, Legal Team", ""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
-
-//        list.add(new Object[] {app.mobile_site, "UA", 2, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site), app.emailsVerificationsEmail, app.emailsVerificationsPass, 28, 172, 173, expectedSender, "Ваші юридичні документи "+app.site+"", "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходяться юридичні документи, що Ви запитали. Дякуємо за користування додатком "+app.site+". З повагою, Юридичний відділ", ""+app.SITE_REG+" Для Вашого спокою, "+app.site+" UAB авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site, "PL", 3, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site), app.emailsVerificationsEmail,  app.emailsVerificationsPass, 0, 146, 147, expectedSender, "Twoje dokumenty prawne "+app.site+"", "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu "+app.site+". Z wyrazami szacunku, Dział Prawny", ""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site, "RU", 4, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site), app.emailsVerificationsEmail, app.emailsVerificationsPass, 28, 181, 182, expectedSender, "Документы "+app.site+"", "Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находятся юридические документы, которые Вы заказывали. Спасибо за пользование "+app.site+". С уважением, Юридический отдел", ""+app.SITE_REG+" Для вашего спокойствия, "+app.site+" UAB авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_discontu, "EN", 1, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_discontu), app.emailsVerificationsEmail, app.emailsVerificationsPass, 28, 169, 170, expectedSender, "Your "+app.site_discontu+" Legal Documents", "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_discontu+" legal documents. Thank you for using "+app.site_discontu+". With kind regards, Legal Team", ""+app.SITE_REG+" "+app.site_discontu+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_discontu, "PL", 2, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_discontu), app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 146, 147, expectedSender, "Twoje dokumenty prawne "+app.site_discontu+"", "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu "+app.site_discontu+". Z wyrazami szacunku, Dział Prawny", ""+app.SITE_REG+" "+app.site_discontu+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_playIt, "EN", 1, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_playIt), app.emailsVerificationsEmail, app.emailsVerificationsPass, 26, 163, 164, expectedPlayITSender, "Your "+app.site_PlayIT+" Legal Documents", "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_PlayIT+" legal documents. Thank you for using "+app.site_PlayIT+". With kind regards, Legal Team", ""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_playIt, "HU", 5, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_playIt), app.emailsVerificationsEmail, app.emailsVerificationsPass, 26, 171, 172, expectedPlayITSender, "Az Ön "+app.site_PlayIT+" jogi dokumentumai", "Kedves "+app.emailsVerificationsFirstName+", Kívánsága szerint, csatolva találja a jogi dokumentumokat. Köszönjük, hogy a PlayIT alkalmazást használja. Üdvözlettel, Jogi csapat", ""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a "+app.site_PlayIT+" Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_snowAttack, "EN", 1, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_snowAttack), app.emailsVerificationsEmail, app.emailsVerificationsPass, 31, 178, 179, expectedSender, "Your "+app.site_SnowAttack+" Legal Documents", "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_SnowAttack+" legal documents. Thank you for using "+app.site_SnowAttack+". With kind regards, Legal Team", ""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_snowAttack, "HU", 5, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_snowAttack), app.emailsVerificationsEmail, app.emailsVerificationsPass, 31, 181, 182, expectedSender, "Az Ön "+app.site_SnowAttack+" jogi dokumentumai", "Kedves "+app.emailsVerificationsFirstName+"! Kívánsága szerint, csatolva találja a jogi dokumentumokat. Köszönjük, hogy a Snow Attack alkalmazást használja. Üdvözlettel, Jogi csapat", ""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_upAndGo, "EN", 1, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_upAndGo), app.emailsVerificationsEmail, app.emailsVerificationsPass, 29, 172, 173, expectedUpAndGoSender, "Your "+app.site_upAndGo+" Legal Documents", "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached selected "+app.site_upAndGo+" legal documents. Thank you for using "+app.site_upAndGo+". With kind regards, Legal Team", ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_upAndGo, "UA", 2, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_upAndGo), app.emailsVerificationsEmail, app.emailsVerificationsPass, 29, 174, 175, expectedUpAndGoSender, "Ваші юридичні документи "+app.site_upAndGo+"", "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходяться юридичні документи, що Ви запитали. Дякуємо за користування додатком "+app.site_upAndGo+". З повагою, Юридичний відділ", ""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_upAndGo, "PL", 3, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_upAndGo), app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 147, 148, expectedUpAndGoSender, "Twoje dokumenty prawne "+app.site_upAndGo+"", "Witaj "+app.emailsVerificationsFirstName+", W załączniku znajdują się zamówione dokumenty prawne. Dziękujemy za korzystanie z serwisu "+app.site_upAndGo+". Z wyrazami szacunku, Dział Prawny", ""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"});
-//        list.add(new Object[] {app.mobile_site_upAndGo, "RU", 4, app.getDbHelper().getClientIdFromDB2(app.emailsVerificationsEmail, app.mobile_site_upAndGo), app.emailsVerificationsEmail, app.emailsVerificationsPass, 29, 183, 184, expectedUpAndGoSender, "Документы "+app.site_upAndGo+"", "Здравствуйте, "+app.emailsVerificationsFirstName+"! В приложении находятся юридические документы, которые Вы заказывали. Спасибо за пользование "+app.site_upAndGo+". С уважением, Юридический отдел", ""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"});
-//
+        list.add(new Object[] {app.mobile_site, "EN", "1",  app.emailsVerificationsEmail, app.emailsVerificationsPass, 28, 217, 218, expectedSender, "Your password reset request", "We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team", ""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site, "PL", "3", app.emailsVerificationsEmail,  app.emailsVerificationsPass, 0, 156, 157, expectedSender, "Żądanie zmiany hasła", "Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta", ""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_discontu, "EN", "1", app.emailsVerificationsEmail, app.emailsVerificationsPass, 28, 217, 218, expectedSender, "Your password reset request", "We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team", ""+app.SITE_REG+" "+app.site_discontu+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_discontu, "PL", "2", app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 156, 157, expectedSender, "Żądanie zmiany hasła", "Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta", ""+app.SITE_REG+" "+app.site_discontu+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_playIt, "EN", "1", app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 191, 192, expectedPlayITSender, "Your password reset request", "We received a request to reset the password associated with your account. Please click on this  link  to confirm your request and finalise the change. With kind regards, Customer Service Team", ""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_playIt, "HU", "5", app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 185, 186, expectedPlayITSender, "Jelszó visszaállítási kérése", "Kaptunk egy kérést a számlája jelszavának visszaállítására. Kérjük klikkeljen erre a linkre , hogy megerősítse a kérést és befejezze a változtatást. Üdvözlettel, Ügyfélszolgálati Csapat", ""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_snowAttack, "EN", "1", app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 191, 192, expectedSender, "Your password reset request", "We received a request to reset the password associated with your account. Please click on this  link  to confirm your request and finalise the change. With kind regards, Customer Service Team", ""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_snowAttack, "HU", "5", app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 186, 187, expectedSender, "Jelszó visszaállítási kérése", "Kaptunk egy kérést a számlája jelszavának visszaállítására. Kérjük klikkeljen erre  a linkre,  hogy megerősítse a kérést és befejezze a változtatást. Üdvözlettel, Ügyfélszolgálati Csapat", ""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_upAndGo, "EN", "1", app.emailsVerificationsEmail, app.emailsVerificationsPass, 29, 218, 219, expectedUpAndGoSender, "Your password reset request", "We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team", ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_upAndGo, "UA", "2", app.emailsVerificationsEmail, app.emailsVerificationsPass, 2, 158, 159, expectedUpAndGoSender, "Запит на зміну паролю", "Ми отримали запит на зміну паролю за Вашим особистим рахунком. Будь-ласка клікніть це посилання, щоб підтвердити зміну. З повагою, Відділ підтримки клієнтів", ""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_upAndGo, "PL", "3", app.emailsVerificationsEmail, app.emailsVerificationsPass, 0, 156, 157, expectedUpAndGoSender, "Żądanie zmiany hasła", "Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta", ""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"});
+        list.add(new Object[] {app.mobile_site_upAndGo, "RU", "4", app.emailsVerificationsEmail, app.emailsVerificationsPass, 2, 149, 150, expectedUpAndGoSender, "Запрос на сброс пароля", "Мы получили запрос на сброс пароля Вашего профиля. Пожалуйста, кликните ссылку, чтобы подтвердить изменения. С уважением, Служба поддержки клиентов", ""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"});
+        //list.add(new Object[] {app.mobile_site_sodexo, "ENPL", "1", app.emailsVerificationsEmail, app.emailsVerificationsPass, 63, 701, 702, expectedSender, "Your password reset request", "Otrzymaliśmy prośbę o zresetowanie hasła powiązanego z Twoim Profilem Wirtualnej Karty Sodexo. Kliknij w ten link lub kliknij w przycisk poniżej, by potwierdzić prośbę i zakończyć proces. Pozdrawiamy, Zespół Wirtualnej Karty Sodexo Centrum Obsługi Klienta +48 (22) 535 11 11 | info.svc.pl@sodexo.com We received a request to reset the password associated with your Virtual Sodexo Card Profile. Please click on this link or click button below, to confirm your request and finalize the change. With kind regards, Virtual Sodexo Card Team Customer Service Center +48 (22) 535 11 11 | info.svc.pl@sodexo.com powered by DiPocket (dipocket.org)", "Customer Service Center +48 (22) 535 11 11 | info.svc.pl@sodexo.com powered by DiPocket (dipocket.org)"});
         return list.iterator();
     }
 
-    @Test(priority = 0, enabled = false)
-    public void testResetPassword() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site);
-        postSendResetPasswordEmail(app.mobile_site);
+    @Test(dataProvider = "ResetPassword")
+    public void testResetPassword(String site, String lang, String langId, String email, String pass, int bodyBegin, int bodyEnd, int footerEnd, String expectedEmailSender, String expectedEmailSubject, String expectedEmailBody, String expectedEmailFooter) throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(email, langId, site);
+        postSendResetPasswordEmail(site);
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
 
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 28, 217);
-        String actualFooter = getEmailFooterText(emailText, 218);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        String actualBody = getEmailBodyText(emailText, bodyBegin, bodyEnd);
+        String actualFooter = getEmailFooterText(emailText, footerEnd);
 
-        assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo("Your password reset request"));
-        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualSender, expectedEmailSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, expectedEmailSubject, "Subject is not correct");
+        softAssert.assertEquals(actualBody, expectedEmailBody, "Body is not correct");
+        softAssert.assertEquals(actualFooter, expectedEmailFooter, "Footer is not correct");
+        softAssert.assertAll();
     }
 
-    @Test(priority = 1)
-    public void testResetPasswordDipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site);
-        postSendResetPasswordEmail(app.mobile_site);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 28, 217);
-        String actualFooter = getEmailFooterText(emailText, 218);
-
-        assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo("Your password reset request"));
-        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 2)
-    public void testResetPasswordDipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site);
-        postSendResetPasswordEmail(app.mobile_site);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 0, 156);
-        String actualFooter = getEmailFooterText(emailText, 157);
-
-        assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo("Żądanie zmiany hasła"));
-        assertThat(actualBody, equalTo("Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
-    }
+//    @Test(priority = 1)
+//    public void testResetPasswordDipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site);
+//        postSendResetPasswordEmail(app.mobile_site);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 28, 217);
+//        String actualFooter = getEmailFooterText(emailText, 218);
+//
+//        assertThat(actualSender, equalTo(expectedSender));
+//        assertThat(actualSubject, equalTo("Your password reset request"));
+//        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 2)
+//    public void testResetPasswordDipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site);
+//        postSendResetPasswordEmail(app.mobile_site);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 0, 156);
+//        String actualFooter = getEmailFooterText(emailText, 157);
+//
+//        assertThat(actualSender, equalTo(expectedSender));
+//        assertThat(actualSubject, equalTo("Żądanie zmiany hasła"));
+//        assertThat(actualBody, equalTo("Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+//    }
 
     @Test(priority = 20, enabled = false)
     public void testResetPasswordDipocketBG() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
@@ -136,195 +136,195 @@ public class ResetPasswordTests extends TestBase {
         assertThat(emailFooter, equalTo(""+app.SITE_REG+" "+app.site+" UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
-    @Test(priority = 3)
-    public void tesResetPasswordDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_discontu);
-        postSendResetPasswordEmail(app.mobile_site_discontu);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 28, 217);
-        String actualFooter = getEmailFooterText(emailText, 218);
-
-        assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo("Your password reset request"));
-        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 4)
-    public void testResetPasswordDiscontuPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_discontu);
-        postSendResetPasswordEmail(app.mobile_site_discontu);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 0, 156);
-        String actualFooter = getEmailFooterText(emailText, 157);
-
-        assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo("Żądanie zmiany hasła"));
-        assertThat(actualBody, equalTo("Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 5)
-    public void testResetPasswordPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
-        postSendResetPasswordEmail(app.mobile_site_playIt);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 0, 191);
-        String actualFooter = getEmailFooterText(emailText, 192);
-
-        assertThat(actualSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
-        assertThat(actualSubject, equalTo("Your password reset request"));
-        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this  link  to confirm your request and finalise the change. With kind regards, Customer Service Team"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 14)
-    public void testResetPasswordPlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_playIt);
-        postSendResetPasswordEmail(app.mobile_site_playIt);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 0, 185);
-        String actualFooter = getEmailFooterText(emailText, 186);
-
-        assertThat(actualSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
-        assertThat(actualSubject, equalTo("Jelszó visszaállítási kérése"));
-        assertThat(actualBody, equalTo("Kaptunk egy kérést a számlája jelszavának visszaállítására. Kérjük klikkeljen erre a linkre , hogy megerősítse a kérést és befejezze a változtatást. Üdvözlettel, Ügyfélszolgálati Csapat"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 6)
-    public void testResetPasswordUpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_upAndGo);
-        postSendResetPasswordEmail(app.mobile_site_upAndGo);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 29, 218);
-        String actualFooter = getEmailFooterText(emailText, 219);
-
-        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
-        assertThat(actualSubject, equalTo("Your password reset request"));
-        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 7)
-    public void testResetPasswordUpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_upAndGo);
-        postSendResetPasswordEmail(app.mobile_site_upAndGo);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 0, 156);
-        String actualFooter = getEmailFooterText(emailText, 157);
-
-        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
-        assertThat(actualSubject, equalTo("Żądanie zmiany hasła"));
-        assertThat(actualBody, equalTo("Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 8)
-    public void testResetPasswordUpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site_upAndGo);
-        postSendResetPasswordEmail(app.mobile_site_upAndGo);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 2, 158);
-        String actualFooter = getEmailFooterText(emailText, 159);
-
-        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
-        assertThat(actualSubject, equalTo("Запит на зміну паролю"));
-        assertThat(actualBody, equalTo("Ми отримали запит на зміну паролю за Вашим особистим рахунком. Будь-ласка клікніть це посилання, щоб підтвердити зміну. З повагою, Відділ підтримки клієнтів"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 9)
-    public void testResetPasswordUpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site_upAndGo);
-        postSendResetPasswordEmail(app.mobile_site_upAndGo);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 2, 149);
-        String actualFooter = getEmailFooterText(emailText, 150);
-
-        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
-        assertThat(actualSubject, equalTo("Запрос на сброс пароля"));
-        assertThat(actualBody, equalTo("Мы получили запрос на сброс пароля Вашего профиля. Пожалуйста, кликните ссылку, чтобы подтвердить изменения. С уважением, Служба поддержки клиентов"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 10)
-    public void testResetPasswordSnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_snowAttack);
-        postSendResetPasswordEmail(app.mobile_site_snowAttack);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 0, 191);
-        String actualFooter = getEmailFooterText(emailText, 192);
-
-        assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo("Your password reset request"));
-        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this  link  to confirm your request and finalise the change. With kind regards, Customer Service Team"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
-    }
-
-    @Test(priority = 11)
-    public void testResetPasswordSnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_snowAttack);
-        postSendResetPasswordEmail(app.mobile_site_snowAttack);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 0, 186);
-        String actualFooter = getEmailFooterText(emailText, 187);
-
-        assertThat(actualSender, equalTo(expectedSender));
-        assertThat(actualSubject, equalTo("Jelszó visszaállítási kérése"));
-        assertThat(actualBody, equalTo("Kaptunk egy kérést a számlája jelszavának visszaállítására. Kérjük klikkeljen erre  a linkre,  hogy megerősítse a kérést és befejezze a változtatást. Üdvözlettel, Ügyfélszolgálati Csapat"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
-    }
+//    @Test(priority = 3)
+//    public void tesResetPasswordDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_discontu);
+//        postSendResetPasswordEmail(app.mobile_site_discontu);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 28, 217);
+//        String actualFooter = getEmailFooterText(emailText, 218);
+//
+//        assertThat(actualSender, equalTo(expectedSender));
+//        assertThat(actualSubject, equalTo("Your password reset request"));
+//        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 4)
+//    public void testResetPasswordDiscontuPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_discontu);
+//        postSendResetPasswordEmail(app.mobile_site_discontu);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 0, 156);
+//        String actualFooter = getEmailFooterText(emailText, 157);
+//
+//        assertThat(actualSender, equalTo(expectedSender));
+//        assertThat(actualSubject, equalTo("Żądanie zmiany hasła"));
+//        assertThat(actualBody, equalTo("Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_discontu+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 5)
+//    public void testResetPasswordPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
+//        postSendResetPasswordEmail(app.mobile_site_playIt);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 0, 191);
+//        String actualFooter = getEmailFooterText(emailText, 192);
+//
+//        assertThat(actualSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
+//        assertThat(actualSubject, equalTo("Your password reset request"));
+//        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this  link  to confirm your request and finalise the change. With kind regards, Customer Service Team"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_PlayIT+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 14)
+//    public void testResetPasswordPlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_playIt);
+//        postSendResetPasswordEmail(app.mobile_site_playIt);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 0, 185);
+//        String actualFooter = getEmailFooterText(emailText, 186);
+//
+//        assertThat(actualSender, equalTo("PlayIT Card <customer.service@dipocket.org>"));
+//        assertThat(actualSubject, equalTo("Jelszó visszaállítási kérése"));
+//        assertThat(actualBody, equalTo("Kaptunk egy kérést a számlája jelszavának visszaállítására. Kérjük klikkeljen erre a linkre , hogy megerősítse a kérést és befejezze a változtatást. Üdvözlettel, Ügyfélszolgálati Csapat"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Megnyugtatásul tájékoztatjuk, hogy a PlayIT Kártya számládat a DiPocket UAB kezeli, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel Upės str. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 6)
+//    public void testResetPasswordUpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_upAndGo);
+//        postSendResetPasswordEmail(app.mobile_site_upAndGo);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 29, 218);
+//        String actualFooter = getEmailFooterText(emailText, 219);
+//
+//        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+//        assertThat(actualSubject, equalTo("Your password reset request"));
+//        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this link to confirm your request and finalise the change. With kind regards, Customer Service Team"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 7)
+//    public void testResetPasswordUpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_upAndGo);
+//        postSendResetPasswordEmail(app.mobile_site_upAndGo);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 0, 156);
+//        String actualFooter = getEmailFooterText(emailText, 157);
+//
+//        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+//        assertThat(actualSubject, equalTo("Żądanie zmiany hasła"));
+//        assertThat(actualBody, equalTo("Otrzymaliśmy żądanie zmiany hasła do Twojego konta. Kliknij ten link , aby potwierdzić żądanie i ukończyć zmianę. Z wyrazami szacunku, Dział Obsługi Klienta"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 8)
+//    public void testResetPasswordUpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site_upAndGo);
+//        postSendResetPasswordEmail(app.mobile_site_upAndGo);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 2, 158);
+//        String actualFooter = getEmailFooterText(emailText, 159);
+//
+//        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+//        assertThat(actualSubject, equalTo("Запит на зміну паролю"));
+//        assertThat(actualBody, equalTo("Ми отримали запит на зміну паролю за Вашим особистим рахунком. Будь-ласка клікніть це посилання, щоб підтвердити зміну. З повагою, Відділ підтримки клієнтів"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 9)
+//    public void testResetPasswordUpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site_upAndGo);
+//        postSendResetPasswordEmail(app.mobile_site_upAndGo);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 2, 149);
+//        String actualFooter = getEmailFooterText(emailText, 150);
+//
+//        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+//        assertThat(actualSubject, equalTo("Запрос на сброс пароля"));
+//        assertThat(actualBody, equalTo("Мы получили запрос на сброс пароля Вашего профиля. Пожалуйста, кликните ссылку, чтобы подтвердить изменения. С уважением, Служба поддержки клиентов"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 10)
+//    public void testResetPasswordSnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_snowAttack);
+//        postSendResetPasswordEmail(app.mobile_site_snowAttack);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 0, 191);
+//        String actualFooter = getEmailFooterText(emailText, 192);
+//
+//        assertThat(actualSender, equalTo(expectedSender));
+//        assertThat(actualSubject, equalTo("Your password reset request"));
+//        assertThat(actualBody, equalTo("We received a request to reset the password associated with your account. Please click on this  link  to confirm your request and finalise the change. With kind regards, Customer Service Team"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+//    }
+//
+//    @Test(priority = 11)
+//    public void testResetPasswordSnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+//        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_snowAttack);
+//        postSendResetPasswordEmail(app.mobile_site_snowAttack);
+//
+//        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualSender = senderAndSubject.get(0);
+//        String actualSubject = senderAndSubject.get(1);
+//
+//        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+//        String actualBody = getEmailBodyText(emailText, 0, 186);
+//        String actualFooter = getEmailFooterText(emailText, 187);
+//
+//        assertThat(actualSender, equalTo(expectedSender));
+//        assertThat(actualSubject, equalTo("Jelszó visszaállítási kérése"));
+//        assertThat(actualBody, equalTo("Kaptunk egy kérést a számlája jelszavának visszaállítására. Kérjük klikkeljen erre  a linkre,  hogy megerősítse a kérést és befejezze a változtatást. Üdvözlettel, Ügyfélszolgálati Csapat"));
+//        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_SnowAttack+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
+//    }
 
     @Test(priority = 12)
     public void testResetPasswordSodexo() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
