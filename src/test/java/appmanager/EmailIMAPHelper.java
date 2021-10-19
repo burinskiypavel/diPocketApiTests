@@ -17,7 +17,7 @@ public class EmailIMAPHelper extends HelperBase {
     public static String getLinkFromEmailAfterRegistration(String host, String user,
                                                            String password) throws InterruptedException {
         String emailLink = null;
-        Thread.sleep(4000);
+        //Thread.sleep(4000);
 
         try {
 
@@ -34,6 +34,13 @@ public class EmailIMAPHelper extends HelperBase {
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_WRITE);//READ_ONLY
+
+            int count = 0;
+            while(emailFolder.getMessages().length == 0 && count < 120){
+                Thread.sleep(1000);
+                count++;
+            }
+            System.out.println("count:" + count);
 
             Message[] messages = emailFolder.getMessages();
             System.out.println("messages.length---" + messages.length);
