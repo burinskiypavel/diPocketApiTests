@@ -10,7 +10,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
 public class Peak extends TestBase {
-    String requestId = "6613ba7c-bbe6-434c-a4fe-3781cb41049f";
+    String requestId = "6513ba7c-bbe6-534c-a4fe-1781cb41049f";
+    String currencyId = "978";
     String publicToken = null;
     String pan = null;
     String pin = null;
@@ -24,7 +25,7 @@ public class Peak extends TestBase {
                 .queryParam("ddStatus", "SDD")
                 .queryParam("feeTarifPlanId", "10012")
                 .queryParam("program", "PEAK_CASHCARD_WHITE_EUR")
-                .queryParam("currencyId", "978")
+                .queryParam("currencyId", currencyId)
                 .queryParam("firstName", "PEAK")
                 .queryParam("lastName", "TEST")
                 .queryParam("rStreetLine1", "rStreetLine1")
@@ -113,6 +114,37 @@ public class Peak extends TestBase {
                 .queryParam("firstName", "firstName")
                 .when()
                 .get("PeakServices/v1/card/updateCardholder")
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 6)
+    public void test_PeakServices_v1_card_depositToCard(){
+        given().log().uri().log().headers().log().body()
+                .queryParam("requestId", "4f48912e-412e-30ca-a75d-b20c933516f5")
+                .queryParam("publicTokenTo", publicToken)
+                .queryParam("currencyId", currencyId)
+                .queryParam("amount", "15")
+                .queryParam("note", "description")
+                .when()
+                .get("PeakServices/v1/card/depositToCard")
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 7)
+    public void test_PeakServices_v1_card_cardToCardTransfer(){
+        given().log().uri().log().headers().log().body()
+                .queryParam("requestId", "37e7fa96-9087-41c3-90d0-6dd2ad516c9e")
+                .queryParam("publicTokenFrom", "352299423")
+                .queryParam("currencyId", currencyId)
+                .queryParam("amount", "1")
+                .queryParam("note", "description")
+                .queryParam("publicTokenTo", "352307110")
+                .when()
+                .get("PeakServices/v1/card/cardToCardTransfer")
                 .then()
                 .log().all()
                 .statusCode(200);
