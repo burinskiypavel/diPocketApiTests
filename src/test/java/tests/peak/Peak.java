@@ -1,14 +1,16 @@
 package tests.peak;
 
 import base.TestBase;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
 public class Peak extends TestBase {
-    String requestId = "6613ba7c-bbe6-434c-a5fe-3781cb51069f";
+    String requestId = "6613ba7c-bbe6-434c-a5fe-3781cb51049f";
     String publicToken = null;
     String pan = null;
     String pin = null;
@@ -16,6 +18,7 @@ public class Peak extends TestBase {
 
     @Test(priority = 1)
     public void test_PeakServices_v1_card_cardIssue(){
+        baseURI = "http://dipocket3.intranet:8092/";
         Response res =  given().log().uri().log().headers()
                 .queryParam("lang", "en")
                 .queryParam("ddStatus", "SDD")
@@ -46,7 +49,7 @@ public class Peak extends TestBase {
                 .queryParam("cardType", "PLASTIC")
                 .queryParam("requestId", requestId)
                 .when()
-                .get("http://dipocket3.intranet:8092/PeakServices/v1/card/cardIssue");
+                .get("PeakServices/v1/card/cardIssue");
 
                 res.then().log().all()
                         .statusCode(200)
@@ -67,10 +70,26 @@ public class Peak extends TestBase {
                 .queryParam("requestId", requestId)
                 .queryParam("publicToken", publicToken)
                 .when()
-                .get("http://dipocket3.intranet:8092/PeakServices/v1/card/activateCard")
+                .get("PeakServices/v1/card/activateCard")
                 .then()
                 .log().all()
                 .statusCode(200)
                 .body("cardStatus", equalTo("ACTIVE"));
+    }
+
+    @Test(priority = 3)
+    public void test_PeakServices_v1_card_setPin(){
+        given().log().uri().log().headers().log().body()
+                .contentType(ContentType.JSON)
+                .body("{\n" +
+                        "    \"requestId\":  \""+requestId+"\",\n" +
+                        "    \"publicToken\":  \""+publicToken+"\",\n" +
+                        "    \"pin\":  \"0007\"\n" +
+                        "}")
+                .when()
+                .post("PeakServices/v1/card/setPin")
+                .then()
+                .log().all()
+                .statusCode(200);
     }
 }
