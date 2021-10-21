@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
 public class Peak extends TestBase {
-    String requestId = "6613ba7c-bbe6-434c-a5fe-3781cb41049f";
+    String requestId = "6613ba7c-bbe6-434c-a4fe-3781cb41049f";
     String publicToken = null;
     String pan = null;
     String pin = null;
@@ -104,5 +104,17 @@ public class Peak extends TestBase {
                 .log().all()
                 .statusCode(200)
                 .body("pin", equalTo("0007"));
+    }
+
+    @Test(priority = 5)
+    public void test_PeakServices_v1_card_updateCardholder(){
+        given().log().uri().log().headers().log().body()
+                .queryParam("publicToken", publicToken)
+                .queryParam("firstName", "firstName")
+                .when()
+                .get("PeakServices/v1/card/updateCardholder")
+                .then()
+                .log().all()
+                .statusCode(200);
     }
 }
