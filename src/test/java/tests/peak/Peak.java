@@ -165,5 +165,21 @@ public class Peak extends TestBase {
                 .body(containsString("financeBalance"));
 
         detailsRef = res.getBody().jsonPath().get("transactions.detailsRef").toString();
+        System.out.println("detailsRef: " + detailsRef);
+    }
+
+    @Test(priority = 9)
+    public void test_PeakServices_v1_card_transactionDetails(){
+        String resultDetailsRef = detailsRef.substring(1, 16);
+        given().log().uri().log().headers()
+                .queryParam("detailsRef", resultDetailsRef)
+                .when()
+                .get("PeakServices/v1/card/transactionDetails")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body(containsString("accCurrencyCode"))
+                .body(containsString("accAmount"))
+                .body(containsString("stateId"));
     }
 }
