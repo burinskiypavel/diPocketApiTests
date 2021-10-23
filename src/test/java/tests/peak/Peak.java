@@ -55,10 +55,11 @@ public class Peak extends TestBase {
 
                 res.then().log().all()
                         .statusCode(200)
-                        .body(containsString("publicToken"))
-                        .body(containsString("pan"))
-                        .body(containsString("expDate"))
-                        .body(containsString("cvv"));
+                        .body(
+                                 containsString("publicToken")
+                                ,containsString("pan")
+                                ,containsString("expDate")
+                                ,containsString("cvv"));
 
                 publicToken = res.getBody().jsonPath().get("publicToken").toString();
                 pan = res.getBody().jsonPath().get("pan").toString();
@@ -160,9 +161,10 @@ public class Peak extends TestBase {
 
         res.then().log().all()
                 .statusCode(200)
-                .body(containsString("account"))
-                .body(containsString("availableBalance"))
-                .body(containsString("financeBalance"));
+                .body(
+                         containsString("account")
+                        ,containsString("availableBalance")
+                        ,containsString("financeBalance"));
 
         detailsRef = res.getBody().jsonPath().get("transactions.detailsRef").toString();
         System.out.println("detailsRef: " + detailsRef);
@@ -178,8 +180,22 @@ public class Peak extends TestBase {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body(containsString("accCurrencyCode"))
-                .body(containsString("accAmount"))
-                .body(containsString("stateId"));
+                .body(containsString("accCurrencyCode"),
+                containsString("accAmount"),
+                containsString("stateId"));
+    }
+
+    @Test(priority = 10)
+    public void test_PeakServices_v1_card_blockCard(){
+        given().log().uri().log().headers()
+                .queryParam("requestId", requestId)
+                .queryParam("publicToken", publicToken)
+                .queryParam("reason", "LOST")
+                .when()
+                .get("PeakServices/v1/card/blockCard")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("cardStatus", equalTo("LOST"));
     }
 }
