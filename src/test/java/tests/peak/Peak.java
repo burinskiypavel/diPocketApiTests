@@ -67,7 +67,7 @@ public class Peak extends TestBase {
 
     @Test(priority = 2)
     public void test_PeakServices_v1_card_activateCard(){
-        given().log().uri().log().headers().log().body()
+        given().log().uri().log().headers()
                 .queryParam("requestId", requestId)
                 .queryParam("publicToken", publicToken)
                 .when()
@@ -96,7 +96,7 @@ public class Peak extends TestBase {
 
     @Test(priority = 4)
     public void test_PeakServices_v1_card_pinReveal(){
-        given().log().uri().log().headers().log().body()
+        given().log().uri().log().headers()
                 .queryParam("publicToken", publicToken)
                 .queryParam("cvv", cvv)
                 .when()
@@ -109,7 +109,7 @@ public class Peak extends TestBase {
 
     @Test(priority = 5)
     public void test_PeakServices_v1_card_updateCardholder(){
-        given().log().uri().log().headers().log().body()
+        given().log().uri().log().headers()
                 .queryParam("publicToken", publicToken)
                 .queryParam("firstName", "firstName")
                 .when()
@@ -121,7 +121,7 @@ public class Peak extends TestBase {
 
     @Test(priority = 6)
     public void test_PeakServices_v1_card_depositToCard(){
-        given().log().uri().log().headers().log().body()
+        given().log().uri().log().headers()
                 .queryParam("requestId", "4f48912e-412e-30ca-a75d-"+app.generateRandomString(12)+"")
                 .queryParam("publicTokenTo", publicToken)
                 .queryParam("currencyId", currencyId)
@@ -136,7 +136,7 @@ public class Peak extends TestBase {
 
     @Test(priority = 7)
     public void test_PeakServices_v1_card_cardToCardTransfer(){
-        given().log().uri().log().headers().log().body()
+        given().log().uri().log().headers()
                 .queryParam("requestId", "37e7fa96-9087-41c3-90d0-"+app.generateRandomString(12)+"")
                 .queryParam("publicTokenFrom", "352299423")
                 .queryParam("currencyId", currencyId)
@@ -152,7 +152,7 @@ public class Peak extends TestBase {
 
     @Test(priority = 8)
     public void test_PeakServices_v1_card_transactionList(){
-        given().log().uri().log().headers().log().body()
+        given().log().uri().log().headers()
                 .queryParam("publicToken", publicToken)
                 .when()
                 .get("PeakServices/v1/card/transactionList")
