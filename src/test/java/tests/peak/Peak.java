@@ -158,6 +158,9 @@ public class Peak extends TestBase {
                 .get("PeakServices/v1/card/transactionList")
                 .then()
                 .log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body(containsString("account"))
+                .body(containsString("availableBalance"))
+                .body(containsString("financeBalance"));
     }
 }
