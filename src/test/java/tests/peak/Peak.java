@@ -16,6 +16,7 @@ public class Peak extends TestBase {
     String pan = null;
     String pin = null;
     String cvv = null;
+    String detailsRef = null;
 
     @Test(priority = 1)
     public void test_PeakServices_v1_card_cardIssue(){
@@ -152,15 +153,17 @@ public class Peak extends TestBase {
 
     @Test(priority = 8)
     public void test_PeakServices_v1_card_transactionList(){
-        given().log().uri().log().headers()
+        Response res = given().log().uri().log().headers()
                 .queryParam("publicToken", publicToken)
                 .when()
-                .get("PeakServices/v1/card/transactionList")
-                .then()
-                .log().all()
+                .get("PeakServices/v1/card/transactionList");
+
+        res.then().log().all()
                 .statusCode(200)
                 .body(containsString("account"))
                 .body(containsString("availableBalance"))
                 .body(containsString("financeBalance"));
+
+        detailsRef = res.getBody().jsonPath().get("transactions.detailsRef").toString();
     }
 }
