@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
-public class Peak extends TestBase {
+public class PeakTests extends TestBase {
     String requestId = "6513ba7c-bbe6-534c-a4fe-"+app.generateRandomString(12)+"";
     String currencyId = "978";
     String publicToken = null;
@@ -213,5 +213,17 @@ public class Peak extends TestBase {
                         ,containsString("publicToken")
                         ,containsString("ddStatus")
                         ,containsString("firstName"));
+    }
+
+    @Test(priority = 12)
+    public void test_PeakServices_v1_card_unblockCard(){
+        given().log().uri().log().headers()
+                .queryParam("publicToken", publicToken)
+                .when()
+                .get("PeakServices/v1/card/unblockCard")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("cardStatus", equalTo("ACTIVE"));
     }
 }
