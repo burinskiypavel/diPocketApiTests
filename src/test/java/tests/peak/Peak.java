@@ -198,4 +198,20 @@ public class Peak extends TestBase {
                 .statusCode(200)
                 .body("cardStatus", equalTo("LOST"));
     }
+
+    @Test(priority = 11)
+    public void test_PeakServices_v1_card_cardInquiry(){
+        given().log().uri().log().headers()
+                .queryParam("publicToken", publicToken)
+                .when()
+                .get("PeakServices/v1/card/cardInquiry")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body(containsString("cardStatus")
+                        ,containsString("LOST")
+                        ,containsString("publicToken")
+                        ,containsString("ddStatus")
+                        ,containsString("firstName"));
+    }
 }
