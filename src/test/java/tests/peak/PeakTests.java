@@ -167,7 +167,6 @@ public class PeakTests extends TestBase {
                         ,containsString("financeBalance"));
 
         detailsRef = res.getBody().jsonPath().get("transactions.detailsRef").toString();
-        System.out.println("detailsRef: " + detailsRef);
     }
 
     @Test(priority = 9)
