@@ -3,10 +3,16 @@ package tests.dipocket.registration;
 import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.google.gson.Gson;
 import io.restassured.response.Response;
+import model.client.ClientAddress;
+import model.registration.AttachedCard;
+import model.registration.RegSavepointData;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -112,6 +118,34 @@ public class RegistrationTest extends TestBase {
 
     @Test(priority = 8)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
+//        Gson gson = new Gson();
+//
+//        ClientAddress clientAddress = new ClientAddress();
+//        clientAddress.setTypeId(0);
+//
+//        ClientAddress regAddress = new ClientAddress();
+//        regAddress.setTypeId(3);
+//
+//
+//        List<AttachedCard> attachedCardsList = new ArrayList<>();
+//
+//
+//        RegSavepointData regSavepointData = new RegSavepointData();
+//        regSavepointData.setDeviceUUID(HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+//        regSavepointData.setLangId(4);
+//        regSavepointData.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+//        regSavepointData.setStepNo(1);
+//        regSavepointData.setRegisteredAddrAsmail(true);
+//        regSavepointData.setAddress(clientAddress);
+//        regSavepointData.setRegAddress(regAddress);
+//        regSavepointData.setAttachedCardsList(attachedCardsList);
+//        regSavepointData.setSmsCode(smsCode);
+//        regSavepointData.setIsSkipped(false);
+//
+//        String json = gson.toJson(regSavepointData);
+
+
+
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
