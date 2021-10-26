@@ -118,57 +118,50 @@ public class RegistrationTest extends TestBase {
 
     @Test(priority = 8)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
-//        Gson gson = new Gson();
-//
-//        ClientAddress clientAddress = new ClientAddress();
-//        clientAddress.setTypeId(0);
-//
-//        ClientAddress regAddress = new ClientAddress();
-//        regAddress.setTypeId(3);
-//
-//
-//        List<AttachedCard> attachedCardsList = new ArrayList<>();
-//
-//
-//        RegSavepointData regSavepointData = new RegSavepointData();
-//        regSavepointData.setDeviceUUID(HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
-//        regSavepointData.setLangId(4);
-//        regSavepointData.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
-//        regSavepointData.setStepNo(1);
-//        regSavepointData.setRegisteredAddrAsmail(true);
-//        regSavepointData.setAddress(clientAddress);
-//        regSavepointData.setRegAddress(regAddress);
-//        regSavepointData.setAttachedCardsList(attachedCardsList);
-//        regSavepointData.setSmsCode(smsCode);
-//        regSavepointData.setIsSkipped(false);
-//
-//        String json = gson.toJson(regSavepointData);
+        Gson gson = new Gson();
+        ClientAddress clientAddress = new ClientAddress();
+        clientAddress.setTypeId(0);
+        ClientAddress regAddress = new ClientAddress();
+        regAddress.setTypeId(3);
+        List<AttachedCard> attachedCardsList = new ArrayList<>();
 
-
+        RegSavepointData regSavepointData = new RegSavepointData();
+        regSavepointData.setDeviceUUID(HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+        regSavepointData.setLangId(4);
+        regSavepointData.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+        regSavepointData.setStepNo(1);
+        regSavepointData.setRegisteredAddrAsmail(true);
+        regSavepointData.setAddress(clientAddress);
+        regSavepointData.setRegAddress(regAddress);
+        regSavepointData.setAttachedCardsList(attachedCardsList);
+        regSavepointData.setSmsCode(smsCode);
+        regSavepointData.setIsSkipped(false);
+        String json = gson.toJson(regSavepointData);
 
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"stepNo\" : 1,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+//                        "  \"stepNo\" : 1,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
                 .then().log().all()
