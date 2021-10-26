@@ -1,0 +1,35 @@
+{
+  "cardId": 10456,
+  
+  "blockCash": true,
+
+  "blockOnline": true,
+  "blockPayPass": true,
+  "blockPos": false,
+
+  "cachDailyLimit": {
+    "ccyId": 978,
+    "ccySymbol": "€",
+    "maxAmount": 200,
+    "limitAmount": 100,
+    "availableAmount": 50
+  },
+  "purchaseDailyLimit": {
+    "ccyId": 978,
+    "ccySymbol": "€",
+    "maxAmount": 200,
+    "limitAmount": 100,
+    "availableAmount": 50
+  },
+
+  "listPermittedCountriesEditable":  true,
+  "listPermittedCountries": [{
+    "id": 804,
+    "name": "Ukraine"
+  }],
+  "listRestrictedCategories": [{
+    "id": 8999,
+    "name": "Private topup",
+    "editable": false
+  }]
+}

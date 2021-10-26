@@ -1,0 +1,22 @@
+{
+  "cardId": 0,
+  "cpnId": "481822619",
+  "cardType": 0,
+  "blockCard": false,
+  "blockCash": true,
+  "blockPurchase": true,
+  "blockEcom": true,
+  "blockPayPass": true,
+  "cachDailyLimit": {
+    "limitAmount": 100
+  },
+  "purchaseDailyLimit": {
+    "limitAmount": 100
+  },
+  "listIdPermittedCountries": [
+    "804"
+  ],
+  "listIdRestrictedCategories": [
+    "8999"
+  ]
+}

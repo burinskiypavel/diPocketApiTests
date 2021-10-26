@@ -3,11 +3,11 @@ package tests.dipocket.registration;
 import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.pojo.client.ClientAddress;
+import com.cs.dipocketback.pojo.registration.AttachedCard;
+import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
-import model.client.ClientAddress;
-import model.registration.AttachedCard;
-import model.registration.RegSavepointData;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
