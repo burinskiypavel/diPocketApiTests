@@ -7,6 +7,14 @@
     <groupId>org.example</groupId>
     <artifactId>diPocketApiTests2</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <repositories>
+        <repository>
+            <id>local-maven-repo</id>
+            <url>file:///${project.basedir}/local-maven-repo</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -75,6 +83,14 @@
             <artifactId>webdrivermanager</artifactId>
             <version>3.0.0</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>oracle-driver</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/libs/ojdbc8-19.3.0.0.jar</systemPath>
         </dependency>
 
     </dependencies>
