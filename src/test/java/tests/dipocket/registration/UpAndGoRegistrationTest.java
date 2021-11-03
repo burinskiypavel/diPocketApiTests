@@ -60,8 +60,8 @@ public class UpAndGoRegistrationTest extends TestBase {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("countryList.code", hasItems("AU", "MK", "PK", "RS", "JP"),
-                        "countryList.name", hasItems("Австралия", "Македония", "Пакистан", "Сербия", "Япония"));
+                .body("countryList.code", hasItems("AU", "MK", "JP"),
+                        "countryList.name", hasItems("Австралия", "Македония", "Япония"));
     }
 
     @Test(priority = 4)
