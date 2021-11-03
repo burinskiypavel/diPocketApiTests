@@ -20,8 +20,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 1)
     public void test_PeakServices_v1_card_cardIssue(){
-        baseURI = "http://dipocket3.intranet:8092/";
-        Response res =  given().log().uri().log().headers()
+        Response res =  given()
+                .spec(app.requestSpecPeak)
                 .queryParam("lang", "en")
                 .queryParam("ddStatus", "SDD")
                 .queryParam("feeTarifPlanId", "10012")
@@ -69,7 +69,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 2)
     public void test_PeakServices_v1_card_activateCard(){
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("requestId", requestId)
                 .queryParam("publicToken", publicToken)
                 .when()
@@ -82,7 +83,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 3)
     public void test_PeakServices_v1_card_setPin(){
-        given().log().uri().log().headers().log().body()
+        given()
+                .spec(app.requestSpecPeak)
                 .contentType(ContentType.JSON)
                 .body("{\n" +
                         "    \"requestId\":  \""+requestId+"\",\n" +
@@ -98,7 +100,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 4)
     public void test_PeakServices_v1_card_pinReveal(){
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("publicToken", publicToken)
                 .queryParam("cvv", cvv)
                 .when()
@@ -111,7 +114,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 5)
     public void test_PeakServices_v1_card_updateCardholder(){
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("publicToken", publicToken)
                 .queryParam("firstName", "firstName")
                 .when()
@@ -123,7 +127,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 6)
     public void test_PeakServices_v1_card_depositToCard(){
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("requestId", "4f48912e-412e-30ca-a75d-"+app.generateRandomString(12)+"")
                 .queryParam("publicTokenTo", publicToken)
                 .queryParam("currencyId", currencyId)
@@ -138,7 +143,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 7)
     public void test_PeakServices_v1_card_cardToCardTransfer(){
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("requestId", "37e7fa96-9087-41c3-90d0-"+app.generateRandomString(12)+"")
                 .queryParam("publicTokenFrom", "352299423")
                 .queryParam("currencyId", currencyId)
@@ -154,7 +160,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 8)
     public void test_PeakServices_v1_card_transactionList(){
-        Response res = given().log().uri().log().headers()
+        Response res = given()
+                .spec(app.requestSpecPeak)
                 .queryParam("publicToken", publicToken)
                 .when()
                 .get("PeakServices/v1/card/transactionList");
@@ -172,7 +179,8 @@ public class PeakTests extends TestBase {
     @Test(priority = 9)
     public void test_PeakServices_v1_card_transactionDetails(){
         String resultDetailsRef = detailsRef.substring(1, 16);
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("detailsRef", resultDetailsRef)
                 .when()
                 .get("PeakServices/v1/card/transactionDetails")
@@ -186,7 +194,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 10)
     public void test_PeakServices_v1_card_blockCard(){
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("requestId", requestId)
                 .queryParam("publicToken", publicToken)
                 .queryParam("reason", "LOST")
@@ -200,7 +209,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 11)
     public void test_PeakServices_v1_card_cardInquiry(){
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("publicToken", publicToken)
                 .when()
                 .get("PeakServices/v1/card/cardInquiry")
@@ -216,7 +226,8 @@ public class PeakTests extends TestBase {
 
     @Test(priority = 12)
     public void test_PeakServices_v1_card_unblockCard(){
-        given().log().uri().log().headers()
+        given()
+                .spec(app.requestSpecPeak)
                 .queryParam("publicToken", publicToken)
                 .when()
                 .get("PeakServices/v1/card/unblockCard")

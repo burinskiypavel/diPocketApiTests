@@ -76,6 +76,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecSnowAttack;
     public RequestSpecification requestSpecTDS;
     public RequestSpecification requestSpecTDSJson;
+    public RequestSpecification requestSpecPeak;
     public RestAssuredConfig configTimeout;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
@@ -190,6 +191,11 @@ public class ApplicationManager {
                 .config(configTimeout)
                 .baseUri(TDSBaseUrl)
                 .contentType("application/xml");
+
+        requestSpecPeak = given()
+                .log().uri().log().headers()
+                .config(configTimeout)
+                .baseUri("http://dipocket3.intranet:8092/");
 
         requestSpecTDSJson = given()
                 .config(configTimeout)
