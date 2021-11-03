@@ -175,6 +175,7 @@ public class ApplicationManager {
 
         requestSpecEmailVerification = given()
                 .baseUri(dipocket3_intranet)
+                .log().uri().log().headers().log().body()
                 .contentType("application/json");
 
         requestSpecTelenor = given()
@@ -193,7 +194,7 @@ public class ApplicationManager {
                 .contentType("application/xml");
 
         requestSpecPeak = given()
-                .log().uri().log().headers()
+                .log().uri().log().headers().log().body()
                 .config(configTimeout)
                 .baseUri("http://dipocket3.intranet:8092/");
 
