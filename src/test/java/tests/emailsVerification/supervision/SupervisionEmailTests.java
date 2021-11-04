@@ -93,7 +93,11 @@ public class SupervisionEmailTests extends TestBase {
         }
         softAssert.assertEquals(actualSubject, expectedEmailSubject, "Subject is not correct ");
         softAssert.assertEquals(actualBody, expectedEmailBody, "Body is not correct");
-        softAssert.assertEquals(actualFooter, expectedEmailFooter, "Footer is not correct");
+
+        if(!site.equals("UPANDGO")){
+            softAssert.assertEquals(actualFooter, expectedEmailFooter, "Footer is not correct");
+        }
+
         softAssert.assertAll();
     }
 
