@@ -81,12 +81,13 @@ public class BankTransferTests extends TestBase {
         String actualFooter = getEmailFooterText(emailText, footerEnd);
 
         SoftAssert softAssert = new SoftAssert();
-        if(!site.equals("UPANDGO")){
-            softAssert.assertEquals(actualSender, expectedEmailSender, "Sender is not correct");
-        }
+        softAssert.assertEquals(actualSender, expectedEmailSender, "Sender is not correct");
         softAssert.assertEquals(actualSubject, expectedEmailSubject, "Subject is not correct");
         softAssert.assertEquals(actualBody, expectedEmailBody, "Body is not correct");
-        softAssert.assertEquals(actualFooter, expectedEmailFooter, "Footer is not correct");
+
+        if(!site.equals("UPANDGO")){
+            softAssert.assertEquals(actualFooter, expectedEmailFooter, "Footer is not correct");
+        }
         softAssert.assertAll();
     }
 }
