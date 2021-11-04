@@ -202,10 +202,10 @@ public class StatementEmailTests extends TestBase {
         String actualBody = getEmailBodyText(emailText, 29, 173);
         String actualFooter = getEmailFooterText(emailText, 174);
 
-        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+        assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo("Your "+app.site_upAndGo+" account statement"));
         assertThat(actualBody, equalTo("Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your up and go account statement(s). Thank you for using "+app.site_upAndGo+". With kind regards, Legal Team"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
+        //assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test
@@ -220,10 +220,10 @@ public class StatementEmailTests extends TestBase {
         String actualBody = getEmailBodyText(emailText, 29, 194);
         String actualFooter = getEmailFooterText(emailText, 195);
 
-        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+        assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo("Виписка по рахунку "+app.site_upAndGo+""));
         assertThat(actualBody, equalTo("Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлена Вами банківська виписка по рахунку "+app.site_upAndGo+". Дякуємо за користування додатком "+app.site_upAndGo+". З повагою, Юридичний відділ"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
+        //assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test
@@ -238,10 +238,10 @@ public class StatementEmailTests extends TestBase {
         String actualBody = getEmailBodyText(emailText, 0, 155);
         String actualFooter = getEmailFooterText(emailText, 156);
 
-        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+        assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo("Twój wyciąg z konta "+app.site_upAndGo+""));
         assertThat(actualBody, equalTo("Witaj "+app.emailsVerificationsFirstName+", W załączniku znajduje się zamówiony wyciąg z konta up and go. Dziękujemy za korzystanie z serwisu "+app.site_upAndGo+". Z wyrazami szacunku, Dział Prawny"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
+        //assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT"));
     }
 
     @Test
@@ -256,10 +256,10 @@ public class StatementEmailTests extends TestBase {
         String actualBody = getEmailBodyText(emailText, 29, 176);
         String actualFooter = getEmailFooterText(emailText, 177);
 
-        //assertThat(actualSender, equalTo(expectedUpAndGoSender));
+        assertThat(actualSender, equalTo(expectedUpAndGoSender));
         assertThat(actualSubject, equalTo("Выписка по счету "+app.site_upAndGo+""));
         assertThat(actualBody, equalTo("Здравствуйте, "+app.emailsVerificationsFirstName+"! К письму прикреплена выписка по счету, которую Вы заказывали. Спасибо за пользование "+app.site_upAndGo+". С уважением, Юридический отдел"));
-        assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
+        //assertThat(actualFooter, equalTo(""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT"));
     }
 
     @Test
