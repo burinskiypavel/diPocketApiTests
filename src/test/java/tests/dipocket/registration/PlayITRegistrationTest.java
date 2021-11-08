@@ -3,10 +3,16 @@ package tests.dipocket.registration;
 import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.pojo.client.ClientAddress;
+import com.cs.dipocketback.pojo.registration.AttachedCard;
+import com.cs.dipocketback.pojo.registration.RegSavepointData;
+import com.google.gson.Gson;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -19,6 +25,12 @@ public class PlayITRegistrationTest extends TestBase {
     String countryId = "826";
     String currencyId = "348";
     String site = "PLAYIT";
+    int langId = 4;
+
+    Gson gson = new Gson();
+    ClientAddress clientAddress = new ClientAddress();
+    ClientAddress regAddress = new ClientAddress();
+    RegSavepointData regSavepointData = new RegSavepointData();
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
@@ -55,8 +67,8 @@ public class PlayITRegistrationTest extends TestBase {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("versionColor", equalTo("BLACK"))
-                .body("appParams.isAccountCreationEnabled", equalTo(true));
+                .body("versionColor", equalTo("BLACK"),
+                        "appParams.isAccountCreationEnabled", equalTo(true));
     }
 
     @Test(priority = 4)
@@ -116,29 +128,47 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 8)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
+        clientAddress.setTypeId(0);
+        regAddress.setTypeId(3);
+        List<AttachedCard> attachedCardsList = new ArrayList<>();
+
+        regSavepointData.setDeviceUUID(HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+        regSavepointData.setLangId(langId);
+        regSavepointData.setMainPhone(app.playITRegistrationPhone);
+        regSavepointData.setStepNo(1);
+        regSavepointData.setRegisteredAddrAsmail(true);
+        regSavepointData.setAddress(clientAddress);
+        regSavepointData.setRegAddress(regAddress);
+        regSavepointData.setAttachedCardsList(attachedCardsList);
+        regSavepointData.setSmsCode(smsCode);
+        regSavepointData.setIsSkipped(false);
+        String json = gson.toJson(regSavepointData);
+        System.out.println(json);
+
         given()
                 .spec(app.requestSpecPlayITRegistration)
                 .contentType("application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"mainPhone\" : \""+ app.playITRegistrationPhone+"\",\n" +
-                        "  \"stepNo\" : 1,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"mainPhone\" : \""+ app.playITRegistrationPhone+"\",\n" +
+//                        "  \"stepNo\" : 1,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
                 .then()
