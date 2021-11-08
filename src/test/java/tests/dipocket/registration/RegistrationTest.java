@@ -21,9 +21,14 @@ import static org.testng.Assert.assertEquals;
 
 public class RegistrationTest extends TestBase {
     String smsCode = null;
-    String countryId = "616";
-    String currencyId = "985";
+    int countryId = 616;
+    int currencyId = 985;
     String site = "DIPOCKET";
+    int langId = 4;
+
+    Gson gson = new Gson();
+    ClientAddress clientAddress = new ClientAddress();
+    ClientAddress regAddress = new ClientAddress();
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
@@ -118,10 +123,8 @@ public class RegistrationTest extends TestBase {
 
     @Test(priority = 8)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
-        Gson gson = new Gson();
-        ClientAddress clientAddress = new ClientAddress();
+
         clientAddress.setTypeId(0);
-        ClientAddress regAddress = new ClientAddress();
         regAddress.setTypeId(3);
         List<AttachedCard> attachedCardsList = new ArrayList<>();
 
@@ -185,50 +188,83 @@ public class RegistrationTest extends TestBase {
 
     @Test(priority = 10)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_() {
+        clientAddress.setStreetLine1("Home");
+        clientAddress.setCity("Kharkiv");
+        clientAddress.setZip("30-000");
+        clientAddress.setCountryId(countryId);
+
+        regAddress.setStreetLine1("Home");
+        regAddress.setCity("Kharkiv");
+        regAddress.setZip("30-000");
+        regAddress.setCountryId(countryId);
+        List<AttachedCard> attachedCardsList = new ArrayList<>();
+
+        RegSavepointData regSavepointData = new RegSavepointData();
+        regSavepointData.setDeviceUUID(HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+        regSavepointData.setLangId(langId);
+        regSavepointData.setFirstName(HelperBase.prop.getProperty("mobile.registration.firstName"));
+        regSavepointData.setLastName(HelperBase.prop.getProperty("mobile.registration.lastName"));
+        regSavepointData.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+        regSavepointData.setCountryId(countryId);
+        regSavepointData.setCurrencyId(currencyId);
+        regSavepointData.setBirthDate("715611173985");
+        regSavepointData.setResidenceCountryId(countryId);
+        regSavepointData.setStepNo(1);
+        regSavepointData.setRegisteredAddrAsmail(true);
+        regSavepointData.setAddress(clientAddress);
+        regSavepointData.setRegAddress(regAddress);
+        regSavepointData.setAttachedCardsList(attachedCardsList);
+        regSavepointData.setSmsCode(smsCode);
+        regSavepointData.setIsSkipped(false);
+        String json = gson.toJson(regSavepointData);
+
+        System.out.println(json);
+
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
-                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"birthDate\" : \"715611173985\",\n" +
-                        "  \"residenceCountryId\" : 616,\n" +
-                        "  \"stepNo\" : 2,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
+//                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
+//                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+//                        "  \"countryId\" : "+countryId+",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"birthDate\" : \"715611173985\",\n" +
+//                        "  \"residenceCountryId\" : 616,\n" +
+//                        "  \"stepNo\" : 2,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
                 .then().log().all()
