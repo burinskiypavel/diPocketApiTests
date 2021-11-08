@@ -218,8 +218,6 @@ public class RegistrationTest extends TestBase {
         regSavepointData.setIsSkipped(false);
         String json = gson.toJson(regSavepointData);
 
-        System.out.println(json);
-
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
