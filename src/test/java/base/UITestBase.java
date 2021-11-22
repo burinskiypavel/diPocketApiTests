@@ -505,4 +505,17 @@ public class UITestBase {
         type(By.id("secAnswer"), secAnswer);
         pressConfirm(By.cssSelector("button[data-dpwa-action='sa-send']"));
     }
+
+//    Up And Go
+
+    public void gotoUpAndGoSiteAndDoneBasicAuth(String url, String login, String password) {
+        //driver.navigate().to("https://dipocket:LeprechauN@telenor-test.dipocket.org");
+        driver.navigate().to("https://"+login+":"+password+"@"+url+"");
+        waitForSeveralItems(new String[]{"Register your card", "Login/ Top-up", "Check balance and PIN code"});
+    }
+
+    public void gotoLoginPageUpAndGo() {
+        driver.findElement(By.cssSelector("a[href='/en/cabinet']")).click();
+        waitForSeveralItems(new String[]{"Login", "Phone number"});
+    }
 }

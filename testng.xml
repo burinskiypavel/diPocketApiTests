@@ -481,6 +481,12 @@
         </classes>
     </test>
 
+    <test name="UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest">
+        <classes>
+            <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
