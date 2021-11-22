@@ -487,6 +487,12 @@
         </classes>
     </test>
 
+    <test name="UpAndGoCheckBalanceNegativeTests">
+        <classes>
+            <class name="tests.uiTests.upandgo.UpAndGoCheckBalanceNegativeTests"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
