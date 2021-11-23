@@ -493,6 +493,12 @@
         </classes>
     </test>
 
+    <test name="UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest">
+        <classes>
+            <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
