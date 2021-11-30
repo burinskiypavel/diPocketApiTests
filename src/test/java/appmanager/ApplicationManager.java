@@ -169,6 +169,7 @@ public class ApplicationManager {
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
 
         requestSpecSnowAttackHomePage = given()
+                .log().uri().log().headers().log().body()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site.snowAttack"));
                 //.header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
