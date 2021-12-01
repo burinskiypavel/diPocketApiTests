@@ -41,11 +41,11 @@
     <!--&lt;!&ndash;        </classes>&ndash;&gt;-->
     <!--&lt;!&ndash;    </test>&ndash;&gt;-->
 
-    <!--    <test name="TDSV1BioAcceptTest">-->
-    <!--        <classes>-->
-    <!--            <class name="tests.tds.TDSV1BioAcceptTest"/>-->
-    <!--        </classes>-->
-    <!--    </test>-->
+        <test name="TDSV1BioAcceptTest">
+            <classes>
+                <class name="tests.tds.TDSV1BioAcceptTest"/>
+            </classes>
+        </test>
 
     <!--    <test name="TDSV1BioDeclineTest">-->
     <!--        <classes>-->
@@ -348,11 +348,11 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="TelenorFullRegistrationPageNegativeVerificationTests">
-        <classes>
-            <class name="tests.uiTests.telenor.TelenorFullRegistrationPageNegativeVerificationTests"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorFullRegistrationPageNegativeVerificationTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.telenor.TelenorFullRegistrationPageNegativeVerificationTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 <!--    <test name="TelenorCheckBalanceNegativeTests">-->
 <!--        <classes>-->
