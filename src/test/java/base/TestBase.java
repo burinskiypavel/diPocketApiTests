@@ -18,6 +18,11 @@ public class TestBase {
         app.init();
     }
 
+    public void printCurentThredId(){
+        String className = this.getClass().getCanonicalName();
+        System.out.println("Class Name: " + className + "  Current thred id: " + Thread.currentThread().getId());
+    }
+
     //    public void deleteClientFromDB2() throws SQLException, ClassNotFoundException {
 //        //Connection con = DriverManager.getConnection(dbUrl,username,password);
 //        String dbUrl = "jdbc:oracle:thin:@dipocket1.intranet/dip";
