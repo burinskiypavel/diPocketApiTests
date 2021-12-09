@@ -39,7 +39,7 @@ public class ChangePhoneTests extends TestBase {
                 "}";
     }
 
-    public void postSendChangePhoneMailRealFlow(int landId, String site, int id) {
+    public void sendChangePhoneMail(int landId, String site, int id) {
         given()
                 .spec(app.requestSpecEmailVerification)
                 .body(body(landId, site, id))
@@ -73,7 +73,7 @@ public class ChangePhoneTests extends TestBase {
 
     @Test(dataProvider = "ChangePhone")
     public void testChangePhone(String site, String lang, int langId, int id, String email, String pass, int bodyBegin, int bodyEnd, int footerEnd, String expectedEmailSender, String expectedEmailSubject, String expectedEmailBody, String expectedEmailFooter) throws InterruptedException, MessagingException, IOException {
-        postSendChangePhoneMailRealFlow(langId, site, id);
+        sendChangePhoneMail(langId, site, id);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
         String actualSender = senderAndSubject.get(0);
