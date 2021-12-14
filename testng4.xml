@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestingSuite" parallel="none">
+
+
+
+    <!--EmailsVerification-->
+
+    <test name="EmailsVerificationBankTransferTests">
+        <classes>
+            <class name="tests.emailsVerification.bankTransfer.BankTransferTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationChangeEmailTests">
+        <classes>
+            <class name="tests.emailsVerification.changeEmail.ChangeEmailTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationChangePhoneTests">
+        <classes>
+            <class name="tests.emailsVerification.changePhone.ChangePhoneTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationLegalEmailTests">
+        <classes>
+            <class name="tests.emailsVerification.legalEmail.LegalEmailTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationStatementEmailTests">
+        <classes>
+            <class name="tests.emailsVerification.statement.StatementEmailTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationSupervisionEmailTests">
+        <classes>
+            <class name="tests.emailsVerification.supervision.SupervisionEmailTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationResetPasswordTests">
+        <classes>
+            <class name="tests.emailsVerification.resetPassword.ResetPasswordTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationTacEmailsTests">
+        <classes>
+            <class name="tests.emailsVerification.tac.TacEmailsTests"/>
+        </classes>
+    </test>
+
+    <!--    <test name="EmailsVerificationResetSecretAnswerTests">-->
+    <!--        <classes>-->
+    <!--            <class name="emailsVerification.resetSecretAnswer.ResetSecretAnswerTests"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+    <test name="EmailsVerificationLegalAttachmentsDipocketTests">
+        <classes>
+            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsDipocketTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationLegalAttachmentsUpAndGoTests">
+        <classes>
+            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsUpAndGoTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationLegalAttachmentsPlayITTests">
+        <classes>
+            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsPlayITTests"/>
+        </classes>
+    </test>
+
+    <test name="EmailsVerificationLegalAttachmentsSnowAttackTests">
+        <classes>
+            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsSnowAttackTests"/>
+        </classes>
+    </test>
+
+    <!--    <test name="EmailsVerificationStatementAttachmentsDipocketTests">-->
+    <!--        <classes>-->
+    <!--            <class name="emailsVerification.statement.StatementAttachmentsDipocketTests"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+    <!--    <test name="EmailsVerificationStatementAttachmentsUpAndGoTests">-->
+    <!--        <classes>-->
+    <!--            <class name="emailsVerification.statement.StatementAttachmentsUpAndGoTests"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+    <!--    <test name="EmailsVerificationStatementAttachmentsPlayITTests">-->
+    <!--        <classes>-->
+    <!--            <class name="emailsVerification.statement.StatementAttachmentsPlayITTests"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+</suite>
