@@ -524,4 +524,17 @@ public class UITestBase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='false']")));
         return driver.findElement(By.cssSelector("div.uk-modal-content")).getText();
     }
+
+    // bo
+
+    public void gotoBOSiteAndLoginWithBOUserRole(String login, String password) throws InterruptedException {
+        driver.navigate().to("https://support.dipocket.dev/NgBOTool");
+        waitForSeveralItems(new String[]{"Login:", "Password:", "Log in"});
+
+        type(By.cssSelector("input[type='text']"), login);
+        type(By.cssSelector("input[type='password']"), password);
+        Thread.sleep(500);
+        click(By.cssSelector("button[type='button']"));
+        waitForSeveralItems(new String[]{"Search", "Take Ticket", "Home", "Logout"});
+    }
 }
