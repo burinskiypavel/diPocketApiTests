@@ -499,6 +499,18 @@
         </classes>
     </test>
 
+    <test name="LoginBOUserRolesBOTest">
+        <classes>
+            <class name="tests.uiTests.bo.LoginBOUserRolesBOTest"/>
+        </classes>
+    </test>
+
+    <test name="LoginBOUserRolesCBOTest">
+        <classes>
+            <class name="tests.uiTests.bo.LoginBOUserRolesCBOTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
