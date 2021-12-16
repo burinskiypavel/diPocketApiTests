@@ -254,6 +254,20 @@ public class UITestBase {
         return driver.findElements(locator).size() != 0;
     }
 
+    public boolean areElementsPresent(String mas []){
+        boolean bool = false;
+        for(int i = 0; i < mas.length; i++){
+
+            bool =  isElementPresent(By.xpath(mas[i]));
+
+            if(bool == false){
+                System.out.println("element is not present: " + mas[i]);
+                return false;
+            }
+        }
+        return true;
+    }
+
     public String navigateToTelenorAndLogin(String phone, String smsCode) {
         basicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         driver.findElement(By.cssSelector("a[href='/en/login']")).click();
@@ -530,11 +544,20 @@ public class UITestBase {
     public void gotoBOSiteAndLoginWithBOUserRole(String login, String password) throws InterruptedException {
         driver.navigate().to("https://support.dipocket.dev/NgBOTool");
         waitForSeveralItems(new String[]{"Login:", "Password:", "Log in"});
-
         type(By.cssSelector("input[type='text']"), login);
         type(By.cssSelector("input[type='password']"), password);
         Thread.sleep(500);
         click(By.cssSelector("button[type='button']"));
         waitForSeveralItems(new String[]{"Search", "Take Ticket", "Home", "Logout"});
+    }
+
+    public void gotoBOSiteAndLoginWithCBOUserRole(String login, String password) throws InterruptedException {
+        driver.navigate().to("https://support.dipocket.dev/NgBOTool");
+        waitForSeveralItems(new String[]{"Login:", "Password:", "Log in"});
+        type(By.cssSelector("input[type='text']"), login);
+        type(By.cssSelector("input[type='password']"), password);
+        Thread.sleep(500);
+        click(By.cssSelector("button[type='button']"));
+        waitForSeveralItems(new String[]{"Tickets", "BO Users", "Search", "Operations", "Reports"});
     }
 }
