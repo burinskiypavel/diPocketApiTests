@@ -190,6 +190,7 @@ public class ApplicationManager {
                 .contentType("application/json; charset=utf-8");
 
         requestSpecTDS = given()
+                .log().uri().log().headers().log().body()
                 .config(configTimeout)
                 .baseUri(TDSBaseUrl)
                 .contentType("application/xml");
@@ -200,6 +201,7 @@ public class ApplicationManager {
                 .baseUri("http://dipocket3.intranet:8092/");
 
         requestSpecTDSJson = given()
+                .log().uri().log().headers().log().body()
                 .config(configTimeout)
                 .baseUri(TDSBaseUrl)
                 .contentType("application/json");
