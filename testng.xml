@@ -282,11 +282,11 @@
         </classes>
     </test>
 
-    <test name="TelenorNewAndOldPINNegativeTests">
-        <classes>
-            <class name="tests.uiTests.telenor.manageSecurity.TelenorNewAndOldPINNegativeTests"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorNewAndOldPINNegativeTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.telenor.manageSecurity.TelenorNewAndOldPINNegativeTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TelenorRegistrationVerificationUntickedCheckboxForPersonalInformationProcessingTest">
         <classes>
@@ -294,17 +294,17 @@
         </classes>
     </test>
 
-    <test name="TelenorRegistrationVerificationWithInvalidTokenTest">
-        <classes>
-            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorRegistrationVerificationWithInvalidTokenTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithInvalidTokenTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TelenorRegistrationVerificationWithInvalidPhoneTest">
-        <classes>
-            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithInvalidPhoneTest"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorRegistrationVerificationWithInvalidPhoneTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationWithInvalidPhoneTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest">
         <classes>
@@ -336,11 +336,11 @@
     <!--        </classes>-->
     <!--    </test>-->
 
-    <test name="TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests">
-        <classes>
-            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests"/>
-        </classes>
-    </test>
+<!--    <test name="TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.telenor.TelenorRegistrationVerificationMaximumSMSCountLimitReachedTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TelenorLoginVerificationWithEmptyPhoneFieldTest">
         <classes>
