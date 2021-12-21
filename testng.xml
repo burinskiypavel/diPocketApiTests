@@ -501,13 +501,13 @@
 
     <test name="LoginBOUserRolesBOTest">
         <classes>
-            <class name="tests.uiTests.bo.LoginBOUserRolesBOTest"/>
+            <class name="tests.uiTests.bo.boUser.LoginBOUserRolesBOTest"/>
         </classes>
     </test>
 
     <test name="LoginBOUserRolesCBOTest">
         <classes>
-            <class name="tests.uiTests.bo.LoginBOUserRolesCBOTest"/>
+            <class name="tests.uiTests.bo.boUser.LoginBOUserRolesCBOTest"/>
         </classes>
     </test>
 

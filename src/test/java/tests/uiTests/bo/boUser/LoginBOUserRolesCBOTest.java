@@ -1,4 +1,4 @@
-package tests.uiTests.bo;
+package tests.uiTests.bo.boUser;
 
 import base.UITestBase;
 import org.testng.annotations.Test;
