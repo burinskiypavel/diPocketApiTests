@@ -254,6 +254,11 @@ public class UITestBase {
         return driver.findElements(locator).size() != 0;
     }
 
+    public boolean isDefault(By locator) {
+        boolean bool = isElementPresent(locator);
+        return bool;
+    }
+
     public boolean areElementsPresent(String mas []){
         boolean bool = false;
         for(int i = 0; i < mas.length; i++){
