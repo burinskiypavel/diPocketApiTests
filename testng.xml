@@ -511,6 +511,12 @@
         </classes>
     </test>
 
+    <test name="BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
