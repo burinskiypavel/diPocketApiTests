@@ -13,6 +13,7 @@ public class BOUserRolesCBORolesTableTest extends UITestBase {
     public void testBOUserRolesCBORolesTable() throws InterruptedException {
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
         click(By.xpath("//p[contains(text(), 'BO Users')]"));
+        waitFor(By.id("p-tabpanel-2-label"));
         click(By.id("p-tabpanel-2-label"));
 
         assertTrue(isTabActiveAndSelected(By.xpath("//a[@id='p-tabpanel-2-label'][@aria-selected='true']")));
