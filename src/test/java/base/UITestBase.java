@@ -250,6 +250,16 @@ public class UITestBase {
         return driver.findElement(locator).isSelected();
     }
 
+    public boolean isTabActiveAndSelected(By locator) {
+        boolean bool = isElementPresent(locator);
+        return bool;
+    }
+
+    public boolean isPageOpen(By locator) {
+        boolean bool = isElementPresent(locator);
+        return bool;
+    }
+
     public boolean isElementPresent(By locator) {
         return driver.findElements(locator).size() != 0;
     }

@@ -499,6 +499,8 @@
         </classes>
     </test>
 
+    <!--BO-->
+
     <test name="LoginBOUserRolesBOTest">
         <classes>
             <class name="tests.uiTests.bo.boUser.LoginBOUserRolesBOTest"/>
@@ -514,6 +516,18 @@
     <test name="BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest">
         <classes>
             <class name="tests.uiTests.bo.boUser.BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest"/>
+        </classes>
+    </test>
+
+    <test name="BOUserRolesCBOAllUsersTableTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOAllUsersTableTest"/>
+        </classes>
+    </test>
+
+    <test name="BOUserRolesCBORolesTableTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBORolesTableTest"/>
         </classes>
     </test>
 
