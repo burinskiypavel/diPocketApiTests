@@ -575,4 +575,9 @@ public class UITestBase {
         click(By.cssSelector("button[type='button']"));
         waitForSeveralItems(new String[]{"Tickets", "BO Users", "Search", "Operations", "Reports"});
     }
+
+    public void gotoBOUsersPage() {
+        click(By.xpath("//p[contains(text(), 'BO Users')]"));
+        waitFor(By.xpath("//span[contains(text(), 'Active users')]"));
+    }
 }

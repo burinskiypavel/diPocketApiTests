@@ -11,7 +11,7 @@ public class BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest extends UIT
     @Test
     public void testBOUserRolesCBOVerifyActiveUsersTableIsDefaultOption() throws InterruptedException {
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
-        click(By.xpath("//p[contains(text(), 'BO Users')]"));
+        gotoBOUsersPage();
 
         assertTrue(isElementPresent(By.xpath("//span[contains(text(), 'Active users')]")));
         assertTrue(isDefault(By.xpath("//a[@id='p-tabpanel-0-label'][@aria-selected='true']")));
