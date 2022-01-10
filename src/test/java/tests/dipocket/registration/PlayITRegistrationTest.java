@@ -3,6 +3,7 @@ package tests.dipocket.registration;
 import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import com.cs.dipocketback.pojo.client.CheckboxContainer;
 import com.cs.dipocketback.pojo.client.ClientAddress;
 import com.cs.dipocketback.pojo.registration.AttachedCard;
@@ -540,6 +541,6 @@ public class PlayITRegistrationTest extends TestBase {
                 .then().log().all();
                 //.statusCode(200);
 
-        assertTrue(app.getDbHelper().iSClientExistInDB(app.playITRegistrationPhone, "PLAYIT"));
+        assertTrue(app.getDbHelper().iSClientExistInDB(app.playITRegistrationPhone, Site.PLAYIT.toString()));
     }
 }
