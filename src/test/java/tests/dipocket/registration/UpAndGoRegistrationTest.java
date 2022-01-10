@@ -3,6 +3,7 @@ package tests.dipocket.registration;
 import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import com.cs.dipocketback.pojo.client.CheckboxContainer;
 import com.cs.dipocketback.pojo.client.ClientAddress;
 import com.cs.dipocketback.pojo.registration.AttachedCard;
@@ -19,6 +20,7 @@ import static com.cs.dipocketback.pojo.client.CheckboxType.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -26,8 +28,9 @@ public class UpAndGoRegistrationTest extends TestBase {
     String smsCode = null;
     int countryId = 616;
     int currencyId = 985;
-    String site = "UPANDGO";
+    String site = Site.UPANDGO.toString();
     int langId = 4;
+    String redirectedLink = "https://upandgo-test.dipocket.org/en/verify/email";
 
     Gson gson = new Gson();
     ClientAddress clientAddress = new ClientAddress();
@@ -619,9 +622,24 @@ public class UpAndGoRegistrationTest extends TestBase {
         String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationSnowAttack(app.registrationEmail, "pasword12!");
         System.out.println("link_link " + link);
         given()
+                .log().uri()
                 .when()
+                .redirects().follow(false)
                 .get(link)
-                .then().log().all();
+                .then()
+                .log().all()
+                .statusCode(301)
+                .headers("Location", notNullValue(),
+                        "Location", redirectedLink);
+
+        given()
+                .log().uri()
+                .when()
+                .auth().preemptive().basic("dipocket", "LeprechauN")
+                .get(redirectedLink)
+                .then()
+                .log().all()
+                .statusCode(200);
 
         assertTrue(app.getDbHelper().iSClientExistInDB(app.registrationPhone, site));
     }
