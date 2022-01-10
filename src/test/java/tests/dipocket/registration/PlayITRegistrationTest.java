@@ -21,6 +21,7 @@ import static com.cs.dipocketback.pojo.client.CheckboxType.TERMS_AND_CONDITIONS_
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -28,8 +29,9 @@ public class PlayITRegistrationTest extends TestBase {
     String smsCode = null;
     int countryId = 826;
     int currencyId = 348;
-    String site = "PLAYIT";
+    String site = Site.PLAYIT.toString();
     int langId = 4;
+    String redirectedLink = "https://playit-test.dipocket.org/verify/email";
 
     Gson gson = new Gson();
     ClientAddress clientAddress = new ClientAddress();
@@ -41,7 +43,7 @@ public class PlayITRegistrationTest extends TestBase {
         app.getDbHelper().deleteClientFromDB(app.playITRegistrationPhone, site);
         given()
                 .spec(app.requestSpecPlayITRegistration)
-                .queryParam("langID", "4")
+                .queryParam("langID", langId)
                 .when()
                 .get( "references/availableCountries")
                 .then()
@@ -535,12 +537,26 @@ public class PlayITRegistrationTest extends TestBase {
     public void testEmailLink() throws InterruptedException, SQLException, ClassNotFoundException {
         String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationPlayIT(  "testdipocket4@gmail.com", "pasword12!");
         System.out.println("link_link " + link);
-        given().log().uri()
+        given()
+                .log().uri()
                 .when()
+                .redirects().follow(false)
                 .get(link)
-                .then().log().all();
-                //.statusCode(200);
+                .then()
+                .log().all()
+                .statusCode(301)
+                .headers("Location", notNullValue(),
+                        "Location", redirectedLink);
 
-        assertTrue(app.getDbHelper().iSClientExistInDB(app.playITRegistrationPhone, Site.PLAYIT.toString()));
+        given()
+                .log().uri()
+                .when()
+                .auth().preemptive().basic("dipocket", "LeprechauN")
+                .get(redirectedLink)
+                .then()
+                .log().all()
+                .statusCode(200);
+
+        assertTrue(app.getDbHelper().iSClientExistInDB(app.playITRegistrationPhone, site));
     }
 }
