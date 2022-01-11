@@ -21,15 +21,19 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
         type(By.cssSelector("app-input[ng-reflect-label='Role ID'] input[type='text']"), "testqa");
 
         type(By.cssSelector("app-input[ng-reflect-label='Role name'] input[type='text']"), "testqa2");
+        Thread.sleep(1000);
 
         click(By.cssSelector("app-button[ng-reflect-label='Add']"));
 
 
         click(By.cssSelector("p-dropdown[placeholder='Role']"));
+        Thread.sleep(1000);
         click(By.cssSelector("li[aria-label='testqa']"));
+        Thread.sleep(1000);
 
         clickCheckbox(By.cssSelector("div[role='checkbox']"));
         click(By.cssSelector("app-button[label='Update']"));
+        waitFor(By.xpath("//div[contains(text(), 'User role changed successfully')]"));
 
         assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role changed successfully')]")));
 
