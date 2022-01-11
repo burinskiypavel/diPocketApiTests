@@ -18,10 +18,8 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
         waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
 
         type(By.cssSelector("app-input[ng-reflect-label='Role ID'] input[type='text']"), "testqa");
-
         type(By.cssSelector("app-input[ng-reflect-label='Role name'] input[type='text']"), "testqa2");
-        Thread.sleep(1000);
-
+        Thread.sleep(500);
         click(By.cssSelector("app-button[ng-reflect-label='Add']"));
 
 
