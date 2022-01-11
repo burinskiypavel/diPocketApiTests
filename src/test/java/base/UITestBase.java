@@ -580,4 +580,23 @@ public class UITestBase {
         click(By.xpath("//p[contains(text(), 'BO Users')]"));
         waitFor(By.xpath("//span[contains(text(), 'Active users')]"));
     }
+
+    public void gotoRolesTab() {
+        click(By.id("p-tabpanel-2-label"));
+    }
+
+    public void addRole(String roleID, String roleName) throws InterruptedException {
+        click(By.cssSelector("app-button[label='+ Add']"));
+        waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
+        type(By.cssSelector("app-input[ng-reflect-label='Role ID'] input[type='text']"), roleID);
+        type(By.cssSelector("app-input[ng-reflect-label='Role name'] input[type='text']"), roleName);
+        Thread.sleep(500);
+        click(By.cssSelector("app-button[ng-reflect-label='Add']"));
+    }
+
+    public void selectRoleFromDropDown(final String name) {
+        click(By.cssSelector("p-dropdown[placeholder='Role']"));
+        click(By.cssSelector("li[aria-label='" + name + "']"));
+        waitFor(By.cssSelector("div[role='checkbox']"));
+    }
 }

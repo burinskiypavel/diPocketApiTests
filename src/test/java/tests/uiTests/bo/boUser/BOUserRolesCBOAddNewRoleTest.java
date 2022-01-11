@@ -12,20 +12,9 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
     public void testBOUserRolesCBOAddNewRole() throws InterruptedException {
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
         gotoBOUsersPage();
-        click(By.id("p-tabpanel-2-label"));
-
-        click(By.cssSelector("app-button[label='+ Add']"));
-        waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
-
-        type(By.cssSelector("app-input[ng-reflect-label='Role ID'] input[type='text']"), "testqa");
-        type(By.cssSelector("app-input[ng-reflect-label='Role name'] input[type='text']"), "testqa2");
-        Thread.sleep(500);
-        click(By.cssSelector("app-button[ng-reflect-label='Add']"));
-
-
-        click(By.cssSelector("p-dropdown[placeholder='Role']"));
-        click(By.cssSelector("li[aria-label='testqa']"));
-        waitFor(By.cssSelector("div[role='checkbox']"));
+        gotoRolesTab();
+        addRole("testqa1", "testqa2");
+        selectRoleFromDropDown("testqa1");
 
         clickCheckbox(By.cssSelector("div[role='checkbox']"));
         click(By.cssSelector("app-button[label='Update']"));
