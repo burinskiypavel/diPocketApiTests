@@ -11,8 +11,7 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
     @Test
     public void testBOUserRolesCBOAddNewRole() throws InterruptedException {
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
-        click(By.xpath("//p[contains(text(), 'BO Users')]"));
-        waitFor(By.id("p-tabpanel-2-label"));
+        gotoBOUsersPage();
         click(By.id("p-tabpanel-2-label"));
 
         click(By.cssSelector("app-button[label='+ Add']"));
