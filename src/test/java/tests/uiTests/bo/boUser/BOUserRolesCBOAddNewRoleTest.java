@@ -26,7 +26,7 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
 
 
         click(By.cssSelector("p-dropdown[placeholder='Role']"));
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         click(By.cssSelector("li[aria-label='testqa']"));
         Thread.sleep(1000);
 
