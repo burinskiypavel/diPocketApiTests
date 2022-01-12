@@ -585,6 +585,10 @@ public class UITestBase {
         click(By.id("p-tabpanel-2-label"));
     }
 
+    public void gotoAllUsersTab() {
+        click(By.id("p-tabpanel-1-label"));
+    }
+
     public void addRole(String roleID, String roleName) throws InterruptedException {
         click(By.cssSelector("app-button[label='+ Add']"));
         waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
@@ -600,9 +604,11 @@ public class UITestBase {
         waitFor(By.cssSelector("div[role='checkbox']"));
     }
 
-    public void editUserRole(String roleName) {
+    public void editUserRole(String roleName) throws InterruptedException {
         click(By.cssSelector("app-button[label='Edit']"));
         type(By.cssSelector("div[role='dialog'] input[type='text']"), roleName);
+        Thread.sleep(1000);
         click(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']"));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']")));
     }
 }

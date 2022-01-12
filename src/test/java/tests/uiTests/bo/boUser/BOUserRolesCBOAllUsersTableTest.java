@@ -11,9 +11,8 @@ public class BOUserRolesCBOAllUsersTableTest extends UITestBase {
     @Test
     public void testBOUserRolesCBOAllUsersTable() throws InterruptedException {
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
-        click(By.xpath("//p[contains(text(), 'BO Users')]"));
-        waitFor(By.id("p-tabpanel-1-label"));
-        click(By.id("p-tabpanel-1-label"));
+        gotoBOUsersPage();
+        gotoAllUsersTab();
 
         assertTrue(isElementPresent(By.xpath("//a[@id='p-tabpanel-1-label'][@aria-selected='true']")));
         assertTrue(isElementPresent(By.xpath("//div[@id='p-tabpanel-1'][@aria-hidden='false']")));
