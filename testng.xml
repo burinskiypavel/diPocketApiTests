@@ -543,6 +543,12 @@
         </classes>
     </test>
 
+    <test name="BOUserRolesCBODeleteRoleTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBODeleteRoleTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
