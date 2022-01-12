@@ -611,4 +611,9 @@ public class UITestBase {
         click(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']"));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']")));
     }
+
+    public void deleteRole() {
+        click(By.cssSelector("app-button[label='Delete']"));
+        click(By.cssSelector("app-role-delete-modal app-button[label='Delete']"));
+    }
 }

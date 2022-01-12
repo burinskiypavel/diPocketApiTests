@@ -19,8 +19,7 @@ public class BOUserRolesCBODeleteRoleTest extends UITestBase {
             gotoBOUsersPage();
             gotoRolesTab();
             selectRoleFromDropDown(roleID);
-            click(By.cssSelector("app-button[label='Delete']"));
-            click(By.cssSelector("app-role-delete-modal app-button[label='Delete']"));
+            deleteRole();
             waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
         }
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
@@ -28,9 +27,7 @@ public class BOUserRolesCBODeleteRoleTest extends UITestBase {
         gotoRolesTab();
         addRole(roleID, "a_roleName");
         selectRoleFromDropDown(roleID);
-
-        click(By.cssSelector("app-button[label='Delete']"));
-        click(By.cssSelector("app-role-delete-modal app-button[label='Delete']"));
+        deleteRole();
         waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
 
         assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role deleted successfully')]")));
