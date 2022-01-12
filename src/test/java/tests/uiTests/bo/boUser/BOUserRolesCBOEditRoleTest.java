@@ -18,10 +18,4 @@ public class BOUserRolesCBOEditRoleTest extends UITestBase {
 
         assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role edited successfully')]")));
     }
-
-    public void editUserRole(String roleName) {
-        click(By.cssSelector("app-button[label='Edit']"));
-        type(By.cssSelector("div[role='dialog'] input[type='text']"), roleName);
-        click(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']"));
-    }
 }

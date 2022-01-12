@@ -599,4 +599,10 @@ public class UITestBase {
         click(By.cssSelector("li[aria-label='" + name + "']"));
         waitFor(By.cssSelector("div[role='checkbox']"));
     }
+
+    public void editUserRole(String roleName) {
+        click(By.cssSelector("app-button[label='Edit']"));
+        type(By.cssSelector("div[role='dialog'] input[type='text']"), roleName);
+        click(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']"));
+    }
 }
