@@ -14,15 +14,14 @@ public class BOUserRolesCBOEditRoleTest extends UITestBase {
         gotoBOUsersPage();
         gotoRolesTab();
         selectRoleFromDropDown("1");
+        editUserRole("test2");
 
+        assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role edited successfully')]")));
+    }
+
+    public void editUserRole(String roleName) {
         click(By.cssSelector("app-button[label='Edit']"));
-        type(By.cssSelector("div[role='dialog'] input[type='text']"), "test2");
+        type(By.cssSelector("div[role='dialog'] input[type='text']"), roleName);
         click(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']"));
-
-
-        //assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role changed successfully')]")));
-
-        //click(By.cssSelector("app-button[label='Delete']"));
-        //click(By.cssSelector("app-role-delete-modal app-button[label='Delete']"));
     }
 }
