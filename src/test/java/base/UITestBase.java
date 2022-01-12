@@ -607,7 +607,7 @@ public class UITestBase {
     public void editUserRole(String roleName) throws InterruptedException {
         click(By.cssSelector("app-button[label='Edit']"));
         type(By.cssSelector("div[role='dialog'] input[type='text']"), roleName);
-        Thread.sleep(1000);
+        Thread.sleep(500);
         click(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']"));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Edit']")));
     }
