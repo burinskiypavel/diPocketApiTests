@@ -66,7 +66,7 @@ public class DBHelper extends HelperBase {
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
 
-        String query2 = "commit";
+        String commit = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -74,11 +74,8 @@ public class DBHelper extends HelperBase {
 
         CallableStatement myCall = connection.prepareCall("{call PKI_CLIENT.CLEARCLIENTBYPHONE(p_Site=>'" + site + "',p_Phone=>'" +number+"')}");
         myCall.executeUpdate();
-
         Statement stmt = connection.createStatement();
-
-        ResultSet rs2= stmt.executeQuery(query2);
-
+        stmt.executeQuery(commit);
         connection.close();
     }
 
@@ -87,7 +84,7 @@ public class DBHelper extends HelperBase {
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
 
-        String query2 = "commit";
+        String commit = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -97,9 +94,7 @@ public class DBHelper extends HelperBase {
         myCall.executeUpdate();
 
         Statement stmt = connection.createStatement();
-
-        ResultSet rs2= stmt.executeQuery(query2);
-
+        stmt.executeQuery(commit);
         connection.close();
     }
 
@@ -160,10 +155,12 @@ public class DBHelper extends HelperBase {
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
         String query = "delete from clientdevice where uuid = '"+clientDevice+"'";
+        String commit = "commit";
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
-        ResultSet rs= stmt.executeQuery(query);
+        stmt.executeQuery(query);
+        stmt.executeQuery(commit);
         con.close();
     }
 
