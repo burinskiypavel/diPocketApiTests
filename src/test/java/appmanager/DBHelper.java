@@ -536,4 +536,27 @@ public class DBHelper extends HelperBase {
         }
         return bool;
     }
+
+    public String getRoleNameFromDB(String id) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM vb_userrole\n" +
+                "WHERE ID = '" + id + "'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String roleName = null;
+        while (rs.next()){
+            roleName = rs.getString(2);
+
+            System. out.println("roleName : " + roleName);
+            break;
+        }
+        con.close();
+        return roleName;
+    }
 }
