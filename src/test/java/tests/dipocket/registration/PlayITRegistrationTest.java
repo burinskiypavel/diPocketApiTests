@@ -557,6 +557,6 @@ public class PlayITRegistrationTest extends TestBase {
                 .log().all()
                 .statusCode(200);
 
-        assertTrue(app.getDbHelper().iSClientExistInDB(app.playITRegistrationPhone, site));
+        assertTrue(app.getDbHelper().isClientExistInDB(app.playITRegistrationPhone, site));
     }
 }

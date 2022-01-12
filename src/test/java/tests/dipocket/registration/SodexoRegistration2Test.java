@@ -1,9 +1,7 @@
 package tests.dipocket.registration;
 
 import appmanager.EmailIMAPHelper;
-import appmanager.HelperBase;
 import base.TestBase;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -203,6 +201,6 @@ public class SodexoRegistration2Test extends TestBase {
                 .statusCode(200)
                 .body("html.body.div.div.div.div.div.div.div.h1", equalTo("Login"));
 
-        assertTrue(app.getDbHelper().iSClientExistInDB(phone, site));
+        assertTrue(app.getDbHelper().isClientExistInDB(phone, site));
     }
 }

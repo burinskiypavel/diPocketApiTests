@@ -1,6 +1,7 @@
 package appmanager;
 
 import java.sql.*;
+import java.util.Objects;
 
 public class DBHelper extends HelperBase {
     String nulll = null;
@@ -499,7 +500,7 @@ public class DBHelper extends HelperBase {
         return stateID;
     }
 
-    public boolean iSClientExistInDB(String phone, String site) throws SQLException, ClassNotFoundException {
+    public boolean isClientExistInDB(String phone, String site) throws SQLException, ClassNotFoundException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
@@ -558,5 +559,32 @@ public class DBHelper extends HelperBase {
         }
         con.close();
         return roleName;
+    }
+
+    public boolean isRoleExistInDB(String roleID) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM vb_userrole\n" +
+                "where ID = '" + roleID + "'";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String id = null;
+        boolean bool = true;
+        while (rs.next()){
+            id = rs.getString(1);
+            System. out.println("id : " + id);
+            break;
+        }
+        con.close();
+
+        if(Objects.equals(id, null)){
+            bool = false;
+            return bool;
+        }
+        return bool;
     }
 }

@@ -458,6 +458,6 @@ public class SodexoRegistrationTest extends TestBase {
                 .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
                 .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"));
 
-        assertTrue(app.getDbHelper().iSClientExistInDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site));
+        assertTrue(app.getDbHelper().isClientExistInDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site));
     }
 }

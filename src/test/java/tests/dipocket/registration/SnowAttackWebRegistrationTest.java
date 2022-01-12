@@ -206,6 +206,6 @@ public class SnowAttackWebRegistrationTest extends TestBase {
                 .statusCode(200)
                 .body("html.body.div.div.div.div.div.div.div.h1", equalTo("Login"));
 
-        assertTrue(app.getDbHelper().iSClientExistInDB(phone, site));
+        assertTrue(app.getDbHelper().isClientExistInDB(phone, site));
     }
 }

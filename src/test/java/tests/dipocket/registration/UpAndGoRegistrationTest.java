@@ -643,6 +643,6 @@ public class UpAndGoRegistrationTest extends TestBase {
                 .log().all()
                 .statusCode(200);
 
-        assertTrue(app.getDbHelper().iSClientExistInDB(app.registrationPhone, site));
+        assertTrue(app.getDbHelper().isClientExistInDB(app.registrationPhone, site));
     }
 }
