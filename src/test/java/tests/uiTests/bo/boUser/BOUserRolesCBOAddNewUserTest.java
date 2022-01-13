@@ -32,5 +32,8 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
         click(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'SODEXO')]"));
 
         type(By.cssSelector("app-input[ng-reflect-label='Firstname'] input[type='text']"), "Pavel");
+
+        WebElement fileInput = driver.findElement(By.cssSelector("input[type='file']"));
+        fileInput.sendKeys("C:/Work/Files/self.jpg");
     }
 }
