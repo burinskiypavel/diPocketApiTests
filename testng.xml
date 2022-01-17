@@ -549,6 +549,12 @@
         </classes>
     </test>
 
+    <test name="BOUserRolesCBOEditUserTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOEditUserTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
