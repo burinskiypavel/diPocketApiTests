@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOEditUserTest extends UITestBase {
+    String random = app.generateRandomNumber(4);
 
     @Test
     public void testBOUserRolesCBOEditUser() throws InterruptedException {
@@ -35,8 +36,10 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
         assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
         assertTrue(isButtonEnabled(By.cssSelector("app-button[ng-reflect-label='Edit user")));
 
-        type(By.cssSelector("app-input[ng-reflect-label='Firstname'] input[type='text']"), "Pavel2");
+        type(By.cssSelector("app-input[ng-reflect-label='Firstname'] input[type='text']"), "Pavel" + random);
+        Thread.sleep(1200);
         click(By.cssSelector("app-button[ng-reflect-label='Edit user']"));
         waitFor(By.xpath("//*[contains(text(), 'User updated successfully')]"));
+        waitFor(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']"));
     }
 }
