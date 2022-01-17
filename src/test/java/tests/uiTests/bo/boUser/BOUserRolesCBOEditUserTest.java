@@ -41,5 +41,6 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
         click(By.cssSelector("app-button[ng-reflect-label='Edit user']"));
         waitFor(By.xpath("//*[contains(text(), 'User updated successfully')]"));
         waitFor(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']"));
+        assertTrue(isElementPresent(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']")));
     }
 }
