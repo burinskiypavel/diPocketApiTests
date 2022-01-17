@@ -615,5 +615,6 @@ public class UITestBase {
     public void deleteRole() {
         click(By.cssSelector("app-button[label='Delete']"));
         click(By.cssSelector("app-role-delete-modal app-button[label='Delete']"));
+        waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
     }
 }
