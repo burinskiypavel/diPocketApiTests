@@ -3,12 +3,19 @@ package tests.bo;
 import appmanager.HelperBase;
 import base.TestBase;
 import config.Properties;
+import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
+import model.bo.Client_sites;
+import model.telenor.login.auth_authenticate.AuthAuthenticate;
+import model.telenor.login.clientImages.Image;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Type;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LoginTest extends TestBase {
     String cookie = null;
@@ -60,15 +67,18 @@ public class LoginTest extends TestBase {
 
     @Test(priority = 4)
     public void test_BOServices_v1_client_sites(){
-        given()
+        Response res = given()
                 .log().uri().log().headers()
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "https://support.dipocket.dev/BOServices/v1/client/sites")
-                .then().log().all()
-                .statusCode(200)
-                .body("site", containsString("SODEXO"),
-                        "name", containsString("Sodexo"));
+                .get( "https://support.dipocket.dev/BOServices/v1/client/sites");
+            res.then().log().all().statusCode(200);
+        //Client_sites[] client_sites = res.as(Client_sites[].class, ObjectMapperType.GSON);
+        Client_sites[] client_sites = res.as(Client_sites[].class);
+        assertThat(client_sites[0].getSite(), equalTo("AIQLABS"));
+        assertThat(client_sites[0].getName(), equalTo("AIQLabs"));
+        assertThat(client_sites[2].getSite(), equalTo("BACCA"));
+        assertThat(client_sites[2].getName(), equalTo("Bacca"));
     }
 }
