@@ -2,6 +2,7 @@ package tests.emailsVerification.legalEmail;
 
 import appmanager.EmailVerificationHelper;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import model.telenor.login.auth_authenticate.AuthAuthenticate;
@@ -31,7 +32,7 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
     @Test(priority = 1)
     public void test_clientProfile_getLegalDocumentList() throws SQLException, ClassNotFoundException {
         //app.getDbHelper().deleteClientDeviceFromDB("380633192217-AutoTest-Login");
-        app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site_snowAttack);
+        app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.SNOW_ATTACK.toString());
         cliSessionId = app.getLogin_registrationHelper().loginSnowAttack(phone, "pasword1");
 
         given()
