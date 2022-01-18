@@ -3,9 +3,6 @@ package tests.emailsVerification.legalEmail;
 import appmanager.EmailVerificationHelper;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
-import io.restassured.mapper.ObjectMapperType;
-import io.restassured.response.Response;
-import model.telenor.login.auth_authenticate.AuthAuthenticate;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -18,14 +15,13 @@ import java.util.List;
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
 import static appmanager.EmailIMAPHelper.getEmailFooterText;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.testng.Assert.assertEquals;
 
 public class LegalAttachmentsSnowAttackTests extends TestBase {
     String cliSessionId = null;
     String email = "testdipocket2@gmail.com";
-    String pass = "pasword12!";
+    String pass = "pasword1";
+    String emailPass = "pasword12!";
     String phone = "380633192217";
     String expectedSender = "legal.team@dipocket.org";
 
@@ -33,11 +29,11 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
     public void test_clientProfile_getLegalDocumentList() throws SQLException, ClassNotFoundException {
         //app.getDbHelper().deleteClientDeviceFromDB("380633192217-AutoTest-Login");
         app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.SNOW_ATTACK.toString());
-        cliSessionId = app.getLogin_registrationHelper().loginSnowAttack(phone, "pasword1");
+        cliSessionId = app.getLogin_registrationHelper().loginSnowAttack(phone, pass);
 
         given()
                 .spec(app.requestSpecSnowAttackHomePage)
-                .auth().preemptive().basic(phone, "pasword1")
+                .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("clientProfile/getLegalDocumentList")
@@ -48,7 +44,7 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
                         "documentList.selected", hasItems(false, false));
     }
 
-    public void sendLegalInfo2(String phone, String pass, String cliSessionId, final String nameForClient) {
+    public void sendLegalInfo2(String phone, String pass, String cliSessionId, String nameForClient) {
         given()
                 .spec(app.requestSpecSnowAttackHomePage)
                 .auth().preemptive().basic(phone, pass)
@@ -72,14 +68,14 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
 
     @Test(priority = 2)
     public void test_clientProfile_sendLegalInfo2_SnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site_snowAttack);
-        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Card Terms and Conditions");
+        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.SNOW_ATTACK.toString());
+        sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Card Terms and Conditions");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 31, 178);
         String actualFooter = getEmailFooterText(emailText, 179);
 
@@ -94,14 +90,14 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
 
     @Test(priority = 3)
     public void test_clientProfile_sendLegalInfo2_SnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "5", app.mobile_site_snowAttack);
-        sendLegalInfo2("380633192217", "pasword1", "" + cliSessionId + "", "Kártyaszerződési feltételek");
+        app.getDbHelper().updateClientLanguageFromDB(email, "5", Site.SNOW_ATTACK.toString());
+        sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Kártyaszerződési feltételek");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 31, 181);
         String actualFooter = getEmailFooterText(emailText, 182);
 
