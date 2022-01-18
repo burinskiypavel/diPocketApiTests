@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class LoginTest extends TestBase {
+public class LoginBOTest extends TestBase {
     String cookie = null;
 
     @Test(priority = 1)
