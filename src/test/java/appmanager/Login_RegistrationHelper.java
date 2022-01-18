@@ -1,5 +1,6 @@
 package appmanager;
 
+import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
 
 import java.sql.SQLException;
@@ -157,8 +158,8 @@ public class Login_RegistrationHelper extends HelperBase {
 
     public String loginSnowAttack(String phone, String pass) {
         Response res = given().log().uri().log().headers().log().body()
-                .baseUri("https://dipocket3.intranet:8900")
-                .header("site", "SNOW_ATTACK")
+                .baseUri("https://http.dipocket.dev")
+                .header("site", Site.SNOW_ATTACK.toString())
                 .contentType("application/json; charset=utf-8")
                 .auth().preemptive().basic("11_" + phone, pass)
                 .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
