@@ -39,4 +39,21 @@ public class LoginTest extends TestBase {
                 .statusCode(200)
                 .body("value", equalTo(true));
     }
+
+    @Test(priority = 3)
+    public void test_BOServices_v1_user_authenticated(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "https://support.dipocket.dev/BOServices/v1/user/authenticated")
+                .then().log().all()
+                .statusCode(200)
+                .body("username", equalTo("PAVELB"),
+                        "email", equalTo("burinskiypavel@gmail.com"),
+                        "roleId", equalTo("CBO"),
+                        "phone", equalTo("380685448615"),
+                        "lastName", equalTo("Burinskiy"));
+    }
 }
