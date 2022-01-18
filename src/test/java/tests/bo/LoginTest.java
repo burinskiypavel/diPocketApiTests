@@ -19,6 +19,8 @@ public class LoginTest extends TestBase {
                 .when()
                 .post( "https://support.dipocket.dev/BOServices/v1/user/authentication")
                 .then().log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body("username", equalTo("PAVELB"));
+
     }
 }
