@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class LoginTest extends TestBase {
@@ -55,5 +56,19 @@ public class LoginTest extends TestBase {
                         "roleId", equalTo("CBO"),
                         "phone", equalTo("380685448615"),
                         "lastName", equalTo("Burinskiy"));
+    }
+
+    @Test(priority = 4)
+    public void test_BOServices_v1_client_sites(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "https://support.dipocket.dev/BOServices/v1/client/sites")
+                .then().log().all()
+                .statusCode(200)
+                .body("site", containsString("SODEXO"),
+                        "name", containsString("Sodexo"));
     }
 }
