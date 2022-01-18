@@ -17,7 +17,7 @@ public class LoginTest extends TestBase {
                 .auth().preemptive().basic("PAVELB", "D5kHO7a")
                 .contentType("application/json")
                 .when()
-                .post( "https://http.dipocket.dev/BOServices/v1/user/authentication")
+                .post( "https://support.dipocket.dev/BOServices/v1/user/authentication")
                 .then().log().all()
                 .statusCode(200);
     }
