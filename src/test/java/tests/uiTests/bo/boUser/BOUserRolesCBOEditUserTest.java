@@ -6,6 +6,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
@@ -26,7 +28,8 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
         seriesOfActions.perform() ;
 
         click(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Burinskiy']"));
-        waitFor(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Edit']"));
+        //waitFor(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Edit']"));
+        Thread.sleep(500);
         click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Edit']"));
 
         waitForSeveralItems(new String[]{"Role:", "Site:", "Firstname:",
