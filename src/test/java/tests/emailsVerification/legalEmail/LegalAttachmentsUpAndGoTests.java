@@ -3,6 +3,7 @@ package tests.emailsVerification.legalEmail;
 import appmanager.EmailVerificationHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -19,19 +20,24 @@ import static org.hamcrest.CoreMatchers.hasItems;
 
 public class LegalAttachmentsUpAndGoTests extends TestBase {
     String cliSessionId = null;
-    String email = "testdipocket@gmail.com";
-    String pass = "DvAUtN6";
-    String phone = "380685448615";
-    String deviceuuid = "380685448615-AutoTest-Login";
+    //String email = "testdipocket@gmail.com";
+    //String pass = "pasword1";
+    //String phone = "380685448615";
+    //String deviceuuid = "380685448615-AutoTest-Login";
+    String email = "testdipocket2@gmail.com";
+    String pass = "pasword1";
+    String emailPass = "pasword12!";
+    String phone = "380633192217";
+    String deviceuuid = "380633192217-AutoTest-Login";
 
     @Test(priority = 2)
     public void test_clientProfile_getLegalDocumentList() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site_upAndGo);
+        app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.UPANDGO.toString());
         cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(phone, pass ,deviceuuid);
 
         given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
-                .header("site", app.mobile_site_upAndGo)
+                .header("site", Site.UPANDGO.toString())
                 .header("deviceuuid", deviceuuid)
                 .auth().preemptive().basic("10_"+ phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
@@ -46,14 +52,14 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 3)
     public void test_clientProfile_sendLegalInfo2_UpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "4", app.mobile_site_upAndGo);
-        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Общие условия", "testdipocket2@gmail.com", "Tariff Table", app.mobile_site_upAndGo, "10_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Общие условия", "testdipocket2@gmail.com", "Tariff Table", Site.UPANDGO.toString(), "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 29, 183);
         String actualFooter = getEmailFooterText(emailText, 184);
 
@@ -68,14 +74,14 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 4)
     public void test_clientProfile_sendLegalInfo2_UpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site_upAndGo);
-        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Tariff Table", "testdipocket2@gmail.com", "Tariff Table", app.mobile_site_upAndGo, "10_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Tariff Table", "testdipocket2@gmail.com", "Tariff Table", Site.UPANDGO.toString(), "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 29, 172);
         String actualFooter = getEmailFooterText(emailText, 173);
 
@@ -90,14 +96,14 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 5)
     public void test_clientProfile_sendLegalInfo2_UpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "3", app.mobile_site_upAndGo);
-        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Tabela Opłat", "testdipocket2@gmail.com", "Tariff Table", app.mobile_site_upAndGo, "10_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "3", Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Tabela Opłat", "testdipocket2@gmail.com", "Tariff Table", Site.UPANDGO.toString(), "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 0, 147);
         String actualFooter = getEmailFooterText(emailText, 148);
 
@@ -112,14 +118,14 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 6)
     public void test_clientProfile_sendLegalInfo2_UpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "2", app.mobile_site_upAndGo);
-        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Тарифи", "testdipocket2@gmail.com", "Tariff Table", app.mobile_site_upAndGo, "10_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "2", Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Тарифи", "testdipocket2@gmail.com", "Tariff Table", Site.UPANDGO.toString(), "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 29, 174);
         String actualFooter = getEmailFooterText(emailText, 175);
 
