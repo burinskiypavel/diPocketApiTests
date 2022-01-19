@@ -28,7 +28,6 @@ public class BOLoginTest extends TestBase {
                 .statusCode(200)
                 .body("username", equalTo(username));
         cookie = response.getHeader("Set-Cookie");
-        System.out.println("cookie: " + cookie);
     }
 
     @Test(priority = 2)
