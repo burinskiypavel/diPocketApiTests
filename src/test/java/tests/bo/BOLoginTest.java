@@ -75,4 +75,17 @@ public class BOLoginTest extends TestBase {
         assertThat(client_sites[2].getSite(), equalTo("BACCA"));
         assertThat(client_sites[2].getName(), equalTo("Bacca"));
     }
+
+    @Test(priority = 5)
+    public void test_BOServices_v1_user_roles(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/BOServices/v1/user/roles")
+                .then().log().all()
+                .statusCode(200)
+                .body("", equalTo(""));
+    }
 }

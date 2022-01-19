@@ -14,14 +14,14 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
     @Test
     public void testBOUserRolesCBOAddNewRole() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
-            gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+            gotoBOSiteAndLoginWithCBOUserRole("PAVELB", "D5kHO7a");
             gotoBOUsersPage();
             gotoRolesTab();
             selectRoleFromDropDown(roleID);
             deleteRole();
         }
 
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole("PAVELB", "D5kHO7a");
         gotoBOUsersPage();
         gotoRolesTab();
         addRole(roleID, "testqa2");
