@@ -12,6 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BOLoginTest extends TestBase {
     String cookie = null;
+    String username = "PAVELB";
     String URL = "https://support.dipocket.dev";
 
     @Test(priority = 1)
@@ -19,13 +20,13 @@ public class BOLoginTest extends TestBase {
         baseURI = URL;
         Response response = given()
                 .log().uri().log().headers()
-                .auth().preemptive().basic("PAVELB", "D5kHO7a")
+                .auth().preemptive().basic(username, "D5kHO7a")
                 .contentType("application/json")
                 .when()
                 .post( "/BOServices/v1/user/authentication");
         response.then().log().all()
                 .statusCode(200)
-                .body("username", equalTo("PAVELB"));
+                .body("username", equalTo(username));
         cookie = response.getHeader("Set-Cookie");
         System.out.println("cookie: " + cookie);
     }
@@ -53,7 +54,7 @@ public class BOLoginTest extends TestBase {
                 .get( "/BOServices/v1/user/authenticated")
                 .then().log().all()
                 .statusCode(200)
-                .body("username", equalTo("PAVELB"),
+                .body("username", equalTo(username),
                         "email", equalTo("burinskiypavel@gmail.com"),
                         "roleId", equalTo("CBO"),
                         "phone", equalTo("380685448615"),
