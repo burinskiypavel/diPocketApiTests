@@ -10,18 +10,20 @@ import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
     String roleID = "testqa1";
+    String login = "PAVELB";
+    String pass = "D5kHO7a";
 
     @Test
     public void testBOUserRolesCBOAddNewRole() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
-            gotoBOSiteAndLoginWithCBOUserRole("PAVELB", "D5kHO7a");
+            gotoBOSiteAndLoginWithCBOUserRole(login, pass);
             gotoBOUsersPage();
             gotoRolesTab();
             selectRoleFromDropDown(roleID);
             deleteRole();
         }
 
-        gotoBOSiteAndLoginWithCBOUserRole("PAVELB", "D5kHO7a");
+        gotoBOSiteAndLoginWithCBOUserRole(login, pass);
         gotoBOUsersPage();
         gotoRolesTab();
         addRole(roleID, "testqa2");
@@ -32,7 +34,6 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
         waitFor(By.xpath("//div[contains(text(), 'User role changed successfully')]"));
 
         assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role changed successfully')]")));
-
         deleteRole();
     }
 }
