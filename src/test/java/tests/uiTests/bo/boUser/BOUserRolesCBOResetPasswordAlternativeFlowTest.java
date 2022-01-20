@@ -3,11 +3,6 @@ package tests.uiTests.bo.boUser;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertFalse;
@@ -20,20 +15,12 @@ public class BOUserRolesCBOResetPasswordAlternativeFlowTest extends UITestBase {
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
         gotoBOUsersPage();
         gotoAllUsersTab();
-        type(By.cssSelector("p-tabpanel[header='All users'] p-columnfilter[field='username'] input[type='text']"), "PAVELB");
-        Actions actions = new Actions(driver);
-        actions.sendKeys(Keys.ENTER).perform();
-
-        click(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Burinskiy']"));
-        Thread.sleep(500);
+        searchAndSelectBOUser("All users", "username", "PAVELB");
         click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Reset password']"));
-
         waitFor(By.cssSelector("div[role='dialog']"));
-        waitForSeveralItems(new String[]{"Are you sure want to reset password and send new one?"});
-        click(By.cssSelector("span.p-dialog-header-close-icon"));
-
-        wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div[role='dialog']")));
+        waitFor(By.xpath("//*[contains(text(), 'Are you sure want to reset password and send new one?')]"));
+        closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
+        waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
 
         assertFalse(isElementPresent(By.cssSelector("div[role='dialog']")));
     }

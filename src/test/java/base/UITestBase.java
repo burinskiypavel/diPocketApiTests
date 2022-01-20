@@ -165,6 +165,16 @@ public class UITestBase {
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public void waitForInvisibilityOfElement(By locator) {
+        wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    public void pressKeys(Keys key) {
+        Actions actions = new Actions(driver);
+        actions.sendKeys(key).perform();
+    }
+
     public void gotoTelenorSiteAndDoneBasicAuth(String url, String login, String password) {
         //driver.navigate().to("https://dipocket:LeprechauN@telenor-test.dipocket.org");
         driver.navigate().to("https://"+login+":"+password+"@"+url+"");
@@ -616,5 +626,20 @@ public class UITestBase {
         click(By.cssSelector("app-button[label='Delete']"));
         click(By.cssSelector("app-role-delete-modal app-button[label='Delete']"));
         waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
+    }
+
+    public void selectBOUser(String text) throws InterruptedException {
+        click(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='" + text + "']"));
+        Thread.sleep(500);
+    }
+
+    public void searchBOUser(String tabPanel, String filter, String text) {
+        type(By.cssSelector("p-tabpanel[header='" + tabPanel + "'] p-columnfilter[field='" + filter + "'] input[type='text']"), text);
+        pressKeys(Keys.ENTER);
+    }
+
+    public void searchAndSelectBOUser(String tabPanel, String filter, String text) throws InterruptedException {
+        searchBOUser(tabPanel, filter, text);
+        selectBOUser(text);
     }
 }
