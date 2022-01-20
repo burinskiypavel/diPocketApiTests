@@ -10,8 +10,8 @@ import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
     String roleID = "testqa1";
-    String login = "PAVELB";
-    String pass = "D5kHO7a";
+    String login = "Viktoria";
+    String pass = "kWmaB0s";
 
     @Test
     public void testBOUserRolesCBOAddNewRole() throws InterruptedException, SQLException, ClassNotFoundException {

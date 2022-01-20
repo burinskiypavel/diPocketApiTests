@@ -11,18 +11,20 @@ import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBODeleteRoleTest extends UITestBase {
     String roleID = "a_roleID";
+    String login = "Viktoria";
+    String pass = "kWmaB0s";
 
     @Test
     public void testBOUserRolesCBODeleteRole() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
-            gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+            gotoBOSiteAndLoginWithCBOUserRole(login, pass);
             gotoBOUsersPage();
             gotoRolesTab();
             selectRoleFromDropDown(roleID);
             deleteRole();
             waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
         }
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole(login, pass);
         gotoBOUsersPage();
         gotoRolesTab();
         addRole(roleID, "a_roleName");
