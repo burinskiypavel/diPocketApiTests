@@ -642,4 +642,11 @@ public class UITestBase {
         searchBOUser(tabPanel, filter, text);
         selectBOUser(text);
     }
+
+    public void editUser(String firsname) throws InterruptedException {
+        type(By.cssSelector("app-input[ng-reflect-label='Firstname'] input[type='text']"), firsname);
+        Thread.sleep(1200);
+        click(By.cssSelector("app-button[ng-reflect-label='Edit user']"));
+        waitFor(By.xpath("//*[contains(text(), 'User updated successfully')]"));
+    }
 }
