@@ -56,7 +56,7 @@ public class BOLoginTest extends TestBase {
                 .body("username", equalTo(username),
                         "email", equalTo("burinskiypavel@gmail.com"),
                         "roleId", equalTo("CBO"),
-                        "phone", equalTo("380685448615"),
+                        "phone", equalTo("380685448614"),
                         "lastName", equalTo("Burinskiy"));
     }
 
