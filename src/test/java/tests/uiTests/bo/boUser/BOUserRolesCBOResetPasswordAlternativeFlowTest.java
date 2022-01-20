@@ -22,9 +22,7 @@ public class BOUserRolesCBOResetPasswordAlternativeFlowTest extends UITestBase {
         gotoAllUsersTab();
         type(By.cssSelector("p-tabpanel[header='All users'] p-columnfilter[field='username'] input[type='text']"), "PAVELB");
         Actions actions = new Actions(driver);
-        Action seriesOfActions = actions
-                .sendKeys(Keys.ENTER).build();
-        seriesOfActions.perform() ;
+        actions.sendKeys(Keys.ENTER).perform();
 
         click(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Burinskiy']"));
         Thread.sleep(500);
