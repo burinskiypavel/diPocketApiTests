@@ -2,15 +2,23 @@ package tests.uiTests.bo.boUser;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
+import java.sql.SQLException;
 
 import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOAddNewUserTest extends UITestBase {
+    String username = "PAVELB1";
 
     @Test
-    public void testBOUserRolesCBOAddNewUser() throws InterruptedException {
+    public void testBOUserRolesCBOAddNewUser() throws InterruptedException, SQLException, ClassNotFoundException {
+        if(app.getDbHelper().isBOUserExistInDB(username)){
+            app.getDbHelper().deleteBOUserFromDB(username);
+        }
+
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
         gotoBOUsersPage();
         click(By.cssSelector("app-button[ng-reflect-label='Add User']"));
@@ -22,15 +30,24 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
         assertTrue(isButtonEnabled(By.cssSelector("app-button[ng-reflect-label='Add user")));
 
         click(By.cssSelector("app-select-async[ng-reflect-label='Role']"));
+        waitFor(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'CBO')]"));
         click(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'CBO')]"));
 
         click(By.cssSelector("app-select-async[ng-reflect-label='Site']"));
+        waitFor(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'SODEXO')]"));
         click(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'SODEXO')]"));
 
-        fillBOUserFieldsInPopup("Pavel", "Burinskiy", "380685448615", "burinskiypavel@gmail.com", "PavelB");
+        fillBOUserFieldsInPopup("Pavel", "Burinskiy", "380685448615", "burinskiypavel@gmail.com", username);
         uploadFile(By.cssSelector("input[type='file']"), "C:/Work/Files/self.jpg");
 
+        Thread.sleep(500);
         click(By.cssSelector("app-button[ng-reflect-label='Add user']"));
         waitFor(By.xpath("//*[contains(text(), 'User created successfully')]"));
+
+        assertTrue(app.getDbHelper().isBOUserExistInDB(username));
+
+        if(app.getDbHelper().isBOUserExistInDB(username)){
+            app.getDbHelper().deleteBOUserFromDB(username);
+        }
     }
 }

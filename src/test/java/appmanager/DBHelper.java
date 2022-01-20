@@ -584,4 +584,44 @@ public class DBHelper extends HelperBase {
         }
         return bool;
     }
+
+    public void deleteBOUserFromDB(String user) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "delete from users where USERNAME = '" + user + "'";
+        String commit = "commit";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        stmt.executeQuery(query);
+        stmt.executeQuery(commit);
+        con.close();
+    }
+
+    public boolean isBOUserExistInDB(String userName) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select * from users where USERNAME = '" + userName + "'";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String usernameFromDB = null;
+        boolean bool = true;
+        while (rs.next()){
+            usernameFromDB = rs.getString(1);
+            System. out.println("usernameFromDB : " + usernameFromDB);
+            break;
+        }
+        con.close();
+
+        if(Objects.equals(usernameFromDB, null)){
+            bool = false;
+            return bool;
+        }
+        return bool;
+    }
 }
