@@ -555,6 +555,12 @@
         </classes>
     </test>
 
+    <test name="BOUserRolesCBOResetPasswordAlternativeFlowTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOResetPasswordAlternativeFlowTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
