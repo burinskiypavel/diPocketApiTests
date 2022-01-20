@@ -4,6 +4,7 @@ import appmanager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Action;
@@ -108,6 +109,10 @@ public class UITestBase {
         }
     }
 
+    public void uploadFile(By locator, String path) {
+        WebElement fileInput = driver.findElement(locator);
+        fileInput.sendKeys(path);
+    }
 
     public String getTextFromPopUp() {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Ok')]")));
@@ -648,5 +653,13 @@ public class UITestBase {
         Thread.sleep(1200);
         click(By.cssSelector("app-button[ng-reflect-label='Edit user']"));
         waitFor(By.xpath("//*[contains(text(), 'User updated successfully')]"));
+    }
+
+    public void fillBOUserFieldsInPopup(String firstname, String lastname, String phone, String email, String username) {
+        type(By.cssSelector("app-input[ng-reflect-label='Firstname'] input[type='text']"), firstname);
+        type(By.cssSelector("app-input[ng-reflect-label='Lastname'] input[type='text']"), lastname);
+        type(By.cssSelector("app-input-number[ng-reflect-label='Phone'] input.p-inputtext"), phone);
+        type(By.cssSelector("app-input[ng-reflect-label='Email'] input[type='text']"), email);
+        type(By.cssSelector("app-input[ng-reflect-name='username'] input[type='text']"), username);
     }
 }

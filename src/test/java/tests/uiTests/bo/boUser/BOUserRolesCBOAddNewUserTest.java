@@ -2,11 +2,7 @@ package tests.uiTests.bo.boUser;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptException;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
@@ -31,14 +27,8 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
         click(By.cssSelector("app-select-async[ng-reflect-label='Site']"));
         click(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'SODEXO')]"));
 
-        type(By.cssSelector("app-input[ng-reflect-label='Firstname'] input[type='text']"), "Pavel");
-        type(By.cssSelector("app-input[ng-reflect-label='Lastname'] input[type='text']"), "Burinskiy");
-        type(By.cssSelector("app-input-number[ng-reflect-label='Phone'] input.p-inputtext"), "380685448615");
-        type(By.cssSelector("app-input[ng-reflect-label='Email'] input[type='text']"), "burinskiypavel@gmail.com");
-        type(By.cssSelector("app-input[ng-reflect-name='username'] input[type='text']"), "PavelB");
-
-        WebElement fileInput = driver.findElement(By.cssSelector("input[type='file']"));
-        fileInput.sendKeys("C:/Work/Files/self.jpg");
+        fillBOUserFieldsInPopup("Pavel", "Burinskiy", "380685448615", "burinskiypavel@gmail.com", "PavelB");
+        uploadFile(By.cssSelector("input[type='file']"), "C:/Work/Files/self.jpg");
 
         click(By.cssSelector("app-button[ng-reflect-label='Add user']"));
         waitFor(By.xpath("//*[contains(text(), 'User created successfully')]"));
