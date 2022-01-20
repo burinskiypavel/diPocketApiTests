@@ -2,17 +2,12 @@ package tests.uiTests.bo.boUser;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class BOUserRolesCBOEditUserTest extends UITestBase {
+    SoftAssert softAssert = new SoftAssert();
     String random = app.generateRandomNumber(4);
 
     @Test
@@ -20,30 +15,22 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
         gotoBOUsersPage();
         gotoAllUsersTab();
-        type(By.cssSelector("p-tabpanel[header='All users'] p-columnfilter[field='username'] input[type='text']"), "PAVELB");
-
-        Actions actions = new Actions(driver);
-        Action seriesOfActions = actions
-                .sendKeys(Keys.ENTER).build();
-        seriesOfActions.perform() ;
-
-        click(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Burinskiy']"));
-        //waitFor(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Edit']"));
-        Thread.sleep(500);
+        searchAndSelectBOUser("All users", "username", "PAVELB");
         click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Edit']"));
 
         waitForSeveralItems(new String[]{"Role:", "Site:", "Firstname:",
                 "Lastname:", "Phone:", "Email:", "Login (Username):",
                 "Portal client(optional):", "Portal clients for management (optional):", "Upload Photo:"});
 
-        assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
-        assertTrue(isButtonEnabled(By.cssSelector("app-button[ng-reflect-label='Edit user")));
+        softAssert.assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
+        softAssert.assertTrue(isButtonEnabled(By.cssSelector("app-button[ng-reflect-label='Edit user")));
 
         type(By.cssSelector("app-input[ng-reflect-label='Firstname'] input[type='text']"), "Pavel" + random);
         Thread.sleep(1200);
         click(By.cssSelector("app-button[ng-reflect-label='Edit user']"));
         waitFor(By.xpath("//*[contains(text(), 'User updated successfully')]"));
         waitFor(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']"));
-        assertTrue(isElementPresent(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']")));
+        softAssert.assertAll();
     }
 }
