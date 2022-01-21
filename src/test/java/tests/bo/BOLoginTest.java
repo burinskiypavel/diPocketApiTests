@@ -3,6 +3,7 @@ package tests.bo;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.bo.Client_sites;
+import model.bo.User_roles;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.baseURI;
@@ -13,11 +14,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class BOLoginTest extends TestBase {
     String cookie = null;
     String username = "PAVELB";
-    String URL = "https://support.dipocket.dev";
 
     @Test(priority = 1)
     public void test_BOServices_v1_user_authentication(){
-        baseURI = URL;
+        baseURI = app.BOURL;
         Response response = given()
                 .log().uri().log().headers()
                 .auth().preemptive().basic(username, "D5kHO7a")
@@ -78,14 +78,19 @@ public class BOLoginTest extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_user_roles(){
-        given()
+        Response res =given()
                 .log().uri().log().headers()
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/roles")
-                .then().log().all()
-                .statusCode(200)
-                .body("", equalTo(""));
+                .get( "/BOServices/v1/user/roles");
+        res.then().log().all().statusCode(200);
+        User_roles[] user_roles = res.as(User_roles[].class);
+        assertThat(user_roles[7].getId(), equalTo("BO"));
+        assertThat(user_roles[7].getName(), equalTo("Back officer"));
+        assertThat(user_roles[8].getId(), equalTo("CBO"));
+        assertThat(user_roles[8].getName(), equalTo("Chief Back officer"));
+        assertThat(user_roles[11].getId(), equalTo("FINANCE"));
+        assertThat(user_roles[11].getName(), equalTo("Finance officer"));
     }
 }

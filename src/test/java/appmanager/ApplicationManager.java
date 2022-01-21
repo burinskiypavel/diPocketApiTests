@@ -82,6 +82,7 @@ public class ApplicationManager {
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
     public String registrationPhone = "380636083315";
     public String registrationEmail = "testdipocket4@gmail.com";
+    public String BOURL = "https://support.dipocket.dev";
 
 
     //private MailHelper mailHelper;

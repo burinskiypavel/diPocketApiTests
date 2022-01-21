@@ -1,17 +1,16 @@
 package model.bo;
 
-public class Client_sites {
-
-    private String site;
+public class User_roles {
+    private String id;
     private String name;
 
 
-    public String getSite() {
-        return site;
+    public String getId() {
+        return id;
     }
 
-    public void setSite(String site) {
-        this.site = site;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
