@@ -3,6 +3,7 @@ package tests.bo;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.bo.Client_sites;
+import model.bo.User_All_AllActive;
 import model.bo.User_roles;
 import org.testng.annotations.Test;
 
@@ -78,19 +79,23 @@ public class BOBlockUserTest extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_user_allActive(){
-        given()
+        Response res = given()
                 .log().uri().log().headers()
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/allActive")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", equalTo(username),
-                        "email", equalTo("burinskiypavel@gmail.com"),
-                        "roleId", equalTo("CBO"),
-                        "phone", equalTo("380685448614"),
-                        "lastName", equalTo("Burinskiy"));
+                .get( "/BOServices/v1/user/allActive");
+        res.then().log().all().statusCode(200);
+        User_All_AllActive[] user_allActives = res.as(User_All_AllActive[].class);
+        assertThat(user_allActives[2].getFirstName(), equalTo("Anthony"));
+        assertThat(user_allActives[2].getLastName(), equalTo("Jarman"));
+        assertThat(user_allActives[2].getRoleId(), equalTo("PORTAL"));
+        assertThat(user_allActives[2].getStateId(), equalTo(10));
+        assertThat(user_allActives[2].getStateName(), equalTo("Active"));
+        assertThat(user_allActives[2].getUsername(), equalTo("A.JARMAN"));
+        assertThat(user_allActives[2].getPhone(), equalTo("447340159323"));
+        assertThat(user_allActives[2].getEmail(), equalTo("anthony.jarman@dipocket.org"));
+        assertThat(user_allActives[2].getSite(), equalTo("AWAS"));
     }
 
     @Test(priority = 6)
@@ -113,19 +118,23 @@ public class BOBlockUserTest extends TestBase {
 
     @Test(priority = 7)
     public void test_BOServices_v1_user_all(){
-        given()
+        Response res = given()
                 .log().uri().log().headers()
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/all")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", equalTo(username),
-                        "email", equalTo("burinskiypavel@gmail.com"),
-                        "roleId", equalTo("CBO"),
-                        "phone", equalTo("380685448614"),
-                        "lastName", equalTo("Burinskiy"));
+                .get( "/BOServices/v1/user/all");
+        res.then().log().all().statusCode(200);
+        User_All_AllActive[] user_all = res.as(User_All_AllActive[].class);
+        assertThat(user_all[5].getFirstName(), equalTo("Agnieszka"));
+        assertThat(user_all[5].getLastName(), equalTo("Szewczyk"));
+        assertThat(user_all[5].getRoleId(), equalTo("PORTAL"));
+        assertThat(user_all[5].getStateId(), equalTo(10));
+        assertThat(user_all[5].getStateName(), equalTo("Active"));
+        assertThat(user_all[5].getUsername(), equalTo("A.SZEWCZYK"));
+        assertThat(user_all[5].getPhone(), equalTo("48663647283"));
+        assertThat(user_all[5].getEmail(), equalTo("Agnieszka.Szewczyk@sodexo.com"));
+        assertThat(user_all[5].getSite(), equalTo("DIPOCKET"));
     }
 
     @Test(priority = 8)
