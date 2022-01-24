@@ -60,7 +60,7 @@ public class BOLoginTest extends TestBase {
                         "lastName", equalTo("Burinskiy"));
     }
 
-    @Test(priority = 4)
+    @Test(enabled = false, priority = 4)
     public void test_BOServices_v1_client_sites(){
         Response res = given()
                 .log().uri().log().headers()
@@ -76,7 +76,7 @@ public class BOLoginTest extends TestBase {
         assertThat(client_sites[2].getName(), equalTo("Bacca"));
     }
 
-    @Test(priority = 5)
+    @Test(enabled = false, priority = 5)
     public void test_BOServices_v1_user_roles(){
         Response res =given()
                 .log().uri().log().headers()
