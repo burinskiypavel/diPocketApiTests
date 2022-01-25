@@ -665,4 +665,16 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+<!--    <test name="BOBlockUserTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.bo.BOBlockUserTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="BOUnblockUserTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.bo.BOUnblockUserTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 </suite>
