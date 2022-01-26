@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import model.bo.Client_sites;
 import model.bo.User_All_AllActive;
 import model.bo.User_roles;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.baseURI;
@@ -108,6 +109,19 @@ public class BOBlockUserTest extends TestBase {
                 .get( "/BOServices/v1/user/roles");
         res.then().log().all().statusCode(200);
         User_roles[] user_roles = res.as(User_roles[].class);
+
+        for(int i = 0; i < user_roles.length; i++){
+            int length = user_roles.length-1;
+            System.out.println(user_roles[i].getId());
+            if(user_roles[i].getId().equals("BO")){
+                System.out.println("Actual: " + user_roles[i].getId() + " Expected: BO");
+                Assert.assertEquals(user_roles[i].getId(), "BO");
+                break;
+            } if(length == i){
+               Assert.fail("BO is not visible");
+            }
+        }
+
         assertThat(user_roles[7].getId(), equalTo("BO"));
         assertThat(user_roles[7].getName(), equalTo("Back officer"));
         assertThat(user_roles[8].getId(), equalTo("CBO"));
