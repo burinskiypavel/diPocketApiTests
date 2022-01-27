@@ -122,8 +122,20 @@ public class BOBlockUserTest extends TestBase {
             }
         }
 
-        assertThat(user_roles[7].getId(), equalTo("BO"));
-        assertThat(user_roles[7].getName(), equalTo("Back officer"));
+        for(int i = 0; i < user_roles.length; i++){
+            int length = user_roles.length-1;
+            System.out.println(user_roles[i].getName());
+            if(user_roles[i].getName().equals("Back officer")){
+                System.out.println("Actual: " + user_roles[i].getName() + " Expected: Back officer");
+                Assert.assertEquals(user_roles[i].getName(), "Back officer");
+                break;
+            } if(length == i){
+                Assert.fail("Back officer is not visible");
+            }
+        }
+
+        //assertThat(user_roles[7].getId(), equalTo("BO"));
+        //assertThat(user_roles[7].getName(), equalTo("Back officer"));
         assertThat(user_roles[8].getId(), equalTo("CBO"));
         assertThat(user_roles[8].getName(), equalTo("Chief Back officer"));
         assertThat(user_roles[11].getId(), equalTo("FINANCE"));
