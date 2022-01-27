@@ -662,4 +662,34 @@ public class UITestBase {
         type(By.cssSelector("app-input[ng-reflect-label='Email'] input[type='text']"), email);
         type(By.cssSelector("app-input[ng-reflect-name='username'] input[type='text']"), username);
     }
+
+    public boolean isButtonEnabled2(By locator) {
+        boolean enabled = false;
+        WebElement element = driver.findElements(locator).get(1);
+        boolean disabled = Boolean.parseBoolean(element.getAttribute("ng-reflect-disabled"));
+        System.out.println(disabled);
+
+        if(disabled){
+            return false;
+        } else if (disabled == false){
+            enabled  = true;
+        }
+
+        return enabled;
+    }
+
+    public boolean isButtonEnabled3(By locator) {
+        boolean enabled = false;
+        WebElement element = driver.findElement(locator);
+        boolean disabled = Boolean.parseBoolean(element.getAttribute("ng-reflect-disabled"));
+        System.out.println(disabled);
+
+        if(disabled){
+            return false;
+        } else if (disabled == false){
+            enabled  = true;
+        }
+
+        return enabled;
+    }
 }
