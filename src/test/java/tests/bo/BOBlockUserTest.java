@@ -5,7 +5,6 @@ import io.restassured.response.Response;
 import model.bo.Client_sites;
 import model.bo.User_All_AllActive;
 import model.bo.User_roles;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.baseURI;
@@ -110,36 +109,12 @@ public class BOBlockUserTest extends TestBase {
         res.then().log().all().statusCode(200);
         User_roles[] user_roles = res.as(User_roles[].class);
 
-        for(int i = 0; i < user_roles.length; i++){
-            int length = user_roles.length-1;
-            System.out.println(user_roles[i].getId());
-            if(user_roles[i].getId().equals("BO")){
-                System.out.println("Actual: " + user_roles[i].getId() + " Expected: BO");
-                Assert.assertEquals(user_roles[i].getId(), "BO");
-                break;
-            } if(length == i){
-               Assert.fail("BO is not visible");
-            }
-        }
-
-        for(int i = 0; i < user_roles.length; i++){
-            int length = user_roles.length-1;
-            System.out.println(user_roles[i].getName());
-            if(user_roles[i].getName().equals("Back officer")){
-                System.out.println("Actual: " + user_roles[i].getName() + " Expected: Back officer");
-                Assert.assertEquals(user_roles[i].getName(), "Back officer");
-                break;
-            } if(length == i){
-                Assert.fail("Back officer is not visible");
-            }
-        }
-
-        //assertThat(user_roles[7].getId(), equalTo("BO"));
-        //assertThat(user_roles[7].getName(), equalTo("Back officer"));
-        assertThat(user_roles[8].getId(), equalTo("CBO"));
-        assertThat(user_roles[8].getName(), equalTo("Chief Back officer"));
-        assertThat(user_roles[11].getId(), equalTo("FINANCE"));
-        assertThat(user_roles[11].getName(), equalTo("Finance officer"));
+        app.getBOHelper().checkUserRolesId(user_roles, "BO");
+        app.getBOHelper().checkUserRolesName(user_roles, "Back officer");
+        app.getBOHelper().checkUserRolesId(user_roles, "CBO");
+        app.getBOHelper().checkUserRolesName(user_roles, "Chief Back officer");
+        app.getBOHelper().checkUserRolesId(user_roles, "FINANCE");
+        app.getBOHelper().checkUserRolesName(user_roles, "Finance officer");
     }
 
     @Test(priority = 7)
