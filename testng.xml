@@ -567,6 +567,12 @@
         </classes>
     </test>
 
+    <test name="BOUserRolesCBOBlockUserAlternativeFlowTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOBlockUserAlternativeFlowTest"/>
+        </classes>
+    </test>
+
     <test name="BOUserRolesCBOUnblockUserAlternativeFlowTest">
         <classes>
             <class name="tests.uiTests.bo.boUser.BOUserRolesCBOUnblockUserAlternativeFlowTest"/>
