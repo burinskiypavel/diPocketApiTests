@@ -58,6 +58,12 @@ public class UITestBase {
         driver.quit();
     }
 
+    public boolean isDefault2(By locator) {
+        WebElement element = driver.findElement(locator);
+        boolean ariaSelected = Boolean.parseBoolean(element.getAttribute("aria-selected"));
+        return ariaSelected;
+    }
+
     public void closePopUp(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         driver.findElement(locator).click();
@@ -598,6 +604,11 @@ public class UITestBase {
     public void gotoBOUsersPage() {
         click(By.xpath("//p[contains(text(), 'BO Users')]"));
         waitFor(By.xpath("//span[contains(text(), 'Active users')]"));
+    }
+
+    public void gotoSearchPage() {
+        click(By.cssSelector("div[ng-reflect-router-link='search']"));
+        waitFor(By.xpath("//*[contains(text(), 'Card')]"));
     }
 
     public void gotoRolesTab() {

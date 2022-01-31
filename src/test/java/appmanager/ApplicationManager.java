@@ -84,10 +84,10 @@ public class ApplicationManager {
     public String registrationPhone = "380636083315";
     public String registrationEmail = "testdipocket4@gmail.com";
     public String BOURL = "https://support.dipocket.dev";
-    String CBOuserLogin = "Viktoria";
-    String CBOuserPass = "kWmaB0s";
-    String BOuserLogin = "Evgenya";
-    String BOuserPass = "7RTwTUP";
+    public String CBOuserLogin = "Viktoria";
+    public String CBOuserPass = "kWmaB0s";
+    public String BOuserLogin = "Evgenya";
+    public String BOuserPass = "7RTwTUP";
 
 
     //private MailHelper mailHelper;
