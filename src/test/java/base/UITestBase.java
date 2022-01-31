@@ -692,4 +692,22 @@ public class UITestBase {
 
         return enabled;
     }
+
+    public void unblockUser() {
+        click(By.cssSelector("app-button[ng-reflect-label='Unblock user']"));
+        click(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
+        waitFor(By.xpath("//*[contains(text(), 'User unblocked successfully')]"));
+    }
+
+    public void blockUser(String blockReason) throws InterruptedException {
+        click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Block user']"));
+        waitFor(By.cssSelector("div[role='dialog']"));
+        waitFor(By.xpath("//*[contains(text(), 'Are you sure want to block user')]"));
+        type(By.cssSelector("div[role='dialog'] input[type='text']"), blockReason);
+        Thread.sleep(1000);
+        click(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Block user']"));
+        waitFor(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
+        waitFor(By.cssSelector("td[ng-reflect-text='Blocked']"));
+    }
 }
