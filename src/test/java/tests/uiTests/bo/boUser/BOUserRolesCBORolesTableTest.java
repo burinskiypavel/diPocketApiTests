@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-
 public class BOUserRolesCBORolesTableTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
 
@@ -21,14 +20,14 @@ public class BOUserRolesCBORolesTableTest extends UITestBase {
         click(By.cssSelector("p-dropdown[placeholder='Role']"));
         click(By.cssSelector("li[aria-label='1']"));
 
-        softAssert.assertTrue(isButtonEnabled(By.cssSelector("app-button[label='Edit")));
-        softAssert.assertTrue(isButtonEnabled(By.cssSelector("app-button[label='Delete")));
+        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("app-button[label='Edit")));
+        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("app-button[label='Delete")));
 
         softAssert.assertFalse(!areElementsPresent(new String[]{"//th[contains(text(), 'Code')]",
                 "//th[contains(text(), 'Name')]", "//th[contains(text(), 'Description')]",
                 "//th[contains(text(), 'Checked')]", }));
 
-        softAssert.assertTrue(isButtonEnabled(By.cssSelector("app-button[label='Update']")));
+        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("app-button[label='Update']")));
         softAssert.assertAll();
     }
 }
