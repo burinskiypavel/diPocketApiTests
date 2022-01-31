@@ -86,6 +86,8 @@ public class ApplicationManager {
     public String BOURL = "https://support.dipocket.dev";
     String CBOuserLogin = "Viktoria";
     String CBOuserPass = "kWmaB0s";
+    String BOuserLogin = "Evgenya";
+    String BOuserPass = "7RTwTUP";
 
 
     //private MailHelper mailHelper;
