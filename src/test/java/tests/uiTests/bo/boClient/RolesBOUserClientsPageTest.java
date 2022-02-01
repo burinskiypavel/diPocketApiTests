@@ -2,11 +2,9 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class RolesBOUserClientsPageTest extends UITestBase {
 
@@ -27,11 +25,36 @@ public class RolesBOUserClientsPageTest extends UITestBase {
         assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='companyName']")));
 
         type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
-        assertFalse(!isElementPresent(By.xpath("//td[@ng-reflect-text='380634413376']")));
-        assertFalse(!isElementPresent(By.xpath("//td[@ng-reflect-text='vikarez20@gmail.com']")));
+        waitFor(By.cssSelector("td[ng-reflect-text='380634413376']"));
+        assertFalse(!isElementPresent(By.cssSelector("td[ng-reflect-text='380634413376']")));
+        assertFalse(!isElementPresent(By.cssSelector("td[ng-reflect-text='vikarez20@gmail.com']")));
 
-        click(By.xpath("//td[@ng-reflect-text='380634413376']"));
+        click(By.cssSelector("td[ng-reflect-text='380634413376']"));
+        waitFor(By.cssSelector("p.user-name"));
 
 
+        String actualUsername = getText(By.cssSelector("p.user-name"));
+        String actualEmail = getText(By.cssSelector("p.email"));
+
+
+        String actualState = getText(By.xpath("//*[contains(text(), 'State:')]"));
+        String actualSite = getText(By.xpath("//*[contains(text(), 'Site:')]"));
+
+        String actualRisk = getText(By.xpath("//*[contains(text(), 'Risk')]"));
+        String actualRegistryAdd = getText(By.xpath("//*[contains(text(), 'Registry add:')]"));
+        String actualMailingAdd = getText(By.xpath("//*[contains(text(), 'Mailing add:')]"));
+
+        assertFalse(!areElementsPresent(new String[]{
+                "//*[contains(text(), '06.10.1976 (45)')]", "//*[contains(text(), '380634413376')]", "//*[contains(text(), '33217')]",
+                "//*[contains(text(), 'FDD')]", "//*[contains(text(), 'EUR - standart')]", "//*[contains(text(), 'EUR')]",
+                "//*[contains(text(), 'English')]",}));
+
+        assertEquals(actualUsername, "Nona Qwerty");
+        assertEquals(actualEmail, "vikarez20@gmail.com (verified)");
+        assertEquals(actualState, "State: Active");
+        assertEquals(actualSite, "Site: DIPOCKET");
+        assertEquals(actualRisk, "Risk: 3");
+        assertEquals(actualRegistryAdd, "Registry add: Address44, City, UA");
+        assertEquals(actualMailingAdd, "Mailing add: Address, City, PL");
     }
 }

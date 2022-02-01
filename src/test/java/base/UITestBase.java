@@ -64,6 +64,10 @@ public class UITestBase {
         return ariaSelected;
     }
 
+    public String getText(By locator) {
+        return driver.findElement(locator).getText();
+    }
+
     public void closePopUp(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         driver.findElement(locator).click();
