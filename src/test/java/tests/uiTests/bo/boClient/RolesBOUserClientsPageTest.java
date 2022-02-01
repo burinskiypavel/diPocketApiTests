@@ -25,5 +25,13 @@ public class RolesBOUserClientsPageTest extends UITestBase {
         assertFalse(isElementPresent(By.xpath("//span[@class='p-calendar-w-btn']")));
         assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='mailingAddress']")));
         assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='companyName']")));
+
+        type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
+        assertFalse(!isElementPresent(By.xpath("//td[@ng-reflect-text='380634413376']")));
+        assertFalse(!isElementPresent(By.xpath("//td[@ng-reflect-text='vikarez20@gmail.com']")));
+
+        click(By.xpath("//td[@ng-reflect-text='380634413376']"));
+
+
     }
 }
