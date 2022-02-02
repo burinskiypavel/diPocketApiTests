@@ -19,7 +19,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
 
     @Test(priority = 1)
-    public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -165,7 +165,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                     .body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
