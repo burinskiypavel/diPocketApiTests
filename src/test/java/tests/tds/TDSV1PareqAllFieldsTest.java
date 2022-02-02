@@ -20,7 +20,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
 
     @Test(priority = 1)
-    public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
+    public void test_veReqAEx1_TDSServices_acs_bgAuth_v1() {
         given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -39,7 +39,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth.v1")
+                .post("/TDSServices/acs/bgAuth.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.chName", equalTo(""),
@@ -48,7 +48,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
     }
 
     @Test(priority = 2)
-    public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
+    public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -86,7 +86,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth.v1");
+                .post("/TDSServices/acs/bgAuth.v1");
 
         res.then().log().all();
         String response = res.asString();
