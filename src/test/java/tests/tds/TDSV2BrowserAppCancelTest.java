@@ -23,7 +23,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
 
     @Test(priority = 1)
-    public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -70,7 +70,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all()
                 .statusCode(200)
@@ -91,7 +91,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
     }
 
     @Test(priority = 2)
-    public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -104,7 +104,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -130,7 +130,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
     }
 
     @Test(priority = 3)
-    public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -152,7 +152,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all()
                 .statusCode(200)
