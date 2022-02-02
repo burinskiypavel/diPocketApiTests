@@ -26,6 +26,7 @@ public class ApplicationManager {
     public String TDSBaseUrl = null;
     public String telenorSite = null;
     public String dipocket3_intranet = "https://dipocket3.intranet:8900";
+    public String baseURL = null;
     public String telenorLoginPhone = null;
     public String loginPhone = null;
     public String telenorRegistrationPhone = "380980316499";
@@ -114,6 +115,7 @@ public class ApplicationManager {
         dbHelper.prop = dbHelper.loadDataFromConfigFile();
         pan = dbHelper.prop.getProperty("tds.pan");
         TDSBaseUrl = dbHelper.prop.getProperty("tds.base.url");
+        baseURL = HelperBase.prop.getProperty("base.url");
         telenorSite = "TELENOR";
         //dipocket3_intranet = "https://dipocket3.intranet:8900";
         telenorLoginPhone = dbHelper.prop.getProperty("mobile.registration.phoneNumber");
