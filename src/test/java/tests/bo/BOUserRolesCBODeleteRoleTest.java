@@ -77,18 +77,37 @@ public class BOUserRolesCBODeleteRoleTest extends TestBase {
         app.getBOHelper().checkUserRolesName(user_roles, "Finance officer");
     }
 
-    @Test(priority = 5, enabled = false)
+    @Test(priority = 5)
     public void test_BOServices_v1_user_role_create(){
         given()
                 .log().uri().log().headers()
                 .cookie(cookie)
-                //.contentType("application/json")
-                .queryParam("a_roleID")
-                .queryParam("a_roleName")
+                .contentType("application/json")
+                .queryParam("roleId", "a_roleID")
+                .queryParam("roleName","a_roleName")
                 .when()
                 .post( "/BOServices/v1/user/role/create")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    @Test(priority = 6)
+    public void test_BOServices_v1_user_roles_(){
+        Response res =given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/BOServices/v1/user/roles");
+        res.then().log().all().statusCode(200);
+        User_roles[] user_roles = res.as(User_roles[].class);
+
+        app.getBOHelper().checkUserRolesId(user_roles, "BO");
+        app.getBOHelper().checkUserRolesName(user_roles, "Back officer");
+        app.getBOHelper().checkUserRolesId(user_roles, "CBO");
+        app.getBOHelper().checkUserRolesName(user_roles, "Chief Back officer");
+        app.getBOHelper().checkUserRolesId(user_roles, "FINANCE");
+        app.getBOHelper().checkUserRolesName(user_roles, "Finance officer");
     }
 
 }
