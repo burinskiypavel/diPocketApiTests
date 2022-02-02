@@ -25,7 +25,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     @Test(priority = 1)
     public void test_veReqAEx1_TDSServices_acs_bgAuth_v1() {
         System.out.println("app.TDSBaseUrl: " + app.TDSBaseUrl + " txid: " + randomTXID + " pan: " + app.pan);
-        given().log().uri().log().headers().log().body()
+        given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
@@ -55,7 +55,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
-        Response res = given().log().uri().log().headers().log().body()
+        Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
@@ -111,7 +111,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     @Test(priority = 3)
     public void test_tranStatus_TDSServices_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
-        given().log().uri().log().headers().log().body()
+        given()
                 .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
@@ -127,10 +127,11 @@ public class TDSV1BioAcceptTest extends TestBase {
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         System.out.println("txid: " + randomTXID);
         Response res = given().log().uri().log().headers().log().body()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                //.config(app.configTimeout)
+                //.contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .when()
-                .get("https://3ds.dipocket.dev/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
+                .get("/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -149,7 +150,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .header("SITE", app.mobile_site_upAndGo)
                 .header("ClISESSIONID", cliSessionId)
                 .when()
-                .post("https://http.dipocket.dev/ClientServices/v1/tds/" + tranId + "/tranAccept");
+                .post(app.baseURL + "ClientServices/v1/tds/" + tranId + "/tranAccept");
 
         response.then().log().all();
         assertEquals(response.getStatusCode(), 200);
@@ -158,7 +159,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     @Test(priority = 6)
     public void test_tranStatus_TDSServices_acs_tranStatus_v1_() {
         System.out.println("txid: " + randomTXID);
-        given().log().uri().log().headers().log().body()
+        given()
                 .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
@@ -173,7 +174,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     @Test(priority = 7)
     public void test_paReq_TDSServices_acs_bgAuth_v1_() {
         System.out.println("txid: " + randomTXID);
-        given().log().uri().log().headers().log().body()
+        given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                         "<backgroundRequest>\n" +
