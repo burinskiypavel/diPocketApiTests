@@ -22,7 +22,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     String now2 = null;
 
     @Test(priority = 1)
-    public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -69,7 +69,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("02"),
@@ -91,7 +91,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     }
 
     @Test(priority = 2)
-    public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -106,7 +106,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -134,7 +134,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     }
 
     @Test(priority = 3)
-    public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         //String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -150,7 +150,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -178,7 +178,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     }
 
     @Test(priority = 4)
-    public void test_CReq_DiPocket3ds_acs_bgAuth__() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth__() throws IOException, SAXException, ParserConfigurationException {
         String wrongSMSCode = "123456";
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -194,7 +194,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
