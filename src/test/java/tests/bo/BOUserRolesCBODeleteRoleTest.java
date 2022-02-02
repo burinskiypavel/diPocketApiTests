@@ -8,10 +8,12 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBODeleteRoleTest extends TestBase {
     String cookie = null;
-    //String username = "PAVELB";
 
     @Test(priority = 1)
     public void test_BOServices_v1_user_authentication(){
@@ -69,12 +71,7 @@ public class BOUserRolesCBODeleteRoleTest extends TestBase {
         res.then().log().all().statusCode(200);
         User_roles[] user_roles = res.as(User_roles[].class);
 
-        app.getBOHelper().checkUserRolesId(user_roles, "BO");
-        app.getBOHelper().checkUserRolesName(user_roles, "Back officer");
-        app.getBOHelper().checkUserRolesId(user_roles, "CBO");
-        app.getBOHelper().checkUserRolesName(user_roles, "Chief Back officer");
-        app.getBOHelper().checkUserRolesId(user_roles, "FINANCE");
-        app.getBOHelper().checkUserRolesName(user_roles, "Finance officer");
+        assertFalse(app.getBOHelper().isUserRolesIdExist(user_roles, "a_roleID"));
     }
 
     @Test(priority = 5)
@@ -102,12 +99,49 @@ public class BOUserRolesCBODeleteRoleTest extends TestBase {
         res.then().log().all().statusCode(200);
         User_roles[] user_roles = res.as(User_roles[].class);
 
-        app.getBOHelper().checkUserRolesId(user_roles, "BO");
-        app.getBOHelper().checkUserRolesName(user_roles, "Back officer");
-        app.getBOHelper().checkUserRolesId(user_roles, "CBO");
-        app.getBOHelper().checkUserRolesName(user_roles, "Chief Back officer");
-        app.getBOHelper().checkUserRolesId(user_roles, "FINANCE");
-        app.getBOHelper().checkUserRolesName(user_roles, "Finance officer");
+        assertTrue(app.getBOHelper().isUserRolesIdExist(user_roles, "a_roleID"));
     }
 
+    @Test(priority = 7)
+    public void test_BOServices_v1_user_role_rightsTree(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .queryParam("roleId", "a_roleID")
+                .contentType("application/json")
+                .when()
+                .get( "/BOServices/v1/user/role/rightsTree")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("data.data.description", hasItems("Access to Back Office tool", "Access to First Line support", "Access to Portal"),
+                        "data.data.code", hasItems("BO", "EXTBO", "Portal"));
+    }
+
+    @Test(priority = 8)
+    public void test_BOServices_v1_user_role_delete(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .queryParam("roleId", "a_roleID")
+                .when()
+                .post( "/BOServices/v1/user/role/delete")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 9)
+    public void test_BOServices_v1_user_roles__(){
+        Response res =given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/BOServices/v1/user/roles");
+        res.then().log().all().statusCode(200);
+        User_roles[] user_roles = res.as(User_roles[].class);
+
+        assertFalse(app.getBOHelper().isUserRolesIdExist(user_roles, "a_roleID"));
+    }
 }
