@@ -22,7 +22,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
     String tranId = null;
 
     @Test(priority = 1)
-    public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -68,7 +68,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200).
                 body("backgroundResponse2.backgroundARes.messageExtension", equalTo(""));
@@ -87,7 +87,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
     }
 
     @Test(priority = 2)
-    public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -100,7 +100,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -126,14 +126,14 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
     }
 
     @Test(priority = 3)
-    public void test_tranStatus_DiPocket3ds_acs_tranStatus() {
+    public void test_tranStatus_TDSServices_acs_tranStatus() {
         given()
                 .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
                         "}")
                 .when()
-                .post("/DiPocket3ds/acs/tranStatus")
+                .post("/TDSServices/acs/tranStatus")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("AWAITING"));
@@ -142,10 +142,11 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
     @Test(priority = 4)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                //.config(app.configTimeout)
+                //.contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .when()
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
+                .get("/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -164,28 +165,28 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
                 .header("SITE", app.mobile_site_upAndGo)
                 .header("ClISESSIONID", cliSessionId)
                 .when()
-                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranDecline");
+                .post(app.baseURL + "ClientServices/v1/tds/" + tranId + "/tranDecline");
 
         response.then().log().all();
         assertEquals(response.getStatusCode(), 200);
     }
 
     @Test(priority = 6)
-    public void test_tranStatus_DiPocket3ds_acs_tranStatus_() {
+    public void test_tranStatus_TDSServices_acs_tranStatus_() {
         given()
                 .spec(app.requestSpecTDSJson)
                 .body("{\n" +
                         "\t\"txId\" : \"" + randomAcsTransId + "\"\n" +
                         "}")
                 .when()
-                .post("/DiPocket3ds/acs/tranStatus")
+                .post("/TDSServices/acs/tranStatus")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("DECLINED"));
     }
 
     @Test(priority = 7)
-    public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -211,7 +212,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
