@@ -23,7 +23,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     String tranId = null;
 
     @Test(priority = 1)
-    public void test_veReqAEx1_DiPocket3ds_acs_bgAuth_v1() {
+    public void test_veReqAEx1_TDSServices_acs_bgAuth_v1() {
         System.out.println("app.TDSBaseUrl: " + app.TDSBaseUrl + " txid: " + randomTXID + " pan: " + app.pan);
         given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTDS)
@@ -43,7 +43,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "    </backgroundVereq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth.v1")
+                .post("/TDSServices/acs/bgAuth.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundVeres.chName", equalTo(""),
@@ -52,7 +52,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     }
 
     @Test(priority = 2)
-    public void test_paReq_DiPocket3ds_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
+    public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
         Response res = given().log().uri().log().headers().log().body()
@@ -85,7 +85,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "   </backgroundPareq>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth.v1");
+                .post("/TDSServices/acs/bgAuth.v1");
 
         res.then().log().all();
         String response = res.asString();
@@ -109,7 +109,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     }
 
     @Test(priority = 3)
-    public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1() {
+    public void test_tranStatus_TDSServices_acs_tranStatus_v1() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTDSJson)
@@ -117,7 +117,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
                 .when()
-                .post("/DiPocket3ds/acs/tranStatus.v1")
+                .post("/TDSServices/acs/tranStatus.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("AWAITING"));
@@ -130,7 +130,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .config(app.configTimeout)
                 .contentType("application/json")
                 .when()
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
+                .get("https://3ds.dipocket.dev/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -149,14 +149,14 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .header("SITE", app.mobile_site_upAndGo)
                 .header("ClISESSIONID", cliSessionId)
                 .when()
-                .post("https://dipocket3.intranet:8900/ClientServices/v1/tds/" + tranId + "/tranAccept");
+                .post("https://http.dipocket.dev/ClientServices/v1/tds/" + tranId + "/tranAccept");
 
         response.then().log().all();
         assertEquals(response.getStatusCode(), 200);
     }
 
     @Test(priority = 6)
-    public void test_tranStatus_DiPocket3ds_acs_tranStatus_v1_() {
+    public void test_tranStatus_TDSServices_acs_tranStatus_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTDSJson)
@@ -164,14 +164,14 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "\t\"txId\" : \"" + randomTXID + "\"\n" +
                         "}")
                 .when()
-                .post("/DiPocket3ds/acs/tranStatus.v1")
+                .post("/TDSServices/acs/tranStatus.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo("ACCEPTED"));
     }
 
     @Test(priority = 7)
-    public void test_paReq_DiPocket3ds_acs_bgAuth_v1_() {
+    public void test_paReq_TDSServices_acs_bgAuth_v1_() {
         System.out.println("txid: " + randomTXID);
         given().log().uri().log().headers().log().body()
                 .spec(app.requestSpecTDS)
@@ -193,7 +193,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                         "   </backgroundPageResponse>\n" +
                         "</backgroundRequest>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth.v1")
+                .post("/TDSServices/acs/bgAuth.v1")
                 .then().log().all()
                 .statusCode(200)
                 .body("backgroundResponse.backgroundPares.paresStatus", equalTo("Y"));
