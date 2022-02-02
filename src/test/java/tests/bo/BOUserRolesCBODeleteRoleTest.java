@@ -5,6 +5,8 @@ import io.restassured.response.Response;
 import model.bo.User_roles;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
+
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -16,7 +18,7 @@ public class BOUserRolesCBODeleteRoleTest extends TestBase {
     String cookie = null;
 
     @Test(priority = 1)
-    public void test_BOServices_v1_user_authentication(){
+    public void test_BOServices_v1_user_authentication() throws SQLException, ClassNotFoundException {
         baseURI = app.BOURL;
         Response response = given()
                 .log().uri().log().headers()
@@ -28,6 +30,18 @@ public class BOUserRolesCBODeleteRoleTest extends TestBase {
                 .statusCode(200)
                 .body("username", equalTo("VIKTORIA"));
         cookie = response.getHeader("Set-Cookie");
+
+        if(app.getDbHelper().isRoleExistInDB("a_roleID")){
+            given()
+                    .log().uri().log().headers()
+                    .cookie(cookie)
+                    .contentType("application/json")
+                    .queryParam("roleId", "a_roleID")
+                    .when()
+                    .post( "/BOServices/v1/user/role/delete")
+                    .then().log().all()
+                    .statusCode(200);
+        }
     }
 
     @Test(priority = 2)
