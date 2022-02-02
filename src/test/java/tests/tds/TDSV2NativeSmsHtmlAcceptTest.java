@@ -24,7 +24,7 @@ public class TDSV2NativeSmsHtmlAcceptTest extends TestBase {
     String sms = null;
 
     @Test(priority = 1)
-    public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String pan4TestSMS = "5455980666358066";
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -71,7 +71,7 @@ public class TDSV2NativeSmsHtmlAcceptTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("02"),
@@ -93,7 +93,7 @@ public class TDSV2NativeSmsHtmlAcceptTest extends TestBase {
     }
 
     @Test(priority = 2)
-    public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -107,7 +107,7 @@ public class TDSV2NativeSmsHtmlAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundCRes.InProgressCRes.acsCounterAtoS", equalTo("000"),
@@ -140,10 +140,11 @@ public class TDSV2NativeSmsHtmlAcceptTest extends TestBase {
     @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         Response res = given()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                //.config(app.configTimeout)
+                //.contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .when()
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
+                .get("/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
 
         res.then().log().all();
         tranId = res.asString();
@@ -154,10 +155,11 @@ public class TDSV2NativeSmsHtmlAcceptTest extends TestBase {
     @Test(priority = 4)
     public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
         Response res = given()
-                .config(app.configTimeout)
-                .contentType("application/json")
+                //.config(app.configTimeout)
+                //.contentType("application/json")
+                .spec(app.requestSpecTDSJson)
                 .when()
-                .get("http://dipocket3.intranet:8092/TDSTestServices/v1/sms?tranId=" + tranId + "");
+                .get("/TDSTestServices/v1/sms?tranId=" + tranId + "");
 
         res.then().log().all();
         sms = res.asString();
@@ -166,7 +168,7 @@ public class TDSV2NativeSmsHtmlAcceptTest extends TestBase {
     }
 
     @Test(priority = 5)
-    public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -181,7 +183,7 @@ public class TDSV2NativeSmsHtmlAcceptTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
