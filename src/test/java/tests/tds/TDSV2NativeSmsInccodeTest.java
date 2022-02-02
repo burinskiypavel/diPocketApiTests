@@ -25,7 +25,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
     String wrongSMSCode = "123456";
 
     @Test(priority = 1)
-    public void test_AReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         String pan4TestSMS = "5455980666358066";
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -77,7 +77,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
                         "   </backgroundAReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200)
                 .body("backgroundResponse2.backgroundARes.acsRenderingType.acsInterface", equalTo("01"),
@@ -99,7 +99,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
     }
 
     @Test(priority = 2)
-    public void test_CReq_DiPocket3ds_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -113,7 +113,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
@@ -144,7 +144,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
     }
 
     @Test(priority = 3)
-    public void test_CReq_DiPocket3ds_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+    public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -159,7 +159,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
                         "   </backgroundCReq>\n" +
                         "</backgroundRequest2>")
                 .when()
-                .post("/DiPocket3ds/acs/bgAuth");
+                .post("/TDSServices/acs/bgAuth");
 
         res.then().log().all().statusCode(200);
         String response = res.asString();
