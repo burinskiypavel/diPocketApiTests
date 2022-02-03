@@ -309,6 +309,20 @@ public class UITestBase {
         return true;
     }
 
+    public boolean areButtonsPresent(String mas []){
+        boolean bool = false;
+        for(int i = 0; i < mas.length; i++){
+
+            bool =  isElementPresent(By.xpath(mas[i]));
+
+            if(bool == false){
+                System.out.println("button is not present: " + mas[i]);
+                return false;
+            }
+        }
+        return true;
+    }
+
     public String navigateToTelenorAndLogin(String phone, String smsCode) {
         basicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
         driver.findElement(By.cssSelector("a[href='/en/login']")).click();

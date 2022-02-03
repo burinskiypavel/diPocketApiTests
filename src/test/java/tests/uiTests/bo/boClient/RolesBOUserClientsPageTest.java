@@ -59,11 +59,14 @@ public class RolesBOUserClientsPageTest extends UITestBase {
 
 
         assertFalse(!areElementsPresent(new String[]{
-                "//a[@role='tab'] //span[contains(text(), 'Tiles')]", "//a[@role='tab'] //span[contains(text(), 'Messages')]",
-                "//a[@role='tab'] //span[contains(text(), 'Client iban')]", "//a[@role='tab'] //span[contains(text(), 'Payee')]",
-                "//a[@role='tab'] //span[contains(text(), 'Selfie')]", "//a[@role='tab'] //span[contains(text(), 'Docs')]",
-                "//a[@role='tab'] //span[contains(text(), 'Accounts')]", "//a[@role='tab'] //span[contains(text(), '3rd party cards')]",
-                "//a[@role='tab'] //span[contains(text(), 'Transaction')]", "//a[@role='tab'] //span[contains(text(), 'Tickets')]",
-                "//a[@role='tab'] //span[contains(text(), 'Supervisor requests')]"}));
+                "//a[@role='tab'] //span[contains(text(), 'Tiles')]", "//a[@role='tab'] //span[contains(text(), 'Messages')]", "//a[@role='tab'] //span[contains(text(), 'Client iban')]",
+                "//a[@role='tab'] //span[contains(text(), 'Payee')]", "//a[@role='tab'] //span[contains(text(), 'Selfie')]", "//a[@role='tab'] //span[contains(text(), 'Docs')]",
+                "//a[@role='tab'] //span[contains(text(), 'Accounts')]", "//a[@role='tab'] //span[contains(text(), '3rd party cards')]", "//a[@role='tab'] //span[contains(text(), 'Transaction')]",
+                "//a[@role='tab'] //span[contains(text(), 'Tickets')]", "//a[@role='tab'] //span[contains(text(), 'Supervisor requests')]"}));
+
+        assertFalse(!areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Search']", "//app-button[@ng-reflect-label='Block client']", "//app-button[@ng-reflect-label='Ban client']",
+                    "//app-button[@ng-reflect-label='Forget client']", "//app-button[@ng-reflect-label='Change credentials']", "//app-button[@ng-reflect-label='Send statements']",
+                    "//app-button[@ng-reflect-label='Upload docs']", "//app-button[@ng-reflect-label='Upload selfies']", "//app-button[@ng-reflect-label='Transfer back']", "//app-button[@ng-reflect-label='Report a bug']"}));
+
     }
 }
