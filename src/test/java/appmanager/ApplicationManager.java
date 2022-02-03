@@ -206,7 +206,7 @@ public class ApplicationManager {
         requestSpecPeak = given()
                 .log().uri().log().headers().log().body()
                 .config(configTimeout)
-                .baseUri("http://dipocket3.intranet:8092/");
+                .baseUri(baseURL);
 
         requestSpecTDSJson = given()
                 .log().uri().log().headers().log().body()
