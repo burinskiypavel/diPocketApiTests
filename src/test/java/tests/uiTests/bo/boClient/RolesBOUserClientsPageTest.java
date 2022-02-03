@@ -56,5 +56,14 @@ public class RolesBOUserClientsPageTest extends UITestBase {
         assertEquals(actualRisk, "Risk: 3");
         assertEquals(actualRegistryAdd, "Registry add: Address44, City, UA");
         assertEquals(actualMailingAdd, "Mailing add: Address, City, PL");
+
+
+        assertFalse(!areElementsPresent(new String[]{
+                "//a[@role='tab'] //span[contains(text(), 'Tiles')]", "//a[@role='tab'] //span[contains(text(), 'Messages')]",
+                "//a[@role='tab'] //span[contains(text(), 'Client iban')]", "//a[@role='tab'] //span[contains(text(), 'Payee')]",
+                "//a[@role='tab'] //span[contains(text(), 'Selfie')]", "//a[@role='tab'] //span[contains(text(), 'Docs')]",
+                "//a[@role='tab'] //span[contains(text(), 'Accounts')]", "//a[@role='tab'] //span[contains(text(), '3rd party cards')]",
+                "//a[@role='tab'] //span[contains(text(), 'Transaction')]", "//a[@role='tab'] //span[contains(text(), 'Tickets')]",
+                "//a[@role='tab'] //span[contains(text(), 'Supervisor requests')]"}));
     }
 }
