@@ -15,14 +15,11 @@ public class RolesBOUserClientsPageTest extends UITestBase {
         assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
         assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
         assertTrue(isDefault2(By.id("p-tabpanel-0-label")));
-        assertFalse(!isElementPresent(By.xpath("//app-input-number[@ng-reflect-name='id']")));
-        assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='email']")));
-        assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='mainPhone']")));
-        assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='firstName']")));
-        assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='lastName']")));
-        assertFalse(isElementPresent(By.xpath("//span[@class='p-calendar-w-btn']")));
-        assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='mailingAddress']")));
-        assertFalse(!isElementPresent(By.xpath("//app-input[@ng-reflect-name='companyName']")));
+
+        assertFalse(!areElementsPresent(new String[]{
+                "//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='email']", "//app-input[@ng-reflect-name='mainPhone']",
+                "//app-input[@ng-reflect-name='firstName']", "//app-input[@ng-reflect-name='lastName']", "//p-calendar //input[@type='text']",
+        "//app-input[@ng-reflect-name='mailingAddress']", "//app-input[@ng-reflect-name='companyName']"}));
 
         type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
         waitFor(By.cssSelector("td[ng-reflect-text='380634413376']"));
