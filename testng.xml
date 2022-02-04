@@ -585,6 +585,12 @@
         </classes>
     </test>
 
+    <test name="RolesBOUserClientsPageEditProfileDataTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientsPageEditProfileDataTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
