@@ -531,11 +531,11 @@
         </classes>
     </test>
 
-    <test name="BOUserRolesCBOAddNewRoleTest">
-        <classes>
-            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOAddNewRoleTest"/>
-        </classes>
-    </test>
+<!--    <test name="BOUserRolesCBOAddNewRoleTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOAddNewRoleTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="BOUserRolesCBOEditRoleTest">
         <classes>
@@ -543,11 +543,11 @@
         </classes>
     </test>
 
-    <test name="BOUserRolesCBODeleteRoleTest">
-        <classes>
-            <class name="tests.uiTests.bo.boUser.BOUserRolesCBODeleteRoleTest"/>
-        </classes>
-    </test>
+<!--    <test name="BOUserRolesCBODeleteRoleTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBODeleteRoleTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="BOUserRolesCBOAddNewUserTest">
         <classes>
