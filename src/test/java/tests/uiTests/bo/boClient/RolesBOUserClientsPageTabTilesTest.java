@@ -2,8 +2,9 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
 
 public class RolesBOUserClientsPageTabTilesTest extends UITestBase {
 
@@ -17,7 +18,6 @@ public class RolesBOUserClientsPageTabTilesTest extends UITestBase {
         waitFor(By.cssSelector("p.user-name"));
         click(By.id("p-tabpanel-2-label"));
 
-        Assert.assertTrue(isElementPresent(By.xpath("//table //th[contains(text(), 'Types')]")));
-        Assert.assertTrue(isElementPresent(By.xpath("//table //th[contains(text(), 'Messages')]")));
+        assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Types')]", "//table //th[contains(text(), 'Messages')]"}));
     }
 }
