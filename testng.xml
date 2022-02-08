@@ -603,6 +603,12 @@
         </classes>
     </test>
 
+    <test name="RolesBOUserClientsPageClientIBANtabTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientsPageClientIBANtabTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
