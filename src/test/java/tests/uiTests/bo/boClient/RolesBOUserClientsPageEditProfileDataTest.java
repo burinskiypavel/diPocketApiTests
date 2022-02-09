@@ -3,12 +3,12 @@ package tests.uiTests.bo.boClient;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertTrue;
+import org.testng.asserts.SoftAssert;
 
 public class RolesBOUserClientsPageEditProfileDataTest extends UITestBase {
+    SoftAssert softAssert = new SoftAssert();
 
-    @Test()
+    @Test
     public void testRolesBOUserClientsPageEditProfileData() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -21,20 +21,21 @@ public class RolesBOUserClientsPageEditProfileDataTest extends UITestBase {
         waitFor(By.xpath("//app-button[@ng-reflect-label='Save']"));
         Thread.sleep(500);
 
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='firstName'] input[ng-reflect-model='Nona']")));
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='lastName'] input[ng-reflect-model='Qwerty']")));
-        assertTrue(isElementPresent(By.cssSelector("p-calendar[ng-reflect-model='Wed Oct 06 1976 03:00:00 GMT+0']")));
-        assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-name='gender'] //span[contains(text(), 'F')]")));
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='email'] input[ng-reflect-model='vikarez20@gmail.com']")));
-        assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-label='Document type'] //span[contains(text(), 'Passport')]")));
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-label='Pesel']")));
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-label='Doc serial number'] input[ng-reflect-model='CGH164279']")));
-        assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-label='Doc country of issue'] //span[contains(text(), 'Aland Islands')]")));
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingStreetLine1']")));
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingStreetLine2']")));
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingCity'] input[ng-reflect-model='City']")));
-        assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-label='Country'] //span[contains(text(), 'Poland')]")));
-        assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingPostcode'] input[ng-reflect-model='11-11']")));
-        assertTrue(areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Save']"}));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='firstName'] input[ng-reflect-model='Nona']")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='lastName'] input[ng-reflect-model='Qwerty']")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("p-calendar[ng-reflect-model='Wed Oct 06 1976 03:00:00 GMT+0']")));
+        softAssert.assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-name='gender'] //span[contains(text(), 'F')]")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='email'] input[ng-reflect-model='vikarez20@gmail.com']")));
+        softAssert.assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-label='Document type'] //span[contains(text(), 'Passport')]")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-label='Pesel']")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-label='Doc serial number'] input[ng-reflect-model='CGH164279']")));
+        softAssert.assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-label='Doc country of issue'] //span[contains(text(), 'Aland Islands')]")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingStreetLine1']")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingStreetLine2']")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingCity'] input[ng-reflect-model='City']")));
+        softAssert.assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-label='Country'] //span[contains(text(), 'Poland')]")));
+        softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingPostcode'] input[ng-reflect-model='11-11']")));
+        softAssert.assertTrue(areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Save']"}));
+        softAssert.assertAll();
     }
 }
