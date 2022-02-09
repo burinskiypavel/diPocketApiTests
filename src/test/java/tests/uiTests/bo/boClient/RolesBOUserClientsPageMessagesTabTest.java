@@ -3,12 +3,12 @@ package tests.uiTests.bo.boClient;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertTrue;
+import org.testng.asserts.SoftAssert;
 
 public class RolesBOUserClientsPageMessagesTabTest extends UITestBase {
+    SoftAssert softAssert = new SoftAssert();
 
-    @Test()
+    @Test
     public void testRolesBOUserClientsPageMessagesTab() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -18,8 +18,17 @@ public class RolesBOUserClientsPageMessagesTabTest extends UITestBase {
         waitFor(By.cssSelector("p.user-name"));
         click(By.id("p-tabpanel-3-label"));
 
-        assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Chanel')]",
+        softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Chanel')]",
                 "//table //th[contains(text(), 'Created')]", "//table //th[contains(text(), 'Send')]",
         "//table //th[contains(text(), 'Messages')]", "//table //th[contains(text(), 'Error message')]"}));
+
+        waitFor(By.cssSelector("td[ng-reflect-text='S']"));
+        click(By.cssSelector("p-dropdown[placeholder='All']"));
+        waitForElementToBeClickable(By.cssSelector("li[aria-label='S']"));
+        click(By.cssSelector("li[aria-label='S']"));
+
+        softAssert.assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='S']")));
+        softAssert.assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='P']")));
+        softAssert.assertAll();
     }
 }

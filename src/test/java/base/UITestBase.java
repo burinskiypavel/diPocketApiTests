@@ -64,6 +64,18 @@ public class UITestBase {
         return ariaSelected;
     }
 
+    public boolean areElementsPresentAfterSorting(By locator){
+        boolean bool;
+        int size = driver.findElements(locator).size();
+        if(size >= 1){
+            bool = true;
+        }
+        else {
+            bool = false;
+        }
+        return bool;
+    }
+
     public String getText(By locator) {
         return driver.findElement(locator).getText();
     }
@@ -179,6 +191,11 @@ public class UITestBase {
     public void waitFor(By locator){
         wait = new WebDriverWait(driver, 20);
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void waitForElementToBeClickable(By locator){
+        wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public void waitForInvisibilityOfElement(By locator) {
