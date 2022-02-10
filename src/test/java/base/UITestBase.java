@@ -64,6 +64,12 @@ public class UITestBase {
         return ariaSelected;
     }
 
+    public void deleteTextFromTextarea(By locator) {
+        WebElement element = driver.findElement(locator);
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+    }
+
     public boolean areElementsPresentAfterSorting(By locator){
         boolean bool;
         int size = driver.findElements(locator).size();
@@ -759,5 +765,10 @@ public class UITestBase {
         waitFor(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
         waitFor(By.cssSelector("td[ng-reflect-text='Blocked']"));
+    }
+
+    public void boClientPageFilter(String filter, String text) {
+        type(By.cssSelector("p-columnfilter[field='" + filter + "'] input[type='text']"), text);
+        pressKeys(Keys.ENTER);
     }
 }
