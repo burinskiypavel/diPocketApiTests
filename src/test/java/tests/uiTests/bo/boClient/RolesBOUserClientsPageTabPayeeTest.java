@@ -36,5 +36,11 @@ public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
 
         String actualCurrencyCode = driver.findElements(By.xpath("//table/tbody/tr[1]/td[3]")).get(2).getAttribute("ng-reflect-text");
         Assert.assertEquals(actualCurrencyCode, "GBP");
-     }
+
+        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+
+        setClientPageFilter("bankId", "WBKPPLPP");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='WBKPPLPP']")));
+        assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='VHHFRGUF']")));
+    }
 }
