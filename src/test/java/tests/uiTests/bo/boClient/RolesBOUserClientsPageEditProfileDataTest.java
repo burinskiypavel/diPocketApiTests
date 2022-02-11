@@ -33,7 +33,7 @@ public class RolesBOUserClientsPageEditProfileDataTest extends UITestBase {
         softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingStreetLine1']")));
         softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingStreetLine2']")));
         softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingCity'] input[ng-reflect-model='City']")));
-        softAssert.assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-label='Country'] //span[contains(text(), 'Poland')]")));
+        softAssert.assertTrue(isElementPresent(By.xpath("//app-select-async[@ng-reflect-label='Country'] //span[contains(text(), 'Austria')]")));
         softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='mailingPostcode'] input[ng-reflect-model='11-11']")));
         softAssert.assertTrue(areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Save']"}));
         softAssert.assertAll();
