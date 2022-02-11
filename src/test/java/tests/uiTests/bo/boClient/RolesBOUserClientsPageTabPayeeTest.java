@@ -1,7 +1,11 @@
 package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
+import com.cs.dipocketback.pojo.incontrol.core.type.ActionType;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -64,7 +68,12 @@ public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Hchc']")));
 
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='address1'] input[type='text']"));
+
+        WebElement element = driver.findElement(By.cssSelector("p-columnfilter[field='companyName'] input[type='text']"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+
         setClientPageFilter("firstName", "Gfu");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Hchc']")));
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Gfu']")));
     }
 }
