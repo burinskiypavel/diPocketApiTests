@@ -42,5 +42,23 @@ public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
         setClientPageFilter("bankId", "WBKPPLPP");
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='WBKPPLPP']")));
         assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='VHHFRGUF']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='bankId'] input[type='text']"));
+
+        setClientPageFilter("accountNo", "64109000047341800000085706");
+
+        String actualaccountNo = driver.findElements(By.xpath("//table/tbody/tr[1]/td[5]")).get(2).getAttribute("ng-reflect-text");
+        Assert.assertEquals(actualaccountNo, "64109000047341800000085706");
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='accountNo'] input[type='text']"));
+
+        setClientPageFilter("countryName", "Australia");
+
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Australia']")));
+        assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Poland']")));
+
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='countryName'] input[type='text']"));
+
+        setClientPageFilter("zip", "JUVUV");
+
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='JUVUV']")));
     }
 }
