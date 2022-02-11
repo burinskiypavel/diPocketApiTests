@@ -56,9 +56,15 @@ public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
         assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Poland']")));
 
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='countryName'] input[type='text']"));
-
         setClientPageFilter("zip", "JUVUV");
-
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='JUVUV']")));
+
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='zip'] input[type='text']"));
+        setClientPageFilter("address1", "Hchc");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Hchc']")));
+
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='address1'] input[type='text']"));
+        setClientPageFilter("firstName", "Gfu");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Hchc']")));
     }
 }
