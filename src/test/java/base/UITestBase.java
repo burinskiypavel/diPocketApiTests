@@ -767,8 +767,18 @@ public class UITestBase {
         waitFor(By.cssSelector("td[ng-reflect-text='Blocked']"));
     }
 
-    public void boClientPageFilter(String filter, String text) {
+    public void setClientPageFilter(String filter, String text) {
         type(By.cssSelector("p-columnfilter[field='" + filter + "'] input[type='text']"), text);
         pressKeys(Keys.ENTER);
+    }
+
+    public void setDropDownClientPageFilter(String filter, String value) {
+        click(By.cssSelector("p-columnfilter[field='" + filter + "']"));
+        click(By.cssSelector("li[aria-label='" + value + "']"));
+        waitFor(By.cssSelector("i.p-dropdown-clear-icon"));
+    }
+
+    public void clearFilter(By locator) {
+        click(locator);
     }
 }
