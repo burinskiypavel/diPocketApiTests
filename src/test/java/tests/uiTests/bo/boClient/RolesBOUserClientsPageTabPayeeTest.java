@@ -1,16 +1,12 @@
 package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
-import com.cs.dipocketback.pojo.incontrol.core.type.ActionType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
 
@@ -39,7 +35,7 @@ public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
         setDropDownClientPageFilter("currencyCode", "GBP");
 
         String actualCurrencyCode = driver.findElements(By.xpath("//table/tbody/tr[1]/td[3]")).get(2).getAttribute("ng-reflect-text");
-        Assert.assertEquals(actualCurrencyCode, "GBP");
+        assertEquals(actualCurrencyCode, "GBP");
 
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
@@ -51,7 +47,7 @@ public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
         setClientPageFilter("accountNo", "64109000047341800000085706");
 
         String actualaccountNo = driver.findElements(By.xpath("//table/tbody/tr[1]/td[5]")).get(2).getAttribute("ng-reflect-text");
-        Assert.assertEquals(actualaccountNo, "64109000047341800000085706");
+        assertEquals(actualaccountNo, "64109000047341800000085706");
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='accountNo'] input[type='text']"));
 
         setClientPageFilter("countryName", "Australia");
@@ -75,5 +71,11 @@ public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
 
         setClientPageFilter("firstName", "Gfu");
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Gfu']")));
+
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='firstName'] input[type='text']"));
+        setClientPageFilter("lastName", "Hchc");
+
+        String actualLastName = driver.findElement(By.xpath("//table/tbody/tr[1]/td[11]")).getAttribute("ng-reflect-text");
+        assertEquals(actualLastName, "Hchc");
     }
 }
