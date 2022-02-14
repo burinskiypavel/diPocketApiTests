@@ -53,7 +53,7 @@ public class RolesBOUserClientsPageTest extends UITestBase {
         softAssert.assertEquals(actualSite, "Site: DIPOCKET");
         softAssert.assertEquals(actualRisk, "Risk: 3");
         softAssert.assertEquals(actualRegistryAdd, "Registry add: Address44, City, UA");
-        softAssert.assertEquals(actualMailingAdd, "Mailing add: Address, City, PL");
+        softAssert.assertEquals(actualMailingAdd, "Mailing add: Address, City, AT");
 
 
         softAssert.assertFalse(!areElementsPresent(new String[]{
