@@ -19,7 +19,7 @@ public class RolesBOUserClientsPageEditProfileDataTest extends UITestBase {
         click(By.cssSelector("div.edit-button"));
         waitFor(By.xpath("//app-select-async[@ng-reflect-name='gender']"));
         waitFor(By.xpath("//app-button[@ng-reflect-label='Save']"));
-        Thread.sleep(500);
+        Thread.sleep(700);
 
         softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='firstName'] input[ng-reflect-model='Nona']")));
         softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='lastName'] input[ng-reflect-model='Qwerty']")));
