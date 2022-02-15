@@ -2,12 +2,14 @@ package tests.bo.boClient;
 
 import base.TestBase;
 import io.restassured.response.Response;
+import model.bo.boClient.ClientImage_Selfie;
 import model.bo.boClient.Client_address;
 import model.bo.boClient.Client_states;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -91,5 +93,21 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(client_addresses[0].getCode(), equalTo("AT"));
         assertThat(client_addresses[0].getCountryName(), equalTo("Austria"));
         assertThat(client_addresses[0].isRestricted(), equalTo(false));
+    }
+
+    @Test(priority = 5)
+    public void test_BOServices_v1_clientImage_33217_selfie(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/BOServices/v1/clientImage/"+clientId+"/selfie");
+        res.then().log().all().statusCode(200);
+        ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
+        assertThat(clientImage_selfies[0].getId(), equalTo(30920));
+        assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
+        assertThat(clientImage_selfies[0].getTypeId(), equalTo(1));
+        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAA"));
     }
 }
