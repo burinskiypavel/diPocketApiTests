@@ -110,4 +110,24 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(clientImage_selfies[0].getTypeId(), equalTo(1));
         assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAA"));
     }
+
+    @Test(priority = 6)
+    public void test_BOServices_v1_client_search(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"id\" : 33217\n" +
+                        "}")
+                .when()
+                .post( "/BOServices/v1/client/search")
+                .then().log().all()
+                .statusCode(200)
+                .body("email", equalTo("vikarez20@gmail.com"),
+                        "id", equalTo(33217),
+                        "mainPhone", equalTo("380634413376"),
+                        "firstName", equalTo("Nona"),
+                        "lastName", equalTo("Qwerty"));
+    }
 }
