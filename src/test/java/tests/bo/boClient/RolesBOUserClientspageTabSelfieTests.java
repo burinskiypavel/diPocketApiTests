@@ -3,17 +3,16 @@ package tests.bo.boClient;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.bo.boClient.*;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RolesBOUserClientspageTabSelfieTests extends TestBase {
     String cookie = null;
-    String username = "PAVELB";
     int clientId = 33217;
 
     @Test(priority = 1)
@@ -148,5 +147,26 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(client_search[0].getMainPhone(), equalTo("380634413376"));
         assertThat(client_search[0].getEmail(), equalTo("vikarez20@gmail.com"));
         assertThat(client_search[0].getSite(), equalTo("DIPOCKET"));
+    }
+
+    @Test(priority = 8)
+    public void test_BOServices_v1_supervisor_33217_reqList(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/BOServices/v1/supervisor/33217/reqList");
+        res.then().log().all().statusCode(200);
+        Supervisor_reqList[] supervisor_reqLists = res.as(Supervisor_reqList[].class);
+        assertThat(supervisor_reqLists[0].getReqId(), equalTo(2676));
+        assertThat(supervisor_reqLists[0].getClientId(), equalTo(33217));
+        assertThat(supervisor_reqLists[0].getRole(), equalTo("Child"));
+        assertThat(supervisor_reqLists[0].getrClientPhone(), equalTo("380638918373"));
+        assertThat(supervisor_reqLists[0].getrFullName(), equalTo("Vika Qwerty"));
+        assertThat(supervisor_reqLists[0].getStateId(), equalTo(- 100));
+        assertThat(supervisor_reqLists[0].getStateName(), equalTo("Finished"));
+        Assert.assertFalse(supervisor_reqLists[0].getCreatedAt().isEmpty());
+        Assert.assertFalse(supervisor_reqLists[0].getApprovedAt().isEmpty());
     }
 }
