@@ -2,10 +2,7 @@ package tests.bo.boClient;
 
 import base.TestBase;
 import io.restassured.response.Response;
-import model.bo.boClient.ClientImage_Selfie;
-import model.bo.boClient.Client_address;
-import model.bo.boClient.Client_search;
-import model.bo.boClient.Client_states;
+import model.bo.boClient.*;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.baseURI;
@@ -59,6 +56,26 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
     }
 
     @Test(priority = 3)
+    public void test_BOServices_v1_client_availCurrencies(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/BOServices/v1/client/availCurrencies");
+        res.then().log().all().statusCode(200);
+        Client_availCurrencies[] client_availCurrencies = res.as(Client_availCurrencies[].class);
+        assertThat(client_availCurrencies[0].getId(), equalTo(975));
+        assertThat(client_availCurrencies[0].getCode(), equalTo("BGN"));
+        assertThat(client_availCurrencies[1].getId(), equalTo(756));
+        assertThat(client_availCurrencies[1].getCode(), equalTo("CHF"));
+        assertThat(client_availCurrencies[1].getSymbol(), equalTo("Fr"));
+        assertThat(client_availCurrencies[2].getId(), equalTo(978));
+        assertThat(client_availCurrencies[2].getCode(), equalTo("EUR"));
+        assertThat(client_availCurrencies[2].getSymbol(), equalTo("€"));
+    }
+
+    @Test(priority = 4)
     public void test_BOServices_v1_client_33217(){
         given()
                 .log().uri().log().headers()
@@ -75,7 +92,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                         "lastName", equalTo("Qwerty"));
     }
 
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void test_BOServices_v1_client_33217_address(){
         Response res = given()
                 .log().uri().log().headers()
@@ -96,7 +113,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(client_addresses[0].isRestricted(), equalTo(false));
     }
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void test_BOServices_v1_clientImage_33217_selfie(){
         Response res = given()
                 .log().uri().log().headers()
@@ -112,7 +129,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAA"));
     }
 
-    @Test(priority = 6)
+    @Test(priority = 7)
     public void test_BOServices_v1_client_search(){
         Response res = given()
                 .log().uri().log().headers()
