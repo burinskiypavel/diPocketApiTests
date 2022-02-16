@@ -4,6 +4,7 @@ import base.TestBase;
 import io.restassured.response.Response;
 import model.bo.boClient.ClientImage_Selfie;
 import model.bo.boClient.Client_address;
+import model.bo.boClient.Client_search;
 import model.bo.boClient.Client_states;
 import org.testng.annotations.Test;
 
@@ -113,7 +114,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
 
     @Test(priority = 6)
     public void test_BOServices_v1_client_search(){
-        given()
+        Response res = given()
                 .log().uri().log().headers()
                 .cookie(cookie)
                 .contentType("application/json")
@@ -121,13 +122,14 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                         "  \"id\" : 33217\n" +
                         "}")
                 .when()
-                .post( "/BOServices/v1/client/search")
-                .then().log().all()
-                .statusCode(200)
-                .body("email", equalTo("vikarez20@gmail.com"),
-                        "id", equalTo(33217),
-                        "mainPhone", equalTo("380634413376"),
-                        "firstName", equalTo("Nona"),
-                        "lastName", equalTo("Qwerty"));
+                .post( "/BOServices/v1/client/search");
+        res.then().log().all().statusCode(200);
+        Client_search[] client_search = res.as(Client_search[].class);
+        assertThat(client_search[0].getId(), equalTo(clientId));
+        assertThat(client_search[0].getFirstName(), equalTo("Nona"));
+        assertThat(client_search[0].getLastName(), equalTo("Qwerty"));
+        assertThat(client_search[0].getMainPhone(), equalTo("380634413376"));
+        assertThat(client_search[0].getEmail(), equalTo("vikarez20@gmail.com"));
+        assertThat(client_search[0].getSite(), equalTo("DIPOCKET"));
     }
 }
