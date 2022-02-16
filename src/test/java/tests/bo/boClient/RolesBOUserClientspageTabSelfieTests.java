@@ -6,8 +6,7 @@ import model.bo.boClient.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -18,12 +17,13 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
     @Test(priority = 1)
     public void test_BOServices_v1_user_authentication(){
         baseURI = app.BOURL;
+        basePath = "BOServices";
         Response response = given()
                 .log().uri().log().headers()
                 .auth().preemptive().basic("Viktoria", "kWmaB0s")
                 .contentType("application/json")
                 .when()
-                .post( "/BOServices/v1/user/authentication");
+                .post( "/v1/user/authentication");
         response.then().log().all()
                 .statusCode(200)
                 .body("username", equalTo("VIKTORIA"));
@@ -37,7 +37,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/client/states");
+                .get( "/v1/client/states");
         res.then().log().all().statusCode(200);
         Client_states[] client_states = res.as(Client_states[].class);
         assertThat(client_states[0].getId(), equalTo(-200));
@@ -61,7 +61,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/client/availCurrencies");
+                .get( "/v1/client/availCurrencies");
         res.then().log().all().statusCode(200);
         Client_availCurrencies[] client_availCurrencies = res.as(Client_availCurrencies[].class);
         assertThat(client_availCurrencies[0].getId(), equalTo(975));
@@ -81,7 +81,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/client/"+ clientId +"")
+                .get( "/v1/client/"+ clientId +"")
                 .then().log().all()
                 .statusCode(200)
                 .body("email", equalTo("vikarez20@gmail.com"),
@@ -98,7 +98,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/client/"+ clientId +"/address");
+                .get( "/v1/client/"+ clientId +"/address");
         res.then().log().all().statusCode(200);
         Client_address[] client_addresses = res.as(Client_address[].class);
         assertThat(client_addresses[0].getClientId(), equalTo(clientId));
@@ -119,7 +119,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/clientImage/"+clientId+"/selfie");
+                .get( "/v1/clientImage/"+clientId+"/selfie");
         res.then().log().all().statusCode(200);
         ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
         assertThat(clientImage_selfies[0].getId(), equalTo(30920));
@@ -138,7 +138,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                         "  \"id\" : 33217\n" +
                         "}")
                 .when()
-                .post( "/BOServices/v1/client/search");
+                .post( "/v1/client/search");
         res.then().log().all().statusCode(200);
         Client_search[] client_search = res.as(Client_search[].class);
         assertThat(client_search[0].getId(), equalTo(clientId));
@@ -156,7 +156,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/supervisor/33217/reqList");
+                .get( "/v1/supervisor/33217/reqList");
         res.then().log().all().statusCode(200);
         Supervisor_reqList[] supervisor_reqLists = res.as(Supervisor_reqList[].class);
         assertThat(supervisor_reqLists[0].getReqId(), equalTo(2676));
