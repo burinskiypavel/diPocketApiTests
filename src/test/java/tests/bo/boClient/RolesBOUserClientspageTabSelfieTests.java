@@ -169,4 +169,56 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         Assert.assertFalse(supervisor_reqLists[0].getCreatedAt().isEmpty());
         Assert.assertFalse(supervisor_reqLists[0].getApprovedAt().isEmpty());
     }
+
+    @Test(priority = 9)
+    public void test_BOServices_v1_ticket_types(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/ticket/types");
+        res.then().log().all().statusCode(200);
+        Ticket_types[] ticket_types = res.as(Ticket_types[].class);
+        assertThat(ticket_types[0].getId(), equalTo(402));
+        assertThat(ticket_types[0].getName(), equalTo("PhotoID change"));
+        assertThat(ticket_types[1].getId(), equalTo(700));
+        assertThat(ticket_types[1].getName(), equalTo("Client restriction"));
+        assertThat(ticket_types[2].getId(), equalTo(100));
+        assertThat(ticket_types[2].getName(), equalTo("SDD check"));
+        assertThat(ticket_types[3].getId(), equalTo(200));
+        assertThat(ticket_types[3].getName(), equalTo("FDD check"));
+        assertThat(ticket_types[4].getId(), equalTo(300));
+        assertThat(ticket_types[4].getName(), equalTo("PIN incorrect (3)"));
+        assertThat(ticket_types[5].getId(), equalTo(310));
+        assertThat(ticket_types[5].getName(), equalTo("PIN change"));
+        assertThat(ticket_types[6].getId(), equalTo(320));
+        assertThat(ticket_types[6].getName(), equalTo("Secret answer incorrect (2)"));
+    }
+
+    @Test(priority = 10)
+    public void test_BOServices_v1_tran_states(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/tran/states");
+        res.then().log().all().statusCode(200);
+        Tran_states[] tran_states = res.as(Tran_states[].class);
+        assertThat(tran_states[0].getId(), equalTo(-100));
+        assertThat(tran_states[0].getName(), equalTo("Error"));
+        assertThat(tran_states[1].getId(), equalTo(-60));
+        assertThat(tran_states[1].getName(), equalTo("Reversed"));
+        assertThat(tran_states[2].getId(), equalTo(-50));
+        assertThat(tran_states[2].getName(), equalTo("Reversing"));
+        assertThat(tran_states[3].getId(), equalTo(-10));
+        assertThat(tran_states[3].getName(), equalTo("Cancelled"));
+        assertThat(tran_states[4].getId(), equalTo(0));
+        assertThat(tran_states[4].getName(), equalTo("Processing"));
+        assertThat(tran_states[5].getId(), equalTo(10));
+        assertThat(tran_states[5].getName(), equalTo("Hidden"));
+        assertThat(tran_states[6].getId(), equalTo(30));
+        assertThat(tran_states[6].getName(), equalTo("Pending"));
+    }
 }
