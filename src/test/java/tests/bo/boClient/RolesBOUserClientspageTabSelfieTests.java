@@ -221,4 +221,16 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(tran_states[6].getId(), equalTo(30));
         assertThat(tran_states[6].getName(), equalTo("Pending"));
     }
+
+    @Test(priority = 11)
+    public void test_BOServices_v1_dashboard_tranTypes(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/dashboard/tranTypes")
+                .then().log().all()
+                .statusCode(200).body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
+    }
 }
