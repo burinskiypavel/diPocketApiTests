@@ -233,4 +233,30 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .then().log().all()
                 .statusCode(200).body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
     }
+
+    @Test(priority = 12)
+    public void test_BOServices_v1_account_client_33217(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/account/client/"+clientId+"");
+        res.then().log().all().statusCode(200);
+        Account_client[] account_clients = res.as(Account_client[].class);
+        assertThat(account_clients[0].getId(), equalTo(102690));
+        assertThat(account_clients[0].getAccountName(), equalTo("Bbh"));
+        assertThat(account_clients[0].getClientId(), equalTo(33217));
+        assertThat(account_clients[0].getCcyId(), equalTo(826));
+        assertThat(account_clients[0].getCcyCode(), equalTo("GBP"));
+        assertThat(account_clients[0].getRestAmount(), equalTo(0));
+        assertThat(account_clients[0].getStateId(), equalTo(-100));
+        assertThat(account_clients[0].getStateName(), equalTo("Closed"));
+        assertThat(account_clients[0].getTypeId(), equalTo(1));
+        assertThat(account_clients[0].getCreated(), equalTo("2021-10-12"));
+        assertThat(account_clients[0].getAccStateNameExt(), equalTo("Closed"));
+        assertThat(account_clients[0].getClientIdOwner(), equalTo(33217));
+        assertThat(account_clients[0].isOwner(), equalTo(true));
+        assertThat(account_clients[0].isShared(), equalTo(false));
+    }
 }
