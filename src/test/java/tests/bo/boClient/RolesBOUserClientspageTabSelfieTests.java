@@ -259,4 +259,22 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(account_clients[0].isOwner(), equalTo(true));
         assertThat(account_clients[0].isShared(), equalTo(false));
     }
+
+    @Test(priority = 13)
+    public void test_BOServices_v1_account_other_client_33217(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/account/other/client/33217");
+        res.then().log().all().statusCode(200);
+        Account_other_client[] account_other_clients = res.as(Account_other_client[].class);
+        assertThat(account_other_clients[0].getId(), equalTo(104447));
+        assertThat(account_other_clients[0].getClientId(), equalTo(33217));
+        assertThat(account_other_clients[0].getCardName(), equalTo("Test"));
+        assertThat(account_other_clients[0].getCreated(), equalTo("2022-01-12"));
+        assertThat(account_other_clients[0].getMaskedPan(), equalTo("555585******9888"));
+        assertThat(account_other_clients[0].getAccountStateName(), equalTo("Closed"));
+    }
 }
