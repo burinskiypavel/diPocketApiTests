@@ -1,7 +1,6 @@
 package tests.bo.boClient;
 
 import base.TestBase;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import model.bo.boClient.*;
 import org.testng.Assert;
@@ -10,7 +9,6 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasKey;
 import static org.testng.Assert.assertTrue;
 
 public class RolesBOUserClientspageTabSelfieTests extends TestBase {
@@ -159,7 +157,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/v1/supervisor/33217/reqList");
+                .get( "/v1/supervisor/"+clientId+"/reqList");
         res.then().log().all().statusCode(200);
         Supervisor_reqList[] supervisor_reqLists = res.as(Supervisor_reqList[].class);
         assertThat(supervisor_reqLists[0].getReqId(), equalTo(2676));
@@ -290,7 +288,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/v1/account/other/client/33217");
+                .get( "/v1/account/other/client/"+clientId+"");
         res.then().log().all().statusCode(200);
         Account_other_client[] account_other_clients = res.as(Account_other_client[].class);
         assertThat(account_other_clients[0].getId(), equalTo(104447));
@@ -308,7 +306,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/v1/clientImage/33217/docs");
+                .get( "/v1/clientImage/"+clientId+"/docs");
         res.then().log().all().statusCode(200);
         ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
         assertThat(clientImage_selfies[0].getId(), equalTo(31456));
