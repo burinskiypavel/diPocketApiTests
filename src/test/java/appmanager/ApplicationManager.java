@@ -22,6 +22,7 @@ public class ApplicationManager {
     private Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
     private AttachmentHelper attachmentHelper = new AttachmentHelper();
     private BOHelper boHelper = new BOHelper();
+    private JsonHelper jsonHelper = new JsonHelper();
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
@@ -300,6 +301,8 @@ public class ApplicationManager {
     }
 
     public BOHelper getBOHelper() { return boHelper; }
+
+    public JsonHelper getJsonHelper() { return jsonHelper; }
 
 //    public MailHelper mail(){
 //        if(mailHelper == null){
