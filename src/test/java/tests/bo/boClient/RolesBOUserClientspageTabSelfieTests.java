@@ -277,4 +277,20 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(account_other_clients[0].getMaskedPan(), equalTo("555585******9888"));
         assertThat(account_other_clients[0].getAccountStateName(), equalTo("Closed"));
     }
+
+    @Test(priority = 14)
+    public void test_BOServices_v1_clientImage_33217_docs(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/clientImage/33217/docs");
+        res.then().log().all().statusCode(200);
+        ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
+        assertThat(clientImage_selfies[0].getId(), equalTo(31456));
+        assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
+        assertThat(clientImage_selfies[0].getTypeId(), equalTo(2));
+        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAAqACAAQAAAABAAAEOKADAAQAAAABAAAF7gAAAAD"));
+    }
 }
