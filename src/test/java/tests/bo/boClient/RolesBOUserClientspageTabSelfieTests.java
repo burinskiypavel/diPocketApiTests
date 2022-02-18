@@ -197,6 +197,26 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
     }
 
     @Test(priority = 10)
+    public void test_BOServices_v1_ticket_states(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/ticket/states");
+        res.then().log().all().statusCode(200);
+        Ticket_states[] ticket_states = res.as(Ticket_states[].class);
+        assertThat(ticket_states[0].getId(), equalTo(10));
+        assertThat(ticket_states[0].getName(), equalTo("Open"));
+        assertThat(ticket_states[1].getId(), equalTo(50));
+        assertThat(ticket_states[1].getName(), equalTo("In progress"));
+        assertThat(ticket_states[2].getId(), equalTo(100));
+        assertThat(ticket_states[2].getName(), equalTo("Closed"));
+        assertThat(ticket_states[3].getId(), equalTo(-10));
+        assertThat(ticket_states[3].getName(), equalTo("Rejected"));
+    }
+
+    @Test(priority = 11)
     public void test_BOServices_v1_tran_states(){
         Response res = given()
                 .log().uri().log().headers()
@@ -222,7 +242,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(tran_states[6].getName(), equalTo("Pending"));
     }
 
-    @Test(priority = 11)
+    @Test(priority = 12)
     public void test_BOServices_v1_dashboard_tranTypes(){
         given()
                 .log().uri().log().headers()
@@ -234,7 +254,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .statusCode(200).body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
     }
 
-    @Test(priority = 12)
+    @Test(priority = 13)
     public void test_BOServices_v1_account_client_33217(){
         Response res = given()
                 .log().uri().log().headers()
@@ -260,7 +280,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(account_clients[0].isShared(), equalTo(false));
     }
 
-    @Test(priority = 13)
+    @Test(priority = 14)
     public void test_BOServices_v1_account_other_client_33217(){
         Response res = given()
                 .log().uri().log().headers()
@@ -278,7 +298,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(account_other_clients[0].getAccountStateName(), equalTo("Closed"));
     }
 
-    @Test(priority = 14)
+    @Test(priority = 15)
     public void test_BOServices_v1_clientImage_33217_docs(){
         Response res = given()
                 .log().uri().log().headers()
