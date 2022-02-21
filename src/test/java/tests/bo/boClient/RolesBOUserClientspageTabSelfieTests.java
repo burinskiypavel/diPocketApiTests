@@ -374,4 +374,23 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(clientImage_docHistories[0].getStateId(), equalTo(10));
         assertThat(clientImage_docHistories[0].getStateName(), equalTo("Approved"));
     }
+
+    @Test(priority = 19)
+    public void test_BOServices_v1_client_33217_pushMsgs(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+clientId+"/pushMsgs");
+        res.then().log().all().statusCode(200);
+        Client_pushMsgs[] client_pushMsgs = res.as(Client_pushMsgs[].class);
+        assertThat(client_pushMsgs[0].getId(), equalTo(660119));
+        assertThat(client_pushMsgs[0].getClientId(), equalTo(clientId));
+        assertThat(client_pushMsgs[0].getChannel(), equalTo("P"));
+        assertThat(client_pushMsgs[0].getCreated(), equalTo("2022-02-21T10:57:46.891768Z"));
+        assertThat(client_pushMsgs[0].getSent(), equalTo("2022-02-21T10:59:49.098217Z"));
+        assertThat(client_pushMsgs[0].getMessage(), equalTo("Ви не прийняли переказ від Eva Fisher протягом 7 днів, кошти були повернуті платнику"));
+        assertThat(client_pushMsgs[0].getFormattedCreated(), equalTo("2022-02-21"));
+    }
 }
