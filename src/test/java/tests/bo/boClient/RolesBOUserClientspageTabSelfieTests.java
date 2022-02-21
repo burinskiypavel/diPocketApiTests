@@ -354,4 +354,24 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(clientImage_docHistories[0].getStateId(), equalTo(10));
         assertThat(clientImage_docHistories[0].getStateName(), equalTo("Approved"));
     }
+
+    @Test(priority = 18)
+    public void test_BOServices_v1_clientImage_33217_selfieHistory(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/clientImage/"+clientId+"/selfieHistory");
+        res.then().log().all().statusCode(200);
+        ClientImage_docHistory[] clientImage_docHistories = res.as(ClientImage_docHistory[].class);
+        assertThat(clientImage_docHistories[0].getId(), equalTo(17159));
+        assertThat(clientImage_docHistories[0].getClientId(), equalTo(clientId));
+        assertThat(clientImage_docHistories[0].getTypeId(), equalTo(4));
+        assertThat(clientImage_docHistories[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9"));
+        assertThat(clientImage_docHistories[0].getAdded(), equalTo("2021-12-29T13:10:12.551693Z"));
+        assertThat(clientImage_docHistories[0].getClientId(), equalTo(clientId));
+        assertThat(clientImage_docHistories[0].getStateId(), equalTo(10));
+        assertThat(clientImage_docHistories[0].getStateName(), equalTo("Approved"));
+    }
 }
