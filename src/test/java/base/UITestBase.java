@@ -64,6 +64,12 @@ public class UITestBase {
         return ariaSelected;
     }
 
+    public void performContextClick(By locator) {
+        WebElement element = driver.findElement(locator);
+        Actions actions = new Actions(driver);
+        actions.contextClick(element).perform();
+    }
+
     public void deleteTextFromTextarea(By locator) {
         WebElement element = driver.findElement(locator);
         element.sendKeys(Keys.CONTROL + "a");
