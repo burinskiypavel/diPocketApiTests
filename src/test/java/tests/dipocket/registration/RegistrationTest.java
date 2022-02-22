@@ -530,7 +530,7 @@ public class RegistrationTest extends TestBase {
 
     @Test(priority = 18)
     public void testEmailLink() throws InterruptedException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket0@gmail.com", "password1<");
         System.out.println("link_link " + link);
         given()
                 .when()

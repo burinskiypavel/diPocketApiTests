@@ -138,6 +138,7 @@ public class ApplicationManager {
         emailsVerificationsCurrencyId = HelperBase.prop.getProperty("emailsVerifications.currencyId");
 
         requestSpecDipocketRegistration = given()
+                .log().uri().log().headers().log().body()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
