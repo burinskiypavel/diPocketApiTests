@@ -20,27 +20,21 @@ public class RolesBOUserClientspageTabAccountsTest extends UITestBase {
         click(By.id("p-tabpanel-8-label"));
 
         setClientPageFilter("accountName", "Bbh");
-
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Bbh']")));
         assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Hhh']")));
-
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='accountName'] input[type='text']"));
-
 
         setDropDownClientPageFilter("stateName", "Active");
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Active']")));
         assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Frozen']")));
-
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
         setDropDownClientPageFilter("ccyCode", "EUR");
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='EUR']")));
         assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='GBR']")));
-
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
         performContextClick(By.cssSelector("td[ng-reflect-text='Bbh']"));
-
         assertTrue(areElementsPresent(new String[]{"//span[contains(text(), 'Block account')]", "//span[contains(text(), 'Account limits')]", "//span[contains(text(), 'Overdraft limit')]"}));
     }
 }
