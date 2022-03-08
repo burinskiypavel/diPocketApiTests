@@ -718,10 +718,10 @@ public class UITestBase {
     }
 
     public void fillBOUserFieldsInPopup(String firstname, String lastname, String phone, String email, String username) {
-        type(By.cssSelector("app-input[ng-reflect-label='Firstname'] input[type='text']"), firstname);
-        type(By.cssSelector("app-input[ng-reflect-label='Lastname'] input[type='text']"), lastname);
-        type(By.cssSelector("app-input-number[ng-reflect-label='Phone'] input.p-inputtext"), phone);
-        type(By.cssSelector("app-input[ng-reflect-label='Email'] input[type='text']"), email);
+        type(By.cssSelector("app-input[ng-reflect-name='firstName'] input[type='text']"), firstname);
+        type(By.cssSelector("app-input[ng-reflect-name='lastName'] input[type='text']"), lastname);
+        type(By.cssSelector("app-input-number[ng-reflect-name='phone'] input.p-inputtext"), phone);
+        type(By.cssSelector("app-input[ng-reflect-name='email'] input[type='text']"), email);
         type(By.cssSelector("app-input[ng-reflect-name='username'] input[type='text']"), username);
     }
 

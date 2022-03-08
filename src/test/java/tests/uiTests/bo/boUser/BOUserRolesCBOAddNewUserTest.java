@@ -29,11 +29,11 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
         assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
         assertTrue(isButtonEnabled(By.cssSelector("app-button[ng-reflect-label='Add user")));
 
-        click(By.cssSelector("app-select-async[ng-reflect-label='Role']"));
+        click(By.cssSelector("app-select-async[ng-reflect-name='role']"));
         waitFor(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'CBO')]"));
         click(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'CBO')]"));
 
-        click(By.cssSelector("app-select-async[ng-reflect-label='Site']"));
+        click(By.cssSelector("app-select-async[ng-reflect-name='site']"));
         waitFor(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'SODEXO')]"));
         click(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'SODEXO')]"));
 
