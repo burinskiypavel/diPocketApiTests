@@ -128,10 +128,10 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
         assertEquals(nativeSms.getChallengeInfoHeader(), "Confirm with SMS code");
         assertEquals(nativeSms.getChallengeInfoLabel(), "Enter the Code here");
 
-        assertThat(nativeSms.getChallengeInfoText(), equalTo("To confirm the transaction, please enter below the Code we sent by SMS to 4984\\n\\n\n" +
-                "Card # 545598******8066\\n\\n\n" +
-                        "Date   " + now2 + "\\n\\n\n" +
-                        "Store  integration test\\n\\n\n" +
+        assertThat(nativeSms.getChallengeInfoText(), equalTo("To confirm the transaction, please enter below the Code we sent by SMS to 4984\\n\\n\r\n" +
+                "Card # 545598******8066\\n\\n\r\n" +
+                        "Date   " + now2 + "\\n\\n\r\n" +
+                        "Store  integration test\\n\\n\r\n" +
                         "Amount 102.00 USD\\n\\n"
                 ));
 
