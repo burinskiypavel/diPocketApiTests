@@ -609,7 +609,7 @@ public class UITestBase {
     public void gotoUpAndGoSiteAndDoneBasicAuth(String url, String login, String password) {
         //driver.navigate().to("https://dipocket:LeprechauN@telenor-test.dipocket.org");
         driver.navigate().to("https://"+login+":"+password+"@"+url+"");
-        waitForSeveralItems(new String[]{"Register your card", "Login/ Top-up", "Check balance and PIN code"});
+        waitForSeveralItems(new String[]{"Register your card", "Login", "Check balance and PIN code"});
     }
 
     public void gotoLoginPageUpAndGo() {
