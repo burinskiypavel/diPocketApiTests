@@ -18,9 +18,10 @@ public class UpAndGoCheckBalanceNegativeTests extends UITestBase {
         waitForSeveralItems(new String[]{"Check balance and PIN code", "Card identifier", "Cancel", "Continue"});
         type(By.id("token"), "");
         click(By.cssSelector("button[data-dpwa-action='check-balance']"));
-        String hexColor = getColorOfElement(By.id("token"), "border-color");
+        String popUpMessage = getTextFromPopUpUpAndGo();
+        closePopUp(By.xpath("//button[contains(text(), 'OK')]"));
 
-        assertThat(hexColor, equalTo(hexRedColor));
+        assertThat(popUpMessage, equalTo("Token not found. Please check token and try again"));
     }
 
     @Test(priority = 2)
