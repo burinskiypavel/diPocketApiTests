@@ -9,7 +9,7 @@ import static org.testng.Assert.assertTrue;
 public class RolesBOUserClientspageTabAccountsAccountLimitsTest extends UITestBase {
 
     @Test
-    public void testRolesBOUserClientspageTabAccounts() throws InterruptedException {
+    public void testRolesBOUserClientspageTabAccountsAccountLimits() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
