@@ -187,7 +187,7 @@ public class ApplicationManager {
                 //.header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
 
         requestSpecEmailVerification = given()
-                .baseUri(dipocket3_intranet)
+                .baseUri(baseURL)
                 .log().uri().log().headers().log().body()
                 .contentType("application/json");
 
