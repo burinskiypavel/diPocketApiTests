@@ -19,6 +19,20 @@ public class RolesBOUserClientspageTabAccountsBlockAccountTest extends UITestBas
         waitFor(By.cssSelector("p.user-name"));
         click(By.id("p-tabpanel-8-label"));
         performContextClick(By.cssSelector("td[ng-reflect-text='test']"));
+
+        if(!isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
+            click(By.xpath("//span[contains(text(), 'Unblock account')]"));
+            click(By.cssSelector("app-button[label='Unblock']"));
+            waitFor(By.xpath("//div[contains(text(), 'Account was unblocked successfully')]"));
+            Thread.sleep(2500);
+
+            moveToElement(By.cssSelector("td[ng-reflect-text='test']"));
+            Thread.sleep(1500);
+            performContextClick(By.cssSelector("td[ng-reflect-text='test']"));
+            waitForElementToBeClickable(By.xpath("//span[contains(text(), 'Block account')]"));
+            Thread.sleep(2500);
+        }
+
         click(By.xpath("//span[contains(text(), 'Block account')]"));
         String actualPopupText = getTextFromPopUp2(By.cssSelector("app-block-account-modal p"));
         click(By.cssSelector("app-button[label='Block']"));
