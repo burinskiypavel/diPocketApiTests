@@ -70,6 +70,12 @@ public class UITestBase {
         actions.contextClick(element).perform();
     }
 
+    public void moveToElement(By locator) {
+        WebElement element = driver.findElement(locator);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+    }
+
     public void deleteTextFromTextarea(By locator) {
         WebElement element = driver.findElement(locator);
         element.sendKeys(Keys.CONTROL + "a");
