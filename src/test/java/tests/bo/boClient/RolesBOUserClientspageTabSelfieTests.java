@@ -1,5 +1,6 @@
 package tests.bo.boClient;
 
+import appmanager.BOHelper;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.bo.boClient.*;
@@ -265,7 +266,15 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .get( "/v1/account/client/"+clientId+"");
         res.then().log().all().statusCode(200);
         Account_client[] account_clients = res.as(Account_client[].class);
-        assertThat(account_clients[0].getId(), equalTo(102690));
+
+        app.getBOHelper().isAccountClientIdExist(account_clients, 102690);
+
+        //BOHelper.funcR(BOHelper::f);
+
+        //BOHelper.isAccountClientAccountNameExist2(Account_client::getAccountName, account_clients, "test");
+
+
+        //assertThat(account_clients[0].getId(), equalTo(102690));
         assertThat(account_clients[0].getAccountName(), equalTo("Bbh"));
         assertThat(account_clients[0].getClientId(), equalTo(33217));
         assertThat(account_clients[0].getCcyId(), equalTo(826));
