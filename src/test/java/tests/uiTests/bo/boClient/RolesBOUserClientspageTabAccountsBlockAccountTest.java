@@ -20,16 +20,8 @@ public class RolesBOUserClientspageTabAccountsBlockAccountTest extends UITestBas
         performContextClick(By.cssSelector("td[ng-reflect-text='test']"));
 
         if(!isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
-            click(By.xpath("//span[contains(text(), 'Unblock account')]"));
-            click(By.cssSelector("app-button[label='Unblock']"));
-            waitFor(By.xpath("//div[contains(text(), 'Account was unblocked successfully')]"));
-            Thread.sleep(2500);
-
-            moveToElement(By.cssSelector("td[ng-reflect-text='test']"));
-            Thread.sleep(1500);
-            performContextClick(By.cssSelector("td[ng-reflect-text='test']"));
-            waitForElementToBeClickable(By.xpath("//span[contains(text(), 'Block account')]"));
-            //Thread.sleep(1000);
+            unblockAccount();
+            moveToElementAndPerformContextClick("test");
         }
 
         click(By.xpath("//span[contains(text(), 'Block account')]"));

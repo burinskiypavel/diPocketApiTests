@@ -208,7 +208,7 @@ public class UITestBase {
 
     public void waitFor(By locator){
         wait = new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public void waitForElementToBeClickable(By locator){
@@ -792,5 +792,20 @@ public class UITestBase {
 
     public void clearFilter(By locator) {
         click(locator);
+    }
+
+    public void moveToElementAndPerformContextClick(String accountName) throws InterruptedException {
+        moveToElement(By.cssSelector("td[ng-reflect-text='" + accountName + "']"));
+        Thread.sleep(1500);
+        performContextClick(By.cssSelector("td[ng-reflect-text='" + accountName + "']"));
+        waitForElementToBeClickable(By.xpath("//span[contains(text(), 'Block account')]"));
+        //Thread.sleep(1000);
+    }
+
+    public void unblockAccount() throws InterruptedException {
+        click(By.xpath("//span[contains(text(), 'Unblock account')]"));
+        click(By.cssSelector("app-button[label='Unblock']"));
+        waitFor(By.xpath("//div[contains(text(), 'Account was unblocked successfully')]"));
+        Thread.sleep(1500);
     }
 }
