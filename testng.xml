@@ -627,6 +627,12 @@
         </classes>
     </test>
 
+    <test name="RolesBOUserClientspageTabAccountsBlockAccountTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientspageTabAccountsBlockAccountTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->

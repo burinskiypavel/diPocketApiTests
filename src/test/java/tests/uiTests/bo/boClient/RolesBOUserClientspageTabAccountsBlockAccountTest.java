@@ -2,10 +2,9 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 public class RolesBOUserClientspageTabAccountsBlockAccountTest extends UITestBase {
 
@@ -30,14 +29,14 @@ public class RolesBOUserClientspageTabAccountsBlockAccountTest extends UITestBas
             Thread.sleep(1500);
             performContextClick(By.cssSelector("td[ng-reflect-text='test']"));
             waitForElementToBeClickable(By.xpath("//span[contains(text(), 'Block account')]"));
-            Thread.sleep(2500);
+            //Thread.sleep(1000);
         }
 
         click(By.xpath("//span[contains(text(), 'Block account')]"));
         String actualPopupText = getTextFromPopUp2(By.cssSelector("app-block-account-modal p"));
         click(By.cssSelector("app-button[label='Block']"));
 
-        Assert.assertEquals(actualPopupText, "Are you sure want to block account with name: test?");
+        assertEquals(actualPopupText, "Are you sure want to block account with name: test?");
 
         //assertTrue(areElementsPresent(new String[]{"//th[contains(text(), 'Name')]", "//th[contains(text(), 'Type')]", "//th[contains(text(), 'Currency')]", "//th[contains(text(), 'Max amount')]", "//th[contains(text(), 'Limit amount')]"}));
     }
