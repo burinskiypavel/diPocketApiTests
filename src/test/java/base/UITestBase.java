@@ -718,7 +718,7 @@ public class UITestBase {
 
     public void editUser(String firsname) throws InterruptedException {
         type(By.cssSelector("app-input[ng-reflect-name='firstName'] input[type='text']"), firsname);
-        Thread.sleep(1200);
+        Thread.sleep(1500);
         click(By.cssSelector("app-button[ng-reflect-label='Edit user']"));
         waitFor(By.xpath("//*[contains(text(), 'User updated successfully')]"));
     }
