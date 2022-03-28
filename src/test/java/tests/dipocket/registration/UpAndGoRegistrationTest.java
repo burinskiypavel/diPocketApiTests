@@ -382,7 +382,7 @@ public class UpAndGoRegistrationTest extends TestBase {
 
     @Test(priority = 15)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2___() {
-        regSavepointData.setEmail(app.playITRegistrationEmail);
+        regSavepointData.setEmail(app.registrationEmail);
         regSavepointData.setStepNo(4);
         String json = gson.toJson(regSavepointData);
         System.out.println(json);
