@@ -20,7 +20,9 @@ import static com.cs.dipocketback.pojo.client.CheckboxType.TERMS_AND_CONDITIONS_
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class RegistrationTest extends TestBase {
     String smsCode = null;
@@ -528,7 +530,7 @@ public class RegistrationTest extends TestBase {
                 .body("resultCode", equalTo(0));
     }
 
-    @Test(priority = 18)
+    @Test(priority = 18 ,enabled = false)
     public void testEmailLink() throws InterruptedException {
         String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
         System.out.println("link_link " + link);
@@ -539,5 +541,34 @@ public class RegistrationTest extends TestBase {
                 .statusCode(200)
                 .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"),
                         "html.body.div.div.div.h2", equalTo("Большое спасибо!"));
+    }
+
+    @Test(priority = 19)
+    public void testEmailLink_() throws InterruptedException {
+        //String redirectedLink = "https://http.dipocket.dev/Mail/v1/view/eMailConfirmation/successful?site=DIPOCKET&langId=4&lang=ru";
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
+        System.out.println("link_link " + link);
+        given()
+                .log().uri()
+                .when()
+                .redirects().follow(false)
+                .urlEncodingEnabled(false)
+                .get(link)
+                .then()
+                .log().all()
+                .statusCode(301);
+                //.headers("Location", notNullValue(),
+                //        "Location", redirectedLink);
+
+//        given()
+//                .log().uri()
+//                .when()
+//                .auth().preemptive().basic("dipocket", "LeprechauN")
+//                .urlEncodingEnabled(false)
+//                .get(redirectedLink)
+//                .then()
+//                .log().all()
+//                .statusCode(200);
+
     }
 }
