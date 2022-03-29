@@ -609,9 +609,9 @@
         </classes>
     </test>
 
-    <test name="RolesBOUserClientsPageTabPayeeTest">
+    <test name="RolesBOUserClientPageTabPayeeTest">
         <classes>
-            <class name="tests.uiTests.bo.boClient.RolesBOUserClientsPageTabPayeeTest"/>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabPayeeTest"/>
         </classes>
     </test>
 

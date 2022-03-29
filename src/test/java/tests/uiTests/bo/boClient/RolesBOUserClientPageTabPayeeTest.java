@@ -8,10 +8,10 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class RolesBOUserClientsPageTabPayeeTest extends UITestBase {
+public class RolesBOUserClientPageTabPayeeTest extends UITestBase {
 
     @Test
-    public void testRolesBOUserClientsPageTabPayee() throws InterruptedException {
+    public void testRolesBOUserClientPageTabPayee() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
