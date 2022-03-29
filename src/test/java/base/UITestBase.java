@@ -808,4 +808,26 @@ public class UITestBase {
         waitFor(By.xpath("//div[contains(text(), 'Account was unblocked successfully')]"));
         Thread.sleep(1500);
     }
+
+    public String blockAccount() {
+        click(By.xpath("//span[contains(text(), 'Block account')]"));
+        String actualPopupText = getTextFromPopUp2(By.cssSelector("app-block-account-modal p"));
+        click(By.cssSelector("app-button[label='Block']"));
+        waitFor(By.xpath("//div[contains(text(), 'Account was blocked successfully')]"));
+        return actualPopupText;
+    }
+
+    public void goToAccountsTab() {
+        click(By.id("p-tabpanel-8-label"));
+    }
+
+    public void goToClientPage(String phone) {
+        click(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
+        waitFor(By.cssSelector("p.user-name"));
+    }
+
+    public void search(String by, String value, String phone) {
+        type(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"), value);
+        waitFor(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
+    }
 }
