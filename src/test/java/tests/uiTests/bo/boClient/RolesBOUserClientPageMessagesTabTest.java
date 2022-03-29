@@ -5,11 +5,11 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class RolesBOUserClientsPageMessagesTabTest extends UITestBase {
+public class RolesBOUserClientPageMessagesTabTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
 
     @Test
-    public void testRolesBOUserClientsPageMessagesTab() throws InterruptedException {
+    public void testRolesBOUserClientPageMessagesTab() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
