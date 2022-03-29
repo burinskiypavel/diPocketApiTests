@@ -6,10 +6,10 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-public class RolesBOUserClientsPageTabTilesTest extends UITestBase {
+public class RolesBOUserClientPageTabTilesTest extends UITestBase {
 
     @Test()
-    public void testRolesBOUserClientsPageTabTiles() throws InterruptedException {
+    public void testRolesBOUserClientPageTabTiles() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
