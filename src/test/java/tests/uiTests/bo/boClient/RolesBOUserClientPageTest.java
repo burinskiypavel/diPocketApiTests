@@ -5,11 +5,11 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class RolesBOUserClientsPageTest extends UITestBase {
+public class RolesBOUserClientPageTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
 
     @Test
-    public void testRolesBOUserClientsPage() throws InterruptedException {
+    public void testRolesBOUserClientPage() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
