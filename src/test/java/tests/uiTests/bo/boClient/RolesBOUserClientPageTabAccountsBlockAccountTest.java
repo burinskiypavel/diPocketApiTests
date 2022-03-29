@@ -6,12 +6,12 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class RolesBOUserClientspageTabAccountsBlockAccountTest extends UITestBase {
+public class RolesBOUserClientPageTabAccountsBlockAccountTest extends UITestBase {
     String accountName = "test";
     String phone = "380634413376";
 
     @Test
-    public void testRolesBOUserClientspageTabAccountsBlockAccount() throws InterruptedException {
+    public void testRolesBOUserClientPageTabAccountsBlockAccount() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         search("id", "33217", phone);
