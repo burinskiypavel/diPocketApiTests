@@ -809,11 +809,26 @@ public class UITestBase {
         Thread.sleep(1500);
     }
 
+    public void boClientPageBlockAccount() throws InterruptedException {
+        click(By.xpath("//span[contains(text(), 'Block account')]"));
+        click(By.cssSelector("app-button[label='Block']"));
+        waitFor(By.xpath("//div[contains(text(), 'Account was blocked successfully')]"));
+        Thread.sleep(1500);
+    }
+
     public String blockAccount() {
         click(By.xpath("//span[contains(text(), 'Block account')]"));
         String actualPopupText = getTextFromPopUp2(By.cssSelector("app-block-account-modal p"));
         click(By.cssSelector("app-button[label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Account was blocked successfully')]"));
+        return actualPopupText;
+    }
+
+    public String unblockAccountAndGetPopupText() {
+        click(By.xpath("//span[contains(text(), 'Unblock account')]"));
+        String actualPopupText = getTextFromPopUp2(By.cssSelector("app-unblock-account-modal p"));
+        click(By.cssSelector("app-button[label='Unblock']"));
+        waitFor(By.xpath("//div[contains(text(), 'Account was unblocked successfully')]"));
         return actualPopupText;
     }
 
