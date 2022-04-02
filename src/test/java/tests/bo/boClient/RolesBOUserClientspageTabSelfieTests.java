@@ -389,9 +389,9 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .body("id", hasItem(660119),
                         "clientId", hasItem(33217),
                         "channel", hasItem("P"),
-                        "created", hasItem("2022-02-21T10:57:46.891768Z"),
-                        "sent", hasItem("2022-02-21T10:59:49.098217Z"),
-                        "message", hasItem("Ви не прийняли переказ від Eva Fisher протягом 7 днів, кошти були повернуті платнику"),
-                        "formattedCreated", hasItem("21.02.2022 00:00:00"));
+                        "created", hasItem("21.02.2022 10:57:46"),
+                        "sent", hasItem("21.02.2022 10:59:49"),
+                        "message", hasItem("Ви не прийняли переказ від Eva Fisher протягом 7 днів, кошти були повернуті платнику"));
+                        //"formattedCreated", hasItem("21.02.2022 00:00:00"));
     }
 }
