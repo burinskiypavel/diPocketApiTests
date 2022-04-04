@@ -2,10 +2,10 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UITestBase {
     String accountName = "test";
@@ -70,5 +70,34 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         updateLimits(randomLimit, randomLimit);
 
         assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'Account limits was changed successfull')]")));
+    }
+
+    @Test(priority = 4)
+    public void testRolesBOUserClientPageTabAccountsCardsTablesBlock() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", "33217", phone);
+        goToClientPage(phone);
+        goToAccountsTab();
+        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+
+        waitFor(By.cssSelector("td[ng-reflect-text='Plastic']"));
+
+        setClientPageFilter("id", "188989");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='188989']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='id'] input[type='text']"));
+
+        setClientPageFilter("publicToken", "893529504");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='893529504']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='publicToken'] input[type='text']"));
+
+        setClientPageFilter("dipToken", "32842383");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='32842383']")));
+        performContextClick(By.cssSelector("td[ng-reflect-text='186406']"));
+
+        assertTrue(areElementsPresent(new String[]{"//span[contains(text(), 'Block card')]", "//span[contains(text(), 'Unblock card')]",
+        "//span[contains(text(), 'Get QR')]", "//span[contains(text(), 'Card limits')]", "//span[contains(text(), 'Reset pin counter')]",
+        "//span[contains(text(), 'Reset ePin')]", "//span[contains(text(), 'Reset contactless counter')]",
+        "//span[contains(text(), 'Activate card')]"}));
     }
 }
