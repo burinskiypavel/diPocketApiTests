@@ -371,7 +371,6 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(clientImage_docHistories[0].getTypeId(), equalTo(4));
         assertThat(clientImage_docHistories[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdCIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9"));
         assertThat(clientImage_docHistories[0].getAdded(), equalTo("2021-12-29T13:10:12.551693Z"));
-        assertThat(clientImage_docHistories[0].getClientId(), equalTo(clientId));
         assertThat(clientImage_docHistories[0].getStateId(), equalTo(10));
         assertThat(clientImage_docHistories[0].getStateName(), equalTo("Approved"));
     }
@@ -392,6 +391,5 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                         "created", hasItem("21.02.2022 10:57:46"),
                         "sent", hasItem("21.02.2022 10:59:49"),
                         "message", hasItem("Ви не прийняли переказ від Eva Fisher протягом 7 днів, кошти були повернуті платнику"));
-                        //"formattedCreated", hasItem("21.02.2022 00:00:00"));
     }
 }
