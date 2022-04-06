@@ -369,9 +369,9 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .body("id", hasItem(17159),
                         "clientId", hasItem(clientId),
                         "typeId", hasItem(4),
-                        //"imageInBase64", containsString("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAA"),
-                        //"added", hasItem("2021-12-29T13:10:12.551693Z"),
-                        //"stateId", hasItem(10),
+                        "imageInBase64", hasItem(notNullValue()),
+                        "added", hasItem("2021-12-29T13:10:12.551693Z"),
+                        "stateId", hasItem(10),
                         "stateName", hasItem("Approved"));
     }
 
