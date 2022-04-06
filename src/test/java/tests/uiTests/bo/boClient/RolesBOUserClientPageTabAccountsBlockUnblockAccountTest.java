@@ -100,4 +100,27 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         "//span[contains(text(), 'Reset ePin')]", "//span[contains(text(), 'Reset contactless counter')]",
         "//span[contains(text(), 'Activate card')]"}));
     }
+
+    @Test(priority = 5)
+    public void testRolesBOUserClientPageTabAccountsBlockCard () throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", "33217", phone);
+        goToClientPage(phone);
+        goToAccountsTab();
+        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        waitFor(By.cssSelector("td[ng-reflect-text='Plastic']"));
+        performContextClick(By.cssSelector("td[ng-reflect-text='Plastic']"));
+        click(By.xpath("//li //span[contains(text(), 'Block card')]"));
+
+
+        assertTrue(areElementsPresent(new String[]{"//label[contains(text(), '41 Lost card (can be unblocked)')]", "//label[contains(text(), '43 Stolen card')]",
+        "//label[contains(text(), '62 Restricted card')]", "//label[contains(text(), '83 Card destroyed')]"}));
+
+        click(By.xpath("//label[contains(text(), '43 Stolen card')]"));
+        click(By.cssSelector("app-button[ng-reflect-label='Block']"));
+        waitFor(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
+
+
+    }
 }
