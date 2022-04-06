@@ -45,7 +45,7 @@ public class RolesBOUserClientPageTest extends UITestBase {
         softAssert.assertFalse(!areElementsPresent(new String[]{
                 "//*[contains(text(), '06.10.1976 (45)')]", "//*[contains(text(), '380634413376')]", "//*[contains(text(), '33217')]",
                 "//*[contains(text(), 'FDD')]", "//*[contains(text(), 'EUR - standart')]", "//*[contains(text(), 'EUR')]",
-                "//*[contains(text(), 'Ukrainian')]",}));
+                "//*[contains(text(), 'English')]",}));
 
         softAssert.assertEquals(actualUsername, "Nona Qwerty");
         softAssert.assertEquals(actualEmail, "vikarez20@gmail.com (verified)");
