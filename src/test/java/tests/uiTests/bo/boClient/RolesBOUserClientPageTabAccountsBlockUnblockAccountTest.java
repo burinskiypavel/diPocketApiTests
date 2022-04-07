@@ -111,6 +111,14 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
         waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+
+
+        if(isElementPresent(By.cssSelector("li[data-ik='1'] a[tabindex='0']"))){
+            click(By.xpath("//li //span[contains(text(), 'Unblock card')]"));
+            click(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
+        }
+
+
         click(By.xpath("//li //span[contains(text(), 'Block card')]"));
 
         assertTrue(areElementsPresent(new String[]{"//label[contains(text(), '41 Lost card (can be unblocked)')]", "//label[contains(text(), '43 Stolen card')]",
