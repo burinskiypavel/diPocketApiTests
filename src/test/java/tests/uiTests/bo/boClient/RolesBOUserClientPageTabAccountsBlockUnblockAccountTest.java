@@ -116,10 +116,20 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
         if(isElementPresent(By.cssSelector("li[data-ik='1'] a[tabindex='0']"))){
             click(By.xpath("//li //span[contains(text(), 'Unblock card')]"));
+            waitFor(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
             click(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
             waitFor(By.xpath("//div[contains(text(), 'Card was unblocked successfully')]"));
-            //String actualState = driver.findElement(By.xpath("//td[text() = '187562']/following-sibling::td[3]")).getText();
-            Thread.sleep(2000);
+            Thread.sleep(4000);
+
+//            String actualState = "Block";
+//            int count = 0;
+//            while (actualState.equals("Active") && count <= 30){
+//                actualState = driver.findElement(By.xpath("//td[text() = '187562']/following-sibling::td[3]")).getText();
+//                Thread.sleep(1000);
+//                System.out.println("count: " + count);
+//                count++;
+//            }
+            moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
             performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
 
