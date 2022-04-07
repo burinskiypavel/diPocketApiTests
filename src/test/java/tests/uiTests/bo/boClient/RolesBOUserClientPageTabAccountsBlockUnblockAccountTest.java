@@ -3,6 +3,7 @@ package tests.uiTests.bo.boClient;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import sun.awt.windows.ThemeReader;
 
 import static org.testng.Assert.*;
 
@@ -10,7 +11,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     String accountName = "test";
     String phone = "380634413376";
     String randomLimit = app.generateRandomNumber(4);
-    int cardId = 187562;
+    String cardId = "187562";
 
     @Test(priority = 1)
     public void testRolesBOUserClientPageTabAccountsBlockAccount() throws InterruptedException {
@@ -116,15 +117,23 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         if(isElementPresent(By.cssSelector("li[data-ik='1'] a[tabindex='0']"))){
             click(By.xpath("//li //span[contains(text(), 'Unblock card')]"));
             click(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
+            waitFor(By.xpath("//div[contains(text(), 'Card was unblocked successfully')]"));
+            //String actualState = driver.findElement(By.xpath("//td[text() = '187562']/following-sibling::td[3]")).getText();
+            Thread.sleep(2000);
+            performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
 
 
         click(By.xpath("//li //span[contains(text(), 'Block card')]"));
 
+        waitFor(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
+
+
         assertTrue(areElementsPresent(new String[]{"//label[contains(text(), '41 Lost card (can be unblocked)')]", "//label[contains(text(), '43 Stolen card')]",
         "//label[contains(text(), '62 Restricted card')]", "//label[contains(text(), '83 Card destroyed')]"}));
 
         click(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
+        Thread.sleep(1200);
         click(By.cssSelector("app-button[ng-reflect-label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
     }
