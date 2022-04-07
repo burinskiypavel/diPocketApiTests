@@ -2,7 +2,6 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -11,6 +10,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     String accountName = "test";
     String phone = "380634413376";
     String randomLimit = app.generateRandomNumber(4);
+    int cardId = 187562;
 
     @Test(priority = 1)
     public void testRolesBOUserClientPageTabAccountsBlockAccount() throws InterruptedException {
@@ -109,18 +109,15 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         goToClientPage(phone);
         goToAccountsTab();
         click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
-        waitFor(By.cssSelector("td[ng-reflect-text='Plastic']"));
-        performContextClick(By.cssSelector("td[ng-reflect-text='Plastic']"));
+        waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         click(By.xpath("//li //span[contains(text(), 'Block card')]"));
-
 
         assertTrue(areElementsPresent(new String[]{"//label[contains(text(), '41 Lost card (can be unblocked)')]", "//label[contains(text(), '43 Stolen card')]",
         "//label[contains(text(), '62 Restricted card')]", "//label[contains(text(), '83 Card destroyed')]"}));
 
-        click(By.xpath("//label[contains(text(), '43 Stolen card')]"));
+        click(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
         click(By.cssSelector("app-button[ng-reflect-label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
-
-
     }
 }
