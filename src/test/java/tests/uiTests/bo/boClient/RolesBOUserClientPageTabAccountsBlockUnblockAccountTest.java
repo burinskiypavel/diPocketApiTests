@@ -143,5 +143,9 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
             performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
         unblockCard();
+
+        String actualState = driver.findElement(By.xpath("//td[text() = '"+cardId+"']/following-sibling::td[3]")).getText();
+
+        assertEquals(actualState, "Active");
     }
 }
