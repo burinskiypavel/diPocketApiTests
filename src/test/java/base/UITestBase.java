@@ -875,4 +875,9 @@ public class UITestBase {
         waitFor(By.xpath("//div[contains(text(), 'Card was unblocked successfully')]"));
         Thread.sleep(4000);
     }
+
+    public String getNextElementFromTheTable(String cardId, int element) {
+        String actualState = driver.findElement(By.xpath("//td[text() = '"+cardId+"']/following-sibling::td["+element+"]")).getText();
+        return actualState;
+    }
 }

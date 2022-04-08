@@ -112,10 +112,8 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
 
-
         if(isElementPresent(By.cssSelector("li[data-ik='1'] a[tabindex='0']"))){
             unblockCard();
-
             moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
             performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
@@ -138,13 +136,12 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
         if(isElementPresent(By.cssSelector("li[data-ik='0'] a[tabindex='0']"))){
             blockCard();
-
             moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
             performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
-        unblockCard();
 
-        String actualState = driver.findElement(By.xpath("//td[text() = '"+cardId+"']/following-sibling::td[3]")).getText();
+        unblockCard();
+        String actualState = getNextElementFromTheTable(cardId, 3);
 
         assertEquals(actualState, "Active");
     }
