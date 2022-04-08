@@ -137,5 +137,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         Thread.sleep(1200);
         click(By.cssSelector("app-button[ng-reflect-label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
+
+        assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'Card was blocked successfully')]")));
     }
 }
