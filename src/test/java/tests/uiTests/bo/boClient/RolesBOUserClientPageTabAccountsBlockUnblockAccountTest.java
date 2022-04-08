@@ -120,7 +120,6 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
             performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
 
-
         blockCard();
 
         assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'Card was blocked successfully')]")));
@@ -144,27 +143,5 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
             performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
         unblockCard();
-
-        assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'Card was unblocked successfully')]")));
-    }
-
-    public void blockCard() throws InterruptedException {
-        click(By.xpath("//li //span[contains(text(), 'Block card')]"));
-        waitFor(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
-        assertTrue(areElementsPresent(new String[]{"//label[contains(text(), '41 Lost card (can be unblocked)')]", "//label[contains(text(), '43 Stolen card')]",
-                "//label[contains(text(), '62 Restricted card')]", "//label[contains(text(), '83 Card destroyed')]"}));
-
-        click(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
-        Thread.sleep(1200);
-        click(By.cssSelector("app-button[ng-reflect-label='Block']"));
-        waitFor(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
-    }
-
-    public void unblockCard() throws InterruptedException {
-        click(By.xpath("//li //span[contains(text(), 'Unblock card')]"));
-        waitFor(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
-        click(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
-        waitFor(By.xpath("//div[contains(text(), 'Card was unblocked successfully')]"));
-        Thread.sleep(4000);
     }
 }

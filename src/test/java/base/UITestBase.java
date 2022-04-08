@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertTrue;
 
 public class UITestBase {
 
@@ -852,5 +853,26 @@ public class UITestBase {
         Thread.sleep(1000);
         click(By.cssSelector("app-button[ng-reflect-label='Save']"));
         waitFor(By.xpath("//div[contains(text(), 'Account limits was changed successfully')]"));
+    }
+
+    public void blockCard() throws InterruptedException {
+        click(By.xpath("//li //span[contains(text(), 'Block card')]"));
+        waitFor(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
+        assertTrue(areElementsPresent(new String[]{"//label[contains(text(), '41 Lost card (can be unblocked)')]", "//label[contains(text(), '43 Stolen card')]",
+                "//label[contains(text(), '62 Restricted card')]", "//label[contains(text(), '83 Card destroyed')]"}));
+
+        click(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
+        Thread.sleep(1200);
+        click(By.cssSelector("app-button[ng-reflect-label='Block']"));
+        waitFor(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
+    }
+
+    public void unblockCard() throws InterruptedException {
+        click(By.xpath("//li //span[contains(text(), 'Unblock card')]"));
+        waitFor(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
+        click(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
+        waitFor(By.xpath("//div[contains(text(), 'Card was unblocked successfully')]"));
+        Thread.sleep(4000);
     }
 }
