@@ -3,7 +3,6 @@ package tests.uiTests.bo.boClient;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import sun.awt.windows.ThemeReader;
 
 import static org.testng.Assert.*;
 
@@ -121,14 +120,6 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
             waitFor(By.xpath("//div[contains(text(), 'Card was unblocked successfully')]"));
             Thread.sleep(4000);
 
-//            String actualState = "Block";
-//            int count = 0;
-//            while (actualState.equals("Active") && count <= 30){
-//                actualState = driver.findElement(By.xpath("//td[text() = '187562']/following-sibling::td[3]")).getText();
-//                Thread.sleep(1000);
-//                System.out.println("count: " + count);
-//                count++;
-//            }
             moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
             performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
