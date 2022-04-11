@@ -145,4 +145,21 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
         assertEquals(actualState, "Active");
     }
+
+    @Test(priority = 7)
+    public void testRolesBOUserClientPageTabAccountsCardLimits() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", "33217", phone);
+        goToClientPage(phone);
+        goToAccountsTab();
+        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+
+        click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
+        //waitFor(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
+
+
+    }
 }
