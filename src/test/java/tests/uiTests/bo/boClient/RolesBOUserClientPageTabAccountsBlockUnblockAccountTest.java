@@ -158,10 +158,10 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
 
         click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
-        //waitFor(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
+        waitFor(By.xpath("//span[contains(text(), 'Card id:')]"));
+
+        assertTrue(areElementsPresent(new String[]{"//span[contains(text(), 'Card id:')]", "//span[contains(text(), 'Card type:')]"}));
 
         closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
-
-
     }
 }
