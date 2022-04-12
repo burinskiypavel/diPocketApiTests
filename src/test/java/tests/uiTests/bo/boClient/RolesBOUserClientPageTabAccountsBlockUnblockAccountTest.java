@@ -162,5 +162,6 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         assertTrue(areElementsPresent(new String[]{"//span[contains(text(), 'Card id:')]", "//span[contains(text(), 'Card type:')]"}));
 
         closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
+        waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
     }
 }
