@@ -11,6 +11,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     String phone = "380634413376";
     String randomLimit = app.generateRandomNumber(4);
     String cardId = "187562";
+    String clientId = "33217";
 
     @Test(priority = 1)
     public void testRolesBOUserClientPageTabAccountsBlockAccount() throws InterruptedException {
