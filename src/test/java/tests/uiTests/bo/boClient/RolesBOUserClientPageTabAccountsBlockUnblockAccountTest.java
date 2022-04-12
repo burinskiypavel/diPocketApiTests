@@ -156,7 +156,6 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
         waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-
         click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
         waitFor(By.xpath("//span[contains(text(), 'Card id:')]"));
 
