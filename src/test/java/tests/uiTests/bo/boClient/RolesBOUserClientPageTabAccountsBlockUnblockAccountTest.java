@@ -121,7 +121,10 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
         blockCard();
 
-        assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'Card was blocked successfully')]")));
+        moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        String actualState = getNextElementFromTheTable(cardId, 3);
+
+        assertEquals(actualState, "Blocked");
     }
 
     @Test(priority = 6)
