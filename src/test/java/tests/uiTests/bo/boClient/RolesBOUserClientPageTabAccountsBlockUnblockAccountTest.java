@@ -160,6 +160,8 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
         //waitFor(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
 
+        closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
+
 
     }
 }
