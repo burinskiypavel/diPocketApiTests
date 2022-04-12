@@ -17,7 +17,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     public void testRolesBOUserClientPageTabAccountsBlockAccount() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", "33217", phone);
+        search("id", clientId, phone);
         goToClientPage(phone);
         goToAccountsTab();
         performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
@@ -43,7 +43,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     public void testRolesBOUserClientPageTabAccountsUnblockAccount() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", "33217", phone);
+        search("id", clientId, phone);
         goToClientPage(phone);
         goToAccountsTab();
         performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
@@ -62,7 +62,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     public void testRolesBOUserClientPageTabAccountsOverdraftLimit() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", "33217", phone);
+        search("id", clientId, phone);
         goToClientPage(phone);
         goToAccountsTab();
         performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
@@ -77,7 +77,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     public void testRolesBOUserClientPageTabAccountsCardsTablesBlock() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", "33217", phone);
+        search("id", clientId, phone);
         goToClientPage(phone);
         goToAccountsTab();
         click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
@@ -106,7 +106,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     public void testRolesBOUserClientPageTabAccountsBlockCard() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", "33217", phone);
+        search("id", clientId, phone);
         goToClientPage(phone);
         goToAccountsTab();
         click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
@@ -131,7 +131,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     public void testRolesBOUserClientPageTabAccountsUnblockCard() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", "33217", phone);
+        search("id", clientId, phone);
         goToClientPage(phone);
         goToAccountsTab();
         click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
@@ -154,7 +154,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
     public void testRolesBOUserClientPageTabAccountsCardLimits() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", "33217", phone);
+        search("id", clientId, phone);
         goToClientPage(phone);
         goToAccountsTab();
         click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
