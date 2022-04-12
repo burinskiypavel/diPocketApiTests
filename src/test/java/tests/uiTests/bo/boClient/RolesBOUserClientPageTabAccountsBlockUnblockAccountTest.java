@@ -145,6 +145,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         }
 
         unblockCard();
+        moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         String actualState = getNextElementFromTheTable(cardId, 3);
 
         assertEquals(actualState, "Active");
