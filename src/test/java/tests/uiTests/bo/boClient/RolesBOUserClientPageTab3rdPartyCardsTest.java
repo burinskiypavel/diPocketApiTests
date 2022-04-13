@@ -20,7 +20,7 @@ public class RolesBOUserClientPageTab3rdPartyCardsTest extends UITestBase {
         gotoSearchPage();
         search("id", clientId, phone);
         goToClientPage(phone);
-        goToAccountsTab();
+        goTo3rdPartyCardsTab();
 //        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
 //        waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
 //        performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
