@@ -641,8 +641,8 @@ public class UITestBase {
         type(By.cssSelector("input[type='text']"), login);
         type(By.cssSelector("input[type='password']"), password);
         Thread.sleep(500);
-        click(By.cssSelector("button[type='button']"));
-        waitForSeveralItems(new String[]{"Search", "Take Ticket", "Home", "Logout"});
+        click(By.cssSelector("button[type='submit']"));
+        waitForSeveralItems(new String[]{"Search", "Take Ticket", "Logout"});
     }
 
     public void gotoBOSiteAndLoginWithCBOUserRole(String login, String password) throws InterruptedException {
