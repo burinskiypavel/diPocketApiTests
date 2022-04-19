@@ -42,9 +42,12 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
         click(By.cssSelector("app-button[label='Search']"));
 
         waitFor(By.cssSelector("td[ng-reflect-text='629314']"));
+
         performContextClick(By.cssSelector("td[ng-reflect-text='629314']"));
 
+        waitFor(By.xpath("//li //span[contains(text(), 'Details')]"));
         click(By.xpath("//li //span[contains(text(), 'Details')]"));
+        waitFor(By.xpath("//td[contains(text(), 'Account name:')]"));
 
         assertTrue(areElementsPresent(new String[]{
                 "//td[contains(text(), 'Account name:')]", "//td[contains(text(), 'Account amount:')]",
