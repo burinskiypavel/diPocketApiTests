@@ -26,4 +26,29 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
                 "//thead //th[contains(text(), 'Event date')]", "//thead //th[contains(text(), 'State')]",
                 "//thead //th[contains(text(), 'Fee Amount')]"}));
     }
+
+    @Test
+    public void testRolesBOUserClientPageTabTransactionsDetailsTest() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+        goToTransactionTab();
+        waitFor(By.xpath("//thead //th[contains(text(), 'TranItemId')]"));
+
+        click(By.cssSelector("p-dropdown[optionlabel='value']"));
+        click(By.cssSelector("li[aria-label='All']"));
+
+        click(By.cssSelector("app-button[label='Search']"));
+
+        waitFor(By.cssSelector("td[ng-reflect-text='629314']"));
+        performContextClick(By.cssSelector("td[ng-reflect-text='629314']"));
+
+        click(By.xpath("//li //span[contains(text(), 'Details')]"));
+
+        assertTrue(areElementsPresent(new String[]{
+                "//td[contains(text(), 'Account name:')]", "//td[contains(text(), 'Account amount:')]",
+                "//td[contains(text(), 'Account currency:')]", "//td[contains(text(), 'Type:')]",
+                "//td[contains(text(), 'State')]"}));
+    }
 }
