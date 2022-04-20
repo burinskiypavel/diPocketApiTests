@@ -856,8 +856,8 @@ public class UITestBase {
     }
 
     public void updateLimits(String lowLimit, String highLimit) throws InterruptedException {
-        type(By.cssSelector("app-input[ng-reflect-name='lowLimit'] input[type='text']"), lowLimit);
-        type(By.cssSelector("app-input[ng-reflect-name='highLimit'] input[type='text']"), highLimit);
+        type(By.cssSelector("app-input-number[ng-reflect-name='lowLimit'] input[inputmode='decimal']"), lowLimit);
+        type(By.cssSelector("app-input-number[ng-reflect-name='highLimit'] input[inputmode='decimal']"), highLimit);
         Thread.sleep(1000);
         click(By.cssSelector("app-button[ng-reflect-label='Save']"));
         waitFor(By.xpath("//div[contains(text(), 'Account limits was changed successfully')]"));
