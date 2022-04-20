@@ -845,6 +845,10 @@ public class UITestBase {
         click(By.id("p-tabpanel-10-label"));
     }
 
+    public void goToTicketsTab() {
+        click(By.id("p-tabpanel-11-label"));
+    }
+
     public void goToClientPage(String phone) {
         click(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
         waitFor(By.cssSelector("p.user-name"));

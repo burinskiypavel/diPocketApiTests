@@ -645,6 +645,12 @@
         </classes>
     </test>
 
+    <test name="RolesBOUserClientPageTabTicketsTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabTicketsTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
