@@ -1,6 +1,7 @@
 package appmanager;
 
 import com.cs.dipocketback.base.data.Site;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 import java.sql.SQLException;
@@ -167,6 +168,27 @@ public class Login_RegistrationHelper extends HelperBase {
                 .post("/WebServices/v1/homePage/authenticateWithSca");
 
         String cliSessionId = res.getHeader("cliSessionId");
+
+        String responseBody  = res.getBody().asString();
+        JsonPath jsonPath = new JsonPath(responseBody);
+        String errCode = jsonPath.getString("errCode");
+
+        if(errCode.equals("DIP-00602")){
+
+            given().log().uri().log().headers().log().body()
+                    .baseUri("https://http.dipocket.dev")
+                    .header("site", Site.SNOW_ATTACK.toString())
+                    .contentType("application/json; charset=utf-8")
+                    .auth().preemptive().basic("11_" + phone, pass)
+                    .body("{\n" +
+                            "  \"mainPhone\" : \""+phone+"\"\n" +
+                            "}")
+                    .when()
+                    .post("/WebServices/v1/security/sendSca")
+                    .then().log().all()
+                    .statusCode(200);
+        }
+
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
         res.then().log().all();
