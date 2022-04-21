@@ -167,31 +167,35 @@ public class Login_RegistrationHelper extends HelperBase {
                 .when()
                 .post("/WebServices/v1/homePage/authenticateWithSca");
 
+        res.then().log().all();
+
         String cliSessionId = res.getHeader("cliSessionId");
 
-        String responseBody  = res.getBody().asString();
-        JsonPath jsonPath = new JsonPath(responseBody);
-        String errCode = jsonPath.getString("errCode");
+        if(res.getStatusCode() != 200) {
 
-        if(errCode.equals("DIP-00602")){
+            String responseBody = res.getBody().asString();
+            JsonPath jsonPath = new JsonPath(responseBody);
+            String errCode = jsonPath.getString("errCode");
 
-            given().log().uri().log().headers().log().body()
-                    .baseUri("https://http.dipocket.dev")
-                    .header("site", Site.SNOW_ATTACK.toString())
-                    .contentType("application/json; charset=utf-8")
-                    .auth().preemptive().basic("11_" + phone, pass)
-                    .body("{\n" +
-                            "  \"mainPhone\" : \""+phone+"\"\n" +
-                            "}")
-                    .when()
-                    .post("/WebServices/v1/security/sendSca")
-                    .then().log().all()
-                    .statusCode(200);
+            if (errCode.equals("DIP-00602")) {
+
+                given().log().uri().log().headers().log().body()
+                        .baseUri("https://http.dipocket.dev")
+                        .header("site", Site.SNOW_ATTACK.toString())
+                        .contentType("application/json; charset=utf-8")
+                        .auth().preemptive().basic("11_" + phone, pass)
+                        .body("{\n" +
+                                "  \"mainPhone\" : \"" + phone + "\"\n" +
+                                "}")
+                        .when()
+                        .post("/WebServices/v1/security/sendSca")
+                        .then().log().all()
+                        .statusCode(200);
+            }
         }
 
         System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
-        res.then().log().all();
 
         assertEquals(res.getStatusCode(), 200);
         return cliSessionId;
