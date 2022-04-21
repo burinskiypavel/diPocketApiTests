@@ -436,7 +436,7 @@ public class SnowAttackRegistrationTest extends TestBase {
 
     @Test(priority = 18)
     public void testEmailLink() throws InterruptedException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationSnowAttack(  "testdipocket@gmail.com", "password1<");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationSnowAttack(HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
         System.out.println("link_link " + link);
         given()
                 .when()
