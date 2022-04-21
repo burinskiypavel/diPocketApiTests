@@ -159,13 +159,13 @@ public class Login_RegistrationHelper extends HelperBase {
 
     public String loginSnowAttack(String phone, String pass) {
         Response res = given().log().uri().log().headers().log().body()
-                .baseUri("https://http.dipocket.dev")
+                .baseUri(HelperBase.prop.getProperty("base.url"))
                 .header("site", Site.SNOW_ATTACK.toString())
                 .contentType("application/json; charset=utf-8")
                 .auth().preemptive().basic("11_" + phone, pass)
                 .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
                 .when()
-                .post("/WebServices/v1/homePage/authenticateWithSca");
+                .post("WebServices/v1/homePage/authenticateWithSca");
 
         res.then().log().all();
 
@@ -180,7 +180,7 @@ public class Login_RegistrationHelper extends HelperBase {
             if (errCode.equals("DIP-00602")) {
 
                 given().log().uri().log().headers().log().body()
-                        .baseUri("https://http.dipocket.dev")
+                        .baseUri(HelperBase.prop.getProperty("base.url"))
                         .header("site", Site.SNOW_ATTACK.toString())
                         .contentType("application/json; charset=utf-8")
                         .auth().preemptive().basic("11_" + phone, pass)
@@ -188,7 +188,7 @@ public class Login_RegistrationHelper extends HelperBase {
                                 "  \"mainPhone\" : \"" + phone + "\"\n" +
                                 "}")
                         .when()
-                        .post("/WebServices/v1/security/sendSca")
+                        .post("WebServices/v1/security/sendSca")
                         .then().log().all()
                         .statusCode(200);
             }
