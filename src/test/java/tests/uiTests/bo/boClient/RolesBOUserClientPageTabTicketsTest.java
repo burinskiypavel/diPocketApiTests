@@ -27,9 +27,22 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
                 "//thead //th[contains(text(), 'Ticket State')]", "//thead //th[contains(text(), 'Closed')]",
                 "//thead //th[contains(text(), 'Last comment')]"}));
 
-        //setClientPageFilter("id", "25596");
+        //setClientPageFilter();
+
         WebElement element = driver.findElements(By.cssSelector("p-columnfilter[field='id'] input[type='text']")).get(1);
         element.sendKeys("25596");
         pressKeys(Keys.ENTER);
+
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='25596']")));
+
+        WebElement element2 = driver.findElements(By.cssSelector("p-columnfilter[field='id'] input[type='text']")).get(1);
+        element2.sendKeys(Keys.CONTROL + "a");
+        element2.sendKeys(Keys.DELETE);
+
+        //deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='id'] input[type='text']"));
+
+        setClientPageFilter("created", "02.02.2022");
+        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='02.02.2022']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='created'] input[type='text']"));
     }
 }
