@@ -19,7 +19,7 @@ import static org.hamcrest.CoreMatchers.hasItems;
 
 public class LegalAttachmentsSnowAttackTests extends TestBase {
     String cliSessionId = null;
-    String email = "testdipocket0@gmail.com";//2
+    String email = "testdipocket0@gmail.com";//testdipocket2@gmail.com"
     String pass = "pasword1";
     String emailPass = "pasword12!";
     String phone = "380987419131";//380633192217
