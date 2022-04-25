@@ -83,6 +83,11 @@ public class UITestBase {
         element.sendKeys(Keys.DELETE);
     }
 
+    public void deleteText(WebElement id) {
+        id.sendKeys(Keys.CONTROL + "a");
+        id.sendKeys(Keys.DELETE);
+    }
+
     public boolean areElementsPresentAfterSorting(By locator){
         boolean bool;
         int size = driver.findElements(locator).size();

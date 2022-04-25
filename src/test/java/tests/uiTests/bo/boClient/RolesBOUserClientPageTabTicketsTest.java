@@ -52,10 +52,12 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
         driver.findElement(By.cssSelector("li[aria-label='Closed']")).click();
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Closed']")));
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
-    }
 
-    public void deleteText(WebElement id) {
-        id.sendKeys(Keys.CONTROL + "a");
-        id.sendKeys(Keys.DELETE);
+        setClientPageFilter("closed", "07.02.2022");
+        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='07.02.2022']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='closed'] input[type='text']"));
+
+        setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
+        assertTrue(areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Ticket reassigned. Reason: test')]")));
     }
 }
