@@ -51,5 +51,13 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
         //setDropDownClientPageFilter("stateName", "Finished"); // bug
         //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Finished']")));
         //clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+
+        setClientPageFilter("createdAt", "19.01.2022");
+        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='19.01.2022']"))); //bug
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='createdAt'] input[type='text']"));
+
+        setClientPageFilter("approvedAt", "30.08.2021");
+        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='30.08.2021']"))); // bug
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='approvedAt'] input[type='text']"));
     }
 }
