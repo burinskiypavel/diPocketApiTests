@@ -48,7 +48,7 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Vika Qwerty']")));
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='rFullName'] input[type='text']"));
 
-        //setDropDownClientPageFilter("stateName", "Finished"); // bug
+        //setDropDownClientPageFilter("stateName", "Finished"); // bug DEV-1904
         //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Finished']")));
         //clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
