@@ -43,41 +43,5 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
         setClientPageFilter("rClientPhone", "380638918373");
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='380638918373']")));
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='rClientPhone'] input[type='text']"));
-
-
-
-
-
-        WebElement id = driver.findElements(By.cssSelector("p-columnfilter[field='id'] input[type='text']")).get(1);
-        id.sendKeys("25596");
-        pressKeys(Keys.ENTER);
-        waitFor(By.cssSelector("td[ng-reflect-text='25596']"));
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='25596']")));
-        deleteText(id);
-
-        setClientPageFilter("created", "02.02.2022");
-        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='02.02.2022']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='created'] input[type='text']"));
-
-        setDropDownClientPageFilter("typeName", "FDD check");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='FDD check']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
-
-        setDropDownClientPageFilter("username", "EVGENYA");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='EVGENYA']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
-
-        WebElement stateName = driver.findElements(By.cssSelector("p-columnfilter[field='stateName']")).get(2);
-        stateName.click();
-        driver.findElement(By.cssSelector("li[aria-label='Closed']")).click();
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Closed']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
-
-        setClientPageFilter("closed", "07.02.2022");
-        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='07.02.2022']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='closed'] input[type='text']"));
-
-        setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
-        assertTrue(areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Ticket reassigned. Reason: test')]")));
     }
 }
