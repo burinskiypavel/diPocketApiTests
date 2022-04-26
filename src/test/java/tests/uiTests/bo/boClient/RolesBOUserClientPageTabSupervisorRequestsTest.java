@@ -32,6 +32,15 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='3079']")));
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='reqId'] input[type='text']"));
 
+        setDropDownClientPageFilter("role", "Child");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Child']")));
+        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+
+        setClientPageFilter("clientId", "33655");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='33655']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='clientId'] input[type='text']"));
+
+
 
 
 
