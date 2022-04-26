@@ -43,5 +43,9 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
         setClientPageFilter("rClientPhone", "380638918373");
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='380638918373']")));
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='rClientPhone'] input[type='text']"));
+
+        setClientPageFilter("rFullName", "Vika Qwerty");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Vika Qwerty']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='rFullName'] input[type='text']"));
     }
 }
