@@ -28,6 +28,13 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
                 "//thead //th[contains(text(), 'Created date')]", "//thead //th[contains(text(), 'Approved date')]"}));
 
 
+        setClientPageFilter("reqId", "3079");
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='3079']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='reqId'] input[type='text']"));
+
+
+
+
         WebElement id = driver.findElements(By.cssSelector("p-columnfilter[field='id'] input[type='text']")).get(1);
         id.sendKeys("25596");
         pressKeys(Keys.ENTER);
