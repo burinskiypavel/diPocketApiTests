@@ -35,17 +35,9 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='25596']")));
         deleteText(id);
 
-        setClientPageFilter("created", "02.02.2022");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='02.02.2022']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='created'] input[type='text']"));
-
-        setDropDownClientPageFilter("typeName", "FDD check");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='FDD check']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
-
-        setDropDownClientPageFilter("username", "EVGENYA");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='EVGENYA']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        verifyClientPageFilter("created", "02.02.2022");
+        verifyDropDownClientPageFilter("typeName", "FDD check");
+        verifyDropDownClientPageFilter("username", "EVGENYA");
 
         WebElement stateName = driver.findElements(By.cssSelector("p-columnfilter[field='stateName']")).get(2);
         stateName.click();
@@ -53,9 +45,7 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Closed']")));
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
-        setClientPageFilter("closed", "07.02.2022");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='07.02.2022']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='closed'] input[type='text']"));
+        verifyClientPageFilter("closed", "07.02.2022");
 
         setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
         assertTrue(areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Ticket reassigned. Reason: test')]")));
