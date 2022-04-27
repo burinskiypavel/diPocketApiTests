@@ -29,12 +29,16 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
     public void test_clientProfile_getLegalDocumentList() throws SQLException, ClassNotFoundException {
         //app.getDbHelper().deleteClientDeviceFromDB("380633192217-AutoTest-Login");
         app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.SNOW_ATTACK.toString());
-        cliSessionId = app.getLogin_registrationHelper().loginSnowAttack(phone, pass);
+        List<String> cockiesCliSessionId = app.getLogin_registrationHelper().loginSnowAttack2(phone, pass);
+
+        String cookie = cockiesCliSessionId.get(0);
+        cliSessionId = cockiesCliSessionId.get(1);
 
         given()
                 .spec(app.requestSpecSnowAttackHomePage)
-                .auth().preemptive().basic(phone, pass)
+                //.auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
+                .cookie("JSESSIONID", cookie)
                 .when()
                 .get("clientProfile/getLegalDocumentList")
                 .then().log().all()

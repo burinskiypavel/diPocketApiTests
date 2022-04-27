@@ -1,14 +1,19 @@
 package appmanager;
 
 import com.cs.dipocketback.base.data.Site;
+import io.restassured.http.Cookie;
+import io.restassured.http.Cookies;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.testng.Assert.assertEquals;
 
 public class Login_RegistrationHelper extends HelperBase {
@@ -157,6 +162,76 @@ public class Login_RegistrationHelper extends HelperBase {
         return cliSessionId;
     }
 
+    public List<String> loginSnowAttack2(String phone, String pass) {
+        List<String> collection = new ArrayList<>();
+
+        Response res = given().log().uri().log().headers().log().body()
+                .baseUri(HelperBase.prop.getProperty("base.url"))
+                .header("site", Site.SNOW_ATTACK.toString())
+                .contentType("application/json; charset=utf-8")
+                .auth().preemptive().basic("11_" + phone, pass)
+                .header("accept", "application/json, text/json;q=0.8, text/plain;q=0.6, */*;q=0.1")
+                .when()
+                .post("WebServices/v1/homePage/authenticateWithSca");
+
+        res.then().log().all();
+
+        //Cookies cookie = res.then().extract().response().getDetailedCookies();
+        String cookie = res.then().extract().response().getCookie("JSESSIONID");
+        collection.add(cookie);
+
+        String cliSessionId = res.getHeader("cliSessionId");
+        collection.add(cliSessionId);
+
+        if(res.getStatusCode() != 200) {
+
+            String responseBody = res.getBody().asString();
+            JsonPath jsonPath = new JsonPath(responseBody);
+            String errCode = jsonPath.getString("errCode");
+
+            if (errCode.equals("DIP-00602")) {
+
+                given().log().uri().log().headers().log().body()
+                        .baseUri(HelperBase.prop.getProperty("base.url"))
+                        .header("site", Site.SNOW_ATTACK.toString())
+                        .contentType("application/json; charset=utf-8")
+                        .auth().preemptive().basic("11_" + phone, pass)
+                        .body("{\n" +
+                                "  \"mainPhone\" : \"" + phone + "\"\n" +
+                                "}")
+                        .when()
+                        .post("WebServices/v1/security/sendSca")
+                        .then().log().all()
+                        .statusCode(200);
+            }
+        }
+
+        System.out.println(res.getHeaders());
+        System.out.println("cliSessionId " + cliSessionId);
+
+        assertEquals(res.getStatusCode(), 200);
+
+
+//        given()
+//                //.spec(requestSpecSnowAttackHomePage)
+//                .log().uri().log().headers().log().body()
+//                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+//                .header("site", HelperBase.prop.getProperty("mobile.site.snowAttack"))
+//                //.auth().preemptive().basic(phone, pass)
+//                .header("clisessionid", ""+cliSessionId+"")
+//                .cookie("JSESSIONID", cookie)
+//                .when()
+//                .get("clientProfile/getLegalDocumentList")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("documentList.type", hasItems("General Terms and Conditions", "Card Terms and Conditions"),
+//                        "documentList.nameForClient", hasItems("Общие условия", "Условия пользования картами"),
+//                        "documentList.selected", hasItems(false, false));
+
+
+        return collection;
+    }
+
     public String loginSnowAttack(String phone, String pass) {
         Response res = given().log().uri().log().headers().log().body()
                 .baseUri(HelperBase.prop.getProperty("base.url"))
@@ -198,6 +273,7 @@ public class Login_RegistrationHelper extends HelperBase {
         System.out.println("cliSessionId " + cliSessionId);
 
         assertEquals(res.getStatusCode(), 200);
+
         return cliSessionId;
     }
 }
