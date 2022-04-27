@@ -36,7 +36,7 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
         deleteText(id);
 
         setClientPageFilter("created", "02.02.2022");
-        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='02.02.2022']")));
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='02.02.2022']")));
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='created'] input[type='text']"));
 
         setDropDownClientPageFilter("typeName", "FDD check");
@@ -54,7 +54,7 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
         setClientPageFilter("closed", "07.02.2022");
-        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='07.02.2022']")));
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='07.02.2022']")));
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='closed'] input[type='text']"));
 
         setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
