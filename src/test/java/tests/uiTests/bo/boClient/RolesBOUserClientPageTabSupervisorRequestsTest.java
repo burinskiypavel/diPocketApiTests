@@ -2,8 +2,6 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
@@ -27,37 +25,17 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
                 "//thead //th[contains(text(), 'Full name')]", "//thead //th[contains(text(), 'State')]",
                 "//thead //th[contains(text(), 'Created date')]", "//thead //th[contains(text(), 'Approved date')]"}));
 
-
-        setClientPageFilter("reqId", "3079");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='3079']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='reqId'] input[type='text']"));
-
-        setDropDownClientPageFilter("role", "Child");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Child']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
-
-        setClientPageFilter("rClientId", "33655");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='33655']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='rClientId'] input[type='text']"));
-
-        setClientPageFilter("rClientPhone", "380638918373");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='380638918373']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='rClientPhone'] input[type='text']"));
-
-        setClientPageFilter("rFullName", "Vika Qwerty");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Vika Qwerty']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='rFullName'] input[type='text']"));
+        verifyClientPageFilter("reqId", "3079");
+        verifyDropDownClientPageFilter("role", "Child");
+        verifyClientPageFilter("rClientId", "33655");
+        verifyClientPageFilter("rClientPhone", "380638918373");
+        verifyClientPageFilter("rFullName", "Vika Qwerty");
 
         //setDropDownClientPageFilter("stateName", "Finished"); // bug DEV-1904
         //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Finished']")));
         //clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
-        setClientPageFilter("createdAt", "19.01.2022");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='19.01.2022']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='createdAt'] input[type='text']"));
-
-        setClientPageFilter("approvedAt", "30.08.2021");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='30.08.2021']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='approvedAt'] input[type='text']"));
+        verifyClientPageFilter("createdAt", "19.01.2022");
+        verifyClientPageFilter("approvedAt", "30.08.2021");
     }
 }

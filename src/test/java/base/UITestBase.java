@@ -901,4 +901,16 @@ public class UITestBase {
         String actualState = driver.findElement(By.xpath("//td[text() = '"+cardId+"']/following-sibling::td["+element+"]")).getText();
         return actualState;
     }
+
+    public void verifyDropDownClientPageFilter(String filter, String text) {
+        setDropDownClientPageFilter(filter, text);
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
+        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+    }
+
+    public void verifyClientPageFilter(String filter, String text) {
+        setClientPageFilter(filter, text);
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='"+filter+"'] input[type='text']"));
+    }
 }
