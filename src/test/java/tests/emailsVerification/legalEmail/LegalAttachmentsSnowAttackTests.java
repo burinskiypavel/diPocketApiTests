@@ -21,9 +21,10 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
     String cliSessionId = null;
     String email = "testdipocket0@gmail.com";//testdipocket2@gmail.com"
     String pass = "pasword1";
-    String emailPass = "pasword12!";
+    String emailPass = "password1<";
     String phone = "380987419131";//380633192217
     String expectedSender = "legal.team@dipocket.org";
+    String cookie = null;
 
     @Test(priority = 1)
     public void test_clientProfile_getLegalDocumentList() throws SQLException, ClassNotFoundException {
@@ -31,7 +32,7 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.SNOW_ATTACK.toString());
         List<String> cockiesCliSessionId = app.getLogin_registrationHelper().loginSnowAttack2(phone, pass);
 
-        String cookie = cockiesCliSessionId.get(0);
+        cookie = cockiesCliSessionId.get(0);
         cliSessionId = cockiesCliSessionId.get(1);
 
         given()
@@ -51,14 +52,15 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
     public void sendLegalInfo2(String phone, String pass, String cliSessionId, String nameForClient) {
         given()
                 .spec(app.requestSpecSnowAttackHomePage)
-                .auth().preemptive().basic(phone, pass)
+                //.auth().preemptive().basic(phone, pass)
                 .header("clisessionid", cliSessionId)
+                .cookie("JSESSIONID", cookie)
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"documentList\": [\n" +
                         "    {\n" +
                         "      \"nameForClient\": \"" + nameForClient + "\",\n" +
-                        "      \"nameForEmail\": \"testdipocket2@gmail.com\",\n" +
+                        "      \"nameForEmail\": \""+email+"\",\n" +
                         "      \"selected\": true,\n" +
                         "      \"type\": \"Card Terms and Conditions\"\n" +
                         "    }\n" +
