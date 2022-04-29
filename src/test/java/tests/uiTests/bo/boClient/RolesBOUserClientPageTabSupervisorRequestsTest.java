@@ -30,12 +30,8 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
         verifyClientPageFilter("rClientId", "33655");
         verifyClientPageFilter("rClientPhone", "380638918373");
         verifyClientPageFilter("rFullName", "Vika Qwerty");
-
-        //setDropDownClientPageFilter("stateName", "Finished"); // bug DEV-1904
-        //assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Finished']")));
-        //clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
-
-        verifyClientPageFilter("createdAt", "19.01.2022");
+        verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@field='stateName']"), "Finished", 3);
+        verifyClientPageFilter("createdAt", "21.01.2022");
         verifyClientPageFilter("approvedAt", "30.08.2021");
     }
 }

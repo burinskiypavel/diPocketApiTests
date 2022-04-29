@@ -904,13 +904,23 @@ public class UITestBase {
 
     public void verifyDropDownClientPageFilter(String filter, String text) {
         setDropDownClientPageFilter(filter, text);
+        waitForSeveralItems(new String[]{text});
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
     }
 
     public void verifyClientPageFilter(String filter, String text) {
         setClientPageFilter(filter, text);
+        waitForSeveralItems(new String[]{text});
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='"+filter+"'] input[type='text']"));
+    }
+
+    public void verifyDropDownClientPageFilterWithCollection(By by, String text, int index) {
+        WebElement filter = driver.findElements(by).get(index);
+        filter.click();
+        click(By.xpath("//li[@aria-label='" + text + "']"));
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='" + text + "']")));
+        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
     }
 }
