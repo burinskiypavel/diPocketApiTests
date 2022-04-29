@@ -38,13 +38,7 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
         verifyClientPageFilter("created", "02.02.2022");
         verifyDropDownClientPageFilter("typeName", "FDD check");
         verifyDropDownClientPageFilter("username", "EVGENYA");
-
-        WebElement stateName = driver.findElements(By.cssSelector("p-columnfilter[field='stateName']")).get(2);
-        stateName.click();
-        driver.findElement(By.cssSelector("li[aria-label='Closed']")).click();
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Closed']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
-
+        verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@field='stateName']"), "Closed", 2);
         verifyClientPageFilter("closed", "07.02.2022");
 
         setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
