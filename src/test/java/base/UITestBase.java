@@ -848,6 +848,7 @@ public class UITestBase {
 
     public void goToTransactionTab() {
         click(By.id("p-tabpanel-10-label"));
+        waitFor(By.xpath("//thead //th[contains(text(), 'TranItemId')]"));
     }
 
     public void goToTicketsTab() {
@@ -931,5 +932,11 @@ public class UITestBase {
         waitFor(By.cssSelector("td[ng-reflect-text='"+text+"']"));
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
         deleteText(fil);
+    }
+
+    public void searchByTransactionTab(String date) {
+        click(By.cssSelector("p-dropdown[optionlabel='value']"));
+        click(By.cssSelector("li[aria-label='" + date + "']"));
+        click(By.cssSelector("app-button[label='Search']"));
     }
 }

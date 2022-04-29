@@ -17,7 +17,6 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
         search("id", clientId, phone);
         goToClientPage(phone);
         goToTransactionTab();
-        waitFor(By.xpath("//thead //th[contains(text(), 'TranItemId')]"));
 
         assertTrue(areElementsPresent(new String[]{
                 "//thead //th[contains(text(), 'TranItemId')]", "//thead //th[contains(text(), 'Account name')]",
@@ -34,15 +33,9 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
         search("id", clientId, phone);
         goToClientPage(phone);
         goToTransactionTab();
-        waitFor(By.xpath("//thead //th[contains(text(), 'TranItemId')]"));
-
-        click(By.cssSelector("p-dropdown[optionlabel='value']"));
-        click(By.cssSelector("li[aria-label='All']"));
-
-        click(By.cssSelector("app-button[label='Search']"));
+        searchByTransactionTab("All");
 
         waitFor(By.cssSelector("td[ng-reflect-text='629314']"));
-
         performContextClick(By.cssSelector("td[ng-reflect-text='629314']"));
 
         waitFor(By.xpath("//li //span[contains(text(), 'Details')]"));
