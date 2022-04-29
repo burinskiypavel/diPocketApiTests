@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class UITestBase {
@@ -674,6 +675,11 @@ public class UITestBase {
         click(By.id("p-tabpanel-2-label"));
     }
 
+    public void goToPayeeTab() {
+        click(By.id("p-tabpanel-5-label"));
+        waitFor(By.cssSelector("p-columnfilter[field='nickName']"));
+    }
+
     public void gotoAllUsersTab() {
         click(By.id("p-tabpanel-1-label"));
     }
@@ -910,10 +916,26 @@ public class UITestBase {
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
     }
 
+    public void verifyDropDownClientPageFilter(String filter, String text, String mustNotBe) {
+        setDropDownClientPageFilter(filter, text);
+        waitForSeveralItems(new String[]{text});
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
+        assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+mustNotBe+"']")));
+        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+    }
+
     public void verifyClientPageFilter(String filter, String text) {
         setClientPageFilter(filter, text);
         waitForSeveralItems(new String[]{text});
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
+        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='"+filter+"'] input[type='text']"));
+    }
+
+    public void verifyClientPageFilter(String filter, String text, String mustNotBe) {
+        setClientPageFilter(filter, text);
+        waitForSeveralItems(new String[]{text});
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
+        assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+mustNotBe+"']")));
         deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='"+filter+"'] input[type='text']"));
     }
 
