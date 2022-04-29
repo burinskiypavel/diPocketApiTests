@@ -2,8 +2,6 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
@@ -28,13 +26,7 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
                 "//thead //th[contains(text(), 'Last comment')]"}));
 
 
-        WebElement id = driver.findElements(By.cssSelector("p-columnfilter[field='id'] input[type='text']")).get(1);
-        id.sendKeys("25596");
-        pressKeys(Keys.ENTER);
-        waitFor(By.cssSelector("td[ng-reflect-text='25596']"));
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='25596']")));
-        deleteText(id);
-
+        verifyClientPageFilterWithCollection("id", "25596", 1);
         verifyClientPageFilter("created", "02.02.2022");
         verifyDropDownClientPageFilter("typeName", "FDD check");
         verifyDropDownClientPageFilter("username", "EVGENYA");

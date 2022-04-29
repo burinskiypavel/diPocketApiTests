@@ -923,4 +923,13 @@ public class UITestBase {
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='" + text + "']")));
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
     }
+
+    public void verifyClientPageFilterWithCollection(String filter, String text, int index) {
+        WebElement fil = driver.findElements(By.cssSelector("p-columnfilter[field='" + filter + "'] input[type='text']")).get(index);
+        fil.sendKeys(text);
+        pressKeys(Keys.ENTER);
+        waitFor(By.cssSelector("td[ng-reflect-text='"+text+"']"));
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
+        deleteText(fil);
+    }
 }
