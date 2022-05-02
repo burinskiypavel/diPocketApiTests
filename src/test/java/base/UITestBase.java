@@ -863,6 +863,7 @@ public class UITestBase {
 
     public void goToSupervisorRequestsTab() {
         click(By.id("p-tabpanel-12-label"));
+        waitFor(By.xpath("//thead //th[contains(text(), 'Request id')]"));
     }
 
     public void goToClientPage(String phone) {
@@ -960,5 +961,21 @@ public class UITestBase {
         click(By.cssSelector("p-dropdown[optionlabel='value']"));
         click(By.cssSelector("li[aria-label='" + date + "']"));
         click(By.cssSelector("app-button[label='Search']"));
+    }
+
+    public void rejectSupervisor() throws InterruptedException {
+        click(By.xpath("//li //span[contains(text(), 'Reject')]"));
+        click(By.cssSelector("button[ng-reflect-label='Reject']"));
+        waitFor(By.xpath("//*[contains(text(), 'Supervisor was rejected successfully')]"));
+        Thread.sleep(2500);
+    }
+
+    public String approveSupervisorAndGetTextFromPopUp() {
+        waitFor(By.xpath("//li //span[contains(text(), 'Approve')]"));
+        click(By.xpath("//li //span[contains(text(), 'Approve')]"));
+        String actualPopupText = getTextFromPopUp2(By.cssSelector("div.p-dialog-content"));
+        click(By.cssSelector("button[ng-reflect-label='Approve']"));
+        waitFor(By.xpath("//*[contains(text(), 'Supervisor was approved successfully')]"));
+        return actualPopupText;
     }
 }
