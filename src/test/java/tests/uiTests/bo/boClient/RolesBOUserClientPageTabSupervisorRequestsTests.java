@@ -36,7 +36,7 @@ public class RolesBOUserClientPageTabSupervisorRequestsTests extends UITestBase 
         verifyClientPageFilter("approvedAt", "30.08.2021");
     }
 
-    @Test
+    @Test(enabled = false)
     public void testRolesBOUserClientPageTabSupervisorRequestsApprove() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -55,7 +55,7 @@ public class RolesBOUserClientPageTabSupervisorRequestsTests extends UITestBase 
         assertEquals(actualPopupText, "Are you sure want to approve supervision request #"+requestId+"");
     }
 
-    @Test
+    @Test(enabled = false)
     public void testRolesBOUserClientPageTabSupervisorRequestsReject() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
