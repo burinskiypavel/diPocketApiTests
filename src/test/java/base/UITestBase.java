@@ -72,6 +72,12 @@ public class UITestBase {
         actions.contextClick(element).perform();
     }
 
+    public void performContextClickFromTable(String text) {
+        WebElement element = driver.findElement(By.cssSelector("td[ng-reflect-text='"+text+"']"));
+        Actions actions = new Actions(driver);
+        actions.contextClick(element).perform();
+    }
+
     public void moveToElement(By locator) {
         WebElement element = driver.findElement(locator);
         Actions actions = new Actions(driver);
@@ -977,5 +983,9 @@ public class UITestBase {
         click(By.cssSelector("button[ng-reflect-label='Approve']"));
         waitFor(By.xpath("//*[contains(text(), 'Supervisor was approved successfully')]"));
         return actualPopupText;
+    }
+
+    public boolean isElementActiveFromContextMenu(int index) {
+        return driver.findElements(By.cssSelector("li[data-ik='"+index+"'] a[tabindex='0']")).size() != 0;
     }
 }

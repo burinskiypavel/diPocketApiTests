@@ -43,11 +43,11 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
         search("id", clientId, phone);
         goToClientPage(phone);
         goToSupervisorRequestsTab();
-        performContextClick(By.cssSelector("td[ng-reflect-text='"+requestId+"']"));
+        performContextClickFromTable(requestId);
 
-        if(isElementPresent(By.cssSelector("li[data-ik='1'] a[tabindex='0']"))){
+        if(isElementActiveFromContextMenu(1)){
             rejectSupervisor();
-            performContextClick(By.cssSelector("td[ng-reflect-text='"+requestId+"']"));
+            performContextClickFromTable(requestId);
         }
 
         String actualPopupText = approveSupervisorAndGetTextFromPopUp();
