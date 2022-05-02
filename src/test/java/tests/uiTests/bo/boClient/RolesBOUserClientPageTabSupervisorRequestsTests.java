@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
+public class RolesBOUserClientPageTabSupervisorRequestsTests extends UITestBase {
     String phone = "380634413376";
     String clientId = "33217";
     String requestId = "3080";
@@ -53,5 +53,24 @@ public class RolesBOUserClientPageTabSupervisorRequestsTest extends UITestBase {
         String actualPopupText = approveSupervisorAndGetTextFromPopUp();
 
         assertEquals(actualPopupText, "Are you sure want to approve supervision request #"+requestId+"");
+    }
+
+    @Test
+    public void testRolesBOUserClientPageTabSupervisorRequestsReject() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+        goToSupervisorRequestsTab();
+        performContextClickFromTable(requestId);
+
+        if(isElementActiveFromContextMenu(0)){
+            approveSupervisor();
+            performContextClickFromTable(requestId);
+        }
+
+        String actualPopupText = rejectSupervisorAndGetTextFromPopUp();
+
+        assertEquals(actualPopupText, "Are you sure want to reject supervision request #"+requestId+"");
     }
 }

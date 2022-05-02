@@ -976,12 +976,28 @@ public class UITestBase {
         Thread.sleep(2500);
     }
 
+    public void approveSupervisor() throws InterruptedException {
+        click(By.xpath("//li //span[contains(text(), 'Approve')]"));
+        click(By.cssSelector("button[ng-reflect-label='Approve']"));
+        waitFor(By.xpath("//*[contains(text(), 'Supervisor was approved successfully')]"));
+        Thread.sleep(2500);
+    }
+
     public String approveSupervisorAndGetTextFromPopUp() {
         waitFor(By.xpath("//li //span[contains(text(), 'Approve')]"));
         click(By.xpath("//li //span[contains(text(), 'Approve')]"));
         String actualPopupText = getTextFromPopUp2(By.cssSelector("div.p-dialog-content"));
         click(By.cssSelector("button[ng-reflect-label='Approve']"));
         waitFor(By.xpath("//*[contains(text(), 'Supervisor was approved successfully')]"));
+        return actualPopupText;
+    }
+
+    public String rejectSupervisorAndGetTextFromPopUp() {
+        waitFor(By.xpath("//li //span[contains(text(), 'Reject')]"));
+        click(By.xpath("//li //span[contains(text(), 'Reject')]"));
+        String actualPopupText = getTextFromPopUp2(By.cssSelector("div.p-dialog-content"));
+        click(By.cssSelector("button[ng-reflect-label='Reject']"));
+        waitFor(By.xpath("//*[contains(text(), 'Supervisor was rejected successfully')]"));
         return actualPopupText;
     }
 
