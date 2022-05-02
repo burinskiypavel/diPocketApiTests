@@ -73,4 +73,17 @@ public class RolesBOUserClientPageTabSupervisorRequestsTests extends UITestBase 
 
         assertEquals(actualPopupText, "Are you sure want to reject supervision request #"+requestId+"");
     }
+
+    @Test
+    public void testRolesBOUserClientPageTabSupervisorRequestsUploadProofOfRelationship() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+        goToSupervisorRequestsTab();
+        performContextClickFromTable(requestId);
+        click(By.xpath("//li //span[contains(text(), 'Upload ‘Proof of relationship’')]"));
+        uploadFile(By.cssSelector("input[type='file']"), "C:/Users/pa.burinsky/Desktop/4.jpg");
+        click(By.cssSelector("app-button[ng-reflect-label='Send']"));
+    }
 }
