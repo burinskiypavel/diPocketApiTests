@@ -1004,4 +1004,20 @@ public class UITestBase {
     public boolean isElementActiveFromContextMenu(int index) {
         return driver.findElements(By.cssSelector("li[data-ik='"+index+"'] a[tabindex='0']")).size() != 0;
     }
+
+    public void blockClient() throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Block client']"));
+        type(By.cssSelector("app-dynamic-form input[type='text']"), "test");
+        Thread.sleep(1500);
+        click(By.xpath("//app-button[@ng-reflect-label='Block']"));
+        waitFor(By.xpath("//div[contains(text(), 'Client was blocked successfully')]"));
+        waitFor(By.xpath("//span[contains(text(), 'Blocked')]"));
+    }
+
+    public void unblockClient() {
+        click(By.xpath("//app-button[@ng-reflect-label='Unblock client']"));
+        click(By.xpath("//app-button[@ng-reflect-label='Unblock']"));
+        waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unblocked successfully')]"));
+        waitFor(By.xpath("//app-button[@ng-reflect-label='Block client']"));
+    }
 }

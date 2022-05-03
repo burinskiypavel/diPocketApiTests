@@ -19,18 +19,10 @@ public class RolesBOUserClientPageBlockClientButtonTest extends UITestBase {
         goToClientPage(phone);
 
         if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
-            click(By.xpath("//app-button[@ng-reflect-label='Unblock client']"));
-            click(By.xpath("//app-button[@ng-reflect-label='Unblock']"));
-            waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unblocked successfully')]"));
-            waitFor(By.xpath("//app-button[@ng-reflect-label='Block client']"));
+            unblockClient();
         }
 
-        click(By.xpath("//app-button[@ng-reflect-label='Block client']"));
-        type(By.cssSelector("app-dynamic-form input[type='text']"), "test");
-        Thread.sleep(1500);
-        click(By.xpath("//app-button[@ng-reflect-label='Block']"));
-        waitFor(By.xpath("//div[contains(text(), 'Client was blocked successfully')]"));
-        waitFor(By.xpath("//span[contains(text(), 'Blocked')]"));
+        blockClient();
 
         WebElement state = driver.findElements(By.cssSelector("p.ng-star-inserted")).get(0);
         String actualState = state.getText();
