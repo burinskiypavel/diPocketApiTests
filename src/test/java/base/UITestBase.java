@@ -1037,6 +1037,15 @@ public class UITestBase {
         waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
     }
 
+    public void banClientWithoutBlockingClientDevice(String reason) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Ban client']"));
+        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
+        Thread.sleep(1500);
+        click(By.xpath("//app-button[@ng-reflect-label='Ban']"));
+        waitFor(By.xpath("//div[contains(text(), 'User was ban successfully')]"));
+        waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
+    }
+
     public void unbanClient(String reason) {
         click(By.xpath("//app-button[@ng-reflect-label='Unban client']"));
         type(By.cssSelector("app-dynamic-form input[type='text']"), reason);

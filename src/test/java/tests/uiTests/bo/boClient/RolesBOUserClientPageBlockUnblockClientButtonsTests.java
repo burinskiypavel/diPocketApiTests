@@ -60,4 +60,21 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
 
         assertEquals(actualState, "State: Banned");
     }
+
+    @Test
+    public void testRolesBOUserClientPageBanClientWithoutBlockingClientDevice() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+            unbanClient("test");
+        }
+
+        banClientWithoutBlockingClientDevice("test");
+        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+
+        assertEquals(actualState, "State: Banned");
+    }
 }
