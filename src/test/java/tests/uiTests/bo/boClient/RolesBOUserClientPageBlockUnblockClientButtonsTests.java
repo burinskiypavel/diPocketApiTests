@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class RolesBOUserClientPageBlockClientButtonTest extends UITestBase {
+public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestBase {
     String phone = "380634413376";
     String clientId = "33217";
 
@@ -28,5 +28,24 @@ public class RolesBOUserClientPageBlockClientButtonTest extends UITestBase {
         String actualState = state.getText();
 
         assertEquals(actualState, "State: Blocked");
+    }
+
+    @Test
+    public void testRolesBOUserClientPageUnblockClientButton() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Block client']"))){
+            blockClient();
+        }
+
+        unblockClient();
+
+        WebElement state = driver.findElements(By.cssSelector("p.ng-star-inserted")).get(0);
+        String actualState = state.getText();
+
+        assertEquals(actualState, "State: Active");
     }
 }
