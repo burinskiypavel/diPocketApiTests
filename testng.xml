@@ -657,9 +657,9 @@
         </classes>
     </test>
 
-    <test name="RolesBOUserClientPageBlockClientButtonTest">
+    <test name="RolesBOUserClientPageBlockUnblockClientButtonsTests">
         <classes>
-            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageBlockClientButtonTest"/>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageBlockUnblockClientButtonsTests"/>
         </classes>
     </test>
 
