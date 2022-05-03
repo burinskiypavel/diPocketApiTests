@@ -66,6 +66,11 @@ public class UITestBase {
         return ariaSelected;
     }
 
+    public String getText(By by, int index) {
+        WebElement state = driver.findElements(by).get(index);
+        return state.getText();
+    }
+
     public void performContextClick(By locator) {
         WebElement element = driver.findElement(locator);
         Actions actions = new Actions(driver);

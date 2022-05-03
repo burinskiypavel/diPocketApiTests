@@ -2,7 +2,6 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -23,9 +22,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         }
 
         blockClient();
-
-        WebElement state = driver.findElements(By.cssSelector("p.ng-star-inserted")).get(0);
-        String actualState = state.getText();
+        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Blocked");
     }
@@ -42,9 +39,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         }
 
         unblockClient();
-
-        WebElement state = driver.findElements(By.cssSelector("p.ng-star-inserted")).get(0);
-        String actualState = state.getText();
+        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Active");
     }
