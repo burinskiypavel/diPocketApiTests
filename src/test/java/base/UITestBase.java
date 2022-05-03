@@ -1019,5 +1019,6 @@ public class UITestBase {
         click(By.xpath("//app-button[@ng-reflect-label='Unblock']"));
         waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unblocked successfully')]"));
         waitFor(By.xpath("//app-button[@ng-reflect-label='Block client']"));
+        waitFor(By.xpath("//span[contains(text(), 'Active')]"));
     }
 }
