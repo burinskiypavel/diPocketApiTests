@@ -21,7 +21,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
             unblockClient();
         }
 
-        blockClient();
+        blockClient("test");
         String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Blocked");
@@ -35,12 +35,29 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         goToClientPage(phone);
 
         if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Block client']"))){
-            blockClient();
+            blockClient("test");
         }
 
         unblockClient();
         String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Active");
+    }
+
+    @Test
+    public void testRolesBOUserClientPageBanClientButton() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+            unbanClient("test");
+        }
+
+        banClient("test");
+        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+
+        assertEquals(actualState, "State: Banned");
     }
 }

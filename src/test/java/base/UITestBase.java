@@ -1010,9 +1010,9 @@ public class UITestBase {
         return driver.findElements(By.cssSelector("li[data-ik='"+index+"'] a[tabindex='0']")).size() != 0;
     }
 
-    public void blockClient() throws InterruptedException {
+    public void blockClient(String reason) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Block client']"));
-        type(By.cssSelector("app-dynamic-form input[type='text']"), "test");
+        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
         Thread.sleep(1500);
         click(By.xpath("//app-button[@ng-reflect-label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was blocked successfully')]"));
@@ -1024,6 +1024,24 @@ public class UITestBase {
         click(By.xpath("//app-button[@ng-reflect-label='Unblock']"));
         waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unblocked successfully')]"));
         waitFor(By.xpath("//app-button[@ng-reflect-label='Block client']"));
+        waitFor(By.xpath("//span[contains(text(), 'Active')]"));
+    }
+
+    public void banClient(String reason) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Ban client']"));
+        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
+        Thread.sleep(1500);
+        clickCheckbox(By.cssSelector("app-dynamic-form p-checkbox"));
+        click(By.xpath("//app-button[@ng-reflect-label='Ban']"));
+        waitFor(By.xpath("//div[contains(text(), 'User was ban successfully')]"));
+        waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
+    }
+
+    public void unbanClient(String reason) {
+        click(By.xpath("//app-button[@ng-reflect-label='Unban client']"));
+        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
+        click(By.xpath("//app-button[@ng-reflect-label='Unban']"));
+        waitFor(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
     }
 }
