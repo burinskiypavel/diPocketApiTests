@@ -18,6 +18,13 @@ public class RolesBOUserClientPageBlockClientButtonTest extends UITestBase {
         search("id", clientId, phone);
         goToClientPage(phone);
 
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+            click(By.xpath("//app-button[@ng-reflect-label='Unblock client']"));
+            click(By.xpath("//app-button[@ng-reflect-label='Unblock']"));
+            waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unblocked successfully')]"));
+            waitFor(By.xpath("//app-button[@ng-reflect-label='Block client']"));
+        }
+
         click(By.xpath("//app-button[@ng-reflect-label='Block client']"));
         type(By.cssSelector("app-dynamic-form input[type='text']"), "test");
         Thread.sleep(1500);
