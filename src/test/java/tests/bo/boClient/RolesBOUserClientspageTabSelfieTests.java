@@ -338,22 +338,21 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
 
     @Test(priority = 17)
     public void test_BOServices_v1_clientImage_33217_docHistory(){
-        Response res = given()
+        given()
                 .log().uri().log().headers()
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/v1/clientImage/33217/docHistory");
-        res.then().log().all().statusCode(200);
-        ClientImage_docHistory[] clientImage_docHistories = res.as(ClientImage_docHistory[].class);
-        assertThat(clientImage_docHistories[0].getId(), equalTo(17326));
-        assertThat(clientImage_docHistories[0].getClientId(), equalTo(clientId));
-        assertThat(clientImage_docHistories[0].getTypeId(), equalTo(2));
-        assertThat(clientImage_docHistories[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAAqACAAQAAAABAAAEOKADAAQAAAABAAAF7"));
-        assertThat(clientImage_docHistories[0].getAdded(), equalTo("2022-01-20"));
-        assertThat(clientImage_docHistories[0].getClientId(), equalTo(clientId));
-        assertThat(clientImage_docHistories[0].getStateId(), equalTo(10));
-        assertThat(clientImage_docHistories[0].getStateName(), equalTo("Approved"));
+                .get( "/v1/clientImage/33217/docHistory")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(17326),
+                        "clientId", hasItem(clientId),
+                        "typeId", hasItem(2),
+                        "imageInBase64", hasItem(notNullValue()),
+                        "added", hasItem("2022-01-20"),
+                        "stateId", hasItem(10),
+                        "stateName", hasItem("Approved"));
     }
 
     @Test(priority = 18)
