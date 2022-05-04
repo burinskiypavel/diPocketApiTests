@@ -146,28 +146,16 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 
     @Test(priority = 9)
     public void test_BOServices_v1_ticket_types(){
-        Response res = given()
+                given()
                 .log().uri().log().headers()
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/v1/ticket/types");
-        res.then().log().all().statusCode(200);
-        Ticket_types[] ticket_types = res.as(Ticket_types[].class);
-        assertThat(ticket_types[0].getId(), equalTo(402));
-        assertThat(ticket_types[0].getName(), equalTo("PhotoID change"));
-        assertThat(ticket_types[1].getId(), equalTo(700));
-        assertThat(ticket_types[1].getName(), equalTo("Client restriction"));
-        assertThat(ticket_types[2].getId(), equalTo(100));
-        assertThat(ticket_types[2].getName(), equalTo("SDD check"));
-        assertThat(ticket_types[3].getId(), equalTo(200));
-        assertThat(ticket_types[3].getName(), equalTo("FDD check"));
-        assertThat(ticket_types[4].getId(), equalTo(300));
-        assertThat(ticket_types[4].getName(), equalTo("PIN incorrect (3)"));
-        assertThat(ticket_types[5].getId(), equalTo(310));
-        assertThat(ticket_types[5].getName(), equalTo("PIN change"));
-        assertThat(ticket_types[6].getId(), equalTo(320));
-        assertThat(ticket_types[6].getName(), equalTo("Secret answer incorrect (2)"));
+                .get( "/v1/ticket/types")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(402, 700, 100, 200, 300, 310, 320),
+                        "name", hasItems("PhotoID change", "Client restriction", "SDD check", "FDD check", "PIN incorrect (3)", "PIN change", "Secret answer incorrect (2)"));
     }
 
 //    @Test(priority = 3)
