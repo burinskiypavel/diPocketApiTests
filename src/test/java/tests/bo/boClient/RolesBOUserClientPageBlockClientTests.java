@@ -2,6 +2,7 @@ package tests.bo.boClient;
 
 import base.TestBase;
 import io.restassured.response.Response;
+import model.bo.User_All_AllActive;
 import model.bo.boClient.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -115,6 +116,27 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "mainPhone", equalTo("380634413376"),
                         "firstName", equalTo("Nona"),
                         "lastName", equalTo("Qwerty"));
+    }
+
+    @Test(priority = 7)
+    public void test_BOServices_v1_user_all(){
+                given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/user/all")
+                .then().log().all()
+                .statusCode(200)
+                .body("firstName", hasItem("Agnieszka"),
+                        "lastName", hasItem("Szewczyk"),
+                        "roleId", hasItem("PORTAL"),
+                        "stateId", hasItem(10),
+                        "stateName", hasItem("Active"),
+                        "username", hasItem("A.SZEWCZYK"),
+                        "phone", hasItem("48663647283"),
+                        "email", hasItem("Agnieszka.Szewczyk@sodexo.com"),
+                        "site", hasItem("DIPOCKET"));
     }
 
 //    @Test(priority = 3)
