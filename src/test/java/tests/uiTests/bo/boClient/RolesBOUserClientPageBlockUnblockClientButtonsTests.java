@@ -85,4 +85,21 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
             unbanClient("test");
         }
     }
+
+    @Test
+    public void testRolesBOUserClientPageUnbanClientButton() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Ban client']"))){
+            banClient("test");
+        }
+
+        unbanClient("test");
+        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+
+        assertEquals(actualState, "State: Active");
+    }
 }
