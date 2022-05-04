@@ -5,6 +5,7 @@ import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
+import requests.bo.BORequests;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,6 +24,7 @@ public class ApplicationManager {
     private AttachmentHelper attachmentHelper = new AttachmentHelper();
     private BOHelper boHelper = new BOHelper();
     private JsonHelper jsonHelper = new JsonHelper();
+    private BORequests boRequestsHelper = new BORequests();
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
@@ -306,6 +308,8 @@ public class ApplicationManager {
     public BOHelper getBOHelper() { return boHelper; }
 
     public JsonHelper getJsonHelper() { return jsonHelper; }
+
+    public BORequests getBoRequestsHelper() { return boRequestsHelper; }
 
 //    public MailHelper mail(){
 //        if(mailHelper == null){
