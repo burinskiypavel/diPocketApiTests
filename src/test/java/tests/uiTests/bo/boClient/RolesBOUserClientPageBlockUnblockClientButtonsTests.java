@@ -59,6 +59,10 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Banned");
+
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+            unbanClient("test");
+        }
     }
 
     @Test
@@ -76,5 +80,9 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Banned");
+
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+            unbanClient("test");
+        }
     }
 }
