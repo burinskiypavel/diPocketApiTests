@@ -146,16 +146,7 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 
     @Test(priority = 9)
     public void test_BOServices_v1_ticket_types(){
-                given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/ticket/types")
-                .then().log().all()
-                .statusCode(200)
-                .body("id", hasItems(402, 700, 100, 200, 300, 310, 320),
-                        "name", hasItems("PhotoID change", "Client restriction", "SDD check", "FDD check", "PIN incorrect (3)", "PIN change", "Secret answer incorrect (2)"));
+        app.getBoRequestsHelper().boServices_v1_ticket_types(cookie);
     }
 
 //    @Test(priority = 3)
