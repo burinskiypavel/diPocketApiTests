@@ -139,6 +139,20 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "site", hasItem("DIPOCKET"));
     }
 
+    @Test(priority = 8)
+    public void test_BOServices_v1_ticket_states(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/ticket/states")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(10, 50, 100, -10),
+                        "name", hasItems("Open", "In progress", "Closed", "Rejected"));
+    }
+
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
 //        Response res = given()
@@ -230,25 +244,7 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //        assertThat(ticket_types[6].getName(), equalTo("Secret answer incorrect (2)"));
 //    }
 //
-//    @Test(priority = 10)
-//    public void test_BOServices_v1_ticket_states(){
-//        Response res = given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/ticket/states");
-//        res.then().log().all().statusCode(200);
-//        Ticket_states[] ticket_states = res.as(Ticket_states[].class);
-//        assertThat(ticket_states[0].getId(), equalTo(10));
-//        assertThat(ticket_states[0].getName(), equalTo("Open"));
-//        assertThat(ticket_states[1].getId(), equalTo(50));
-//        assertThat(ticket_states[1].getName(), equalTo("In progress"));
-//        assertThat(ticket_states[2].getId(), equalTo(100));
-//        assertThat(ticket_states[2].getName(), equalTo("Closed"));
-//        assertThat(ticket_states[3].getId(), equalTo(-10));
-//        assertThat(ticket_states[3].getName(), equalTo("Rejected"));
-//    }
+
 //
 //    @Test(priority = 11)
 //    public void test_BOServices_v1_tran_states(){
