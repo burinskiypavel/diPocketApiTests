@@ -322,6 +322,24 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "countryId", hasItems(4, 248, 8, 32),
                         "nameEng", hasItems("Australia", "Austria", "Brazil", "China"));
     }
+
+    @Test(priority = 25)
+    public void test_BOServices_v1_client_33217_pushMsgs(){
+                given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+clientId+"/pushMsgs")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(660119),
+                        "clientId", hasItem(clientId),
+                        "channel", hasItem("P"),
+                        "created", hasItem("21.02.2022 10:57:46"),
+                        "sent", hasItem("21.02.2022 10:59:49"),
+                        "message", hasItem("Ви не прийняли переказ від Eva Fisher протягом 7 днів, кошти були повернуті платнику"));
+    }
 //
 //
 //    @Test(priority = 17)
@@ -362,21 +380,5 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //                        "stateName", hasItem("Approved"));
 //    }
 //
-//    @Test(priority = 19)
-//    public void test_BOServices_v1_client_33217_pushMsgs(){
-//                given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/client/"+clientId+"/pushMsgs")
-//                .then().log().all()
-//                .statusCode(200)
-//                .body("id", hasItem(660119),
-//                        "clientId", hasItem(33217),
-//                        "channel", hasItem("P"),
-//                        "created", hasItem("21.02.2022 10:57:46"),
-//                        "sent", hasItem("21.02.2022 10:59:49"),
-//                        "message", hasItem("Ви не прийняли переказ від Eva Fisher протягом 7 днів, кошти були повернуті платнику"));
-//    }
+
 }
