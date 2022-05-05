@@ -227,6 +227,21 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
         app.getBoRequestsHelper().boServices_v1_client_33217_paymentDetails(cookie, clientId);
     }
 
+    @Test(priority = 18)
+    public void test_BOServices_v1_payee_paymentTypes(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/payee/paymentTypes")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(4, 1, 2, 3, 5),
+                        "sName", hasItems("GBP in United Kingdom", "PLN in Poland", "EUR in Single Euro Payment Area", "Other payments", "HUF in Hungary"));
+    }
+
+
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
 //        Response res = given()
