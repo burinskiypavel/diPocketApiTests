@@ -276,27 +276,26 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                 .statusCode(200);
     }
 
-//
-//    @Test(priority = 5)
-//    public void test_BOServices_v1_client_33217_address(){
-//        Response res = given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/client/"+ clientId +"/address");
-//        res.then().log().all().statusCode(200);
-//        Client_address[] client_addresses = res.as(Client_address[].class);
-//        assertThat(client_addresses[0].getClientId(), equalTo(clientId));
-//        assertThat(client_addresses[0].getCity(), equalTo("City"));
-//        assertThat(client_addresses[0].getStreetLine1(), equalTo("Address"));
-//        assertThat(client_addresses[0].getZip(), equalTo("11-11"));
-//        assertThat(client_addresses[0].getTypeId(), equalTo(0));
-//        assertThat(client_addresses[0].getCountryId(), equalTo(40));
-//        assertThat(client_addresses[0].getCode(), equalTo("AT"));
-//        assertThat(client_addresses[0].getCountryName(), equalTo("Austria"));
-//        assertThat(client_addresses[0].isRestricted(), equalTo(false));
-//    }
+    @Test(priority = 22)
+    public void test_BOServices_v1_client_33217_address(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+ clientId +"/address")
+                .then().log().all()
+                .statusCode(200)
+                .body("clientId", hasItem(clientId),
+                        "city", hasItem("City"),
+                        "streetLine1", hasItem("Address"),
+                        "zip", hasItem("11-11"),
+                        "typeId", hasItem(0),
+                        "countryId", hasItem(40),
+                        "code", hasItem("AT"),
+                        "countryName", hasItem("Austria"),
+                        "restricted", hasItem(false));
+    }
 //
 //
 //    @Test(priority = 17)
