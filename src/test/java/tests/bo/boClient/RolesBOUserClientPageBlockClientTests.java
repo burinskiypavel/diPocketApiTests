@@ -170,6 +170,18 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
         app.getBoRequestsHelper().boServices_v1_ticket_states(cookie);
     }
 
+    @Test(priority = 12)
+    public void test_BOServices_v1_dashboard_tranTypes(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/dashboard/tranTypes")
+                .then().log().all()
+                .statusCode(200).body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
+    }
+
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
 //        Response res = given()
@@ -215,18 +227,7 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //
 
 
-//
-//    @Test(priority = 12)
-//    public void test_BOServices_v1_dashboard_tranTypes(){
-//        given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/dashboard/tranTypes")
-//                .then().log().all()
-//                .statusCode(200).body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
-//    }
+
 //
 //    @Test(priority = 13)
 //    public void test_BOServices_v1_account_client_33217(){
