@@ -201,6 +201,33 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "sNameEng", hasItems("Active", "Hidden", "To open", "To confirm", "Frozen", "Closed"));
     }
 
+    @Test(priority = 15)
+    public void test_BOServices_v1_account_client_33217(){
+//       given()
+//                .log().uri().log().headers()
+//                .cookie(cookie)
+//                .contentType("application/json")
+//                .when()
+//                .get( "/v1/account/client/"+clientId+"")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("id", hasItem(102690),
+//                "accountName", hasItem("Bbh"),
+//                "clientId", hasItem(clientId),
+//                "ccyId", hasItem(826),
+//                "ccyCode", hasItem("GBP"),
+//                "restAmount", hasItem(0),
+//                "stateId", hasItem(-100),
+//                "stateName", hasItem("Closed"),
+//                "typeId", hasItem(1),
+//                "created", hasItem("2021-10-12"),
+//                "accStateNameExt", hasItem("Closed"),
+//                "clientIdOwner", hasItem(33217),
+//                "owner", hasItem(true),
+//                "shared", hasItem(false));
+        app.getBoRequestsHelper().boServices_v1_account_client_33217(cookie, clientId);
+    }
+
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
 //        Response res = given()
@@ -248,31 +275,7 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 
 
 //
-//    @Test(priority = 13)
-//    public void test_BOServices_v1_account_client_33217(){
-//       given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/account/client/"+clientId+"")
-//                .then().log().all()
-//                .statusCode(200)
-//                .body("id", hasItem(102690),
-//                "accountName", hasItem("Bbh"),
-//                "clientId", hasItem(33217),
-//                "ccyId", hasItem(826),
-//                "ccyCode", hasItem("GBP"),
-//                "restAmount", hasItem(0),
-//                "stateId", hasItem(-100),
-//                "stateName", hasItem("Closed"),
-//                "typeId", hasItem(1),
-//                "created", hasItem("2021-10-12"),
-//                "accStateNameExt", hasItem("Closed"),
-//                "clientIdOwner", hasItem(33217),
-//                "owner", hasItem(true),
-//                "shared", hasItem(false));
-//    }
+
 //
 //
 //    @Test(priority = 15)

@@ -43,24 +43,48 @@ public class BORequests {
                 .statusCode(200)
                 .body("id", hasItems(-100, -60, -50, -10, 0, 10, 30),
                         "name", hasItems("Error", "Reversed", "Reversing", "Cancelled", "Processing", "Hidden", "Pending"));
-
     }
 
 
-        public void boServices_v1_account_other_client_33217(String cookie, int clientId){
-            given()
-                    .log().uri().log().headers()
-                    .cookie(cookie)
-                    .contentType("application/json")
-                    .when()
-                    .get( "/v1/account/other/client/"+clientId+"")
-                    .then().log().all()
-                    .statusCode(200)
-                    .body("id", hasItem(104447),
+    public void boServices_v1_account_other_client_33217(String cookie, int clientId){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/account/other/client/"+clientId+"")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(104447),
                             "clientId", hasItem(clientId),
                             "cardName", hasItem("Test"),
                             "created", hasItem("2022-01-12"),
                             "maskedPan", hasItem("555585******9888"),
                             "accountStateName", hasItem("Closed"));
-        }
     }
+
+    public void boServices_v1_account_client_33217(String cookie, int clientId) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/account/client/"+clientId+"")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(102690),
+                        "accountName", hasItem("Bbh"),
+                        "clientId", hasItem(clientId),
+                        "ccyId", hasItem(826),
+                        "ccyCode", hasItem("GBP"),
+                        "restAmount", hasItem(0),
+                        "stateId", hasItem(-100),
+                        "stateName", hasItem("Closed"),
+                        "typeId", hasItem(1),
+                        "created", hasItem("2021-10-12"),
+                        "accStateNameExt", hasItem("Closed"),
+                        "clientIdOwner", hasItem(33217),
+                        "owner", hasItem(true),
+                        "shared", hasItem(false));
+    }
+}
