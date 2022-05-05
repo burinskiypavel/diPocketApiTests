@@ -182,9 +182,23 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                 .statusCode(200).body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
     }
 
-    @Test(priority = 14)
+    @Test(priority = 13)
     public void test_BOServices_v1_account_other_client_33217(){
         app.getBoRequestsHelper().boServices_v1_account_other_client_33217(cookie, clientId);
+    }
+
+    @Test(priority = 14)
+    public void test_BOServices_v1_account_states(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/account/states")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(20, 10, 5, 0, -50, -100),
+                        "sNameEng", hasItems("Active", "Hidden", "To open", "To confirm", "Frozen", "Closed"));
     }
 
 //    @Test(priority = 3)
