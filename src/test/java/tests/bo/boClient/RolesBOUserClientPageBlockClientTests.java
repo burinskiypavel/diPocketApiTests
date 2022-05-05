@@ -182,6 +182,24 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                 .statusCode(200).body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
     }
 
+    @Test(priority = 14)
+    public void test_BOServices_v1_account_other_client_33217(){
+                given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/account/other/client/"+clientId+"")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(104447),
+                        "clientId", hasItem(clientId),
+                        "cardName", hasItem("Test"),
+                        "created", hasItem("2022-01-12"),
+                        "maskedPan", hasItem("555585******9888"),
+                        "accountStateName", hasItem("Closed"));
+    }
+
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
 //        Response res = given()
@@ -255,23 +273,6 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //                "shared", hasItem(false));
 //    }
 //
-//    @Test(priority = 14)
-//    public void test_BOServices_v1_account_other_client_33217(){
-//        Response res = given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/account/other/client/"+clientId+"");
-//        res.then().log().all().statusCode(200);
-//        Account_other_client[] account_other_clients = res.as(Account_other_client[].class);
-//        assertThat(account_other_clients[0].getId(), equalTo(104447));
-//        assertThat(account_other_clients[0].getClientId(), equalTo(33217));
-//        assertThat(account_other_clients[0].getCardName(), equalTo("Test"));
-//        assertThat(account_other_clients[0].getCreated(), equalTo("2022-01-12"));
-//        assertThat(account_other_clients[0].getMaskedPan(), equalTo("555585******9888"));
-//        assertThat(account_other_clients[0].getAccountStateName(), equalTo("Closed"));
-//    }
 //
 //    @Test(priority = 15)
 //    public void test_BOServices_v1_clientImage_33217_docs(){
