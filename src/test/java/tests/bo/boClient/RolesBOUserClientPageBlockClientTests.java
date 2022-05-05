@@ -259,28 +259,20 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "currencyId", hasItem(985));
     }
 
-
-//    @Test(priority = 3)
-//    public void test_BOServices_v1_client_availCurrencies(){
-//        Response res = given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/client/availCurrencies");
-//        res.then().log().all().statusCode(200);
-//        Client_availCurrencies[] client_availCurrencies = res.as(Client_availCurrencies[].class);
-//        assertThat(client_availCurrencies[0].getId(), equalTo(975));
-//        assertThat(client_availCurrencies[0].getCode(), equalTo("BGN"));
-//        assertThat(client_availCurrencies[1].getId(), equalTo(756));
-//        assertThat(client_availCurrencies[1].getCode(), equalTo("CHF"));
-//        assertThat(client_availCurrencies[1].getSymbol(), equalTo("Fr"));
-//        assertThat(client_availCurrencies[2].getId(), equalTo(978));
-//        assertThat(client_availCurrencies[2].getCode(), equalTo("EUR"));
-//        assertThat(client_availCurrencies[2].getSymbol(), equalTo("€"));
-//    }
-//
-
+    @Test(priority = 20)
+    public void test_BOServices_v1_client_availCurrencies(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/availCurrencies")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(975, 756, 978),
+                        "code", hasItems("BGN", "CHF", "EUR"),
+                        "symbol", hasItems("Fr", "€"));
+    }
 //
 //    @Test(priority = 5)
 //    public void test_BOServices_v1_client_33217_address(){
