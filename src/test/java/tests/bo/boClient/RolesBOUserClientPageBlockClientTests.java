@@ -190,7 +190,6 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //        assertThat(client_availCurrencies[2].getSymbol(), equalTo("€"));
 //    }
 //
-//    @Test(priority = 4)
 
 //
 //    @Test(priority = 5)
@@ -215,10 +214,6 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //    }
 //
 
-//
-
-
-//
 
 //
 //    @Test(priority = 12)
