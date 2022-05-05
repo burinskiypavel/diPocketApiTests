@@ -167,7 +167,7 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 
     @Test(priority = 11)
     public void test_BOServices_v1_tran_states(){
-        app.getBoRequestsHelper().boServices_v1_ticket_states(cookie);
+        app.getBoRequestsHelper().boServices_v1_tran_states(cookie);
     }
 
     @Test(priority = 12)
@@ -279,6 +279,33 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
     @Test(priority = 22)
     public void test_BOServices_v1_client_33217_address(){
         app.getBoRequestsHelper().boServices_v1_client_33217_address(cookie, clientId);
+    }
+
+    @Test(priority = 23)
+    public void test_BOServices_v1_ticket_client_33217(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/ticket/client/"+clientId+"")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(26276),
+                        "typeId", hasItem(700),
+                        "typeName", hasItem("Client restriction"),
+                        "stateId", hasItem(100),
+                        "stateName", hasItem("Closed"),
+                        "username", hasItem("EVGENYA"),
+                        "created", hasItem("2022-05-05"),
+                        "closed", hasItem("2022-05-05"),
+                        "queueOrder", hasItem("2022-05-05"),
+                        "clientId", hasItem(clientId),
+                        "clientFullName", hasItem("Nona Qwerty"),
+                        "clientSite", hasItem("DIPOCKET"),
+                        "clientStateId", hasItem(1),
+                        "clientStateName", hasItem("Active"),
+                        "lastMessage", hasItem("Ticket closed. Reason: Client unblocked."));
     }
 //
 //
