@@ -130,4 +130,24 @@ public class BORequests {
                         "code", hasItems("BGN", "CHF", "EUR"),
                         "symbol", hasItems("Fr", "€"));
     }
+
+    public void boServices_v1_client_33217_address(String cookie, int clientId){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+ clientId +"/address")
+                .then().log().all()
+                .statusCode(200)
+                .body("clientId", hasItem(clientId),
+                        "city", hasItem("City"),
+                        "streetLine1", hasItem("Address"),
+                        "zip", hasItem("11-11"),
+                        "typeId", hasItem(0),
+                        "countryId", hasItem(40),
+                        "code", hasItem("AT"),
+                        "countryName", hasItem("Austria"),
+                        "restricted", hasItem(false));
+    }
 }
