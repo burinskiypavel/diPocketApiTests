@@ -30,4 +30,17 @@ public class BORequests {
                 .body("id", hasItems(402, 700, 100, 200, 300, 310, 320),
                         "name", hasItems("PhotoID change", "Client restriction", "SDD check", "FDD check", "PIN incorrect (3)", "PIN change", "Secret answer incorrect (2)"));
     }
+
+    public void boServices_v1_tran_states(String cookie){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/tran/states")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(-100, -60, -50, -10, 0, 10, 30),
+                        "name", hasItems("Error", "Reversed", "Reversing", "Cancelled", "Processing", "Hidden", "Pending"));
+    }
 }

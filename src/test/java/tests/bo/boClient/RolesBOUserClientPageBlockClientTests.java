@@ -165,6 +165,11 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
         assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAA"));
     }
 
+    @Test(priority = 11)
+    public void test_BOServices_v1_tran_states(){
+        app.getBoRequestsHelper().boServices_v1_ticket_states(cookie);
+    }
+
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
 //        Response res = given()
@@ -214,31 +219,7 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 
 
 //
-//    @Test(priority = 11)
-//    public void test_BOServices_v1_tran_states(){
-//        Response res = given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/tran/states");
-//        res.then().log().all().statusCode(200);
-//        Tran_states[] tran_states = res.as(Tran_states[].class);
-//        assertThat(tran_states[0].getId(), equalTo(-100));
-//        assertThat(tran_states[0].getName(), equalTo("Error"));
-//        assertThat(tran_states[1].getId(), equalTo(-60));
-//        assertThat(tran_states[1].getName(), equalTo("Reversed"));
-//        assertThat(tran_states[2].getId(), equalTo(-50));
-//        assertThat(tran_states[2].getName(), equalTo("Reversing"));
-//        assertThat(tran_states[3].getId(), equalTo(-10));
-//        assertThat(tran_states[3].getName(), equalTo("Cancelled"));
-//        assertThat(tran_states[4].getId(), equalTo(0));
-//        assertThat(tran_states[4].getName(), equalTo("Processing"));
-//        assertThat(tran_states[5].getId(), equalTo(10));
-//        assertThat(tran_states[5].getName(), equalTo("Hidden"));
-//        assertThat(tran_states[6].getId(), equalTo(30));
-//        assertThat(tran_states[6].getName(), equalTo("Pending"));
-//    }
+
 //
 //    @Test(priority = 12)
 //    public void test_BOServices_v1_dashboard_tranTypes(){
