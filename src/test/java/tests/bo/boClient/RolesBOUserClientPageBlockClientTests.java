@@ -184,20 +184,7 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 
     @Test(priority = 14)
     public void test_BOServices_v1_account_other_client_33217(){
-                given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/account/other/client/"+clientId+"")
-                .then().log().all()
-                .statusCode(200)
-                .body("id", hasItem(104447),
-                        "clientId", hasItem(clientId),
-                        "cardName", hasItem("Test"),
-                        "created", hasItem("2022-01-12"),
-                        "maskedPan", hasItem("555585******9888"),
-                        "accountStateName", hasItem("Closed"));
+        app.getBoRequestsHelper().boServices_v1_account_other_client_33217(cookie, clientId);
     }
 
 //    @Test(priority = 3)
