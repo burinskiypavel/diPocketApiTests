@@ -307,6 +307,21 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "clientStateName", hasItem("Active"),
                         "lastMessage", hasItem("Ticket closed. Reason: Client unblocked."));
     }
+
+    @Test(priority = 24)
+    public void test_BOServices_v1_client_citizenships(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/citizenships")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(4, 248, 8, 32),
+                        "countryId", hasItems(4, 248, 8, 32),
+                        "nameEng", hasItems("Australia", "Austria", "Brazil", "China"));
+    }
 //
 //
 //    @Test(priority = 17)
