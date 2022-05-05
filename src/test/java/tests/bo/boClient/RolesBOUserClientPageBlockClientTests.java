@@ -222,6 +222,11 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
         assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAAqACAAQAAAABAAAEOKADAAQAAAABAAAF7gAAAAD"));
     }
 
+    @Test(priority = 17)
+    public void test_BOServices_v1_client_33217_paymentDetails(){
+        app.getBoRequestsHelper().boServices_v1_client_33217_paymentDetails(cookie, clientId);
+    }
+
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
 //        Response res = given()
@@ -265,27 +270,6 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //        assertThat(client_addresses[0].isRestricted(), equalTo(false));
 //    }
 //
-
-//
-//    @Test(priority = 16)
-//    public void test_BOServices_v1_client_33217_paymentDetails(){
-//        Response res = given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/client/"+clientId+"/paymentDetails");
-//        res.then().log().all().statusCode(200);
-//
-//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.paymentType == 3}.paymentType", 3));
-//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.currencyId == 985}.currencyId", 985));
-//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.currencyCode == 'PLN'}.currencyCode", "PLN"));
-//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.accountName == 'Nona Qwerty'}.accountName", "Nona Qwerty"));
-//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.bankId == 'WBKPPLPP'}.bankId", "WBKPPLPP"));
-//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.accountNo == 'PL16109000047335800000085124'}.accountNo", "PL16109000047335800000085124"));
-//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.address == 'Address44 - 11111 City - Ukraine'}.address", "Address44 - 11111 City - Ukraine"));
-//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.bankName == 'Santander Bank Polska SA - al. Jana Pawla II 17 - 00-854 Warsaw Poland'}.bankName", "Santander Bank Polska SA - al. Jana Pawla II 17 - 00-854 Warsaw Poland"));
-//    }
 //
 //    @Test(priority = 17)
 //    public void test_BOServices_v1_clientImage_33217_docHistory(){

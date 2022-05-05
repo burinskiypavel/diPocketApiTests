@@ -87,4 +87,33 @@ public class BORequests {
                         "owner", hasItem(true),
                         "shared", hasItem(false));
     }
+
+    public void boServices_v1_client_33217_paymentDetails(String cookie, int clientId) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+clientId+"/paymentDetails")
+                .then().log().all()
+                .statusCode(200)
+                .body("paymentType", hasItem(3),
+                        "currencyId", hasItem(756),
+                        "currencyCode", hasItem("CHF"),
+                        "accountName", hasItem("Nona Qwerty"),
+                        "bankId", hasItem("WBKPPLPP"),
+                        "accountNo", hasItem("PL18109000047340800000085129"),
+                        "address", hasItem("Address44 - 11111 City - Ukraine"),
+                        "bankName", hasItem("Santander Bank Polska SA - al. Jana Pawla II 17 - 00-854 Warsaw Poland"));
+
+        //        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.paymentType == 3}.paymentType", 3));
+//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.currencyId == 985}.currencyId", 985));
+//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.currencyCode == 'PLN'}.currencyCode", "PLN"));
+//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.accountName == 'Nona Qwerty'}.accountName", "Nona Qwerty"));
+//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.bankId == 'WBKPPLPP'}.bankId", "WBKPPLPP"));
+//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.accountNo == 'PL16109000047335800000085124'}.accountNo", "PL16109000047335800000085124"));
+//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.address == 'Address44 - 11111 City - Ukraine'}.address", "Address44 - 11111 City - Ukraine"));
+//        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.bankName == 'Santander Bank Polska SA - al. Jana Pawla II 17 - 00-854 Warsaw Poland'}.bankName", "Santander Bank Polska SA - al. Jana Pawla II 17 - 00-854 Warsaw Poland"));
+
+    }
 }
