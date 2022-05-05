@@ -264,6 +264,18 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
         app.getBoRequestsHelper().boServices_v1_client_availCurrencies(cookie);
     }
 
+    @Test(priority = 21)
+    public void test_BOServices_v1_client_33217_tiles(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+clientId+"/tiles")
+                .then().log().all()
+                .statusCode(200);
+    }
+
 //
 //    @Test(priority = 5)
 //    public void test_BOServices_v1_client_33217_address(){
