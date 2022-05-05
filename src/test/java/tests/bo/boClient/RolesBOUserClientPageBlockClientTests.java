@@ -149,6 +149,22 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
         app.getBoRequestsHelper().boServices_v1_ticket_types(cookie);
     }
 
+    @Test(priority = 10)
+    public void test_BOServices_v1_clientImage_33217_selfie(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/clientImage/"+clientId+"/selfie");
+        res.then().log().all().statusCode(200);
+        ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
+        assertThat(clientImage_selfies[0].getId(), equalTo(30920));
+        assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
+        assertThat(clientImage_selfies[0].getTypeId(), equalTo(1));
+        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAA"));
+    }
+
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
 //        Response res = given()
@@ -193,29 +209,9 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //        assertThat(client_addresses[0].isRestricted(), equalTo(false));
 //    }
 //
-//    @Test(priority = 6)
-//    public void test_BOServices_v1_clientImage_33217_selfie(){
-//        Response res = given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/clientImage/"+clientId+"/selfie");
-//        res.then().log().all().statusCode(200);
-//        ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
-//        assertThat(clientImage_selfies[0].getId(), equalTo(30920));
-//        assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
-//        assertThat(clientImage_selfies[0].getTypeId(), equalTo(1));
-//        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAA"));
-//    }
-//
-
-//
-//    @Test(priority = 8)
 
 //
 
-//
 
 //
 //    @Test(priority = 11)
