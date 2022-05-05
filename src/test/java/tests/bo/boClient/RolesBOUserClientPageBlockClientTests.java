@@ -261,18 +261,9 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 
     @Test(priority = 20)
     public void test_BOServices_v1_client_availCurrencies(){
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/client/availCurrencies")
-                .then().log().all()
-                .statusCode(200)
-                .body("id", hasItems(975, 756, 978),
-                        "code", hasItems("BGN", "CHF", "EUR"),
-                        "symbol", hasItems("Fr", "€"));
+        app.getBoRequestsHelper().boServices_v1_client_availCurrencies(cookie);
     }
+
 //
 //    @Test(priority = 5)
 //    public void test_BOServices_v1_client_33217_address(){

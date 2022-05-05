@@ -116,4 +116,18 @@ public class BORequests {
 //        assertTrue(app.getJsonHelper().isElementPresentInJson(res, "find {it.bankName == 'Santander Bank Polska SA - al. Jana Pawla II 17 - 00-854 Warsaw Poland'}.bankName", "Santander Bank Polska SA - al. Jana Pawla II 17 - 00-854 Warsaw Poland"));
 
     }
+
+    public void boServices_v1_client_availCurrencies(String cookie){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/availCurrencies")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(975, 756, 978),
+                        "code", hasItems("BGN", "CHF", "EUR"),
+                        "symbol", hasItems("Fr", "€"));
+    }
 }
