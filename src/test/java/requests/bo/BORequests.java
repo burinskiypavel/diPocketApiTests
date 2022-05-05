@@ -1,8 +1,7 @@
 package requests.bo;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.*;
 
 public class BORequests {
 
@@ -149,5 +148,23 @@ public class BORequests {
                         "code", hasItem("AT"),
                         "countryName", hasItem("Austria"),
                         "restricted", hasItem(false));
+    }
+
+    public void boServices_v1_clientImage_33217_docHistory(String cookie, int clientId){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/clientImage/33217/docHistory")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(17326),
+                        "clientId", hasItem(clientId),
+                        "typeId", hasItem(2),
+                        "imageInBase64", hasItem(notNullValue()),
+                        "added", hasItem("2022-01-20"),
+                        "stateId", hasItem(10),
+                        "stateName", hasItem("Approved"));
     }
 }

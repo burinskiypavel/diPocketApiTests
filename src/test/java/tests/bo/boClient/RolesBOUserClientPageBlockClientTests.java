@@ -340,26 +340,11 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "sent", hasItem("21.02.2022 10:59:49"),
                         "message", hasItem("Ви не прийняли переказ від Eva Fisher протягом 7 днів, кошти були повернуті платнику"));
     }
-//
-//
-//    @Test(priority = 17)
-//    public void test_BOServices_v1_clientImage_33217_docHistory(){
-//        given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/clientImage/33217/docHistory")
-//                .then().log().all()
-//                .statusCode(200)
-//                .body("id", hasItem(17326),
-//                        "clientId", hasItem(clientId),
-//                        "typeId", hasItem(2),
-//                        "imageInBase64", hasItem(notNullValue()),
-//                        "added", hasItem("2022-01-20"),
-//                        "stateId", hasItem(10),
-//                        "stateName", hasItem("Approved"));
-//    }
+
+    @Test(priority = 26)
+    public void test_BOServices_v1_clientImage_33217_docHistory(){
+        app.getBoRequestsHelper().boServices_v1_clientImage_33217_docHistory(cookie, clientId);
+    }
 //
 //    @Test(priority = 18)
 //    public void test_BOServices_v1_clientImage_33217_selfieHistory(){
