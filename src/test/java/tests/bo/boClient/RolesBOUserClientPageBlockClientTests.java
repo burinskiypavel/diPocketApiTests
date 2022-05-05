@@ -203,29 +203,23 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 
     @Test(priority = 15)
     public void test_BOServices_v1_account_client_33217(){
-//       given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/account/client/"+clientId+"")
-//                .then().log().all()
-//                .statusCode(200)
-//                .body("id", hasItem(102690),
-//                "accountName", hasItem("Bbh"),
-//                "clientId", hasItem(clientId),
-//                "ccyId", hasItem(826),
-//                "ccyCode", hasItem("GBP"),
-//                "restAmount", hasItem(0),
-//                "stateId", hasItem(-100),
-//                "stateName", hasItem("Closed"),
-//                "typeId", hasItem(1),
-//                "created", hasItem("2021-10-12"),
-//                "accStateNameExt", hasItem("Closed"),
-//                "clientIdOwner", hasItem(33217),
-//                "owner", hasItem(true),
-//                "shared", hasItem(false));
         app.getBoRequestsHelper().boServices_v1_account_client_33217(cookie, clientId);
+    }
+
+    @Test(priority = 16)
+    public void test_BOServices_v1_clientImage_33217_docs(){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/clientImage/"+clientId+"/docs");
+        res.then().log().all().statusCode(200);
+        ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
+        assertThat(clientImage_selfies[0].getId(), equalTo(31456));
+        assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
+        assertThat(clientImage_selfies[0].getTypeId(), equalTo(2));
+        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAAqACAAQAAAABAAAEOKADAAQAAAABAAAF7gAAAAD"));
     }
 
 //    @Test(priority = 3)
@@ -272,27 +266,6 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
 //    }
 //
 
-
-
-//
-
-//
-//
-//    @Test(priority = 15)
-//    public void test_BOServices_v1_clientImage_33217_docs(){
-//        Response res = given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/clientImage/"+clientId+"/docs");
-//        res.then().log().all().statusCode(200);
-//        ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
-//        assertThat(clientImage_selfies[0].getId(), equalTo(31456));
-//        assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
-//        assertThat(clientImage_selfies[0].getTypeId(), equalTo(2));
-//        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAAqACAAQAAAABAAAEOKADAAQAAAABAAAF7gAAAAD"));
-//    }
 //
 //    @Test(priority = 16)
 //    public void test_BOServices_v1_client_33217_paymentDetails(){
