@@ -115,7 +115,8 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "id", equalTo(clientId),
                         "mainPhone", equalTo("380634413376"),
                         "firstName", equalTo("Nona"),
-                        "lastName", equalTo("Qwerty"));
+                        "lastName", equalTo("Qwerty"),
+                        "stateName", equalTo("Active"));
     }
 
     @Test(priority = 7)
@@ -345,25 +346,23 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
     public void test_BOServices_v1_clientImage_33217_docHistory(){
         app.getBoRequestsHelper().boServices_v1_clientImage_33217_docHistory(cookie, clientId);
     }
-//
-//    @Test(priority = 18)
-//    public void test_BOServices_v1_clientImage_33217_selfieHistory(){
-//        given()
-//                .log().uri().log().headers()
-//                .cookie(cookie)
-//                .contentType("application/json")
-//                .when()
-//                .get( "/v1/clientImage/"+clientId+"/selfieHistory")
-//                .then().log().all()
-//                .statusCode(200)
-//                .body("id", hasItem(17159),
-//                        "clientId", hasItem(clientId),
-//                        "typeId", hasItem(4),
-//                        "imageInBase64", hasItem(notNullValue()),
-//                        "added", hasItem("2021-12-29T13:10:12.551693Z"),
-//                        "stateId", hasItem(10),
-//                        "stateName", hasItem("Approved"));
-//    }
-//
 
+    @Test(priority = 27)
+    public void test_BOServices_v1_clientImage_33217_selfieHistory(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/clientImage/"+clientId+"/selfieHistory")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(17159),
+                        "clientId", hasItem(clientId),
+                        "typeId", hasItem(4),
+                        "imageInBase64", hasItem(notNullValue()),
+                        "added", hasItem("2021-12-29T13:10:12.551693Z"),
+                        "stateId", hasItem(10),
+                        "stateName", hasItem("Approved"));
+    }
 }
