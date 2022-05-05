@@ -241,6 +241,24 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "sName", hasItems("GBP in United Kingdom", "PLN in Poland", "EUR in Single Euro Payment Area", "Other payments", "HUF in Hungary"));
     }
 
+    @Test(priority = 19)
+    public void test_BOServices_v1_payee_33217(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/payee/"+clientId+"")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(3952),
+                        "clientId", hasItems(clientId),
+                        "nickName", hasItem("Den"),
+                        "paymentTypeId", hasItem(1),
+                        "paymentTypeName", hasItem("PLN in Poland"),
+                        "currencyId", hasItem(985));
+    }
+
 
 //    @Test(priority = 3)
 //    public void test_BOServices_v1_client_availCurrencies(){
