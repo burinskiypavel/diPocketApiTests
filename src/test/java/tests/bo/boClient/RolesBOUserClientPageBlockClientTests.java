@@ -16,6 +16,7 @@ import static org.testng.Assert.assertTrue;
 public class RolesBOUserClientPageBlockClientTests extends TestBase {
     String cookie = null;
     int clientId = 33217;
+    String reason = "test";
 
     @Test(priority = 1)
     public void test_BOServices_v1_user_authentication(){
@@ -364,5 +365,61 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
                         "added", hasItem("2021-12-29T13:10:12.551693Z"),
                         "stateId", hasItem(10),
                         "stateName", hasItem("Approved"));
+    }
+
+    @Test(priority = 28)
+    public void test_BOServices_v1_client_33217_block(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"blockOrBanReason\" : \""+reason+"\"\n" +
+                        "}")
+                .when()
+                .post( "/v1/client/"+clientId+"/block")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 29)
+    public void test_BOServices_v1_client_33217_(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+ clientId +"")
+                .then().log().all()
+                .statusCode(200)
+                .body("stateName", equalTo("Blocked"));
+    }
+
+    @Test(priority = 30)
+    public void test_BOServices_v1_client_33217_unblock() {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"unblockOrUnbanReason\" : \""+reason+"\"\n" +
+                        "}")
+                .when()
+                .post("/v1/client/" + clientId + "/unblock")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 31)
+    public void test_BOServices_v1_client_33217__(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+ clientId +"")
+                .then().log().all()
+                .statusCode(200)
+                .body("stateName", equalTo("Active"));
     }
 }
