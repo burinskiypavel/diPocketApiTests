@@ -10,7 +10,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
     String phone = "380634413376";
     String clientId = "33217";
 
-    @Test
+    @Test(enabled = false) // moved to api
     public void testRolesBOUserClientPageBlockClientButton() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -27,7 +27,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         assertEquals(actualState, "State: Blocked");
     }
 
-    @Test
+    @Test(enabled = false) // moved to api
     public void testRolesBOUserClientPageUnblockClientButton() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
