@@ -2,18 +2,15 @@ package tests.bo.boClient;
 
 import base.TestBase;
 import io.restassured.response.Response;
-import model.bo.User_All_AllActive;
 import model.bo.boClient.*;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
-public class RolesBOUserClientPageBlockClientTests extends TestBase {
+public class RolesBOUserClientPageBlockUnblockClientTests extends TestBase {
     String cookie = null;
     int clientId = 33217;
     String reason = "test";
