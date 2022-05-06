@@ -321,21 +321,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
 
     @Test(priority = 17)
     public void test_BOServices_v1_clientImage_33217_docHistory(){
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/clientImage/33217/docHistory")
-                .then().log().all()
-                .statusCode(200)
-                .body("id", hasItem(17467),
-                        "clientId", hasItem(clientId),
-                        "typeId", hasItem(7),
-                        "imageInBase64", hasItem(notNullValue()),
-                        "added", hasItem("2022-05-02"),
-                        "stateId", hasItem(-10),
-                        "stateName", hasItem("Rejected"));
+        app.getBoRequestsHelper().boServices_v1_clientImage_33217_docHistory(cookie, clientId);
     }
 
     @Test(priority = 18, enabled = false)
