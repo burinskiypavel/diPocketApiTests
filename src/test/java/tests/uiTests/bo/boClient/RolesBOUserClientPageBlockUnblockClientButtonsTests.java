@@ -44,7 +44,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         assertEquals(actualState, "State: Active");
     }
 
-    @Test
+    @Test(enabled = false) // moved to api
     public void testRolesBOUserClientPageBanClientButton() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -65,7 +65,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         }
     }
 
-    @Test
+    @Test(enabled = false) // moved to api
     public void testRolesBOUserClientPageBanClientWithoutBlockingClientDevice() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -86,7 +86,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         }
     }
 
-    @Test
+    @Test(enabled = false) // moved to api
     public void testRolesBOUserClientPageUnbanClientButton() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
