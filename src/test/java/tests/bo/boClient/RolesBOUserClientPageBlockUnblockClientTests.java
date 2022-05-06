@@ -33,15 +33,7 @@ public class RolesBOUserClientPageBlockUnblockClientTests extends TestBase {
 
     @Test(priority = 2)
     public void test_BOServices_v1_client_states(){
-                given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/client/states")
-                        .then().log().all().statusCode(200)
-                        .body("id", hasItems(-200, -150, -100, -1, 0, 1),
-                        "name", hasItems("Archived", "Forgotten", "Banned", "Blocked", "Savepoint", "Active"));
+        app.getBoRequestsHelper().boServices_v1_client_states(cookie);
     }
 
     @Test(priority = 3)
@@ -59,62 +51,17 @@ public class RolesBOUserClientPageBlockUnblockClientTests extends TestBase {
 
     @Test(priority = 4)
     public void test_BOServices_v1_client_search(){
-                given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .body("{\n" +
-                        "  \"id\" : "+clientId+"\n" +
-                        "}")
-                .when()
-                .post( "/v1/client/search")
-                        .then().log().all()
-                        .statusCode(200)
-                        .body("id", hasItem(clientId),
-                        "firstName", hasItem("Nona"),
-                        "lastName", hasItem("Qwerty"),
-                        "mainPhone", hasItem("380634413376"),
-                        "email", hasItem("vikarez20@gmail.com"),
-                        "site", hasItem("DIPOCKET"));
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId);
     }
 
     @Test(priority = 5)
     public void test_BOServices_v1_supervisor_33217_reqList(){
-        Response res = given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/supervisor/"+clientId+"/reqList");
-        res.then().log().all().statusCode(200);
-        Supervisor_reqList[] supervisor_reqLists = res.as(Supervisor_reqList[].class);
-        assertThat(supervisor_reqLists[0].getReqId(), equalTo(2676));
-        assertThat(supervisor_reqLists[0].getClientId(), equalTo(clientId));
-        assertThat(supervisor_reqLists[0].getRole(), equalTo("Child"));
-        assertThat(supervisor_reqLists[0].getrClientPhone(), equalTo("380638918373"));
-        assertThat(supervisor_reqLists[0].getrFullName(), equalTo("Vika Qwerty"));
-        assertThat(supervisor_reqLists[0].getStateId(), equalTo(- 100));
-        assertThat(supervisor_reqLists[0].getStateName(), equalTo("Finished"));
-        assertFalse(supervisor_reqLists[0].getCreatedAt().isEmpty());
-        assertFalse(supervisor_reqLists[0].getApprovedAt().isEmpty());
+        app.getBoRequestsHelper().boServices_v1_supervisor_33217_reqList(cookie, clientId);
     }
 
-        @Test(priority = 6)
-        public void test_BOServices_v1_client_33217(){
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/client/"+ clientId +"")
-                .then().log().all()
-                .statusCode(200)
-                .body("email", equalTo("vikarez20@gmail.com"),
-                        "id", equalTo(clientId),
-                        "mainPhone", equalTo("380634413376"),
-                        "firstName", equalTo("Nona"),
-                        "lastName", equalTo("Qwerty"),
-                        "stateName", equalTo("Active"));
+    @Test(priority = 6)
+    public void test_BOServices_v1_client_33217(){
+        app.getBoRequestsHelper().boServices_v1_client_33217(cookie, clientId);
     }
 
     @Test(priority = 7)

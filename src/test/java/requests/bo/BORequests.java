@@ -1,7 +1,12 @@
 package requests.bo;
 
+import io.restassured.response.Response;
+import model.bo.boClient.Supervisor_reqList;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertFalse;
 
 public class BORequests {
 
@@ -166,5 +171,74 @@ public class BORequests {
                         "added", hasItem("2022-05-02"),
                         "stateId", hasItem(-10),
                         "stateName", hasItem("Rejected"));
+    }
+
+    public void boServices_v1_client_states(String cookie){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/states")
+                .then().log().all().statusCode(200)
+                .body("id", hasItems(-200, -150, -100, -1, 0, 1),
+                        "name", hasItems("Archived", "Forgotten", "Banned", "Blocked", "Savepoint", "Active"));
+    }
+
+    public void boServices_v1_client_33217(String cookie, int clientId){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+ clientId +"")
+                .then().log().all()
+                .statusCode(200)
+                .body("email", equalTo("vikarez20@gmail.com"),
+                        "id", equalTo(clientId),
+                        "mainPhone", equalTo("380634413376"),
+                        "firstName", equalTo("Nona"),
+                        "lastName", equalTo("Qwerty"),
+                        "stateName", equalTo("Active"));
+    }
+
+    public void boServices_v1_client_search(String cookie, int clientId){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"id\" : "+clientId+"\n" +
+                        "}")
+                .when()
+                .post( "/v1/client/search")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItem(clientId),
+                        "firstName", hasItem("Nona"),
+                        "lastName", hasItem("Qwerty"),
+                        "mainPhone", hasItem("380634413376"),
+                        "email", hasItem("vikarez20@gmail.com"),
+                        "site", hasItem("DIPOCKET"));
+    }
+
+    public void boServices_v1_supervisor_33217_reqList(String cookie, int clientId){
+        Response res = given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/supervisor/"+clientId+"/reqList");
+        res.then().log().all().statusCode(200);
+        Supervisor_reqList[] supervisor_reqLists = res.as(Supervisor_reqList[].class);
+        assertThat(supervisor_reqLists[0].getReqId(), equalTo(2676));
+        assertThat(supervisor_reqLists[0].getClientId(), equalTo(clientId));
+        assertThat(supervisor_reqLists[0].getRole(), equalTo("Child"));
+        assertThat(supervisor_reqLists[0].getrClientPhone(), equalTo("380638918373"));
+        assertThat(supervisor_reqLists[0].getrFullName(), equalTo("Vika Qwerty"));
+        assertThat(supervisor_reqLists[0].getStateId(), equalTo(- 100));
+        assertThat(supervisor_reqLists[0].getStateName(), equalTo("Finished"));
+        assertFalse(supervisor_reqLists[0].getCreatedAt().isEmpty());
+        assertFalse(supervisor_reqLists[0].getApprovedAt().isEmpty());
     }
 }
