@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertFalse;
 
 public class RolesBOUserClientPageBlockUnblockClientTests extends TestBase {
     String cookie = null;
