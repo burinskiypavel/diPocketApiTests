@@ -365,4 +365,59 @@ public class RolesBOUserClientPageBlockUnblockClientTests extends TestBase {
                 .statusCode(200)
                 .body("stateName", equalTo("Active"));
     }
+
+    @Test(priority = 32)
+    public void test_BOServices_v1_client_33217_ban(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"blockOrBanReason\" : \""+reason+"\",\n" +
+                        "  \"blockClientDevice\" : false\n" +
+                        "}")
+                .when()
+                .post( "/v1/client/"+clientId+"/ban")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 33)
+    public void test_BOServices_v1_client_33217___(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+ clientId +"")
+                .then().log().all()
+                .statusCode(200)
+                .body("stateName", equalTo("Banned"));
+    }
+
+    @Test(priority = 34)
+    public void test_BOServices_v1_client_33217_unban(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{}")
+                .when()
+                .post( "/v1/client/"+clientId+"/unban")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 35)
+    public void test_BOServices_v1_client_33217____(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/client/"+ clientId +"")
+                .then().log().all()
+                .statusCode(200)
+                .body("stateName", equalTo("Active"));
+    }
 }
