@@ -3,12 +3,12 @@ package tests.bo.boClient;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.bo.boClient.*;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertFalse;
 
 public class RolesBOUserClientspageTabSelfieTests extends TestBase {
     String cookie = null;
@@ -56,22 +56,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_client_availCurrencies(){
-        Response res = given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/client/availCurrencies");
-        res.then().log().all().statusCode(200);
-        Client_availCurrencies[] client_availCurrencies = res.as(Client_availCurrencies[].class);
-        assertThat(client_availCurrencies[0].getId(), equalTo(975));
-        assertThat(client_availCurrencies[0].getCode(), equalTo("BGN"));
-        assertThat(client_availCurrencies[1].getId(), equalTo(756));
-        assertThat(client_availCurrencies[1].getCode(), equalTo("CHF"));
-        assertThat(client_availCurrencies[1].getSymbol(), equalTo("Fr"));
-        assertThat(client_availCurrencies[2].getId(), equalTo(978));
-        assertThat(client_availCurrencies[2].getCode(), equalTo("EUR"));
-        assertThat(client_availCurrencies[2].getSymbol(), equalTo("€"));
+        app.getBoRequestsHelper().boServices_v1_client_availCurrencies(cookie);
     }
 
     @Test(priority = 4)
@@ -93,23 +78,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_client_33217_address(){
-        Response res = given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/client/"+ clientId +"/address");
-        res.then().log().all().statusCode(200);
-        Client_address[] client_addresses = res.as(Client_address[].class);
-        assertThat(client_addresses[0].getClientId(), equalTo(clientId));
-        assertThat(client_addresses[0].getCity(), equalTo("City"));
-        assertThat(client_addresses[0].getStreetLine1(), equalTo("Address"));
-        assertThat(client_addresses[0].getZip(), equalTo("11-11"));
-        assertThat(client_addresses[0].getTypeId(), equalTo(0));
-        assertThat(client_addresses[0].getCountryId(), equalTo(40));
-        assertThat(client_addresses[0].getCode(), equalTo("AT"));
-        assertThat(client_addresses[0].getCountryName(), equalTo("Austria"));
-        assertThat(client_addresses[0].isRestricted(), equalTo(false));
+        app.getBoRequestsHelper().boServices_v1_client_33217_address(cookie, clientId);
     }
 
     @Test(priority = 6)
@@ -166,80 +135,23 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
         assertThat(supervisor_reqLists[0].getrFullName(), equalTo("Vika Qwerty"));
         assertThat(supervisor_reqLists[0].getStateId(), equalTo(- 100));
         assertThat(supervisor_reqLists[0].getStateName(), equalTo("Finished"));
-        Assert.assertFalse(supervisor_reqLists[0].getCreatedAt().isEmpty());
-        Assert.assertFalse(supervisor_reqLists[0].getApprovedAt().isEmpty());
+        assertFalse(supervisor_reqLists[0].getCreatedAt().isEmpty());
+        assertFalse(supervisor_reqLists[0].getApprovedAt().isEmpty());
     }
 
     @Test(priority = 9)
     public void test_BOServices_v1_ticket_types(){
-        Response res = given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/ticket/types");
-        res.then().log().all().statusCode(200);
-        Ticket_types[] ticket_types = res.as(Ticket_types[].class);
-        assertThat(ticket_types[0].getId(), equalTo(402));
-        assertThat(ticket_types[0].getName(), equalTo("PhotoID change"));
-        assertThat(ticket_types[1].getId(), equalTo(700));
-        assertThat(ticket_types[1].getName(), equalTo("Client restriction"));
-        assertThat(ticket_types[2].getId(), equalTo(100));
-        assertThat(ticket_types[2].getName(), equalTo("SDD check"));
-        assertThat(ticket_types[3].getId(), equalTo(200));
-        assertThat(ticket_types[3].getName(), equalTo("FDD check"));
-        assertThat(ticket_types[4].getId(), equalTo(300));
-        assertThat(ticket_types[4].getName(), equalTo("PIN incorrect (3)"));
-        assertThat(ticket_types[5].getId(), equalTo(310));
-        assertThat(ticket_types[5].getName(), equalTo("PIN change"));
-        assertThat(ticket_types[6].getId(), equalTo(320));
-        assertThat(ticket_types[6].getName(), equalTo("Secret answer incorrect (2)"));
+        app.getBoRequestsHelper().boServices_v1_ticket_types(cookie);
     }
 
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_states(){
-        Response res = given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/ticket/states");
-        res.then().log().all().statusCode(200);
-        Ticket_states[] ticket_states = res.as(Ticket_states[].class);
-        assertThat(ticket_states[0].getId(), equalTo(10));
-        assertThat(ticket_states[0].getName(), equalTo("Open"));
-        assertThat(ticket_states[1].getId(), equalTo(50));
-        assertThat(ticket_states[1].getName(), equalTo("In progress"));
-        assertThat(ticket_states[2].getId(), equalTo(100));
-        assertThat(ticket_states[2].getName(), equalTo("Closed"));
-        assertThat(ticket_states[3].getId(), equalTo(-10));
-        assertThat(ticket_states[3].getName(), equalTo("Rejected"));
+        app.getBoRequestsHelper().boServices_v1_ticket_states(cookie);
     }
 
     @Test(priority = 11)
     public void test_BOServices_v1_tran_states(){
-        Response res = given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/tran/states");
-        res.then().log().all().statusCode(200);
-        Tran_states[] tran_states = res.as(Tran_states[].class);
-        assertThat(tran_states[0].getId(), equalTo(-100));
-        assertThat(tran_states[0].getName(), equalTo("Error"));
-        assertThat(tran_states[1].getId(), equalTo(-60));
-        assertThat(tran_states[1].getName(), equalTo("Reversed"));
-        assertThat(tran_states[2].getId(), equalTo(-50));
-        assertThat(tran_states[2].getName(), equalTo("Reversing"));
-        assertThat(tran_states[3].getId(), equalTo(-10));
-        assertThat(tran_states[3].getName(), equalTo("Cancelled"));
-        assertThat(tran_states[4].getId(), equalTo(0));
-        assertThat(tran_states[4].getName(), equalTo("Processing"));
-        assertThat(tran_states[5].getId(), equalTo(10));
-        assertThat(tran_states[5].getName(), equalTo("Hidden"));
-        assertThat(tran_states[6].getId(), equalTo(30));
-        assertThat(tran_states[6].getName(), equalTo("Pending"));
+        app.getBoRequestsHelper().boServices_v1_tran_states(cookie);
     }
 
     @Test(priority = 12)
@@ -256,46 +168,12 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
 
     @Test(priority = 13)
     public void test_BOServices_v1_account_client_33217(){
-       given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/account/client/"+clientId+"")
-                .then().log().all()
-                .statusCode(200)
-                .body("id", hasItem(102690),
-                "accountName", hasItem("Bbh"),
-                "clientId", hasItem(33217),
-                "ccyId", hasItem(826),
-                "ccyCode", hasItem("GBP"),
-                "restAmount", hasItem(0),
-                "stateId", hasItem(-100),
-                "stateName", hasItem("Closed"),
-                "typeId", hasItem(1),
-                "created", hasItem("2021-10-12"),
-                "accStateNameExt", hasItem("Closed"),
-                "clientIdOwner", hasItem(33217),
-                "owner", hasItem(true),
-                "shared", hasItem(false));
+        app.getBoRequestsHelper().boServices_v1_account_client_33217(cookie, clientId);
     }
 
     @Test(priority = 14)
     public void test_BOServices_v1_account_other_client_33217(){
-        Response res = given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/account/other/client/"+clientId+"");
-        res.then().log().all().statusCode(200);
-        Account_other_client[] account_other_clients = res.as(Account_other_client[].class);
-        assertThat(account_other_clients[0].getId(), equalTo(104447));
-        assertThat(account_other_clients[0].getClientId(), equalTo(33217));
-        assertThat(account_other_clients[0].getCardName(), equalTo("Test"));
-        assertThat(account_other_clients[0].getCreated(), equalTo("2022-01-12"));
-        assertThat(account_other_clients[0].getMaskedPan(), equalTo("555585******9888"));
-        assertThat(account_other_clients[0].getAccountStateName(), equalTo("Closed"));
+        app.getBoRequestsHelper().boServices_v1_account_other_client_33217(cookie, clientId);
     }
 
     @Test(priority = 15)
