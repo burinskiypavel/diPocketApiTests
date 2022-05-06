@@ -348,7 +348,7 @@ public class RolesBOUserClientPageBlockClientTests extends TestBase {
         app.getBoRequestsHelper().boServices_v1_clientImage_33217_docHistory(cookie, clientId);
     }
 
-    @Test(priority = 27)
+    @Test(priority = 27, enabled = false)
     public void test_BOServices_v1_clientImage_33217_selfieHistory(){
         given()
                 .log().uri().log().headers()

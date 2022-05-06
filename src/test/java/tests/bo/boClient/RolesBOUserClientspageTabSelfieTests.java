@@ -340,7 +340,7 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                         "stateName", hasItem("Approved"));
     }
 
-    @Test(priority = 18)
+    @Test(priority = 18, enabled = false)
     public void test_BOServices_v1_clientImage_33217_selfieHistory(){
         given()
                 .log().uri().log().headers()
