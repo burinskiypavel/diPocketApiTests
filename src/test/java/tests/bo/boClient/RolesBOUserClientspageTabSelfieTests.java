@@ -1,6 +1,5 @@
 package tests.bo.boClient;
 
-import appmanager.BOHelper;
 import base.TestBase;
 import io.restassured.response.Response;
 import model.bo.boClient.*;
@@ -10,7 +9,6 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertTrue;
 
 public class RolesBOUserClientspageTabSelfieTests extends TestBase {
     String cookie = null;
@@ -331,13 +329,13 @@ public class RolesBOUserClientspageTabSelfieTests extends TestBase {
                 .get( "/v1/clientImage/33217/docHistory")
                 .then().log().all()
                 .statusCode(200)
-                .body("id", hasItem(17326),
+                .body("id", hasItem(17467),
                         "clientId", hasItem(clientId),
-                        "typeId", hasItem(2),
+                        "typeId", hasItem(7),
                         "imageInBase64", hasItem(notNullValue()),
-                        "added", hasItem("2022-01-20"),
-                        "stateId", hasItem(10),
-                        "stateName", hasItem("Approved"));
+                        "added", hasItem("2022-05-02"),
+                        "stateId", hasItem(-10),
+                        "stateName", hasItem("Rejected"));
     }
 
     @Test(priority = 18, enabled = false)
