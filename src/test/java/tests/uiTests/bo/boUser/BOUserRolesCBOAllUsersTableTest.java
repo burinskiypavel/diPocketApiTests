@@ -10,7 +10,7 @@ public class BOUserRolesCBOAllUsersTableTest extends UITestBase {
 
     @Test
     public void testBOUserRolesCBOAllUsersTable() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoBOUsersPage();
         gotoAllUsersTab();
 
