@@ -25,6 +25,10 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Blocked");
+
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+            unblockClient();
+        }
     }
 
     @Test(enabled = false) // moved to api
