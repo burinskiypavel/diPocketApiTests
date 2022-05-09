@@ -1,14 +1,19 @@
 package tests.uiTests.bo.boClient;
 
+import appmanager.HelperBase;
 import base.UITestBase;
+import com.cs.dipocketback.base.data.Site;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+
+import java.sql.SQLException;
 
 import static org.testng.Assert.assertEquals;
 
 public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestBase {
     String phone = "380634413376";
     String clientId = "33217";
+    String forgotPhone = "380685448615";
 
     @Test
     public void testRolesBOUserClientPageBlockClientButton() throws InterruptedException {
@@ -108,19 +113,15 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
     }
 
     @Test
-    public void testRolesCBOUserClientPageForgetClient() throws InterruptedException {
+    public void testRolesCBOUserClientPageForgetClient() throws InterruptedException, SQLException, ClassNotFoundException {
+        String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-
-//        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Ban client']"))){
-//            banClient("test");
-//        }
-
-        unbanClient("test");
+        search("id", clientId, forgotPhone);
+        goToClientPage(forgotPhone);
+        forgetClient("test");
         String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 
-        assertEquals(actualState, "State: Active");
+        assertEquals(actualState, "State: Forgotten");
     }
 }

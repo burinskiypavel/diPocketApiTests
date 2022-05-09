@@ -1053,4 +1053,12 @@ public class UITestBase {
         waitFor(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
     }
+
+    public void forgetClient(String reason) {
+        click(By.xpath("//app-button[@ng-reflect-label='Forget client']"));
+        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
+        click(By.xpath("//app-button[@ng-reflect-label='Forget']"));
+        waitFor(By.xpath("//div[contains(text(), 'Client was forget successfully')]"));
+        waitFor(By.xpath("//span[contains(text(), 'Forgotten')]"));
+    }
 }
