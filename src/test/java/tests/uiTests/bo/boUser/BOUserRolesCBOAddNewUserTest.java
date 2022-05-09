@@ -27,18 +27,12 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
         assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
         assertTrue(isButtonEnabled(By.cssSelector("app-button[ng-reflect-label='Add user")));
 
-        click(By.cssSelector("app-select-async[ng-reflect-name='role']"));
-        waitFor(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'CBO')]"));
-        click(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'CBO')]"));
-
-        click(By.cssSelector("app-select-async[ng-reflect-name='site']"));
-        waitFor(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'SODEXO')]"));
-        click(By.xpath("//ul[@role='listbox'] //span[contains(text(), 'SODEXO')]"));
-
+        selectFromSelectAddNewUserPage("role", "CBO");
+        selectFromSelectAddNewUserPage("site", "SODEXO");
         fillBOUserFieldsInPopup("Pavel", "Burinskiy", "380685448615", "burinskiypavel@gmail.com", username);
         uploadFile(By.cssSelector("input[type='file']"), "C:/Work/Files/self.jpg");
 
-        Thread.sleep(500);
+        Thread.sleep(700);
         click(By.cssSelector("app-button[ng-reflect-label='Add user']"));
         waitFor(By.xpath("//*[contains(text(), 'User created successfully')]"));
 

@@ -1062,4 +1062,10 @@ public class UITestBase {
         waitFor(By.xpath("//div[contains(text(), 'Client was forget successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Forgotten')]"));
     }
+
+    public void selectFromSelectAddNewUserPage(String select, String text) {
+        click(By.cssSelector("app-select-async[ng-reflect-name='" + select + "']"));
+        waitFor(By.xpath("//ul[@role='listbox'] //span[contains(text(), '" + text + "')]"));
+        click(By.xpath("//ul[@role='listbox'] //span[contains(text(), '" + text + "')]"));
+    }
 }
