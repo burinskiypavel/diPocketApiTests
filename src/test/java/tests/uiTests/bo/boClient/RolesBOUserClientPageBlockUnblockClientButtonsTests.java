@@ -106,4 +106,21 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
 
         assertEquals(actualState, "State: Active");
     }
+
+    @Test
+    public void testRolesCBOUserClientPageForgetClient() throws InterruptedException {
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+
+//        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Ban client']"))){
+//            banClient("test");
+//        }
+
+        unbanClient("test");
+        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+
+        assertEquals(actualState, "State: Active");
+    }
 }
