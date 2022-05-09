@@ -706,6 +706,7 @@ public class UITestBase {
 
     public void selectRoleFromDropDown(final String name) {
         click(By.cssSelector("p-dropdown[placeholder='Role']"));
+        waitFor(By.cssSelector("li[aria-label='" + name + "']"));
         click(By.cssSelector("li[aria-label='" + name + "']"));
         waitFor(By.cssSelector("div[role='checkbox']"));
     }

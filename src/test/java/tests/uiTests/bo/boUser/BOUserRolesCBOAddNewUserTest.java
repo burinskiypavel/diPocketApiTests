@@ -2,8 +2,6 @@ package tests.uiTests.bo.boUser;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -19,7 +17,7 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
             app.getDbHelper().deleteBOUserFromDB(username);
         }
 
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoBOUsersPage();
         click(By.cssSelector("app-button[ng-reflect-label='Add User']"));
         waitForSeveralItems(new String[]{"Role:", "Site:", "Firstname:",

@@ -11,8 +11,8 @@ import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBODeleteRoleTest extends UITestBase {
     String roleID = "a_roleID";
-    String login = "Viktoria";
-    String pass = "kWmaB0s";
+    String login = app.CBOuserLogin;
+    String pass = app.CBOuserPass;
 
     @Test
     public void testBOUserRolesCBODeleteRole() throws InterruptedException, SQLException, ClassNotFoundException {

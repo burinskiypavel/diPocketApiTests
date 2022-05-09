@@ -10,7 +10,7 @@ public class BOUserRolesCBOBlockUserAlternativeFlowTest extends UITestBase {
 
     @Test
     public void testBOUserRolesCBOBlockUserAlternativeFlow() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoBOUsersPage();
         gotoAllUsersTab();
         searchAndSelectBOUser("All users", "username", "PAVELB");
