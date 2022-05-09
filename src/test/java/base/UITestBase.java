@@ -698,8 +698,8 @@ public class UITestBase {
     public void addRole(String roleID, String roleName) throws InterruptedException {
         click(By.cssSelector("app-button[label='+ Add']"));
         waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
-        type(By.cssSelector("app-input[ng-reflect-label='Role ID'] input[type='text']"), roleID);
-        type(By.cssSelector("app-input[ng-reflect-label='Role name'] input[type='text']"), roleName);
+        type(By.cssSelector("app-input[ng-reflect-name='roleId'] input[type='text']"), roleID);
+        type(By.cssSelector("app-input[ng-reflect-name='roleName'] input[type='text']"), roleName);
         Thread.sleep(500);
         click(By.cssSelector("app-button[ng-reflect-label='Add']"));
     }
