@@ -124,4 +124,18 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
 
         assertEquals(actualState, "State: Forgotten");
     }
+
+    @Test
+    public void testRolesBOUserClientPageChangeCredentialsButtonChangePIN() throws InterruptedException, SQLException, ClassNotFoundException {
+        String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, forgotPhone);
+        goToClientPage(forgotPhone);
+
+        click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+        click(By.xpath("//label[contains(text(), 'Change password:')]"));
+        click(By.cssSelector("app-button[ng-reflect-label='Change']"));
+        waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+    }
 }
