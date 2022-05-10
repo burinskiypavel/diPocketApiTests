@@ -15,7 +15,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
     String clientId = "33217";
     String forgotPhone = "380685448615";
 
-    @Test
+    @Test(priority = 1)
     public void testRolesBOUserClientPageBlockClientButton() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -36,7 +36,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         }
     }
 
-    @Test(enabled = false) // moved to api
+    @Test(priority = 2, enabled = false) // moved to api
     public void testRolesBOUserClientPageUnblockClientButton() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -53,7 +53,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         assertEquals(actualState, "State: Active");
     }
 
-    @Test
+    @Test(priority = 3)
     public void testRolesBOUserClientPageBanClientButton() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -74,7 +74,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         }
     }
 
-    @Test(enabled = false) // moved to api
+    @Test(priority = 4, enabled = false) // moved to api
     public void testRolesBOUserClientPageBanClientWithoutBlockingClientDevice() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -95,7 +95,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         }
     }
 
-    @Test(enabled = false) // moved to api
+    @Test(priority = 5, enabled = false) // moved to api
     public void testRolesBOUserClientPageUnbanClientButton() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -112,20 +112,7 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         assertEquals(actualState, "State: Active");
     }
 
-    @Test
-    public void testRolesCBOUserClientPageForgetClient() throws InterruptedException, SQLException, ClassNotFoundException {
-        String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        gotoSearchPage();
-        search("id", clientId, forgotPhone);
-        goToClientPage(forgotPhone);
-        forgetClient("test");
-        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
-
-        assertEquals(actualState, "State: Forgotten");
-    }
-
-    @Test
+    @Test(priority = 6)
     public void testRolesBOUserClientPageChangeCredentialsButtonChangePIN() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
@@ -137,5 +124,18 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         click(By.xpath("//label[contains(text(), 'Change password:')]"));
         click(By.cssSelector("app-button[ng-reflect-label='Change']"));
         waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+    }
+
+    @Test(priority = 7)
+    public void testRolesCBOUserClientPageForgetClient() throws InterruptedException, SQLException, ClassNotFoundException {
+        String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        gotoSearchPage();
+        search("id", clientId, forgotPhone);
+        goToClientPage(forgotPhone);
+        forgetClient("test");
+        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+
+        assertEquals(actualState, "State: Forgotten");
     }
 }
