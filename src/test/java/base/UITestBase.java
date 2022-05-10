@@ -1055,9 +1055,10 @@ public class UITestBase {
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
     }
 
-    public void forgetClient(String reason) {
+    public void forgetClient(String reason) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Forget client']"));
         type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
+        Thread.sleep(1500);
         click(By.xpath("//app-button[@ng-reflect-label='Forget']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was forget successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Forgotten')]"));
