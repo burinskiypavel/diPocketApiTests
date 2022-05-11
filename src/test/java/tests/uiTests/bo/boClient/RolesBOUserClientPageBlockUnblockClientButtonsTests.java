@@ -141,6 +141,21 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
     }
 
     @Test(priority = 8)
+    public void testRolesBOUserClientPageChangeCredentialsButtonChangeChangePhoneNumber() throws InterruptedException, SQLException, ClassNotFoundException {
+        String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, forgotPhone);
+        goToClientPage(forgotPhone);
+
+        click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+        click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
+        type(By.cssSelector("input[placeholder='New phone']"), "38098316499");
+        click(By.cssSelector("app-button[ng-reflect-label='Change']"));
+        waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+    }
+
+    @Test(priority = 9)
     public void testRolesCBOUserClientPageForgetClient() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
