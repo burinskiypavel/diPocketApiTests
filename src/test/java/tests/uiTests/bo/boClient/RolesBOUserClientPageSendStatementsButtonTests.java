@@ -34,10 +34,7 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject("testdipocket3@gmail.com", "pasword12!");
         String actualSubject = senderAndSubject.get(1);
-
         List<String> actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", "testdipocket3@gmail.com", "pasword12!");
-
-
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", "testdipocket3@gmail.com", "pasword12!");
         String actualBody = getEmailBodyText(emailText, 28, 191);
 
