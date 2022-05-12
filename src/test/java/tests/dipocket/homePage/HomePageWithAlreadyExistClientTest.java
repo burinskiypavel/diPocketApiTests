@@ -22,7 +22,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
-                .header("content-type", "application/json; charset=UTF-8")
+                .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
@@ -43,7 +43,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
         Response res =  given()
                 .spec(app.requestSpecDipocketHomePage)
                 .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
-                .header("content-type", "application/json; charset=UTF-8")
+                .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
                         "  \"devType\" : \"android\",\n" +
