@@ -663,6 +663,12 @@
         </classes>
     </test>
 
+    <test name="RolesBOUserClientPageSendStatementsButtonTests">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageSendStatementsButtonTests"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
