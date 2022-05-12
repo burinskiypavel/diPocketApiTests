@@ -15,13 +15,16 @@ import static org.testng.Assert.assertEquals;
 
 public class HomePageWithAlreadyExistClientTest extends TestBase {
     String cliSessionId = null;
+    String phone = "380980316499";
+    String pass = "reset246740";
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .auth().preemptive().basic(phone, pass)
                 .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
@@ -39,10 +42,11 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB("380980316499", HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
         Response res =  given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .auth().preemptive().basic(phone, pass)
                 .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
                         "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
@@ -64,7 +68,8 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("clientProfile/clientInfo2")
@@ -78,7 +83,8 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("clientProfile/clientConfig")
@@ -96,7 +102,8 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("accounts/clientDiPAccounts2?walletId=null")
@@ -110,7 +117,8 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_tile_getMessage2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
+                .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("tile/getMessages2")
