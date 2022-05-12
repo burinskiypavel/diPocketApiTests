@@ -1069,4 +1069,12 @@ public class UITestBase {
         waitFor(By.xpath("//ul[@role='listbox'] //span[contains(text(), '" + text + "')]"));
         click(By.xpath("//ul[@role='listbox'] //span[contains(text(), '" + text + "')]"));
     }
+
+    public void changeCredentialsChagePhoneNumber(String newPhone) throws InterruptedException {
+        click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
+        waitForInvisibilityOfElement(By.cssSelector("input[placeholder='New phone'][disabled]"));
+        type(By.cssSelector("input[placeholder='New phone']"), newPhone);
+        Thread.sleep(1000);
+        click(By.cssSelector("app-button[ng-reflect-label='Change']"));
+    }
 }

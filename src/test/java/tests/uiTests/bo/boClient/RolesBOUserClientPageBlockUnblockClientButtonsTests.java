@@ -147,11 +147,9 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         gotoSearchPage();
         search("id", clientId, forgotPhone);
         goToClientPage(forgotPhone);
-
         click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
-        click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
-        type(By.cssSelector("input[placeholder='New phone']"), "38098316499");
-        click(By.cssSelector("app-button[ng-reflect-label='Change']"));
+        changeCredentialsChagePhoneNumber("38098316499");
+
         waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
