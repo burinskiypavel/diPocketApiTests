@@ -2,7 +2,6 @@ package tests.uiTests.bo.boClient;
 
 import appmanager.EmailVerificationHelper;
 import base.UITestBase;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
@@ -25,14 +24,7 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
         gotoSearchPage();
         search("id", clientId, phone);
         goToClientPage(phone);
-        click(By.xpath("//app-button[@ng-reflect-label='Send statements']"));
-
-        waitFor(By.id("formly_3_multi-select_statementRequestList_0"));
-        click(By.id("formly_3_multi-select_statementRequestList_0"));
-        click(By.cssSelector("div[role='checkbox']"));
-        click(By.cssSelector("span.p-multiselect-close-icon"));
-        click(By.cssSelector("p-button[label='Send']"));
-        waitFor(By.xpath("//div[contains(text(), 'Statements were sent successfully')]"));
+        sendAllStatemenstToDefaultEmail();
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
         String actualSubject = senderAndSubject.get(1);
@@ -51,20 +43,7 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
         gotoSearchPage();
         search("id", clientId, phone);
         goToClientPage(phone);
-        click(By.xpath("//app-button[@ng-reflect-label='Send statements']"));
-
-        waitFor(By.id("formly_3_multi-select_statementRequestList_0"));
-        click(By.id("formly_3_multi-select_statementRequestList_0"));
-        //click(By.cssSelector("li[tabindex='0']"));
-        click(By.cssSelector("div[role='checkbox']"));
-        click(By.cssSelector("span.p-multiselect-close-icon"));
-
-        click(By.id("formly_3_checkbox_useClientEmail_1"));
-
-        type(By.id("formly_3_input_email_2"), app.emailsVerificationsEmail);
-
-        click(By.cssSelector("p-button[label='Send']"));
-        waitFor(By.xpath("//div[contains(text(), 'Statements were sent successfully')]"));
+        sendAllStatementsToEnteredEmail(app.emailsVerificationsEmail);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSubject = senderAndSubject.get(1);

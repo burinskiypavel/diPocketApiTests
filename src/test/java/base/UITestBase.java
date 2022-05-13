@@ -1085,4 +1085,27 @@ public class UITestBase {
         Thread.sleep(1000);
         click(By.cssSelector("app-button[ng-reflect-label='Change']"));
     }
+
+    public void sendAllStatemenstToDefaultEmail() {
+        click(By.xpath("//app-button[@ng-reflect-label='Send statements']"));
+        waitFor(By.id("formly_3_multi-select_statementRequestList_0"));
+        click(By.id("formly_3_multi-select_statementRequestList_0"));
+        click(By.cssSelector("div[role='checkbox']"));
+        click(By.cssSelector("span.p-multiselect-close-icon"));
+        click(By.cssSelector("p-button[label='Send']"));
+        waitFor(By.xpath("//div[contains(text(), 'Statements were sent successfully')]"));
+    }
+
+    public void sendAllStatementsToEnteredEmail(String email) {
+        click(By.xpath("//app-button[@ng-reflect-label='Send statements']"));
+        waitFor(By.id("formly_3_multi-select_statementRequestList_0"));
+        click(By.id("formly_3_multi-select_statementRequestList_0"));
+        //click(By.cssSelector("li[tabindex='0']"));
+        click(By.cssSelector("div[role='checkbox']"));
+        click(By.cssSelector("span.p-multiselect-close-icon"));
+        click(By.id("formly_3_checkbox_useClientEmail_1"));
+        type(By.id("formly_3_input_email_2"), email);
+        click(By.cssSelector("p-button[label='Send']"));
+        waitFor(By.xpath("//div[contains(text(), 'Statements were sent successfully')]"));
+    }
 }
