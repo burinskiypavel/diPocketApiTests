@@ -55,4 +55,23 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
         assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлена Вами банківська виписка по рахунку "+app.site+". Дякуємо за користування додатком "+app.site+". З повагою, Юридичний відділ");
         assertTrue(actualAttachedFileNames.size()>3);
     }
+
+    @Test
+    public void testRolesBOUserClientPageSendStatementsButtonStatementForChosenPeriodAndDefaultEmail() throws InterruptedException, IOException, MessagingException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        search("id", clientId, phone);
+        goToClientPage(phone);
+        sendStatementForChosenPeriodAndDefaultEmail();
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        String actualSubject = senderAndSubject.get(1);
+        List<String> actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        String actualBody = getEmailBodyText(emailText, 28, 191);
+
+        assertEquals(actualSubject, "Виписка по рахунку "+app.site+"");
+        assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлена Вами банківська виписка по рахунку "+app.site+". Дякуємо за користування додатком "+app.site+". З повагою, Юридичний відділ");
+        assertTrue(actualAttachedFileNames.size() == 1);
+    }
 }
