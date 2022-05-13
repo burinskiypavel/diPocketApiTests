@@ -117,7 +117,17 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", clientId, forgotPhone);
+        search("id", clientId);
+
+        if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
+            goToClientPage("38098316499");
+            click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+            changeCredentialsChagePhoneNumber(forgotPhone);
+            waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+            driver.navigate().back();
+            search("id", clientId);
+        }
+
         goToClientPage(forgotPhone);
 
         click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
@@ -145,12 +155,34 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        search("id", clientId, forgotPhone);
+        search("id", clientId);
+
+        if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
+            goToClientPage("38098316499");
+            click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+            changeCredentialsChagePhoneNumber(forgotPhone);
+            waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+            driver.navigate().back();
+            search("id", clientId);
+        }
+
         goToClientPage(forgotPhone);
         click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
         changeCredentialsChagePhoneNumber("38098316499");
 
         waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+
+        driver.navigate().back();
+        search("id", clientId);
+
+        if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
+            goToClientPage("38098316499");
+            click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+            changeCredentialsChagePhoneNumber(forgotPhone);
+            waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+            driver.navigate().back();
+            search("id", clientId);
+        }
     }
 
     @Test(priority = 9)
@@ -158,8 +190,13 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoSearchPage();
-        search("id", clientId, forgotPhone);
+        search("id", clientId);
         goToClientPage(forgotPhone);
+
+        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+            unblockClient();
+        }
+
         forgetClient("test");
         String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
 

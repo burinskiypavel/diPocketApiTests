@@ -884,8 +884,15 @@ public class UITestBase {
     }
 
     public void search(String by, String value, String phone) {
+        waitFor(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"));
         type(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"), value);
         waitFor(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
+    }
+
+    public void search(String by, String value) {
+        waitFor(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"));
+        type(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"), value);
+        waitFor(By.cssSelector("td[ng-reflect-text='"+value+"']"));
     }
 
     public void updateLimits(String lowLimit, String highLimit) throws InterruptedException {
