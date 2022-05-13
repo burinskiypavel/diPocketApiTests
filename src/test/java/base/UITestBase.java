@@ -1078,6 +1078,7 @@ public class UITestBase {
     }
 
     public void changeCredentialsChagePhoneNumber(String newPhone) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
         click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
         waitForInvisibilityOfElement(By.cssSelector("input[placeholder='New phone'][disabled]"));
         type(By.cssSelector("input[placeholder='New phone']"), newPhone);

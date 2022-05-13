@@ -121,7 +121,6 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
 
         if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
             goToClientPage("38098316499");
-            click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
             changeCredentialsChagePhoneNumber(forgotPhone);
             waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
             driver.navigate().back();
@@ -159,7 +158,6 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
 
         if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
             goToClientPage("38098316499");
-            click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
             changeCredentialsChagePhoneNumber(forgotPhone);
             waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
             driver.navigate().back();
@@ -167,7 +165,6 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
         }
 
         goToClientPage(forgotPhone);
-        click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
         changeCredentialsChagePhoneNumber("38098316499");
 
         waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
@@ -177,7 +174,6 @@ public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestB
 
         if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
             goToClientPage("38098316499");
-            click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
             changeCredentialsChagePhoneNumber(forgotPhone);
             waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
             driver.navigate().back();
