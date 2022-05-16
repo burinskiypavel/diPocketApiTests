@@ -63,7 +63,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                 .post( "/v1/clientImage/uploadDoc")
                 .then().log().all()
                 .statusCode(200)
-                .body("id", hasItems(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
-                        "sName", hasItems("Selfie", "PhotoID", "Proof of address", "Smiling Selfie", "PhotoID Back", "Second ID", "Proof of relationship", "Avatar (Large)", "Avatar (Medium)", "Avatar (Small)", "Residence Permit/Visa Type D"));
+                .body("clientId", equalTo(clientId),
+                        "typeId", equalTo("PHOTOID"));
     }
 }
