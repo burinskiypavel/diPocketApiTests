@@ -856,6 +856,10 @@ public class UITestBase {
         return actualPopupText;
     }
 
+    public void goToDocsTab() {
+        click(By.id("p-tabpanel-7-label"));
+    }
+
     public void goToAccountsTab() {
         click(By.id("p-tabpanel-8-label"));
     }
