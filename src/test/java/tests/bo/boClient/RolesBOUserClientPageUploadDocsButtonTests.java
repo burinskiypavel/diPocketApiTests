@@ -67,10 +67,10 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
         //.body();
     }
 
-    @Test(priority = 6, enabled = false)
+    @Test(priority = 6)
     public void test_BOServices_v1_clientImage_uploadDoc(){
         given()
-                .log().uri().log().headers()
+                .log().uri().log().headers().log().body()
                 .cookie(cookie)
                 .contentType("application/json")
                 .body("{\n" +
@@ -81,8 +81,19 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                 .when()
                 .post( "/v1/clientImage/uploadDoc")
                 .then().log().all()
-                .statusCode(200)
-                .body("clientId", equalTo(clientId),
-                        "typeId", equalTo("PHOTOID"));
+                .statusCode(200);
+    }
+
+    @Test(priority = 7)
+    public void test_BOServices_v1_clientImage_clientId_docs_() {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get("/v1/clientImage/" + clientId + "/docs")
+                .then().log().all()
+                .statusCode(200);
+        //.body();
     }
 }
