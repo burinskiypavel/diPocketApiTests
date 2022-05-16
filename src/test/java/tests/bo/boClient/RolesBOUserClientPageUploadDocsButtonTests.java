@@ -65,7 +65,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 6, enabled = false)
+    @Test(priority = 5, enabled = false)
     public void test_BOServices_v1_clientImage_uploadDoc(){
         given()
                 .log().uri().log().headers().log().body()
@@ -82,7 +82,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 7)
+    @Test(priority = 6)
     public void test_BOServices_v1_clientImage_clientId_docs_() {
         given()
                 .log().uri().log().headers()
