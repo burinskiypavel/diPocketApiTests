@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItems;
 
 public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
-
     String cookie = null;
     int clientId = 33217;
     String reason = "test";
@@ -32,5 +32,19 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
     @Test(priority = 2)
     public void test_BOServices_v1_client_search(){
         app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId);
+    }
+
+    @Test(priority = 3)
+    public void test_BOServices_v1_clientImage_docTypes(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/clientImage/docTypes")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
+                        "sName", hasItems("Selfie", "PhotoID", "Proof of address", "Smiling Selfie", "PhotoID Back", "Second ID", "Proof of relationship", "Avatar (Large)", "Avatar (Medium)", "Avatar (Small)", "Residence Permit/Visa Type D"));
     }
 }
