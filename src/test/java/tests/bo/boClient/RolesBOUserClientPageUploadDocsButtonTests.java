@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.hasLength;
+import static org.hamcrest.Matchers.hasSize;
 
 public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
     String cookie = null;
@@ -65,7 +66,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                 .get("/v1/clientImage/" + clientId + "/docs")
                 .then().log().all()
                 .statusCode(200)
-                .body("results.size()", hasLength(0));
+                .body("results", hasSize(0));
     }
 
     @Test(priority = 5)
