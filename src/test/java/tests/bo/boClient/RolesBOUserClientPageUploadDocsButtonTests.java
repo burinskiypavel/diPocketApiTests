@@ -19,14 +19,14 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
         basePath = "BOServices";
         Response response = given()
                 .log().uri().log().headers()
-                .auth().preemptive().basic("Viktoria", "kWmaB0s")
+                .auth().preemptive().basic(app.BOuserLogin, app.BOuserPass)
                 .contentType("application/json")
                 .when()
                 .post( "/v1/user/authentication");
+        cookie = response.getHeader("Set-Cookie");
         response.then().log().all()
                 .statusCode(200)
-                .body("username", equalTo("VIKTORIA"));
-        cookie = response.getHeader("Set-Cookie");
+                .body("username", equalTo("EVGENYA"));
     }
 
     @Test(priority = 2)
@@ -48,7 +48,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                         "sName", hasItems("Selfie", "PhotoID", "Proof of address", "Smiling Selfie", "PhotoID Back", "Second ID", "Proof of relationship", "Avatar (Large)", "Avatar (Medium)", "Avatar (Small)", "Residence Permit/Visa Type D"));
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, enabled = false)
     public void test_BOServices_v1_clientImage_uploadDoc(){
         given()
                 .log().uri().log().headers()
