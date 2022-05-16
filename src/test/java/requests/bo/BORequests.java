@@ -202,7 +202,7 @@ public class BORequests {
                         "stateName", equalTo("Active"));
     }
 
-    public void boServices_v1_client_search(String cookie, int clientId){
+    public void boServices_v1_client_search(String cookie, int clientId, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite){
         given()
                 .log().uri().log().headers()
                 .cookie(cookie)
@@ -215,11 +215,11 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200)
                 .body("id", hasItem(clientId),
-                        "firstName", hasItem("Nona"),
-                        "lastName", hasItem("Qwerty"),
-                        "mainPhone", hasItem("380634413376"),
-                        "email", hasItem("vikarez20@gmail.com"),
-                        "site", hasItem("DIPOCKET"));
+                        "firstName", hasItem(expectedFirstName),
+                        "lastName", hasItem(expectedLastName),
+                        "mainPhone", hasItem(expectedMainPhone),
+                        "email", hasItem(expectedEmail),
+                        "site", hasItem(expectedSite));
     }
 
     public void boServices_v1_supervisor_33217_reqList(String cookie, int clientId){

@@ -1,8 +1,12 @@
 package tests.bo.boClient;
 
+import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
+
+import java.sql.SQLException;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -10,11 +14,12 @@ import static org.hamcrest.CoreMatchers.hasItems;
 
 public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
     String cookie = null;
-    int clientId = 33217;
+    String clientId = null;
     String reason = "test";
 
     @Test(priority = 1)
-    public void test_BOServices_v1_user_authentication(){
+    public void test_BOServices_v1_user_authentication() throws SQLException, ClassNotFoundException {
+        clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         baseURI = app.BOURL;
         basePath = "BOServices";
         Response response = given()
@@ -31,7 +36,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
 
     @Test(priority = 2)
     public void test_BOServices_v1_client_search(){
-        app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId);
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, Integer.parseInt(clientId), "Pavel", "Burinsky", "380685448615", "testdipocket@gmail.com", "DIPOCKET");
     }
 
     @Test(priority = 3)

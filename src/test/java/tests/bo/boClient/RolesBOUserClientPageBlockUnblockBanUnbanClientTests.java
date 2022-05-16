@@ -50,7 +50,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
 
     @Test(priority = 4)
     public void test_BOServices_v1_client_search(){
-        app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId);
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId, "Nona", "Qwerty", "380634413376", "vikarez20@gmail.com", "DIPOCKET");
     }
 
     @Test(priority = 5)
