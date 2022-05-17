@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.Matchers.hasLength;
 import static org.hamcrest.Matchers.hasSize;
 
 public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
@@ -111,7 +110,8 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                 .when()
                 .get("/v1/clientImage/"+clientId+"/docHistory")
                 .then().log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body("results", hasSize(0));
 //                .body("clientId", hasItem(clientId),
 //                        "typeId", hasItem(typeId),
 //                "imageInBase64[0]", equalTo(image));
