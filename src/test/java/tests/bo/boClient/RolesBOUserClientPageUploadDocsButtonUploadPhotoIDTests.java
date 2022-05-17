@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.hasSize;
 
-public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
+public class RolesBOUserClientPageUploadDocsButtonUploadPhotoIDTests extends TestBase {
     String cookie = null;
     int clientId = 0;
     int typeId = 2;
