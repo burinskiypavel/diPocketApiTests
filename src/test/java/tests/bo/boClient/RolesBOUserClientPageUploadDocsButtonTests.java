@@ -65,7 +65,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                 .get("/v1/clientImage/" + clientId + "/docs")
                 .then().log().all()
                 .statusCode(200)
-                .body("results", hasSize(0));
+                .body("", hasSize(0));
     }
 
     @Test(priority = 5)
@@ -111,7 +111,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends TestBase {
                 .get("/v1/clientImage/"+clientId+"/docHistory")
                 .then().log().all()
                 .statusCode(200)
-                .body("results", hasSize(0));
+                .body("", hasSize(0));
 //                .body("clientId", hasItem(clientId),
 //                        "typeId", hasItem(typeId),
 //                "imageInBase64[0]", equalTo(image));
