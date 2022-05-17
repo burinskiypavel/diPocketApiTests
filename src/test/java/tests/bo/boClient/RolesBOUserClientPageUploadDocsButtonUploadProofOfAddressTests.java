@@ -45,7 +45,7 @@ public class RolesBOUserClientPageUploadDocsButtonUploadProofOfAddressTests exte
                 .get("/v1/clientImage/" + clientId + "/docs")
                 .then().log().all()
                 .statusCode(200)
-                .body("imageInBase64[0]", not(containsString(image)),
+                .body("imageInBase64", not(containsString(image)),
                         "", hasSize(1));
     }
 
