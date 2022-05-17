@@ -256,4 +256,33 @@ public class BORequests {
         assertFalse(supervisor_reqLists[0].getCreatedAt().isEmpty());
         assertFalse(supervisor_reqLists[0].getApprovedAt().isEmpty());
     }
+
+    public void boServices_v1_clientImage_docTypes(String cookie) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/clientImage/docTypes")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
+                        "sName", hasItems("Selfie", "PhotoID", "Proof of address", "Smiling Selfie", "PhotoID Back", "Second ID", "Proof of relationship", "Avatar (Large)", "Avatar (Medium)", "Avatar (Small)", "Residence Permit/Visa Type D"));
+    }
+
+    public void boServices_v1_clientImage_uploadDoc(String cookie, int clientId, int typeId, String image) {
+        given()
+                .log().uri().log().headers().log().body()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"clientId\" : "+ clientId +",\n" +
+                        "  \"base64data\" : \""+image+"\",\n" +
+                        "  \"typeId\" : "+ typeId +"\n" +
+                        "}")
+                .when()
+                .post( "/v1/clientImage/uploadDoc")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
