@@ -20,15 +20,12 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends UITestBase {
         goToClientPage(phone);
 
         click(By.xpath("//app-button[@ng-reflect-label='Upload docs']"));
-
         click(By.cssSelector("app-select-async[ng-reflect-name='typeId']"));
         click(By.cssSelector("li[aria-label='PhotoID']"));
-
         uploadFile(By.cssSelector("p-fileupload[ng-reflect-choose-label='Browse'] input[type='file']"), "C:/Work/Files/self.jpg");
-
+        Thread.sleep(1500);
         click(By.xpath("//app-button[@ng-reflect-label='Confirm']"));
-        waitFor(By.xpath("//div[contains(text(), 'Docs were uploaded successfully')]"));
 
-        goToDocsTab();
+        waitFor(By.xpath("//div[contains(text(), 'Docs were uploaded successfully')]"));
     }
 }
