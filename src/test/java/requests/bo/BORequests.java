@@ -292,9 +292,9 @@ public class BORequests {
                 .cookie(cookie)
                 .contentType("application/json")
                 .body("{\n" +
-                        "  \"clientId\" : "+ clientId +",\n" +
+                        "  \"clientId\" : "+clientId+",\n" +
                         "  \"base64Selfie1\" : \""+image1+"\",\n" +
-                        "  \"base64Selfie2\" : \""+image2+"\",\n" +
+                        "  \"base64Selfie2\" : \""+image2+"\"\n" +
                         "}")
                 .when()
                 .post( "/v1/clientImage/uploadSelfie")
