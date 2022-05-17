@@ -11,7 +11,6 @@ import java.sql.SQLException;
 public class RolesBOUserClientPageUploadDocsButtonTests extends UITestBase {
     String phone = "380685448615";
 
-
     @Test
     public void testRolesBOUserClientPageUploadDocsButtonUploadPhotoID() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
@@ -19,10 +18,6 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends UITestBase {
         gotoSearchPage();
         search("id", clientId);
         goToClientPage(phone);
-
-//        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
-//            unblockClient();
-//        }
 
         click(By.xpath("//app-button[@ng-reflect-label='Upload docs']"));
 
@@ -35,6 +30,5 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends UITestBase {
         waitFor(By.xpath("//div[contains(text(), 'Docs were uploaded successfully')]"));
 
         goToDocsTab();
-
     }
 }
