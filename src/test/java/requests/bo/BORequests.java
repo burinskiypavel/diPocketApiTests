@@ -10,6 +10,21 @@ import static org.testng.Assert.assertFalse;
 
 public class BORequests {
 
+    public String boServices_v1_user_authentication(String login, String pass, String expectedUsername) {
+        String cookie = null;
+        Response response = given()
+                .log().uri().log().headers()
+                .auth().preemptive().basic(login, pass)
+                .contentType("application/json")
+                .when()
+                .post( "/v1/user/authentication");
+        cookie = response.getHeader("Set-Cookie");
+        response.then().log().all()
+                .statusCode(200)
+                .body("username", equalTo(expectedUsername));
+        return cookie;
+    }
+
     public void boServices_v1_ticket_states(String cookie) {
         given()
                 .log().uri().log().headers()

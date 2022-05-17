@@ -3,7 +3,6 @@ package tests.bo.boClient;
 import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -23,16 +22,7 @@ public class RolesBOUserClientPageUploadDocsButtonUploadPhotoIDTests extends Tes
         clientId = app.getDbHelper().getClientIdFromDB2(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         baseURI = app.BOURL;
         basePath = "BOServices";
-        Response response = given()
-                .log().uri().log().headers()
-                .auth().preemptive().basic(app.BOuserLogin, app.BOuserPass)
-                .contentType("application/json")
-                .when()
-                .post( "/v1/user/authentication");
-        cookie = response.getHeader("Set-Cookie");
-        response.then().log().all()
-                .statusCode(200)
-                .body("username", equalTo("EVGENYA"));
+        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.BOuserLogin, app.BOuserPass, "EVGENYA");
     }
 
     @Test(priority = 2)
