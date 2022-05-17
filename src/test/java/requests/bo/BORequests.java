@@ -285,4 +285,20 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void boServices_v1_clientImage_uploadSelfie(String cookie, int clientId, String image1, String image2) {
+        given()
+                .log().uri().log().headers().log().body()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"clientId\" : "+ clientId +",\n" +
+                        "  \"base64Selfie1\" : \""+image1+"\",\n" +
+                        "  \"base64Selfie2\" : \""+image2+"\",\n" +
+                        "}")
+                .when()
+                .post( "/v1/clientImage/uploadSelfie")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
