@@ -1,6 +1,7 @@
 package tests.bo.boUser;
 
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -68,5 +69,20 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
                 .body("username", hasItem("A.SZEWCZYK"),
                         "phone", hasItem("48663647283"),
                         "email", hasItem("Agnieszka.Szewczyk@sodexo.com"));
+    }
+
+    @Test(priority = 5)
+    public void test_BOServices_v1_user_corpClients_site_SODEXO(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/user/corpClients/site/SODEXO")
+                .then().log().all()
+                .statusCode(200)
+                .body("corpClientId", hasItem(notNullValue()),
+                        "companyName", hasItem("Sodexo New LE"),
+                        "site", hasItem(Site.SODEXO.toString()));
     }
 }
