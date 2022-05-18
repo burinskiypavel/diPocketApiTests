@@ -85,4 +85,18 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
                         "companyName", hasItem("Sodexo New LE"),
                         "site", hasItem(Site.SODEXO.toString()));
     }
+
+    @Test(priority = 6)
+    public void test_BOServices_v1_user_verifyPhone(){
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .queryParam("phone","380685448615")
+                .when()
+                .get( "/v1/user/verifyPhone")
+                .then().log().all()
+                .statusCode(200)
+                .body("value", equalTo(true));
+    }
 }
