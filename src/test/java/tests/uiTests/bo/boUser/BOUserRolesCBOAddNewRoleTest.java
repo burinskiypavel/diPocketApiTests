@@ -13,7 +13,7 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
     String login = app.CBOuserLogin;
     String pass = app.CBOuserPass;
 
-    @Test
+    @Test //moved to api
     public void testBOUserRolesCBOAddNewRole() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
             gotoBOSiteAndLoginWithCBOUserRole(login, pass);
