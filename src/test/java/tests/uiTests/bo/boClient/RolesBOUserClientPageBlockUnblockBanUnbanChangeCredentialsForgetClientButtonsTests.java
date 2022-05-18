@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import static org.testng.Assert.assertEquals;
 
-public class RolesBOUserClientPageBlockUnblockClientButtonsTests extends UITestBase {
+public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetClientButtonsTests extends UITestBase {
     String phone = "380634413376";
     String clientId = "33217";
     String forgotPhone = "380685448615";

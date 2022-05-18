@@ -657,9 +657,15 @@
         </classes>
     </test>
 
-    <test name="RolesBOUserClientPageBlockUnblockClientButtonsTests">
+    <test name="RolesBOUserClientPageUploadDocsButtonTests">
         <classes>
-            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageBlockUnblockClientButtonsTests"/>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageUploadDocsButtonTests"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetClientButtonsTests">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetClientButtonsTests"/>
         </classes>
     </test>
 
@@ -669,11 +675,6 @@
         </classes>
     </test>
 
-    <test name="RolesBOUserClientPageUploadDocsButtonTests">
-        <classes>
-            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageUploadDocsButtonTests"/>
-        </classes>
-    </test>
 
     <!--EmailsVerification-->
 
