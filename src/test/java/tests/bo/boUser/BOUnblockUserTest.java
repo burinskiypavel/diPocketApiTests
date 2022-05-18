@@ -1,4 +1,4 @@
-package tests.bo;
+package tests.bo.boUser;
 
 import base.TestBase;
 import io.restassured.response.Response;

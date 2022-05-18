@@ -776,13 +776,13 @@
 
 <!--    <test name="BOBlockUserTest">-->
 <!--        <classes>-->
-<!--            <class name="tests.bo.BOBlockUserTest"/>-->
+<!--            <class name="tests.bo.boUser.BOBlockUserTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="BOUnblockUserTest">-->
 <!--        <classes>-->
-<!--            <class name="tests.bo.BOUnblockUserTest"/>-->
+<!--            <class name="tests.bo.boUser.BOUnblockUserTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
