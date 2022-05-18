@@ -3,6 +3,7 @@ package tests.emailsVerification.statement;
 import appmanager.EmailVerificationHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -19,11 +20,11 @@ import static org.hamcrest.CoreMatchers.hasItems;
 
 public class StatementAttachmentsUpAndGoTests extends TestBase {
     String cliSessionId = null;
-    //String emailPass = "pasword12!";
-    //String email = "testdipocket@gmail.com";
-    String pass = "DvAUtN6";
-    String phone = "380685448615";
-    String deviceuuid = "380685448615-AutoTest-Login";
+    String email = "testdipocket2@gmail.com";
+    String emailPass = "pasword12!";
+    String pass = "pasword1";
+    String phone = "380633192217";
+    String deviceuuid = "380633192217-AutoTest-Login";
     String expectedUpAndGoSender = "zestawienia@upcard.pl";
 
 
@@ -34,7 +35,7 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
 
         given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
-                .header("site", HelperBase.prop.getProperty("mobile.site.upAndGo"))
+                .header("site", Site.UPANDGO.toString())
                 .header("deviceuuid", deviceuuid)
                 .auth().preemptive().basic("10_" + phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
@@ -42,20 +43,20 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
                 .get("/dashBoard/customerStatementRequestList")
                 .then().log().all()
                 .statusCode(200)
-                .body("statementRequestList.month", hasItems("07", "06"),
-                        "statementRequestList.year", hasItems("2021"));
+                .body("statementRequestList.month", hasItems("04", "03", "02", "01"),
+                        "statementRequestList.year", hasItems("2022"));
     }
 
     @Test(priority = 3)
     public void test_dashBoard_sendCustomerStatements_UpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site_upAndGo);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", app.mobile_site_upAndGo, deviceuuid, "10_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", Site.UPANDGO.toString(), deviceuuid, "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 29, 176);
         String actualFooter = getEmailFooterText(emailText, 177);
 
@@ -70,14 +71,14 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 4)
     public void test_dashBoard_sendCustomerStatements_UpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_upAndGo);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "06", "2021", app.mobile_site_upAndGo, deviceuuid, "10_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "06", "2021", Site.UPANDGO.toString(), deviceuuid, "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 29, 173);
         String actualFooter = getEmailFooterText(emailText, 174);
 
@@ -92,14 +93,14 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 5)
     public void test_dashBoard_sendCustomerStatements_UpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_upAndGo);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", app.mobile_site_upAndGo, deviceuuid, "10_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "3", Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", Site.UPANDGO.toString(), deviceuuid, "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 0, 155);
         String actualFooter = getEmailFooterText(emailText, 156);
 
@@ -114,14 +115,14 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 6)
     public void test_dashBoard_sendCustomerStatements_UpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site_upAndGo);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", app.mobile_site_upAndGo, deviceuuid, "10_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "2", Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", Site.UPANDGO.toString(), deviceuuid, "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
         String actualBody = getEmailBodyText(emailText, 29, 194);
         String actualFooter = getEmailFooterText(emailText, 195);
 
