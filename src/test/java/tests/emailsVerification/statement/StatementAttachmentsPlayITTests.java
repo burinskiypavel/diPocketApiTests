@@ -3,6 +3,7 @@ package tests.emailsVerification.statement;
 import appmanager.EmailVerificationHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -32,7 +33,7 @@ public class StatementAttachmentsPlayITTests extends TestBase {
 
         given()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
-                .header("site", HelperBase.prop.getProperty("mobile.site.playIt"))
+                .header("site", Site.PLAYIT.toString())
                 .header("deviceuuid", deviceuuid)
                 .auth().preemptive().basic("9_" + phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
@@ -46,8 +47,8 @@ public class StatementAttachmentsPlayITTests extends TestBase {
 
     @Test(priority = 2)
     public void test_dashBoard_sendCustomerStatements_PlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", app.mobile_site_playIt);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "08", "2021", app.mobile_site_playIt, deviceuuid, "9_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.PLAYIT.toString());
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "08", "2021", Site.PLAYIT.toString(), deviceuuid, "9_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
@@ -68,8 +69,8 @@ public class StatementAttachmentsPlayITTests extends TestBase {
 
     @Test(priority = 3)
     public void test_dashBoard_sendCustomerStatements_PlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "5", app.mobile_site_playIt);
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "08", "2021", app.mobile_site_playIt, deviceuuid, "9_");
+        app.getDbHelper().updateClientLanguageFromDB(email, "5", Site.PLAYIT.toString());
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "08", "2021", Site.PLAYIT.toString(), deviceuuid, "9_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
         String actualSender = senderAndSubject.get(0);
