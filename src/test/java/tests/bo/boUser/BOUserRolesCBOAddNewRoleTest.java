@@ -13,7 +13,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOAddNewRoleTest extends TestBase {
-
     String cookie = null;
 
     @Test(priority = 1)
