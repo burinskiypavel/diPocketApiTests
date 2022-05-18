@@ -11,7 +11,7 @@ import static org.testng.Assert.assertTrue;
 public class BOUserRolesCBOAddNewUserTest extends UITestBase {
     String username = "PAVELB2";
 
-    @Test
+    @Test //moved to api
     public void testBOUserRolesCBOAddNewUser() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isBOUserExistInDB(username)){
             app.getDbHelper().deleteBOUserFromDB(username);
