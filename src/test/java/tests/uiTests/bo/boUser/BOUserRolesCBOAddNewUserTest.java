@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOAddNewUserTest extends UITestBase {
-    String username = "PAVELB1";
+    String username = "PAVELB2";
 
     @Test
     public void testBOUserRolesCBOAddNewUser() throws InterruptedException, SQLException, ClassNotFoundException {
