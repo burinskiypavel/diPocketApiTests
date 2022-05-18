@@ -49,6 +49,9 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
                 .when()
                 .get( "/BOServices/v1/user/all")
                         .then().log().all()
-                        .statusCode(200);
+                        .statusCode(200)
+                        .body("username", hasItem("A.SZEWCZYK"),
+                                "phone", hasItem("48663647283"),
+                                "email", hasItem("Agnieszka.Szewczyk@sodexo.com"));
     }
 }
