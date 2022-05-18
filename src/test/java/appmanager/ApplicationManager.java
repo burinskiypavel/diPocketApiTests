@@ -178,6 +178,7 @@ public class ApplicationManager {
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
 
         requestSpecDipocketHomePage = given()
+                .log().uri().log().headers().log().body()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
