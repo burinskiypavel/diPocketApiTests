@@ -12,7 +12,7 @@ public class BOUserRolesCBOResetPasswordAlternativeFlowTest extends UITestBase {
 
     @Test
     public void testBOUserRolesCBOResetPasswordAlternativeFlow() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoBOUsersPage();
         gotoAllUsersTab();
         searchAndSelectBOUser("All users", "username", "PAVELB");
