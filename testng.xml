@@ -555,11 +555,11 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="BOUserRolesCBOEditUserTest">
-        <classes>
-            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOEditUserTest"/>
-        </classes>
-    </test>
+<!--    <test name="BOUserRolesCBOEditUserTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOEditUserTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="BOUserRolesCBOResetPasswordAlternativeFlowTest">
         <classes>
