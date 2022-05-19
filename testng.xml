@@ -537,11 +537,11 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="BOUserRolesCBOEditRoleTest">
-        <classes>
-            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOEditRoleTest"/>
-        </classes>
-    </test>
+<!--    <test name="BOUserRolesCBOEditRoleTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOEditRoleTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 <!--    <test name="BOUserRolesCBODeleteRoleTest">-->
 <!--        <classes>-->
