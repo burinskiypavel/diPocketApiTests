@@ -10,7 +10,7 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
     String random = app.generateRandomNumber(4);
 
-    @Test
+    @Test // moved to api
     public void testBOUserRolesCBOEditUser() throws InterruptedException {
         gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoBOUsersPage();
