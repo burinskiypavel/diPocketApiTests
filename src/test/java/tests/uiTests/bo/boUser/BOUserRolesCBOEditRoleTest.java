@@ -13,7 +13,7 @@ import static org.testng.Assert.assertTrue;
 public class BOUserRolesCBOEditRoleTest extends UITestBase {
     String roleName = "test3";
 
-    @Test
+    @Test // moved to API
     public void testBOUserRolesCBOEditRole() throws InterruptedException, SQLException, ClassNotFoundException {
         gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
         gotoBOUsersPage();
