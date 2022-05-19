@@ -782,7 +782,7 @@
 
 <!--    <test name="BOUnblockUserTest">-->
 <!--        <classes>-->
-<!--            <class name="tests.bo.boUser.BOUnblockUserTest"/>-->
+<!--            <class name="tests.bo.boUser.BOUserRolesCBOUnblockUserTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
