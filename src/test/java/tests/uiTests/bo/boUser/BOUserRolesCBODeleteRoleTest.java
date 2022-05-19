@@ -14,7 +14,7 @@ public class BOUserRolesCBODeleteRoleTest extends UITestBase {
     String login = app.CBOuserLogin;
     String pass = app.CBOuserPass;
 
-    @Test
+    @Test //moved to API
     public void testBOUserRolesCBODeleteRole() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
             gotoBOSiteAndLoginWithCBOUserRole(login, pass);
