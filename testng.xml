@@ -776,7 +776,7 @@
 
 <!--    <test name="BOBlockUserTest">-->
 <!--        <classes>-->
-<!--            <class name="tests.bo.boUser.BOBlockUserTest"/>-->
+<!--            <class name="tests.bo.boUser.BOUserRolesCBOBlockUserTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
