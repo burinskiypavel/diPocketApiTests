@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class RolesBOUserClientspageTabSelfieTests extends TestBase {
+public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     String cookie = null;
     int clientId = 33217;
 
