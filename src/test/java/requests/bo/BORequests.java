@@ -367,4 +367,18 @@ public class BORequests {
                         "phone", hasItem(expectedPhone),
                         "email", hasItem(expectedEmail));
     }
+
+    public void boServices_v1_user_authenticated(String cookie, String expectedUsername, String expectedPhone, String expectedEmail) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/user/authenticated")
+                .then().log().all()
+                .statusCode(200)
+                .body("username", equalTo(expectedUsername),
+                        "phone", equalTo(expectedPhone),
+                        "email", equalTo(expectedEmail));
+    }
 }

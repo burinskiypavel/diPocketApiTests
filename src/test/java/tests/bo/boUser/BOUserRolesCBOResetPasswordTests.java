@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
 
 public class BOUserRolesCBOResetPasswordTests extends TestBase {
     String cookie = null;
@@ -23,32 +22,12 @@ public class BOUserRolesCBOResetPasswordTests extends TestBase {
 
     @Test(priority = 2)
     public void test_BOServices_v1_user_authenticated(){
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/user/authenticated")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", equalTo("VIKTORIA"),
-                        "phone", equalTo("380634413376"),
-                        "email", equalTo("vikarezznik60@gmail.com"));
+        app.getBoRequestsHelper().boServices_v1_user_authenticated(cookie, "VIKTORIA", "380634413376", "vikarezznik60@gmail.com");
     }
 
     @Test(priority = 3)
     public void test_BOServices_v1_user_all(){
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/user/all")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", hasItem("A.VAIVARS"),
-                        "phone", hasItem("37125680800"),
-                        "email", hasItem("arnis.vaivars@twino.eu"));
+        app.getBoRequestsHelper().boServices_v1_user_all(cookie, "A.VAIVARS", "Arnis", "37125680800", "arnis.vaivars@twino.eu");
     }
 
     @Test(priority = 4)
