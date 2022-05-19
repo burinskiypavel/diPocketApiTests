@@ -2,7 +2,6 @@ package tests.bo.boUser;
 
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -25,30 +24,12 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
 
         baseURI = app.BOURL;
         basePath = "BOServices";
-        Response response = given()
-                .log().uri().log().headers()
-                .auth().preemptive().basic("Viktoria", "kWmaB0s")
-                .contentType("application/json")
-                .when()
-                .post( "/v1/user/authentication");
-        response.then().log().all()
-                .statusCode(200)
-                .body("username", equalTo("VIKTORIA"));
-        cookie = response.getHeader("Set-Cookie");
+        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
     }
 
     @Test(priority = 2)
     public void test_BOServices_v1_user_roles(){
-                given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/user/roles")
-                        .then().log().all()
-                        .statusCode(200)
-                        .body("id", hasItems("BO", "CBO"),
-                                "name", hasItems("Back officer", "Chief Back officer"));
+        app.getBoRequestsHelper().boServices_v1_user_roles(cookie);
     }
 
     @Test(priority = 3)
@@ -69,46 +50,17 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
 
     @Test(priority = 4)
     public void test_BOServices_v1_user_allActive(){
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/user/allActive")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", hasItem("A.JARMAN"),
-                        "phone", hasItem("447340159323"),
-                        "email", hasItem("anthony.jarman@dipocket.org"));
+        app.getBoRequestsHelper().boServices_v1_user_allActive(cookie, "A.JARMAN", "447340159323", "anthony.jarman@dipocket.org");
     }
 
     @Test(priority = 5)
     public void test_BOServices_v1_user_corpClients_site_SODEXO(){
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/user/corpClients/site/SODEXO")
-                .then().log().all()
-                .statusCode(200)
-                .body("corpClientId", hasItem(notNullValue()),
-                        "companyName", hasItem("Sodexo New LE"),
-                        "site", hasItem(Site.SODEXO.toString()));
+        app.getBoRequestsHelper().boServices_v1_user_corpClients_site_SODEXO(cookie, "Sodexo New LE", Site.SODEXO.toString());
     }
 
     @Test(priority = 6)
     public void test_BOServices_v1_user_verifyPhone(){
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .queryParam("phone",phone)
-                .when()
-                .get( "/v1/user/verifyPhone")
-                .then().log().all()
-                .statusCode(200)
-                .body("value", equalTo(true));
+        app.getBoRequestsHelper().boServices_v1_user_verifyPhone(cookie, phone, true);
     }
 
     @Test(priority = 7)
@@ -144,17 +96,7 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
 
     @Test(priority = 8)
     public void test_BOServices_v1_user_all_() throws SQLException, ClassNotFoundException {
-        given()
-                .log().uri().log().headers()
-                .cookie(cookie)
-                .contentType("application/json")
-                .when()
-                .get( "/v1/user/all")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", hasItem(username),
-                        "phone", hasItem(phone),
-                        "email", hasItem(email));
+        app.getBoRequestsHelper().boServices_v1_user_all(cookie, username, phone, email);
 
         if(app.getDbHelper().isBOUserExistInDB(username)){
             app.getDbHelper().deleteBOUserFromDB(username);

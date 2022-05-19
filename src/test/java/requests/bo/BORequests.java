@@ -301,4 +301,69 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void boServices_v1_user_roles(String cookie) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/user/roles")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems("BO", "CBO"),
+                        "name", hasItems("Back officer", "Chief Back officer"));
+    }
+
+    public void boServices_v1_user_allActive (String cookie, String expectedUsername, String expectedPhone, String expectedEmail) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/user/allActive")
+                .then().log().all()
+                .statusCode(200)
+                .body("username", hasItem(expectedUsername),
+                        "phone", hasItem(expectedPhone),
+                        "email", hasItem(expectedEmail));
+    }
+
+    public void boServices_v1_user_corpClients_site_SODEXO(String cookie, String expectedCompanyName, String expectedSite) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/user/corpClients/site/SODEXO")
+                .then().log().all()
+                .statusCode(200)
+                .body("corpClientId", hasItem(notNullValue()),
+                        "companyName", hasItem(expectedCompanyName),
+                        "site", hasItem(expectedSite));
+    }public void boServices_v1_user_verifyPhone(String cookie, String phone, boolean expectedValue) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .queryParam("phone", phone)
+                .when()
+                .get( "/v1/user/verifyPhone")
+                .then().log().all()
+                .statusCode(200)
+                .body("value", equalTo(expectedValue));
+    }
+    public void boServices_v1_user_all(String cookie, String expectedUsername, String expectedPhone, String expectedEmail) {
+        given()
+                .log().uri().log().headers()
+                .cookie(cookie)
+                .contentType("application/json")
+                .when()
+                .get( "/v1/user/all")
+                .then().log().all()
+                .statusCode(200)
+                .body("username", hasItem(expectedUsername),
+                        "phone", hasItem(expectedPhone),
+                        "email", hasItem(expectedEmail));
+    }
 }
