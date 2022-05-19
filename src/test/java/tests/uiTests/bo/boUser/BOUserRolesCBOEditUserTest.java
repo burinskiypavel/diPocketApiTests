@@ -12,7 +12,7 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
 
     @Test
     public void testBOUserRolesCBOEditUser() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoBOUsersPage();
         gotoAllUsersTab();
         searchAndSelectBOUser("All users", "username", "PAVELB");

@@ -15,7 +15,7 @@ public class BOUserRolesCBOEditRoleTest extends UITestBase {
 
     @Test // moved to API
     public void testBOUserRolesCBOEditRole() throws InterruptedException, SQLException, ClassNotFoundException {
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoBOUsersPage();
         gotoRolesTab();
         selectRoleFromDropDown("1");
