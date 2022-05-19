@@ -353,7 +353,7 @@ public class BORequests {
                 .statusCode(200)
                 .body("value", equalTo(expectedValue));
     }
-    public void boServices_v1_user_all(String cookie, String expectedUsername, String expectedPhone, String expectedEmail) {
+    public void boServices_v1_user_all(String cookie, String expectedUsername, String expectedFirstName, String expectedPhone, String expectedEmail) {
         given()
                 .log().uri().log().headers()
                 .cookie(cookie)
@@ -363,6 +363,7 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200)
                 .body("username", hasItem(expectedUsername),
+                        "firstName", hasItem(expectedFirstName),
                         "phone", hasItem(expectedPhone),
                         "email", hasItem(expectedEmail));
     }
