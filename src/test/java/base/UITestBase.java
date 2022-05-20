@@ -343,6 +343,10 @@ public class UITestBase {
         return driver.findElements(locator).size() != 0;
     }
 
+    public boolean isTabPresent(By locator) {
+        return driver.findElements(locator).size() != 0;
+    }
+
     public boolean isDefault(By locator) {
         boolean bool = isElementPresent(locator);
         return bool;

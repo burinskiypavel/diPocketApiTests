@@ -675,6 +675,12 @@
         </classes>
     </test>
 
+    <test name="RolesCBOBOSearchByClientClientIDTest">
+        <classes>
+            <class name="tests.uiTests.bo.boSearch.RolesCBOBOSearchByClientClientIDTest"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 
