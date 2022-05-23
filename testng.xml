@@ -681,9 +681,9 @@
         </classes>
     </test>
 
-    <test name="RolesCBOBOSearchByClientClientIDTest">
+    <test name="RolesBOSearchByClientClientIDTest">
         <classes>
-            <class name="tests.uiTests.bo.boSearch.RolesCBOBOSearchByClientClientIDTest"/>
+            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByClientClientIDTest"/>
         </classes>
     </test>
 

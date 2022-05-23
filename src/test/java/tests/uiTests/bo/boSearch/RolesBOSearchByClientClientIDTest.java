@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class RolesCBOBOSearchByClientClientIDTest extends UITestBase {
+public class RolesBOSearchByClientClientIDTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
 
     @Test
