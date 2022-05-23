@@ -7,8 +7,7 @@ import model.bo.User_All_AllActive;
 import model.bo.User_roles;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -19,16 +18,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 1)
     public void test_BOServices_v1_user_authentication(){
         baseURI = app.BOURL;
-        Response response = given()
-                .log().uri().log().headers()
-                .auth().preemptive().basic("Viktoria", "kWmaB0s")
-                .contentType("application/json")
-                .when()
-                .post( "/BOServices/v1/user/authentication");
-        response.then().log().all()
-                .statusCode(200)
-                .body("username", equalTo("VIKTORIA"));
-        cookie = response.getHeader("Set-Cookie");
+        basePath = "BOServices";
+        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
     }
 
     @Test(priority = 2)
@@ -38,7 +29,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/checkAuthentication")
+                .get( "/v1/user/checkAuthentication")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo(true));
@@ -51,7 +42,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/authenticated")
+                .get( "/v1/user/authenticated")
                 .then().log().all()
                 .statusCode(200)
                 .body("username", equalTo("VIKTORIA"),
@@ -68,7 +59,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/client/sites");
+                .get( "/v1/client/sites");
             res.then().log().all().statusCode(200);
         Client_sites[] client_sites = res.as(Client_sites[].class);
         assertThat(client_sites[0].getSite(), equalTo("AIQLABS"));
@@ -84,7 +75,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/allActive");
+                .get( "/v1/user/allActive");
         res.then().log().all().statusCode(200);
         User_All_AllActive[] user_allActives = res.as(User_All_AllActive[].class);
         assertThat(user_allActives[2].getFirstName(), equalTo("Anthony"));
@@ -105,7 +96,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/roles");
+                .get( "/v1/user/roles");
         res.then().log().all().statusCode(200);
         User_roles[] user_roles = res.as(User_roles[].class);
 
@@ -124,7 +115,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/all");
+                .get( "/v1/user/all");
         res.then().log().all().statusCode(200);
         User_All_AllActive[] user_all = res.as(User_All_AllActive[].class);
         assertThat(user_all[5].getFirstName(), equalTo("Agnieszka"));
@@ -145,7 +136,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/"+username+"")
+                .get( "/v1/user/"+username+"")
                 .then().log().all()
                 .statusCode(200)
                 .body("username", equalTo(username),
@@ -167,7 +158,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                         "  \"reason\" : \"test\"\n" +
                         "}")
                 .when()
-                .post( "/BOServices/v1/user/block")
+                .post( "/v1/user/block")
                 .then().log().all()
                 .statusCode(200);
     }
@@ -179,7 +170,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/"+username+"")
+                .get( "/v1/user/"+username+"")
                 .then().log().all()
                 .statusCode(200)
                 .body("username", equalTo(username),
@@ -201,7 +192,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                         "  \"reason\" : \"test\"\n" +
                         "}")
                 .when()
-                .post( "/BOServices/v1/user/unblock")
+                .post( "/v1/user/unblock")
                 .then().log().all()
                 .statusCode(200);
     }
@@ -213,7 +204,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/"+username+"")
+                .get( "/v1/user/"+username+"")
                 .then().log().all()
                 .statusCode(200)
                 .body("username", equalTo(username),
