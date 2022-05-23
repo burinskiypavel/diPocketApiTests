@@ -1,6 +1,7 @@
 package tests.bo.boClient;
 
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
 import model.bo.boClient.*;
 import org.testng.annotations.Test;
@@ -17,16 +18,7 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     public void test_BOServices_v1_user_authentication(){
         baseURI = app.BOURL;
         basePath = "BOServices";
-        Response response = given()
-                .log().uri().log().headers()
-                .auth().preemptive().basic("Viktoria", "kWmaB0s")
-                .contentType("application/json")
-                .when()
-                .post( "/v1/user/authentication");
-        response.then().log().all()
-                .statusCode(200)
-                .body("username", equalTo("VIKTORIA"));
-        cookie = response.getHeader("Set-Cookie");
+        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
     }
 
     @Test(priority = 2)
@@ -67,7 +59,7 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
 
     @Test(priority = 7)
     public void test_BOServices_v1_client_search(){
-        app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId, "Nona", "Qwerty", "380634413376", "vikarez20@gmail.com", "DIPOCKET");
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId, "Nona", "Qwerty", "380634413376", "vikarez20@gmail.com", Site.DIPOCKET.toString());
     }
 
     @Test(priority = 8)
@@ -147,14 +139,6 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/selfieHistory")
                 .then().log().all();
-//                .statusCode(200)
-//                .body("id", hasItem(17159),
-//                        "clientId", hasItem(clientId),
-//                        "typeId", hasItem(4),
-//                        "imageInBase64", hasItem(notNullValue()),
-//                        "added", hasItem("2021-12-29T13:10:12.551693Z"),
-//                        "stateId", hasItem(10),
-//                        "stateName", hasItem("Approved"));
     }
 
     @Test(priority = 19)
