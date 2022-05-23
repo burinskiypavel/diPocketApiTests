@@ -217,9 +217,28 @@ public class BORequests {
                         "stateName", equalTo("Active"));
     }
 
+    public void boServices_v1_client_search(String cookie, String by, String value, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite){
+        given()
+                .log().uri().log().headers().log().body()
+                .cookie(cookie)
+                .contentType("application/json")
+                .body("{\n" +
+                        "  \"" + by + "\" : \""+value+"\"\n" +
+                        "}")
+                .when()
+                .post( "/v1/client/search")
+                .then().log().all()
+                .statusCode(200)
+                .body("firstName", hasItem(expectedFirstName),
+                        "lastName", hasItem(expectedLastName),
+                        "mainPhone", hasItem(expectedMainPhone),
+                        "email", hasItem(expectedEmail),
+                        "site", hasItem(expectedSite));
+    }
+
     public void boServices_v1_client_search(String cookie, int clientId, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite){
         given()
-                .log().uri().log().headers()
+                .log().uri().log().headers().log().body()
                 .cookie(cookie)
                 .contentType("application/json")
                 .body("{\n" +
