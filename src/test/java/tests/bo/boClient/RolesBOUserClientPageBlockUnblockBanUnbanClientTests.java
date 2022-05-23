@@ -1,6 +1,7 @@
 package tests.bo.boClient;
 
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
 import model.bo.boClient.*;
 import org.testng.annotations.Test;
@@ -18,16 +19,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     public void test_BOServices_v1_user_authentication(){
         baseURI = app.BOURL;
         basePath = "BOServices";
-        Response response = given()
-                .log().uri().log().headers()
-                .auth().preemptive().basic("Viktoria", "kWmaB0s")
-                .contentType("application/json")
-                .when()
-                .post( "/v1/user/authentication");
-        response.then().log().all()
-                .statusCode(200)
-                .body("username", equalTo("VIKTORIA"));
-        cookie = response.getHeader("Set-Cookie");
+        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
     }
 
     @Test(priority = 2)
@@ -44,7 +36,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
                 .when()
                 .get( "/v1/client/sites")
                 .then().log().all()
-                .body("site", hasItems("DIPOCKET", "GETSBY", "PEAK", "PLAYIT", "SODEXO"),
+                .body("site", hasItems(Site.DIPOCKET.toString(), Site.GETSBY.toString(), Site.PEAK.toString(), Site.PLAYIT.toString(), Site.SODEXO.toString()),
                         "name", hasItems("Salarify", "Sandbox", "Nexo", "Figame"));
     }
 
@@ -81,7 +73,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
                         "username", hasItem("A.SZEWCZYK"),
                         "phone", hasItem("48663647283"),
                         "email", hasItem("Agnieszka.Szewczyk@sodexo.com"),
-                        "site", hasItem("DIPOCKET"));
+                        "site", hasItem(Site.DIPOCKET.toString()));
     }
 
     @Test(priority = 8)
@@ -247,7 +239,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
                         "queueOrder", hasItem("2022-05-05"),
                         "clientId", hasItem(clientId),
                         "clientFullName", hasItem("Nona Qwerty"),
-                        "clientSite", hasItem("DIPOCKET"),
+                        "clientSite", hasItem(Site.DIPOCKET.toString()),
                         "clientStateId", hasItem(1),
                         "clientStateName", hasItem("Active"),
                         "lastMessage", hasItem("Ticket closed. Reason: Client unblocked."));
