@@ -59,6 +59,8 @@
     <!--    </classes>-->
     <!--    </test>-->
 
+    <!--    TDS -->
+
     <!--&lt;!&ndash;    <test name="TDSV1BioDeclineTest">&ndash;&gt;-->
     <!--&lt;!&ndash;        <classes>&ndash;&gt;-->
     <!--&lt;!&ndash;            <class name="tests.tds.TDSV1BioDeclineTest"/>&ndash;&gt;-->
@@ -178,6 +180,8 @@
     <!--            <class name="tests.tds.TDSV2AreqAllFieldTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
+
+    <!--    Telenor -->
 
     <!--    <test name="TelenorHomePageTest">-->
     <!--        <classes>-->
@@ -481,6 +485,8 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+    <!--    Up And Go -->
+
     <test name="UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest">
         <classes>
             <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest"/>
@@ -762,11 +768,11 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="EmailsVerificationStatementAttachmentsDipocketTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.emailsVerification.statement.StatementAttachmentsDipocketTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="EmailsVerificationStatementAttachmentsDipocketTests">
+        <classes>
+            <class name="tests.emailsVerification.statement.StatementAttachmentsDipocketTests"/>
+        </classes>
+    </test>
 
 <!--    <test name="EmailsVerificationStatementAttachmentsUpAndGoTests">-->
 <!--        <classes>-->
@@ -777,18 +783,6 @@
 <!--    <test name="EmailsVerificationStatementAttachmentsPlayITTests">-->
 <!--        <classes>-->
 <!--            <class name="tests.emailsVerification.statement.StatementAttachmentsPlayITTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="BOBlockUserTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bo.boUser.BOUserRolesCBOBlockUserTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="BOUnblockUserTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bo.boUser.BOUserRolesCBOUnblockUserTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
