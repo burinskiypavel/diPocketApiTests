@@ -7,8 +7,7 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.testng.Assert.assertTrue;
 
@@ -18,16 +17,8 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
     @Test(priority = 1)
     public void test_BOServices_v1_user_authentication() throws SQLException, ClassNotFoundException {
         baseURI = app.BOURL;
-        Response response = given()
-                .log().uri().log().headers()
-                .auth().preemptive().basic("Viktoria", "kWmaB0s")
-                .contentType("application/json")
-                .when()
-                .post( "/BOServices/v1/user/authentication");
-        response.then().log().all()
-                .statusCode(200)
-                .body("username", equalTo("VIKTORIA"));
-        cookie = response.getHeader("Set-Cookie");
+        basePath = "BOServices";
+        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
 
         if(app.getDbHelper().isRoleExistInDB("a_roleID")){
             given()
@@ -36,7 +27,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                     .contentType("application/json")
                     .queryParam("roleId", "a_roleID")
                     .when()
-                    .post( "/BOServices/v1/user/role/delete")
+                    .post( "/v1/user/role/delete")
                     .then().log().all()
                     .statusCode(200);
         }
@@ -49,7 +40,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/checkAuthentication")
+                .get( "/v1/user/checkAuthentication")
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo(true));
@@ -62,7 +53,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/authenticated")
+                .get( "/v1/user/authenticated")
                 .then().log().all()
                 .statusCode(200)
                 .body("username", equalTo("VIKTORIA"),
@@ -81,7 +72,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                 .queryParam("roleId", "a_roleID")
                 .queryParam("roleName","a_roleName")
                 .when()
-                .post( "/BOServices/v1/user/role/create")
+                .post( "/v1/user/role/create")
                 .then().log().all()
                 .statusCode(200);
     }
@@ -93,7 +84,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
-                .get( "/BOServices/v1/user/roles");
+                .get( "/v1/user/roles");
         res.then().log().all().statusCode(200);
         User_roles[] user_roles = res.as(User_roles[].class);
 
@@ -111,7 +102,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                         "  \"checkCodes\" : [ \"BO\" ]\n" +
                         "}")
                 .when()
-                .post( "/BOServices/v1/user/role/saveRights")
+                .post( "/v1/user/role/saveRights")
                 .then().log().all()
                 .statusCode(200);
     }
@@ -124,7 +115,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                 .contentType("application/json")
                 .queryParam("roleId", "a_roleID")
                 .when()
-                .post( "/BOServices/v1/user/role/delete")
+                .post( "/v1/user/role/delete")
                 .then().log().all()
                 .statusCode(200);
     }
