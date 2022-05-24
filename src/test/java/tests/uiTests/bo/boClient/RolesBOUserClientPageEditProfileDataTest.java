@@ -7,19 +7,15 @@ import org.testng.asserts.SoftAssert;
 
 public class RolesBOUserClientPageEditProfileDataTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
+    String phone = "380634413376";
 
     @Test
     public void testRolesBOUserClientPageEditProfileData() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
-        waitFor(By.cssSelector("td[ng-reflect-text='380634413376']"));
-        click(By.cssSelector("td[ng-reflect-text='380634413376']"));
-        waitFor(By.cssSelector("p.user-name"));
-        click(By.cssSelector("div.edit-button"));
-        waitFor(By.xpath("//app-select-async[@ng-reflect-name='gender']"));
-        waitFor(By.xpath("//app-button[@ng-reflect-label='Save']"));
-        Thread.sleep(700);
+        search("id", "33217", phone);
+        goToClientPage(phone);
+        pressEditProfileDataFromClientPage();
 
         softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='firstName'] input[ng-reflect-model='Nona']")));
         softAssert.assertTrue(isElementPresent(By.cssSelector("app-input[ng-reflect-name='lastName'] input[ng-reflect-model='Qwerty']")));
