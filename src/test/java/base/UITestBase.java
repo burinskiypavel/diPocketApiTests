@@ -690,6 +690,10 @@ public class UITestBase {
         click(By.id("p-tabpanel-2-label"));
     }
 
+    public void goToMessagesTab() {
+        click(By.id("p-tabpanel-3-label"));
+    }
+
     public void goToClientIBANTab() {
         click(By.id("p-tabpanel-4-label"));
     }

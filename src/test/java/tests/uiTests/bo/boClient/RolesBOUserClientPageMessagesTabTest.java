@@ -7,16 +7,15 @@ import org.testng.asserts.SoftAssert;
 
 public class RolesBOUserClientPageMessagesTabTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
+    String phone = "380634413376";
 
     @Test
     public void testRolesBOUserClientPageMessagesTab() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
-        waitFor(By.cssSelector("td[ng-reflect-text='380634413376']"));
-        click(By.cssSelector("td[ng-reflect-text='380634413376']"));
-        waitFor(By.cssSelector("p.user-name"));
-        click(By.id("p-tabpanel-3-label"));
+        search("id", "33217", phone);
+        goToClientPage(phone);
+        goToMessagesTab();
 
         softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Chanel')]",
                 "//table //th[contains(text(), 'Created')]", "//table //th[contains(text(), 'Send')]",
