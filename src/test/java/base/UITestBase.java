@@ -690,6 +690,10 @@ public class UITestBase {
         click(By.id("p-tabpanel-2-label"));
     }
 
+    public void goToClientIBANTab() {
+        click(By.id("p-tabpanel-4-label"));
+    }
+
     public void goToPayeeTab() {
         click(By.id("p-tabpanel-5-label"));
         waitFor(By.cssSelector("p-columnfilter[field='nickName']"));
