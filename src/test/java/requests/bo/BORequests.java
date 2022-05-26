@@ -21,7 +21,18 @@ public class BORequests {
         cookie = response.getHeader("Set-Cookie");
         response.then().log().all()
                 .statusCode(200)
-                .body("username", equalTo(expectedUsername));
+                .body("firstName", notNullValue(),
+                        "lastName", notNullValue(),
+                        "roleId", notNullValue(),
+                        "stateId", notNullValue(),
+                        "stateName", notNullValue(),
+                        "username", notNullValue(),
+                        "phone", notNullValue(),
+                        "corpClientId", notNullValue(),
+                        "photo", notNullValue(),
+                        "email", notNullValue(),
+                        "site", notNullValue(),
+                        "username", equalTo(expectedUsername));
         return cookie;
     }
 
@@ -396,7 +407,18 @@ public class BORequests {
                 .get( "/v1/user/authenticated")
                 .then().log().all()
                 .statusCode(200)
-                .body("username", equalTo(expectedUsername),
+                .body("firstName", notNullValue(),
+                        "lastName", notNullValue(),
+                        "roleId", notNullValue(),
+                        "stateId", notNullValue(),
+                        "stateName", notNullValue(),
+                        "username", notNullValue(),
+                        "phone", notNullValue(),
+                        "corpClientId", notNullValue(),
+                        "photo", notNullValue(),
+                        "email", notNullValue(),
+                        "site", notNullValue(),
+                        "username", equalTo(expectedUsername),
                         "phone", equalTo(expectedPhone),
                         "email", equalTo(expectedEmail));
     }
