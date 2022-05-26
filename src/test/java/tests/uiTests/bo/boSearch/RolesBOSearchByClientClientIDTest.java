@@ -11,7 +11,7 @@ public class RolesBOSearchByClientClientIDTest extends UITestBase {
 
     @Test
     public void testRolesBOSearchByClientClientID() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
 
         softAssert.assertTrue(isTabPresent(By.xpath("//a[@role='tab'] //span[contains(text(), 'Client')]")), "Is tab present");
