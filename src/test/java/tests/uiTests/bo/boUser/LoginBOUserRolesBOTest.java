@@ -10,7 +10,7 @@ public class LoginBOUserRolesBOTest extends UITestBase {
 
     @Test
     public void testLoginBOUserRolesBO() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole("Evgenya", "7RTwTUP");
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
 
         assertFalse(!isElementPresent(By.xpath("//p[contains(text(), 'Search')]")));
         assertFalse(!isElementPresent(By.xpath("//p[contains(text(), 'Take Ticket')]")));

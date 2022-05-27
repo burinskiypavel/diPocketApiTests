@@ -9,7 +9,7 @@ public class LoginBOUserRolesCBOTest extends UITestBase {
 
     @Test
     public void testLoginBOUserRolesCBO() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
 
         assertFalse(!areElementsPresent(new String[]{"//p[contains(text(), 'Tickets')]",
                 "//p[contains(text(), 'BO Users')]", "//p[contains(text(), 'Search')]",
