@@ -8,16 +8,16 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class RolesBOUserClientPageTabAccountsTest extends UITestBase {
+    String phone = "380634413376";
+    String clientId = "33217";
 
     @Test
     public void testRolesBOUserClientPageTabAccounts() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        type(By.cssSelector("app-input-number[ng-reflect-name='id'] input.p-inputnumber-input"), "33217");
-        waitFor(By.cssSelector("td[ng-reflect-text='380634413376']"));
-        click(By.cssSelector("td[ng-reflect-text='380634413376']"));
-        waitFor(By.cssSelector("p.user-name"));
-        click(By.id("p-tabpanel-8-label"));
+        search("id", clientId, phone);
+        goToClientPage(phone);
+        goToAccountsTab();
 
         setClientPageFilter("accountName", "Bbh");
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='Bbh']")));
