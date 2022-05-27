@@ -29,7 +29,6 @@ public class BORequests {
                         "username", notNullValue(),
                         "phone", notNullValue(),
                         "corpClientId", notNullValue(),
-                        "photo", notNullValue(),
                         "email", notNullValue(),
                         "site", notNullValue(),
                         "username", equalTo(expectedUsername));
