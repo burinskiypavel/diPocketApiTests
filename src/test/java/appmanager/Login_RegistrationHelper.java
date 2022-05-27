@@ -27,6 +27,7 @@ public class Login_RegistrationHelper extends HelperBase {
         dbHelper.deleteClientDeviceFromDB(deviceUUID);
 
         given()
+                .log().uri().log().headers().log().body()
                 .auth().preemptive().basic(phone, pass)
                 .header("deviceuuid", deviceUUID)
                 .header("site", site)
