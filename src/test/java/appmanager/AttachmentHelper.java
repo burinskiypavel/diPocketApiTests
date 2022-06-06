@@ -6,6 +6,7 @@ public class AttachmentHelper extends HelperBase {
 
     public void sendCustomerStatements(String phone, String pass, String cliSessionId, String month, String year, String site, String deviceuuid, String prefix) {
         given()
+                .log().uri().log().body().log().headers()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", site)
                 .header("deviceuuid", deviceuuid)
@@ -29,6 +30,7 @@ public class AttachmentHelper extends HelperBase {
 
     public void sendLegalInfo2(String phone, String pass, String cliSessionId, String nameForClient, String nameForEmail, String type, String site, String prifix) {
         given()
+                .log().uri().log().body().log().headers()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", site)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"))
