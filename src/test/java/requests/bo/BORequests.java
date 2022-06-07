@@ -13,19 +13,16 @@ public class BORequests {
     public String boServices_v1_auth_authentication(String login, String pass, String expectedUsername) {
         String cookie = null;
 
-
         Response responseCode = given()
                 .log().uri().log().headers()
                 .auth().preemptive().basic(login, pass)
                 .contentType("application/json")
-                //.header("bo-auth-token", "123456")
                 .queryParam("smsCounter", 1)
                 .when()
                 .post( "/v1/auth/genSecureCodeWithCounter");
         cookie = responseCode.getHeader("Set-Cookie");
         responseCode.then().log().all()
                 .statusCode(200);
-
 
         Response response = given()
                 .log().uri().log().headers()
