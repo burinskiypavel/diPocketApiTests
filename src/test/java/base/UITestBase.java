@@ -663,6 +663,7 @@ public class UITestBase {
         type(By.cssSelector("input[type='password']"), password);
         Thread.sleep(500);
         click(By.cssSelector("button[type='submit']"));
+        enterSecureCode("123456");
         waitForSeveralItems(new String[]{"Search", "Take Ticket", "Logout"});
     }
 
@@ -673,7 +674,14 @@ public class UITestBase {
         type(By.cssSelector("input[type='password']"), password);
         Thread.sleep(500);
         click(By.cssSelector("button[type='submit']"));
+        enterSecureCode("123456");
         waitForSeveralItems(new String[]{"Tickets", "BO Users", "Search", "Operations", "Reports"});
+    }
+
+    public void enterSecureCode(String secureCode) {
+        waitFor(By.id("formly_3_input_secureCode_0"));
+        type(By.id("formly_3_input_secureCode_0"), secureCode);
+        click(By.cssSelector("app-two-factor-auth-modal button[type='submit']"));
     }
 
     public void gotoBOUsersPage() {
