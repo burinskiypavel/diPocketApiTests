@@ -215,6 +215,7 @@ public class BORequests {
     public void boServices_v1_client_states(String cookie){
         given()
                 .log().uri().log().headers()
+                .header("bo-auth-token", "123456")
                 .cookie(cookie)
                 .contentType("application/json")
                 .when()
@@ -245,6 +246,7 @@ public class BORequests {
         given()
                 .log().uri().log().headers().log().body()
                 .cookie(cookie)
+                .header("bo-auth-token", "123456")
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"" + by + "\" : \""+value+"\"\n" +
@@ -264,6 +266,7 @@ public class BORequests {
         given()
                 .log().uri().log().headers().log().body()
                 .cookie(cookie)
+                .header("bo-auth-token", "123456")
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"" + by + "\" : \""+value+"\"\n" +
