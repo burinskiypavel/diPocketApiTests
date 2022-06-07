@@ -436,6 +436,7 @@ public class BORequests {
         given()
                 .log().uri().log().headers()
                 .cookie(cookie)
+                .header("bo-auth-token", "123456")
                 .contentType("application/json")
                 .when()
                 .get( "/v1/user/authenticated")
