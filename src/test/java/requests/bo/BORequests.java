@@ -286,7 +286,7 @@ public class BORequests {
     public void boServices_v1_client_search(String cookie, int clientId, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite){
         given()
                 .log().uri().log().headers().log().body()
-                //.cookie(cookie)
+                .cookie(cookie)
                 .header("bo-auth-token", "123456")
                 .contentType("application/json")
                 .body("{\n" +
