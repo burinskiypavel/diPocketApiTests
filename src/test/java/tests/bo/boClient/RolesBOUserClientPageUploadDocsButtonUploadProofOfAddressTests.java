@@ -22,7 +22,7 @@ public class RolesBOUserClientPageUploadDocsButtonUploadProofOfAddressTests exte
         clientId = app.getDbHelper().getClientIdFromDB2(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         baseURI = app.BOURL;
         basePath = "BOServices";
-        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.BOuserLogin, app.BOuserPass, "EVGENYA");
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, "EVGENYA");
     }
 
     @Test(priority = 2)

@@ -18,10 +18,10 @@ public class RolesBOSearchByClientClientIDTests extends TestBase {
     public void test_BOServices_v1_user_authentication() {
         baseURI = app.BOURL;
         basePath = "BOServices";
-        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.BOuserLogin, app.BOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, enabled = false)
     public void test_BOServices_v1_user_authenticated(){
         app.getBoRequestsHelper().boServices_v1_user_authenticated(cookie, username, phone, email);
     }

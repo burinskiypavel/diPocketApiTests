@@ -4,7 +4,6 @@ import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
 import model.bo.Client_sites;
-import model.bo.User_All_AllActive;
 import model.bo.User_roles;
 import org.testng.annotations.Test;
 
@@ -20,7 +19,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     public void test_BOServices_v1_user_authentication(){
         baseURI = app.BOURL;
         basePath = "BOServices";
-        cookie = app.getBoRequestsHelper().boServices_v1_user_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
     }
 
     @Test(priority = 2)
