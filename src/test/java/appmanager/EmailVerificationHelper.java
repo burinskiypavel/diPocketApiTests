@@ -6,7 +6,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimePart;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -299,6 +299,77 @@ public class EmailVerificationHelper {
             Store store = emailSession.getStore("imaps");
 
             store.connect("pop.gmail.com", user, password);
+
+            Folder emailFolder = store.getFolder("INBOX");
+            emailFolder.open(Folder.READ_ONLY);
+
+            int count = 0;
+            while(emailFolder.getMessages().length == 0 && count < 120){
+                Thread.sleep(1000);
+                count++;
+            }
+            System.out.println("count:" + count);
+
+            Message[] messages = emailFolder.getMessages();
+            System.out.println("messages.length---" + messages.length);
+
+            for (int i = 0, n = messages.length; i < n; i++) {
+                Message message = messages[i];
+                System.out.println("---------------------------------");
+                System.out.println("Email Number " + (i + 1));
+                System.out.println("Subject: " + message.getSubject());
+                System.out.println("Received Date: " + message.getReceivedDate());
+                System.out.println("From: " + message.getFrom()[0]);
+
+                result.add(String.valueOf(message.getFrom()[0]));
+                result.add(message.getSubject());
+
+            }
+
+            emailFolder.close(false);
+            store.close();
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static List<String> getEmailSenderAndSubjectOAUTH2(String user, String password) throws InterruptedException, MessagingException, IOException {
+        List<String> result = new ArrayList<String>();
+
+        try {
+//            Properties props = new Properties();
+//            props.put("mail.imap.ssl.enable", "true"); // required for Gmail
+//            props.put("mail.imap.auth.mechanisms", "XOAUTH2");
+//            Session session = Session.getInstance(props);
+//            Store store = session.getStore("imap");
+            //store.connect("imap.gmail.com", user, "ya29.a0ARrdaM9KHGx3N_bxhyUduSf4KP6Owz2Gz1A9xYbM0u87o8o1ML0XAbbJ0PvdY52Tcy3xa4-nm3wrzWRPVlNVAf9bfHHIhBAcA6-WUKQLeTE5w_jckVgxeVSLQgGAWfDbsCyS-TdyvWiurffnA0TVz8eRVusm");
+
+
+            System.out.println("Connecting to gmail with IMAP and OAUTH2.");
+            Properties props = new Properties();
+            props.put("mail.imaps.ssl.enable", "true");
+            props.put("mail.imaps.sasl.enable", "true");
+            props.put("mail.imaps.sasl.mechanisms", "XOAUTH2");
+            props.put("mail.imaps.auth.login.disable", "true");
+            props.put("mail.imaps.auth.plain.disable", "true");
+            props.put("mail.debug.auth", "true");
+        /*
+        props.put("mail.imaps.sasl.mechanisms.oauth2.oauthToken",
+                    accessToken);
+        */
+            System.out.println("Creating session...");
+            Session session = Session.getInstance(props);
+            session.setDebug(true);
+            System.out.println("Creating store...");
+            Store store = session.getStore("imaps");
+            System.out.println("Connecting store...");
+            store.connect("imap.gmail.com", 993, "911454727863-rpcm0d5am6rv2bb6odjinptbcfoae1tn.apps.googleusercontent.com", "ya29.a0ARrdaM9eoUuPxqGjfPHMTNNZzp_C8H6ScoNrwyM_uzr3lJp7vnLMzkoUE_phdRssvE8zMNyqsEi2c2Y8QOyWL-1XB-84WIYKu2hufY0xWVqDXxHeHpXLNrPw3MNjHoBMZiIKfm2F6a9wPCM1UW_4k4iiC35m");
+            System.out.println("Store connected.  If we get here, things work.");
+
+
+
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
