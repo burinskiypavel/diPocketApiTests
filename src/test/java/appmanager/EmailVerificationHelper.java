@@ -15,10 +15,12 @@ import static javax.mail.internet.MimeUtility.decodeText;
 
 
 public class EmailVerificationHelper {
+    public static String appPass = "oangitprvdsqwrgh";
+
     public static String getTextFromEmail(String host, String user,
                                           String password) throws InterruptedException, MessagingException, IOException {
         String result = "";
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
 
         try {
 
@@ -31,7 +33,7 @@ public class EmailVerificationHelper {
 
             Store store = emailSession.getStore("imaps");
 
-            store.connect(host, user, password);
+            store.connect(host, user, appPass);
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_WRITE);  //READ_ONLY
@@ -295,10 +297,12 @@ public class EmailVerificationHelper {
             properties.put("mail.imap.port", "993");
             properties.put("mail.imap.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
+            System.out.println("0. Preconnect");
 
             Store store = emailSession.getStore("imaps");
 
-            store.connect("pop.gmail.com", user, password);
+            store.connect("pop.gmail.com", user, appPass);
+            System.out.println("1. Connected");
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
