@@ -2,6 +2,7 @@ package tests.emailsVerification.tac;
 
 import appmanager.EmailVerificationHelper;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -68,8 +69,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site);
-        postSendTacEmail(app.mobile_site);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.DIPOCKET.toString());
+        postSendTacEmail(Site.DIPOCKET.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -90,8 +91,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site);
-        postSendTacEmail(app.mobile_site);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", Site.DIPOCKET.toString());
+        postSendTacEmail(Site.DIPOCKET.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -112,8 +113,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site);
-        postSendTacEmail(app.mobile_site);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", Site.DIPOCKET.toString());
+        postSendTacEmail(Site.DIPOCKET.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -134,8 +135,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site);
-        postSendTacEmail(app.mobile_site);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", Site.DIPOCKET.toString());
+        postSendTacEmail(Site.DIPOCKET.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -156,8 +157,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_discontu);
-        postSendTacEmail(app.mobile_site_discontu);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.DISCONTU.toString());
+        postSendTacEmail(Site.DISCONTU.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -178,8 +179,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDiscontuPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_discontu);
-        postSendTacEmail(app.mobile_site_discontu);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", Site.DISCONTU.toString());
+        postSendTacEmail(Site.DISCONTU.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -200,8 +201,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_playIt);
-        postSendTacEmail(app.mobile_site_playIt);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.PLAYIT.toString());
+        postSendTacEmail(Site.PLAYIT.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -222,8 +223,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacPlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_playIt);
-        postSendTacEmail(app.mobile_site_playIt);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", Site.PLAYIT.toString());
+        postSendTacEmail(Site.PLAYIT.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -243,97 +244,9 @@ public class TacEmailsTests extends TestBase {
     }
 
     @Test
-    public void testTacUpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_upAndGo);
-        postSendTacEmail(app.mobile_site_upAndGo);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 29, 1630);
-        String actualFooter = getEmailFooterText(emailText, 1631);
-
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("General Terms and Conditions.pdf", "E-wallet terms of usage.pdf"), "Attachments are not correct");
-        softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct");
-        softAssert.assertEquals(actualSubject, ""+app.site_upAndGo+" Terms and Conditions - PLEASE DO NOT DISCARD", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", Please find attached \""+app.site_upAndGo+"_Terms_and_Conditions\" (the \"T&Cs\"). It is important that you familiarise yourself with these documents and in particular that you review in detail \"up and go_at_a_Glance\", which summarises the key clauses applicable to your up and go account and also includes our current pricing and transaction limits. With regard to Personal Information, we ask you to please read the section in the T&C’s titled 'Personal Information' - we will process any Information you provide to us according those terms. By providing it to us, you are agreeing for us to process it, including any sensitive data for the purposes described in the Agreement subject to a number of rights you have to be informed about how your Information is processed, to correct any errors, to object to any processing, to restrict processing or have Information erased or to instruct us to copy or transfer Information as you direct. If you accept the T&Cs, please click on this link and proceed with the registration process through up and go mobile App. The T&Cs may only be changed upon 2 months notice to you, following which, if you have not objected, you will be deemed to have accepted the new terms. IMPORTANT: to expedite registration you may choose to start using the App even if you have not clicked on the link above. However, if you do not click on it within a week of accessing the App, your up and go account will be temporarily blocked until such time as you have clicked on the link and confirmed your agreement to having read and accepted the T&C’s. With kind regards, Legal Team", "Body is not correct");
-        //softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
-        softAssert.assertAll();
-    }
-
-    @Test
-    public void testTacUpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", app.mobile_site_upAndGo);
-        postSendTacEmail(app.mobile_site_upAndGo);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 29, 1576);
-        String actualFooter = getEmailFooterText(emailText, 1577);
-
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("Загальні умови.pdf", "Правила та Умови використання електронного гаманця.pdf"), "Attachments are not correct");
-        softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct");
-        softAssert.assertEquals(actualSubject, "Правила та Умови користування додатком "+app.site_upAndGo+" - будь ласка, збережіть це повідомлення", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! Будь ласка, ознайомтесь з прикріпленим файлом \"up and go_Terms_and_Conditions\". Будь ласка, зверніть увагу на частину \"up and go_at_a_Glance\", в ньому знаходяться ключові правила користування up and go, актуальні ціни та ліміти для транзакцій. Стосовно особистої інформації, просимо Вас ознайомитись з розділом під назвою \"Personal Information\" - ми будемо обробляти будь-яку інформацію, яку ви надаєте нам відповідно до цих умов. Надавши нам інформацію (включаючи будь-які конфіденційні дані), Ви погоджуєтесь на її обробку для цілей, описаних у Договорі, з урахуванням права бути проінформованим про обробку вашої інформації, для виправлення помилок, для відмови у обробці, обмеження обробки або видалення інформації, для доручення копіювати або передавати інформацію за Вашою вказівкою. Якщо Ви приймаєте \"up and go_Terms_and_Conditions\", перейдіть за цим посиланням та продовжіть реєстрацію у додатку up and go. \"up and go_Terms_and_Conditions\" лишатимуться незмінним, доки ми не повідомимо про зміни, надсилаючи нові документи. Зміни будуть вислані принаймні за два місяці, щоб дати можливість ознайомитись із ними та прийняти їх. ВАЖЛИВО: Для прискорення процесу реєстрації можна почати користуватись додатком up and go без переходу за посиланням, яке зазначене вище. Але якщо Ви не зробите цього протягом 7 днів з моменту отримання доступу в додаток, Ваш рахунок up and go буде заблоковано, до моменту переходу за посиланням, що підтвердить що Ви ознайомились із \"up and go_Terms_and_Conditions\". З повагою, Юридичний відділ", "Body is not correct");
-        //softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
-        softAssert.assertAll();
-    }
-
-    @Test
-    public void testTacUpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", app.mobile_site_upAndGo);
-        postSendTacEmail(app.mobile_site_upAndGo);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 29, 1760);
-        String actualFooter = getEmailFooterText(emailText, 1761);
-
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("Warunki Ogólne dla Klientów Indywidualnych.pdf", "Warunki mające zastosowanie do portfela elektronicznego.pdf"), "Attachments are not correct");
-        softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct");
-        softAssert.assertEquals(actualSubject, "Zasady i Warunki korzystania z aplikacji "+app.site_upAndGo+" - PROSIMY O ZACHOWANIE TEJ WIADOMOŚCI", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Witaj "+app.emailsVerificationsFirstName+", Prosimy o zapoznanie się z załączonym plikiem “Warunki ogólne dla klientów indywidualnych up and go”. Prosimy o zwrócenie szczególnej uwagi na część “Najważniejsze informacje o up and go”, w której znajduje się podsumowanie kluczowych zasad korzystania z konta up and go, aktualny cennik oraz limity transakcji. W odniesieniu do Informacji osobowych, prosimy o zapoznanie się z sekcją Warunków ogólnych, zatytułowaną „Informacje osobowe” – przetwarzamy wszelkie powierzone nam dane zgodnie z zapisami tej sekcji. Przekazanie danych jest jednoczesnym wyrażeniem zgody na ich przetwarzanie, w tym na przetwarzanie danych poufnych do celów opisanych w Umowie, z zastrzeżeniem szeregu praw, o których użytkownik został poinformowany w aspektach: sposobu przetwarzania Informacji, poprawienia błędów, całkowitej lub częściowej odmowie możliwości przetwarzania, usunięcia informacji lub nakazania nam skopiowania lub transferu danych zgodnie z twoją dyspozycją. Jeżeli akceptujesz “Ogólne warunki dla klientów indywidualnych up and go” kliknij w ten link aby kontynuować proces rejestracji w aplikacji mobilnej up and go. “Ogólne warunki dla klientów indywidualnych up and go” mogą ulec zmianie jedynie, jeśli użytkownicy zostaną powiadomieni z co najmniej dwumiesięcznym wyprzedzeniem. W przypadku niezgłoszenia braku akceptacji, uznamy że akceptujesz nowe regulacje. WAŻNE: Aby przyspieszyć rejestrację, możesz zacząć korzystać z aplikacji up and go bez klikania w link zamieszczony powyżej. Jednakże w przypadku, gdy nie klikniesz w link w ciągu 7 dni, Twoje konto up and go zostanie tymczasowo zablokowane do momentu zaakceptowania „Ogólnych warunków korzystania z aplikacji up and go”. Z wyrazami szacunku, Dział Prawny", "Body is not correct");
-        //softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT", "Footer is not correct");
-        softAssert.assertAll();
-    }
-
-    @Test
-    public void testTacUpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", app.mobile_site_upAndGo);
-        postSendTacEmail(app.mobile_site_upAndGo);
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
-        String actualBody = getEmailBodyText(emailText, 29, 1551);
-        String actualFooter = getEmailFooterText(emailText, 1552);
-
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("Общие условия.pdf", "Условия пользования электронным кошельком.pdf"), "Attachments are not correct");
-        softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct");
-        softAssert.assertEquals(actualSubject, "Условия пользования приложением "+app.site_upAndGo+" - пожалуйста, сохраните это сообщение", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Здравствуйте, "+app.emailsVerificationsFirstName+"! Ознакомьтесь с прикрепленным файлом \""+app.site_upAndGo+"_Terms_and_Conditions\". Обратите внимание на документ \""+app.site_upAndGo+"_at_a_Glance\", в нём вы найдете ключевые правила пользования "+app.site_upAndGo+", актуальные цены и тарифы. Относительно личных данных, просьба обратить внимание на раздел \"Personal Information\" в \""+app.site_upAndGo+"_Terms_and_Conditions\", поскольку вся личная информация будет обрабатываться согласно этим условиям. Предоставляя нам информацию (включая конфиденциальную), вы даёте согласие на ее обработку в целях, описанных в Договоре. Вы имеете право быть в курсе использования данных, чтобы иметь возможность исправить ошибки, чтобы отказаться от обработки или остановить обработку, или удалить информацию или проинструктировать нас о копировании или передачи информации по Вашему указанию. Если Вы принимаете \"Условия пользования приложением "+app.site_upAndGo+"\",  перейдите по этой ссылке и закончите регистрацию в приложении, если еще не закончили. \""+app.site_upAndGo+"_Terms_and_Conditions\" остаются неизменными до тех пор, пока не будет уведомлено об обратном. Уведомление об изменении условий будет выслано, по меньшей мере, за два месяца, чтобы дать Вам возможность ознакомится и принять их. ВАЖНО: можно закончить регистрацию без перехода по ссылке выше. Но, если вы не сделаете этого в течение 7 дней после получения доступа к приложению, учетная запись в up and go будет заблокирована до тех пор, пока Вы не перейдете по ссылке, принимая таким образом \""+app.site_upAndGo+"_Terms_and_Conditions\". С уважением, Юридический отдел", "Body is not correct");
-        //softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
-        softAssert.assertAll();
-    }
-
-    @Test
     public void testTacSnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.mobile_site_snowAttack);
-        postSendTacEmail(app.mobile_site_snowAttack);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.SNOW_ATTACK.toString());
+        postSendTacEmail(Site.SNOW_ATTACK.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -354,8 +267,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacSnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.mobile_site_snowAttack);
-        postSendTacEmail(app.mobile_site_snowAttack);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", Site.SNOW_ATTACK.toString());
+        postSendTacEmail(Site.SNOW_ATTACK.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -374,10 +287,98 @@ public class TacEmailsTests extends TestBase {
         softAssert.assertAll();
     }
 
+    @Test
+    public void testTacUpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.UPANDGO.toString());
+        postSendTacEmail(Site.UPANDGO.toString());
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 29, 1630);
+        String actualFooter = getEmailFooterText(emailText, 1631);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("General Terms and Conditions.pdf", "E-wallet terms of usage.pdf"), "Attachments are not correct");
+        softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, ""+app.site_upAndGo+" Terms and Conditions - PLEASE DO NOT DISCARD", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", Please find attached \""+app.site_upAndGo+"_Terms_and_Conditions\" (the \"T&Cs\"). It is important that you familiarise yourself with these documents and in particular that you review in detail \"up and go_at_a_Glance\", which summarises the key clauses applicable to your up and go account and also includes our current pricing and transaction limits. With regard to Personal Information, we ask you to please read the section in the T&C’s titled 'Personal Information' - we will process any Information you provide to us according those terms. By providing it to us, you are agreeing for us to process it, including any sensitive data for the purposes described in the Agreement subject to a number of rights you have to be informed about how your Information is processed, to correct any errors, to object to any processing, to restrict processing or have Information erased or to instruct us to copy or transfer Information as you direct. If you accept the T&Cs, please click on this link and proceed with the registration process through up and go mobile App. The T&Cs may only be changed upon 2 months notice to you, following which, if you have not objected, you will be deemed to have accepted the new terms. IMPORTANT: to expedite registration you may choose to start using the App even if you have not clicked on the link above. However, if you do not click on it within a week of accessing the App, your up and go account will be temporarily blocked until such time as you have clicked on the link and confirmed your agreement to having read and accepted the T&C’s. With kind regards, Legal Team", "Body is not correct");
+        //softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void testTacUpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", Site.UPANDGO.toString());
+        postSendTacEmail(Site.UPANDGO.toString());
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 29, 1576);
+        String actualFooter = getEmailFooterText(emailText, 1577);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("Загальні умови.pdf", "Правила та Умови використання електронного гаманця.pdf"), "Attachments are not correct");
+        softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Правила та Умови користування додатком "+app.site_upAndGo+" - будь ласка, збережіть це повідомлення", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Вітаємо, "+app.emailsVerificationsFirstName+"! Будь ласка, ознайомтесь з прикріпленим файлом \"up and go_Terms_and_Conditions\". Будь ласка, зверніть увагу на частину \"up and go_at_a_Glance\", в ньому знаходяться ключові правила користування up and go, актуальні ціни та ліміти для транзакцій. Стосовно особистої інформації, просимо Вас ознайомитись з розділом під назвою \"Personal Information\" - ми будемо обробляти будь-яку інформацію, яку ви надаєте нам відповідно до цих умов. Надавши нам інформацію (включаючи будь-які конфіденційні дані), Ви погоджуєтесь на її обробку для цілей, описаних у Договорі, з урахуванням права бути проінформованим про обробку вашої інформації, для виправлення помилок, для відмови у обробці, обмеження обробки або видалення інформації, для доручення копіювати або передавати інформацію за Вашою вказівкою. Якщо Ви приймаєте \"up and go_Terms_and_Conditions\", перейдіть за цим посиланням та продовжіть реєстрацію у додатку up and go. \"up and go_Terms_and_Conditions\" лишатимуться незмінним, доки ми не повідомимо про зміни, надсилаючи нові документи. Зміни будуть вислані принаймні за два місяці, щоб дати можливість ознайомитись із ними та прийняти їх. ВАЖЛИВО: Для прискорення процесу реєстрації можна почати користуватись додатком up and go без переходу за посиланням, яке зазначене вище. Але якщо Ви не зробите цього протягом 7 днів з моменту отримання доступу в додаток, Ваш рахунок up and go буде заблоковано, до моменту переходу за посиланням, що підтвердить що Ви ознайомились із \"up and go_Terms_and_Conditions\". З повагою, Юридичний відділ", "Body is not correct");
+        //softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void testTacUpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", Site.UPANDGO.toString());
+        postSendTacEmail(Site.UPANDGO.toString());
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 29, 1760);
+        String actualFooter = getEmailFooterText(emailText, 1761);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("Warunki Ogólne dla Klientów Indywidualnych.pdf", "Warunki mające zastosowanie do portfela elektronicznego.pdf"), "Attachments are not correct");
+        softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Zasady i Warunki korzystania z aplikacji "+app.site_upAndGo+" - PROSIMY O ZACHOWANIE TEJ WIADOMOŚCI", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Witaj "+app.emailsVerificationsFirstName+", Prosimy o zapoznanie się z załączonym plikiem “Warunki ogólne dla klientów indywidualnych up and go”. Prosimy o zwrócenie szczególnej uwagi na część “Najważniejsze informacje o up and go”, w której znajduje się podsumowanie kluczowych zasad korzystania z konta up and go, aktualny cennik oraz limity transakcji. W odniesieniu do Informacji osobowych, prosimy o zapoznanie się z sekcją Warunków ogólnych, zatytułowaną „Informacje osobowe” – przetwarzamy wszelkie powierzone nam dane zgodnie z zapisami tej sekcji. Przekazanie danych jest jednoczesnym wyrażeniem zgody na ich przetwarzanie, w tym na przetwarzanie danych poufnych do celów opisanych w Umowie, z zastrzeżeniem szeregu praw, o których użytkownik został poinformowany w aspektach: sposobu przetwarzania Informacji, poprawienia błędów, całkowitej lub częściowej odmowie możliwości przetwarzania, usunięcia informacji lub nakazania nam skopiowania lub transferu danych zgodnie z twoją dyspozycją. Jeżeli akceptujesz “Ogólne warunki dla klientów indywidualnych up and go” kliknij w ten link aby kontynuować proces rejestracji w aplikacji mobilnej up and go. “Ogólne warunki dla klientów indywidualnych up and go” mogą ulec zmianie jedynie, jeśli użytkownicy zostaną powiadomieni z co najmniej dwumiesięcznym wyprzedzeniem. W przypadku niezgłoszenia braku akceptacji, uznamy że akceptujesz nowe regulacje. WAŻNE: Aby przyspieszyć rejestrację, możesz zacząć korzystać z aplikacji up and go bez klikania w link zamieszczony powyżej. Jednakże w przypadku, gdy nie klikniesz w link w ciągu 7 dni, Twoje konto up and go zostanie tymczasowo zablokowane do momentu zaakceptowania „Ogólnych warunków korzystania z aplikacji up and go”. Z wyrazami szacunku, Dział Prawny", "Body is not correct");
+        //softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" dostarcza DiPocket UAB, autoryzowana Instytucja Pieniądza Elektronicznego, podlegająca nadzorowi Banku Litwy (numer licencji 75) | Licencjonowana przez Mastercard do działania na Europejskim Obszarze Gospodarczego Upės g. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void testTacUpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", Site.UPANDGO.toString());
+        postSendTacEmail(Site.UPANDGO.toString());
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
+        String actualBody = getEmailBodyText(emailText, 29, 1551);
+        String actualFooter = getEmailFooterText(emailText, 1552);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("Общие условия.pdf", "Условия пользования электронным кошельком.pdf"), "Attachments are not correct");
+        softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct");
+        softAssert.assertEquals(actualSubject, "Условия пользования приложением "+app.site_upAndGo+" - пожалуйста, сохраните это сообщение", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Здравствуйте, "+app.emailsVerificationsFirstName+"! Ознакомьтесь с прикрепленным файлом \""+app.site_upAndGo+"_Terms_and_Conditions\". Обратите внимание на документ \""+app.site_upAndGo+"_at_a_Glance\", в нём вы найдете ключевые правила пользования "+app.site_upAndGo+", актуальные цены и тарифы. Относительно личных данных, просьба обратить внимание на раздел \"Personal Information\" в \""+app.site_upAndGo+"_Terms_and_Conditions\", поскольку вся личная информация будет обрабатываться согласно этим условиям. Предоставляя нам информацию (включая конфиденциальную), вы даёте согласие на ее обработку в целях, описанных в Договоре. Вы имеете право быть в курсе использования данных, чтобы иметь возможность исправить ошибки, чтобы отказаться от обработки или остановить обработку, или удалить информацию или проинструктировать нас о копировании или передачи информации по Вашему указанию. Если Вы принимаете \"Условия пользования приложением "+app.site_upAndGo+"\",  перейдите по этой ссылке и закончите регистрацию в приложении, если еще не закончили. \""+app.site_upAndGo+"_Terms_and_Conditions\" остаются неизменными до тех пор, пока не будет уведомлено об обратном. Уведомление об изменении условий будет выслано, по меньшей мере, за два месяца, чтобы дать Вам возможность ознакомится и принять их. ВАЖНО: можно закончить регистрацию без перехода по ссылке выше. Но, если вы не сделаете этого в течение 7 дней после получения доступа к приложению, учетная запись в up and go будет заблокирована до тех пор, пока Вы не перейдете по ссылке, принимая таким образом \""+app.site_upAndGo+"_Terms_and_Conditions\". С уважением, Юридический отдел", "Body is not correct");
+        //softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
+    }
+
     @Test(enabled = false)// приходит письмо Регистрация виртуальной карты - подтвердите свой e-mail
-    public void testTacSocexo() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        //app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", "SODEXO");
-        postSendTacEmail("SODEXO");
+    public void testTacSodexo() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        //app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.SODEXO.toString());
+        postSendTacEmail(Site.SODEXO.toString());
 
         String emailSender =  EmailVerificationHelper.getEmailSender(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -391,8 +392,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test(enabled = false) // incorrect, body, footer, subject
     public void testTacTelenorEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", app.telenorSite);
-        postSendTacTelenorEmail(app.telenorSite);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.TELENOR.toString());
+        postSendTacTelenorEmail(Site.TELENOR.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
@@ -410,8 +411,8 @@ public class TacEmailsTests extends TestBase {
 
     @Test(enabled = false) // incorrect, body, footer, subject
     public void testTacTelenorHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", app.telenorSite);
-        postSendTacTelenorEmail(app.telenorSite);
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", Site.TELENOR.toString());
+        postSendTacTelenorEmail(Site.TELENOR.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSender = senderAndSubject.get(0);
