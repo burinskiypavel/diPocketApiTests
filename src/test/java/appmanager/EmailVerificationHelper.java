@@ -180,7 +180,7 @@ public class EmailVerificationHelper {
 
             Store store = emailSession.getStore("imaps");
 
-            store.connect(host, user, password);
+            store.connect(host, user, appPass);
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_ONLY);
