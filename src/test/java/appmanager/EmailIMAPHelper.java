@@ -14,10 +14,11 @@ import static io.restassured.RestAssured.given;
 
 
 public class EmailIMAPHelper extends HelperBase {
+    public static String appPass = "oangitprvdsqwrgh";
+
     public static String getLinkFromEmailAfterRegistration(String host, String user,
                                                            String password) throws InterruptedException {
         String emailLink = null;
-        //Thread.sleep(4000);
 
         try {
 
@@ -28,9 +29,11 @@ public class EmailIMAPHelper extends HelperBase {
             properties.put("mail.imap.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
 
+            System.out.println("0. Preconnect");
             Store store = emailSession.getStore("imaps");
 
-            store.connect(host, user, password);
+            store.connect(host, user, appPass);
+            System.out.println("1. Connected");
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_WRITE);//READ_ONLY
