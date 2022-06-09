@@ -1,6 +1,7 @@
 package tests.emailsVerification.tac;
 
 import appmanager.EmailVerificationHelper;
+import appmanager.Language;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
@@ -69,7 +70,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.EN.getOurId()), Site.DIPOCKET.toString());
         postSendTacEmail(Site.DIPOCKET.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -91,7 +92,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.UK.getOurId()), Site.DIPOCKET.toString());
         postSendTacEmail(Site.DIPOCKET.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -113,7 +114,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.PL.getOurId()), Site.DIPOCKET.toString());
         postSendTacEmail(Site.DIPOCKET.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -135,7 +136,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.RU.getOurId()), Site.DIPOCKET.toString());
         postSendTacEmail(Site.DIPOCKET.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -157,7 +158,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDiscontuEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.DISCONTU.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.EN.getOurId()), Site.DISCONTU.toString());
         postSendTacEmail(Site.DISCONTU.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -179,7 +180,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacDiscontuPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", Site.DISCONTU.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.PL.getOurId()), Site.DISCONTU.toString());
         postSendTacEmail(Site.DISCONTU.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -201,7 +202,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacPlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.PLAYIT.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.EN.getOurId()), Site.PLAYIT.toString());
         postSendTacEmail(Site.PLAYIT.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -223,7 +224,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacPlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", Site.PLAYIT.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.HU.getOurId()), Site.PLAYIT.toString());
         postSendTacEmail(Site.PLAYIT.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -245,7 +246,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacSnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.SNOW_ATTACK.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.EN.getOurId()), Site.SNOW_ATTACK.toString());
         postSendTacEmail(Site.SNOW_ATTACK.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -267,7 +268,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacSnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", Site.SNOW_ATTACK.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.HU.getOurId()), Site.SNOW_ATTACK.toString());
         postSendTacEmail(Site.SNOW_ATTACK.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -289,7 +290,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacUpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.UPANDGO.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.EN.getOurId()), Site.UPANDGO.toString());
         postSendTacEmail(Site.UPANDGO.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -311,7 +312,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacUpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "2", Site.UPANDGO.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.UK.getOurId()), Site.UPANDGO.toString());
         postSendTacEmail(Site.UPANDGO.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -333,7 +334,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacUpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "3", Site.UPANDGO.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.PL.getOurId()), Site.UPANDGO.toString());
         postSendTacEmail(Site.UPANDGO.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -355,7 +356,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test
     public void testTacUpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "4", Site.UPANDGO.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.RU.getOurId()), Site.UPANDGO.toString());
         postSendTacEmail(Site.UPANDGO.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -392,7 +393,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test(enabled = false) // incorrect, body, footer, subject
     public void testTacTelenorEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.TELENOR.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.EN.getOurId()), Site.TELENOR.toString());
         postSendTacTelenorEmail(Site.TELENOR.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -411,7 +412,7 @@ public class TacEmailsTests extends TestBase {
 
     @Test(enabled = false) // incorrect, body, footer, subject
     public void testTacTelenorHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", Site.TELENOR.toString());
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, String.valueOf(Language.HU.getOurId()), Site.TELENOR.toString());
         postSendTacTelenorEmail(Site.TELENOR.toString());
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
