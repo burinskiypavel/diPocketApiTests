@@ -22,6 +22,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
     String cliSessionId = null;
     String email = "testdipocket3@gmail.com";
     String emailPass = "pasword12!";
+    String appPass = "whotpsgrehudbtqv";
     String phone = "380980316499";
     String pass = "reset246740";
     String expectedSender = "statements@dipocket.org";
@@ -49,11 +50,11 @@ public class StatementAttachmentsDipocketTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.DIPOCKET.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", Site.DIPOCKET.toString(), HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 0, 146);
         String actualFooter = getEmailFooterText(emailText, 147);
 
@@ -71,11 +72,11 @@ public class StatementAttachmentsDipocketTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.DIPOCKET.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "06", "2021", Site.DIPOCKET.toString(), HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 28, 170);
         String actualFooter = getEmailFooterText(emailText, 171);
 
@@ -93,11 +94,11 @@ public class StatementAttachmentsDipocketTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "3", Site.DIPOCKET.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "05", "2021", Site.DIPOCKET.toString(), HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 0, 153);
         String actualFooter = getEmailFooterText(emailText, 154);
 
@@ -115,11 +116,11 @@ public class StatementAttachmentsDipocketTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "2", Site.DIPOCKET.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "04", "2021", Site.DIPOCKET.toString(), HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 28, 191);
         String actualFooter = getEmailFooterText(emailText, 192);
 
