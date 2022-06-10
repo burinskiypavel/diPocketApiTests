@@ -1,6 +1,7 @@
 package requests.bo;
 
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import model.bo.boClient.Supervisor_reqList;
 
 import static io.restassured.RestAssured.given;
@@ -9,6 +10,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertFalse;
 
 public class BORequests {
+
+    public RequestSpecification requestSpecBO = given()
+            .log().uri().log().headers().log().body()
+            .baseUri("https://support.dipocket.dev")
+            .basePath("BOServices")
+            .header("bo-auth-token", "123456")
+            .contentType("application/json");
+
 
     public String boServices_v1_auth_authentication(String login, String pass, String expectedUsername) {
         String cookie = null;
@@ -51,9 +60,10 @@ public class BORequests {
 
     public void boServices_v1_ticket_states(String cookie) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get("/v1/ticket/states")
                 .then().log().all()
@@ -64,9 +74,10 @@ public class BORequests {
 
     public void boServices_v1_ticket_types(String cookie) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get("/v1/ticket/types")
                 .then().log().all()
@@ -77,9 +88,10 @@ public class BORequests {
 
     public void boServices_v1_tran_states(String cookie) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get("/v1/tran/states")
                 .then().log().all()
@@ -91,9 +103,10 @@ public class BORequests {
 
     public void boServices_v1_account_other_client_33217(String cookie, int clientId){
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/account/other/client/"+clientId+"")
                 .then().log().all()
@@ -108,9 +121,10 @@ public class BORequests {
 
     public void boServices_v1_account_client_33217(String cookie, int clientId) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/account/client/"+clientId+"")
                 .then().log().all()
@@ -133,9 +147,10 @@ public class BORequests {
 
     public void boServices_v1_client_33217_paymentDetails(String cookie, int clientId) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+clientId+"/paymentDetails")
                 .then().log().all()
@@ -162,9 +177,10 @@ public class BORequests {
 
     public void boServices_v1_client_availCurrencies(String cookie){
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/availCurrencies")
                 .then().log().all()
@@ -176,9 +192,10 @@ public class BORequests {
 
     public void boServices_v1_client_33217_address(String cookie, int clientId){
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+ clientId +"/address")
                 .then().log().all()
@@ -196,9 +213,10 @@ public class BORequests {
 
     public void boServices_v1_clientImage_33217_docHistory(String cookie, int clientId){
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/33217/docHistory")
                 .then().log().all()
@@ -214,10 +232,11 @@ public class BORequests {
 
     public void boServices_v1_client_states(String cookie){
         given()
-                .log().uri().log().headers()
-                .header("bo-auth-token", "123456")
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
+                //.header("bo-auth-token", "123456")
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/states")
                 .then().log().all().statusCode(200)
@@ -227,9 +246,10 @@ public class BORequests {
 
     public void boServices_v1_client_33217(String cookie, int clientId){
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+ clientId +"")
                 .then().log().all()
@@ -244,10 +264,11 @@ public class BORequests {
 
     public void boServices_v1_client_search(String cookie, String by, String value, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite){
         given()
-                .log().uri().log().headers().log().body()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers().log().body()
                 .cookie(cookie)
-                .header("bo-auth-token", "123456")
-                .contentType("application/json")
+                //.header("bo-auth-token", "123456")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"" + by + "\" : \""+value+"\"\n" +
                         "}")
@@ -264,10 +285,11 @@ public class BORequests {
 
     public void boServices_v1_client_search(String cookie, String by, String value, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite, long expectedBirthDate){
         given()
-                .log().uri().log().headers().log().body()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers().log().body()
                 .cookie(cookie)
-                .header("bo-auth-token", "123456")
-                .contentType("application/json")
+                //.header("bo-auth-token", "123456")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"" + by + "\" : \""+value+"\"\n" +
                         "}")
@@ -285,10 +307,11 @@ public class BORequests {
 
     public void boServices_v1_client_search(String cookie, int clientId, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite){
         given()
-                .log().uri().log().headers().log().body()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers().log().body()
                 .cookie(cookie)
-                .header("bo-auth-token", "123456")
-                .contentType("application/json")
+                //.header("bo-auth-token", "123456")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"id\" : "+clientId+"\n" +
                         "}")
@@ -306,9 +329,10 @@ public class BORequests {
 
     public void boServices_v1_supervisor_33217_reqList(String cookie, int clientId){
         Response res = given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/supervisor/"+clientId+"/reqList");
         res.then().log().all().statusCode(200);
@@ -326,9 +350,10 @@ public class BORequests {
 
     public void boServices_v1_clientImage_docTypes(String cookie) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/docTypes")
                 .then().log().all()
@@ -339,9 +364,10 @@ public class BORequests {
 
     public void boServices_v1_clientImage_uploadDoc(String cookie, int clientId, int typeId, String image) {
         given()
-                .log().uri().log().headers().log().body()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers().log().body()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"clientId\" : "+ clientId +",\n" +
                         "  \"base64data\" : \""+image+"\",\n" +
@@ -355,9 +381,10 @@ public class BORequests {
 
     public void boServices_v1_clientImage_uploadSelfie(String cookie, int clientId, String image1, String image2) {
         given()
-                .log().uri().log().headers().log().body()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers().log().body()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"clientId\" : "+clientId+",\n" +
                         "  \"base64Selfie1\" : \""+image1+"\",\n" +
@@ -371,9 +398,10 @@ public class BORequests {
 
     public void boServices_v1_user_roles(String cookie) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/roles")
                 .then().log().all()
@@ -384,9 +412,10 @@ public class BORequests {
 
     public void boServices_v1_user_allActive (String cookie, String expectedUsername, String expectedPhone, String expectedEmail) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/allActive")
                 .then().log().all()
@@ -398,9 +427,10 @@ public class BORequests {
 
     public void boServices_v1_user_corpClients_site_SODEXO(String cookie, String expectedCompanyName, String expectedSite) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/corpClients/site/SODEXO")
                 .then().log().all()
@@ -410,9 +440,10 @@ public class BORequests {
                         "site", hasItem(expectedSite));
     }public void boServices_v1_user_verifyPhone(String cookie, String phone, boolean expectedValue) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .queryParam("phone", phone)
                 .when()
                 .get( "/v1/user/verifyPhone")
@@ -422,9 +453,10 @@ public class BORequests {
     }
     public void boServices_v1_user_all(String cookie, String expectedUsername, String expectedFirstName, String expectedPhone, String expectedEmail) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/all")
                 .then().log().all()
@@ -437,10 +469,11 @@ public class BORequests {
 
     public void boServices_v1_user_authenticated(String cookie, String expectedUsername, String expectedPhone, String expectedEmail) {
         given()
-                .log().uri().log().headers()
+                .spec(requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .header("bo-auth-token", "123456")
-                .contentType("application/json")
+                //.header("bo-auth-token", "123456")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/authenticated")
                 .then().log().all()
