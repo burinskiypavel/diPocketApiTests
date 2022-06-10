@@ -160,7 +160,7 @@ public class BORequests {
                         "currencyCode", hasItem("CHF"),
                         "accountName", hasItem("Nona Qwerty"),
                         "bankId", hasItem("WBKPPLPP"),
-                        "accountNo", hasItem("PL18109000047340800000085129"),
+                        "accountNo", (notNullValue()),
                         "address", hasItem("Address44 - 11111 City - Ukraine"),
                         "bankName", hasItem("Santander Bank Polska SA - al. Jana Pawla II 17 - 00-854 Warsaw Poland"));
 

@@ -30,9 +30,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 3)
     public void test_BOServices_v1_client_sites(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/sites")
                 .then().log().all()
@@ -58,9 +59,9 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 7)
     public void test_BOServices_v1_user_all(){
                 given()
-                .log().uri().log().headers()
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                .spec(app.requestSpecBO)//.contentType("application/json")
                 .when()
                 .get( "/v1/user/all")
                 .then().log().all()
@@ -89,9 +90,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 10)
     public void test_BOServices_v1_clientImage_33217_selfie(){
         Response res = given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/selfie");
         res.then().log().all().statusCode(200);
@@ -110,9 +112,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 12)
     public void test_BOServices_v1_dashboard_tranTypes(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/dashboard/tranTypes")
                 .then().log().all()
@@ -127,9 +130,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 14)
     public void test_BOServices_v1_account_states(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/account/states")
                 .then().log().all()
@@ -146,9 +150,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 16)
     public void test_BOServices_v1_clientImage_33217_docs(){
         Response res = given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/docs");
         res.then().log().all().statusCode(200);
@@ -167,9 +172,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 18)
     public void test_BOServices_v1_payee_paymentTypes(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/payee/paymentTypes")
                 .then().log().all()
@@ -181,9 +187,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 19)
     public void test_BOServices_v1_payee_33217(){
         given()
-                .log().uri().log().headers()
+                //.log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/payee/"+clientId+"")
                 .then().log().all()
@@ -204,9 +211,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 21)
     public void test_BOServices_v1_client_33217_tiles(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+clientId+"/tiles")
                 .then().log().all()
@@ -221,9 +229,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 23)
     public void test_BOServices_v1_ticket_client_33217(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/ticket/client/"+clientId+"")
                 .then().log().all()
@@ -248,9 +257,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 24)
     public void test_BOServices_v1_client_citizenships(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/citizenships")
                 .then().log().all()
@@ -263,9 +273,9 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 25)
     public void test_BOServices_v1_client_33217_pushMsgs(){
                 given()
-                .log().uri().log().headers()
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                .spec(app.requestSpecBO)
                 .when()
                 .get( "/v1/client/"+clientId+"/pushMsgs")
                 .then().log().all()
@@ -286,9 +296,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 27, enabled = false)
     public void test_BOServices_v1_clientImage_33217_selfieHistory(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/selfieHistory")
                 .then().log().all()
@@ -305,9 +316,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 28)
     public void test_BOServices_v1_client_33217_block(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"blockOrBanReason\" : \""+reason+"\"\n" +
                         "}")
@@ -320,9 +332,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 29)
     public void test_BOServices_v1_client_33217_(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+ clientId +"")
                 .then().log().all()
@@ -333,9 +346,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 30)
     public void test_BOServices_v1_client_33217_unblock() {
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"unblockOrUnbanReason\" : \""+reason+"\"\n" +
                         "}")
@@ -348,9 +362,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 31)
     public void test_BOServices_v1_client_33217__(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+ clientId +"")
                 .then().log().all()
@@ -361,9 +376,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 32)
     public void test_BOServices_v1_client_33217_ban_WithoutBlockingClientDevice(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"blockOrBanReason\" : \""+reason+"\",\n" +
                         "  \"blockClientDevice\" : false\n" +
@@ -377,9 +393,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 33)
     public void test_BOServices_v1_client_33217___(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+ clientId +"")
                 .then().log().all()
@@ -390,9 +407,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 34)
     public void test_BOServices_v1_client_33217_unban(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{}")
                 .when()
                 .post( "/v1/client/"+clientId+"/unban")
@@ -403,9 +421,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 35)
     public void test_BOServices_v1_client_33217____(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+ clientId +"")
                 .then().log().all()
@@ -416,9 +435,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 36)
     public void test_BOServices_v1_client_33217_ban(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"blockOrBanReason\" : \""+reason+"\",\n" +
                         "  \"blockClientDevice\" : true\n" +
@@ -432,9 +452,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 37)
     public void test_BOServices_v1_client_33217_____(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+ clientId +"")
                 .then().log().all()
@@ -445,9 +466,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 38)
     public void test_BOServices_v1_client_33217_unban_(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{}")
                 .when()
                 .post( "/v1/client/"+clientId+"/unban")
@@ -458,9 +480,10 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     @Test(priority = 39)
     public void test_BOServices_v1_client_33217______(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/client/"+ clientId +"")
                 .then().log().all()

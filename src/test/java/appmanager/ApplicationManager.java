@@ -82,6 +82,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecTDS;
     public RequestSpecification requestSpecTDSJson;
     public RequestSpecification requestSpecPeak;
+    public RequestSpecification requestSpecBO;
     public RestAssuredConfig configTimeout;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
@@ -219,6 +220,14 @@ public class ApplicationManager {
                 .log().uri().log().headers().log().body()
                 .config(configTimeout)
                 .baseUri(TDSBaseUrl)
+                .contentType("application/json");
+
+        requestSpecBO = given()
+                .log().uri().log().headers().log().body()
+                .config(configTimeout)
+                .baseUri(BOURL)
+                .basePath("BOServices")
+                .header("bo-auth-token", "123456")
                 .contentType("application/json");
     }
 
