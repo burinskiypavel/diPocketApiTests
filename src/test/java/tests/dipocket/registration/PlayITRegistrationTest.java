@@ -535,7 +535,7 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 18)
     public void testEmailLink() throws InterruptedException, SQLException, ClassNotFoundException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationPlayIT(  app.playITRegistrationEmail, "pasword12!");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationPlayIT(app.playITRegistrationEmail, "pasword12!", "fxwqrtfwkzcmuikt");
         System.out.println("link_link " + link);
         given()
                 .log().uri()
