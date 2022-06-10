@@ -31,6 +31,7 @@ public class RolesCBOSearchByClientMailingStreetTests extends TestBase {
                 given()
                 .log().uri().log().headers().log().body()
                 .cookie(cookie)
+                        .header("bo-auth-token", "123456")
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"mailingAddress\" : \"vila\"\n" +
