@@ -22,6 +22,7 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
     String email = "testdipocket0@gmail.com";//testdipocket2@gmail.com"
     String pass = "pasword1";
     String emailPass = "password1<";
+    String appPass = "xnzmwhidkvyjeoxb";
     String phone = "380987419131";//380633192217
     String expectedSender = "legal.team@dipocket.org";
     String cookie = null;
@@ -77,11 +78,11 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.SNOW_ATTACK.toString());
         sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Card Terms and Conditions");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 31, 178);
         String actualFooter = getEmailFooterText(emailText, 179);
 
@@ -99,11 +100,11 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "5", Site.SNOW_ATTACK.toString());
         sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Kártyaszerződési feltételek");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 31, 181);
         String actualFooter = getEmailFooterText(emailText, 182);
 
