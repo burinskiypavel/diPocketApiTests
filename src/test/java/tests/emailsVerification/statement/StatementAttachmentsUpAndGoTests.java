@@ -22,6 +22,7 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
     String cliSessionId = null;
     String email = "testdipocket2@gmail.com";
     String emailPass = "pasword12!";
+    String appPass = "mjledaazrygvvoqj";
     String pass = "pasword1";
     String phone = "380633192217";
     String deviceuuid = "380633192217-AutoTest-Login";
@@ -52,11 +53,11 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "04", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 29, 176);
         String actualFooter = getEmailFooterText(emailText, 177);
 
@@ -74,11 +75,11 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "03", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 29, 173);
         String actualFooter = getEmailFooterText(emailText, 174);
 
@@ -96,11 +97,11 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "3", Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "02", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 0, 155);
         String actualFooter = getEmailFooterText(emailText, 156);
 
@@ -118,11 +119,11 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "2", Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "02", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 29, 194);
         String actualFooter = getEmailFooterText(emailText, 195);
 
