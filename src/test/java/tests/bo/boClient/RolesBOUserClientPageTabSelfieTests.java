@@ -44,9 +44,10 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     @Test(priority = 6)
     public void test_BOServices_v1_clientImage_33217_selfie(){
         Response res = given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/selfie");
         res.then().log().all().statusCode(200);
@@ -85,13 +86,15 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     @Test(priority = 12)
     public void test_BOServices_v1_dashboard_tranTypes(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/dashboard/tranTypes")
                 .then().log().all()
-                .statusCode(200).body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
+                .statusCode(200)
+                .body("", hasItems("Balance Check at ATM", "Card transaction", "Direct Debit", "Reversed Crowd-Payment", "Top Up"));
     }
 
     @Test(priority = 13)
@@ -107,9 +110,10 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     @Test(priority = 15)
     public void test_BOServices_v1_clientImage_33217_docs(){
         Response res = given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/docs");
         res.then().log().all().statusCode(200);
@@ -130,7 +134,7 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
         app.getBoRequestsHelper().boServices_v1_clientImage_33217_docHistory(cookie, clientId);
     }
 
-    @Test(priority = 18, enabled = false)
+    @Test(priority = 18, enabled = false) // fail after too much selfie
     public void test_BOServices_v1_clientImage_33217_selfieHistory(){
         given()
                 .log().uri().log().headers()
@@ -144,9 +148,8 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     @Test(priority = 19)
     public void test_BOServices_v1_client_33217_pushMsgs(){
                 given()
-                .log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                .spec(app.requestSpecBO)
                 .when()
                 .get( "/v1/client/"+clientId+"/pushMsgs")
                 .then().log().all()

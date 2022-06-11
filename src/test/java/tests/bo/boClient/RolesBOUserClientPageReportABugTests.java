@@ -31,9 +31,10 @@ public class RolesBOUserClientPageReportABugTests extends TestBase {
     @Test(priority = 4)
     public void test_BOServices_v1_report_email_sendBugReport(){
         given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecBO)
+                //.log().uri().log().headers().log().body()
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"clientId\" : "+clientId+",\n" +
                         "  \"problem\" : \"test\",\n" +
