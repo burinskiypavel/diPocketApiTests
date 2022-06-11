@@ -27,6 +27,7 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
     String email = "testdipocket2@gmail.com";
     String pass = "pasword1";
     String emailPass = "pasword12!";
+    String appPass = "mjledaazrygvvoqj";
     String phone = "380633192217";
     String deviceuuid = "380633192217-AutoTest-Login";
 
@@ -55,11 +56,11 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.UPANDGO.toString());
         app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Общие условия", "testdipocket2@gmail.com", "Tariff Table", Site.UPANDGO.toString(), "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 29, 183);
         String actualFooter = getEmailFooterText(emailText, 184);
 
@@ -77,11 +78,11 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.UPANDGO.toString());
         app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Tariff Table", "testdipocket2@gmail.com", "Tariff Table", Site.UPANDGO.toString(), "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 29, 172);
         String actualFooter = getEmailFooterText(emailText, 173);
 
@@ -99,11 +100,11 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "3", Site.UPANDGO.toString());
         app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Tabela Opłat", "testdipocket2@gmail.com", "Tariff Table", Site.UPANDGO.toString(), "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 0, 147);
         String actualFooter = getEmailFooterText(emailText, 148);
 
@@ -121,11 +122,11 @@ public class LegalAttachmentsUpAndGoTests extends TestBase {
         app.getDbHelper().updateClientLanguageFromDB(email, "2", Site.UPANDGO.toString());
         app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Тарифи", "testdipocket2@gmail.com", "Tariff Table", Site.UPANDGO.toString(), "10_");
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
         String actualBody = getEmailBodyText(emailText, 29, 174);
         String actualFooter = getEmailFooterText(emailText, 175);
 
