@@ -10,7 +10,7 @@
 
     <test name="DipocketRegistrationTest">
         <classes>
-            <class name="tests.dipocket.registration.RegistrationTest"/>
+            <class name="tests.dipocket.registration.DipocketRegistrationTest"/>
         </classes>
     </test>
 

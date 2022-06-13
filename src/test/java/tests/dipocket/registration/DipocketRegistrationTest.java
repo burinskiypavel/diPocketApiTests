@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class RegistrationTest extends TestBase {
+public class DipocketRegistrationTest extends TestBase {
     String smsCode = null;
     int countryId = 616;
     int currencyId = 985;
