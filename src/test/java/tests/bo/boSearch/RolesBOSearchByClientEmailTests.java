@@ -27,6 +27,6 @@ public class RolesBOSearchByClientEmailTests extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_client_search(){
-        app.getBoRequestsHelper().boServices_v1_client_search(cookie, "email",  email, "Luiza", "Qwerty", phone, email, Site.DIPOCKET.toString());
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, "email",  email, "Lopa", "Qwerty", phone, email, Site.DIPOCKET.toString());
     }
 }
