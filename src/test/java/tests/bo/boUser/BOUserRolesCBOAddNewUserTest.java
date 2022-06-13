@@ -18,7 +18,7 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
     String firstName = "Pavel";
 
     @Test(priority = 1)
-    public void test_BOServices_v1_user_authentication() throws SQLException, ClassNotFoundException {
+    public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
         if(app.getDbHelper().isBOUserExistInDB(username)){
             app.getDbHelper().deleteBOUserFromDB(username);
         }
@@ -36,9 +36,8 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
     @Test(priority = 3)
     public void test_BOServices_v1_user_all(){
                 given()
-                .log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                .spec(app.requestSpecBO)
                 .when()
                 .get( "/v1/user/all")
                         .then().log().all()
@@ -67,9 +66,8 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
     @Test(priority = 7)
     public void test_BOServices_v1_user_create() throws SQLException, ClassNotFoundException {
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .body("{\n" +
                         "  \"username\" : \""+username+"\",\n" +
                         "  \"firstName\" : \""+firstName+"\",\n" +
