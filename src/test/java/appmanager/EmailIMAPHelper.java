@@ -146,10 +146,9 @@ public class EmailIMAPHelper extends HelperBase {
         return emailLink;
     }
 
-    public static String getLinkFromEmailAfterRegistrationSnowAttack(String user, String password) throws InterruptedException {
+    public static String getLinkFromEmailAfterRegistrationSnowAttack(String user, String password, String appPass) throws InterruptedException {
         String host = "pop.gmail.com";
         String emailLink = null;
-        //Thread.sleep(4000);
 
         try {
 
@@ -162,7 +161,7 @@ public class EmailIMAPHelper extends HelperBase {
 
             Store store = emailSession.getStore("imaps");
 
-            store.connect(host, user, password);
+            store.connect(host, user, appPass);
 
             Folder emailFolder = store.getFolder("INBOX");
             emailFolder.open(Folder.READ_WRITE);//READ_ONLY

@@ -619,7 +619,7 @@ public class UpAndGoRegistrationTest extends TestBase {
 
     @Test(priority = 20)
     public void testEmailLink() throws InterruptedException, SQLException, ClassNotFoundException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationSnowAttack(app.registrationEmail, "pasword12!");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationSnowAttack(app.registrationEmail, "pasword12!", "fxwqrtfwkzcmuikt");
         System.out.println("link_link " + link);
         given()
                 .log().uri()
