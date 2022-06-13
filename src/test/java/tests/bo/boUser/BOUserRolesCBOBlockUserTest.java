@@ -3,20 +3,18 @@ package tests.bo.boUser;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
-import model.bo.Client_sites;
 import model.bo.User_roles;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BOUserRolesCBOBlockUserTest extends TestBase {
     String cookie = null;
     String username = "PAVELB";
 
     @Test(priority = 1)
-    public void test_BOServices_v1_user_authentication(){
+    public void test_BOServices_v1_auth_authentication(){
         baseURI = app.BOURL;
         basePath = "BOServices";
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
@@ -25,9 +23,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 2)
     public void test_BOServices_v1_user_checkAuthentication(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .when()
                 .get( "/v1/user/checkAuthentication")
                 .then().log().all()
@@ -38,9 +35,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 3)
     public void test_BOServices_v1_user_authenticated(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .when()
                 .get( "/v1/user/authenticated")
                 .then().log().all()
@@ -54,26 +50,22 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
 
     @Test(priority = 4)
     public void test_BOServices_v1_client_sites(){
-        Response res = given()
-                .log().uri().log().headers()
+         given()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .when()
-                .get( "/v1/client/sites");
-            res.then().log().all().statusCode(200);
-        Client_sites[] client_sites = res.as(Client_sites[].class);
-        assertThat(client_sites[0].getSite(), equalTo("AIQLABS"));
-        assertThat(client_sites[0].getName(), equalTo("AIQLabs"));
-        assertThat(client_sites[2].getSite(), equalTo("BACCA"));
-        assertThat(client_sites[2].getName(), equalTo("Bacca"));
+                .get( "/v1/client/sites")
+                 .then().log().all()
+                 .statusCode(200)
+                .body("site", hasItems("AIQLABS", "AWAS", "BILLON", "DIPOCKET", "PEAK", "SODEXO"),
+                        "name", hasItems("AIQLabs", "Agency Welfare Asylum Seekers", "Sodexo", "Billon", "DiPocket", "Peak", "Sodexo"));
     }
 
     @Test(priority = 5)
     public void test_BOServices_v1_user_allActive(){
                 given()
-                .log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                .spec(app.requestSpecBO)
                 .when()
                 .get( "/v1/user/allActive")
                         .then().log().all()
@@ -92,9 +84,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 6)
     public void test_BOServices_v1_user_roles(){
         Response res =given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .when()
                 .get( "/v1/user/roles");
         res.then().log().all().statusCode(200);
@@ -111,9 +102,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 7)
     public void test_BOServices_v1_user_all(){
                 given()
-                .log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                .spec(app.requestSpecBO)
                 .when()
                 .get( "/v1/user/all")
                         .then().log().all()
@@ -133,9 +123,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 8)
     public void test_BOServices_v1_user_PAVELB(){
         given()
-                .log().uri().log().headers()
                 .cookie(cookie)
-                .contentType("application/json")
+                .spec(app.requestSpecBO)
                 .when()
                 .get( "/v1/user/"+username+"")
                 .then().log().all()
@@ -151,9 +140,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 9)
     public void test_BOServices_v1_user_block(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .body("{\n" +
                         "  \"username\" : \""+username+"\",\n" +
                         "  \"reason\" : \"test\"\n" +
@@ -167,9 +155,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 10)
     public void test_BOServices_v1_user_PAVELB_(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .when()
                 .get( "/v1/user/"+username+"")
                 .then().log().all()
@@ -185,9 +172,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 11)
     public void test_BOServices_v1_user_unblock(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .body("{\n" +
                         "  \"username\" : \""+username+"\",\n" +
                         "  \"reason\" : \"test\"\n" +
@@ -201,9 +187,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     @Test(priority = 12)
     public void test_BOServices_v1_user_PAVELB__(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .when()
                 .get( "/v1/user/"+username+"")
                 .then().log().all()
