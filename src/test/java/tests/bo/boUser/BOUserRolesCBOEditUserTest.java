@@ -15,7 +15,7 @@ public class BOUserRolesCBOEditUserTest extends TestBase {
     String randomFirsName = "Pavel" + app.generateRandomNumber(4);;
 
     @Test(priority = 1)
-    public void test_BOServices_v1_user_authentication() {
+    public void test_BOServices_v1_auth_authentication() {
         baseURI = app.BOURL;
         basePath = "BOServices";
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
@@ -29,9 +29,10 @@ public class BOUserRolesCBOEditUserTest extends TestBase {
     @Test(priority = 3)
     public void test_BOServices_v1_user_all(){
         given()
-                .log().uri().log().headers()
+                //.log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/all")
                 .then().log().all()
@@ -44,9 +45,10 @@ public class BOUserRolesCBOEditUserTest extends TestBase {
     @Test(priority = 4)
     public void test_BOServices_v1_user_PAVELB(){
         given()
-                .log().uri().log().headers()
+                //.log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/PAVELB")
                 .then().log().all()
@@ -69,9 +71,10 @@ public class BOUserRolesCBOEditUserTest extends TestBase {
     @Test(priority = 7)
     public void test_BOServices_v1_user_update(){
         given()
-                .log().uri().log().headers().log().body()
+                //.log().uri().log().headers().log().body()
                 .cookie(cookie)
-                .contentType("application/json")
+                .spec(app.requestSpecBO)
+                //.contentType("application/json")
                 .body("{\n" +
                         "  \"username\" : \""+username+"\",\n" +
                         "  \"firstName\" : \""+randomFirsName+"\",\n" +
