@@ -10,9 +10,9 @@ import static io.restassured.RestAssured.baseURI;
 public class RolesBOSearchByClientPhoneTests extends TestBase {
     String cookie = null;
     String username = "EVGENYA";
-    String phone = "380634413376";
     String searchPhone = "380983488583";
-    String email = "vikarezznik60@gmail.com";
+    String phone = "380992871946";
+    String email = "e.kononenko0312+1@gmail.com";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
