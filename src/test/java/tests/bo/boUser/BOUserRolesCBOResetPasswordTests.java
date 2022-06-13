@@ -38,9 +38,8 @@ public class BOUserRolesCBOResetPasswordTests extends TestBase {
     @Test(priority = 5)
     public void test_BOServices_v1_user_PAVELB1(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
                 .when()
                 .get( "/v1/user/"+username+"")
                 .then().log().all()
@@ -53,7 +52,7 @@ public class BOUserRolesCBOResetPasswordTests extends TestBase {
     @Test(priority = 6)
     public void test_BOServices_v1_user_PAVELB1_updatePassword(){
         given()
-                .log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
                 .when()
                 .post( "/v1/user/"+username+"/updatePassword")
