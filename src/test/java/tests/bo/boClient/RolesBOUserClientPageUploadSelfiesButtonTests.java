@@ -36,9 +36,10 @@ public class RolesBOUserClientPageUploadSelfiesButtonTests extends TestBase {
     @Test(priority = 3)
     public void test_BOServices_v1_clientImage_33217_selfie(){
         Response res = given()
-                .log().uri().log().headers()
+                //.log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/selfie");
         res.then().log().all().statusCode(200);
@@ -57,9 +58,10 @@ public class RolesBOUserClientPageUploadSelfiesButtonTests extends TestBase {
     @Test(priority = 5)
     public void test_BOServices_v1_clientImage_33217_selfie_(){
         Response res = given()
-                .log().uri().log().headers()
+                //.log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/selfie");
         res.then().log().all().statusCode(200);
@@ -74,9 +76,10 @@ public class RolesBOUserClientPageUploadSelfiesButtonTests extends TestBase {
     @Test(priority = 6)
     public void test_BOServices_v1_clientImage_clientId_selfieHistory() {
         given()
-                .log().uri().log().headers()
+                //.log().uri().log().headers()
+                .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .contentType("application/json")
+                //.contentType("application/json")
                 .when()
                 .get("/v1/clientImage/"+clientId+"/selfieHistory")
                 .then().log().all()
