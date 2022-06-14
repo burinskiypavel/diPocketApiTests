@@ -5,20 +5,22 @@ import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.hasItems;
 
-public class RolesCBOSearchByClientMailingStreetTests extends TestBase {
+public class RolesBOSearchByClientMailingStreetTests extends TestBase {
     String cookie = null;
-    String username = "VIKTORIA";
-    String phone = "380634413376";
-    String email = "vikarezznik60@gmail.com";
-    String mailingAddress = "Qwer st 1";
+    String name = "Vika";
+    String username = "EVGENYA";
+    String phone = "380992871946";
+    String email = "e.kononenko0312+1@gmail.com";
+    String mailingAddress = "Eugieniwska 345";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
         baseURI = app.BOURL;
         basePath = "BOServices";
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
     @Test(priority = 2)
@@ -38,10 +40,10 @@ public class RolesCBOSearchByClientMailingStreetTests extends TestBase {
                 .post("/v1/client/search")
                 .then().log().all()
                 .statusCode(200)
-                .body("firstName", hasItem("Q"),
-                        "lastName", hasItem("A"),
-                        "mainPhone", hasItem("380992568879"),
-                        "email", hasItem("qwert@dd.com"),
+                .body("firstName", hasItem("    MariEugen"),
+                        "lastName", hasItem("Pukpuk"),
+                        "mainPhone", hasItem("380931970064"),
+                        "email", hasItem("linafaso@gmail.com"),
                         "mailingAddress", hasItem(mailingAddress),
                         "site", hasItem(Site.DIPOCKET.toString()));
     }
