@@ -17,6 +17,7 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
     String clientId = "29818";
     String email = "testdipocket3@gmail.com";
     String pass = "pasword12!";
+    String appPass = "whotpsgrehudbtqv";
 
     @Test
     public void testRolesBOUserClientPageSendStatementsButtonAllStatementsAndDefaultEmail() throws InterruptedException, IOException, MessagingException {
@@ -26,10 +27,10 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
         goToClientPage(phone);
         sendAllStatemenstToDefaultEmail();
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass, appPass);
         String actualSubject = senderAndSubject.get(1);
-        List<String> actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String> actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass, appPass);
         String actualBody = getEmailBodyText(emailText, 28, 191);
 
         assertEquals(actualSubject, "Виписка по рахунку "+app.site+"");
@@ -64,10 +65,10 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
         goToClientPage(phone);
         sendStatementForChosenPeriodAndDefaultEmail();
 
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass);
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass, appPass);
         String actualSubject = senderAndSubject.get(1);
-        List<String> actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass);
+        List<String> actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, pass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, pass, appPass);
         String actualBody = getEmailBodyText(emailText, 28, 191);
 
         assertEquals(actualSubject, "Виписка по рахунку "+app.site+"");
