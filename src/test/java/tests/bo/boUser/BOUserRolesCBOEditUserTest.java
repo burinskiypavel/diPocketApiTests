@@ -29,10 +29,8 @@ public class BOUserRolesCBOEditUserTest extends TestBase {
     @Test(priority = 3)
     public void test_BOServices_v1_user_all(){
         given()
-                //.log().uri().log().headers()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/all")
                 .then().log().all()
@@ -45,10 +43,8 @@ public class BOUserRolesCBOEditUserTest extends TestBase {
     @Test(priority = 4)
     public void test_BOServices_v1_user_PAVELB(){
         given()
-                //.log().uri().log().headers()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                //.contentType("application/json")
                 .when()
                 .get( "/v1/user/PAVELB")
                 .then().log().all()
@@ -71,10 +67,8 @@ public class BOUserRolesCBOEditUserTest extends TestBase {
     @Test(priority = 7)
     public void test_BOServices_v1_user_update(){
         given()
-                //.log().uri().log().headers().log().body()
                 .cookie(cookie)
                 .spec(app.requestSpecBO)
-                //.contentType("application/json")
                 .body("{\n" +
                         "  \"username\" : \""+username+"\",\n" +
                         "  \"firstName\" : \""+randomFirsName+"\",\n" +
