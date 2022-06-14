@@ -2,6 +2,7 @@ package tests.emailsVerification.resetSecretAnswer;
 
 import appmanager.EmailVerificationHelper;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
@@ -32,7 +33,7 @@ public class ResetSecretAnswerTests extends TestBase {
 
     @Test
     public void testResetSecretAnswerTelenorEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", "TELENOR");
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "1", Site.TELENOR.toString());
         postSendResetPasswordEmail();
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -51,7 +52,7 @@ public class ResetSecretAnswerTests extends TestBase {
 
     @Test()//incorrect body, footer
     public void testResetSecretAnswerTelenorHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", "TELENOR");
+        app.getDbHelper().updateClientLanguageFromDB(app.emailsVerificationsEmail, "5", Site.TELENOR.toString());
         postSendResetPasswordEmail();
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
@@ -67,6 +68,4 @@ public class ResetSecretAnswerTests extends TestBase {
         //assertThat(actualBody, equalTo(""));
         //assertThat(actualFooter, equalTo(""+app.SITE_REG+" "+app.site_Telenor+", a DiPocket UAB támogatásával, mely vállalatot a Litván Nemzeti Bank elektronikus pénzintézetenként (# 75) engedélyezett és felügyel | a Mastercard licencével rendelkezik az Európai Gazdasági Térségre vonatkozva Upės str. 23, 08128 Vilnius, LT"));
     }
-
-
 }
