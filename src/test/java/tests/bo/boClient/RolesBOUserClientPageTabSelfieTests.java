@@ -15,7 +15,7 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     int clientId = 33217;
 
     @Test(priority = 1)
-    public void test_BOServices_v1_user_authentication(){
+    public void test_BOServices_v1_auth_authentication(){
         baseURI = app.BOURL;
         basePath = "BOServices";
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
@@ -45,9 +45,7 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     public void test_BOServices_v1_clientImage_33217_selfie(){
         Response res = given()
                 .spec(app.requestSpecBO)
-                //.log().uri().log().headers()
                 .cookie(cookie)
-                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/selfie");
         res.then().log().all().statusCode(200);
@@ -87,9 +85,7 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     public void test_BOServices_v1_dashboard_tranTypes(){
         given()
                 .spec(app.requestSpecBO)
-                //.log().uri().log().headers()
                 .cookie(cookie)
-                //.contentType("application/json")
                 .when()
                 .get( "/v1/dashboard/tranTypes")
                 .then().log().all()
@@ -111,9 +107,7 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
     public void test_BOServices_v1_clientImage_33217_docs(){
         Response res = given()
                 .spec(app.requestSpecBO)
-                //.log().uri().log().headers()
                 .cookie(cookie)
-                //.contentType("application/json")
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/docs");
         res.then().log().all().statusCode(200);
