@@ -6,18 +6,18 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 
-public class RolesCBOSearchByClientCompanyNameTests extends TestBase {
+public class RolesBOSearchByClientCompanyNameTests extends TestBase {
     String cookie = null;
-    String username = "VIKTORIA";
-    String phone = "380634413376";
-    String email = "vikarezznik60@gmail.com";
+    String username = "EVGENYA";
+    String phone = "380992871946";
+    String email = "e.kononenko0312+1@gmail.com";
     String companyName = "Dipocket";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
         baseURI = app.BOURL;
         basePath = "BOServices";
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
     @Test(priority = 2)
