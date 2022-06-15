@@ -1,6 +1,7 @@
 package tests.emailsVerification.legalEmail;
 
 import appmanager.EmailVerificationHelper;
+import appmanager.Language;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
@@ -30,7 +31,7 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
     @Test(priority = 1)
     public void test_clientProfile_getLegalDocumentList() throws SQLException, ClassNotFoundException {
         //app.getDbHelper().deleteClientDeviceFromDB("380633192217-AutoTest-Login");
-        app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.SNOW_ATTACK.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.SNOW_ATTACK.toString());
         List<String> cockiesCliSessionId = app.getLogin_registrationHelper().loginSnowAttack2(phone, pass);
 
         cookie = cockiesCliSessionId.get(0);
@@ -46,7 +47,7 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
                 .then().log().all()
                 .statusCode(200)
                 .body("documentList.type", hasItems("General Terms and Conditions", "Card Terms and Conditions"),
-                        "documentList.nameForClient", hasItems("Общие условия", "Условия пользования картами"),
+                        "documentList.nameForClient", hasItems("General Terms and Conditions", "Card Terms and Conditions"),
                         "documentList.selected", hasItems(false, false));
     }
 
@@ -75,7 +76,7 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
 
     @Test(priority = 2)
     public void test_clientProfile_sendLegalInfo2_SnowAttackEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.SNOW_ATTACK.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.SNOW_ATTACK.toString());
         sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Card Terms and Conditions");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -97,7 +98,7 @@ public class LegalAttachmentsSnowAttackTests extends TestBase {
 
     @Test(priority = 3)
     public void test_clientProfile_sendLegalInfo2_SnowAttackHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "5", Site.SNOW_ATTACK.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.HU.getOurId()), Site.SNOW_ATTACK.toString());
         sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Kártyaszerződési feltételek");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
