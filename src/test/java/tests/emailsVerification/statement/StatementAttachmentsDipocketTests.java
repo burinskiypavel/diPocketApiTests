@@ -2,6 +2,7 @@ package tests.emailsVerification.statement;
 
 import appmanager.EmailVerificationHelper;
 import appmanager.HelperBase;
+import appmanager.Language;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
@@ -29,7 +30,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
 
     @Test(priority = 1)
     public void test_dashBoard_customerStatementRequestList() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.DIPOCKET.toString());
         //app.getDbHelper().updateEmailForTelenorFromDB("burinskiypavel@gmail.com", Site.DIPOCKET.toString(), "testdipocket3@gmail.com", "380980316499");
         cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, "380980316499-AutoTest-Login");
 
@@ -47,7 +48,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
 
     @Test(priority = 2)
     public void test_dashBoard_sendCustomerStatements_DipocketRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.RU.getOurId()), Site.DIPOCKET.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "07", "2021", Site.DIPOCKET.toString(), HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -69,7 +70,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
 
     @Test(priority = 3)
     public void test_dashBoard_sendCustomerStatements_DipocketEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.DIPOCKET.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "06", "2021", Site.DIPOCKET.toString(), HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -91,7 +92,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
 
     @Test(priority = 4)
     public void test_dashBoard_sendCustomerStatements_DipocketPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "3", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.PL.getOurId()), Site.DIPOCKET.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "05", "2021", Site.DIPOCKET.toString(), HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -113,7 +114,7 @@ public class StatementAttachmentsDipocketTests extends TestBase {
 
     @Test(priority = 5)
     public void test_dashBoard_sendCustomerStatements_DipocketUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "2", Site.DIPOCKET.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.UK.getOurId()), Site.DIPOCKET.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "04", "2021", Site.DIPOCKET.toString(), HelperBase.prop.getProperty("mobile.login.deviceuuid"), "");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
