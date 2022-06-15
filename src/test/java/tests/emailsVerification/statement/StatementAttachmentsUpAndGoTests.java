@@ -2,6 +2,7 @@ package tests.emailsVerification.statement;
 
 import appmanager.EmailVerificationHelper;
 import appmanager.HelperBase;
+import appmanager.Language;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
@@ -50,7 +51,7 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 3)
     public void test_dashBoard_sendCustomerStatements_UpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "4", Site.UPANDGO.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.RU.getOurId()), Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "04", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -72,7 +73,7 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 4)
     public void test_dashBoard_sendCustomerStatements_UpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.UPANDGO.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "03", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -94,7 +95,7 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 5)
     public void test_dashBoard_sendCustomerStatements_UpAndGoPL() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "3", Site.UPANDGO.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.PL.getOurId()), Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "02", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -116,7 +117,7 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
 
     @Test(priority = 6)
     public void test_dashBoard_sendCustomerStatements_UpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "2", Site.UPANDGO.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.UK.getOurId()), Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "02", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
