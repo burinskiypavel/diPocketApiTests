@@ -2,6 +2,7 @@ package tests.emailsVerification.legalEmail;
 
 import appmanager.EmailVerificationHelper;
 import appmanager.HelperBase;
+import appmanager.Language;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
@@ -30,7 +31,7 @@ public class LegalAttachmentsPlayITTests extends TestBase {
 
     @Test(priority = 1)
     public void test_clientProfile_getLegalDocumentListEN() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.PLAYIT.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.PLAYIT.toString());
         cliSessionId = app.getLogin_registrationHelper().loginPlayIT(phone,pass, deviceuuid);
 
         given()
@@ -50,7 +51,7 @@ public class LegalAttachmentsPlayITTests extends TestBase {
 
     @Test(priority = 2)
     public void test_clientProfile_sendLegalInfo2_PlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.PLAYIT.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.PLAYIT.toString());
         app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Card Terms and Conditions", email, "Card Terms and Conditions", Site.PLAYIT.toString(), "9_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -72,7 +73,7 @@ public class LegalAttachmentsPlayITTests extends TestBase {
 
     @Test(priority = 3)
     public void test_clientProfile_sendLegalInfo2_PlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "5", Site.PLAYIT.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.HU.getOurId()), Site.PLAYIT.toString());
         app.getAttachmentHelper().sendLegalInfo2(phone, pass, "" + cliSessionId + "", "Kártyaszerződési feltételek", email, "General Terms and Conditions", Site.PLAYIT.toString(), "9_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
