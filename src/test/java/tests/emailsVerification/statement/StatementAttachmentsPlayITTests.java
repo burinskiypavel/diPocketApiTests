@@ -2,6 +2,7 @@ package tests.emailsVerification.statement;
 
 import appmanager.EmailVerificationHelper;
 import appmanager.HelperBase;
+import appmanager.Language;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
@@ -48,7 +49,7 @@ public class StatementAttachmentsPlayITTests extends TestBase {
 
     @Test(priority = 2)
     public void test_dashBoard_sendCustomerStatements_PlayITEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "1", Site.PLAYIT.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.PLAYIT.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "08", "2021", Site.PLAYIT.toString(), deviceuuid, "9_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
@@ -70,7 +71,7 @@ public class StatementAttachmentsPlayITTests extends TestBase {
 
     @Test(priority = 3)
     public void test_dashBoard_sendCustomerStatements_PlayITHU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, "5", Site.PLAYIT.toString());
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.HU.getOurId()), Site.PLAYIT.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "08", "2021", Site.PLAYIT.toString(), deviceuuid, "9_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
