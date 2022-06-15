@@ -50,28 +50,6 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
     }
 
     @Test(priority = 3)
-    public void test_dashBoard_sendCustomerStatements_UpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.RU.getOurId()), Site.UPANDGO.toString());
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "04", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
-
-        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
-        String actualSender = senderAndSubject.get(0);
-        String actualSubject = senderAndSubject.get(1);
-        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
-        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
-        String actualBody = getEmailBodyText(emailText, 29, 176);
-        String actualFooter = getEmailFooterText(emailText, 177);
-
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-04.2022.pdf"), "File name is not correct");
-        //softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct"); //bug DEV-2479
-        softAssert.assertEquals(actualSubject, "Выписка по счету "+app.site_upAndGo+"", "Subject is not correct");
-        softAssert.assertEquals(actualBody, "Здравствуйте, "+app.emailsVerificationsFirstName+"! К письму прикреплена выписка по счету, которую Вы заказывали. Спасибо за пользование "+app.site_upAndGo+". С уважением, Юридический отдел", "Body is not correct");
-        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
-        softAssert.assertAll();
-    }
-
-    @Test(priority = 4)
     public void test_dashBoard_sendCustomerStatements_UpAndGoEN() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.EN.getOurId()), Site.UPANDGO.toString());
         app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "03", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
@@ -90,6 +68,28 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
         softAssert.assertEquals(actualSubject, "Your "+app.site_upAndGo+" account statement", "Subject is not correct");
         softAssert.assertEquals(actualBody, "Dear "+app.emailsVerificationsFirstName+", As requested, please find attached your up and go account statement(s). Thank you for using "+app.site_upAndGo+". With kind regards, Legal Team", "Body is not correct");
         softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" "+app.site_upAndGo+" is powered by DiPocket UAB, authorised Electronic Money Institution regulated by the Bank of Lithuania (#75) | Licensed by Masterсard for the European Economic Area Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 4)
+    public void test_dashBoard_sendCustomerStatements_UpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.UK.getOurId()), Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "02", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
+
+        List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
+        String actualSender = senderAndSubject.get(0);
+        String actualSubject = senderAndSubject.get(1);
+        List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
+        String actualBody = getEmailBodyText(emailText, 29, 194);
+        String actualFooter = getEmailFooterText(emailText, 195);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-02.2022.pdf"), "File name is not correct");
+        //softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct"); //bug DEV-2479
+        softAssert.assertEquals(actualSubject, "Виписка по рахунку "+app.site_upAndGo+"", "Subject is not correct");
+        softAssert.assertEquals(actualBody,"Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлена Вами банківська виписка по рахунку "+app.site_upAndGo+". Дякуємо за користування додатком "+app.site_upAndGo+". З повагою, Юридичний відділ", "Body is not correct");
+        softAssert.assertEquals(actualFooter,""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
     }
 
@@ -116,24 +116,24 @@ public class StatementAttachmentsUpAndGoTests extends TestBase {
     }
 
     @Test(priority = 6)
-    public void test_dashBoard_sendCustomerStatements_UpAndGoUA() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
-        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.UK.getOurId()), Site.UPANDGO.toString());
-        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "02", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
+    public void test_dashBoard_sendCustomerStatements_UpAndGoRU() throws InterruptedException, MessagingException, IOException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.RU.getOurId()), Site.UPANDGO.toString());
+        app.getAttachmentHelper().sendCustomerStatements(phone, pass, "" + cliSessionId + "", "04", "2022", Site.UPANDGO.toString(), deviceuuid, "10_");
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, emailPass, appPass);
         String actualSender = senderAndSubject.get(0);
         String actualSubject = senderAndSubject.get(1);
         List<String>actualAttachedFileNames = EmailVerificationHelper.getFileNameFromEmail("pop.gmail.com", email, emailPass, appPass);
         String emailText =  EmailVerificationHelper.getTextFromEmail("pop.gmail.com", email, emailPass, appPass);
-        String actualBody = getEmailBodyText(emailText, 29, 194);
-        String actualFooter = getEmailFooterText(emailText, 195);
+        String actualBody = getEmailBodyText(emailText, 29, 176);
+        String actualFooter = getEmailFooterText(emailText, 177);
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-02.2022.pdf"), "File name is not correct");
+        softAssert.assertEquals(actualAttachedFileNames, Arrays.asList("statement-04.2022.pdf"), "File name is not correct");
         //softAssert.assertEquals(actualSender, expectedUpAndGoSender, "Sender is not correct"); //bug DEV-2479
-        softAssert.assertEquals(actualSubject, "Виписка по рахунку "+app.site_upAndGo+"", "Subject is not correct");
-        softAssert.assertEquals(actualBody,"Вітаємо, "+app.emailsVerificationsFirstName+"! В додатку знаходиться замовлена Вами банківська виписка по рахунку "+app.site_upAndGo+". Дякуємо за користування додатком "+app.site_upAndGo+". З повагою, Юридичний відділ", "Body is not correct");
-        softAssert.assertEquals(actualFooter,""+app.SITE_REG+" Для Вашого спокою, "+app.site_upAndGo+" працює при підтримці DiPocket UAB, що авторизований та контролюється Банком Литви, як емітент електронних грошей (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
+        softAssert.assertEquals(actualSubject, "Выписка по счету "+app.site_upAndGo+"", "Subject is not correct");
+        softAssert.assertEquals(actualBody, "Здравствуйте, "+app.emailsVerificationsFirstName+"! К письму прикреплена выписка по счету, которую Вы заказывали. Спасибо за пользование "+app.site_upAndGo+". С уважением, Юридический отдел", "Body is not correct");
+        softAssert.assertEquals(actualFooter, ""+app.SITE_REG+" Для вашего спокойствия, "+app.site_upAndGo+" осуществляет деятельность при поддержке DiPocket UAB, который авторизован и контролируется Банком Литвы как эмитент электронных денег (#75) Upės str. 23, 08128 Vilnius, LT", "Footer is not correct");
         softAssert.assertAll();
     }
 }
