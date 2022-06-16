@@ -657,7 +657,7 @@ public class UITestBase {
     public WebElement editBtn;
 
     public void gotoBOSiteAndLoginWithBOUserRole(String login, String password) throws InterruptedException {
-        driver.navigate().to("https://support.dipocket.dev/NgBOTool");
+        driver.navigate().to("https://support.dipocket.dev/NgBOTool/");
         waitForSeveralItems(new String[]{"Login:", "Password:", "Log in"});
         type(By.cssSelector("input[type='text']"), login);
         type(By.cssSelector("input[type='password']"), password);
@@ -668,7 +668,7 @@ public class UITestBase {
     }
 
     public void gotoBOSiteAndLoginWithCBOUserRole(String login, String password) throws InterruptedException {
-        driver.navigate().to("https://support.dipocket.dev/NgBOTool");
+        driver.navigate().to("https://support.dipocket.dev/NgBOTool/");
         waitForSeveralItems(new String[]{"Login:", "Password:", "Log in"});
         type(By.cssSelector("input[type='text']"), login);
         type(By.cssSelector("input[type='password']"), password);
