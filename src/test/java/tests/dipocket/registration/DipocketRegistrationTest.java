@@ -103,6 +103,26 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
+        given()
+                .log().uri().log().headers().log().body()
+                .when()
+                .get("http://app.dipocket.dev:8091/sms/all")
+                .then().log().all()
+                .statusCode(200);
+
+        String smsMessage = given()
+                .log().uri().log().headers().log().body()
+                .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("site", site)
+                .when()
+                .get("http://app.dipocket.dev:8091/sms/by_phone_and_site")
+                .then().log().all()
+                .statusCode(200)
+                .extract().path("message");
+
+        String  smsFromMemCash = smsMessage.substring(6, 12);
+        System.out.println("smsFromMemCash: " + smsFromMemCash);
+
         smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
                 .spec(app.requestSpecDipocketRegistration)
