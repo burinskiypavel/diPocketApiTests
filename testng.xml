@@ -693,6 +693,12 @@
         </classes>
     </test>
 
+    <test name="RolesBOSearchByCardBySeveralFieldsTest">
+        <classes>
+            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardBySeveralFieldsTest"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 
