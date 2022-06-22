@@ -16,19 +16,12 @@ public class RolesBOSearchByCardCardIDPlasticCardIinactiveTest extends UITestBas
         gotoCardSearchTab();
         searchByCard("id", cardId);
         gotoCardDetailsPage(cardId);
+        waitFor(By.xpath("//a[@role='tab'] //span[contains(text(), 'Card')]"));
 
-        softAssert.assertTrue(areElementsPresent(new String[]{"//td[@ng-reflect-text='" + cardId + "']"}), "Incorrect headers");
-
-        waitFor(By.xpath("//td[@ng-reflect-text='"+cardId+"']"));
-
-//        softAssert.assertTrue(areElementsPresent(new String[]{"//td[@ng-reflect-text='"+cardId+"']", "//td[@ng-reflect-text='"+publicToken+"']",
-//                "//td[@ng-reflect-text='"+dipToken+"']", "//td[@ng-reflect-text='"+clientId+"']",
-//                "//td[@ng-reflect-text='"+cardholderName+"']"}), "Incorrect data in the table results");
-
+        softAssert.assertTrue(areElementsPresent(new String[]{"//a[@role='tab'] //span[contains(text(), 'Card')]", "//a[@role='tab'] //span[contains(text(), 'Client')]",
+                "//a[@role='tab'] //span[contains(text(), 'Transactions')]"}), "Incorrect tabs");
+        softAssert.assertTrue(areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Back to search']",
+        "//app-button[@ng-reflect-label='Show client info']", "//app-button[@ng-reflect-label='Operations']"}), "Incorrect buttons");
         softAssert.assertAll();
-    }
-
-    public void gotoCardDetailsPage(String cardId) {
-        click(By.xpath("//td[@ng-reflect-text='" + cardId + "']"));
     }
 }

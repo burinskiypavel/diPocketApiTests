@@ -1169,4 +1169,9 @@ public class UITestBase {
     public void searchByCard(String filter, String value) {
         type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='"+filter+"'] //input"), value);
     }
+
+    public void gotoCardDetailsPage(String cardId) {
+        waitFor(By.xpath("//td[@ng-reflect-text='" + cardId + "']"));
+        click(By.xpath("//td[@ng-reflect-text='" + cardId + "']"));
+    }
 }
