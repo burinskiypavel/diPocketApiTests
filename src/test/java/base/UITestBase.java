@@ -719,7 +719,7 @@ public class UITestBase {
         click(By.id("p-tabpanel-1-label"));
     }
 
-    public void gotoCardTab() {
+    public void gotoCardSearchTab() {
         click(By.id("p-tabpanel-1-label"));
     }
 

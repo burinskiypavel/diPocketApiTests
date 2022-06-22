@@ -1,7 +1,6 @@
 package tests.uiTests.bo.boSearch;
 
 import base.UITestBase;
-import com.cs.dipocketback.base.data.Site;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -15,7 +14,7 @@ public class RolesCBOBOSearchByCardTest extends UITestBase {
         gotoSearchPage();
         softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
         softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
-        click(By.id("p-tabpanel-1-label"));
+        gotoCardSearchTab();
 
         softAssert.assertFalse(!areElementsPresent(new String[]{
                 "//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='publicToken']",
@@ -31,7 +30,7 @@ public class RolesCBOBOSearchByCardTest extends UITestBase {
         gotoSearchPage();
         softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
         softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
-        click(By.id("p-tabpanel-1-label"));
+        gotoCardSearchTab();
 
         softAssert.assertFalse(!areElementsPresent(new String[]{
                 "//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='publicToken']",

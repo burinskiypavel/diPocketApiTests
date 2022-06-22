@@ -18,7 +18,7 @@ public class RolesBOSearchByCardBySeveralFieldsTest extends UITestBase {
     public void testRolesBOSearchByCardBySeveralFields() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
-        gotoCardTab();
+        gotoCardSearchTab();
         searchByCardBySeveralFields(cardId, publicToken, dipToken, pan, clientId, cardholderName);
 
         softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Card id')]",
