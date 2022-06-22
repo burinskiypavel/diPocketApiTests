@@ -1165,4 +1165,8 @@ public class UITestBase {
         type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='clientId'] //input"), clientId);
         type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='cardholderName'] //input"), cardholderName);
     }
+
+    public void searchByCard(String filter, String value) {
+        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='"+filter+"'] //input"), value);
+    }
 }
