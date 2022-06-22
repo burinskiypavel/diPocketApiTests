@@ -16,7 +16,7 @@ public class RolesBOSearchByCardBySeveralFieldsTest extends UITestBase {
 
     @Test
     public void testRolesBOSearchByCardBySeveralFields() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         gotoCardTab();
         searchByCardBySeveralFields(cardId, publicToken, dipToken, pan, clientId, cardholderName);
