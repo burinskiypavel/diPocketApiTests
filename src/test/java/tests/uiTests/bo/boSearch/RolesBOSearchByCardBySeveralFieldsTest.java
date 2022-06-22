@@ -18,15 +18,8 @@ public class RolesBOSearchByCardBySeveralFieldsTest extends UITestBase {
     public void testRolesBOSearchByCardBySeveralFields() throws InterruptedException {
         gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoSearchPage();
-        click(By.id("p-tabpanel-1-label"));
-
-        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='id'] //input"), cardId);
-        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='publicToken'] //input"), publicToken);
-        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='dipToken'] //input"), dipToken);
-        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='pan'] //input"), pan);
-        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='clientId'] //input"), clientId);
-        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='cardholderName'] //input"), cardholderName);
-
+        gotoCardTab();
+        searchByCardBySeveralFields(cardId, publicToken, dipToken, pan, clientId, cardholderName);
 
         softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Card id')]",
                 "//table //th[contains(text(), 'Public token')]", "//table //th[contains(text(), 'DiP token')]",

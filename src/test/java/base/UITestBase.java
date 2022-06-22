@@ -719,6 +719,10 @@ public class UITestBase {
         click(By.id("p-tabpanel-1-label"));
     }
 
+    public void gotoCardTab() {
+        click(By.id("p-tabpanel-1-label"));
+    }
+
     public void addRole(String roleID, String roleName) throws InterruptedException {
         click(By.cssSelector("app-button[label='+ Add']"));
         waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
@@ -1151,5 +1155,14 @@ public class UITestBase {
         waitFor(By.xpath("//app-select-async[@ng-reflect-name='gender']"));
         waitFor(By.xpath("//app-button[@ng-reflect-label='Save']"));
         Thread.sleep(700);
+    }
+
+    public void searchByCardBySeveralFields(String cardId, String publicToken, String dipToken, String pan, String clientId, String cardholderName) {
+        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='id'] //input"), cardId);
+        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='publicToken'] //input"), publicToken);
+        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='dipToken'] //input"), dipToken);
+        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='pan'] //input"), pan);
+        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='clientId'] //input"), clientId);
+        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='cardholderName'] //input"), cardholderName);
     }
 }
