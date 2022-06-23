@@ -1173,5 +1173,6 @@ public class UITestBase {
     public void gotoCardDetailsPage(String cardId) {
         waitFor(By.xpath("//td[@ng-reflect-text='" + cardId + "']"));
         click(By.xpath("//td[@ng-reflect-text='" + cardId + "']"));
+        waitFor(By.xpath("//a[@role='tab'] //span[contains(text(), 'Transactions')]"));
     }
 }
