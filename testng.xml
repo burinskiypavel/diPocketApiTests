@@ -699,9 +699,9 @@
         </classes>
     </test>
 
-    <test name="RolesBOSearchByCardCardIDPlasticCardIinactiveTest">
+    <test name="RolesBOSearchByCardCardIDPlasticCardInactiveTest">
         <classes>
-            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardCardIDPlasticCardIinactiveTest"/>
+            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardCardIDPlasticCardInactiveTest"/>
         </classes>
     </test>
 

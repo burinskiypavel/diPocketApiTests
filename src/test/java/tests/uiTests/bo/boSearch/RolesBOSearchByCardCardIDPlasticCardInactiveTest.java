@@ -5,18 +5,18 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class RolesBOSearchByCardCardIDPlasticCardIinactiveTest extends UITestBase {
+public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
     String cardId = "185822";
 
     @Test
-    public void testRolesBOSearchByCardCardIDPlasticCardIinactive() throws InterruptedException {
+    public void testRolesBOSearchByCardCardIDPlasticCardInactive() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         gotoCardSearchTab();
         searchByCard("id", cardId);
         gotoCardDetailsPage(cardId);
-        waitFor(By.xpath("//a[@role='tab'] //span[contains(text(), 'Card')]"));
+        waitFor(By.xpath("//a[@role='tab'] //span[contains(text(), 'Transactions')]"));
 
         softAssert.assertTrue(areElementsPresent(new String[]{"//a[@role='tab'] //span[contains(text(), 'Card')]", "//a[@role='tab'] //span[contains(text(), 'Client')]",
                 "//a[@role='tab'] //span[contains(text(), 'Transactions')]"}), "Incorrect tabs");
