@@ -40,4 +40,20 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         softAssert.assertEquals(pan, "5455982163608829");
         softAssert.assertAll();
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDAccountLimits() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Account limits')]"));
+
+        softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Name')]", "//table //th[contains(text(), 'Type')]",
+                "//table //th[contains(text(), 'Currency')]", "//table //th[contains(text(), 'Max amount')]", "//table //th[contains(text(), 'Limit amount')]"}), "Account limits has incorrect headers ");
+        softAssert.assertAll();
+    }
 }
