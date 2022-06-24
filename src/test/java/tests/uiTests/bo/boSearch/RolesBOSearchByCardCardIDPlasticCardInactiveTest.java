@@ -20,7 +20,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         softAssert.assertTrue(areElementsPresent(new String[]{"//a[@role='tab'] //span[contains(text(), 'Card')]", "//a[@role='tab'] //span[contains(text(), 'Client')]",
                 "//a[@role='tab'] //span[contains(text(), 'Transactions')]"}), "Incorrect tabs");
         softAssert.assertTrue(areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Back to search']",
-        "//app-button[@ng-reflect-label='Show client info']", "//app-button[@ng-reflect-label='Operations']"}), "Incorrect buttons");
+                "//app-button[@ng-reflect-label='Show client info']", "//app-button[@ng-reflect-label='Operations']"}), "Incorrect buttons");
         softAssert.assertAll();
     }
 
@@ -54,6 +54,25 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Name')]", "//table //th[contains(text(), 'Type')]",
                 "//table //th[contains(text(), 'Currency')]", "//table //th[contains(text(), 'Max amount')]", "//table //th[contains(text(), 'Limit amount')]"}), "Account limits has incorrect headers ");
+        softAssert.assertAll();
+    }
+
+    @Test(enabled = false)
+    public void testRolesBOSearchByCardCardIDBlockAccount() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
+        click(By.xpath("//app-button[@label='Block']"));
+        waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+
+
+        //softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Name')]", "//table //th[contains(text(), 'Type')]",
+        //        "//table //th[contains(text(), 'Currency')]", "//table //th[contains(text(), 'Max amount')]", "//table //th[contains(text(), 'Limit amount')]"}), "Account limits has incorrect headers ");
         softAssert.assertAll();
     }
 }
