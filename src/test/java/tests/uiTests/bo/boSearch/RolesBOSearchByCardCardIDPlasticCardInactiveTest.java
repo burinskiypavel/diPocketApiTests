@@ -52,6 +52,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         gotoCardDetailsPage(cardId);
 
         click(By.xpath("//app-button[@label='Operations']"));
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Account limits')]"));
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Account limits')]"));
 
         softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Name')]", "//table //th[contains(text(), 'Type')]",
