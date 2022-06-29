@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import static org.testng.Assert.assertTrue;
+
 public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
     String cardId = "185822";
@@ -57,7 +59,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         softAssert.assertAll();
     }
 
-    @Test(enabled = false)
+    @Test
     public void testRolesBOSearchByCardCardIDBlockAccount() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -66,13 +68,22 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         gotoCardDetailsPage(cardId);
 
         click(By.xpath("//app-button[@label='Operations']"));
+
+        if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock account')]"))){
+            click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock account')]"));
+            click(By.xpath("//app-button[@label='Unblock']"));
+            waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+            waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+            click(By.xpath("//app-button[@label='Operations']"));
+        }
+
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
         click(By.xpath("//app-button[@label='Block']"));
         waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
 
+        click(By.xpath("//app-button[@label='Operations']"));
 
-        //softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Name')]", "//table //th[contains(text(), 'Type')]",
-        //        "//table //th[contains(text(), 'Currency')]", "//table //th[contains(text(), 'Max amount')]", "//table //th[contains(text(), 'Limit amount')]"}), "Account limits has incorrect headers ");
-        softAssert.assertAll();
+        assertTrue(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock account')]")));
     }
 }
