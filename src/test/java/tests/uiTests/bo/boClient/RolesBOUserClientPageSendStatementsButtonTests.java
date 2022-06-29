@@ -1,11 +1,14 @@
 package tests.uiTests.bo.boClient;
 
 import appmanager.EmailVerificationHelper;
+import appmanager.Language;
 import base.UITestBase;
+import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import static appmanager.EmailIMAPHelper.getEmailBodyText;
@@ -20,7 +23,8 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
     String appPass = "whotpsgrehudbtqv";
 
     @Test
-    public void testRolesBOUserClientPageSendStatementsButtonAllStatementsAndDefaultEmail() throws InterruptedException, IOException, MessagingException {
+    public void testRolesBOUserClientPageSendStatementsButtonAllStatementsAndDefaultEmail() throws InterruptedException, IOException, MessagingException, SQLException, ClassNotFoundException {
+        app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.UK.getOurId()), Site.DIPOCKET.toString());
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         search("id", clientId, phone);
