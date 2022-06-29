@@ -24,7 +24,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends UITestBase {
         click(By.cssSelector("li[aria-label='PhotoID']"));
         uploadFile(By.cssSelector("p-fileupload[ng-reflect-choose-label='Browse'] input[type='file']"), "C:/Work/Files/self.jpg");
         Thread.sleep(1500);
-        click(By.xpath("//app-button[@ng-reflect-label='Confirm']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
 
         waitFor(By.xpath("//div[contains(text(), 'Docs were uploaded successfully')]"));
     }
