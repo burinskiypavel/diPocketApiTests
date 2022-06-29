@@ -1153,7 +1153,7 @@ public class UITestBase {
     public void pressEditProfileDataFromClientPage() throws InterruptedException {
         click(By.cssSelector("div.edit-button"));
         waitFor(By.xpath("//app-select-async[@ng-reflect-name='gender']"));
-        waitFor(By.xpath("//app-button[@ng-reflect-label='Save']"));
+        waitFor(By.xpath("//p-button[@ng-reflect-label='Save']"));
         Thread.sleep(700);
     }
 
