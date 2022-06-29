@@ -131,7 +131,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
         click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
         click(By.xpath("//label[contains(text(), 'Change password:')]"));
-        click(By.cssSelector("app-button[ng-reflect-label='Change']"));
+        click(By.cssSelector("p-button[ng-reflect-label='Change']"));
         waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
@@ -145,7 +145,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
         click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
         click(By.xpath("//label[contains(text(), 'Change secret answer:')]"));
-        click(By.cssSelector("app-button[ng-reflect-label='Change']"));
+        click(By.cssSelector("p-button[ng-reflect-label='Change']"));
         waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 

@@ -1054,14 +1054,14 @@ public class UITestBase {
         click(By.xpath("//app-button[@ng-reflect-label='Block client']"));
         type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
         Thread.sleep(1500);
-        click(By.xpath("//app-button[@ng-reflect-label='Block']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was blocked successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Blocked')]"));
     }
 
     public void unblockClient() {
         click(By.xpath("//app-button[@ng-reflect-label='Unblock client']"));
-        click(By.xpath("//app-button[@ng-reflect-label='Unblock']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Unblock']"));
         waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unblocked successfully')]"));
         waitFor(By.xpath("//app-button[@ng-reflect-label='Block client']"));
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
@@ -1072,7 +1072,7 @@ public class UITestBase {
         type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
         Thread.sleep(1500);
         clickCheckbox(By.cssSelector("app-dynamic-form p-checkbox"));
-        click(By.xpath("//app-button[@ng-reflect-label='Ban']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Ban']"));
         waitFor(By.xpath("//div[contains(text(), 'User was ban successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
     }
@@ -1089,7 +1089,7 @@ public class UITestBase {
     public void unbanClient(String reason) {
         click(By.xpath("//app-button[@ng-reflect-label='Unban client']"));
         type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
-        click(By.xpath("//app-button[@ng-reflect-label='Unban']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Unban']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
     }
@@ -1098,7 +1098,7 @@ public class UITestBase {
         click(By.xpath("//app-button[@ng-reflect-label='Forget client']"));
         type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
         Thread.sleep(1500);
-        click(By.xpath("//app-button[@ng-reflect-label='Forget']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Forget']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was forget successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Forgotten')]"));
     }
@@ -1115,7 +1115,7 @@ public class UITestBase {
         waitForInvisibilityOfElement(By.cssSelector("input[placeholder='New phone'][disabled]"));
         type(By.cssSelector("input[placeholder='New phone']"), newPhone);
         Thread.sleep(1000);
-        click(By.cssSelector("app-button[ng-reflect-label='Change']"));
+        click(By.cssSelector("p-button[ng-reflect-label='Change']"));
     }
 
     public void sendAllStatemenstToDefaultEmail() {
