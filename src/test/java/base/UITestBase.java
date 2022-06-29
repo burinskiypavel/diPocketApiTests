@@ -825,7 +825,7 @@ public class UITestBase {
         waitFor(By.xpath("//*[contains(text(), 'Are you sure want to block user')]"));
         type(By.cssSelector("div[role='dialog'] input[type='text']"), blockReason);
         Thread.sleep(1000);
-        click(By.cssSelector("div[role='dialog'] app-button[ng-reflect-label='Block user']"));
+        click(By.cssSelector("div[role='dialog'] p-button[ng-reflect-label='Block user']"));
         waitFor(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
         waitFor(By.cssSelector("td[ng-reflect-text='Blocked']"));
