@@ -23,17 +23,43 @@
     <!--    </test>-->
 
 
-        <test name="DipocketRegistrationTest">
-            <classes>
-                <class name="tests.dipocket.registration.DipocketRegistrationTest"/>
-            </classes>
-        </test>
+    <!--    <test name="DipocketRegistrationTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tests.dipocket.registration.DipocketRegistrationTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
-    <!--    <test name="HomePageWithAlreadyExistClientTest">-->
+<!--    <test name="PlayITRegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.dipocket.registration.PlayITRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="UpAndGoRegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.dipocket.registration.UpAndGoRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--        <test name="SnowAttackRegistrationTest">-->
+<!--            <classes>-->
+<!--                <class name="tests.dipocket.registration.SnowAttackRegistrationTest"/>-->
+<!--            </classes>-->
+<!--        </test>-->
+
+<!--    <test name="SodexoRegistrationTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.dipocket.registration.SodexoRegistrationTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <!--    <test name="DipocketHomePageWithAlreadyExistClientTest">-->
     <!--    <classes>-->
     <!--        <class name="tests.dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
     <!--    </classes>-->
     <!--    </test>-->
+
+    <!--    TDS -->
 
     <!--&lt;!&ndash;    <test name="TDSV1BioDeclineTest">&ndash;&gt;-->
     <!--&lt;!&ndash;        <classes>&ndash;&gt;-->
@@ -41,11 +67,11 @@
     <!--&lt;!&ndash;        </classes>&ndash;&gt;-->
     <!--&lt;!&ndash;    </test>&ndash;&gt;-->
 
-<!--        <test name="TDSV1BioAcceptTest">-->
-<!--            <classes>-->
-<!--                <class name="tests.tds.TDSV1BioAcceptTest"/>-->
-<!--            </classes>-->
-<!--        </test>-->
+    <!--    <test name="TDSV1BioAcceptTest">-->
+    <!--        <classes>-->
+    <!--            <class name="tests.tds.TDSV1BioAcceptTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
     <!--    <test name="TDSV1BioDeclineTest">-->
     <!--        <classes>-->
@@ -155,6 +181,8 @@
     <!--        </classes>-->
     <!--    </test>-->
 
+    <!--    Telenor -->
+
     <!--    <test name="TelenorHomePageTest">-->
     <!--        <classes>-->
     <!--            <class name="tests.telenor.TelenorHomePageTest"/>-->
@@ -251,6 +279,12 @@
     <!--        </classes>-->
     <!--    </test>-->
 
+
+<!--    <test name="TelenorFullRegistrationPageNegativeVerificationTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.telenor.TelenorFullRegistrationPageNegativeVerificationTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 <!--    <test name="TelenorNewAndOldPINNegativeTests">-->
 <!--        <classes>-->
@@ -451,6 +485,227 @@
 <!--        </classes>-->
 <!--    </test>-->
 
+    <!--    Up And Go -->
+
+    <test name="UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest">
+        <classes>
+            <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest"/>
+        </classes>
+    </test>
+
+    <test name="UpAndGoCheckBalanceNegativeTests">
+        <classes>
+            <class name="tests.uiTests.upandgo.UpAndGoCheckBalanceNegativeTests"/>
+        </classes>
+    </test>
+
+    <test name="UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest">
+        <classes>
+            <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest"/>
+        </classes>
+    </test>
+
+    <!--BO-->
+
+    <test name="LoginBOUserRolesBOTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.LoginBOUserRolesBOTest"/>
+        </classes>
+    </test>
+
+    <test name="LoginBOUserRolesCBOTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.LoginBOUserRolesCBOTest"/>
+        </classes>
+    </test>
+
+    <test name="BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest"/>
+        </classes>
+    </test>
+
+    <test name="BOUserRolesCBOAllUsersTableTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOAllUsersTableTest"/>
+        </classes>
+    </test>
+
+    <test name="BOUserRolesCBORolesTableTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBORolesTableTest"/>
+        </classes>
+    </test>
+
+<!--    <test name="BOUserRolesCBOAddNewRoleTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOAddNewRoleTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="BOUserRolesCBOEditRoleTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOEditRoleTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="BOUserRolesCBODeleteRoleTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBODeleteRoleTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="BOUserRolesCBOAddNewUserTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOAddNewUserTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="BOUserRolesCBOEditUserTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOEditUserTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="BOUserRolesCBOResetPasswordAlternativeFlowTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOResetPasswordAlternativeFlowTest"/>
+        </classes>
+    </test>
+
+    <test name="BOUserRolesCBOBlockUserAlternativeFlowTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOBlockUserAlternativeFlowTest"/>
+        </classes>
+    </test>
+
+    <test name="BOUserRolesCBOUnblockUserAlternativeFlowTest">
+        <classes>
+            <class name="tests.uiTests.bo.boUser.BOUserRolesCBOUnblockUserAlternativeFlowTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageEditProfileDataTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageEditProfileDataTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTabTilesTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabTilesTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageMessagesTabTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageMessagesTabTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageClientIBANtabTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageClientIBANtabTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTabPayeeTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabPayeeTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTabAccountsTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabAccountsTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTabAccountsAccountLimitsTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabAccountsAccountLimitsTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTabAccountsBlockUnblockAccountTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabAccountsBlockUnblockAccountTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTab3rdPartyCardsTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTab3rdPartyCardsTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTabTransactionsTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabTransactionsTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTabTicketsTest">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabTicketsTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageTabSupervisorRequestsTests">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageTabSupervisorRequestsTests"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageUploadDocsButtonTests">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageUploadDocsButtonTests"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetClientButtonsTests">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetClientButtonsTests"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOUserClientPageSendStatementsButtonTests">
+        <classes>
+            <class name="tests.uiTests.bo.boClient.RolesBOUserClientPageSendStatementsButtonTests"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOSearchByClientClientIDTest">
+        <classes>
+            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByClientClientIDTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesCBOBOSearchByCardTest">
+        <classes>
+            <class name="tests.uiTests.bo.boSearch.RolesCBOBOSearchByCardTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOSearchByCardBySeveralFieldsTest">
+        <classes>
+            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardBySeveralFieldsTest"/>
+        </classes>
+    </test>
+
+    <test name="RolesBOSearchByCardCardIDPlasticCardInactiveTest">
+        <classes>
+            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardCardIDPlasticCardInactiveTest"/>
+        </classes>
+    </test>
+
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->
@@ -522,6 +777,30 @@
 <!--    <test name="EmailsVerificationLegalAttachmentsPlayITTests">-->
 <!--        <classes>-->
 <!--            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsPlayITTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="EmailsVerificationLegalAttachmentsSnowAttackTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.legalEmail.LegalAttachmentsSnowAttackTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="EmailsVerificationStatementAttachmentsDipocketTests">
+        <classes>
+            <class name="tests.emailsVerification.statement.StatementAttachmentsDipocketTests"/>
+        </classes>
+    </test>
+
+<!--    <test name="EmailsVerificationStatementAttachmentsUpAndGoTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.statement.StatementAttachmentsUpAndGoTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="EmailsVerificationStatementAttachmentsPlayITTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.emailsVerification.statement.StatementAttachmentsPlayITTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
