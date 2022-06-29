@@ -928,10 +928,10 @@ public class UITestBase {
     }
 
     public void updateLimits(String lowLimit, String highLimit) throws InterruptedException {
-        type(By.cssSelector("app-input-number[ng-reflect-name='lowLimit'] input[inputmode='decimal']"), lowLimit);
-        type(By.cssSelector("app-input-number[ng-reflect-name='highLimit'] input[inputmode='decimal']"), highLimit);
+        type(By.cssSelector("p-inputnumber#formly_3_input-number_lowLimit_0 input"), lowLimit);
+        type(By.cssSelector("p-inputnumber#formly_3_input-number_highLimit_1 input"), highLimit);
         Thread.sleep(1000);
-        click(By.cssSelector("app-button[ng-reflect-label='Save']"));
+        click(By.cssSelector("p-button[ng-reflect-label='Save']"));
         waitFor(By.xpath("//div[contains(text(), 'Account limits was changed successfully')]"));
     }
 
@@ -943,7 +943,7 @@ public class UITestBase {
 
         click(By.xpath("//label[contains(text(), '41 Lost card (can be unblocked)')]"));
         Thread.sleep(1200);
-        click(By.cssSelector("app-button[ng-reflect-label='Block']"));
+        click(By.cssSelector("p-button[ng-reflect-label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
     }
