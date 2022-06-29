@@ -88,4 +88,33 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         assertTrue(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock account')]")));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDUnblockAccount() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+
+        if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block account')]"))){
+            waitFor(By.xpath("//*[contains(text(), 'Block account')]"));
+            click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
+            click(By.xpath("//app-button[@label='Block']"));
+            waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+            waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+            click(By.xpath("//app-button[@label='Operations']"));
+        }
+
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock account')]"));
+        click(By.xpath("//app-button[@label='Unblock']"));
+        waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+
+        click(By.xpath("//app-button[@label='Operations']"));
+
+        assertTrue(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block account')]")));
+    }
 }
