@@ -1011,7 +1011,7 @@ public class UITestBase {
     public void searchByTransactionTab(String date) {
         click(By.cssSelector("p-dropdown[optionlabel='value']"));
         click(By.cssSelector("li[aria-label='" + date + "']"));
-        click(By.cssSelector("app-button[label='Search']"));
+        click(By.cssSelector("p-button[label='Search']"));
     }
 
     public void rejectSupervisor() throws InterruptedException {
