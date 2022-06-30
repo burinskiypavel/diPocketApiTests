@@ -1,4 +1,4 @@
-package tests.dipocket.registration;
+package tests.registration;
 
 import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
@@ -12,48 +12,46 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
-public class SodexoRegistrationTest extends TestBase {
+public class DiscontuRegistrationTest extends TestBase {
     String smsCode = null;
     String countryId = "616";
     String currencyId = "985";
-    String site = app.mobile_site_sodexo;
+    String site = "DISCONTU";
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .queryParam("langID", "4")
                 .when()
                 .get( "references/availableCountries")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200)
-                .body("countryList.code", hasItems("AU", "MK", "JP"),
-                        "countryList.name", hasItems("Австралия", "Македония", "Япония"));
+                .body("countryList.code", hasItems("AU", "MK", "JP"))
+                .body("countryList.name", hasItems("Австралия", "Македония", "Япония"));
     }
 
         @Test(priority = 2)
         public void test_ClientServices_v1_references_languages(){
             given()
-                    .spec(app.requestSpecSodexoRegistration)
+                    .spec(app.requestSpecDiscontuRegistration)
                     .when()
                     .get("references/languages")
                     .then().log().all()
                     .statusCode(200)
-                    .body("languageList.name", hasItems("English", "Magyar"));
+                    .body("languageList.name", hasItems("English", "Polski"))
+                    .body("langHash", equalTo("1e43be1453a8784fc9790aaa6506240a9bad4640becb318a4fd5c9078a47b9f5"));
         }
 
     @Test(priority = 3)
     public void test_ClientServices_v1_references_appConfig(){
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .when()
                 .get("references/appConfig?platform=android&version=2.2.9&langCode=rus")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200)
                 .body("versionColor", equalTo("BLACK"))
                 .body("appParams.isAccountCreationEnabled", equalTo(true));
@@ -62,12 +60,11 @@ public class SodexoRegistrationTest extends TestBase {
     @Test(priority = 4)
     public void test_ClientServices_v1_userRegistration_loadSavePointData2() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .queryParam("devUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .when()
                 .get("userRegistration/loadSavePointData2")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200)
                 .body("isInvited", equalTo(false));
     }
@@ -75,7 +72,7 @@ public class SodexoRegistrationTest extends TestBase {
     @Test(priority = 5)
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .queryParam("langID", "4")
                 .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
                 .body("{\n" +
@@ -83,8 +80,7 @@ public class SodexoRegistrationTest extends TestBase {
                         "}")
                 .when()
                 .post("userRegistration/sendSMSCodeForPhone")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200);
     }
 
@@ -92,12 +88,11 @@ public class SodexoRegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
         smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
                 .when()
                 .get("references/verifyPhone")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo(true));
     }
@@ -105,19 +100,20 @@ public class SodexoRegistrationTest extends TestBase {
     @Test(priority = 7)
     public void test_ClientServices_v1_references_topCountries() {
         Response res = given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
+                .queryParam("langID", "4")
                 .when()
-                .get("references/topCountries?langID=4");
+                .get("references/topCountries");
         res.then().log().all();
         int statusCode = res.getStatusCode();
         assertEquals(statusCode, 200);
-        res.then().body("topCountries.name", hasItems("Польша", "Украина", "Германия", "Эстония", "Великобритания"));
+        res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Украина", "Франция", "Литва", "Норвегия"));
     }
 
     @Test(priority = 8)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -141,22 +137,20 @@ public class SodexoRegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200);
     }
 
     @Test(priority = 9)
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .queryParam("langID", "4")
-                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("phoneNum" , HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
                 .queryParam("code", smsCode)
                 .when()
                 .get("userRegistration/checkPhoneAndLoadSavePoint")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200)
                 .body("isInvited", equalTo(false))
                 .body("smsCode", equalTo(smsCode));
@@ -165,7 +159,7 @@ public class SodexoRegistrationTest extends TestBase {
     @Test(priority = 10)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -176,7 +170,7 @@ public class SodexoRegistrationTest extends TestBase {
                         "  \"countryId\" : "+countryId+",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
-                        "  \"residenceCountryId\" : 826,\n" +
+                        "  \"residenceCountryId\" : 616,\n" +
                         "  \"stepNo\" : 2,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
                         "  \"address\" : {\n" +
@@ -210,15 +204,14 @@ public class SodexoRegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200);
     }
 
     @Test(priority = 11)
     public void test_ClientServices_v1_userRegistration_clientImage() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -235,7 +228,7 @@ public class SodexoRegistrationTest extends TestBase {
     @Test(priority = 12)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2__() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -246,7 +239,7 @@ public class SodexoRegistrationTest extends TestBase {
                         "  \"countryId\" : "+countryId+",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
-                        "  \"residenceCountryId\" : 826,\n" +
+                        "  \"residenceCountryId\" : 616,\n" +
                         "  \"stepNo\" : 3,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
                         "  \"address\" : {\n" +
@@ -280,14 +273,14 @@ public class SodexoRegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200);
     }
 
-        @Test(priority = 13, enabled = false)
+        @Test(priority = 13)
         public void test_ClientServices_v1_userRegistration_clientImage__() {
             given()
+                    .spec(app.requestSpecDiscontuRegistration)
                     .contentType("application/json")
                     .body("{\n" +
                             "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -297,29 +290,28 @@ public class SodexoRegistrationTest extends TestBase {
                             "}")
                     .when()
                     .put("userRegistration/clientImage")
-                    .then()
-                    .log().all()
+                    .then().log().all()
                     .statusCode(200);
         }
 
     @Test(priority = 14)
     public void test_ClientServices_v1_references_questions() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .queryParam("langID", "4")
                 .queryParam("countryId", countryId)
                 .when()
                 .get("references/questions")
                 .then().log().all()
                 .statusCode(200)
-                .body("checkboxList.typeId[0]", equalTo("SODEXO_PROFILING"))
-                .body("checkboxList.typeId[1]", equalTo("SODEXO_CONTACT_BY_EMAIL"));
+                .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"))
+                .body("checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
     }
 
     @Test(priority = 15)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2___() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -331,7 +323,7 @@ public class SodexoRegistrationTest extends TestBase {
                         "  \"countryId\" : "+countryId+",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
-                        "  \"residenceCountryId\" : 826,\n" +
+                        "  \"residenceCountryId\" : 616,\n" +
                         "  \"stepNo\" : 4,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
                         "  \"address\" : {\n" +
@@ -365,27 +357,25 @@ public class SodexoRegistrationTest extends TestBase {
                         "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200);
     }
 
     @Test(priority = 16)
     public void test_ClientServices_v1_userRegistration_sendTermsAndConditions() {
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .queryParam("deviceUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .when()
                 .put("userRegistration/sendTermsAndConditions")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200);
     }
 
     @Test(priority = 17)
     public void test_ClientServices_v1_userRegistration_registerNewClient2(){
         given()
-                .spec(app.requestSpecSodexoRegistration)
+                .spec(app.requestSpecDiscontuRegistration)
                 .contentType("application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -398,8 +388,8 @@ public class SodexoRegistrationTest extends TestBase {
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"birthDate\" : \"715611173985\",\n" +
                         "  \"residenceCountryId\" : 616,\n" +
-                        "  \"secAnswer\" : \"QA\",\n" +
-                        "  \"pin\" : \"pasword1\",\n" +
+                        "  \"secAnswer\" : \"***\",\n" +
+                        "  \"pin\" : \""+ app.generateRandomString(8)+"\",\n" +
                         "  \"stepNo\" : 4,\n" +
                         "  \"registeredAddrAsmail\" : true,\n" +
                         "  \"address\" : {\n" +
@@ -440,15 +430,14 @@ public class SodexoRegistrationTest extends TestBase {
                         "}")
                 .when()
                 .post("userRegistration/registerNewClient2")
-                .then()
-                .log().all()
+                .then().log().all()
                 .statusCode(200)
                 .body("resultCode", equalTo(0));
     }
 
     @Test(priority = 18)
-    public void testEmailLink() throws InterruptedException, SQLException, ClassNotFoundException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationSodexo(HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
+    public void testEmailLink() throws InterruptedException {
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
         System.out.println("link_link " + link);
         given()
                 .when()
@@ -457,7 +446,5 @@ public class SodexoRegistrationTest extends TestBase {
                 .statusCode(200)
                 .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
                 .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"));
-
-        assertTrue(app.getDbHelper().isClientExistInDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site));
     }
 }

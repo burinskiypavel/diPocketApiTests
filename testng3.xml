@@ -10,19 +10,19 @@
 
     <test name="DipocketRegistrationTest">
         <classes>
-            <class name="tests.dipocket.registration.DipocketRegistrationTest"/>
+            <class name="tests.registration.DipocketRegistrationTest"/>
         </classes>
     </test>
 
     <test name="PlayITRegistrationTest">
         <classes>
-            <class name="tests.dipocket.registration.PlayITRegistrationTest"/>
+            <class name="tests.registration.PlayITRegistrationTest"/>
         </classes>
     </test>
 
     <test name="UpAndGoRegistrationTest">
         <classes>
-            <class name="tests.dipocket.registration.UpAndGoRegistrationTest"/>
+            <class name="tests.registration.UpAndGoRegistrationTest"/>
         </classes>
     </test>
 

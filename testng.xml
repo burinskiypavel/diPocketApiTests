@@ -4,7 +4,7 @@
 
     <!--    <test name="DiPocketAPITests">-->
     <!--        <classes>-->
-    <!--            <class name="tests.dipocket.registration.DipocketRegistrationTest"/>-->
+    <!--            <class name="tests.registration.DipocketRegistrationTest"/>-->
     <!--            <class name="tests.dipocket.homePage.HomePageWithAlreadyExistClientTest"/>-->
 
     <!--            <class name="tests.tds.TDSV1BioAcceptTest"/>-->
@@ -25,31 +25,31 @@
 
     <!--    <test name="DipocketRegistrationTest">-->
     <!--        <classes>-->
-    <!--            <class name="tests.dipocket.registration.DipocketRegistrationTest"/>-->
+    <!--            <class name="tests.registration.DipocketRegistrationTest"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
 <!--    <test name="PlayITRegistrationTest">-->
 <!--        <classes>-->
-<!--            <class name="tests.dipocket.registration.PlayITRegistrationTest"/>-->
+<!--            <class name="tests.registration.PlayITRegistrationTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test name="UpAndGoRegistrationTest">-->
 <!--        <classes>-->
-<!--            <class name="tests.dipocket.registration.UpAndGoRegistrationTest"/>-->
+<!--            <class name="tests.registration.UpAndGoRegistrationTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--        <test name="SnowAttackRegistrationTest">-->
 <!--            <classes>-->
-<!--                <class name="tests.dipocket.registration.SnowAttackRegistrationTest"/>-->
+<!--                <class name="tests.registration.SnowAttackRegistrationTest"/>-->
 <!--            </classes>-->
 <!--        </test>-->
 
 <!--    <test name="SodexoRegistrationTest">-->
 <!--        <classes>-->
-<!--            <class name="tests.dipocket.registration.SodexoRegistrationTest"/>-->
+<!--            <class name="tests.registration.SodexoRegistrationTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 

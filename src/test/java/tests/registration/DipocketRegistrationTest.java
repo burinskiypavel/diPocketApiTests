@@ -1,66 +1,83 @@
-package tests.dipocket.registration;
+package tests.registration;
 
 import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.pojo.client.CheckboxContainer;
+import com.cs.dipocketback.pojo.client.ClientAddress;
+import com.cs.dipocketback.pojo.registration.AttachedCard;
+import com.cs.dipocketback.pojo.registration.RegSavepointData;
+import com.google.gson.Gson;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import static com.cs.dipocketback.pojo.client.CheckboxType.ELECTRONIC_COMMUNICATION;
+import static com.cs.dipocketback.pojo.client.CheckboxType.TERMS_AND_CONDITIONS_PL;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
-public class DiscontuRegistrationTest extends TestBase {
+public class DipocketRegistrationTest extends TestBase {
     String smsCode = null;
-    String countryId = "616";
-    String currencyId = "985";
-    String site = "DISCONTU";
+    int countryId = 616;
+    int currencyId = 985;
+    String site = "DIPOCKET";
+    int langId = 4;
+
+    Gson gson = new Gson();
+    ClientAddress clientAddress = new ClientAddress();
+    ClientAddress regAddress = new ClientAddress();
+    RegSavepointData regSavepointData2 = new RegSavepointData();
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .queryParam("langID", "4")
                 .when()
                 .get( "references/availableCountries")
                 .then().log().all()
                 .statusCode(200)
-                .body("countryList.code", hasItems("AU", "MK", "JP"))
-                .body("countryList.name", hasItems("Австралия", "Македония", "Япония"));
+                .body("countryList.code", hasItems("AU", "MK", "JP"),
+                        "countryList.name", hasItems("Австралия", "Македония", "Япония"));
     }
 
         @Test(priority = 2)
         public void test_ClientServices_v1_references_languages(){
             given()
-                    .spec(app.requestSpecDiscontuRegistration)
+                    .spec(app.requestSpecDipocketRegistration)
                     .when()
                     .get("references/languages")
                     .then().log().all()
                     .statusCode(200)
-                    .body("languageList.name", hasItems("English", "Polski"))
-                    .body("langHash", equalTo("1e43be1453a8784fc9790aaa6506240a9bad4640becb318a4fd5c9078a47b9f5"));
+                    .body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"),
+                            "langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"));
         }
 
     @Test(priority = 3)
     public void test_ClientServices_v1_references_appConfig(){
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .when()
                 .get("references/appConfig?platform=android&version=2.2.9&langCode=rus")
                 .then().log().all()
                 .statusCode(200)
-                .body("versionColor", equalTo("BLACK"))
-                .body("appParams.isAccountCreationEnabled", equalTo(true));
+                .body("versionColor", equalTo("WHITE"),
+                        "appParams.isAccountCreationEnabled", equalTo(true));
     }
 
     @Test(priority = 4)
     public void test_ClientServices_v1_userRegistration_loadSavePointData2() {
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .queryParam("devUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .when()
                 .get("userRegistration/loadSavePointData2")
@@ -72,7 +89,7 @@ public class DiscontuRegistrationTest extends TestBase {
     @Test(priority = 5)
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .queryParam("langID", "4")
                 .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
                 .body("{\n" +
@@ -86,9 +103,29 @@ public class DiscontuRegistrationTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
+        given()
+                .log().uri().log().headers().log().body()
+                .when()
+                .get("http://app.dipocket.dev:8091/sms/all")
+                .then().log().all()
+                .statusCode(200);
+
+        String smsMessage = given()
+                .log().uri().log().headers().log().body()
+                .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("site", site)
+                .when()
+                .get("http://app.dipocket.dev:8091/sms/by_phone_and_site")
+                .then().log().all()
+                .statusCode(200)
+                .extract().path("message");
+
+        String  smsFromMemCash = smsMessage.substring(6, 12);
+        System.out.println("smsFromMemCash: " + smsFromMemCash);
+
         smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
                 .when()
                 .get("references/verifyPhone")
@@ -100,41 +137,59 @@ public class DiscontuRegistrationTest extends TestBase {
     @Test(priority = 7)
     public void test_ClientServices_v1_references_topCountries() {
         Response res = given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .queryParam("langID", "4")
                 .when()
                 .get("references/topCountries");
         res.then().log().all();
         int statusCode = res.getStatusCode();
         assertEquals(statusCode, 200);
-        res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Украина", "Франция", "Литва", "Норвегия"));
+        res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Италия", "Австрия", "Украина", "Бельгия", "Болгария", "Венгрия", "Германия", "Чехия"));
     }
 
     @Test(priority = 8)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2() {
+        clientAddress.setTypeId(0);
+        regAddress.setTypeId(3);
+        List<AttachedCard> attachedCardsList = new ArrayList<>();
+
+        RegSavepointData regSavepointData = new RegSavepointData();
+        regSavepointData.setDeviceUUID(HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+        regSavepointData.setLangId(langId);
+        regSavepointData.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+        regSavepointData.setStepNo(1);
+        regSavepointData.setRegisteredAddrAsmail(true);
+        regSavepointData.setAddress(clientAddress);
+        regSavepointData.setRegAddress(regAddress);
+        regSavepointData.setAttachedCardsList(attachedCardsList);
+        regSavepointData.setSmsCode(smsCode);
+        regSavepointData.setIsSkipped(false);
+        String json = gson.toJson(regSavepointData);
+
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"stepNo\" : 1,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+//                        "  \"stepNo\" : 1,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
                 .then().log().all()
@@ -144,64 +199,95 @@ public class DiscontuRegistrationTest extends TestBase {
     @Test(priority = 9)
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .queryParam("langID", "4")
-                .queryParam("phoneNum" , HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
                 .queryParam("code", smsCode)
                 .when()
                 .get("userRegistration/checkPhoneAndLoadSavePoint")
                 .then().log().all()
                 .statusCode(200)
-                .body("isInvited", equalTo(false))
-                .body("smsCode", equalTo(smsCode));
+                .body("isInvited", equalTo(false),
+                        "smsCode", equalTo(smsCode));
     }
 
     @Test(priority = 10)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2_() {
+        clientAddress.setStreetLine1("Home");
+        clientAddress.setCity("Kharkiv");
+        clientAddress.setZip("30-000");
+        clientAddress.setCountryId(countryId);
+
+        regAddress.setStreetLine1("Home");
+        regAddress.setCity("Kharkiv");
+        regAddress.setZip("30-000");
+        regAddress.setCountryId(countryId);
+        List<AttachedCard> attachedCardsList = new ArrayList<>();
+
+        regSavepointData2.setDeviceUUID(HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+        regSavepointData2.setLangId(langId);
+        regSavepointData2.setFirstName(HelperBase.prop.getProperty("mobile.registration.firstName"));
+        regSavepointData2.setLastName(HelperBase.prop.getProperty("mobile.registration.lastName"));
+        regSavepointData2.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+        regSavepointData2.setCountryId(countryId);
+        regSavepointData2.setCurrencyId(currencyId);
+        regSavepointData2.setBirthDate("715611173985");
+        regSavepointData2.setResidenceCountryId(countryId);
+        regSavepointData2.setStepNo(2);
+        regSavepointData2.setRegisteredAddrAsmail(true);
+        regSavepointData2.setAddress(clientAddress);
+        regSavepointData2.setRegAddress(regAddress);
+        regSavepointData2.setAttachedCardsList(attachedCardsList);
+        regSavepointData2.setSmsCode(smsCode);
+        regSavepointData2.setIsSkipped(false);
+        String json = gson.toJson(regSavepointData2);
+        System.out.println(json);
+
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
-                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"birthDate\" : \"715611173985\",\n" +
-                        "  \"residenceCountryId\" : 616,\n" +
-                        "  \"stepNo\" : 2,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
+//                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
+//                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+//                        "  \"countryId\" : "+countryId+",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"birthDate\" : \"715611173985\",\n" +
+//                        "  \"residenceCountryId\" : 616,\n" +
+//                        "  \"stepNo\" : 2,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
                 .then().log().all()
@@ -211,8 +297,8 @@ public class DiscontuRegistrationTest extends TestBase {
     @Test(priority = 11)
     public void test_ClientServices_v1_userRegistration_clientImage() {
         given()
-                .spec(app.requestSpecDiscontuRegistration)
-                .contentType("application/json")
+                .spec(app.requestSpecDipocketRegistration)
+                .contentType( "application/json")
                 .body("{\n" +
                         "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
                         "  \"langId\" : 4,\n" +
@@ -227,50 +313,55 @@ public class DiscontuRegistrationTest extends TestBase {
 
     @Test(priority = 12)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2__() {
+        regSavepointData2.setStepNo(3);
+        String json = gson.toJson(regSavepointData2);
+        System.out.println(json);
+
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
-                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"birthDate\" : \"715611173985\",\n" +
-                        "  \"residenceCountryId\" : 616,\n" +
-                        "  \"stepNo\" : 3,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
+//                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
+//                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+//                        "  \"countryId\" : "+countryId+",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"birthDate\" : \"715611173985\",\n" +
+//                        "  \"residenceCountryId\" : 616,\n" +
+//                        "  \"stepNo\" : 3,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
                 .then().log().all()
@@ -280,7 +371,7 @@ public class DiscontuRegistrationTest extends TestBase {
         @Test(priority = 13)
         public void test_ClientServices_v1_userRegistration_clientImage__() {
             given()
-                    .spec(app.requestSpecDiscontuRegistration)
+                    .spec(app.requestSpecDipocketRegistration)
                     .contentType("application/json")
                     .body("{\n" +
                             "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
@@ -297,64 +388,70 @@ public class DiscontuRegistrationTest extends TestBase {
     @Test(priority = 14)
     public void test_ClientServices_v1_references_questions() {
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .queryParam("langID", "4")
                 .queryParam("countryId", countryId)
                 .when()
                 .get("references/questions")
                 .then().log().all()
                 .statusCode(200)
-                .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"))
-                .body("checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
+                .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"),
+                        "checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
     }
 
     @Test(priority = 15)
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2___() {
+        regSavepointData2.setEmail(HelperBase.prop.getProperty("mobile.registration.email"));
+        regSavepointData2.setStepNo(4);
+        String json = gson.toJson(regSavepointData2);
+        System.out.println(json);
+
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
-                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
-                        "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"birthDate\" : \"715611173985\",\n" +
-                        "  \"residenceCountryId\" : 616,\n" +
-                        "  \"stepNo\" : 4,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
+//                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
+//                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+//                        "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
+//                        "  \"countryId\" : "+countryId+",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"birthDate\" : \"715611173985\",\n" +
+//                        "  \"residenceCountryId\" : 616,\n" +
+//                        "  \"stepNo\" : 4,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \"" + smsCode + "\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
                 .when()
                 .put("userRegistration/registrationSavePoint2")
                 .then().log().all()
@@ -364,7 +461,7 @@ public class DiscontuRegistrationTest extends TestBase {
     @Test(priority = 16)
     public void test_ClientServices_v1_userRegistration_sendTermsAndConditions() {
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .queryParam("deviceUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .when()
                 .put("userRegistration/sendTermsAndConditions")
@@ -374,60 +471,78 @@ public class DiscontuRegistrationTest extends TestBase {
 
     @Test(priority = 17)
     public void test_ClientServices_v1_userRegistration_registerNewClient2(){
+        CheckboxContainer checkboxContainer1 = new CheckboxContainer();
+        checkboxContainer1.setTypeId(TERMS_AND_CONDITIONS_PL);
+        checkboxContainer1.setSelected(true);
+
+        CheckboxContainer checkboxContainer2 = new CheckboxContainer();
+        checkboxContainer2.setTypeId(ELECTRONIC_COMMUNICATION);
+        checkboxContainer2.setSelected(true);
+
+        List<CheckboxContainer> checkboxList = new ArrayList<>();
+        checkboxList.add(checkboxContainer1);
+        checkboxList.add(checkboxContainer2);
+
+        regSavepointData2.setSecAnswer("QA");
+        regSavepointData2.setPin(app.generateRandomString(8));
+        regSavepointData2.setCheckboxList(checkboxList);
+        String json = gson.toJson(regSavepointData2);
+
         given()
-                .spec(app.requestSpecDiscontuRegistration)
+                .spec(app.requestSpecDipocketRegistration)
                 .contentType("application/json")
-                .body("{\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
-                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
-                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
-                        "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
-                        "  \"countryId\" : "+countryId+",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"birthDate\" : \"715611173985\",\n" +
-                        "  \"residenceCountryId\" : 616,\n" +
-                        "  \"secAnswer\" : \"***\",\n" +
-                        "  \"pin\" : \""+ app.generateRandomString(8)+"\",\n" +
-                        "  \"stepNo\" : 4,\n" +
-                        "  \"registeredAddrAsmail\" : true,\n" +
-                        "  \"address\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"regAddress\" : {\n" +
-                        "    \"typeId\" : 3,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardsList\" : [ ],\n" +
-                        "  \"smsCode\" : \""+smsCode+"\",\n" +
-                        "  \"isSkipped\" : false,\n" +
-                        "  \"checkboxList\" : [ {\n" +
-                        "    \"typeId\" : \"TERMS_AND_CONDITIONS_PL\",\n" +
-                        "    \"selected\" : true\n" +
-                        "  }, {\n" +
-                        "    \"typeId\" : \"ELECTRONIC_COMMUNICATION\",\n" +
-                        "    \"selected\" : true\n" +
-                        "  } ],\n" +
-                        "  \"address1\" : {\n" +
-                        "    \"typeId\" : 0,\n" +
-                        "    \"streetLine1\" : \"New Home\",\n" +
-                        "    \"streetLine2\" : \"\",\n" +
-                        "    \"city\" : \"Xxxx\",\n" +
-                        "    \"zip\" : \"30-000\",\n" +
-                        "    \"countryId\" : "+countryId+"\n" +
-                        "  },\n" +
-                        "  \"attachedCardIds\" : [ ]\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"firstName\" : \""+ HelperBase.prop.getProperty("mobile.registration.firstName")+"\",\n" +
+//                        "  \"lastName\" : \""+ HelperBase.prop.getProperty("mobile.registration.lastName")+"\",\n" +
+//                        "  \"mainPhone\" : \""+ HelperBase.prop.getProperty("mobile.registration.phoneNumber")+"\",\n" +
+//                        "  \"email\" : \""+ HelperBase.prop.getProperty("mobile.registration.email")+"\",\n" +
+//                        "  \"countryId\" : "+countryId+",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"birthDate\" : \"715611173985\",\n" +
+//                        "  \"residenceCountryId\" : 616,\n" +
+//                        "  \"secAnswer\" : \"QA\",\n" +
+//                        "  \"pin\" : \""+ app.generateRandomString(8)+"\",\n" +
+//                        "  \"stepNo\" : 4,\n" +
+//                        "  \"registeredAddrAsmail\" : true,\n" +
+//                        "  \"address\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"regAddress\" : {\n" +
+//                        "    \"typeId\" : 3,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardsList\" : [ ],\n" +
+//                        "  \"smsCode\" : \""+smsCode+"\",\n" +
+//                        "  \"isSkipped\" : false,\n" +
+//                        "  \"checkboxList\" : [ {\n" +
+//                        "    \"typeId\" : \"TERMS_AND_CONDITIONS_PL\",\n" +
+//                        "    \"selected\" : true\n" +
+//                        "  }, {\n" +
+//                        "    \"typeId\" : \"ELECTRONIC_COMMUNICATION\",\n" +
+//                        "    \"selected\" : true\n" +
+//                        "  } ],\n" +
+//                        "  \"address1\" : {\n" +
+//                        "    \"typeId\" : 0,\n" +
+//                        "    \"streetLine1\" : \"New Home\",\n" +
+//                        "    \"streetLine2\" : \"\",\n" +
+//                        "    \"city\" : \"Xxxx\",\n" +
+//                        "    \"zip\" : \"30-000\",\n" +
+//                        "    \"countryId\" : "+countryId+"\n" +
+//                        "  },\n" +
+//                        "  \"attachedCardIds\" : [ ]\n" +
+//                        "}")
                 .when()
                 .post("userRegistration/registerNewClient2")
                 .then().log().all()
@@ -435,16 +550,45 @@ public class DiscontuRegistrationTest extends TestBase {
                 .body("resultCode", equalTo(0));
     }
 
-    @Test(priority = 18)
+    @Test(priority = 18 ,enabled = false)
     public void testEmailLink() throws InterruptedException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
         System.out.println("link_link " + link);
         given()
                 .when()
                 .get(link)
                 .then().log().all()
                 .statusCode(200)
-                .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"))
-                .body("html.body.div.div.div.h2", equalTo("Большое спасибо!"));
+                .body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"),
+                        "html.body.div.div.div.h2", equalTo("Большое спасибо!"));
+    }
+
+    @Test(priority = 19)
+    public void testEmailLink_() throws InterruptedException {
+        //String redirectedLink = "https://http.dipocket.dev/Mail/v1/view/eMailConfirmation/successful?site=DIPOCKET&langId=4&lang=ru";
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
+        System.out.println("link_link " + link);
+        given()
+                .log().uri()
+                .when()
+                .redirects().follow(false)
+                .urlEncodingEnabled(false)
+                .get(link)
+                .then()
+                .log().all()
+                .statusCode(301);
+                //.headers("Location", notNullValue(),
+                //        "Location", redirectedLink);
+
+//        given()
+//                .log().uri()
+//                .when()
+//                .auth().preemptive().basic("dipocket", "LeprechauN")
+//                .urlEncodingEnabled(false)
+//                .get(redirectedLink)
+//                .then()
+//                .log().all()
+//                .statusCode(200);
+
     }
 }

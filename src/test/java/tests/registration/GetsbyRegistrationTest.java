@@ -1,4 +1,4 @@
-package tests.dipocket.registration;
+package tests.registration;
 
 import appmanager.EmailIMAPHelper;
 import base.TestBase;
