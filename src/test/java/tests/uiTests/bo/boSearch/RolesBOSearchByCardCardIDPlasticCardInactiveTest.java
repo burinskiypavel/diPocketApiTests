@@ -11,7 +11,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
     SoftAssert softAssert = new SoftAssert();
     String cardId = "185822";
 
-    @Test
+    @Test(enabled = false)
     public void testRolesBOSearchByCardCardIDPlasticCardInactive() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -26,7 +26,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testRolesBOSearchByCardCardIDVerifyMaskedPan() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -43,7 +43,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testRolesBOSearchByCardCardIDAccountLimits() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -71,19 +71,14 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         click(By.xpath("//app-button[@label='Operations']"));
 
         if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock account')]"))){
-            waitFor(By.xpath("//*[contains(text(), 'Unblock account')]"));
-            click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock account')]"));
-            click(By.xpath("//app-button[@label='Unblock']"));
-            waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
-            waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+            unblockAccountFromSearchByCard();
             click(By.xpath("//app-button[@label='Operations']"));
+            waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
+            waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
+            waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
         }
 
-        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
-        click(By.xpath("//app-button[@label='Block']"));
-        waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
-
+        blockAccountFromSearchByCard();
         click(By.xpath("//app-button[@label='Operations']"));
 
         assertTrue(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock account')]")));
@@ -100,19 +95,14 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         click(By.xpath("//app-button[@label='Operations']"));
 
         if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block account')]"))){
-            waitFor(By.xpath("//*[contains(text(), 'Block account')]"));
-            click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
-            click(By.xpath("//app-button[@label='Block']"));
-            waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
-            waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+            blockAccountFromSearchByCard();
             click(By.xpath("//app-button[@label='Operations']"));
+            waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock account')]"));
+            waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
+            waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
         }
 
-        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock account')]"));
-        click(By.xpath("//app-button[@label='Unblock']"));
-        waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
-
+        unblockAccountFromSearchByCard();
         click(By.xpath("//app-button[@label='Operations']"));
 
         assertTrue(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block account')]")));

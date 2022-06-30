@@ -1175,4 +1175,20 @@ public class UITestBase {
         click(By.xpath("//td[@ng-reflect-text='" + cardId + "']"));
         waitFor(By.xpath("//a[@role='tab'] //span[contains(text(), 'Transactions')]"));
     }
+
+    public void blockAccountFromSearchByCard() {
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
+        click(By.xpath("//app-button[@label='Block']"));
+        waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+    }
+
+    public void unblockAccountFromSearchByCard() {
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock account')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock account')]"));
+        click(By.xpath("//app-button[@label='Unblock']"));
+        waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+    }
 }
