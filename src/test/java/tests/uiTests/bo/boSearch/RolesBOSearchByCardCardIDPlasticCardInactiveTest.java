@@ -11,7 +11,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
     SoftAssert softAssert = new SoftAssert();
     String cardId = "185822";
 
-    @Test(enabled = false)
+    @Test
     public void testRolesBOSearchByCardCardIDPlasticCardInactive() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -26,7 +26,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         softAssert.assertAll();
     }
 
-    @Test(enabled = false)
+    @Test
     public void testRolesBOSearchByCardCardIDVerifyMaskedPan() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
@@ -43,7 +43,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         softAssert.assertAll();
     }
 
-    @Test(enabled = false)
+    @Test
     public void testRolesBOSearchByCardCardIDAccountLimits() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
