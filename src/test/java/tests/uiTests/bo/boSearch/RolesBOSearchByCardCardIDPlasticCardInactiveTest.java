@@ -107,4 +107,22 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         assertTrue(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block account')]")));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDOverdraftLimit() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Overdraft limit')]"));
+        type(By.xpath("//p-inputnumber[@id='formly_3_input-number_lowLimit_0'] //input"), "100");
+        type(By.xpath("//p-inputnumber[@id='formly_3_input-number_highLimit_1'] //input"), "150");
+        click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+
+        waitFor(By.xpath("//*[contains(text(), 'Account limits was changed successfully')]"));
+    }
 }
