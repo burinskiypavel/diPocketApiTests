@@ -125,4 +125,22 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitFor(By.xpath("//*[contains(text(), 'Account limits was changed successfully')]"));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDBlockCard() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block card')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block card')]"));
+
+        click(By.xpath("//p-radiobutton[@ng-reflect-value='41']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Block']"));
+
+        waitFor(By.xpath("//*[contains(text(), 'Card was blocked successfully')]"));
+    }
 }
