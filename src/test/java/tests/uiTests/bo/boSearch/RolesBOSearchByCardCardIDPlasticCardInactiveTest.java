@@ -148,6 +148,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block card')]"));
 
         click(By.xpath("//p-radiobutton[@ng-reflect-value='41']"));
+        Thread.sleep(1200);
         click(By.xpath("//p-button[@ng-reflect-label='Block']"));
 
         waitFor(By.xpath("//*[contains(text(), 'Card was blocked successfully')]"));
