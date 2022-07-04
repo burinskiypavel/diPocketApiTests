@@ -1191,4 +1191,12 @@ public class UITestBase {
         waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
     }
+
+    public void unblockCardFromSearchByCard() {
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock card')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock card')]"));
+        click(By.xpath("//app-button[@label='Unblock']"));
+        waitFor(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
+    }
 }

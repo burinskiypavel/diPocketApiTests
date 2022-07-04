@@ -135,6 +135,15 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         gotoCardDetailsPage(cardId);
 
         click(By.xpath("//app-button[@label='Operations']"));
+
+        if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock card')]"))){
+            unblockCardFromSearchByCard();
+            click(By.xpath("//app-button[@label='Operations']"));
+            waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
+            waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
+            waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
+        }
+
         waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block card')]"));
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block card')]"));
 
