@@ -1199,4 +1199,14 @@ public class UITestBase {
         waitFor(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
     }
+
+    public void blockCardFromSearchByCard() throws InterruptedException {
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block card')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block card')]"));
+        click(By.xpath("//p-radiobutton[@ng-reflect-value='41']"));
+        Thread.sleep(1200);
+        click(By.xpath("//p-button[@ng-reflect-label='Block']"));
+        waitFor(By.xpath("//*[contains(text(), 'Card was blocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Card was blocked successfully')]"));
+    }
 }

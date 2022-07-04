@@ -152,4 +152,29 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitFor(By.xpath("//*[contains(text(), 'Card was blocked successfully')]"));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDUnblockCard() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+
+        if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block card')]"))){
+            blockCardFromSearchByCard();
+            click(By.xpath("//app-button[@label='Operations']"));
+            waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock account')]"));
+            waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
+            waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
+        }
+
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock card')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock card')]"));
+        click(By.xpath("//p-button[@ng-reflect-label='Unblock']"));
+
+        waitFor(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
+    }
 }
