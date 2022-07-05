@@ -164,7 +164,11 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         click(By.xpath("//app-button[@label='Operations']"));
 
-        if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block card')]"))){
+        if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock card')]"))){
+
+
+        }
+        else if(isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block card')]"))){
             blockCardFromSearchByCard();
             click(By.xpath("//app-button[@label='Operations']"));
             waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock account')]"));
