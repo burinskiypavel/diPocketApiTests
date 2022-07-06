@@ -10,6 +10,7 @@ import static org.testng.Assert.assertTrue;
 public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
     String cardId = "185822";
+    String cardId2 = "185777";
 
     @Test
     public void testRolesBOSearchByCardCardIDPlasticCardInactive() throws InterruptedException {
@@ -175,6 +176,23 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
             waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
             waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
         }
+
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock card')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock card')]"));
+        click(By.xpath("//p-button[@ng-reflect-label='Unblock']"));
+
+        waitFor(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
+    }
+
+    @Test(enabled = false)
+    public void testRolesBOSearchByCardCardIDUnblockCardCardHasStatCode43_83() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId2);
+        gotoCardDetailsPage(cardId2);
+
+        click(By.xpath("//app-button[@label='Operations']"));
 
         waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock card')]"));
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock card')]"));
