@@ -154,7 +154,8 @@ public class DBHelper extends HelperBase {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-        String query = "delete from clientdevice where uuid = '"+clientDevice+"'";
+        //String query = "delete from clientdevice where uuid = '"+clientDevice+"'";
+        String query = "DELETE FROM ClientDeviceLast WHERE LastDeviceid IN (SELECT id FROM clientdevice WHERE uuid = '"+clientDevice+"')";
         String commit = "commit";
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
