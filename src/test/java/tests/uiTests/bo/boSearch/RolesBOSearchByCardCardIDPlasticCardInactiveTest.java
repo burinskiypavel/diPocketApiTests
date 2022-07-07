@@ -200,4 +200,23 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitFor(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDCardLimits() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Card limits')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Card limits')]"));
+
+        waitFor(By.xpath("//*[contains(text(), 'Card id')]"));
+
+        assertTrue(areElementsPresent(new String[]{"//*[contains(text(), 'Card id')]", "//*[contains(text(), 'Card type')]",
+                "//*[contains(text(), 'Currency symbol')]", "//*[contains(text(), 'Annual max amount')]", "//*[contains(text(), 'Annual max amount')]"}), "Card limits are incorrect");
+    }
 }
