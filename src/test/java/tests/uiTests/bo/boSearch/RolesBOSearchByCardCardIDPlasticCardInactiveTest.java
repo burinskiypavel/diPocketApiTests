@@ -11,6 +11,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
     SoftAssert softAssert = new SoftAssert();
     String cardId = "185822";
     String cardId2 = "185777";
+    String cardId3 = "184046";
 
     @Test
     public void testRolesBOSearchByCardCardIDPlasticCardInactive() throws InterruptedException {
@@ -218,5 +219,22 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         assertTrue(areElementsPresent(new String[]{"//*[contains(text(), 'Card id')]", "//*[contains(text(), 'Card type')]",
                 "//*[contains(text(), 'Currency symbol')]", "//*[contains(text(), 'Annual max amount')]", "//*[contains(text(), 'Annual max amount')]"}), "Card limits are incorrect");
+    }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDResetEpin() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Reset ePin')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Reset ePin')]"));
+        click(By.xpath("//p-button[@ng-reflect-label='Reset']"));
+
+        waitFor(By.xpath("//*[contains(text(), 'Card ePin has been successfully reset')]"));
     }
 }
