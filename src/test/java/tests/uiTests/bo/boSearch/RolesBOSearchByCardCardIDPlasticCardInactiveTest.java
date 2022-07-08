@@ -237,4 +237,27 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitFor(By.xpath("//*[contains(text(), 'Card ePin has been successfully reset')]"));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDChargeFee() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Charge Fee')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Charge Fee')]"));
+        waitFor(By.xpath("//p-dropdown[@ng-reflect-option-label='accountName']"));
+
+        selectFromDropDown("accountName", "F");
+
+        type(By.cssSelector("app-input[ng-reflect-name='feeTranNote'] input[type='text']"), "test");
+
+        //click(By.xpath("//p-button[@ng-reflect-label='Reset']"));
+
+        //waitFor(By.xpath("//*[contains(text(), 'Card ePin has been successfully reset')]"));
+    }
 }
