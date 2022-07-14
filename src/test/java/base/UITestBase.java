@@ -1215,4 +1215,17 @@ public class UITestBase {
         waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
         click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
     }
+
+    public void fillAndPressDoneManualFeeChargePopUp(String source, String feeDescription, String feeRule, String feeAmount) throws InterruptedException {
+        Thread.sleep(1000);
+        waitFor(By.xpath("//p-dropdown[@ng-reflect-option-label='accountName']"));
+        selectFromDropDown("accountName", source);
+        Thread.sleep(1000);
+        type(By.cssSelector("app-input[ng-reflect-name='feeTranNote'] input[type='text']"), feeDescription);
+        selectFromDropDown("name", feeRule);
+        Thread.sleep(1000);
+        type(By.cssSelector("app-input-number[ng-reflect-name='amount'] input"), feeAmount);
+        Thread.sleep(1500);
+        click(By.xpath("//p-button[@ng-reflect-label='Done']"));
+    }
 }

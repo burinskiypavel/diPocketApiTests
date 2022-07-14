@@ -1,7 +1,6 @@
 package tests.uiTests.bo.boSearch;
 
 import base.UITestBase;
-import org.omg.PortableServer.THREAD_POLICY_ID;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -251,21 +250,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Charge Fee')]"));
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Charge Fee')]"));
-        waitFor(By.xpath("//p-dropdown[@ng-reflect-option-label='accountName']"));
-
-        selectFromDropDown("accountName", "F");
-        Thread.sleep(1000);
-
-        type(By.cssSelector("app-input[ng-reflect-name='feeTranNote'] input[type='text']"), "test");
-
-        selectFromDropDown("name", "Fee for Cashback");
-        Thread.sleep(1000);
-
-        type(By.cssSelector("app-input-number[ng-reflect-name='amount'] input"), "1000");
-        Thread.sleep(1500);
-
-        click(By.xpath("//p-button[@ng-reflect-label='Done']"));
-
+        fillAndPressDoneManualFeeChargePopUp("F", "test", "Fee for Cashback", "1000");
 
         waitFor(By.xpath("//*[contains(text(), 'Incorrect user (UserName = EVGENYA) role, expected: FINANCE, actual: BO')]"));
     }
