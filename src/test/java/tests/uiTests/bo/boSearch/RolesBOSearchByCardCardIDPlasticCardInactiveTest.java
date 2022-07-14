@@ -254,4 +254,22 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitFor(By.xpath("//*[contains(text(), 'Incorrect user (UserName = EVGENYA) role, expected: FINANCE, actual: BO')]"));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDResendPIN() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.xpath("//app-button[@label='Operations']"));
+
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Resend PIN')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Resend PIN')]"));
+        waitFor(By.xpath("//p-button[@ng-reflect-label='Proceed']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Proceed']"));
+
+        waitFor(By.xpath("//*[contains(text(), 'PIN was successfully resent')]"));
+    }
 }
