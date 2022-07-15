@@ -272,4 +272,21 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitFor(By.xpath("//*[contains(text(), 'PIN was successfully resent')]"));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDTransactionsTAB() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.id("p-tabpanel-4-label"));
+
+        selectFromDropDown("value", "All");
+
+        click(By.xpath("//p-button[@ng-reflect-label='Search']"));
+
+        waitFor(By.xpath("//td[@ng-reflect-text='629314']"));
+    }
 }
