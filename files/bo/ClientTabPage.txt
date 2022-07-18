@@ -1,0 +1,12 @@
+Card client info
+Client id: 33217
+State: Active
+Phone#: 380634413376
+Full name: Nona Qwerty
+Cardholder name: Nona Qwertii
+Gender: F
+Date of birth: 06.10.1976
+Status: FDD
+Email: vikarez20@gmail.com
+Pesel:
+Site: DIPOCKET

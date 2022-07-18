@@ -2,8 +2,14 @@ package tests.uiTests.bo.boSearch;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -289,4 +295,94 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitFor(By.xpath("//td[@ng-reflect-text='629314']"));
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDClientTAB() throws InterruptedException, IOException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+
+        click(By.id("p-tabpanel-3-label"));
+
+        List<String> actualElementsText = getActualText(By.xpath("//app-client-info"));
+
+        List<String> expectedElementsText = getDateFromFile("files/bo/ClientTabPage.txt");
+
+        Assert.assertEquals(actualElementsText, expectedElementsText);
+    }
+
+    public List<String> getActualText(By locator) {
+        List<String> actualElementsText = new ArrayList<>();
+
+        List<WebElement> elements = driver.findElements(locator);
+
+        for(WebElement element : elements){
+            String text = element.getText();
+
+
+            actualElementsText.add(text);
+        }
+
+        System.out.println(actualElementsText);
+        return actualElementsText;
+    }
+
+    public List<String> getExpectedText() throws IOException {
+        List<String> expectedText = new ArrayList<>();
+
+        //String file ="src/test/resources/fileTest.txt";
+        String file ="files/bo/ClientTabPage.txt";
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+
+
+        String currentLine = reader.readLine();
+
+        expectedText.add(currentLine);
+        reader.close();
+
+        return expectedText;
+    }
+
+    public List<String> getDateFromFile(String path) {
+        List<String> table = new ArrayList<String>();
+        //String fullPathToFile = "ExpectedDataRBDigital/AdminReports/PROD/" + path;//PROD
+        //String fullPathToFile = "ExpectedDataRBDigital/AdminReports/QA/" + path;//QA
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                table.add(line);
+                table.add("\r\n");
+
+
+                //StringBuilder result = new StringBuilder();
+                //  result.append('\n').append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return table;
+    }
+
+//    public List<String> GetActualData(String xpath, String path) throws IOException {
+//
+//        List<String> table = new ArrayList<String>();
+//        //String fullPathToFile = "ExpectedDataRBDigital/AdminReports/PROD/" + path; //Prod
+//        String fullPathToFile = "ExpectedDataRBDigital/AdminReports/QA/" + path;// QA
+//
+//        List<String> actualReport = GetAllDataFromReport(xpath);
+//        //List<String> actualReport = GetAllDataFromReportNew(xpath);
+//        FileWriter writer = new FileWriter(fullPathToFile);
+//        for(String str: actualReport) {
+//            writer.write(str);
+//
+//        }
+//        writer.close();
+//        actualReport = GetDateFromFile(path);
+//        return actualReport;
+//    }
 }
