@@ -84,27 +84,9 @@ public class UITestBase {
         return actualElementsText;
     }
 
-    public List<String> getExpectedText() throws IOException {
-        List<String> expectedText = new ArrayList<>();
-
-        //String file ="src/test/resources/fileTest.txt";
-        String file ="files/bo/ClientTabPage.txt";
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-
-
-        String currentLine = reader.readLine();
-
-        expectedText.add(currentLine);
-        reader.close();
-
-        return expectedText;
-    }
-
     public List<String> getDateFromFile(String path) {
         List<String> table = new ArrayList<String>();
-        //String fullPathToFile = "ExpectedDataRBDigital/AdminReports/PROD/" + path;//PROD
-        //String fullPathToFile = "ExpectedDataRBDigital/AdminReports/QA/" + path;//QA
+        //String fullPathToFile = "/AdminReports/QA/" + path;//QA
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
 
