@@ -298,7 +298,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
     }
 
     @Test
-    public void testRolesBOSearchByCardCardIDClientTAB() throws InterruptedException, IOException {
+    public void testRolesBOSearchByCardCardIDClientTAB() throws InterruptedException {
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         gotoCardSearchTab();
