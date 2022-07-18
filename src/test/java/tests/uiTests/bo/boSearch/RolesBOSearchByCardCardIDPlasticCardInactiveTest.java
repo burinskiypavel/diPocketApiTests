@@ -306,7 +306,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         click(By.id("p-tabpanel-3-label"));
 
-        List<String> actualElementsText = getActualText(By.xpath("//app-client-info"));
+        List<String> actualElementsText = getActualText(By.xpath("//table //tr"));
 
         List<String> expectedElementsText = getDateFromFile("files/bo/ClientTabPage.txt");
 
@@ -321,8 +321,12 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         for(WebElement element : elements){
             String text = element.getText();
 
+            if(text.equals("")){
 
-            actualElementsText.add(text);
+            }
+            else {
+                actualElementsText.add(text);
+            }
         }
 
         System.out.println(actualElementsText);
