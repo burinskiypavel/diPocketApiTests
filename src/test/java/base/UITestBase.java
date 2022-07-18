@@ -18,7 +18,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.io.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -58,6 +61,66 @@ public class UITestBase {
     @AfterClass
     public void stop(){
         driver.quit();
+    }
+
+    public List<String> getActualText(By locator) {
+        List<String> actualElementsText = new ArrayList<>();
+
+        List<WebElement> elements = driver.findElements(locator);
+
+        for(WebElement element : elements){
+            String text = element.getText();
+
+            if(text.equals("")){
+
+            }
+            else {
+                actualElementsText.add(text);
+                actualElementsText.add("\r\n");
+            }
+        }
+
+        System.out.println(actualElementsText);
+        return actualElementsText;
+    }
+
+    public List<String> getExpectedText() throws IOException {
+        List<String> expectedText = new ArrayList<>();
+
+        //String file ="src/test/resources/fileTest.txt";
+        String file ="files/bo/ClientTabPage.txt";
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+
+
+        String currentLine = reader.readLine();
+
+        expectedText.add(currentLine);
+        reader.close();
+
+        return expectedText;
+    }
+
+    public List<String> getDateFromFile(String path) {
+        List<String> table = new ArrayList<String>();
+        //String fullPathToFile = "ExpectedDataRBDigital/AdminReports/PROD/" + path;//PROD
+        //String fullPathToFile = "ExpectedDataRBDigital/AdminReports/QA/" + path;//QA
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                table.add(line);
+                table.add("\r\n");
+
+
+                //StringBuilder result = new StringBuilder();
+                //  result.append('\n').append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return table;
     }
 
     public boolean isDefault2(By locator) {
