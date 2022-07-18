@@ -1,4 +1,3 @@
-Card client info
 Client id: 33217
 State: Active
 Phone#: 380634413376

@@ -11,6 +11,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase {
@@ -307,10 +308,9 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         click(By.id("p-tabpanel-3-label"));
 
         List<String> actualElementsText = getActualText(By.xpath("//table //tr"));
-
         List<String> expectedElementsText = getDateFromFile("files/bo/ClientTabPage.txt");
 
-        Assert.assertEquals(actualElementsText, expectedElementsText);
+        assertEquals(actualElementsText, expectedElementsText);
     }
 
     public List<String> getActualText(By locator) {
@@ -326,6 +326,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
             }
             else {
                 actualElementsText.add(text);
+                actualElementsText.add("\r\n");
             }
         }
 
@@ -371,22 +372,4 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         }
         return table;
     }
-
-//    public List<String> GetActualData(String xpath, String path) throws IOException {
-//
-//        List<String> table = new ArrayList<String>();
-//        //String fullPathToFile = "ExpectedDataRBDigital/AdminReports/PROD/" + path; //Prod
-//        String fullPathToFile = "ExpectedDataRBDigital/AdminReports/QA/" + path;// QA
-//
-//        List<String> actualReport = GetAllDataFromReport(xpath);
-//        //List<String> actualReport = GetAllDataFromReportNew(xpath);
-//        FileWriter writer = new FileWriter(fullPathToFile);
-//        for(String str: actualReport) {
-//            writer.write(str);
-//
-//        }
-//        writer.close();
-//        actualReport = GetDateFromFile(path);
-//        return actualReport;
-//    }
 }
