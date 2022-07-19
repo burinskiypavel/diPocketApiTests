@@ -1273,4 +1273,12 @@ public class UITestBase {
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Done']"));
     }
+
+    public void goToCardClientInfoTab() {
+        click(By.id("p-tabpanel-3-label"));
+    }
+
+    public void goToTransactionsTab() {
+        click(By.id("p-tabpanel-4-label"));
+    }
 }

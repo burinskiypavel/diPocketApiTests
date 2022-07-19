@@ -2,13 +2,9 @@ package tests.uiTests.bo.boSearch;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -287,11 +283,8 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         gotoCardSearchTab();
         searchByCard("id", cardId);
         gotoCardDetailsPage(cardId);
-
-        click(By.id("p-tabpanel-4-label"));
-
+        goToTransactionsTab();
         selectFromDropDown("value", "All");
-
         click(By.xpath("//p-button[@ng-reflect-label='Search']"));
 
         waitFor(By.xpath("//td[@ng-reflect-text='629314']"));
@@ -304,8 +297,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         gotoCardSearchTab();
         searchByCard("id", cardId);
         gotoCardDetailsPage(cardId);
-
-        click(By.id("p-tabpanel-3-label"));
+        goToCardClientInfoTab();
 
         List<String> actualElementsText = getActualText(By.xpath("//table //tr"));
         List<String> expectedElementsText = getDateFromFile("files/bo/ClientTabPage.txt");
