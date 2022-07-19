@@ -288,6 +288,11 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         click(By.xpath("//p-button[@ng-reflect-label='Search']"));
 
         waitFor(By.xpath("//td[@ng-reflect-text='629314']"));
+
+        List<String> actualElementsText = getActualText(By.xpath("//table //tbody //tr"));
+        List<String> expectedElementsText = getDateFromFile("files/bo/TransactionTabData.txt");
+
+        assertEquals(actualElementsText, expectedElementsText);
     }
 
     @Test

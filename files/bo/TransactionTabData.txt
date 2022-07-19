@@ -1,0 +1,197 @@
+629314 Основной счет Fee -1.00 EUR Cash top-up fee at event venue 28.03.2022 17:45:37 Done 0.00
+629212 Основной счет Fee -0.05 EUR Card/payment band issuance fee 22.03.2022 15:03:50 Done 0.00
+629127 Основной счет DiP transfer 10.00 EUR 380992871946 17.03.2022 14:34:18 Done 0.00
+628558 Основной счет DiP transfer 1.00 EUR 380992871946 11.02.2022 13:48:13 Done 0.00
+628528 Основной счет DiP transfer 0.21 EUR 380992871946 10.02.2022 12:03:24 Done 0.00
+628211 DiP transfer 0.05 EUR Nona Qwerty 21.01.2022 16:04:29 Error 0.00
+628209 Основной счет DiP transfer 1.00 EUR 380992871946 21.01.2022 16:02:40 Done 0.00
+628207 DiP transfer 1.00 EUR Nona Qwerty 21.01.2022 16:02:13 Error 0.00
+628205 Основной счет Face to face -0.03 EUR 21.01.2022 15:59:50 Done 0.00
+628194 VQ - Ggg Top Up 100.00 PLN mBank 21.01.2022 15:37:31 Processing 0.00
+628191 VQ - Ggg Top Up 50.00 PLN Hcvhvh 21.01.2022 15:36:58 Processing 0.00
+628185 Основной счет DiP transfer 0.01 EUR Nona Qwerty 21.01.2022 15:35:16 Done 0.00
+628184 Основной счет DiP transfer -0.01 EUR Nona Qwerty 21.01.2022 15:35:04 Done 0.00
+628182 DiP transfer 0.02 RON Nona Qwerty 21.01.2022 15:33:41 Error 0.00
+628180 DiP transfer 0.02 RON Nona Qwerty 21.01.2022 15:32:19 Error 0.00
+628179 Основной счет DiP transfer 0.01 EUR Nona Qwerty 21.01.2022 15:31:48 Done 0.00
+628164 DiP transfer 0.05 RON 380992871946 21.01.2022 14:36:04 Error 0.00
+628163 Основной счет DiP transfer -0.23 EUR Nona Qwerty 21.01.2022 14:35:30 Done 0.00
+628162 Основной счет DiP transfer 0.23 EUR Nona Qwerty 21.01.2022 14:34:56 Done 0.00
+628160 DiP transfer 0.05 RON 380992871946 21.01.2022 14:34:21 Error 0.00
+628143 Основной счет DiP transfer 0.23 EUR Nona Qwerty 21.01.2022 14:00:18 Done 0.00
+628140 DiP transfer 0.05 RON 380992871946 21.01.2022 13:54:27 Error 0.00
+628138 DiP transfer 0.05 RON 380992871946 21.01.2022 13:49:57 Error 0.00
+628136 DiP transfer 0.05 CHF Nona Qwerty 21.01.2022 13:49:45 Error 0.00
+628134 DiP transfer 0.05 RON 380992871946 21.01.2022 13:47:55 Error 0.00
+628132 DiP transfer 0.05 RON Nona Qwerty 21.01.2022 13:46:42 Error 0.00
+628108 DiP transfer 0.05 RON Lola Qwerty 20.01.2022 16:18:40 Error 0.00
+628105 DiP transfer 1.00 CHF Nona Qwerty 20.01.2022 16:13:36 Error 0.00
+628101 DiP transfer 1.00 RON Nona Qwerty 20.01.2022 16:11:05 Error 0.00
+628098 DiP transfer 1.00 CHF Nona Qwerty 20.01.2022 16:10:15 Error 0.00
+628096 DiP transfer 1.00 GBP Nona Qwerty 20.01.2022 16:09:28 Error 0.00
+628092 DiP transfer 0.05 RON Lola Qwerty 20.01.2022 16:00:00 Error 0.00
+628068 Основной счет DiP transfer -0.05 EUR Viva Qwerty 19.01.2022 16:53:20 Done 0.00
+628058 Auto PLN Top Up 50.00 PLN mBank 19.01.2022 15:21:24 Processing 0.00
+628011 Основной счет DiP transfer -0.12 EUR Nona Qwerty 18.01.2022 17:27:39 Done 0.00
+627715 Основной счет DiP transfer -0.01 EUR Nona Qwerty 18.01.2022 17:26:46 Done 0.00
+627709 DiP transfer 0.05 RON Nona Qwerty 14.01.2022 14:09:04 Error 0.00
+627650 ST - Plnnnnnn Top Up 100.00 PLN Inteligo 13.01.2022 14:39:37 Processing 0.00
+627645 ST - Plnnnnnn Top Up 50.00 PLN Inteligo 13.01.2022 14:31:23 Processing 0.00
+627644 ST - Plnnnnnn Top Up 50.00 PLN Inteligo 13.01.2022 14:31:20 Processing 0.00
+627643 ST - Plnnnnnn Top Up 50.00 PLN mBank 13.01.2022 14:30:25 Processing 0.00
+627561 Auto PLN Top Up 50.00 PLN Test 12.01.2022 14:23:38 Processing 0.00
+627559 Auto PLN Top Up 50.00 PLN Test 12.01.2022 14:22:29 Processing 0.00
+627553 Основной счет Top Up 5.00 EUR Test 12.01.2022 14:21:30 Processing 0.00
+626967 DiP transfer 1.00 PLN Nona Qwerty 16.12.2021 18:41:41 Error 0.00
+626965 DiP transfer 0.03 EUR Nona Qwerty 16.12.2021 18:41:07 Error 0.00
+626764 DiP transfer 0.02 RON Kevin Wow 15.12.2021 14:01:03 Error 0.00
+626746 DiP transfer 0.02 CHF Nona Qwerty 15.12.2021 11:10:25 Error 0.00
+626720 Основной счет Move My Funds 0.01 EUR Ghv 14.12.2021 17:54:09 Done 0.00
+626711 Основной счет Move My Funds -0.01 EUR Auto CHF 14.12.2021 17:48:14 Done 0.00
+626710 Основной счет Move My Funds 0.01 EUR Auto CHF 14.12.2021 17:47:46 Done 0.00
+626707 Основной счет Move My Funds -0.01 EUR Dejected 14.12.2021 17:47:27 Done 0.00
+626706 Основной счет Move My Funds 0.04 EUR Auto CHF 14.12.2021 17:46:46 Done 0.00
+626439 DiP transfer 1.00 RON Nona Qwerty 08.12.2021 13:25:52 Error 0.00
+626421 Auto PLN Top Up 50.00 PLN mBank 08.12.2021 12:56:13 Processing 0.00
+626420 Auto PLN Top Up 100.00 PLN Inteligo 08.12.2021 12:56:06 Processing 0.00
+626419 Auto PLN Top Up 100.00 PLN mBank 08.12.2021 12:56:00 Processing 0.00
+626418 Auto PLN Top Up 50.00 PLN Inteligo 08.12.2021 12:55:42 Processing 0.00
+626417 Auto PLN Top Up 50.00 PLN mBank 08.12.2021 12:55:29 Processing 0.00
+626416 Auto PLN Top Up 50.00 PLN mBank 08.12.2021 12:54:36 Processing 0.00
+626409 Auto CHF Top Up 10.00 CHF Ggg 08.12.2021 12:50:57 Processing 0.00
+626407 Auto PLN Top Up 50.00 PLN mBank 08.12.2021 12:44:48 Processing 0.00
+626400 Auto PLN Top Up 50.00 PLN mBank 08.12.2021 12:41:49 Processing 0.00
+626308 Auto PLN Top Up 50.00 PLN mBank 07.12.2021 15:14:06 Processing 0.00
+626023 DiP transfer 0.02 RON Nona Qwerty 01.12.2021 16:42:37 Error 0.00
+625701 Основной счет DiP transfer -0.01 EUR Mama's Qwerty 22.11.2021 16:51:46 Done 0.00
+625699 Основной счет DiP transfer -0.01 EUR Nona Qwerty 22.11.2021 16:50:00 Done 0.00
+625587 Основной счет DiP transfer -0.02 EUR Nona Qwerty 19.11.2021 17:16:03 Done 0.00
+625584 DiP transfer 0.02 CHF Nona Qwerty 19.11.2021 16:17:44 Error 0.00
+625566 DiP transfer 1.00 PLN Nona Qwerty 19.11.2021 15:56:30 Error 0.00
+625563 Основной счет DiP transfer -0.02 EUR Nona Qwerty 19.11.2021 15:55:44 Done 0.00
+625564 DiP transfer 0.02 PLN Nona Qwerty 19.11.2021 15:54:08 Error 0.00
+625560 DiP transfer 0.02 RON Nona Qwerty 19.11.2021 15:53:25 Error 0.00
+625534 Основной счет Move My Funds 0.01 EUR Auto CHF 18.11.2021 17:30:57 Done 0.00
+625532 Основной счет Move My Funds 0.04 EUR Auto CHF 18.11.2021 17:30:29 Done 0.00
+625528 Основной счет Move My Funds 0.01 EUR Auto CHF 18.11.2021 15:51:46 Done 0.00
+625514 Основной счет Move My Funds -0.04 EUR Auto PLN 18.11.2021 15:40:41 Done 0.00
+625513 Основной счет Move My Funds 0.01 EUR Auto PLN 18.11.2021 15:40:10 Done 0.00
+625511 Основной счет Move My Funds 0.02 EUR Auto CHF 18.11.2021 15:39:39 Done 0.00
+625509 Основной счет Move My Funds 0.04 EUR Auto CHF 18.11.2021 15:39:14 Done 0.00
+625506 Основной счет Move My Funds -0.04 EUR Auto PLN 18.11.2021 15:38:13 Done 0.00
+625468 Основной счет Move My Funds 0.01 EUR Auto CHF 17.11.2021 16:05:42 Done 0.00
+625466 Основной счет Move My Funds 0.01 EUR Auto CHF 17.11.2021 15:49:22 Done 0.00
+625464 Основной счет Move My Funds 0.02 EUR Auto CHF 17.11.2021 15:37:21 Done 0.00
+625461 Основной счет Move My Funds -0.02 EUR Auto CHF 17.11.2021 15:36:09 Done 0.00
+625459 Основной счет Move My Funds -0.01 EUR Auto CHF 17.11.2021 15:32:54 Done 0.00
+625457 Основной счет Move My Funds -0.01 EUR Auto CHF 17.11.2021 15:31:52 Done 0.00
+625443 Основной счет Move My Funds -0.01 EUR test 17.11.2021 15:07:55 Done 0.00
+625442 Основной счет Move My Funds 0.01 EUR Auto PLN 17.11.2021 15:07:28 Done 0.00
+625439 Основной счет Move My Funds -0.01 EUR Auto PLN 17.11.2021 15:07:00 Done 0.00
+625375 Основной счет Move My Funds -0.24 EUR Auto PLN 16.11.2021 15:54:44 Done 0.00
+625362 DiP transfer 1.00 RON Mama's Qwerty 16.11.2021 15:29:40 Error 0.00
+625360 DiP transfer 1.00 GBP Mama's Qwerty 16.11.2021 15:29:24 Error 0.00
+625358 DiP transfer 1.00 CHF Mama's Qwerty 16.11.2021 15:29:11 Error 0.00
+625356 DiP transfer 5.00 EUR Mama's Qwerty 16.11.2021 15:28:57 Error 0.00
+625341 Основной счет Move My Funds -0.12 EUR Auto PLN 16.11.2021 10:56:52 Done 0.00
+625207 Основной счет Move My Funds 0.24 EUR Auto PLN 11.11.2021 17:11:50 Done 0.00
+625205 Основной счет Move My Funds 0.02 EUR Auto PLN 11.11.2021 17:11:26 Done 0.00
+625201 Основной счет Move My Funds 0.24 EUR Auto PLN 11.11.2021 17:10:49 Done 0.00
+625198 Основной счет Move My Funds -0.24 EUR Auto PLN 11.11.2021 16:33:36 Done 0.00
+625197 Основной счет Move My Funds 0.24 EUR Auto PLN 11.11.2021 16:30:38 Done 0.00
+625195 Основной счет Move My Funds 0.24 EUR Auto PLN 11.11.2021 16:29:58 Done 0.00
+622798 DiP transfer 1.00 PLN Mama's Qwerty 04.11.2021 13:49:24 Error 0.00
+622599 Основной счет Face to face 0.05 EUR 03.11.2021 14:16:43 Done 0.00
+622595 Основной счет Face to face -0.05 EUR 03.11.2021 14:16:11 Done 0.00
+622568 Основной счет DiP transfer -0.01 EUR Mama's Qwerty 03.11.2021 14:03:21 Done 0.00
+621758 Основной счет DiP transfer reversal 0.03 EUR 380734464340 25.10.2021 18:48:34 Done 0.00
+621755 Основной счет DiP transfer reversal 0.03 EUR 380935679667 25.10.2021 18:44:31 Done 0.00
+621427 Основной счет DiP transfer -0.02 EUR Nona Qwerty 23.10.2021 12:40:21 Done 0.00
+621479 DiP transfer 0.10 RON Nona Qwerty 23.10.2021 12:37:24 Error 0.00
+621429 Основной счет DiP transfer -0.02 EUR Nona Qwerty 23.10.2021 12:36:08 Done 0.00
+621430 DiP transfer 0.02 RON Nona Qwerty 21.10.2021 18:06:20 Error 0.00
+621422 Основной счет DiP transfer -0.02 EUR Nona Qwerty 21.10.2021 18:04:12 Done 0.00
+621420 Основной счет DiP transfer -0.02 EUR Nona Qwerty 21.10.2021 18:03:42 Done 0.00
+621418 Основной счет DiP transfer -0.02 EUR Nona Qwerty 21.10.2021 18:02:19 Done 0.00
+621056 Основной счет DiP transfer -0.03 EUR 380734464340 18.10.2021 18:47:44 Reversed 0.00
+621048 Основной счет DiP transfer -0.03 EUR 380935679667 18.10.2021 18:43:11 Reversed 0.00
+620981 Основной счет DiP transfer reversal 0.05 EUR 380734465340 18.10.2021 12:08:33 Done 0.00
+620750 Основной счет DiP transfer -0.10 EUR Nona Qwerty 13.10.2021 14:33:49 Done 0.00
+620749 Основной счет Move My Funds 0.04 EUR Bbb 13.10.2021 14:32:08 Done 0.00
+620666 Основной счет DiP transfer -0.05 EUR Nona Qwerty 12.10.2021 16:07:24 Done 0.00
+620659 Основной счет DiP transfer -0.06 EUR Nona Qwerty 12.10.2021 16:02:05 Done 0.00
+620657 Основной счет DiP transfer -0.04 EUR Nona Qwerty 12.10.2021 16:00:57 Done 0.00
+620651 Основной счет DiP transfer -0.05 EUR Nona Qwerty 12.10.2021 15:56:09 Done 0.00
+620597 Основной счет DiP transfer -0.05 EUR 380734465340 11.10.2021 12:08:08 Reversed 0.00
+620522 Основной счет Move My Funds 0.50 EUR Qwerty 08.10.2021 16:02:44 Done 0.00
+620061 Auto PLN Top Up 50.00 PLN Test 30.09.2021 14:26:34 Processing 0.00
+620054 Основной счет Move My Funds -0.79 EUR test 30.09.2021 14:15:43 Done 0.00
+620052 Основной счет Move My Funds -0.30 EUR test 30.09.2021 14:15:25 Done 0.00
+620050 Основной счет Move My Funds -0.30 EUR test 30.09.2021 14:15:24 Done 0.00
+620049 Основной счет Move My Funds 0.06 EUR Test 30.09.2021 14:13:29 Done 0.00
+620045 Основной счет Move My Funds 0.50 EUR Dejected 30.09.2021 14:12:57 Done 0.00
+620043 Основной счет Move My Funds 0.20 EUR test 30.09.2021 14:12:37 Done 0.00
+619560 Auto PLN Top Up 100.00 PLN mBank 17.09.2021 12:39:15 Processing 0.00
+619559 Auto PLN Top Up 100.00 PLN mBank 17.09.2021 12:35:51 Processing 0.00
+619558 Auto PLN Top Up 50.00 PLN mBank 17.09.2021 12:35:47 Processing 0.00
+619557 Auto PLN Top Up 50.00 PLN mBank 17.09.2021 12:35:47 Processing 0.00
+619556 Auto PLN Top Up 50.00 PLN mBank 17.09.2021 12:35:46 Processing 0.00
+619555 Auto PLN Top Up 50.00 PLN mBank 17.09.2021 12:35:46 Processing 0.00
+619554 Auto PLN Top Up 50.00 PLN Inteligo 17.09.2021 12:33:12 Processing 0.00
+619553 Auto PLN Top Up 50.00 PLN mBank 17.09.2021 12:33:04 Processing 0.00
+619499 Основной счет DiP transfer -0.10 EUR Nona Qwerty 16.09.2021 13:23:35 Done 0.00
+619227 Основной счет Bank transfer -1.00 EUR Denb 09.09.2021 17:47:21 Done 0.00
+619226 Основной счет Move My Funds 1.00 EUR Auto PLN 09.09.2021 17:41:10 Done 0.00
+619224 Основной счет Bank transfer -1.08 EUR Den 09.09.2021 17:40:04 Done 0.00
+619222 Основной счет Move My Funds 1.18 EUR Auto PLN 09.09.2021 17:38:34 Done 0.00
+619218 Основной счет Top Up 5.00 EUR Uffuuf 09.09.2021 16:50:09 Processing 0.00
+619205 Основной счет DiP transfer -0.06 EUR Nona Qwerty 09.09.2021 13:14:17 Done 0.00
+619204 Основной счет DiP transfer -0.10 EUR Nona Qwerty 09.09.2021 13:13:13 Done 0.00
+619203 Основной счет DiP transfer 0.10 EUR Nona Qwerty 09.09.2021 13:12:56 Done 0.00
+619202 Основной счет DiP transfer -0.10 EUR Nona Qwerty 09.09.2021 13:12:36 Done 0.00
+619201 Основной счет DiP transfer 0.10 EUR Nona Qwerty 09.09.2021 13:12:08 Done 0.00
+619171 Основной счет DiP transfer reversal 0.03 EUR 380634413375 08.09.2021 13:52:43 Done 0.00
+618880 Основной счет Face to face 0.04 EUR 01.09.2021 14:09:36 Done 0.00
+618874 Основной счет Face to face 0.05 EUR 01.09.2021 14:02:50 Done 0.00
+618872 Основной счет Face to face -0.09 EUR 01.09.2021 14:02:27 Done 0.00
+618869 Основной счет DiP transfer -0.10 EUR Nona Qwerty 01.09.2021 13:54:22 Done 0.00
+618868 Основной счет DiP transfer 0.10 EUR Nona Qwerty 01.09.2021 13:54:12 Done 0.00
+618867 Основной счет DiP transfer 0.10 EUR Nona Qwerty 01.09.2021 13:53:53 Done 0.00
+618866 Основной счет DiP transfer -0.10 EUR Nona Qwerty 01.09.2021 13:53:51 Done 0.00
+618865 Основной счет DiP transfer -0.10 EUR Nona Qwerty 01.09.2021 13:53:28 Done 0.00
+618864 Основной счет DiP transfer 0.10 EUR Nona Qwerty 01.09.2021 13:53:11 Done 0.00
+618863 Основной счет DiP transfer 0.10 EUR Nona Qwerty 01.09.2021 13:52:33 Done 0.00
+618862 Основной счет DiP transfer -0.10 EUR Nona Qwerty 01.09.2021 13:52:32 Done 0.00
+618860 Основной счет DiP transfer -0.03 EUR 380634413375 01.09.2021 13:52:08 Reversed 0.00
+618857 Основной счет DiP transfer -0.10 EUR Nona Qwerty 01.09.2021 13:51:06 Done 0.00
+618856 Основной счет DiP transfer 0.10 EUR Nona Qwerty 01.09.2021 13:49:27 Done 0.00
+618201 Основной счет Move My Funds 0.07 EUR Auto PLN 26.08.2021 15:59:44 Done 0.00
+618004 Основной счет DiP transfer -0.05 EUR Nona Qwerty 18.08.2021 16:47:32 Done 0.00
+618003 Основной счет DiP transfer 0.05 EUR Nona Qwerty 18.08.2021 16:47:08 Done 0.00
+618002 Основной счет DiP transfer -0.05 EUR Nona Qwerty 18.08.2021 16:46:37 Done 0.00
+618001 Основной счет DiP transfer 0.05 EUR Nona Qwerty 18.08.2021 16:39:05 Done 0.00
+618000 Основной счет DiP transfer -0.05 EUR Nona Qwerty 18.08.2021 16:38:23 Done 0.00
+617999 Основной счет DiP transfer 0.05 EUR Nona Qwerty 18.08.2021 16:37:19 Done 0.00
+617998 Основной счет DiP transfer 0.05 EUR Nona Qwerty 18.08.2021 16:36:37 Done 0.00
+617996 Основной счет DiP transfer 0.05 EUR Nona Qwerty 18.08.2021 16:36:06 Done 0.00
+617995 Основной счет DiP transfer -0.05 EUR Nona Qwerty 18.08.2021 16:36:03 Done 0.00
+617439 Основной счет DiP transfer reversal 0.01 EUR 447459005206 04.08.2021 16:50:51 Done 0.00
+617161 Основной счет DiP transfer -0.02 EUR 447459005206 04.08.2021 16:42:53 Reversed 0.00
+617432 Основной счет DiP transfer reversal 0.02 EUR 447459005206 04.08.2021 16:40:51 Done 0.00
+617165 Основной счет DiP transfer 0.01 EUR 447459005206 03.08.2021 12:31:57 Done 0.00
+617167 Основной счет DiP transfer 0.21 EUR 447459005206 03.08.2021 12:31:50 Done 0.00
+617173 Основной счет DiP transfer 0.04 EUR Nona Qwerty 03.08.2021 12:31:22 Done 0.00
+617206 Основной счет DiP transfer -0.05 EUR Nona Qwerty 29.07.2021 16:54:45 Done 0.00
+617205 Основной счет DiP transfer 0.05 EUR Nona Qwerty 29.07.2021 16:54:31 Done 0.00
+617172 Основной счет DiP transfer -0.04 EUR Nona Qwerty 28.07.2021 17:41:18 Done 0.00
+617162 Основной счет DiP transfer -0.01 EUR 447459005206 28.07.2021 16:50:43 Reversed 0.00
+617156 Основной счет DiP transfer 0.06 EUR 447459005206 28.07.2021 16:39:19 Done 0.00
+617150 Основной счет DiP transfer 0.01 EUR 447459005206 28.07.2021 16:06:50 Done 0.00
+617145 Основной счет DiP transfer -0.12 EUR Nona Qwerty 28.07.2021 15:58:26 Done 0.00
+617144 Основной счет DiP transfer 0.12 EUR Nona Qwerty 28.07.2021 15:57:48 Done 0.00
+617143 Основной счет DiP transfer reversal 0.04 EUR Nona Qwerty 28.07.2021 15:55:12 Done 0.00
+617141 Основной счет DiP transfer -0.04 EUR Nona Qwerty 28.07.2021 15:54:58 Reversed 0.00
+617140 Основной счет DiP transfer -0.05 EUR Nona Qwerty 28.07.2021 15:53:25 Done 0.00
+617139 Основной счет DiP transfer 0.05 EUR Nona Qwerty 28.07.2021 15:52:42 Done 0.00
+617137 Основной счет DiP transfer 0.04 EUR 447459005206 28.07.2021 15:51:29 Done 0.00
+617136 Основной счет DiP transfer 0.24 EUR 447459005206 28.07.2021 15:51:03 Done 0.00
