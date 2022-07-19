@@ -329,4 +329,20 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         assertEquals(actualElementsText, expectedElementsText);
     }
+
+    @Test
+    public void testRolesBOSearchByCardCardIDBackToSearch() throws InterruptedException {
+        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        gotoSearchPage();
+        gotoCardSearchTab();
+        searchByCard("id", cardId);
+        gotoCardDetailsPage(cardId);
+        click(By.xpath("//app-button[@ng-reflect-label='Back to search']"));
+        waitFor(By.id("searchContent"));
+
+        List<String> actualElementsText = getActualText(By.cssSelector("#searchContent label"));
+        List<String> expectedElementsText = getDateFromFile("files/bo/backToSearch.txt");
+
+        assertEquals(actualElementsText, expectedElementsText);
+    }
 }
