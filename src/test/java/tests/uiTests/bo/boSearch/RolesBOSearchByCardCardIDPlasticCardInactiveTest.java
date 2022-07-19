@@ -322,7 +322,8 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         searchByCard("id", cardId);
         gotoCardDetailsPage(cardId);
         click(By.xpath("//app-button[@ng-reflect-label='Show client info']"));
-        waitFor(By.xpath("//app-client-details //p"));
+        waitForElementToBeClickable(By.xpath("//app-client-details //p"));
+        waitFor(By.xpath("//app-client-button-block"));
 
         List<String> actualElementsText = getActualText(By.xpath("//app-client-details //p"));
         List<String> expectedElementsText = getDateFromFile("files/bo/ShowClientInfo.txt");
