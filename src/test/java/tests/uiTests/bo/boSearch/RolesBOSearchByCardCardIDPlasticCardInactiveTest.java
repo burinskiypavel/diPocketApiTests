@@ -1,12 +1,19 @@
 package tests.uiTests.bo.boSearch;
 
 import base.UITestBase;
+import org.hamcrest.Matchers;
+import org.hamcrest.MatcherAssert;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
+//import static org.hamcrest.MatcherAssert.assertThat;
+import static com.oracle.jrockit.jfr.Transition.To;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -286,13 +293,11 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         goToTransactionsTab();
         selectFromDropDown("value", "All");
         click(By.xpath("//p-button[@ng-reflect-label='Search']"));
-
         waitFor(By.xpath("//td[@ng-reflect-text='629314']"));
-
         List<String> actualElementsText = getActualText(By.xpath("//table //tbody //tr"));
         List<String> expectedElementsText = getDateFromFile("files/bo/TransactionTabData.txt");
 
-        assertEquals(actualElementsText, expectedElementsText);
+        assertThat(actualElementsText, equalTo(expectedElementsText));
     }
 
     @Test
