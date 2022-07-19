@@ -1,7 +1,6 @@
 package tests.uiTests.bo.boSearch;
 
 import base.UITestBase;
-import org.hamcrest.Matchers;
 import org.hamcrest.MatcherAssert;
 
 import org.openqa.selenium.By;
@@ -10,8 +9,6 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-//import static org.hamcrest.MatcherAssert.assertThat;
-import static com.oracle.jrockit.jfr.Transition.To;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
@@ -227,8 +224,13 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
 
         waitFor(By.xpath("//*[contains(text(), 'Card id')]"));
 
+        List<String> actualElementsText = getActualText(By.xpath("//div[@role='dialog'] //p"));
+        List<String> expectedElementsText = getDateFromFile("files/bo/CardLimits.txt");
+
+        assertEquals(actualElementsText, expectedElementsText);
+
         assertTrue(areElementsPresent(new String[]{"//*[contains(text(), 'Card id')]", "//*[contains(text(), 'Card type')]",
-                "//*[contains(text(), 'Currency symbol')]", "//*[contains(text(), 'Annual max amount')]", "//*[contains(text(), 'Annual max amount')]"}), "Card limits are incorrect");
+                "//*[contains(text(), 'Currency symbol')]", "//*[contains(text(), 'Annual max amount')]", "//*[contains(text(), 'Annual max amount')]", "//*[contains(text(), 'Annual available amount')]"}), "Card limits are incorrect");
     }
 
     @Test

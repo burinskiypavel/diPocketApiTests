@@ -84,6 +84,27 @@ public class UITestBase {
         return actualElementsText;
     }
 
+    public List<String> getActualTextAttributeValue(By locator) {
+        List<String> actualElementsText = new ArrayList<>();
+
+        List<WebElement> elements = driver.findElements(locator);
+
+        for(WebElement element : elements){
+            String text = element.getAttribute("Value");
+
+            if(text == null){
+
+            }
+            else {
+                actualElementsText.add(text);
+                actualElementsText.add("\r\n");
+            }
+        }
+
+        System.out.println(actualElementsText);
+        return actualElementsText;
+    }
+
     public List<String> getDateFromFile(String path) {
         List<String> table = new ArrayList<String>();
         //String fullPathToFile = "/AdminReports/QA/" + path;//QA

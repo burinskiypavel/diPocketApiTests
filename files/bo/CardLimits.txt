@@ -1,0 +1,32 @@
+Name: Purchase
+Type: Purchase
+Currency id: 978
+Currency symbol: €
+Max amount: 9,000.00
+Limit amount: 0.00
+Usage amount: 0.00
+Available amount: 9,000.00
+Name: Cash
+Type: Cash
+Currency id: 978
+Currency symbol: €
+Max amount: 600.00
+Limit amount: 0.00
+Usage amount: 0.00
+Available amount: 600.00
+Name: Purchase
+Type: Purchase
+Currency id: 978
+Currency symbol: €
+Max amount: 30,000.00
+Limit amount: 0.00
+Usage amount: 0.00
+Available amount: 30,000.00
+Name: Cash
+Type: Cash
+Currency id: 978
+Currency symbol: €
+Max amount: 3,500.00
+Limit amount: 0.00
+Usage amount: 0.00
+Available amount: 3,500.00
