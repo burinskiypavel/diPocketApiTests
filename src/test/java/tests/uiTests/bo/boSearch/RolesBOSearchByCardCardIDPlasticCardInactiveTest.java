@@ -235,8 +235,8 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         gotoSearchPage();
         gotoCardSearchTab();
-        searchByCard("id", cardId);
-        gotoCardDetailsPage(cardId);
+        searchByCard("id", cardIdForResendPin);
+        gotoCardDetailsPage(cardIdForResendPin);
 
         click(By.xpath("//app-button[@label='Operations']"));
 
