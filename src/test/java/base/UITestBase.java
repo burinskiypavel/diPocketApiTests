@@ -1302,4 +1302,11 @@ public class UITestBase {
     public void goToTransactionsTab() {
         click(By.id("p-tabpanel-4-label"));
     }
+
+    public void pressOperationsSelectValueFromOperation(String item) throws InterruptedException {
+        click(By.xpath("//app-button[@label='Operations']"));
+        Thread.sleep(700);
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), '" + item + "')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), '" + item + "')]"));
+    }
 }

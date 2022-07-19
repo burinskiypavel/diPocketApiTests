@@ -705,6 +705,12 @@
         </classes>
     </test>
 
+    <test name="RolesBOSearchByCardCardIDCardLimits">
+        <classes>
+            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardCardIDCardLimits"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 
