@@ -288,7 +288,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         goToCardClientInfoTab();
 
         List<String> actualElementsText = getActualText(By.xpath("//table //tr"));
-        List<String> expectedElementsText = getDateFromFile("files/bo/ClientTabPage.txt");
+        List<String> expectedElementsText = getDateFromFile("files/bo/boSearch/ClientTabPage.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
     }
