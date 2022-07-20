@@ -4,7 +4,9 @@ import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
 
 public class RolesBOUserClientPageTab3rdPartyCardsTest extends UITestBase {
     String phone = "380634413376";
@@ -18,12 +20,9 @@ public class RolesBOUserClientPageTab3rdPartyCardsTest extends UITestBase {
         goToClientPage(phone);
         goTo3rdPartyCardsTab();
         waitFor(By.xpath("//thead //th[contains(text(), 'Card name')]"));
+        List<String> actualElementsText = getActualText(By.xpath("//thead //th"));
+        List<String> expectedElementsText = getDateFromFile("files/bo/boClient/Tab3rdPartyCards.txt");
 
-        assertTrue(areElementsPresent(new String[]{
-                "//thead //th[contains(text(), 'Card name')]", "//thead //th[contains(text(), 'State')]",
-                "//thead //th[contains(text(), 'CCY')]", "//thead //th[contains(text(), 'Cardholder name')]",
-                "//thead //th[contains(text(), 'Registration date')]", "//thead //th[contains(text(), 'Card number')]",
-                "//thead //th[contains(text(), 'Card type')]", "//thead //th[contains(text(), '3DS Check')]",
-                "//thead //th[contains(text(), 'AVS Check')]"}));
+        assertEquals(actualElementsText, expectedElementsText);
     }
 }
