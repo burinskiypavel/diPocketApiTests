@@ -305,7 +305,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         waitFor(By.xpath("//app-client-button-block"));
 
         List<String> actualElementsText = getActualText(By.xpath("//app-client-details //p"));
-        List<String> expectedElementsText = getDateFromFile("files/bo/ShowClientInfo.txt");
+        List<String> expectedElementsText = getDateFromFile("files/bo/boSearch/ShowClientInfo.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
     }
