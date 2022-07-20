@@ -321,7 +321,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         waitFor(By.id("searchContent"));
 
         List<String> actualElementsText = getActualText(By.cssSelector("#searchContent label"));
-        List<String> expectedElementsText = getDateFromFile("files/bo/backToSearch.txt");
+        List<String> expectedElementsText = getDateFromFile("files/bo/boSearch/backToSearch.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
     }
