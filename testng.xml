@@ -705,9 +705,9 @@
         </classes>
     </test>
 
-    <test name="RolesBOSearchByCardCardIDCardLimits">
+    <test name="RolesBOSearchByCardCardIDCardLimitsTest">
         <classes>
-            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardCardIDCardLimits"/>
+            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardCardIDCardLimitsTest"/>
         </classes>
     </test>
 

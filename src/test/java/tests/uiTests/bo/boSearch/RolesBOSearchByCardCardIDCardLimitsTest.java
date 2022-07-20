@@ -9,7 +9,7 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class RolesBOSearchByCardCardIDCardLimits extends UITestBase {
+public class RolesBOSearchByCardCardIDCardLimitsTest extends UITestBase {
     String cardId = "185822";
 
     @Test
@@ -25,7 +25,7 @@ public class RolesBOSearchByCardCardIDCardLimits extends UITestBase {
         waitFor(By.xpath("//*[contains(text(), 'Card id')]"));
 
         List<String> actualElementsText = getActualText(By.xpath("//div[@role='dialog'] //p"));
-        List<String> expectedElementsText = getDateFromFile("files/bo/CardLimits.txt");
+        List<String> expectedElementsText = getDateFromFile("files/bo/boSearch/CardLimits.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
 
