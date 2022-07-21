@@ -68,6 +68,7 @@ public class UITestBase {
 
         List<WebElement> elements = driver.findElements(locator);
 
+        int count = 0;
         for(WebElement element : elements){
             String text = element.getText();
 
@@ -78,6 +79,10 @@ public class UITestBase {
                 actualElementsText.add(text);
                 actualElementsText.add("\r\n");
             }
+            if(count == 3){
+                break;
+            }
+            count++;
         }
 
         System.out.println(actualElementsText);
