@@ -760,6 +760,11 @@ public class UITestBase {
         waitFor(By.xpath("//*[contains(text(), 'Card')]"));
     }
 
+    public void gotoOperations() {
+        click(By.cssSelector("div[ng-reflect-router-link='operations']"));
+        waitFor(By.xpath("//*[contains(text(), 'Add merchant')]"));
+    }
+
     public void gotoRolesTab() {
         click(By.id("p-tabpanel-2-label"));
     }
@@ -786,6 +791,10 @@ public class UITestBase {
     }
 
     public void gotoCardSearchTab() {
+        click(By.id("p-tabpanel-1-label"));
+    }
+
+    public void gotoFeeTariffPlanTab() {
         click(By.id("p-tabpanel-1-label"));
     }
 
