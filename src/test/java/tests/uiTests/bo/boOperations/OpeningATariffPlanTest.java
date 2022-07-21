@@ -20,14 +20,11 @@ public class OpeningATariffPlanTest extends UITestBase {
         gotoOperations();
         gotoFeeTariffPlanTab();
         selectFromDropDown("name", "United Kingdom - standard");
+        Thread.sleep(1000);
+        List<String> actualElementsText = getActualText2(By.xpath("//table //tbody //tr"));
+        List<String> expectedElementsText = getDateFromFile2("files/bo/boOperations/openingATariffPlan.txt");
 
-        List<String> actualElementsText = getActualText(By.xpath("//table //tbody //tr"));
-        List<String> expectedElementsText = getDateFromFile("files/bo/boOperations/openingATariffPlan.txt");
-
-        //MatcherAssert.assertThat(actualElementsText, equalTo(expectedElementsText));
-        //assertEquals(actualElementsText, expectedElementsText);
-
-        //assertThat(actualElementsText).isEqualToNormalizingNewlines(expectedElementsText);
-        assertThat("text").isEqualToNormalizingNewlines("test");
+        assertEquals(actualElementsText, expectedElementsText);
+        //assertThat("test").isEqualToNormalizingNewlines("test");
     }
 }

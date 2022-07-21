@@ -711,6 +711,12 @@
         </classes>
     </test>
 
+    <test name="OpeningATariffPlanTest">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.OpeningATariffPlanTest"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 

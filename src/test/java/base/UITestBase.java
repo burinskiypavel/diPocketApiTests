@@ -68,7 +68,7 @@ public class UITestBase {
 
         List<WebElement> elements = driver.findElements(locator);
 
-        int count = 0;
+        //int count = 0;
         for(WebElement element : elements){
             String text = element.getText();
 
@@ -78,6 +78,34 @@ public class UITestBase {
             else {
                 actualElementsText.add(text);
                 actualElementsText.add("\r\n");
+            }
+            //if(count == 3){
+            //    break;
+            //}
+            //count++;
+        }
+
+        System.out.println(actualElementsText);
+        return actualElementsText;
+    }
+
+    public List<String> getActualText2(By locator) {
+        List<String> actualElementsText = new ArrayList<>();
+
+        List<WebElement> elements = driver.findElements(locator);
+
+        int count = 0;
+        for(WebElement element : elements){
+            String text = element.getText();
+
+            text = text.replace("\n", " ").replace("\r", " ");
+
+            if(text.equals("")){
+
+            }
+            else {
+                actualElementsText.add(text);
+                //actualElementsText.add("\r\n");
             }
             if(count == 3){
                 break;
@@ -120,6 +148,27 @@ public class UITestBase {
             while ((line = br.readLine()) != null) {
                 table.add(line);
                 table.add("\r\n");
+
+
+                //StringBuilder result = new StringBuilder();
+                //  result.append('\n').append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return table;
+    }
+
+    public List<String> getDateFromFile2(String path) {
+        List<String> table = new ArrayList<String>();
+        //String fullPathToFile = "/AdminReports/QA/" + path;//QA
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                table.add(line);
+                //table.add("\n");
 
 
                 //StringBuilder result = new StringBuilder();
