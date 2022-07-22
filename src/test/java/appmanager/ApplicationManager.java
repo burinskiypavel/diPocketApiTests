@@ -1,10 +1,15 @@
 package appmanager;
 
+import appmanager.ui.bo.UIBOHelper;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import requests.bo.BORequests;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +21,9 @@ public class ApplicationManager {
     //public static java.util.Properties prop = new java.util.Properties();
     //static java.util.Properties prop = new java.util.Properties();
     //static String projectPath = System.getProperty("user.dir");
+    public WebDriver driver;
+    public WebDriverWait wait;
+
     private XmlHelper xmlHelper = new XmlHelper();
     private DBHelper dbHelper = new DBHelper();
     private TelenorHelper telenorHelper = new TelenorHelper();
@@ -25,6 +33,7 @@ public class ApplicationManager {
     private BOHelper boHelper = new BOHelper();
     private JsonHelper jsonHelper = new JsonHelper();
     private BORequests boRequestsHelper = new BORequests();
+    public UIBOHelper uiboHelper;
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
@@ -111,6 +120,16 @@ public class ApplicationManager {
 //    }
 
     public void initStart() {
+//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        //chromeOptions.addArguments("--headless");
+//        //WebDriverManager.chromedriver().version("88").setup();
+//        driver = new ChromeDriver(chromeOptions);
+//        driver.manage().window().maximize();
+//        wait = new WebDriverWait(driver, 20);
+
+
+        uiboHelper = new UIBOHelper(driver);
         configTimeout = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
                         .setParam("http.socket.timeout", 50000)
@@ -320,6 +339,8 @@ public class ApplicationManager {
     public JsonHelper getJsonHelper() { return jsonHelper; }
 
     public BORequests getBoRequestsHelper() { return boRequestsHelper; }
+
+    public UIBOHelper getUiboHelper() { return uiboHelper; }
 
 //    public MailHelper mail(){
 //        if(mailHelper == null){
