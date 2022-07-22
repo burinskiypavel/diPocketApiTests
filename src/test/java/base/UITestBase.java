@@ -1345,6 +1345,21 @@ public class UITestBase {
         click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
     }
 
+    public void selectDropDownFilter(String dropdown, String dropdownItem) {
+        click(By.xpath("//p-columnfilter[@field='" + dropdown + "']"));
+        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+    }
+
+    public void selectDropDownFromMultipleElements(By locator, int index, final String item) throws InterruptedException {
+        List<WebElement> elements = driver.findElements(locator);
+        WebElement element = elements.get(index);
+        element.click();
+        waitForElementToBeClickable(By.xpath("//li[@aria-label='" + item + "']"));
+        Thread.sleep(700);
+        click(By.xpath("//li[@aria-label='" + item + "']"));
+    }
+
     public void fillAndPressDoneManualFeeChargePopUp(String source, String feeDescription, String feeRule, String feeAmount) throws InterruptedException {
         Thread.sleep(1000);
         waitFor(By.xpath("//p-dropdown[@ng-reflect-option-label='accountName']"));
@@ -1371,5 +1386,26 @@ public class UITestBase {
         Thread.sleep(700);
         waitForElementToBeClickable(By.xpath("//*[contains(text(), '" + item + "')]"));
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), '" + item + "')]"));
+    }
+
+    public void addRow(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
+        click(By.xpath("//p-button[@ng-reflect-label='+ Add row']"));
+        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-option-label='name']"), 9, rule);
+        type(By.xpath("//app-input-number[@ng-reflect-name='" + feePercent + "'] //input"), "0");
+        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-option-label='code']"), 2, currency);
+        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-option-label='code']"), 3, feeCurrency);
+        type(By.xpath("//app-input-number[@ng-reflect-name='minFeeAmount'] //input"), minFeeAmount);
+        type(By.xpath("//app-input-number[@ng-reflect-name='maxFeeAmount'] //input"), maxFeeAmount);
+        type(By.xpath("//app-input-number[@ng-reflect-name='flatFeeAmount'] //input"), flatFeeAmount);
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Add']"));
+        waitFor(By.xpath("//*[contains(text(), 'Tariff plan has been successfully added')]"));
+    }
+
+    public void deleteRow(int index) {
+        List<WebElement> elements = driver.findElements(By.xpath("//button[@ng-reflect-icon='pi pi-trash']"));
+        WebElement element = elements.get(index);
+        element.click();
+        waitFor(By.xpath("//*[contains(text(), 'Row deleted successfully')]"));
     }
 }

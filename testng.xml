@@ -717,6 +717,12 @@
         </classes>
     </test>
 
+    <test name="DeletingARowTest">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.DeletingARowTest"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 
