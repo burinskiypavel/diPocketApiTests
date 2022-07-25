@@ -25,7 +25,7 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
                 "Portal client(optional):", "Portal clients for management (optional):", "Upload Photo:"});
 
         assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
-        assertTrue(isButtonEnabled(By.cssSelector("app-button[ng-reflect-label='Add user")));
+        assertTrue(isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Add user")));
 
         selectFromSelectAddNewUserPage("role", "CBO");
         selectFromSelectAddNewUserPage("site", "SODEXO");
@@ -33,7 +33,7 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
         uploadFile(By.cssSelector("input[type='file']"), "C:/Work/Files/self.jpg");
 
         Thread.sleep(700);
-        click(By.cssSelector("app-button[ng-reflect-label='Add user']"));
+        click(By.cssSelector("p-button[ng-reflect-label='Add user']"));
         waitFor(By.xpath("//*[contains(text(), 'User created successfully')]"));
 
         assertTrue(app.getDbHelper().isBOUserExistInDB(username));
