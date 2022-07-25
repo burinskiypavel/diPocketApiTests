@@ -820,7 +820,7 @@ public class UITestBase {
     }
 
     public void gotoRolesTab() {
-        click(By.id("p-tabpanel-2-label"));
+        click(By.id("p-tabpanel-3-label"));
     }
 
     public void goToTilesTab() {
@@ -853,12 +853,12 @@ public class UITestBase {
     }
 
     public void addRole(String roleID, String roleName) throws InterruptedException {
-        click(By.cssSelector("app-button[label='+ Add']"));
+        click(By.cssSelector("p-button[label='+ Add']"));
         waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
         type(By.cssSelector("app-input[ng-reflect-name='roleId'] input[type='text']"), roleID);
         type(By.cssSelector("app-input[ng-reflect-name='roleName'] input[type='text']"), roleName);
         Thread.sleep(500);
-        click(By.cssSelector("app-button[ng-reflect-label='Add']"));
+        click(By.cssSelector("p-button[ng-reflect-label='Add']"));
     }
 
     public void selectRoleFromDropDown(final String name) {
@@ -877,7 +877,7 @@ public class UITestBase {
     }
 
     public void deleteRole() {
-        click(By.cssSelector("app-button[label='Delete']"));
+        click(By.cssSelector("p-button[label='Delete']"));
         click(By.cssSelector("app-role-delete-modal app-button[label='Delete']"));
         waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
     }

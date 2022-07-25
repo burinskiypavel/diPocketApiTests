@@ -13,7 +13,7 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
     String login = app.CBOuserLogin;
     String pass = app.CBOuserPass;
 
-    @Test //moved to api
+    @Test
     public void testBOUserRolesCBOAddNewRole() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
             gotoBOSiteAndLoginWithCBOUserRole(login, pass);
@@ -30,7 +30,7 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
         selectRoleFromDropDown(roleID);
 
         clickCheckbox(By.cssSelector("div[role='checkbox']"));
-        click(By.cssSelector("app-button[label='Update']"));
+        click(By.cssSelector("p-button[label='Update']"));
         waitFor(By.xpath("//div[contains(text(), 'User role changed successfully')]"));
 
         assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role changed successfully')]")));
