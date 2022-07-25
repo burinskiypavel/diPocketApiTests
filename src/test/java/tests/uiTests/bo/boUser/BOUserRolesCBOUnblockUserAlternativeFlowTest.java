@@ -19,9 +19,9 @@ public class BOUserRolesCBOUnblockUserAlternativeFlowTest extends UITestBase {
             selectBOUser("PAVELB");
         }
 
-        softAssert.assertTrue(isButtonEnabled2(By.cssSelector("app-button[ng-reflect-label='Edit']")));
-        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Reset password']")));
-        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Block user']")));
+        softAssert.assertTrue(isButtonEnabled2(By.cssSelector("p-button[ng-reflect-label='Edit']")));
+        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Reset password']")));
+        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Block user']")));
 
         blockUser("test");
 
