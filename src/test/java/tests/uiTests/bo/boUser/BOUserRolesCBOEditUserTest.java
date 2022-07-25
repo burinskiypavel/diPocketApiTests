@@ -12,6 +12,7 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
 
     @Test // moved to api
     public void testBOUserRolesCBOEditUser() throws InterruptedException {
+        System.out.println("Random : " + random);
         gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         gotoBOUsersPage();
         gotoAllUsersTab();
@@ -21,7 +22,7 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
                 "Lastname:", "Phone:", "Email:", "Login (Username):",
                 "Portal client(optional):", "Portal clients for management (optional):", "Upload Photo:"});
         softAssert.assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
-        softAssert.assertTrue(isButtonEnabled(By.cssSelector("app-button[ng-reflect-label='Edit user")));
+        softAssert.assertTrue(isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Edit user")));
         editUser("Pavel" + random);
         waitFor(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']"));
 
