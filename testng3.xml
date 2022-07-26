@@ -29,7 +29,7 @@
 
     <test name="DipocketHomePageWithAlreadyExistClientTest">
         <classes>
-            <class name="tests.homePage.HomePageWithAlreadyExistClientTest"/>
+            <class name="tests.dipocket.homePage.HomePageWithAlreadyExistClientTest"/>
         </classes>
     </test>
 
