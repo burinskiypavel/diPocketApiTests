@@ -316,4 +316,73 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .body("id", hasItems(1, 100, 250, 260),
                         "name", hasItems("Annual", "Max per single trx", "Min per transaction", "High account balance limit"));
     }
+
+    @Test(priority = 23)
+    public void test_BOServices_v1_limit_levels(){
+        given()
+                .spec(app.requestSpecBO)
+                .cookie(cookie)
+                .when()
+                .get( "/v1/limit/levels")
+                .then().log().all()
+                .statusCode(200)
+                .body("", hasItems("EDD", "FDD", "PSDD", "SDD", "SFDD"));
+    }
+
+    @Test(priority = 24)
+    public void test_BOServices_v1_limit_tranGroups(){
+        given()
+                .spec(app.requestSpecBO)
+                .cookie(cookie)
+                .when()
+                .get( "/v1/limit/tranGroups")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(1, 10, 110, 210),
+                        "name", hasItems("DiP Transfers (Out)", "Topup (In)", "Cash load (In)"),
+                        "tranSign", hasItems(-1 ,1));
+    }
+
+    @Test(priority = 25)
+    public void test_BOServices_v1_tcc_balances(){
+        given()
+                .spec(app.requestSpecBO)
+                .cookie(cookie)
+                .when()
+                .get( "/v1/tcc/balances")
+                .then().log().all()
+                .statusCode(200)
+                .body("currencyId", hasItems(840),
+                        "code", hasItems("USD"),
+                        "paymentDate", hasItems("2022-07-26"),
+                        "maxPayment", hasItems(403308),
+                        "today", hasItems("2022-07-26"),
+                        "today1", hasItems("2022-07-27"),
+                        "today2", hasItems("2022-07-28"),
+                        "today3", hasItems("2022-07-29"),
+                        "today4", hasItems("2022-07-30"),
+                        "today5", hasItems("2022-07-31"),
+                        "today6", hasItems("2022-08-01"),
+                        "amount_T0", hasItems(2246),
+                        "amount_T1", hasItems(2246),
+                        "amount_T2", hasItems(2246),
+                        "amount_T3", hasItems(2246),
+                        "amount_T4", hasItems(2246),
+                        "amount_T5", hasItems(2246),
+                        "amount_T6", hasItems(2246));
+    }
+
+    @Test(priority = 26, enabled = false)
+    public void test_BOServices_v1_fee_tariffPlan_duplicate(){
+        given()
+                .spec(app.requestSpecBO)
+                .cookie(cookie)
+                .when()
+                .post("/v1/fee/tariffPlan/duplicate")
+                .then().log().all()
+                .statusCode(200);
+                //.body("id", hasItems(1, 10, 110, 210),
+                //        "name", hasItems("DiP Transfers (Out)", "Topup (In)", "Cash load (In)"),
+                //        "tranSign", hasItems(-1 ,1));
+    }
 }
