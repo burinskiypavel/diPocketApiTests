@@ -723,6 +723,12 @@
         </classes>
     </test>
 
+    <test name="DuplicateTariffPlanTest">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.DuplicateTariffPlanTest"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 

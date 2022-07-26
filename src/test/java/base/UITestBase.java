@@ -1409,4 +1409,12 @@ public class UITestBase {
         element.click();
         waitFor(By.xpath("//*[contains(text(), 'Row deleted successfully')]"));
     }
+
+    public void duplicateTarifPlan(String id, String name) throws InterruptedException {
+        click(By.xpath("//p-button[@ng-reflect-label='Duplicate tariff plan']"));
+        type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
+        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
+        Thread.sleep(1200);
+        click(By.xpath("//p-button[@ng-reflect-label='Duplicate']"));
+    }
 }
