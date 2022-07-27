@@ -96,7 +96,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
         assertThat(clientImage_selfies[0].getId(), equalTo(30920));
         assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
         assertThat(clientImage_selfies[0].getTypeId(), equalTo(1));
-        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAA"));
+        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAQwAABtbnRyUkdCIFhZWi"));
     }
 
     @Test(priority = 11)
