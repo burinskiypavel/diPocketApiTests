@@ -1417,4 +1417,12 @@ public class UITestBase {
         Thread.sleep(1200);
         click(By.xpath("//p-button[@ng-reflect-label='Duplicate']"));
     }
+
+    public void addTarifPlan(String id, String name) throws InterruptedException {
+        click(By.xpath("//p-button[@ng-reflect-label='Add tariff plan']"));
+        type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
+        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
+        Thread.sleep(1200);
+        click(By.xpath("//p-button[@ng-reflect-label='Add']"));
+    }
 }

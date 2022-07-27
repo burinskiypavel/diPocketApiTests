@@ -729,6 +729,12 @@
         </classes>
     </test>
 
+    <test name="AddTariffPlanTest">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.AddTariffPlanTest"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 
