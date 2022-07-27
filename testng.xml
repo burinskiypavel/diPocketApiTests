@@ -723,9 +723,9 @@
         </classes>
     </test>
 
-    <test name="DuplicateTariffPlanTest">
+    <test name="DuplicateTariffPlanTests">
         <classes>
-            <class name="tests.uiTests.bo.boOperations.DuplicateTariffPlanTest"/>
+            <class name="tests.uiTests.bo.boOperations.DuplicateTariffPlanTests"/>
         </classes>
     </test>
 
