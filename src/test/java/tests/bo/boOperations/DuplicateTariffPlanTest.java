@@ -3,18 +3,22 @@ package tests.bo.boOperations;
 import base.TestBase;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
+
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 
 public class DuplicateTariffPlanTest extends TestBase {
     String cookie = null;
     String username = "VIKTORIA";
+    int id = 14361371;
+    String name = "QA_autotest_name";
 
     @Test(priority = 1)
-    public void test_BOServices_v1_auth_authentication() {
+    public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
         baseURI = app.BOURL;
         basePath = "BOServices";
+        app.getDbHelper().deleteFeeTariffPlanDB(String.valueOf(id), name);
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, username);
     }
 
@@ -372,17 +376,17 @@ public class DuplicateTariffPlanTest extends TestBase {
                         "amount_T6", hasItems(2246));
     }
 
-    @Test(priority = 26, enabled = false)
+    @Test(priority = 26)
     public void test_BOServices_v1_fee_tariffPlan_duplicate(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
+                .queryParam("oldFeeTariffPlanId", 1436137)
+                .queryParam("newFeeTariffPlanId", id)
+                .queryParam("feeTariffPlanName", name)
                 .when()
                 .post("/v1/fee/tariffPlan/duplicate")
                 .then().log().all()
                 .statusCode(200);
-                //.body("id", hasItems(1, 10, 110, 210),
-                //        "name", hasItems("DiP Transfers (Out)", "Topup (In)", "Cash load (In)"),
-                //        "tranSign", hasItems(-1 ,1));
     }
 }
