@@ -100,6 +100,8 @@ public class ApplicationManager {
     public String BOURL = "https://support.dipocket.dev";
     public String CBOuserLogin = "Viktoria";
     public String CBOuserPass = "kWmaB0s";
+    public String CBOuserLogin2 = "PAVELBAuto";
+    public String CBOuserPass2 = "mLjY6Ja";
     public String BOuserLogin = "Evgenya";
     public String BOuserPass = "7RTwTUP";
 

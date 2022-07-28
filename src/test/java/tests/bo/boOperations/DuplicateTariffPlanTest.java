@@ -390,4 +390,35 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    @Test(priority = 27)
+    public void test_BOServices_v1_fee_tariffPlan_all_(){
+        given()
+                .spec(app.requestSpecBO)
+                .cookie(cookie)
+                .when()
+                .get( "/v1/fee/tariffPlan/all")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(id),
+                        "name", hasItems(name));
+    }
+
+    @Test(priority = 28)
+    public void test_BOServices_v1_fee_tariff_1436137(){
+        given()
+                .spec(app.requestSpecBO)
+                .cookie(cookie)
+                .when()
+                .get( "/v1/fee/tariff/14361371")
+                .then().log().all()
+                .statusCode(200)
+                .body("id", hasItems(notNullValue()),
+                        "tariffPlanId", hasItems(id),
+                        "ruleId", hasItems(190),
+                        "ruleName", hasItems("Fee for Face to Face"),
+                        "flatFeeAmount", hasItems(50),
+                        "feeCurrencyId", hasItems(840),
+                        "feeCurrencyCode", hasItems("USD"));
+    }
 }
