@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class DuplicateTariffPlanTest extends TestBase {
     String cookie = null;
@@ -358,15 +359,15 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .statusCode(200)
                 .body("currencyId", hasItems(840),
                         "code", hasItems("USD"),
-                        "paymentDate", hasItems("2022-07-26"),
+                        "paymentDate", hasItems(notNullValue()),
                         "maxPayment", hasItems(403308),
-                        "today", hasItems("2022-07-26"),
-                        "today1", hasItems("2022-07-27"),
-                        "today2", hasItems("2022-07-28"),
-                        "today3", hasItems("2022-07-29"),
-                        "today4", hasItems("2022-07-30"),
-                        "today5", hasItems("2022-07-31"),
-                        "today6", hasItems("2022-08-01"),
+                        "today", hasItems(notNullValue()),
+                        "today1", hasItems(notNullValue()),
+                        "today2", hasItems(notNullValue()),
+                        "today3", hasItems(notNullValue()),
+                        "today4", hasItems(notNullValue()),
+                        "today5", hasItems(notNullValue()),
+                        "today6", hasItems(notNullValue()),
                         "amount_T0", hasItems(2246),
                         "amount_T1", hasItems(2246),
                         "amount_T2", hasItems(2246),
