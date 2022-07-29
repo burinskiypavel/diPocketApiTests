@@ -1,7 +1,11 @@
 package tests.bo.boOperations;
 
 import base.TestBase;
+import io.restassured.path.json.JsonPath;
 import org.testng.annotations.Test;
+import io.restassured.response.Response;
+
+import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -9,6 +13,7 @@ import static org.hamcrest.Matchers.*;
 public class AddAndDeleteARowTest extends TestBase {
     String cookie = null;
     String username = "PAVELBAUTO";
+    int createdId;
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
@@ -40,14 +45,14 @@ public class AddAndDeleteARowTest extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_fee_tariff_2(){
-        given()
+        Response res =  given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
                 .when()
-                .get( "/v1/fee/tariff/2")
-                .then().log().all()
-                .statusCode(200)
-                .body("id", hasItem(notNullValue()),
+                .get( "/v1/fee/tariff/2");
+                res.then().log().all();
+                res.then().statusCode(200);
+                res.then().body("id", hasItem(notNullValue()),
                         "tariffPlanId", hasItems(2),
                         "ruleId", hasItems(-100),
                         "ruleName", hasItems("Apple Pay bonus"),
@@ -59,6 +64,12 @@ public class AddAndDeleteARowTest extends TestBase {
                         "flatFeeAmount", hasItems(0),
                         "feeCurrencyId", hasItems(826),
                         "feeCurrencyCode", hasItems("GBP"));
+
+        JsonPath jsonPathEvaluator = res.jsonPath();
+        List<Integer> id = jsonPathEvaluator.get("id");
+        int size = id.size() - 1;
+        int lastId = id.get(size);
+        createdId = lastId;
     }
 
     @Test(priority = 4)
@@ -66,7 +77,7 @@ public class AddAndDeleteARowTest extends TestBase {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .queryParam("tariffRuleId", 43243)
+                .queryParam("tariffId", createdId)
                 .when()
                 .post( "/v1/fee/deleteTariffRule")
                 .then().log().all()
