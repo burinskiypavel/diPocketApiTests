@@ -27,8 +27,8 @@ public class DuplicateTariffPlanTests extends UITestBase {
         gotoOperations();
         gotoFeeTariffPlanTab();
         click(By.xpath("//p-button[@ng-reflect-label='Duplicate tariff plan']"));
-        click(By.cssSelector("div.p-dialog-header-icons"));
+        closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
 
-        waitFor(By.xpath("//p-button[@ng-reflect-label='Duplicate tariff plan']"));
+        waitForInvisibilityOfElement(By.xpath("//*[@app-add-tariff-plan-modal]"));
     }
 }
