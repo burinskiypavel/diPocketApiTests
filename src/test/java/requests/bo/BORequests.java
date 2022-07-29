@@ -51,7 +51,7 @@ public class BORequests {
                         "stateName", notNullValue(),
                         "username", notNullValue(),
                         "phone", notNullValue(),
-                        "corpClientId", notNullValue(),
+                        //"corpClientId", notNullValue(),
                         "email", notNullValue(),
                         "site", notNullValue(),
                         "username", equalTo(expectedUsername));
