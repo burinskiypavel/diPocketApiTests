@@ -19,7 +19,6 @@ public class AddTariffPlanTest extends TestBase {
         app.getDbHelper().deleteFeeTariffPlanDB(String.valueOf(id), name);
         baseURI = app.BOURL;
         basePath = "BOServices";
-        app.getDbHelper().deleteFeeTariffPlanDB(String.valueOf(id), name);
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, username);
     }
 
