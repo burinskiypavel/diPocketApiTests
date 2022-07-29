@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -297,5 +298,30 @@ public class UIHelperBase {
 
     public boolean isButtonEnabled(By locator) {
         return driver.findElement(locator).isEnabled();
+    }
+
+    public boolean isPopUpClosed(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")));
+        if(driver.findElements(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")).size() == 1){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public String getAttributeValue(By locator) {
+        return driver.findElement(locator).getAttribute("value");
+    }
+
+    public String getColorOfElement(By locator, String cssValue) throws InterruptedException {
+        Thread.sleep(2000);
+
+        String color =  driver.findElement(locator).getCssValue(cssValue);
+
+        System.out.println("color: " + color);
+        String hex = Color.fromString(color).asHex();
+        System.out.println("hex: " + hex);
+        return hex;
     }
 }

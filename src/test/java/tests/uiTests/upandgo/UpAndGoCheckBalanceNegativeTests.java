@@ -32,9 +32,9 @@ public class UpAndGoCheckBalanceNegativeTests extends UITestBase {
         app.getUiUpAndGoHelper().type(By.id("token"), "88888888");
         app.getUiUpAndGoHelper().click(By.cssSelector("button[data-dpwa-action='check-balance']"));
         String popUpMessage = app.getUiUpAndGoHelper().getTextFromPopUpUpAndGo();
-        closePopUp(By.xpath("//button[contains(text(), 'OK')]"));
+        app.getUiUpAndGoHelper().closePopUp(By.xpath("//button[contains(text(), 'OK')]"));
 
-        assertTrue(isPopUpClosed());
+        assertTrue(app.getUiUpAndGoHelper().isPopUpClosed());
         assertThat(popUpMessage, equalTo("Token 8888-8888 not found. Please check token and try again"));
     }
 }

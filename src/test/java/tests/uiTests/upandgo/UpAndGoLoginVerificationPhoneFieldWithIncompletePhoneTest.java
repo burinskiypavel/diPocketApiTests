@@ -18,22 +18,22 @@ public class UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest extends U
     public void testLoginVerificationPhoneFieldWithIncompletePhoneWithEmptyPassword() throws InterruptedException {
         app.getUiUpAndGoHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
         app.getUiUpAndGoHelper().gotoLoginPageUpAndGo();
-        type(By.id("phone_number"), phone);
-        String hexColor = getColorOfElement(By.id("phone_number"), "border-color");
+        app.getUiUpAndGoHelper().type(By.id("phone_number"), phone);
+        String hexColor = app.getUiUpAndGoHelper().getColorOfElement(By.id("phone_number"), "border-color");
 
         assertThat(hexColor, equalTo(hexRedColor));
-        assertFalse(isButtonEnabled(By.id("dpwa-login")));
+        assertFalse(app.getUiUpAndGoHelper().isButtonEnabled(By.id("dpwa-login")));
     }
 
     @Test
     public void testLoginVerificationPhoneFieldWithIncompletePhoneWithPassword() throws InterruptedException {
         app.getUiUpAndGoHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
         app.getUiUpAndGoHelper().gotoLoginPageUpAndGo();
-        type(By.id("phone_number"), phone);
-        type(By.id("key"), "12345qw");
-        String hexColor = getColorOfElement(By.id("phone_number"), "border-color");
+        app.getUiUpAndGoHelper().type(By.id("phone_number"), phone);
+        app.getUiUpAndGoHelper().type(By.id("key"), "12345qw");
+        String hexColor = app.getUiUpAndGoHelper().getColorOfElement(By.id("phone_number"), "border-color");
 
         assertThat(hexColor, equalTo(hexRedColor));
-        assertFalse(isButtonEnabled(By.id("dpwa-login")));
+        assertFalse(app.getUiUpAndGoHelper().isButtonEnabled(By.id("dpwa-login")));
     }
 }
