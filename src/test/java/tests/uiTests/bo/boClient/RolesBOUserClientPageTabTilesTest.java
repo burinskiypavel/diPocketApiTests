@@ -11,12 +11,12 @@ public class RolesBOUserClientPageTabTilesTest extends UITestBase {
 
     @Test()
     public void testRolesBOUserClientPageTabTiles() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToTilesTab();
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToTilesTab();
 
-        assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Types')]", "//table //th[contains(text(), 'Messages')]"}));
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//table //th[contains(text(), 'Types')]", "//table //th[contains(text(), 'Messages')]"}));
     }
 }

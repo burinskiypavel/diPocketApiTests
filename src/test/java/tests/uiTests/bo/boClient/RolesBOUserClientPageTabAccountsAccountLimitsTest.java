@@ -12,13 +12,13 @@ public class RolesBOUserClientPageTabAccountsAccountLimitsTest extends UITestBas
 
     @Test
     public void testRolesBOUserClientPageTabAccountsAccountLimits() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        performContextClick(By.cssSelector("td[ng-reflect-text='Bbh']"));
-        click(By.xpath("//span[contains(text(), 'Account limits')]"));
-        assertTrue(areElementsPresent(new String[]{"//th[contains(text(), 'Name')]", "//th[contains(text(), 'Type')]", "//th[contains(text(), 'Currency')]", "//th[contains(text(), 'Max amount')]", "//th[contains(text(), 'Limit amount')]"}));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='Bbh']"));
+        app.getUiboHelper().click(By.xpath("//span[contains(text(), 'Account limits')]"));
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//th[contains(text(), 'Name')]", "//th[contains(text(), 'Type')]", "//th[contains(text(), 'Currency')]", "//th[contains(text(), 'Max amount')]", "//th[contains(text(), 'Limit amount')]"}));
     }
 }

@@ -13,25 +13,25 @@ public class UpAndGoCheckBalanceNegativeTests extends UITestBase {
 
     @Test(priority = 1)
     public void testCheckEmptyCardNumberField() throws InterruptedException {
-        gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
-        click(By.cssSelector("a[href='/en/check/balance']"));
-        waitForSeveralItems(new String[]{"Check balance and PIN code", "Card identifier", "Cancel", "Continue"});
-        type(By.id("token"), "");
-        click(By.cssSelector("button[data-dpwa-action='check-balance']"));
-        String popUpMessage = getTextFromPopUpUpAndGo();
-        closePopUp(By.xpath("//button[contains(text(), 'OK')]"));
+        app.getUiboHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
+        app.getUiboHelper().click(By.cssSelector("a[href='/en/check/balance']"));
+        app.getUiboHelper().waitForSeveralItems(new String[]{"Check balance and PIN code", "Card identifier", "Cancel", "Continue"});
+        app.getUiboHelper().type(By.id("token"), "");
+        app.getUiboHelper().click(By.cssSelector("button[data-dpwa-action='check-balance']"));
+        String popUpMessage = app.getUiUpAndGoHelper().getTextFromPopUpUpAndGo();
+        app.getUiboHelper().closePopUp(By.xpath("//button[contains(text(), 'OK')]"));
 
         assertThat(popUpMessage, equalTo("Token not found. Please check token and try again"));
     }
 
     @Test(priority = 2)
     public void testCheckCardNumberFieldWithInvalidData() {
-        gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
-        click(By.cssSelector("a[href='/en/check/balance']"));
-        waitForSeveralItems(new String[]{"Check balance and PIN code", "Card identifier", "Cancel", "Continue"});
-        type(By.id("token"), "88888888");
-        click(By.cssSelector("button[data-dpwa-action='check-balance']"));
-        String popUpMessage = getTextFromPopUpUpAndGo();
+        app.getUiUpAndGoHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
+        app.getUiUpAndGoHelper().click(By.cssSelector("a[href='/en/check/balance']"));
+        app.getUiUpAndGoHelper().waitForSeveralItems(new String[]{"Check balance and PIN code", "Card identifier", "Cancel", "Continue"});
+        app.getUiUpAndGoHelper().type(By.id("token"), "88888888");
+        app.getUiUpAndGoHelper().click(By.cssSelector("button[data-dpwa-action='check-balance']"));
+        String popUpMessage = app.getUiUpAndGoHelper().getTextFromPopUpUpAndGo();
         closePopUp(By.xpath("//button[contains(text(), 'OK')]"));
 
         assertTrue(isPopUpClosed());

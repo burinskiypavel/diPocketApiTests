@@ -10,12 +10,12 @@ public class BOUserRolesCBOAllUsersTableTest extends UITestBase {
 
     @Test
     public void testBOUserRolesCBOAllUsersTable() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        gotoBOUsersPage();
-        gotoAllUsersTab();
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoBOUsersPage();
+        app.getUiboHelper().gotoAllUsersTab();
 
-        assertTrue(isElementPresent(By.xpath("//a[@id='p-tabpanel-1-label'][@aria-selected='true']")));
-        assertTrue(isElementPresent(By.xpath("//div[@id='p-tabpanel-1'][@aria-hidden='false']")));
-        assertTrue(isElementPresent(By.cssSelector("table")));
+        assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//a[@id='p-tabpanel-1-label'][@aria-selected='true']")));
+        assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[@id='p-tabpanel-1'][@aria-hidden='false']")));
+        assertTrue(app.getUiboHelper().isElementPresent(By.cssSelector("table")));
     }
 }

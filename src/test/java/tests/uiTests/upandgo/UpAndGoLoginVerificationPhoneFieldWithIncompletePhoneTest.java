@@ -16,8 +16,8 @@ public class UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest extends U
 
     @Test
     public void testLoginVerificationPhoneFieldWithIncompletePhoneWithEmptyPassword() throws InterruptedException {
-        gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
-        gotoLoginPageUpAndGo();
+        app.getUiUpAndGoHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
+        app.getUiUpAndGoHelper().gotoLoginPageUpAndGo();
         type(By.id("phone_number"), phone);
         String hexColor = getColorOfElement(By.id("phone_number"), "border-color");
 
@@ -27,8 +27,8 @@ public class UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest extends U
 
     @Test
     public void testLoginVerificationPhoneFieldWithIncompletePhoneWithPassword() throws InterruptedException {
-        gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
-        gotoLoginPageUpAndGo();
+        app.getUiUpAndGoHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
+        app.getUiUpAndGoHelper().gotoLoginPageUpAndGo();
         type(By.id("phone_number"), phone);
         type(By.id("key"), "12345qw");
         String hexColor = getColorOfElement(By.id("phone_number"), "border-color");

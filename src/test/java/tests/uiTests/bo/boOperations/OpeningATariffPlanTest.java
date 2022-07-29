@@ -16,13 +16,13 @@ public class OpeningATariffPlanTest extends UITestBase {
 
     @Test
     public void testOpeningATariffPlan() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        gotoOperations();
-        gotoFeeTariffPlanTab();
-        selectFromDropDown("name", "United Kingdom - standard");
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoFeeTariffPlanTab();
+        app.getUiboHelper().selectFromDropDown("name", "United Kingdom - standard");
         Thread.sleep(1000);
-        List<String> actualElementsText = getActualText2(By.xpath("//table //tbody //tr"));
-        List<String> expectedElementsText = getDateFromFile2("files/bo/boOperations/openingATariffPlan.txt");
+        List<String> actualElementsText = app.getUiboHelper().getActualText2(By.xpath("//table //tbody //tr"));
+        List<String> expectedElementsText = app.getUiboHelper().getDateFromFile2("files/bo/boOperations/openingATariffPlan.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
         //assertThat("test").isEqualToNormalizingNewlines("test");

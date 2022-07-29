@@ -12,28 +12,28 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
 
     @Test
     public void testRolesBOUserClientPageTabTickets() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToTicketsTab();
-        waitFor(By.xpath("//thead //th[contains(text(), 'Ticket Type')]"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToTicketsTab();
+        app.getUiboHelper().waitFor(By.xpath("//thead //th[contains(text(), 'Ticket Type')]"));
 
-        assertTrue(areElementsPresent(new String[]{
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{
                 "//thead //th[contains(text(), 'Ticket id')]", "//thead //th[contains(text(), 'Created')]",
                 "//thead //th[contains(text(), 'Ticket Type')]", "//thead //th[contains(text(), 'User')]",
                 "//thead //th[contains(text(), 'Ticket State')]", "//thead //th[contains(text(), 'Closed')]",
                 "//thead //th[contains(text(), 'Last comment')]"}));
 
 
-        verifyClientPageFilterWithCollection("id", "25596", 1);
-        verifyClientPageFilter("created", "02.02.2022");
-        verifyDropDownClientPageFilter("typeName", "FDD check");
-        verifyDropDownClientPageFilter("username", "EVGENYA");
-        verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@field='stateName']"), "Closed", 2);
-        verifyClientPageFilter("closed", "07.02.2022");
+        app.getUiboHelper().verifyClientPageFilterWithCollection("id", "25596", 1);
+        app.getUiboHelper().verifyClientPageFilter("created", "02.02.2022");
+        app.getUiboHelper().verifyDropDownClientPageFilter("typeName", "FDD check");
+        app.getUiboHelper().verifyDropDownClientPageFilter("username", "EVGENYA");
+        app.getUiboHelper().verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@field='stateName']"), "Closed", 2);
+        app.getUiboHelper().verifyClientPageFilter("closed", "07.02.2022");
 
-        setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
-        assertTrue(areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Ticket reassigned. Reason: test')]")));
+        app.getUiboHelper().setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
+        assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Ticket reassigned. Reason: test')]")));
     }
 }

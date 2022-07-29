@@ -11,8 +11,8 @@ public class UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest e
 
     @Test
     public void testLoginVerificationFillPhoneFieldWithForbiddenCharacters() {
-        gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
-        gotoLoginPageUpAndGo();
+        app.getUiUpAndGoHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
+        app.getUiUpAndGoHelper().gotoLoginPageUpAndGo();
         type(By.id("phone_number"), "kkkA@#%*()");
 
         String phoneText = getAttributeValue(By.id("phone_number"));

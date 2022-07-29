@@ -16,24 +16,24 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
     @Test
     public void testBOUserRolesCBOAddNewRole() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
-            gotoBOSiteAndLoginWithCBOUserRole(login, pass);
-            gotoBOUsersPage();
-            gotoRolesTab();
-            selectRoleFromDropDown(roleID);
-            deleteRole();
+            app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(login, pass);
+            app.getUiboHelper().gotoBOUsersPage();
+            app.getUiboHelper().gotoRolesTab();
+            app.getUiboHelper().selectRoleFromDropDown(roleID);
+            app.getUiboHelper().deleteRole();
         }
 
-        gotoBOSiteAndLoginWithCBOUserRole(login, pass);
-        gotoBOUsersPage();
-        gotoRolesTab();
-        addRole(roleID, "testqa2");
-        selectRoleFromDropDown(roleID);
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(login, pass);
+        app.getUiboHelper().gotoBOUsersPage();
+        app.getUiboHelper().gotoRolesTab();
+        app.getUiboHelper().addRole(roleID, "testqa2");
+        app.getUiboHelper().selectRoleFromDropDown(roleID);
 
-        clickCheckbox(By.cssSelector("div[role='checkbox']"));
-        click(By.cssSelector("p-button[label='Update']"));
-        waitFor(By.xpath("//div[contains(text(), 'User role changed successfully')]"));
+        app.getUiboHelper().clickCheckbox(By.cssSelector("div[role='checkbox']"));
+        app.getUiboHelper().click(By.cssSelector("p-button[label='Update']"));
+        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role changed successfully')]"));
 
-        assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role changed successfully')]")));
-        deleteRole();
+        assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'User role changed successfully')]")));
+        app.getUiboHelper().deleteRole();
     }
 }

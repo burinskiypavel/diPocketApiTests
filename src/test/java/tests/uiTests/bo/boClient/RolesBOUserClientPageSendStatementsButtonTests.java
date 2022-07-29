@@ -25,11 +25,11 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
     @Test
     public void testRolesBOUserClientPageSendStatementsButtonAllStatementsAndDefaultEmail() throws InterruptedException, IOException, MessagingException, SQLException, ClassNotFoundException {
         app.getDbHelper().updateClientLanguageFromDB(email, String.valueOf(Language.UK.getOurId()), Site.DIPOCKET.toString());
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        sendAllStatemenstToDefaultEmail();
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().sendAllStatemenstToDefaultEmail();
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass, appPass);
         String actualSubject = senderAndSubject.get(1);
@@ -44,11 +44,11 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
 
     @Test
     public void testRolesBOUserClientPageSendStatementsButtonStatementAllStatementsAndEnteredEmail() throws InterruptedException, IOException, MessagingException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        sendAllStatementsToEnteredEmail(app.emailsVerificationsEmail);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().sendAllStatementsToEnteredEmail(app.emailsVerificationsEmail);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSubject = senderAndSubject.get(1);
@@ -63,11 +63,11 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
 
     @Test
     public void testRolesBOUserClientPageSendStatementsButtonStatementForChosenPeriodAndDefaultEmail() throws InterruptedException, IOException, MessagingException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        sendStatementForChosenPeriodAndDefaultEmail();
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().sendStatementForChosenPeriodAndDefaultEmail();
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass, appPass);
         String actualSubject = senderAndSubject.get(1);

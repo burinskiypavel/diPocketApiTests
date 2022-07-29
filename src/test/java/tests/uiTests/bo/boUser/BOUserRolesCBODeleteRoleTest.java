@@ -17,22 +17,22 @@ public class BOUserRolesCBODeleteRoleTest extends UITestBase {
     @Test //moved to API
     public void testBOUserRolesCBODeleteRole() throws InterruptedException, SQLException, ClassNotFoundException {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
-            gotoBOSiteAndLoginWithCBOUserRole(login, pass);
-            gotoBOUsersPage();
-            gotoRolesTab();
-            selectRoleFromDropDown(roleID);
-            deleteRole();
-            waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
+            app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(login, pass);
+            app.getUiboHelper().gotoBOUsersPage();
+            app.getUiboHelper().gotoRolesTab();
+            app.getUiboHelper().selectRoleFromDropDown(roleID);
+            app.getUiboHelper().deleteRole();
+            app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
         }
-        gotoBOSiteAndLoginWithCBOUserRole(login, pass);
-        gotoBOUsersPage();
-        gotoRolesTab();
-        addRole(roleID, "a_roleName");
-        selectRoleFromDropDown(roleID);
-        deleteRole();
-        waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(login, pass);
+        app.getUiboHelper().gotoBOUsersPage();
+        app.getUiboHelper().gotoRolesTab();
+        app.getUiboHelper().addRole(roleID, "a_roleName");
+        app.getUiboHelper().selectRoleFromDropDown(roleID);
+        app.getUiboHelper().deleteRole();
+        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
 
-        assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'User role deleted successfully')]")));
+        assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'User role deleted successfully')]")));
         assertFalse(app.getDbHelper().isRoleExistInDB(roleID));
     }
 }

@@ -15,19 +15,19 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
     @Test(priority = 1)
     public void testRolesBOUserClientPageTabAccountsBlockAccount() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
 
-        if(!isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
-            unblockAccount();
-            moveToElementAndPerformContextClick(accountName);
+        if(!app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
+            app.getUiboHelper().unblockAccount();
+            app.getUiboHelper().moveToElementAndPerformContextClick(accountName);
         }
 
-        String actualPopupText = blockAccount();
+        String actualPopupText = app.getUiboHelper().blockAccount();
 
         assertEquals(actualPopupText, "Are you sure want to block account with name: "+accountName+"?");
 
@@ -41,62 +41,62 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
     @Test(priority = 2)
     public void testRolesBOUserClientPageTabAccountsUnblockAccount() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
 
-        if(isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
-            boClientPageBlockAccount();
-            moveToElementAndPerformContextClick(accountName);
+        if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
+            app.getUiboHelper().boClientPageBlockAccount();
+            app.getUiboHelper().moveToElementAndPerformContextClick(accountName);
         }
 
-        String actualPopupText = unblockAccountAndGetPopupText();
+        String actualPopupText = app.getUiboHelper().unblockAccountAndGetPopupText();
 
         assertEquals(actualPopupText, "Are you sure want to unblock account with name: "+accountName+"?");
     }
 
     @Test(priority = 3)
     public void testRolesBOUserClientPageTabAccountsOverdraftLimit() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
 
-        click(By.xpath("//span[contains(text(), 'Overdraft limit')]"));
-        updateLimits(randomLimit, randomLimit);
+        app.getUiboHelper().click(By.xpath("//span[contains(text(), 'Overdraft limit')]"));
+        app.getUiboHelper().updateLimits(randomLimit, randomLimit);
 
-        assertTrue(isElementPresent(By.xpath("//div[contains(text(), 'Account limits was changed successfull')]")));
+        assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'Account limits was changed successfull')]")));
     }
 
     @Test(priority = 4)
     public void testRolesBOUserClientPageTabAccountsCardsTablesBlock() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
 
-        waitFor(By.cssSelector("td[ng-reflect-text='Plastic']"));
+        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='Plastic']"));
 
-        setClientPageFilter("id", "188989");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='188989']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='id'] input[type='text']"));
+        app.getUiboHelper().setClientPageFilter("id", "188989");
+        assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='188989']")));
+        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='id'] input[type='text']"));
 
-        setClientPageFilter("publicToken", "893529504");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='893529504']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='publicToken'] input[type='text']"));
+        app.getUiboHelper().setClientPageFilter("publicToken", "893529504");
+        assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='893529504']")));
+        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='publicToken'] input[type='text']"));
 
-        setClientPageFilter("dipToken", "32842383");
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='32842383']")));
-        performContextClick(By.cssSelector("td[ng-reflect-text='186406']"));
+        app.getUiboHelper().setClientPageFilter("dipToken", "32842383");
+        assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='32842383']")));
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='186406']"));
 
-        assertTrue(areElementsPresent(new String[]{"//span[contains(text(), 'Block card')]", "//span[contains(text(), 'Unblock card')]",
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//span[contains(text(), 'Block card')]", "//span[contains(text(), 'Unblock card')]",
         "//span[contains(text(), 'Get QR')]", "//span[contains(text(), 'Card limits')]", "//span[contains(text(), 'Reset pin counter')]",
         "//span[contains(text(), 'Reset ePin')]", "//span[contains(text(), 'Reset contactless counter')]",
         "//span[contains(text(), 'Activate card')]"}));
@@ -104,86 +104,86 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
     @Test(priority = 5)
     public void testRolesBOUserClientPageTabAccountsBlockCard() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
-        waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
 
-        if(isElementPresent(By.cssSelector("li[data-ik='1'] a[tabindex='0']"))){
-            unblockCard();
-            moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-            performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='1'] a[tabindex='0']"))){
+            app.getUiboHelper().unblockCard();
+            app.getUiboHelper().moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+            app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
 
-        blockCard();
+        app.getUiboHelper().blockCard();
 
-        moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        String actualState = getNextElementFromTheTable(cardId, 3);
+        app.getUiboHelper().moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        String actualState = app.getUiboHelper().getNextElementFromTheTable(cardId, 3);
 
         assertEquals(actualState, "Blocked");
     }
 
     @Test(priority = 6)
     public void testRolesBOUserClientPageTabAccountsUnblockCard() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
-        waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
 
-        if(isElementPresent(By.cssSelector("li[data-ik='0'] a[tabindex='0']"))){
-            blockCard();
-            moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-            performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='0'] a[tabindex='0']"))){
+            app.getUiboHelper().blockCard();
+            app.getUiboHelper().moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+            app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
 
-        unblockCard();
-        moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        String actualState = getNextElementFromTheTable(cardId, 3);
+        app.getUiboHelper().unblockCard();
+        app.getUiboHelper().moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        String actualState = app.getUiboHelper().getNextElementFromTheTable(cardId, 3);
 
         assertEquals(actualState, "Active");
     }
 
     @Test(priority = 7)
     public void testRolesBOUserClientPageTabAccountsCardLimits() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
-        waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
-        waitFor(By.xpath("//span[contains(text(), 'Card id:')]"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
+        app.getUiboHelper().waitFor(By.xpath("//span[contains(text(), 'Card id:')]"));
 
-        assertTrue(areElementsPresent(new String[]{"//span[contains(text(), 'Card id:')]", "//span[contains(text(), 'Card type:')]"}));
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//span[contains(text(), 'Card id:')]", "//span[contains(text(), 'Card type:')]"}));
 
-        closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
-        waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
+        app.getUiboHelper().closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
+        app.getUiboHelper().waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
     }
 
     @Test(priority = 8)
     public void testRolesBOUserClientPageTabAccountsResetContactlessCounters() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToAccountsTab();
-        click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
-        waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        click(By.xpath("//li //span[contains(text(), 'Reset contactless counter')]"));
-        String actualPopupText = getTextFromPopUp2(By.cssSelector("app-reset-contactless-counter-modal p"));
-        click(By.cssSelector("app-button[label='Reset']"));
-        waitFor(By.xpath("//div[contains(text(), 'Contactless counter was successfully reset')]"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToAccountsTab();
+        app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().click(By.xpath("//li //span[contains(text(), 'Reset contactless counter')]"));
+        String actualPopupText = app.getUiboHelper().getTextFromPopUp2(By.cssSelector("app-reset-contactless-counter-modal p"));
+        app.getUiboHelper().click(By.cssSelector("app-button[label='Reset']"));
+        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Contactless counter was successfully reset')]"));
 
         assertEquals(actualPopupText, "Are you sure you want to reset contactless counter for card 187562?");
     }

@@ -10,7 +10,7 @@ public class LoginBONegativeTest extends UITestBase {
 
     @Test(enabled = false)
     public void testLoginBONegative() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole("Evgenya", "123456");
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole("Evgenya", "123456");
 
         //assertFalse(!isElementPresent(By.xpath("//p[contains(text(), 'Search')]")));
         //assertFalse(!isElementPresent(By.xpath("//p[contains(text(), 'Take Ticket')]")));

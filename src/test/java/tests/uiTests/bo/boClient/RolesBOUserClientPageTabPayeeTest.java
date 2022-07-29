@@ -14,39 +14,38 @@ public class RolesBOUserClientPageTabPayeeTest extends UITestBase {
 
     @Test
     public void testRolesBOUserClientPageTabPayee() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToPayeeTab();
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToPayeeTab();
 
-        verifyClientPageFilter("nickName", "Txcy", "Den");
-        verifyDropDownClientPageFilter("paymentTypeName", "PLN in Poland", "Other payments");
+        app.getUiboHelper().verifyClientPageFilter("nickName", "Txcy", "Den");
+        app.getUiboHelper().verifyDropDownClientPageFilter("paymentTypeName", "PLN in Poland", "Other payments");
 
-        setDropDownClientPageFilter("currencyCode", "GBP");
-        String actualCurrencyCode = driver.findElements(By.xpath("//table/tbody/tr[1]/td[3]")).get(2).getAttribute("ng-reflect-text");
+        app.getUiboHelper().setDropDownClientPageFilter("currencyCode", "GBP");
+        String actualCurrencyCode = app.getUiboHelper().getAttributeFromMultiple(By.xpath("//table/tbody/tr[1]/td[3]"), 2);
         assertEquals(actualCurrencyCode, "GBP");
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        app.getUiboHelper().clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
-        verifyClientPageFilter("bankId", "WBKPPLPP", "VHHFRGUF");
+        app.getUiboHelper().verifyClientPageFilter("bankId", "WBKPPLPP", "VHHFRGUF");
 
-        setClientPageFilter("accountNo", "64109000047341800000085706");
-        String actualaccountNo = driver.findElements(By.xpath("//table/tbody/tr[1]/td[5]")).get(2).getAttribute("ng-reflect-text");
+        app.getUiboHelper().setClientPageFilter("accountNo", "64109000047341800000085706");
+        String actualaccountNo = app.getUiboHelper().getAttributeFromMultiple(By.xpath("//table/tbody/tr[1]/td[5]"), 2);
         assertEquals(actualaccountNo, "64109000047341800000085706");
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='accountNo'] input[type='text']"));
+        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='accountNo'] input[type='text']"));
 
-        verifyClientPageFilter("countryName", "Australia", "Poland");
-        verifyClientPageFilter("zip", "JUVUV");
-        verifyClientPageFilter("address1", "Hchc");
+        app.getUiboHelper().verifyClientPageFilter("countryName", "Australia", "Poland");
+        app.getUiboHelper().verifyClientPageFilter("zip", "JUVUV");
+        app.getUiboHelper().verifyClientPageFilter("address1", "Hchc");
 
-        WebElement element = driver.findElement(By.cssSelector("p-columnfilter[field='companyName'] input[type='text']"));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element).perform();
+        WebElement element = app.getUiboHelper().findElement(By.cssSelector("p-columnfilter[field='companyName'] input[type='text']"));
+        app.getUiboHelper().moveToElementAction(element);
 
-        verifyClientPageFilter("firstName", "Gfu");
+        app.getUiboHelper().verifyClientPageFilter("firstName", "Gfu");
 
-        setClientPageFilter("lastName", "Hchc");
-        String actualLastName = driver.findElement(By.xpath("//table/tbody/tr[1]/td[11]")).getAttribute("ng-reflect-text");
+        app.getUiboHelper().setClientPageFilter("lastName", "Hchc");
+        String actualLastName = app.getUiboHelper().findElement(By.xpath("//table/tbody/tr[1]/td[11]")).getAttribute("ng-reflect-text");
         assertEquals(actualLastName, "Hchc");
     }
 }

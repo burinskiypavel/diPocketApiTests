@@ -10,13 +10,13 @@ public class RolesCBOBOSearchByCardTest extends UITestBase {
 
     @Test
     public void testRolesBOSearchByClientClientID() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
-        softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
-        gotoCardSearchTab();
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
+        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
+        app.getUiboHelper().gotoCardSearchTab();
 
-        softAssert.assertFalse(!areElementsPresent(new String[]{
+        softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
                 "//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='publicToken']",
                 "//app-input[@ng-reflect-name='dipToken']", "//app-input[@ng-reflect-name='pan']",
                 "//app-input-number[@ng-reflect-name='clientId']", "//app-input[@ng-reflect-name='cardholderName']",}));
@@ -26,13 +26,13 @@ public class RolesCBOBOSearchByCardTest extends UITestBase {
 
     @Test
     public void testRolesCBOSearchByClientClientID() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        gotoSearchPage();
-        softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
-        softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
-        gotoCardSearchTab();
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
+        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
+        app.getUiboHelper().gotoCardSearchTab();
 
-        softAssert.assertFalse(!areElementsPresent(new String[]{
+        softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
                 "//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='publicToken']",
                 "//app-input[@ng-reflect-name='dipToken']", "//app-input[@ng-reflect-name='pan']",
                 "//app-input-number[@ng-reflect-name='clientId']", "//app-input[@ng-reflect-name='cardholderName']",}));

@@ -16,19 +16,19 @@ public class RolesBOSearchByCardBySeveralFieldsTest extends UITestBase {
 
     @Test
     public void testRolesBOSearchByCardBySeveralFields() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        gotoCardSearchTab();
-        searchByCardBySeveralFields(cardId, publicToken, dipToken, pan, clientId, cardholderName);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().gotoCardSearchTab();
+        app.getUiboHelper().searchByCardBySeveralFields(cardId, publicToken, dipToken, pan, clientId, cardholderName);
 
-        softAssert.assertTrue(areElementsPresent(new String[]{"//table //th[contains(text(), 'Card id')]",
+        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//table //th[contains(text(), 'Card id')]",
                 "//table //th[contains(text(), 'Public token')]", "//table //th[contains(text(), 'DiP token')]",
                 "//table //th[contains(text(), 'Masked PAN')]", "//table //th[contains(text(), 'Client id')]",
                 "//table //th[contains(text(), 'Client')]", "//table //th[contains(text(), 'Cardholder name')]"}), "Incorrect headers");
 
-        waitFor(By.xpath("//td[@ng-reflect-text='"+cardId+"']"));
+        app.getUiboHelper().waitFor(By.xpath("//td[@ng-reflect-text='"+cardId+"']"));
 
-        softAssert.assertTrue(areElementsPresent(new String[]{"//td[@ng-reflect-text='"+cardId+"']", "//td[@ng-reflect-text='"+publicToken+"']",
+        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//td[@ng-reflect-text='"+cardId+"']", "//td[@ng-reflect-text='"+publicToken+"']",
         "//td[@ng-reflect-text='"+dipToken+"']", "//td[@ng-reflect-text='"+clientId+"']",
         "//td[@ng-reflect-text='"+cardholderName+"']"}), "Incorrect data in the table results");
 

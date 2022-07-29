@@ -12,13 +12,13 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
 
     @Test
     public void testRolesBOUserClientPageTabTransactionsTest() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToTransactionTab();
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToTransactionTab();
 
-        assertTrue(areElementsPresent(new String[]{
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{
                 "//thead //th[contains(text(), 'TranItemId')]", "//thead //th[contains(text(), 'Account name')]",
                 "//thead //th[contains(text(), 'Type name')]", "//thead //th[contains(text(), 'Amount')]",
                 "//thead //th[contains(text(), 'Currency')]", "//thead //th[contains(text(), 'Receiver')]",
@@ -28,21 +28,21 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
 
     @Test
     public void testRolesBOUserClientPageTabTransactionsDetailsTest() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goToTransactionTab();
-        searchByTransactionTab("All");
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goToTransactionTab();
+        app.getUiboHelper().searchByTransactionTab("All");
 
-        waitFor(By.cssSelector("td[ng-reflect-text='629314']"));
-        performContextClick(By.cssSelector("td[ng-reflect-text='629314']"));
+        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='629314']"));
+        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='629314']"));
 
-        waitFor(By.xpath("//li //span[contains(text(), 'Details')]"));
-        click(By.xpath("//li //span[contains(text(), 'Details')]"));
-        waitFor(By.xpath("//td[contains(text(), 'Account name:')]"));
+        app.getUiboHelper().waitFor(By.xpath("//li //span[contains(text(), 'Details')]"));
+        app.getUiboHelper().click(By.xpath("//li //span[contains(text(), 'Details')]"));
+        app.getUiboHelper().waitFor(By.xpath("//td[contains(text(), 'Account name:')]"));
 
-        assertTrue(areElementsPresent(new String[]{
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{
                 "//td[contains(text(), 'Account name:')]", "//td[contains(text(), 'Account amount:')]",
                 "//td[contains(text(), 'Account currency:')]", "//td[contains(text(), 'Type:')]",
                 "//td[contains(text(), 'State')]"}));

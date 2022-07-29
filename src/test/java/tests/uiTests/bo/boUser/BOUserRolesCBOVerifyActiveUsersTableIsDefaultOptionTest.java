@@ -10,11 +10,11 @@ public class BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest extends UIT
 
     @Test
     public void testBOUserRolesCBOVerifyActiveUsersTableIsDefaultOption() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
-        gotoBOUsersPage();
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        app.getUiboHelper().gotoBOUsersPage();
 
-        assertTrue(isElementPresent(By.xpath("//span[contains(text(), 'Active users')]")));
-        assertTrue(isDefault(By.xpath("//a[@id='p-tabpanel-0-label'][@aria-selected='true']")));
-        assertTrue(isElementPresent(By.cssSelector("table")));
+        assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Active users')]")));
+        assertTrue(app.getUiboHelper().isDefault(By.xpath("//a[@id='p-tabpanel-0-label'][@aria-selected='true']")));
+        assertTrue(app.getUiboHelper().isElementPresent(By.cssSelector("table")));
     }
 }

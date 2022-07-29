@@ -1,6 +1,7 @@
 package appmanager;
 
 import appmanager.ui.bo.UIBOHelper;
+import appmanager.ui.bo.UIUpAndGoHelper;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -34,6 +35,7 @@ public class ApplicationManager {
     private JsonHelper jsonHelper = new JsonHelper();
     private BORequests boRequestsHelper = new BORequests();
     public UIBOHelper uiboHelper;
+    public UIUpAndGoHelper uiUpAndGoHelper;
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
@@ -122,13 +124,13 @@ public class ApplicationManager {
 //    }
 
     public void initStart() {
-//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-//        ChromeOptions chromeOptions = new ChromeOptions();
-//        //chromeOptions.addArguments("--headless");
-//        //WebDriverManager.chromedriver().version("88").setup();
-//        driver = new ChromeDriver(chromeOptions);
-//        driver.manage().window().maximize();
-//        wait = new WebDriverWait(driver, 20);
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+        ChromeOptions chromeOptions = new ChromeOptions();
+        //chromeOptions.addArguments("--headless");
+        //WebDriverManager.chromedriver().version("88").setup();
+        driver = new ChromeDriver(chromeOptions);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, 20);
 
 
         uiboHelper = new UIBOHelper(driver);
@@ -256,6 +258,10 @@ public class ApplicationManager {
         RestAssured.useRelaxedHTTPSValidation();
     }
 
+    public void closeDriver() {
+        driver.quit();
+    }
+
 //    public void unirest() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException, UnirestException {
 //        //unirest ssl
 //        SSLContext sslcontext = SSLContexts.custom()
@@ -343,6 +349,8 @@ public class ApplicationManager {
     public BORequests getBoRequestsHelper() { return boRequestsHelper; }
 
     public UIBOHelper getUiboHelper() { return uiboHelper; }
+
+    public UIUpAndGoHelper getUiUpAndGoHelper() { return uiUpAndGoHelper; }
 
 //    public MailHelper mail(){
 //        if(mailHelper == null){

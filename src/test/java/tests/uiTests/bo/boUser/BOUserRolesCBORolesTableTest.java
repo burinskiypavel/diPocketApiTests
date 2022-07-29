@@ -10,24 +10,24 @@ public class BOUserRolesCBORolesTableTest extends UITestBase {
 
     @Test
     public void testBOUserRolesCBORolesTable() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
-        gotoBOUsersPage();
-        gotoRolesTab();
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        app.getUiboHelper().gotoBOUsersPage();
+        app.getUiboHelper().gotoRolesTab();
 
-        softAssert.assertTrue(isTabActiveAndSelected(By.xpath("//a[@id='p-tabpanel-2-label'][@aria-selected='true']")));
-        softAssert.assertTrue(isPageOpen(By.xpath("//div[@id='p-tabpanel-2'][@aria-hidden='false']")));
+        softAssert.assertTrue(app.getUiboHelper().isTabActiveAndSelected(By.xpath("//a[@id='p-tabpanel-2-label'][@aria-selected='true']")));
+        softAssert.assertTrue(app.getUiboHelper().isPageOpen(By.xpath("//div[@id='p-tabpanel-2'][@aria-hidden='false']")));
 
-        click(By.cssSelector("p-dropdown[placeholder='Role']"));
-        click(By.cssSelector("li[aria-label='1']"));
+        app.getUiboHelper().click(By.cssSelector("p-dropdown[placeholder='Role']"));
+        app.getUiboHelper().click(By.cssSelector("li[aria-label='1']"));
 
-        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("app-button[label='Edit")));
-        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("app-button[label='Delete")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[label='Edit")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[label='Delete")));
 
-        softAssert.assertFalse(!areElementsPresent(new String[]{"//th[contains(text(), 'Code')]",
+        softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{"//th[contains(text(), 'Code')]",
                 "//th[contains(text(), 'Name')]", "//th[contains(text(), 'Description')]",
                 "//th[contains(text(), 'Checked')]", }));
 
-        softAssert.assertTrue(isButtonEnabled3(By.cssSelector("app-button[label='Update']")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[label='Update']")));
         softAssert.assertAll();
     }
 }

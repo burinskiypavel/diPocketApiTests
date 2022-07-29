@@ -12,16 +12,16 @@ public class BOUserRolesCBOResetPasswordAlternativeFlowTest extends UITestBase {
 
     @Test
     public void testBOUserRolesCBOResetPasswordAlternativeFlow() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        gotoBOUsersPage();
-        gotoAllUsersTab();
-        searchAndSelectBOUser("All users", "username", "PAVELB");
-        click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Reset password']"));
-        waitFor(By.cssSelector("div[role='dialog']"));
-        waitFor(By.xpath("//*[contains(text(), 'Are you sure want to reset password and send new one?')]"));
-        closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
-        waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoBOUsersPage();
+        app.getUiboHelper().gotoAllUsersTab();
+        app.getUiboHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
+        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Reset password']"));
+        app.getUiboHelper().waitFor(By.cssSelector("div[role='dialog']"));
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Are you sure want to reset password and send new one?')]"));
+        app.getUiboHelper().closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
+        app.getUiboHelper().waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
 
-        assertFalse(isElementPresent(By.cssSelector("div[role='dialog']")));
+        assertFalse(app.getUiboHelper().isElementPresent(By.cssSelector("div[role='dialog']")));
     }
 }

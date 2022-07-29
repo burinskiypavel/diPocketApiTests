@@ -17,97 +17,97 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
     @Test(priority = 1)
     public void testRolesBOUserClientPageBlockClientButton() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
-            unblockClient();
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+            app.getUiboHelper().unblockClient();
         }
 
-        blockClient("test");
-        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+        app.getUiboHelper().blockClient("test");
+        String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Blocked");
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
-            unblockClient();
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+            app.getUiboHelper().unblockClient();
         }
     }
 
     @Test(priority = 2, enabled = false) // moved to api
     public void testRolesBOUserClientPageUnblockClientButton() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Block client']"))){
-            blockClient("test");
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Block client']"))){
+            app.getUiboHelper().blockClient("test");
         }
 
-        unblockClient();
-        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+        app.getUiboHelper().unblockClient();
+        String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Active");
     }
 
     @Test(priority = 3)
     public void testRolesBOUserClientPageBanClientButton() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
-            unbanClient("test");
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+            app.getUiboHelper().unbanClient("test");
         }
 
-        banClient("test");
-        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+        app.getUiboHelper().banClient("test");
+        String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Banned");
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
-            unbanClient("test");
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+            app.getUiboHelper().unbanClient("test");
         }
     }
 
     @Test(priority = 4, enabled = false) // moved to api
     public void testRolesBOUserClientPageBanClientWithoutBlockingClientDevice() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
-            unbanClient("test");
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+            app.getUiboHelper().unbanClient("test");
         }
 
-        banClientWithoutBlockingClientDevice("test");
-        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+        app.getUiboHelper().banClientWithoutBlockingClientDevice("test");
+        String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Banned");
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
-            unbanClient("test");
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+            app.getUiboHelper().unbanClient("test");
         }
     }
 
     @Test(priority = 5, enabled = false) // moved to api
     public void testRolesBOUserClientPageUnbanClientButton() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Ban client']"))){
-            banClient("test");
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Ban client']"))){
+            app.getUiboHelper().banClient("test");
         }
 
-        unbanClient("test");
-        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+        app.getUiboHelper().unbanClient("test");
+        String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Active");
     }
@@ -115,86 +115,86 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
     @Test(priority = 6)
     public void testRolesBOUserClientPageChangeCredentialsButtonChangePIN() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId);
 
-        if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
-            goToClientPage("38098316499");
-            changeCredentialsChagePhoneNumber(forgotPhone);
-            waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
-            driver.navigate().back();
-            search("id", clientId);
+        if(app.getUiboHelper().isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
+            app.getUiboHelper().goToClientPage("38098316499");
+            app.getUiboHelper().changeCredentialsChagePhoneNumber(forgotPhone);
+            app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+            app.getUiboHelper().navigateBack();
+            app.getUiboHelper().search("id", clientId);
         }
 
-        goToClientPage(forgotPhone);
+        app.getUiboHelper().goToClientPage(forgotPhone);
 
-        click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
-        click(By.xpath("//label[contains(text(), 'Change password:')]"));
-        click(By.cssSelector("p-button[ng-reflect-label='Change']"));
-        waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+        app.getUiboHelper().click(By.xpath("//label[contains(text(), 'Change password:')]"));
+        app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Change']"));
+        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
     @Test(priority = 7)
     public void testRolesBOUserClientPageChangeCredentialsButtonChangeSecretAnswer() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, forgotPhone);
-        goToClientPage(forgotPhone);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, forgotPhone);
+        app.getUiboHelper().goToClientPage(forgotPhone);
 
-        click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
-        click(By.xpath("//label[contains(text(), 'Change secret answer:')]"));
-        click(By.cssSelector("p-button[ng-reflect-label='Change']"));
-        waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+        app.getUiboHelper().click(By.xpath("//label[contains(text(), 'Change secret answer:')]"));
+        app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Change']"));
+        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
     @Test(priority = 8)
     public void testRolesBOUserClientPageChangeCredentialsButtonChangeChangePhoneNumber() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId);
 
-        if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
-            goToClientPage("38098316499");
-            changeCredentialsChagePhoneNumber(forgotPhone);
+        if(app.getUiboHelper().isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
+            app.getUiboHelper().goToClientPage("38098316499");
+            app.getUiboHelper().changeCredentialsChagePhoneNumber(forgotPhone);
             waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
-            driver.navigate().back();
-            search("id", clientId);
+            app.getUiboHelper().navigateBack();
+            app.getUiboHelper().search("id", clientId);
         }
 
-        goToClientPage(forgotPhone);
-        changeCredentialsChagePhoneNumber("38098316499");
+        app.getUiboHelper().goToClientPage(forgotPhone);
+        app.getUiboHelper().changeCredentialsChagePhoneNumber("38098316499");
 
-        waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
 
-        driver.navigate().back();
-        search("id", clientId);
+        app.getUiboHelper().navigateBack();
+        app.getUiboHelper().search("id", clientId);
 
-        if(isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
-            goToClientPage("38098316499");
-            changeCredentialsChagePhoneNumber(forgotPhone);
-            waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
-            driver.navigate().back();
-            search("id", clientId);
+        if(app.getUiboHelper().isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
+            app.getUiboHelper().goToClientPage("38098316499");
+            app.getUiboHelper().changeCredentialsChagePhoneNumber(forgotPhone);
+            app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+            app.getUiboHelper().navigateBack();
+            app.getUiboHelper().search("id", clientId);
         }
     }
 
     @Test(priority = 9)
     public void testRolesCBOUserClientPageForgetClient() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        gotoSearchPage();
-        search("id", clientId);
-        goToClientPage(forgotPhone);
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId);
+        app.getUiboHelper().goToClientPage(forgotPhone);
 
-        if(isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
-            unblockClient();
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+            app.getUiboHelper().unblockClient();
         }
 
-        forgetClient("test");
-        String actualState = getText(By.cssSelector("p.ng-star-inserted"), 0);
+        app.getUiboHelper().forgetClient("test");
+        String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Forgotten");
     }

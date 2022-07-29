@@ -14,14 +14,14 @@ public class RolesBOUserClientPageTab3rdPartyCardsTest extends UITestBase {
 
     @Test
     public void testRolesBOUserClientPageTab3rdPartyCards() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId, phone);
-        goToClientPage(phone);
-        goTo3rdPartyCardsTab();
-        waitFor(By.xpath("//thead //th[contains(text(), 'Card name')]"));
-        List<String> actualElementsText = getActualText(By.xpath("//thead //th"));
-        List<String> expectedElementsText = getDateFromFile("files/bo/boClient/Tab3rdPartyCards.txt");
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId, phone);
+        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboHelper().goTo3rdPartyCardsTab();
+        app.getUiboHelper().waitFor(By.xpath("//thead //th[contains(text(), 'Card name')]"));
+        List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//thead //th"));
+        List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boClient/Tab3rdPartyCards.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
     }

@@ -12,19 +12,19 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
 
     @Test
     public void testEditTariffPlanRowChangeAll() throws InterruptedException {
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        gotoOperations();
-        gotoFeeTariffPlanTab();
-        selectFromDropDown("name", "United Kingdom - standard");
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoFeeTariffPlanTab();
+        app.getUiboHelper().selectFromDropDown("name", "United Kingdom - standard");
         Thread.sleep(1000);
-        selectDropDownFilter("ruleName", "Apple Pay bonus");
+        app.getUiboHelper().selectDropDownFilter("ruleName", "Apple Pay bonus");
 
         WebElement pencil = driver.findElements(By.xpath("//button[@icon='pi pi-pencil']")).get(1);
         pencil.click();
 
-        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='Apple Pay bonus']"), 1,"Fee for Face to Face");
+        app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='Apple Pay bonus']"), 1,"Fee for Face to Face");
 
-        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='GBP']"), 0,"EUR");
+        app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='GBP']"), 0,"EUR");
 
         WebElement row = driver.findElement(By.xpath("//tr[2]"));
 
@@ -32,7 +32,7 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
         feePercentCell.clear();
         feePercentCell.sendKeys("1");
 
-        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='GBP']"), 0,"EUR");
+        app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='GBP']"), 0,"EUR");
 
         WebElement minFeeAmountCell = row.findElements(By.xpath("//p-celleditor //input")).get(5);
         minFeeAmountCell.clear();

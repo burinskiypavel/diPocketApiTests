@@ -14,22 +14,22 @@ public class RolesBOSearchByCardCardIDCardLimitsTest extends UITestBase {
 
     @Test
     public void testRolesBOSearchByCardCardIDCardLimits() throws InterruptedException {
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        gotoCardSearchTab();
-        searchByCard("id", cardId);
-        gotoCardDetailsPage(cardId);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().gotoCardSearchTab();
+        app.getUiboHelper().searchByCard("id", cardId);
+        app.getUiboHelper().gotoCardDetailsPage(cardId);
 
-        pressOperationsSelectValueFromOperation("Card limits");
+        app.getUiboHelper().pressOperationsSelectValueFromOperation("Card limits");
 
-        waitFor(By.xpath("//*[contains(text(), 'Card id')]"));
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Card id')]"));
 
-        List<String> actualElementsText = getActualText(By.xpath("//div[@role='dialog'] //p"));
-        List<String> expectedElementsText = getDateFromFile("files/bo/boSearch/CardLimits.txt");
+        List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//div[@role='dialog'] //p"));
+        List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boSearch/CardLimits.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
 
-        assertTrue(areElementsPresent(new String[]{"//*[contains(text(), 'Card id')]", "//*[contains(text(), 'Card type')]",
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Card id')]", "//*[contains(text(), 'Card type')]",
                 "//*[contains(text(), 'Currency symbol')]", "//*[contains(text(), 'Annual max amount')]", "//*[contains(text(), 'Annual max amount')]", "//*[contains(text(), 'Annual available amount')]"}), "Card limits are incorrect");
     }
 }

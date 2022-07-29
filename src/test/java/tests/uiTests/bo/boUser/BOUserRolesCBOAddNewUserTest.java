@@ -17,24 +17,24 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
             app.getDbHelper().deleteBOUserFromDB(username);
         }
 
-        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        gotoBOUsersPage();
-        click(By.cssSelector("app-button[ng-reflect-label='Add User']"));
-        waitForSeveralItems(new String[]{"Role:", "Site:", "Firstname:",
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoBOUsersPage();
+        app.getUiboHelper().click(By.cssSelector("app-button[ng-reflect-label='Add User']"));
+        app.getUiboHelper().waitForSeveralItems(new String[]{"Role:", "Site:", "Firstname:",
                 "Lastname:", "Phone:", "Email:", "Login (Username):",
                 "Portal client(optional):", "Portal clients for management (optional):", "Upload Photo:"});
 
-        assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
-        assertTrue(isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Add user")));
+        assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
+        assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Add user")));
 
-        selectFromSelectAddNewUserPage("role", "CBO");
-        selectFromSelectAddNewUserPage("site", "SODEXO");
-        fillBOUserFieldsInPopup("Pavel", "Burinskiy", "380685448615", "burinskiypavel@gmail.com", username);
-        uploadFile(By.cssSelector("input[type='file']"), "C:/Work/Files/self.jpg");
+        app.getUiboHelper().selectFromSelectAddNewUserPage("role", "CBO");
+        app.getUiboHelper().selectFromSelectAddNewUserPage("site", "SODEXO");
+        app.getUiboHelper().fillBOUserFieldsInPopup("Pavel", "Burinskiy", "380685448615", "burinskiypavel@gmail.com", username);
+        app.getUiboHelper().uploadFile(By.cssSelector("input[type='file']"), "C:/Work/Files/self.jpg");
 
         Thread.sleep(700);
-        click(By.cssSelector("p-button[ng-reflect-label='Add user']"));
-        waitFor(By.xpath("//*[contains(text(), 'User created successfully')]"));
+        app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Add user']"));
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'User created successfully')]"));
 
         assertTrue(app.getDbHelper().isBOUserExistInDB(username));
 

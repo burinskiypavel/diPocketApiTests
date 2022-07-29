@@ -14,18 +14,18 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends UITestBase {
     @Test
     public void testRolesBOUserClientPageUploadDocsButtonUploadPhotoID() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        gotoSearchPage();
-        search("id", clientId);
-        goToClientPage(phone);
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboHelper().gotoSearchPage();
+        app.getUiboHelper().search("id", clientId);
+        app.getUiboHelper().goToClientPage(phone);
 
-        click(By.xpath("//app-button[@ng-reflect-label='Upload docs']"));
-        click(By.cssSelector("app-select-async[ng-reflect-name='typeId']"));
-        click(By.cssSelector("li[aria-label='PhotoID']"));
-        uploadFile(By.cssSelector("p-fileupload[ng-reflect-choose-label='Browse'] input[type='file']"), "C:/Work/Files/self.jpg");
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Upload docs']"));
+        app.getUiboHelper().click(By.cssSelector("app-select-async[ng-reflect-name='typeId']"));
+        app.getUiboHelper().click(By.cssSelector("li[aria-label='PhotoID']"));
+        app.getUiboHelper().uploadFile(By.cssSelector("p-fileupload[ng-reflect-choose-label='Browse'] input[type='file']"), "C:/Work/Files/self.jpg");
         Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
 
-        waitFor(By.xpath("//div[contains(text(), 'Docs were uploaded successfully')]"));
+        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Docs were uploaded successfully')]"));
     }
 }
