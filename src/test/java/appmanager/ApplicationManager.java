@@ -134,6 +134,7 @@ public class ApplicationManager {
 
 
         uiboHelper = new UIBOHelper(driver);
+        uiUpAndGoHelper = new UIUpAndGoHelper(driver);
         configTimeout = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
                         .setParam("http.socket.timeout", 50000)
