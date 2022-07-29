@@ -23,6 +23,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
 
     @Test(priority = 1)
     public void test_veReqAEx1_TDSServices_acs_bgAuth_v1() {
+        printCurentThredId();
         given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -51,6 +52,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
 
     @Test(priority = 2)
     public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
@@ -107,9 +109,8 @@ public class TDSV1SmsDeclineTest extends TestBase {
 
     @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
+        printCurentThredId();
         Response res = given()
-                //.config(app.configTimeout)
-                //.contentType("application/json")
                 .spec(app.requestSpecTDSJson)
                 .when()
                 .get("/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
@@ -122,6 +123,7 @@ public class TDSV1SmsDeclineTest extends TestBase {
 
     @Test(priority = 4)
     public void test_paReq_TDSServices_acs_bgAuth_v1_() {
+        printCurentThredId();
         given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

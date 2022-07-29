@@ -20,6 +20,7 @@ public class TDSV2AreqAllFieldTest extends TestBase {
 
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .spec(app.requestSpecTDS)

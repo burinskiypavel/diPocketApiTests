@@ -109,8 +109,6 @@ public class TDSV1EPINAcceptTest extends TestBase {
     @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         Response res = given()
-                //.config(app.configTimeout)
-                //.contentType("application/json")
                 .spec(app.requestSpecTDSJson)
                 .when()
                 .get("/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
@@ -124,8 +122,6 @@ public class TDSV1EPINAcceptTest extends TestBase {
     @Test(priority = 4, enabled = false)
     public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
         Response res = given()
-                //.config(app.configTimeout)
-                //.contentType("application/json")
                 .spec(app.requestSpecTDSJson)
                 .when()
                 .get("/TDSTestServices/v1/sms?tranId=" + tranId + "");

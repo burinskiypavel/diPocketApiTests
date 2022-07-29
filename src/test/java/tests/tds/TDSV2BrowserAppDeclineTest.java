@@ -23,6 +23,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
 
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -88,6 +89,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
 
     @Test(priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -127,6 +129,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
 
     @Test(priority = 3)
     public void test_tranStatus_TDSServices_acs_tranStatus() {
+        printCurentThredId();
         given()
                 .spec(app.requestSpecTDSJson)
                 .body("{\n" +
@@ -141,9 +144,8 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
 
     @Test(priority = 4)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
+        printCurentThredId();
         Response res = given()
-                //.config(app.configTimeout)
-                //.contentType("application/json")
                 .spec(app.requestSpecTDSJson)
                 .when()
                 .get("/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
@@ -156,6 +158,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
 
     @Test(priority = 5)
     public void test_tranDecline_ClientServices_v1_tds_tranId_tranDecline() throws SQLException, ClassNotFoundException {
+        printCurentThredId();
         String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         System.out.println("cliSessionId: " + cliSessionId);
         Response response = given()
@@ -173,6 +176,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
 
     @Test(priority = 6)
     public void test_tranStatus_TDSServices_acs_tranStatus_() {
+        printCurentThredId();
         given()
                 .spec(app.requestSpecTDSJson)
                 .body("{\n" +
@@ -187,6 +191,7 @@ public class TDSV2BrowserAppDeclineTest extends TestBase {
 
     @Test(priority = 7)
     public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

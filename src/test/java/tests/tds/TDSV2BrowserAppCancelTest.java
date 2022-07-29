@@ -24,6 +24,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
 
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -92,6 +93,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
 
     @Test(priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -131,6 +133,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
 
     @Test(priority = 3)
     public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

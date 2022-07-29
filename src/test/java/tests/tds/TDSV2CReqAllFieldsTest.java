@@ -22,6 +22,7 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
 
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -88,6 +89,7 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
 
     @Test(priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -146,4 +148,4 @@ public class TDSV2CReqAllFieldsTest extends TestBase {
         assertEquals(finalCResDecline.getTransStatusReason(), "26");
         assertEquals(finalCResDecline.getChallengeCompletionInd(), "Y");
     }
-   }
+}

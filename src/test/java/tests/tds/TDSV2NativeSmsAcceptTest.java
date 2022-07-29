@@ -26,6 +26,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
 
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         String pan4TestSMS = "5455980666358066";
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -100,6 +101,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
 
     @Test(priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -145,9 +147,8 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
 
     @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
+        printCurentThredId();
         Response res = given()
-                //.config(app.configTimeout)
-                //.contentType("application/json")
                 .spec(app.requestSpecTDSJson)
                 .when()
                 .get("/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
@@ -160,9 +161,8 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
 
     @Test(priority = 4)
     public void test_getSMS_TDSTestServices_v1_sms_tranId_tranId() {
+        printCurentThredId();
         Response res = given()
-                //.config(app.configTimeout)
-                //.contentType("application/json")
                 .spec(app.requestSpecTDSJson)
                 .when()
                 .get("/TDSTestServices/v1/sms?tranId=" + tranId + "");
@@ -175,6 +175,7 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
 
     @Test(priority = 5)
     public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

@@ -20,6 +20,7 @@ public class TDSV2NativeIncorrectTranTest extends TestBase {
 
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         String pan4TestSMS = "5455980666358066";
         Response res = given()

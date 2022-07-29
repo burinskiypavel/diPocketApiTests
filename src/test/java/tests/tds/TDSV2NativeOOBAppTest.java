@@ -23,6 +23,7 @@ public class TDSV2NativeOOBAppTest extends TestBase {
 
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         String now = app.getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -92,6 +93,7 @@ public class TDSV2NativeOOBAppTest extends TestBase {
 
     @Test(priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -135,9 +137,8 @@ public class TDSV2NativeOOBAppTest extends TestBase {
 
     @Test(priority = 3)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
+        printCurentThredId();
         Response res = given()
-                //.config(app.configTimeout)
-                //.contentType("application/json")
                 .spec(app.requestSpecTDSJson)
                 .when()
                 .get("/TDSTestServices/v1/tranId.v2?txId=" + randomAcsTransId + "");
@@ -150,6 +151,7 @@ public class TDSV2NativeOOBAppTest extends TestBase {
 
     @Test(priority = 4)
     public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() throws SQLException, ClassNotFoundException {
+        printCurentThredId();
         System.out.println("tranId: " + tranId);
         String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         System.out.println("cliSessionId: " + cliSessionId);
@@ -168,6 +170,7 @@ public class TDSV2NativeOOBAppTest extends TestBase {
 
     @Test(priority = 5)
     public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

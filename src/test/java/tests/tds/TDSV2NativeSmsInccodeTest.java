@@ -26,6 +26,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
 
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         String pan4TestSMS = "5455980666358066";
         Response res = given()
                 .spec(app.requestSpecTDS)
@@ -100,6 +101,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
 
     @Test(priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -145,6 +147,7 @@ public class TDSV2NativeSmsInccodeTest extends TestBase {
 
     @Test(priority = 3)
     public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

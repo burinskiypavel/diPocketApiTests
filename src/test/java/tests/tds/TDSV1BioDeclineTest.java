@@ -24,6 +24,7 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 1)
     public void test_veReqAEx1_TDSServices_acs_bgAuth_v1() {
+        printCurentThredId();
         System.out.println("txid: " + randomTXID + " pan: " + app.pan);
         baseURI = app.TDSBaseUrl;
         given()
@@ -54,6 +55,7 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 2)
     public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
+        printCurentThredId();
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
         System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
         Response res = given()
@@ -110,6 +112,7 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 3)
     public void test_tranStatus_TDSServices_acs_tranStatus_v1() {
+        printCurentThredId();
         System.out.println("txid: " + randomTXID);
         given()
                 .spec(app.requestSpecTDSJson)
@@ -125,10 +128,9 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 4)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
+        printCurentThredId();
         System.out.println("txid: " + randomTXID);
         Response res = given()
-                //.config(app.configTimeout)
-                //.contentType("application/json")
                 .spec(app.requestSpecTDSJson)
                 .when()
                 .get("/TDSTestServices/v1/tranId?txId=" + randomTXID + "");
@@ -141,6 +143,7 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 5)
     public void test_tranDecline_ClientServices_v1_tds_tranId_tranDecline() throws SQLException, ClassNotFoundException {
+        printCurentThredId();
         System.out.println("tranId: " + tranId);
         String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
         System.out.println("cliSessionId: " + cliSessionId);
@@ -159,6 +162,7 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 6)
     public void test_tranStatus_TDSServices_acs_tranStatus_v1_() {
+        printCurentThredId();
         System.out.println("txid: " + randomTXID);
         given()
                 .spec(app.requestSpecTDSJson)
@@ -175,6 +179,7 @@ public class TDSV1BioDeclineTest extends TestBase {
 
     @Test(priority = 7)
     public void test_paReq_TDSServices_acs_bgAuth_v1_() {
+        printCurentThredId();
         System.out.println("txid: " + randomTXID);
         given()
                 .spec(app.requestSpecTDS)
