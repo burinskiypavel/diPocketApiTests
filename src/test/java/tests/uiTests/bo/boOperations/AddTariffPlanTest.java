@@ -20,4 +20,15 @@ public class AddTariffPlanTest extends UITestBase {
 
         waitFor(By.xpath("//*[contains(text(), 'Tariff plan added successfully')]"));
     }
+
+    @Test
+    public void testTheUserChangedHisMindAboutAddRariffPlan() throws InterruptedException, SQLException, ClassNotFoundException {
+        gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        gotoOperations();
+        gotoFeeTariffPlanTab();
+        click(By.xpath("//p-button[@ng-reflect-label='Add tariff plan']"));
+        closePopUp(By.cssSelector("div.p-dialog-header-icons"));
+
+        waitForInvisibilityOfElement(By.xpath("//*[@app-add-tariff-plan-modal]"));
+    }
 }
