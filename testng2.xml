@@ -23,9 +23,9 @@
     <!--    </test>-->
 
 
-    <test name="RolesBOSearchByCardCardIDPlasticCardInactiveTest">
+    <test name="TDSV1EPINAcceptTest">
         <classes>
-            <class name="tests.uiTests.bo.boSearch.RolesBOSearchByCardCardIDPlasticCardInactiveTest"/>
+            <class name="tests.tds.TDSV1EPINAcceptTest"/>
         </classes>
     </test>
 
