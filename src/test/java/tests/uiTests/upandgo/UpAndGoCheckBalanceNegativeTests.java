@@ -13,7 +13,7 @@ public class UpAndGoCheckBalanceNegativeTests extends UITestBase {
 
     @Test(priority = 1)
     public void testCheckEmptyCardNumberField() throws InterruptedException {
-        app.getUiboHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
+        app.getUiUpAndGoHelper().gotoUpAndGoSiteAndDoneBasicAuth("playit-test.dipocket.org/en","dipocket", "LeprechauN");
         app.getUiboHelper().click(By.cssSelector("a[href='/en/check/balance']"));
         app.getUiboHelper().waitForSeveralItems(new String[]{"Check balance and PIN code", "Card identifier", "Cancel", "Continue"});
         app.getUiboHelper().type(By.id("token"), "");
