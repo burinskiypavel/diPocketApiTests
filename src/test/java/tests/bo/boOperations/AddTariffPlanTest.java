@@ -1,6 +1,6 @@
 package tests.bo.boOperations;
 
-import base.UITestBase;
+import base.TestBase;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.hasItems;
 
-public class AddTariffPlanTest extends UITestBase {
+public class AddTariffPlanTest extends TestBase {
     String cookie = null;
     String username = "VIKTORIA";
     int id = 123456789;
