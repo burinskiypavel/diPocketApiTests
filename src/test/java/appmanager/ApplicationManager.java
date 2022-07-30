@@ -1,8 +1,8 @@
 package appmanager;
 
 import appmanager.ui.UITelenorHelper;
-import appmanager.ui.bo.UIBOHelper;
-import appmanager.ui.bo.UIUpAndGoHelper;
+import appmanager.ui.UIBOHelper;
+import appmanager.ui.UIUpAndGoHelper;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;

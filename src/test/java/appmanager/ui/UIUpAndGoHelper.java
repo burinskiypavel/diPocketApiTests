@@ -1,4 +1,4 @@
-package appmanager.ui.bo;
+package appmanager.ui;
 
 import appmanager.UIHelperBase;
 import org.openqa.selenium.By;
