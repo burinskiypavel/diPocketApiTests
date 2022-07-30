@@ -20,14 +20,14 @@ public class BOUserRolesCBORolesTableTest extends UITestBase {
         app.getUiboHelper().click(By.cssSelector("p-dropdown[placeholder='Role']"));
         app.getUiboHelper().click(By.cssSelector("li[aria-label='1']"));
 
-        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[label='Edit")));
-        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[label='Delete")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[label='Edit")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[label='Delete")));
 
         softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{"//th[contains(text(), 'Code')]",
                 "//th[contains(text(), 'Name')]", "//th[contains(text(), 'Description')]",
                 "//th[contains(text(), 'Checked')]", }));
 
-        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[label='Update']")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[label='Update']")));
         softAssert.assertAll();
     }
 }
