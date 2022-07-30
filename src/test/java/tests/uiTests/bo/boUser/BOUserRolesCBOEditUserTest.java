@@ -21,8 +21,8 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
         app.getUiboHelper().waitForSeveralItems(new String[]{"Role:", "Site:", "Firstname:",
                 "Lastname:", "Phone:", "Email:", "Login (Username):",
                 "Portal client(optional):", "Portal clients for management (optional):", "Upload Photo:"});
-        softAssert.assertTrue(isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
-        softAssert.assertTrue(isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Edit user")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Edit user")));
         app.getUiboHelper().editUser("Pavel" + random);
         app.getUiboHelper().waitFor(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']"));
 

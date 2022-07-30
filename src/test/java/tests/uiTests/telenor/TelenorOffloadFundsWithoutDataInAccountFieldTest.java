@@ -13,14 +13,14 @@ public class TelenorOffloadFundsWithoutDataInAccountFieldTest extends UITestBase
 
     @Test(priority = 1)
     public void testOffloadFundsWithoutDataInAccountFiel() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
-        gotoOffloadFundsPage();
-        type(By.id("accountNo"), "");
-        clickCheckbox(By.name("agreeDelete"));
-        String hexColor = getColorOfElement(By.id("accountNo"), "border-color");
+        app.getUiTelenorHelper().navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
+        app.getUiTelenorHelper().gotoOffloadFundsPage();
+        app.getUiTelenorHelper().type(By.id("accountNo"), "");
+        app.getUiTelenorHelper().clickCheckbox(By.name("agreeDelete"));
+        String hexColor = app.getUiTelenorHelper().getColorOfElement(By.id("accountNo"), "border-color");
 
-        assertFalse(isCheckboxSelected(By.name("agreeDelete")));
+        assertFalse(app.getUiTelenorHelper().isCheckboxSelected(By.name("agreeDelete")));
         assertThat(hexColor, equalTo(app.hexRedColor));
-        assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='offload-confirm']")));
+        assertFalse(app.getUiTelenorHelper().isButtonEnabled(By.cssSelector("button[data-dpwa-action='offload-confirm']")));
     }
 }

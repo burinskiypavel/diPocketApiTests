@@ -81,7 +81,7 @@ public class RolesBOUserClientPageTabSupervisorRequestsTests extends UITestBase 
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboHelper().goToClientPage(phone);
         app.getUiboHelper().goToSupervisorRequestsTab();
-        performContextClickFromTable(requestId);
+        app.getUiboHelper().performContextClickFromTable(requestId);
         app.getUiboHelper().click(By.xpath("//li //span[contains(text(), 'Upload ‘Proof of relationship’')]"));
         app.getUiboHelper().uploadFile(By.cssSelector("input[type='file']"), "C:/Users/pa.burinsky/Desktop/4.jpg");
         app.getUiboHelper().click(By.cssSelector("app-button[ng-reflect-label='Send']"));

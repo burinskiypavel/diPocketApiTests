@@ -10,12 +10,12 @@ public class TelenorRegistrationVerificationUntickedCheckboxForPersonalInformati
 
     @Test
     public void testUntickedCheckboxForPersonalInformationProcessing() throws InterruptedException {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoRegisterPaymentBandPage();
-        type(By.name("publicToken"), token);
-        type(By.id("mainPhone"), phone);
-        submitPublicTokenAndPhone();
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoRegisterPaymentBandPage();
+        app.getUiTelenorHelper().type(By.name("publicToken"), token);
+        app.getUiTelenorHelper().type(By.id("mainPhone"), phone);
+        app.getUiTelenorHelper().submitPublicTokenAndPhone();
 
-        checkThatUntickedCheckboxHasRedColor(By.cssSelector("label.uk-margin-small-bottom[style='cursor: pointer; color: red;']"));
+        app.getUiTelenorHelper().checkThatUntickedCheckboxHasRedColor(By.cssSelector("label.uk-margin-small-bottom[style='cursor: pointer; color: red;']"));
     }
 }

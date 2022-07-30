@@ -13,14 +13,14 @@ public class TelenorLoginVerificationPhoneFieldWithIncompletePhoneTest extends U
 
     @Test
     public void testLoginVerificationPhoneFieldWithIncompletePhone() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoLoginPage();
-        type(By.id("phone_number"), phone);
-        click(By.cssSelector("button.request-otp"));
-        String popUpMessage = getTextFromPopUp2(By.cssSelector("div.uk-margin"));
-        closePopUp2(By.xpath("//button[contains(text(), 'Ok')]"));
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoLoginPage();
+        app.getUiTelenorHelper().type(By.id("phone_number"), phone);
+        app.getUiTelenorHelper().click(By.cssSelector("button.request-otp"));
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp2(By.cssSelector("div.uk-margin"));
+        app.getUiTelenorHelper().closePopUpFromMultiple(By.xpath("//button[contains(text(), 'Ok')]"), 1);
 
-        assertTrue(isPopUpClosed3(By.cssSelector("div.uk-margin")));
+        assertTrue(app.getUiTelenorHelper().isPopUpClosed3(By.cssSelector("div.uk-margin")));
         assertThat(popUpMessage, equalTo("The phone number you entered seems invalid. Please check again"));
     }
 }

@@ -13,16 +13,16 @@ public class TelenorSecretAnswerResetLeaveEmailFieldEmptyTest extends UITestBase
 
     @Test
     public void testSecretAnswerResetLeaveEmailFieldEmpty() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
-        gotoManageSecurityPage();
-        gotoChangeSecretAnswer();
-        gotoForgotSecretAnswer();
-        type(By.id("email"), "");
-        pressConfirm(By.cssSelector("button[data-dpwa-action='sa-reset-request']"));
-        String popUpMessage = getTextFromPopUp();
-        closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+        app.getUiTelenorHelper().navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
+        app.getUiTelenorHelper().gotoManageSecurityPage();
+        app.getUiTelenorHelper().gotoChangeSecretAnswer();
+        app.getUiTelenorHelper().gotoForgotSecretAnswer();
+        app.getUiTelenorHelper().type(By.id("email"), "");
+        app.getUiTelenorHelper().pressConfirm(By.cssSelector("button[data-dpwa-action='sa-reset-request']"));
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
+        app.getUiTelenorHelper().closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
 
-        assertTrue(isPopUpClosed());
+        assertTrue(app.getUiTelenorHelper().isPopUpClosed());
         assertThat(popUpMessage, equalTo("E-mail address is invalid"));
     }
 }

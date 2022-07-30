@@ -14,8 +14,8 @@ public class RolesBOSearchByClientClientIDTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
 
-        softAssert.assertTrue(isTabPresent(By.xpath("//a[@role='tab'] //span[contains(text(), 'Client')]")), "Is tab present");
-        softAssert.assertTrue(isTabPresent(By.xpath("//a[@role='tab'] //span[contains(text(), 'Card')]")), "Is tab present");
+        softAssert.assertTrue(app.getUiboHelper().isTabPresent(By.xpath("//a[@role='tab'] //span[contains(text(), 'Client')]")), "Is tab present");
+        softAssert.assertTrue(app.getUiboHelper().isTabPresent(By.xpath("//a[@role='tab'] //span[contains(text(), 'Card')]")), "Is tab present");
 
         softAssert.assertTrue(app.getUiboHelper().isTabActiveAndSelected(By.xpath("//a[@id='p-tabpanel-0-label'][@aria-selected='true']")), "Is tab Client active and selected");
 

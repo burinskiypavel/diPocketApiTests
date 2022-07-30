@@ -13,14 +13,14 @@ public class TelenorRegistrationVerificationWithIncopliteDataTest extends UITest
 
     @Test(priority = 1)
     public void testRegistrationVerificationWithIncopliteData() throws InterruptedException {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoRegisterPaymentBandPage();
-        type(By.id("publicToken"), token);
-        type(By.id("mainPhone"), phone);
-        clickCheckbox(By.id("agreeProcessInfo"));
-        submitPublicTokenAndPhone();
-        String publicTokenBorderColor = getColorOfElement(By.id("publicToken"), "border-color");
-        String mainPhoneBorderColor = getColorOfElement(By.id("mainPhone"), "border-color");
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoRegisterPaymentBandPage();
+        app.getUiTelenorHelper().type(By.id("publicToken"), token);
+        app.getUiTelenorHelper().type(By.id("mainPhone"), phone);
+        app.getUiTelenorHelper().clickCheckbox(By.id("agreeProcessInfo"));
+        app.getUiTelenorHelper().submitPublicTokenAndPhone();
+        String publicTokenBorderColor = app.getUiTelenorHelper().getColorOfElement(By.id("publicToken"), "border-color");
+        String mainPhoneBorderColor = app.getUiTelenorHelper().getColorOfElement(By.id("mainPhone"), "border-color");
 
         assertThat(publicTokenBorderColor, equalTo(app.hexRedColor));
         assertThat(mainPhoneBorderColor, equalTo(app.hexRedColor));

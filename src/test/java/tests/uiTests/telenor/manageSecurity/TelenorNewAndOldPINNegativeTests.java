@@ -14,46 +14,46 @@ public class TelenorNewAndOldPINNegativeTests extends UITestBase {
 
     @Test(priority = 1)
     public void testNewPINsAreNotMatched() throws InterruptedException {
-        String popupMessage = navigateToTelenorAndLogin(app.telenorRegistrationPhone2, smsCode);
-        gotoManageSecurityPage();
-        if(isElementPresent(By.cssSelector("a[href='/en/security/unblock']"))) {
-            unblockPaymentBandTelenor("514-614-250", "QA");
+        String popupMessage = app.getUiTelenorHelper().navigateToTelenorAndLogin(app.telenorRegistrationPhone2, smsCode);
+        app.getUiTelenorHelper().gotoManageSecurityPage();
+        if(app.getUiTelenorHelper().isElementPresent(By.cssSelector("a[href='/en/security/unblock']"))) {
+            app.getUiTelenorHelper().unblockPaymentBandTelenor("514-614-250", "QA");
         }
-        gotoChangePINPage();
-        type(By.id("pin_new"), "1234");
-        type(By.id("pin_confirm"), "1111");
-        String hexColor = getColorOfElement(By.id("pin_confirm"), "border-color");
+        app.getUiTelenorHelper().gotoChangePINPage();
+        app.getUiTelenorHelper().type(By.id("pin_new"), "1234");
+        app.getUiTelenorHelper().type(By.id("pin_confirm"), "1111");
+        String hexColor = app.getUiTelenorHelper().getColorOfElement(By.id("pin_confirm"), "border-color");
 
         assertThat(hexColor, equalTo(app.hexRedColor));
-        assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
+        assertFalse(app.getUiTelenorHelper().isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
         assertThat(popupMessage, equalTo("Your one time password sent to "+expectedPhone+". If you didn't receive SMS in 2-3 minutes, please request password once again."));
     }
 
     @Test(priority = 2)
     public void testWrongOldPIN() throws InterruptedException {
-        if(isElementPresent(By.id("pin_new"))){
-            type(By.id("pin_new"), "1111");
-            type(By.id("pin_confirm"), "1234");
-            String hexColor = getColorOfElement(By.id("pin_confirm"), "border-color");
+        if(app.getUiTelenorHelper().isElementPresent(By.id("pin_new"))){
+            app.getUiTelenorHelper().type(By.id("pin_new"), "1111");
+            app.getUiTelenorHelper().type(By.id("pin_confirm"), "1234");
+            String hexColor = app.getUiTelenorHelper().getColorOfElement(By.id("pin_confirm"), "border-color");
 
             assertThat(hexColor, equalTo(app.hexRedColor));
-            assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
+            assertFalse(app.getUiTelenorHelper().isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
         }
 
         else {
 
-            String popupMessage = navigateToTelenorAndLogin(app.telenorRegistrationPhone2, smsCode);
-            gotoManageSecurityPage();
-            if(isElementPresent(By.cssSelector("a[href='/en/security/unblock']"))) {
-                unblockPaymentBandTelenor("514-614-250", "QA");
+            String popupMessage = app.getUiTelenorHelper().navigateToTelenorAndLogin(app.telenorRegistrationPhone2, smsCode);
+            app.getUiTelenorHelper().gotoManageSecurityPage();
+            if(app.getUiTelenorHelper().isElementPresent(By.cssSelector("a[href='/en/security/unblock']"))) {
+                app.getUiTelenorHelper().unblockPaymentBandTelenor("514-614-250", "QA");
             }
-            gotoChangePINPage();
-            type(By.id("pin_new"), "1111");
-            type(By.id("pin_confirm"), "1234");
-            String hexColor = getColorOfElement(By.id("pin_confirm"), "border-color");
+            app.getUiTelenorHelper().gotoChangePINPage();
+            app.getUiTelenorHelper().type(By.id("pin_new"), "1111");
+            app.getUiTelenorHelper().type(By.id("pin_confirm"), "1234");
+            String hexColor = app.getUiTelenorHelper().getColorOfElement(By.id("pin_confirm"), "border-color");
 
             assertThat(hexColor, equalTo(app.hexRedColor));
-            assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
+            assertFalse(app.getUiTelenorHelper().isButtonEnabled(By.cssSelector("button[data-dpwa-action='change-pin-confirm']")));
             assertThat(popupMessage, equalTo("Your one time password sent to "+expectedPhone+". If you didn't receive SMS in 2-3 minutes, please request password once again."));
         }
     }

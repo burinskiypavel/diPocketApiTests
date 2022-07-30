@@ -159,7 +159,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         if(app.getUiboHelper().isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
             app.getUiboHelper().goToClientPage("38098316499");
             app.getUiboHelper().changeCredentialsChagePhoneNumber(forgotPhone);
-            waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+            app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
             app.getUiboHelper().navigateBack();
             app.getUiboHelper().search("id", clientId);
         }

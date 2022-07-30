@@ -48,6 +48,6 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
         flatFeeAmountCell.clear();
         flatFeeAmountCell.sendKeys("1");
 
-        click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
+        app.getUiboHelper().click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
     }
 }

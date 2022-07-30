@@ -14,14 +14,14 @@ public class TelenorLoginVerificationPhoneFieldWithNotRegisteredPhoneTest extend
 
     @Test
     public void testLoginVerificationPhoneFieldWithNotRegisteredPhone() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoLoginPage();
-        type(By.id("phone_number"), phone);
-        click(By.cssSelector("button.request-otp"));
-        String popUpMessage = getTextFromPopUp2(By.id("register-prompt-message"));
-        closePopUp(By.cssSelector("#register-prompt button.uk-modal-close"));
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoLoginPage();
+        app.getUiTelenorHelper().type(By.id("phone_number"), phone);
+        app.getUiTelenorHelper().click(By.cssSelector("button.request-otp"));
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp2(By.id("register-prompt-message"));
+        app.getUiTelenorHelper().closePopUp(By.cssSelector("#register-prompt button.uk-modal-close"));
 
-        assertTrue(isPopUpClosed2("register-prompt"));
+        assertTrue(app.getUiTelenorHelper().isPopUpClosed2("register-prompt"));
         assertThat(popUpMessage, equalTo("Phone# "+expectedPhone+" isn’t registered, do you want to?"));
     }
 }

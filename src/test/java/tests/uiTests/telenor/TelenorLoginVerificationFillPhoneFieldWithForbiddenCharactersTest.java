@@ -11,11 +11,11 @@ public class TelenorLoginVerificationFillPhoneFieldWithForbiddenCharactersTest e
 
     @Test
     public void testLoginVerificationFillPhoneFieldWithForbiddenCharacters() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoLoginPage();
-        type(By.id("phone_number"), "kkkA@#%*()");
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoLoginPage();
+        app.getUiTelenorHelper().type(By.id("phone_number"), "kkkA@#%*()");
 
-        String phoneText = getAttributeValue(By.id("phone_number"));
+        String phoneText = app.getUiTelenorHelper().getAttributeValue(By.id("phone_number"));
         assertThat(phoneText, equalTo(""));
     }
 }

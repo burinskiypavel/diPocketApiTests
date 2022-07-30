@@ -26,23 +26,23 @@ public class TelenorChangeEmailWithInvalidDataTest extends UITestBase {
 
     @Test(dataProvider = "changeEmailWithInvalidData")
     public void testChangeEmailWithInvalidData(String email) throws InterruptedException {
-        if(isElementPresent(By.id("email"))){
-            type(By.id("email"), email);
-            pressConfirm(By.cssSelector("button[data-dpwa-action='email-verify']"));
-            String hexColor = getColorOfElement(By.id("email"), "border-color");
+        if(app.getUiTelenorHelper().isElementPresent(By.id("email"))){
+            app.getUiTelenorHelper().type(By.id("email"), email);
+            app.getUiTelenorHelper().pressConfirm(By.cssSelector("button[data-dpwa-action='email-verify']"));
+            String hexColor = app.getUiTelenorHelper().getColorOfElement(By.id("email"), "border-color");
 
             assertThat(hexColor, equalTo(app.hexRedColor));
 
         } else {
 
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
-        gotoManageSecurityPage();
-        gotoChangeEmail();
-        type(By.id("email"), email);
-        pressConfirm(By.cssSelector("button[data-dpwa-action='email-verify']"));
-        String hexColor = getColorOfElement(By.id("email"), "border-color");
+            app.getUiTelenorHelper().navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
+            app.getUiTelenorHelper().gotoManageSecurityPage();
+            app.getUiTelenorHelper().gotoChangeEmail();
+            app.getUiTelenorHelper().type(By.id("email"), email);
+            app.getUiTelenorHelper().pressConfirm(By.cssSelector("button[data-dpwa-action='email-verify']"));
+            String hexColor = app.getUiTelenorHelper().getColorOfElement(By.id("email"), "border-color");
 
-        assertThat(hexColor, equalTo(app.hexRedColor));
+            assertThat(hexColor, equalTo(app.hexRedColor));
         }
     }
 }

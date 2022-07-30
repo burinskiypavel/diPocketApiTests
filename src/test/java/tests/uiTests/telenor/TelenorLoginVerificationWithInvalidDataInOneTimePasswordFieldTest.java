@@ -12,17 +12,17 @@ public class TelenorLoginVerificationWithInvalidDataInOneTimePasswordFieldTest e
 
     @Test
     public void testLoginVerificationWithInvalidDataInOneTimePasswordField() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoLoginPage();
-        type(By.id("phone_number"), app.telenorLoginPhone);
-        click(By.cssSelector("button.request-otp"));
-        closePopUp(By.cssSelector("div.uk-text-right button.uk-modal-close"));
-        type(By.id("password"), "123456");
-        click(By.id("dpwa-login"));
-        String popUpMessage = getTextFromPopUp();
-        closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoLoginPage();
+        app.getUiTelenorHelper().type(By.id("phone_number"), app.telenorLoginPhone);
+        app.getUiTelenorHelper().click(By.cssSelector("button.request-otp"));
+        app.getUiTelenorHelper().closePopUp(By.cssSelector("div.uk-text-right button.uk-modal-close"));
+        app.getUiTelenorHelper().type(By.id("password"), "123456");
+        app.getUiTelenorHelper().click(By.id("dpwa-login"));
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
+        app.getUiTelenorHelper().closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
 
-        assertTrue(isPopUpClosed());
+        assertTrue(app.getUiTelenorHelper().isPopUpClosed());
         assertThat(popUpMessage,equalTo("Login or password is incorrect"));
     }
 }

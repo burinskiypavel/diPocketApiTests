@@ -12,16 +12,16 @@ public class TelenorRegistrationVerificationWithInvalidTokenTest extends UITestB
 
     @Test
     public void testRegistrationVerificationWithInvalidToken() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoRegisterPaymentBandPage();
-        type(By.name("publicToken"), "111111111");
-        type(By.id("mainPhone"), "447459005207");
-        clickCheckbox(By.id("agreeProcessInfo"));
-        submitPublicTokenAndPhone();
-        String popUpMessage = getTextFromPopUp();
-        closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoRegisterPaymentBandPage();
+        app.getUiTelenorHelper().type(By.name("publicToken"), "111111111");
+        app.getUiTelenorHelper().type(By.id("mainPhone"), "447459005207");
+        app.getUiTelenorHelper().clickCheckbox(By.id("agreeProcessInfo"));
+        app.getUiTelenorHelper().submitPublicTokenAndPhone();
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
+        app.getUiTelenorHelper().closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
 
-        assertTrue(isPopUpClosed());
+        assertTrue(app.getUiTelenorHelper().isPopUpClosed());
         assertThat(popUpMessage, equalTo("Card number is invalid. Please enter the correct card number"));
     }
 }

@@ -13,22 +13,22 @@ public class TelenorSecretAnswerResetLeaveSecretAnswerFieldEmptyTest extends UIT
 
     @Test
     public void testSecretAnswerResetLeaveSecretAnswerFieldEmpty() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorLoginPhone, smsCode);
-        gotoManageSecurityPage();
-        gotoChangeSecretAnswer();
-        gotoForgotSecretAnswer();
-        type(By.id("email"), "assetspb@gmail.com");
-        pressConfirm(By.cssSelector("button[data-dpwa-action='sa-reset-request']"));
-        waitForSeveralItems(new String[]{"Back", "Reset"});
-        waitFor(By.id("secAnswer"));
-        type(By.id("secAnswer"), "");
-        click(By.cssSelector("button[data-dpwa-action='sa-reset-confirm']"));
-        String popUpMessage = getTextFromPopUp();
-        closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
-        waitFor(By.id("email"));
-        waitForSeveralItems2(new String[]{"button[data-dpwa-action='sa-reset-request']", "a[href='javascript:history.back()']"});
+        app.getUiTelenorHelper().navigateToTelenorAndLogin2(app.telenorLoginPhone, smsCode);
+        app.getUiTelenorHelper().gotoManageSecurityPage();
+        app.getUiTelenorHelper().gotoChangeSecretAnswer();
+        app.getUiTelenorHelper().gotoForgotSecretAnswer();
+        app.getUiTelenorHelper().type(By.id("email"), "assetspb@gmail.com");
+        app.getUiTelenorHelper().pressConfirm(By.cssSelector("button[data-dpwa-action='sa-reset-request']"));
+        app.getUiTelenorHelper().waitForSeveralItems(new String[]{"Back", "Reset"});
+        app.getUiTelenorHelper().waitFor(By.id("secAnswer"));
+        app.getUiTelenorHelper().type(By.id("secAnswer"), "");
+        app.getUiTelenorHelper().click(By.cssSelector("button[data-dpwa-action='sa-reset-confirm']"));
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
+        app.getUiTelenorHelper().closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+        app.getUiTelenorHelper().waitFor(By.id("email"));
+        app.getUiTelenorHelper().waitForSeveralItems2(new String[]{"button[data-dpwa-action='sa-reset-request']", "a[href='javascript:history.back()']"});
 
-        assertTrue(isPopUpClosed());
+        assertTrue(app.getUiTelenorHelper().isPopUpClosed());
         assertThat(popUpMessage, equalTo("You entered invalid value. Please correct and try again"));
     }
 }

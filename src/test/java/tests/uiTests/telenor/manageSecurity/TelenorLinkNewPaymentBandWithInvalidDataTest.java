@@ -12,27 +12,27 @@ public class TelenorLinkNewPaymentBandWithInvalidDataTest extends UITestBase {
 
     @Test
     public void testLinkNewPaymentBandWithInvalidData() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
-        gotoManageSecurityPage();
-        if (isElementPresent(By.cssSelector("a[href='/en/security/block']"))) {
-            blockPaymentBandTelenor("QA");
-            click(By.cssSelector("a[href='/en/security/relink']"));
-            waitForSeveralItems(new String[]{"To link your payment band please enter your 9-digits payment band token", "Cancel", "Link new payment band", "Card number"});
-            type(By.id("token"), "123456789");
-            click(By.cssSelector("button[data-dpwa-action='band-relink']"));
+        app.getUiTelenorHelper().navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
+        app.getUiTelenorHelper().gotoManageSecurityPage();
+        if (app.getUiTelenorHelper().isElementPresent(By.cssSelector("a[href='/en/security/block']"))) {
+            app.getUiTelenorHelper().blockPaymentBandTelenor("QA");
+            app.getUiTelenorHelper().click(By.cssSelector("a[href='/en/security/relink']"));
+            app.getUiTelenorHelper().waitForSeveralItems(new String[]{"To link your payment band please enter your 9-digits payment band token", "Cancel", "Link new payment band", "Card number"});
+            app.getUiTelenorHelper().type(By.id("token"), "123456789");
+            app.getUiTelenorHelper().click(By.cssSelector("button[data-dpwa-action='band-relink']"));
             //answerYourSecretQuestion("QA");
-            String popUpMessage = getTextFromPopUp();
+            String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
 
             assertThat(popUpMessage, equalTo("Sorry, something went wrong - please try again"));
 
         } else {
 
-            click(By.cssSelector("a[href='/en/security/relink']"));
-            waitForSeveralItems(new String[]{"To link your payment band please enter your 9-digits payment band token", "Cancel", "Link new payment band", "Card number"});
-            type(By.id("token"), "123456789");
-            click(By.cssSelector("button[data-dpwa-action='band-relink']"));
-            answerYourSecretQuestion("QA");
-            String popUpMessage = getTextFromPopUp();
+            app.getUiTelenorHelper().click(By.cssSelector("a[href='/en/security/relink']"));
+            app.getUiTelenorHelper().waitForSeveralItems(new String[]{"To link your payment band please enter your 9-digits payment band token", "Cancel", "Link new payment band", "Card number"});
+            app.getUiTelenorHelper().type(By.id("token"), "123456789");
+            app.getUiTelenorHelper().click(By.cssSelector("button[data-dpwa-action='band-relink']"));
+            app.getUiTelenorHelper().answerYourSecretQuestion("QA");
+            String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
 
             assertThat(popUpMessage, equalTo("Sorry, something went wrong - please try again"));
         }

@@ -14,17 +14,17 @@ public class TelenorSecretAnswerResetFillEmailFieldWithInvalidDataTest extends U
 
     @Test
     public void testSecretAnswerResetFillEmailFieldWithInvalidData() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
-        gotoManageSecurityPage();
-        gotoChangeSecretAnswer();
-        gotoForgotSecretAnswer();
-        type(By.id("email"), invalidEmail);
-        pressConfirm(By.cssSelector("button[data-dpwa-action='sa-reset-request']"));
-        String popUpMessage = getTextFromPopUp();
-        closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
-        String hexColor = getColorOfElement(By.id("email"), "border-color");
+        app.getUiTelenorHelper().navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
+        app.getUiTelenorHelper().gotoManageSecurityPage();
+        app.getUiTelenorHelper().gotoChangeSecretAnswer();
+        app.getUiTelenorHelper().gotoForgotSecretAnswer();
+        app.getUiTelenorHelper().type(By.id("email"), invalidEmail);
+        app.getUiTelenorHelper().pressConfirm(By.cssSelector("button[data-dpwa-action='sa-reset-request']"));
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
+        app.getUiTelenorHelper().closePopUp(By.xpath("//button[contains(text(), 'Ok')]"));
+        String hexColor = app.getUiTelenorHelper().getColorOfElement(By.id("email"), "border-color");
 
-        assertTrue(isPopUpClosed());
+        assertTrue(app.getUiTelenorHelper().isPopUpClosed());
         assertThat(hexColor, equalTo(app.hexRedColor));
         assertThat(popUpMessage, equalTo("E-mail address " + invalidEmail + " is invalid"));
     }

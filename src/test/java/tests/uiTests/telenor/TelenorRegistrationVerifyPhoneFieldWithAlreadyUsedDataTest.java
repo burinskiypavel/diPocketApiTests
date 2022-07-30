@@ -15,17 +15,17 @@ public class TelenorRegistrationVerifyPhoneFieldWithAlreadyUsedDataTest extends 
 
     @Test
     public void testRegistrationVerifyPhoneFieldWithAlreadyUsedData() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoRegisterPaymentBandPage();
-        type(By.name("publicToken"), token);
-        type(By.id("mainPhone"), phone);
-        clickCheckbox(By.id("agreeProcessInfo"));
-        submitPublicTokenAndPhone();
-        String popUpMessage = getTextFromPopUp();
-        closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoRegisterPaymentBandPage();
+        app.getUiTelenorHelper().type(By.name("publicToken"), token);
+        app.getUiTelenorHelper().type(By.id("mainPhone"), phone);
+        app.getUiTelenorHelper().clickCheckbox(By.id("agreeProcessInfo"));
+        app.getUiTelenorHelper().submitPublicTokenAndPhone();
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
+        app.getUiTelenorHelper().closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
 
-        assertTrue(isPopUpClosedRedirection("dpwa-alert"));
-        checkThatAfterRedirectionPhoneNumberDisplayedInPhoneField(expectedPhone);
+        assertTrue(app.getUiTelenorHelper().isPopUpClosedRedirection("dpwa-alert"));
+        app.getUiTelenorHelper().checkThatAfterRedirectionPhoneNumberDisplayedInPhoneField(expectedPhone);
         assertThat(popUpMessage, equalTo("We are redirecting you to LOGIN as you are already registered"));
     }
 }

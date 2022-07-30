@@ -14,15 +14,15 @@ public class TelenorRegistrationVerificationSmsCodeWithIncopliteDataTest extends
 
     @Test(enabled = false)
     public void testRegistrationVerificationSmsCodeWithIncopliteData() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoRegisterPaymentBandPage();
-        type(By.name("publicToken"), token);
-        type(By.id("mainPhone"), phone);
-        clickCheckbox(By.id("agreeProcessInfo"));
-        submitPublicTokenAndPhone();
-        fillSmsCode(smsCode);
-        submitSmsCode();
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoRegisterPaymentBandPage();
+        app.getUiTelenorHelper().type(By.name("publicToken"), token);
+        app.getUiTelenorHelper().type(By.id("mainPhone"), phone);
+        app.getUiTelenorHelper().clickCheckbox(By.id("agreeProcessInfo"));
+        app.getUiTelenorHelper().submitPublicTokenAndPhone();
+        app.getUiTelenorHelper().fillSmsCode(smsCode);
+        app.getUiTelenorHelper().submitSmsCode();
 
-        assertFalse(isButtonEnabled(By.cssSelector("button[data-dpwa-action='register-verify-code']")));
+        assertFalse(app.getUiTelenorHelper().isButtonEnabled(By.cssSelector("button[data-dpwa-action='register-verify-code']")));
     }
 }

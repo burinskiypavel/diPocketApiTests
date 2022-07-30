@@ -10,12 +10,12 @@ public class TelenorRegistrationVerificationWithUntickedCheckboxForProcessingOfT
 
     @Test(priority = 1)
     public void testRegistrationVerificationWithUntickedCheckboxForProcessingOfThePersonalInformation() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoRegisterPaymentBandPage();
-        type(By.name("publicToken"), "513886198");
-        type(By.id("mainPhone"), "447459005206");
-        submitPublicTokenAndPhone();
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoRegisterPaymentBandPage();
+        app.getUiTelenorHelper().type(By.name("publicToken"), "513886198");
+        app.getUiTelenorHelper().type(By.id("mainPhone"), "447459005206");
+        app.getUiTelenorHelper().submitPublicTokenAndPhone();
 
-        assertTrue(isElementHasRedColor(By.cssSelector("label[style*='color: red;']")));
+        assertTrue(app.getUiTelenorHelper().isElementHasRedColor(By.cssSelector("label[style*='color: red;']")));
     }
 }

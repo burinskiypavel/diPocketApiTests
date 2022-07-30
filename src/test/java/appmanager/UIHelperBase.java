@@ -4,9 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.BufferedReader;
@@ -323,5 +325,85 @@ public class UIHelperBase {
         String hex = Color.fromString(color).asHex();
         System.out.println("hex: " + hex);
         return hex;
+    }
+
+    public void waitForSeveralItems2(String mas []){
+        wait = new WebDriverWait(driver, 20);
+        for(int i = 0; i < mas.length; i++){
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mas[i])));
+        }
+    }
+
+    public void basicAuth(String url, String login, String password) {
+        //driver.navigate().to("https://dipocket:LeprechauN@telenor-test.dipocket.org");
+        driver.navigate().to("https://"+login+":"+password+"@"+url+"");
+    }
+
+    public void pressConfirm(By locator){
+        driver.findElement(locator).click();
+    }
+
+    public boolean isCheckboxSelected(By locator){
+        return driver.findElement(locator).isSelected();
+    }
+
+    public boolean isTabPresent(By locator) {
+        return driver.findElements(locator).size() != 0;
+    }
+
+    public void selectFromSelect(By locator, String text) {
+        new Select(driver.findElement(locator)).selectByVisibleText(text);
+    }
+
+    public boolean isElementHasRedColor(By locator) {
+        if(driver.findElements(locator).size() == 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void pressBackSpace() {
+        Actions actions = new Actions(driver);
+        Action seriesOfActions = actions
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys(Keys.BACK_SPACE)
+                .sendKeys(Keys.BACK_SPACE)
+                .build();
+        seriesOfActions.perform() ;
+    }
+
+    public void closePopUpFromMultiple(By locator, int index) {
+        //wait.until(ExpectedConditions.elementToBeClickable(locator));
+        driver.findElements(locator).get(index).click();
+    }
+
+    public List<String> getActualTextAttributeValue(By locator) {
+        List<String> actualElementsText = new ArrayList<>();
+
+        List<WebElement> elements = driver.findElements(locator);
+
+        for(WebElement element : elements){
+            String text = element.getAttribute("Value");
+
+            if(text == null){
+
+            }
+            else {
+                actualElementsText.add(text);
+                actualElementsText.add("\r\n");
+            }
+        }
+
+        System.out.println(actualElementsText);
+        return actualElementsText;
+    }
+
+    public String getTextFromPopUp() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Ok')]")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='false']")));
+        return driver.findElement(By.cssSelector("div.uk-modal-content")).getText();
     }
 }

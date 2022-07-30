@@ -1,5 +1,6 @@
 package appmanager;
 
+import appmanager.ui.UITelenorHelper;
 import appmanager.ui.bo.UIBOHelper;
 import appmanager.ui.bo.UIUpAndGoHelper;
 import io.restassured.RestAssured;
@@ -36,6 +37,7 @@ public class ApplicationManager {
     private BORequests boRequestsHelper = new BORequests();
     public UIBOHelper uiboHelper;
     public UIUpAndGoHelper uiUpAndGoHelper;
+    public UITelenorHelper uiTelenorHelper;
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
@@ -135,6 +137,7 @@ public class ApplicationManager {
 
         uiboHelper = new UIBOHelper(driver);
         uiUpAndGoHelper = new UIUpAndGoHelper(driver);
+        uiTelenorHelper = new UITelenorHelper(driver);
         configTimeout = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
                         .setParam("http.socket.timeout", 50000)
@@ -307,4 +310,6 @@ public class ApplicationManager {
     public UIBOHelper getUiboHelper() { return uiboHelper; }
 
     public UIUpAndGoHelper getUiUpAndGoHelper() { return uiUpAndGoHelper; }
+
+    public UITelenorHelper getUiTelenorHelper() { return uiTelenorHelper; }
 }

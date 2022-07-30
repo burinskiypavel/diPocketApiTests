@@ -14,16 +14,16 @@ public class TelenorRegistrationVerificationWithInvalidPhoneTest extends UITestB
 
     @Test
     public void testRegistrationVerificationWithInvalidPhone() {
-        gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
-        gotoRegisterPaymentBandPage();
-        type(By.name("publicToken"), token);
-        type(By.id("mainPhone"), phone);
-        clickCheckbox(By.id("agreeProcessInfo"));
-        submitPublicTokenAndPhone();
-        String popUpMessage = getTextFromPopUp();
-        closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
+        app.getUiTelenorHelper().gotoTelenorSiteAndDoneBasicAuth("telenor-test.dipocket.org","dipocket", "LeprechauN");
+        app.getUiTelenorHelper().gotoRegisterPaymentBandPage();
+        app.getUiTelenorHelper().type(By.name("publicToken"), token);
+        app.getUiTelenorHelper().type(By.id("mainPhone"), phone);
+        app.getUiTelenorHelper().clickCheckbox(By.id("agreeProcessInfo"));
+        app.getUiTelenorHelper().submitPublicTokenAndPhone();
+        String popUpMessage = app.getUiTelenorHelper().getTextFromPopUp();
+        app.getUiTelenorHelper().closePopUp(By.cssSelector("div.uk-modal-dialog button.uk-modal-close"));
 
-        assertTrue(isPopUpClosed());
+        assertTrue(app.getUiTelenorHelper().isPopUpClosed());
         assertThat(popUpMessage, equalTo("Sorry but a mobile phone number should be from a EEA country, Canada, Switzerland or the USA"));
     }
 }

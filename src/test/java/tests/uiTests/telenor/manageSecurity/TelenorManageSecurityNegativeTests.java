@@ -13,46 +13,46 @@ public class TelenorManageSecurityNegativeTests extends UITestBase {
 
     @Test(priority = 1)
     public void testEmptyFieldSecretAnswer() throws InterruptedException {
-        navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
-        gotoManageSecurityPage();
-        gotoChangeSecretAnswer();
-        answerYourSecretQuestion(secAnswer);
-        waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
-        type(By.id("secAnswer"), "");
-        pressConfirm(By.cssSelector("button[data-dpwa-action='change-secret-answer-confirm']"));
-        String hexColor = getColorOfElement(By.id("secAnswer"), "border-color");
+        app.getUiTelenorHelper().navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
+        app.getUiTelenorHelper().gotoManageSecurityPage();
+        app.getUiTelenorHelper().gotoChangeSecretAnswer();
+        app.getUiTelenorHelper().answerYourSecretQuestion(secAnswer);
+        app.getUiTelenorHelper().waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
+        app.getUiTelenorHelper().type(By.id("secAnswer"), "");
+        app.getUiTelenorHelper().pressConfirm(By.cssSelector("button[data-dpwa-action='change-secret-answer-confirm']"));
+        String hexColor = app.getUiTelenorHelper().getColorOfElement(By.id("secAnswer"), "border-color");
 
         assertThat(hexColor, equalTo(app.hexRedColor));
     }
 
     @Test(priority = 2)
     public void testEmptyFieldUseYourOwnQuestion() throws InterruptedException {
-        if (isElementPresent(By.id("sqs"))) {
-            selectFromSelect(By.id("sqs"), "Use your own question");
-            type(By.id("sqc"), "");
-            type(By.id("secAnswer"), "");
+        if (app.getUiTelenorHelper().isElementPresent(By.id("sqs"))) {
+            app.getUiTelenorHelper().selectFromSelect(By.id("sqs"), "Use your own question");
+            app.getUiTelenorHelper().type(By.id("sqc"), "");
+            app.getUiTelenorHelper().type(By.id("secAnswer"), "");
 
-            pressConfirm(By.cssSelector("button[data-dpwa-action='change-secret-answer-confirm']"));
-            String useUourOwnAuestionHexColor = getColorOfElement(By.id("sqc"), "border-color");
-            String secAnswerHexColor = getColorOfElement(By.id("secAnswer"), "border-color");
+            app.getUiTelenorHelper().pressConfirm(By.cssSelector("button[data-dpwa-action='change-secret-answer-confirm']"));
+            String useUourOwnAuestionHexColor = app.getUiTelenorHelper().getColorOfElement(By.id("sqc"), "border-color");
+            String secAnswerHexColor = app.getUiTelenorHelper().getColorOfElement(By.id("secAnswer"), "border-color");
 
             assertThat(useUourOwnAuestionHexColor, equalTo(app.hexRedColor));
             assertThat(secAnswerHexColor, equalTo(app.hexRedColor));
 
         } else {
 
-            navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
-            gotoManageSecurityPage();
-            gotoChangeSecretAnswer();
-            answerYourSecretQuestion(secAnswer);
-            waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
-            selectFromSelect(By.id("sqs"), "Use your own question");
-            type(By.id("sqc"), "");
-            type(By.id("secAnswer"), "");
+            app.getUiTelenorHelper().navigateToTelenorAndLogin2(app.telenorRegistrationPhone2, smsCode);
+            app.getUiTelenorHelper().gotoManageSecurityPage();
+            app.getUiTelenorHelper().gotoChangeSecretAnswer();
+            app.getUiTelenorHelper().answerYourSecretQuestion(secAnswer);
+            app.getUiTelenorHelper().waitForSeveralItems(new String[]{"Secret question", "Secret answer", "Confirm", "Cancel"});
+            app.getUiTelenorHelper().selectFromSelect(By.id("sqs"), "Use your own question");
+            app.getUiTelenorHelper().type(By.id("sqc"), "");
+            app.getUiTelenorHelper().type(By.id("secAnswer"), "");
 
-            pressConfirm(By.cssSelector("button[data-dpwa-action='change-secret-answer-confirm']"));
-            String useUourOwnAuestionHexColor = getColorOfElement(By.id("sqc"), "border-color");
-            String secAnswerHexColor = getColorOfElement(By.id("secAnswer"), "border-color");
+            app.getUiTelenorHelper().pressConfirm(By.cssSelector("button[data-dpwa-action='change-secret-answer-confirm']"));
+            String useUourOwnAuestionHexColor = app.getUiTelenorHelper().getColorOfElement(By.id("sqc"), "border-color");
+            String secAnswerHexColor = app.getUiTelenorHelper().getColorOfElement(By.id("secAnswer"), "border-color");
 
             assertThat(useUourOwnAuestionHexColor, equalTo(app.hexRedColor));
             assertThat(secAnswerHexColor, equalTo(app.hexRedColor));
