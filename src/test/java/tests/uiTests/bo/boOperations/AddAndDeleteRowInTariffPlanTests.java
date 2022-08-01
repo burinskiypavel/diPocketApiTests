@@ -4,7 +4,7 @@ import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-public class AddAndDeleteRowInTariffPlanTest extends UITestBase {
+public class AddAndDeleteRowInTariffPlanTests extends UITestBase {
 
     @Test
     public void testAddAndDeleteARowInTariffPlan() throws InterruptedException {
