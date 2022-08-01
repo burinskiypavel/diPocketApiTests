@@ -16,6 +16,6 @@ public class AddAndDeleteRowInTariffPlanTest extends UITestBase {
 
         app.getUiboHelper().addRow("Fee for cashload", "feePercent", "GBP", "GBP", "0", "0", "0");
 
-        app.getUiboHelper().deleteRow(1);
+        app.getUiboHelper().deleteRow(0);
     }
 }

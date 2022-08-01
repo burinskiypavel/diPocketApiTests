@@ -735,6 +735,12 @@
         </classes>
     </test>
 
+    <test name="EditTariffPlanRowChangeAllTest">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.EditTariffPlanRowChangeAllTest"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 

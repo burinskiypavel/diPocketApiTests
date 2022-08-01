@@ -15,6 +15,9 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
         app.getUiboHelper().selectFromDropDown("name", "United Kingdom - standard");
         Thread.sleep(1000);
         app.getUiboHelper().selectDropDownFilter("ruleName", "Fee for cashload");
+
+        app.getUiboHelper().addRow("Fee for cashload", "feePercent", "GBP", "GBP", "0", "0", "0");
+
         app.getUiboHelper().pressPencilEditButton(0);
 
         app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='Fee for cashload']"), 1,"Fee for Face to Face");
@@ -42,5 +45,7 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
         app.getUiboHelper().click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
+
+        app.getUiboHelper().deleteRow(0);
     }
 }
