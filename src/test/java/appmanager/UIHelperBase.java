@@ -189,6 +189,32 @@ public class UIHelperBase {
         return actualElementsText;
     }
 
+    public List<String> getActualTextFirstElements(By locator, int index) {
+        List<String> actualElementsText = new ArrayList<>();
+
+        List<WebElement> elements = driver.findElements(locator);
+
+        int count = 0;
+        for(WebElement element : elements){
+            String text = element.getText();
+
+            if(text.equals("")){
+
+            }
+            else {
+                actualElementsText.add(text);
+                actualElementsText.add("\r\n");
+            }
+            if(count == index){
+                break;
+            }
+            count++;
+        }
+
+        System.out.println(actualElementsText);
+        return actualElementsText;
+    }
+
     public List<String> getDateFromFile(String path) {
         List<String> table = new ArrayList<String>();
         //String fullPathToFile = "/AdminReports/QA/" + path;//QA

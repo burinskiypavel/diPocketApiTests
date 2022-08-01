@@ -272,7 +272,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().selectFromDropDown("value", "All");
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Search']"));
         app.getUiboHelper().waitFor(By.xpath("//td[@ng-reflect-text='629314']"));
-        List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//table //tbody //tr"));
+        List<String> actualElementsText = app.getUiboHelper().getActualTextFirstElements(By.xpath("//table //tbody //tr"), 34);
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boSearch/TransactionTabData.txt");
 
         assertThat(actualElementsText, equalTo(expectedElementsText));
@@ -303,7 +303,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Show client info']"));
         app.getUiboHelper().waitForElementToBeClickable(By.xpath("//app-client-details //p"));
         app.getUiboHelper().waitFor(By.xpath("//app-client-button-block"));
-
+        Thread.sleep(700);
         List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-client-details //p"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boSearch/ShowClientInfo.txt");
 
