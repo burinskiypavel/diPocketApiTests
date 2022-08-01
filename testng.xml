@@ -717,9 +717,9 @@
         </classes>
     </test>
 
-    <test name="DeletingARowTest">
+    <test name="AddAndDeleteRowTest">
         <classes>
-            <class name="tests.uiTests.bo.boOperations.DeletingARowTest"/>
+            <class name="tests.uiTests.bo.boOperations.AddAndDeleteRowTest"/>
         </classes>
     </test>
 

@@ -3,7 +3,7 @@ package tests.uiTests.bo.boOperations;
 import base.UITestBase;
 import org.testng.annotations.Test;
 
-public class DeletingARowTest extends UITestBase {
+public class AddAndDeleteRowTest extends UITestBase {
 
     @Test
     public void testDeletingARown() throws InterruptedException {
