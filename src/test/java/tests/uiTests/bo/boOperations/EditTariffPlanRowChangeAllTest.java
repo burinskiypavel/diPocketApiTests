@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 public class EditTariffPlanRowChangeAllTest extends UITestBase {
 
-
     @Test
     public void testEditTariffPlanRowChangeAll() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
@@ -15,14 +14,11 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
         app.getUiboHelper().gotoFeeTariffPlanTab();
         app.getUiboHelper().selectFromDropDown("name", "United Kingdom - standard");
         Thread.sleep(1000);
-        app.getUiboHelper().selectDropDownFilter("ruleName", "Apple Pay bonus");
+        app.getUiboHelper().selectDropDownFilter("ruleName", "Fee for cashload");
+        app.getUiboHelper().pressPencilEditButton(0);
 
-        app.getUiboHelper().pressPencilEditButton(1);
-
-        app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='Apple Pay bonus']"), 1,"Fee for Face to Face");
-
+        app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='Fee for cashload']"), 1,"Fee for Face to Face");
         app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='GBP']"), 0,"EUR");
-
         WebElement row = app.getUiboHelper().findElement(By.xpath("//tr[2]"));
 
         WebElement feePercentCell = row.findElements(By.xpath("//p-celleditor //input")).get(3);
@@ -35,16 +31,16 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
         minFeeAmountCell.clear();
         minFeeAmountCell.sendKeys("2");
 
-
         WebElement maxFeeAmountCell = row.findElements(By.xpath("//p-celleditor //input")).get(6);
         maxFeeAmountCell.clear();
         maxFeeAmountCell.sendKeys("1");
-
 
         WebElement flatFeeAmountCell = row.findElements(By.xpath("//p-celleditor //input")).get(7);
         flatFeeAmountCell.clear();
         flatFeeAmountCell.sendKeys("1");
 
         app.getUiboHelper().click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
+
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
     }
 }
