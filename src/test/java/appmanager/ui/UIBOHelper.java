@@ -669,4 +669,9 @@ public class UIBOHelper extends UIHelperBase {
         Thread.sleep(1200);
         click(By.xpath("//p-button[@ng-reflect-label='Add']"));
     }
+
+    public void pressPencilEditButton(int index) {
+        WebElement pencil = driver.findElements(By.xpath("//button[@icon='pi pi-pencil']")).get(index);
+        pencil.click();
+    }
 }

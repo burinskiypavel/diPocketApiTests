@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 public class EditTariffPlanRowChangeAllTest extends UITestBase {
 
 
@@ -19,14 +17,13 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
         Thread.sleep(1000);
         app.getUiboHelper().selectDropDownFilter("ruleName", "Apple Pay bonus");
 
-        WebElement pencil = driver.findElements(By.xpath("//button[@icon='pi pi-pencil']")).get(1);
-        pencil.click();
+        app.getUiboHelper().pressPencilEditButton(1);
 
         app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='Apple Pay bonus']"), 1,"Fee for Face to Face");
 
         app.getUiboHelper().selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-model='GBP']"), 0,"EUR");
 
-        WebElement row = driver.findElement(By.xpath("//tr[2]"));
+        WebElement row = app.getUiboHelper().findElement(By.xpath("//tr[2]"));
 
         WebElement feePercentCell = row.findElements(By.xpath("//p-celleditor //input")).get(3);
         feePercentCell.clear();
