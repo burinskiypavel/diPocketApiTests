@@ -1,6 +1,7 @@
 package base;
 
 import appmanager.ApplicationManager;
+import appmanager.ApplicationManagerUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +23,7 @@ import static org.testng.Assert.assertTrue;
 
 public class UITestBase {
 
-    protected final ApplicationManager app = new ApplicationManager();
+    protected final ApplicationManagerUI app = new ApplicationManagerUI();
 
     public WebDriver driver;
     public WebDriverWait wait;

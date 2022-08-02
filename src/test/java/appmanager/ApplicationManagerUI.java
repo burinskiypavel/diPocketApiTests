@@ -1,7 +1,7 @@
 package appmanager;
 
-import appmanager.ui.UITelenorHelper;
 import appmanager.ui.UIBOHelper;
+import appmanager.ui.UITelenorHelper;
 import appmanager.ui.UIUpAndGoHelper;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
@@ -19,7 +19,7 @@ import java.util.Calendar;
 
 import static io.restassured.RestAssured.given;
 
-public class ApplicationManager {
+public class ApplicationManagerUI {
     //public static java.util.Properties prop = new java.util.Properties();
     //static java.util.Properties prop = new java.util.Properties();
     //static String projectPath = System.getProperty("user.dir");
@@ -126,13 +126,13 @@ public class ApplicationManager {
 //    }
 
     public void initStart() {
-//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
-//        ChromeOptions chromeOptions = new ChromeOptions();
-//        //chromeOptions.addArguments("--headless");
-//        //WebDriverManager.chromedriver().version("88").setup();
-//        driver = new ChromeDriver(chromeOptions);
-//        driver.manage().window().maximize();
-//        wait = new WebDriverWait(driver, 20);
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
+        ChromeOptions chromeOptions = new ChromeOptions();
+        //chromeOptions.addArguments("--headless");
+        //WebDriverManager.chromedriver().version("88").setup();
+        driver = new ChromeDriver(chromeOptions);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, 20);
 
 
         uiboHelper = new UIBOHelper(driver);
