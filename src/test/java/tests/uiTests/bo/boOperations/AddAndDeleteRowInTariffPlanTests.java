@@ -39,7 +39,6 @@ public class AddAndDeleteRowInTariffPlanTests extends UITestBase {
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoFeeTariffPlanTab();
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='+ Add row']"));
-        //app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Add']"));
         app.getUiboHelper().waitFor(By.cssSelector("p-button[label='Add']"));
 
         assertFalse(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[label='Add']")));
