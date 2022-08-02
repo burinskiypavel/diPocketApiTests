@@ -330,10 +330,10 @@ public class UIBOHelper extends UIHelperBase {
         Thread.sleep(4000);
     }
 
-    public String getNextElementFromTheTable(String cardId, int element) {
-        String actualState = driver.findElement(By.xpath("//td[text() = '"+cardId+"']/following-sibling::td["+element+"]")).getText();
-        return actualState;
-    }
+//    public String getNextElementFromTheTable(String cardId, int element) {
+//        String actualState = driver.findElement(By.xpath("//td[text() = '"+cardId+"']/following-sibling::td["+element+"]")).getText();
+//        return actualState;
+//    }
 
     public void verifyDropDownClientPageFilter(String filter, String text) {
         setDropDownClientPageFilter(filter, text);
@@ -420,9 +420,9 @@ public class UIBOHelper extends UIHelperBase {
         return actualPopupText;
     }
 
-    public boolean isElementActiveFromContextMenu(int index) {
-        return driver.findElements(By.cssSelector("li[data-ik='"+index+"'] a[tabindex='0']")).size() != 0;
-    }
+//    public boolean isElementActiveFromContextMenu(int index) {
+//        return driver.findElements(By.cssSelector("li[data-ik='"+index+"'] a[tabindex='0']")).size() != 0;
+//    }
 
     public void blockClient(String reason) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Block client']"));
@@ -584,11 +584,23 @@ public class UIBOHelper extends UIHelperBase {
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Card was blocked successfully')]"));
     }
 
-    public void selectFromDropDown(String dropdown, String dropdownItem) {
-        click(By.xpath("//p-dropdown[@ng-reflect-option-label='" + dropdown + "']"));
-        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
-        click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
-    }
+//    public void selectFromDropDown(String dropdown, String dropdownItem) {
+//        click(By.xpath("//p-dropdown[@ng-reflect-option-label='" + dropdown + "']"));
+//        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+//        click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+//    }
+//
+//    public void selectFromDropDown(By locator, String dropdownItem) throws InterruptedException {
+//        driver.findElement(locator).click();
+//        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+//        try{
+//            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+//
+//        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+//
+//            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+//        }
+//    }
 
     public void selectDropDownFilter(String dropdown, String dropdownItem) {
         click(By.xpath("//p-columnfilter[@field='" + dropdown + "']"));
@@ -596,14 +608,14 @@ public class UIBOHelper extends UIHelperBase {
         click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
     }
 
-    public void selectDropDownFromMultipleElements(By locator, int index, final String item) throws InterruptedException {
-        List<WebElement> elements = driver.findElements(locator);
-        WebElement element = elements.get(index);
-        element.click();
-        waitForElementToBeClickable(By.xpath("//li[@aria-label='" + item + "']"));
-        Thread.sleep(700);
-        click(By.xpath("//li[@aria-label='" + item + "']"));
-    }
+//    public void selectDropDownFromMultipleElements(By locator, int index, final String item) throws InterruptedException {
+//        List<WebElement> elements = driver.findElements(locator);
+//        WebElement element = elements.get(index);
+//        element.click();
+//        waitForElementToBeClickable(By.xpath("//li[@aria-label='" + item + "']"));
+//        Thread.sleep(700);
+//        click(By.xpath("//li[@aria-label='" + item + "']"));
+//    }
 
     public void fillAndPressDoneManualFeeChargePopUp(String source, String feeDescription, String feeRule, String feeAmount) throws InterruptedException {
         Thread.sleep(1000);
@@ -635,15 +647,16 @@ public class UIBOHelper extends UIHelperBase {
 
     public void addRow(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
         click(By.xpath("//p-button[@ng-reflect-label='+ Add row']"));
-        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-option-label='name']"), 9, rule);
-        type(By.xpath("//app-input-number[@ng-reflect-name='" + feePercent + "'] //input"), "0");
-        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-option-label='code']"), 2, currency);
-        selectDropDownFromMultipleElements(By.xpath("//p-dropdown[@ng-reflect-option-label='code']"), 3, feeCurrency);
-        type(By.xpath("//app-input-number[@ng-reflect-name='minFeeAmount'] //input"), minFeeAmount);
-        type(By.xpath("//app-input-number[@ng-reflect-name='maxFeeAmount'] //input"), maxFeeAmount);
-        type(By.xpath("//app-input-number[@ng-reflect-name='flatFeeAmount'] //input"), flatFeeAmount);
+        waitFor(By.id("formly_11_select_ruleId_0"));
+        selectFromDropDown(By.cssSelector("#formly_11_select_ruleId_0"), rule);
+        type(By.cssSelector("#formly_11_input-number_feePercent_3 input"), feePercent);
+        type(By.cssSelector("#formly_11_input-number_minFeeAmount_5 input"), minFeeAmount);
+        type(By.cssSelector("#formly_11_input-number_maxFeeAmount_6 input"), maxFeeAmount);
+        type(By.cssSelector("#formly_11_input-number_flatFeeAmount_4 input"), flatFeeAmount);
+        selectFromDropDown(By.id("formly_11_select_currencyId_1"), currency);
+        selectFromDropDown(By.id("formly_11_select_feeCurrencyId_2"), feeCurrency);
         Thread.sleep(1000);
-        click(By.xpath("//p-button[@ng-reflect-label='Add']"));
+        click(By.xpath("//p-button[@label='Add']"));
         waitFor(By.xpath("//*[contains(text(), 'Tariff plan has been successfully added')]"));
     }
 

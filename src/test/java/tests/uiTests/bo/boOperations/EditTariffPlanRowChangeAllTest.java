@@ -16,7 +16,7 @@ public class EditTariffPlanRowChangeAllTest extends UITestBase {
         Thread.sleep(1000);
         app.getUiboHelper().selectDropDownFilter("ruleName", "Fee for cashload");
 
-        app.getUiboHelper().addRow("Fee for cashload", "feePercent", "GBP", "GBP", "0", "0", "0");
+        app.getUiboHelper().addRow("Fee for cashload", "0", "GBP", "GBP", "0", "0", "0");
 
         app.getUiboHelper().pressPencilEditButton(0);
 

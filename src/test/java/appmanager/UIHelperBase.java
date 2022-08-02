@@ -432,4 +432,40 @@ public class UIHelperBase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='false']")));
         return driver.findElement(By.cssSelector("div.uk-modal-content")).getText();
     }
+
+    public void selectFromDropDown(String dropdown, String dropdownItem) {
+        click(By.xpath("//p-dropdown[@ng-reflect-option-label='" + dropdown + "']"));
+        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+    }
+
+    public void selectFromDropDown(By locator, String dropdownItem) throws InterruptedException {
+        driver.findElement(locator).click();
+        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        try{
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        }
+    }
+
+    public void selectDropDownFromMultipleElements(By locator, int index, final String item) throws InterruptedException {
+        List<WebElement> elements = driver.findElements(locator);
+        WebElement element = elements.get(index);
+        element.click();
+        waitForElementToBeClickable(By.xpath("//li[@aria-label='" + item + "']"));
+        Thread.sleep(700);
+        click(By.xpath("//li[@aria-label='" + item + "']"));
+    }
+
+    public String getNextElementFromTheTable(String cardId, int element) {
+        String actualState = driver.findElement(By.xpath("//td[text() = '"+cardId+"']/following-sibling::td["+element+"]")).getText();
+        return actualState;
+    }
+
+    public boolean isElementActiveFromContextMenu(int index) {
+        return driver.findElements(By.cssSelector("li[data-ik='"+index+"'] a[tabindex='0']")).size() != 0;
+    }
 }
