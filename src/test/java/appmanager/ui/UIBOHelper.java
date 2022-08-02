@@ -660,6 +660,18 @@ public class UIBOHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Tariff plan has been successfully added')]"));
     }
 
+    public void fillTheFieldsForAddRow(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
+        click(By.xpath("//p-button[@ng-reflect-label='+ Add row']"));
+        waitFor(By.id("formly_11_select_ruleId_0"));
+        selectFromDropDown(By.cssSelector("#formly_11_select_ruleId_0"), rule);
+        type(By.cssSelector("#formly_11_input-number_feePercent_3 input"), feePercent);
+        type(By.cssSelector("#formly_11_input-number_minFeeAmount_5 input"), minFeeAmount);
+        type(By.cssSelector("#formly_11_input-number_maxFeeAmount_6 input"), maxFeeAmount);
+        type(By.cssSelector("#formly_11_input-number_flatFeeAmount_4 input"), flatFeeAmount);
+        selectFromDropDown(By.id("formly_11_select_currencyId_1"), currency);
+        selectFromDropDown(By.id("formly_11_select_feeCurrencyId_2"), feeCurrency);
+    }
+
     public void deleteRow(int index) {
         List<WebElement> elements = driver.findElements(By.xpath("//button[@ng-reflect-icon='pi pi-trash']"));
         WebElement element = elements.get(index);

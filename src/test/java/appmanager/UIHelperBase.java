@@ -10,6 +10,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -467,5 +468,16 @@ public class UIHelperBase {
 
     public boolean isElementActiveFromContextMenu(int index) {
         return driver.findElements(By.cssSelector("li[data-ik='"+index+"'] a[tabindex='0']")).size() != 0;
+    }
+
+    public List<WebElement> findElements(By locator) {
+        List<WebElement> elements = driver.findElements(locator);
+        return elements;
+    }
+
+    public void verifyAmountOfTheSameElements(By locator, int amount) {
+        List<WebElement> elements = findElements(locator);
+        int actualElementsSize = elements.size();
+        Assert.assertEquals(actualElementsSize, amount);
     }
 }
