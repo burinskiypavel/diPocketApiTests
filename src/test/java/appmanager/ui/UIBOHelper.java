@@ -699,4 +699,10 @@ public class UIBOHelper extends UIHelperBase {
         WebElement pencil = driver.findElements(By.xpath("//button[@icon='pi pi-pencil']")).get(index);
         pencil.click();
     }
+
+    public void selectFeeTariffPlanAndSelectRuleFilterInTheTable(String feeTariffPlan, String rule) throws InterruptedException {
+        selectFromDropDown("name", feeTariffPlan);
+        Thread.sleep(1000);
+        selectDropDownFilter("ruleName", rule);
+    }
 }

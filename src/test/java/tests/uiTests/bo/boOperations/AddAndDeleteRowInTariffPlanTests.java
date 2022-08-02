@@ -13,9 +13,7 @@ public class AddAndDeleteRowInTariffPlanTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().selectFromDropDown("name", "United Kingdom - standard");
-        Thread.sleep(1000);
-        app.getUiboHelper().selectDropDownFilter("ruleName", "Fee for cashload");
+        app.getUiboHelper().selectFeeTariffPlanAndSelectRuleFilterInTheTable("United Kingdom - standard", "Fee for cashload");
 
         app.getUiboHelper().addRow("Fee for cashload", "0", "GBP", "GBP", "0", "0", "0");
 
@@ -49,9 +47,7 @@ public class AddAndDeleteRowInTariffPlanTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().selectFromDropDown("name", "United Kingdom - standard");
-        Thread.sleep(1000);
-        app.getUiboHelper().selectDropDownFilter("ruleName", "Fee for cashload");
+        app.getUiboHelper().selectFeeTariffPlanAndSelectRuleFilterInTheTable("United Kingdom - standard", "Fee for cashload");
         app.getUiboHelper().fillTheFieldsForAddRow("Fee for cashload", "-1", "PLN", "PLN", "-1", "-1", "-1");
 
         assertFalse(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[label='Add']")));
