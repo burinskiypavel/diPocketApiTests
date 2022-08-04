@@ -741,6 +741,12 @@
         </classes>
     </test>
 
+    <test name="ChangeTheNameOfAnExistingTariffPlanTest">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.ChangeTheNameOfAnExistingTariffPlanTest"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 

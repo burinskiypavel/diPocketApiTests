@@ -641,4 +641,26 @@ public class DBHelper extends HelperBase {
         stmt.executeQuery(commit);
         con.close();
     }
+
+    public String getFeeTariffPlanFromDB(String id) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select * from Feetariffplan where id = '"+id+"'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String feeTariffPlanName = null;
+        while (rs.next()){
+            feeTariffPlanName = rs.getString(2);
+
+            System. out.println("FeeTariffPlan : " + feeTariffPlanName);
+            break;
+        }
+        con.close();
+        return feeTariffPlanName;
+    }
 }

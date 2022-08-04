@@ -705,4 +705,13 @@ public class UIBOHelper extends UIHelperBase {
         Thread.sleep(1000);
         selectDropDownFilter("ruleName", rule);
     }
+
+    public void renameTariffPlan(String newName) throws InterruptedException {
+        click(By.xpath("//p-button[@ng-reflect-label='Rename tariff plan']"));
+        waitFor(By.xpath("//app-input[@ng-reflect-name='name'] //input"));
+        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), newName);
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
+        waitFor(By.xpath("//div[contains(text(), 'Tariff plan renamed successfully')]"));
+    }
 }
