@@ -526,9 +526,9 @@ public class UIBOHelper extends UIHelperBase {
 
     public void pressEditProfileDataFromClientPage() throws InterruptedException {
         click(By.cssSelector("div.edit-button"));
-        waitFor(By.xpath("//app-select-async[@ng-reflect-name='gender']"));
+        waitFor(By.id("formly_21_select_gender_3"));
         waitFor(By.xpath("//p-button[@ng-reflect-label='Save']"));
-        Thread.sleep(700);
+        Thread.sleep(1500);
     }
 
     public void searchByCardBySeveralFields(String cardId, String publicToken, String dipToken, String pan, String clientId, String cardholderName) {
