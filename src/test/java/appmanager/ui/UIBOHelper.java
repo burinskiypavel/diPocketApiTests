@@ -695,6 +695,13 @@ public class UIBOHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Add']"));
     }
 
+    public void deleteTarifPlan(String name) throws InterruptedException {
+        click(By.xpath("//p-button[@ng-reflect-label='Delete tariff plan']"));
+        waitFor(By.xpath("//app-delete-tariff-plan-modal //*[contains(text(), '"+name+"')]"));
+        Thread.sleep(1200);
+        click(By.xpath("//p-button[@ng-reflect-label='Delete']"));
+    }
+
     public void pressPencilEditButton(int index) {
         WebElement pencil = driver.findElements(By.xpath("//button[@icon='pi pi-pencil']")).get(index);
         pencil.click();

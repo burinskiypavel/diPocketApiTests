@@ -747,6 +747,12 @@
         </classes>
     </test>
 
+    <test name="DeleteTariffPlanTests">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.DeleteTariffPlanTests"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 
