@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 
 public class AddTariffPlanTest extends UITestBase {
-    String id = "123456789";
-    String name = "QA_autotest_name";
+    String id = "14361371";
+    String name = "QA_autotest_name_2";
 
     @Test
     public void testAddTariffPlan() throws InterruptedException, SQLException, ClassNotFoundException {
