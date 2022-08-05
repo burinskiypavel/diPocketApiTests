@@ -19,4 +19,16 @@ public class DeleteTariffPlanTests extends UITestBase {
 
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Tariff plan deleted successfully')]"));
     }
+
+    @Test
+    public void TheUserChangedHisMindAboutDeleteTariffPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoFeeTariffPlanTab();
+        app.getUiboHelper().selectFromDropDown("name", "QA_autotest_name_2");
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Delete tariff plan']"));
+        app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));
+
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
+    }
 }
