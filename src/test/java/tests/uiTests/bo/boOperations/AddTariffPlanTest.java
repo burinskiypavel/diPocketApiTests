@@ -22,7 +22,7 @@ public class AddTariffPlanTest extends UITestBase {
     }
 
     @Test
-    public void testTheUserChangedHisMindAboutAddRariffPlan() throws InterruptedException, SQLException, ClassNotFoundException {
+    public void testTheUserChangedHisMindAboutAddRariffPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoFeeTariffPlanTab();
