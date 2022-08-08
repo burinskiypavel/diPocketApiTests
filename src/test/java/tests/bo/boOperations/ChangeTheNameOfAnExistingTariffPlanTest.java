@@ -21,7 +21,7 @@ public class ChangeTheNameOfAnExistingTariffPlanTest extends TestBase {
         baseURI = app.BOURL;
         basePath = "BOServices";
         System.out.println("randomNumber: " + randomNumber);
-        feeTariffPlanName = app.getDbHelper().getFeeTariffPlanFromDB("123456789");
+        feeTariffPlanName = app.getDbHelper().getFeeTariffPlanFromDB(String.valueOf(id));
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin2, app.CBOuserPass2, username);
     }
 
