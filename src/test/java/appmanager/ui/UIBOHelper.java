@@ -684,7 +684,7 @@ public class UIBOHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Add tariff plan']"));
         type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
         type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
-        Thread.sleep(1200);
+        Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Add']"));
     }
 
