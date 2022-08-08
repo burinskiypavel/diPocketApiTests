@@ -12,7 +12,7 @@ public class ChangeTheNameOfAnExistingTariffPlanTest extends TestBase {
     String cookie = null;
     String username = "PAVELBAUTO";
     int id = 123456789;
-    String name = "QA_autotest_name";
+    String name = "QA_autotest_name_";
     String randomNumber = app.generateRandomNumber(4);
     String feeTariffPlanName = null;
 
@@ -43,13 +43,11 @@ public class ChangeTheNameOfAnExistingTariffPlanTest extends TestBase {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .queryParam("id","123456789")
-                .queryParam("name",feeTariffPlanName)
+                .queryParam("feeTariffPlanId",id)
+                .queryParam("newFeeTariffPlanName",name + randomNumber)
                 .when()
                 .post( "/v1/fee/tariffPlan/rename")
                 .then().log().all()
-                .statusCode(200)
-                .body("id", hasItems(id),
-                        "name", hasItems(name));
+                .statusCode(200);
     }
 }
