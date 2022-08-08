@@ -1,0 +1,2 @@
+1 All transactions (In) Max per single trx 1,000.00
+2 DiP Transfers (Out) Max per single trx 1,000.00
