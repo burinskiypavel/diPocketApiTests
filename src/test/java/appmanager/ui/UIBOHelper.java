@@ -60,7 +60,8 @@ public class UIBOHelper extends UIHelperBase {
 
     public void gotoOperations() {
         click(By.cssSelector("div[ng-reflect-router-link='operations']"));
-        waitFor(By.xpath("//*[contains(text(), 'Add merchant')]"));
+        //waitFor(By.xpath("//*[contains(text(), 'Add merchant')]"));
+        waitFor(By.xpath("//a[@role='tab'] //span[contains(text(), 'Fee tariff plan')]"));
     }
 
     public void gotoRolesTab() {
@@ -93,7 +94,7 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void gotoFeeTariffPlanTab() {
-        click(By.id("p-tabpanel-1-label"));
+        click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Fee tariff plan')]"));
     }
 
     public void addRole(String roleID, String roleName) throws InterruptedException {
@@ -646,15 +647,7 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void addRow(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='+ Add row']"));
-        waitFor(By.id("formly_11_select_ruleId_0"));
-        selectFromDropDown(By.cssSelector("#formly_11_select_ruleId_0"), rule);
-        type(By.cssSelector("#formly_11_input-number_feePercent_3 input"), feePercent);
-        type(By.cssSelector("#formly_11_input-number_minFeeAmount_5 input"), minFeeAmount);
-        type(By.cssSelector("#formly_11_input-number_maxFeeAmount_6 input"), maxFeeAmount);
-        type(By.cssSelector("#formly_11_input-number_flatFeeAmount_4 input"), flatFeeAmount);
-        selectFromDropDown(By.id("formly_11_select_currencyId_1"), currency);
-        selectFromDropDown(By.id("formly_11_select_feeCurrencyId_2"), feeCurrency);
+        fillTheFieldsForAddRow(rule, feePercent, currency, feeCurrency, minFeeAmount, maxFeeAmount, flatFeeAmount);
         Thread.sleep(1000);
         click(By.xpath("//p-button[@label='Add']"));
         waitFor(By.xpath("//*[contains(text(), 'Tariff plan has been successfully added')]"));
@@ -662,14 +655,14 @@ public class UIBOHelper extends UIHelperBase {
 
     public void fillTheFieldsForAddRow(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
         click(By.xpath("//p-button[@ng-reflect-label='+ Add row']"));
-        waitFor(By.id("formly_11_select_ruleId_0"));
-        selectFromDropDown(By.cssSelector("#formly_11_select_ruleId_0"), rule);
-        type(By.cssSelector("#formly_11_input-number_feePercent_3 input"), feePercent);
-        type(By.cssSelector("#formly_11_input-number_minFeeAmount_5 input"), minFeeAmount);
-        type(By.cssSelector("#formly_11_input-number_maxFeeAmount_6 input"), maxFeeAmount);
-        type(By.cssSelector("#formly_11_input-number_flatFeeAmount_4 input"), flatFeeAmount);
-        selectFromDropDown(By.id("formly_11_select_currencyId_1"), currency);
-        selectFromDropDown(By.id("formly_11_select_feeCurrencyId_2"), feeCurrency);
+        waitFor(By.cssSelector("p-dropdown[id*='select_ruleId_0']"));
+        selectFromDropDown(By.cssSelector("p-dropdown[id*='select_ruleId_0']"), rule);
+        type(By.cssSelector("p-inputnumber[id*='input-number_feePercent_3'] input"), feePercent);
+        type(By.cssSelector("p-inputnumber[id*='input-number_minFeeAmount_5'] input"), minFeeAmount);
+        type(By.cssSelector("p-inputnumber[id*='input-number_maxFeeAmount_6'] input"), maxFeeAmount);
+        type(By.cssSelector("p-inputnumber[id*='input-number_flatFeeAmount_4'] input"), flatFeeAmount);
+        selectFromDropDown(By.cssSelector("p-dropdown[id*='select_currencyId_1']"), currency);
+        selectFromDropDown(By.cssSelector("p-dropdown[id*='select_feeCurrencyId_2']"), feeCurrency);
     }
 
     public void deleteRow(int index) {
