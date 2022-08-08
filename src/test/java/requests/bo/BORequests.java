@@ -3,6 +3,7 @@ package requests.bo;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import model.bo.boClient.Supervisor_reqList;
+import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
@@ -438,7 +439,9 @@ public class BORequests {
                 .body("corpClientId", hasItem(notNullValue()),
                         "companyName", hasItem(expectedCompanyName),
                         "site", hasItem(expectedSite));
-    }public void boServices_v1_user_verifyPhone(String cookie, String phone, boolean expectedValue) {
+    }
+
+    public void boServices_v1_user_verifyPhone(String cookie, String phone, boolean expectedValue) {
         given()
                 .spec(requestSpecBO)
                 //.log().uri().log().headers()
@@ -451,6 +454,7 @@ public class BORequests {
                 .statusCode(200)
                 .body("value", equalTo(expectedValue));
     }
+
     public void boServices_v1_user_all(String cookie, String expectedUsername, String expectedFirstName, String expectedPhone, String expectedEmail) {
         given()
                 .spec(requestSpecBO)
@@ -491,5 +495,17 @@ public class BORequests {
                         "username", equalTo(expectedUsername),
                         "phone", equalTo(expectedPhone),
                         "email", equalTo(expectedEmail));
+    }
+
+    public void boServices_v1_fee_tariffPlan_create(String cookie,  int id, String name){
+        given()
+                .spec(requestSpecBO)
+                .cookie(cookie)
+                .queryParam("feeTariffPlanId", id)
+                .queryParam("feeTariffPlanName", name)
+                .when()
+                .post("/v1/fee/tariffPlan/create")
+                .then().log().all()
+                .statusCode(200);
     }
 }
