@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class AddTariffPlanTest extends UITestBase {
     String id = "14361371";
-    String name = "QA_autotest_name_2";
+    String name = "QA_autotest_name";
 
     @Test
     public void testAddTariffPlan() throws InterruptedException, SQLException, ClassNotFoundException {
