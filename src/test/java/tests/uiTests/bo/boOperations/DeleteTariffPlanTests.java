@@ -25,7 +25,7 @@ public class DeleteTariffPlanTests extends UITestBase {
     }
 
     @Test
-    public void TheUserChangedHisMindAboutDeleteTariffPlan() throws InterruptedException {
+    public void testTheUserChangedHisMindAboutDeleteTariffPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoFeeTariffPlanTab();

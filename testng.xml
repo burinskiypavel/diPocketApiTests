@@ -753,6 +753,12 @@
         </classes>
     </test>
 
+    <test name="LimitPlanPageTests">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.LimitPlanPageTests"/>
+        </classes>
+    </test>
+
 
     <!--EmailsVerification-->
 
