@@ -650,14 +650,14 @@ public class UIBOHelper extends UIHelperBase {
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), '" + item + "')]"));
     }
 
-    public void addRow(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
-        fillTheFieldsForAddRow(rule, feePercent, currency, feeCurrency, minFeeAmount, maxFeeAmount, flatFeeAmount);
+    public void addRowInTariffPlan(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
+        fillTheFieldsForAddRowInTariffPlan(rule, feePercent, currency, feeCurrency, minFeeAmount, maxFeeAmount, flatFeeAmount);
         Thread.sleep(1000);
         click(By.xpath("//p-button[@label='Add']"));
         waitFor(By.xpath("//*[contains(text(), 'Tariff plan has been successfully added')]"));
     }
 
-    public void fillTheFieldsForAddRow(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
+    public void fillTheFieldsForAddRowInTariffPlan(String rule, String feePercent, String currency, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
         click(By.xpath("//p-button[@ng-reflect-label='+ Add row']"));
         waitFor(By.cssSelector("p-dropdown[id*='select_ruleId_0']"));
         selectFromDropDown(By.cssSelector("p-dropdown[id*='select_ruleId_0']"), rule);
@@ -671,6 +671,13 @@ public class UIBOHelper extends UIHelperBase {
 
     public void deleteRow(int index) {
         List<WebElement> elements = driver.findElements(By.xpath("//button[@ng-reflect-icon='pi pi-trash']"));
+        WebElement element = elements.get(index);
+        element.click();
+        waitFor(By.xpath("//*[contains(text(), 'Row deleted successfully')]"));
+    }
+
+    public void deleteRow(By locator, int index) {
+        List<WebElement> elements = driver.findElements(locator);
         WebElement element = elements.get(index);
         element.click();
         waitFor(By.xpath("//*[contains(text(), 'Row deleted successfully')]"));
@@ -717,5 +724,15 @@ public class UIBOHelper extends UIHelperBase {
         Thread.sleep(1000);
         click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
         waitFor(By.xpath("//div[contains(text(), 'Tariff plan renamed successfully')]"));
+    }
+
+    public void addRowInLimitPlan(String limitAmount, String group, String type) throws InterruptedException {
+        click(By.xpath("//app-limit-plan-tab //p-button[@ng-reflect-label='+ Add row']"));
+        type(By.xpath("//app-input-number[@ng-reflect-name='limitAmount'] //input"), limitAmount);
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='tranGroupId']"), group);
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), type);
+        Thread.sleep(1500);
+        click(By.xpath("//p-button[@ng-reflect-label='Add']"));
+        waitFor(By.xpath("//*[contains(text(), 'Limit plan has been successfully added')]"));
     }
 }
