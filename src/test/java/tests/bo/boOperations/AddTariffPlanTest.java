@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.hasItems;
 public class AddTariffPlanTest extends TestBase {
     String cookie = null;
     String username = "VIKTORIA";
-    int id = 123456789;
+    int id = 14361371;
     String name = "QA_autotest_name";
 
     @Test(priority = 1)

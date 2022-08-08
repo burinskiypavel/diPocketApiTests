@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class DuplicateTariffPlanTest extends TestBase {
     String cookie = null;
@@ -272,8 +271,8 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .get( "/v1/client/verifyCodesCount")
                 .then().log().all()
                 .statusCode(200)
-                .body("phone", hasItems("380929019081", "380919019083"),
-                        "generated", hasItems("31.08.2017 15:41:19", "27.04.2017 17:21:23"),
+                .body("phone", hasItems("380919019182", "380938970241"),
+                        "generated", hasItems(notNullValue()),
                         "site", hasItems("DIPOCKET", "PZT"));
     }
 
