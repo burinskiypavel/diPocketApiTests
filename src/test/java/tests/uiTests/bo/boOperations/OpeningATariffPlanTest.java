@@ -25,6 +25,5 @@ public class OpeningATariffPlanTest extends UITestBase {
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile2("files/bo/boOperations/openingATariffPlan.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
-        //assertThat("test").isEqualToNormalizingNewlines("test");
     }
 }
