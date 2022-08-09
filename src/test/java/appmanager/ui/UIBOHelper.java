@@ -739,4 +739,16 @@ public class UIBOHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Add']"));
         waitFor(By.xpath("//*[contains(text(), 'Limit plan has been successfully added')]"));
     }
+
+    public void editTariffPlanRow(String rule, String currency, String feePercent, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[2] //p-dropdown"), rule); //Rule
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[4] //p-dropdown"), currency); //Currency
+        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[5] //input"), feePercent); //Fee percent
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[6] //p-dropdown"), feeCurrency); //Fee currency
+        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[7] //input"), minFeeAmount); //Min fee amount
+        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[8] //input"), maxFeeAmount); //Max fee amount
+        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[9] //input"), flatFeeAmount); //Flat fee amount
+        click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
+        waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
+    }
 }
