@@ -1,16 +1,12 @@
 package tests.uiTests.bo.boOperations;
 
 import base.UITestBase;
-import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
-import static org.assertj.core.api.Assertions.assertThat;
-
 
 public class OpeningATariffPlanTest extends UITestBase {
 
