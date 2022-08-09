@@ -75,19 +75,11 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboHelper().selectFromDropDown(By.xpath("//div[@class='dropdowns'] //p-dropdown[@optionlabel='name']"), "Unlimited");
 
-
         app.getUiboHelper().addRowInLimitPlan("150", "Face to Face (Out)", "Max Daily");
 
         app.getUiboHelper().pressPencilEditButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-pencil']"));
 
-
-        app.getUiboHelper().selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[2] //p-dropdown"), "All transactions (In)");
-        app.getUiboHelper().selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[3] //p-dropdown"), "Max Monthly");
-        app.getUiboHelper().type(By.xpath("//app-limit-plan-tab //tbody //td[4] //input"), "12");
-
-        app.getUiboHelper().click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
+        app.getUiboHelper().editLimitPlanRow("All transactions (In)", "Max Monthly", "1");
 
         app.getUiboHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
     }

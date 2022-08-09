@@ -751,4 +751,13 @@ public class UIBOHelper extends UIHelperBase {
         click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
         waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
     }
+
+    public void editLimitPlanRow(String group, String type, String amount) throws InterruptedException {
+        selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[2] //p-dropdown"), group);//Group
+        selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[3] //p-dropdown"), type);//Type
+        type(By.xpath("//app-limit-plan-tab //tbody //td[4] //input"), amount);//Amount
+        click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
+
+        waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
+    }
 }
