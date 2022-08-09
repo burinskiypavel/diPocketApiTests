@@ -95,4 +95,16 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboHelper().waitFor(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"));
     }
+
+    @Test
+    public void testDeleteRowInLimitPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboHelper().selectFromDropDown(By.xpath("//div[@class='dropdowns'] //p-dropdown[@optionlabel='name']"), "Unlimited");
+
+        app.getUiboHelper().addRowInLimitPlan("170", "Face to Face (Out)", "Max Daily");
+
+        app.getUiboHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
+    }
 }
