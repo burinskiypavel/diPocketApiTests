@@ -79,7 +79,7 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboHelper().pressPencilEditButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-pencil']"));
 
-        app.getUiboHelper().editLimitPlanRow("All transactions (In)", "Max Monthly", "1");
+        app.getUiboHelper().editLimitPlanRow("All transactions (In)", "Max Monthly", "12");
 
         app.getUiboHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
     }

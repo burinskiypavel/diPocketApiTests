@@ -33,6 +33,13 @@ public class UIHelperBase {
         driver.findElement(locator).sendKeys(text);
     }
 
+    public void typeWithSeveralClear(By locator, String text) {
+        driver.findElement(locator).click();
+        driver.findElement(locator).clear();
+        driver.findElement(locator).clear();
+        driver.findElement(locator).sendKeys(text);
+    }
+
     public void click(By locator){
         driver.findElement(locator).click();
     }

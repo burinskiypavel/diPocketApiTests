@@ -741,21 +741,21 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void editTariffPlanRow(String rule, String currency, String feePercent, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
-        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[2] //p-dropdown"), rule); //Rule
-        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[4] //p-dropdown"), currency); //Currency
-        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[5] //input"), feePercent); //Fee percent
-        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[6] //p-dropdown"), feeCurrency); //Fee currency
-        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[7] //input"), minFeeAmount); //Min fee amount
-        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[8] //input"), maxFeeAmount); //Max fee amount
-        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[9] //input"), flatFeeAmount); //Flat fee amount
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[2] //p-dropdown"), rule);
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[4] //p-dropdown"), currency);
+        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[5] //input"), feePercent);
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[6] //p-dropdown"), feeCurrency);
+        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[7] //input"), minFeeAmount);
+        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[8] //input"), maxFeeAmount);
+        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[9] //input"), flatFeeAmount);
         click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
         waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
     }
 
     public void editLimitPlanRow(String group, String type, String amount) throws InterruptedException {
-        selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[2] //p-dropdown"), group);//Group
-        selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[3] //p-dropdown"), type);//Type
-        type(By.xpath("//app-limit-plan-tab //tbody //td[4] //input"), amount);//Amount
+        selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[2] //p-dropdown"), group);
+        selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[3] //p-dropdown"), type);
+        typeWithSeveralClear(By.xpath("//app-limit-plan-tab //tbody //td[4] //input"), amount);
         click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
 
         waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
