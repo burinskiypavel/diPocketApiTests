@@ -760,4 +760,8 @@ public class UIBOHelper extends UIHelperBase {
 
         waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
     }
+
+    public void pressXCancelButton(By locator) {
+        click(locator);
+    }
 }
