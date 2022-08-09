@@ -711,6 +711,10 @@ public class UIBOHelper extends UIHelperBase {
         pencil.click();
     }
 
+    public void pressPencilEditButton(By locator) {
+        driver.findElement(locator).click();
+    }
+
     public void selectFeeTariffPlanAndSelectRuleFilterInTheTable(String feeTariffPlan, String rule) throws InterruptedException {
         selectFromDropDown("name", feeTariffPlan);
         Thread.sleep(1000);
