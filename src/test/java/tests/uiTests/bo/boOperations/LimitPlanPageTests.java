@@ -55,4 +55,15 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
     }
+
+    @Test
+    public void testTheUserChangedHisMindAboutAddingARowToTheLimitPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboHelper().click(By.xpath("//app-limit-plan-tab //p-button[@ng-reflect-label='+ Add row']"));
+        app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));
+
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//*[@app-add-limit-plan-modal]"));
+    }
 }
