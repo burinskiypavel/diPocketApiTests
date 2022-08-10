@@ -157,4 +157,29 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
     }
+
+    @Test
+    public void testDeleteLimitPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+
+
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Add limit plan']"));
+        app.getUiboHelper().type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), "111222333");
+        app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), "PPP_AUTO");
+        Thread.sleep(1500);
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Add']"));
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit added successfully')]"));
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Tariff limit added successfully')]"));
+
+
+        app.getUiboHelper().selectFromDropDown(By.xpath("//div[@class='dropdowns'] //p-dropdown[@optionlabel='name']"), "PPP_AUTO");
+
+
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Delete limit plan']"));
+        Thread.sleep(1500);
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Delete']"));
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit deleted successfully')]"));
+    }
 }
