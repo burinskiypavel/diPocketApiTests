@@ -772,4 +772,10 @@ public class UIBOHelper extends UIHelperBase {
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Duplicate']"));
     }
+
+    public void renameLimitPlan(String name) {
+        click(By.xpath("//app-button[@ng-reflect-label='Rename limit plan']"));
+        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
+        click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
+    }
 }

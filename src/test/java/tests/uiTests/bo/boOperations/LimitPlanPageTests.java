@@ -141,13 +141,8 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoLimitPlanTab();
-
         app.getUiboHelper().selectFromDropDown(By.xpath("//div[@class='dropdowns'] //p-dropdown[@optionlabel='name']"), limitPlanName);
-
-
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Rename limit plan']"));
-        app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), "Pavel_rename_AUTO_" + randomNumber);
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
+        app.getUiboHelper().renameLimitPlan("Pavel_rename_AUTO_" + randomNumber);
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit renamed successfully')]"));
     }
