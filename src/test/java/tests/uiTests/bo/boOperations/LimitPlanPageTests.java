@@ -32,7 +32,6 @@ public class LimitPlanPageTests extends UITestBase {
         softAssert.assertAll();
     }
 
-
     @Test
     public void testOpeningALimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
@@ -120,5 +119,16 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().duplicateLimitPlan(duplicateId, duplicateName);
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit duplicated successfully')]"));
+    }
+
+    @Test
+    public void testTheUserChangedHisMindAboutDuplicateLimitPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Duplicate limit plan']"));
+        app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
+
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
     }
 }
