@@ -677,4 +677,26 @@ public class DBHelper extends HelperBase {
         stmt.executeQuery(commit);
         con.close();
     }
+
+    public String getLimitPlanFromDB(String id) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select * from Limitplan where id = '"+id+"'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String LimitPlanName = null;
+        while (rs.next()){
+            LimitPlanName = rs.getString(2);
+
+            System. out.println("LimitPlan : " + LimitPlanName);
+            break;
+        }
+        con.close();
+        return LimitPlanName;
+    }
 }
