@@ -14,6 +14,7 @@ public class LimitPlanPageTests extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
     String duplicateId = "123";
     String duplicateName = "Pavel_QA_Auto";
+    String randomNumber = app.generateRandomNumber(4);
 
     @Test
     public void testOpeningALimitPlanPage() throws InterruptedException {
@@ -130,5 +131,18 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
 
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
+    }
+
+    @Test
+    public void testRenameLimitPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Rename limit plan']"));
+        app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), "Pavel_rename_AUTO");
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
+
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit renamed successfully')]"));
     }
 }
