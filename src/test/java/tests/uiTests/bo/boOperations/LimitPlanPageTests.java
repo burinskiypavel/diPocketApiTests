@@ -5,12 +5,15 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
 public class LimitPlanPageTests extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
+    String duplicateId = "123";
+    String duplicateName = "Pavel_QA_Auto";
 
     @Test
     public void testOpeningALimitPlanPage() throws InterruptedException {
@@ -106,5 +109,16 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().addRowInLimitPlan("170", "Face to Face (Out)", "Max Daily");
 
         app.getUiboHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
+    }
+
+    @Test
+    public void testDuplicateLimitPlan() throws InterruptedException, SQLException, ClassNotFoundException {
+        app.getDbHelper().deleteLimitPlanFromDB(duplicateId, duplicateName);
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboHelper().duplicateLimitPlan(duplicateId, duplicateName);
+
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit duplicated successfully')]"));
     }
 }

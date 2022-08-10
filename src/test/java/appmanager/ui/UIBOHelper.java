@@ -764,4 +764,12 @@ public class UIBOHelper extends UIHelperBase {
     public void pressXCancelButton(By locator) {
         click(locator);
     }
+
+    public void duplicateLimitPlan(String id, String name) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Duplicate limit plan']"));
+        type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
+        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
+        Thread.sleep(1500);
+        click(By.xpath("//p-button[@ng-reflect-label='Duplicate']"));
+    }
 }
