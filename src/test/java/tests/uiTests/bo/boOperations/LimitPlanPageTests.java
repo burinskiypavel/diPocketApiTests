@@ -146,4 +146,15 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit renamed successfully')]"));
     }
+
+    @Test
+    public void testTheUserChangedHisMindAboutRenameLimitPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Rename limit plan']"));
+        app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
+
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
+    }
 }
