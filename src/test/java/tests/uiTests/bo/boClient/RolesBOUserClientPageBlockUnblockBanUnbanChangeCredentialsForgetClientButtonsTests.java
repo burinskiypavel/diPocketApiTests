@@ -95,7 +95,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         }
     }
 
-    @Test(priority = 5, enabled = false) // moved to api
+    @Test(priority = 5) // moved to api
     public void testRolesBOUserClientPageUnbanClientButton() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
