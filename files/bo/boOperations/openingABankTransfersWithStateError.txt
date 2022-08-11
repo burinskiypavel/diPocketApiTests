@@ -1,0 +1,16 @@
+Tran id: 193225
+State: Error
+Payer id: 30870
+Payer: Ivan Ivanov
+Order data: 02.09.2021
+Amount: 351.00
+Currency id: 348
+CCY: HUF
+Reference: Test huf
+Payee: TestTest TestTest
+Payee Account: 9731973197319731
+Payee SWIFT:
+Payee Country: Hungary
+Payee Address:
+Error Message: Wrong receiver account
+Ext. State:
