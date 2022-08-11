@@ -805,4 +805,15 @@ public class UIBOHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Add']"));
         waitFor(By.xpath("//*[contains(text(), 'Tariff limit added successfully')]"));
     }
+
+    public void selectsTransfer(By locator) {
+        click(locator);
+    }
+
+    public void searchForPeriod(String from, String till) throws InterruptedException {
+        selectFromDropDown(By.xpath("//app-search-by-period //p-dropdown[@optionlabel='value']"), "For period");
+        type(By.xpath("//p-calendar[@placeholder='From'] //input"), from);
+        type(By.xpath("//p-calendar[@placeholder='Till'] //input"), till);
+        click(By.xpath("//p-button[@label='Search']"));
+    }
 }

@@ -36,22 +36,9 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoBankTransfersTab();
-
-        app.getUiboHelper().click(By.xpath("//app-search-by-period //p-dropdown[@optionlabel='value']"));
-
-        app.getUiboHelper().click(By.xpath("//p-dropdownitem[@ng-reflect-label='For period']"));
-
-        app.getUiboHelper().type(By.xpath("//p-calendar[@placeholder='From'] //input"), "03.03.2019");
-        app.getUiboHelper().type(By.xpath("//p-calendar[@placeholder='Till'] //input"), "11.08.2022");
-
-        app.getUiboHelper().click(By.xpath("//p-button[@label='Search']"));
-
-        app.getUiboHelper().click(By.xpath("//p-columnfilter[@field='stateName']"));
-        app.getUiboHelper().click(By.xpath("//p-dropdownitem[@ng-reflect-label='Error']"));
-
-
-        app.getUiboHelper().click(By.xpath("//td[@ng-reflect-text='Error']"));
-
+        app.getUiboHelper().searchForPeriod("03.03.2019", "11.08.2022");
+        app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
+        app.getUiboHelper().selectsTransfer(By.xpath("//td[@ng-reflect-text='Error']"));
 
         List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-transactions-details //table //tbody //tr"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boOperations/OpeningABankTransfersWithStateError.txt");
