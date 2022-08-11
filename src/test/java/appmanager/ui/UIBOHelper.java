@@ -101,6 +101,10 @@ public class UIBOHelper extends UIHelperBase {
         click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Limit plan')]"));
     }
 
+    public void gotoResetSMSCounterTab() {
+        click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Reset SMS counter')]"));
+    }
+
     public void addRole(String roleID, String roleName) throws InterruptedException {
         click(By.cssSelector("p-button[label='+ Add']"));
         waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
