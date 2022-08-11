@@ -183,6 +183,16 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//app-delete-tariff-plan-modal"));
+    }
 
+    @Test
+    public void testAddLimitPlan() throws InterruptedException, SQLException, ClassNotFoundException {
+        app.getDbHelper().deleteLimitPlanFromDB(limitPlanIdForDeletion, limitPlanNameForDeletion);
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+
+        app.getUiboHelper().addLimitPlan(limitPlanIdForDeletion, limitPlanNameForDeletion);
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Tariff limit added successfully')]"));
     }
 }
