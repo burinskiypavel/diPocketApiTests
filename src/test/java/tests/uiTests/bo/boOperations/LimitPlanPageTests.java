@@ -195,4 +195,15 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().addLimitPlan(limitPlanIdForDeletion, limitPlanNameForDeletion);
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Tariff limit added successfully')]"));
     }
+
+    @Test
+    public void testTheUserChangedHisMindAboutAddLimitPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Add limit plan']"));
+
+        app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[role='dialog']"));
+    }
 }
