@@ -173,4 +173,16 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit deleted successfully')]"));
     }
+
+    @Test
+    public void testTheUserChangedHisMindAboutDeleteLimitPlan() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Delete limit plan']"));
+
+        app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//app-delete-tariff-plan-modal"));
+
+    }
 }
