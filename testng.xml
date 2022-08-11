@@ -765,6 +765,12 @@
         </classes>
     </test>
 
+    <test name="OpeningABankTransfersPageTests">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.OpeningABankTransfersPageTests"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->

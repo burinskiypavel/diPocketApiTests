@@ -9,7 +9,7 @@ public class SMSCounterResetTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
 
     @Test
-    public void testTheUserChangedHisMindAboutAddLimitPlan() throws InterruptedException {
+    public void testSMSCounterReset() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoResetSMSCounterTab();
