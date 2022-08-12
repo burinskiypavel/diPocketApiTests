@@ -21,7 +21,7 @@ public class BOUserRolesCBOEditRoleTest extends UITestBase {
         app.getUiboHelper().selectRoleFromDropDown("1");
         app.getUiboHelper().editUserRole(roleName);
 
-        assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'User role edited successfully')]")));
+        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role edited successfully')]"));
         String roleNameDB = app.getDbHelper().getRoleNameFromDB("1");
         assertThat(roleNameDB, equalTo(roleName));
     }
