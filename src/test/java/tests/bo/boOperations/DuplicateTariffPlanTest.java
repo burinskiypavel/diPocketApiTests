@@ -74,7 +74,7 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .then().log().all()
                 .statusCode(200)
                 .body("id", hasItems(1, 3, 7, 8, 70, 11122233),
-                        "name", hasItems("Standard", "Peak", "Sodexo", "Getsby", "UpandGo", "Duplicate limit plan"));
+                        "name", hasItems("Peak", "Sodexo", "Getsby", "UpandGo", "Duplicate limit plan"));
     }
 
     @Test(priority = 6)
@@ -271,9 +271,9 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .get( "/v1/client/verifyCodesCount")
                 .then().log().all()
                 .statusCode(200)
-                .body("phone", hasItems("380919019182", "380938970241"),
+                .body("phone", hasItems(notNullValue()),
                         "generated", hasItems(notNullValue()),
-                        "site", hasItems("DIPOCKET", "PZT"));
+                        "site", hasItems("DIPOCKET"));
     }
 
     @Test(priority = 20)
@@ -285,11 +285,11 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .get( "/v1/fee/tariff/1")
                 .then().log().all()
                 .statusCode(200)
-                .body("id", hasItems(13),
+                .body("id", hasItems(57),
                         "tariffPlanId", hasItems(1),
-                        "ruleId", hasItems(400),
-                        "ruleName", hasItems("Fee for Move My Funds"),
-                        "flatFeeAmount", hasItems(0),
+                        "ruleId", hasItems(500),
+                        "ruleName", hasItems("Fee for ATM used worldwide with conversion"),
+                        "flatFeeAmount", hasItems(75),
                         "feeCurrencyId", hasItems(985),
                         "feeCurrencyCode", hasItems("PLN"));
     }
