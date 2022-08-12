@@ -161,7 +161,8 @@ public class LimitPlanPageTests extends UITestBase {
     }
 
     @Test
-    public void testDeleteLimitPlan() throws InterruptedException {
+    public void testDeleteLimitPlan() throws InterruptedException, SQLException, ClassNotFoundException {
+        app.getDbHelper().deleteLimitPlanFromDB(limitPlanIdForDeletion, limitPlanNameForDeletion);
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoLimitPlanTab();
