@@ -1,0 +1,16 @@
+Tran id: 347965
+State: To do
+Payer id: 2662
+Payer: Name Surname
+Order data: 31.07.2022
+Amount: 1.00
+Currency id: 978
+CCY: EUR
+Reference: Manual BO transfer back. Funds offload as per request
+Payee: Jack 1 qwertzuiopouuaelklelkjsndvklnj
+Payee Account: 223435
+Payee SWIFT:
+Payee Country: Qatar
+Payee Address: wq, qw, qw
+Error Message:
+Ext. State:
