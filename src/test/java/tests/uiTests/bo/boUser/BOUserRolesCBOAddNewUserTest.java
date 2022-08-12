@@ -10,6 +10,10 @@ import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOAddNewUserTest extends UITestBase {
     String username = "PAVELB2";
+    String phone = "380685448615";
+    String role = "CBO";
+    String site = "SODEXO";
+    String email = "burinskiypavel@gmail.com";
 
     @Test //moved to api
     public void testBOUserRolesCBOAddNewUser() throws InterruptedException, SQLException, ClassNotFoundException {
@@ -27,9 +31,9 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
         assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
         assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Add user")));
 
-        app.getUiboHelper().selectFromSelectAddNewUserPage("role", "CBO");
-        app.getUiboHelper().selectFromSelectAddNewUserPage("site", "SODEXO");
-        app.getUiboHelper().fillBOUserFieldsInPopup("Pavel", "Burinskiy", "380685448615", "burinskiypavel@gmail.com", username);
+        app.getUiboHelper().selectFromSelectAddNewUserPage("role", role);
+        app.getUiboHelper().selectFromSelectAddNewUserPage("site", site);
+        app.getUiboHelper().fillBOUserFieldsInPopup("Pavel", "Burinskiy", phone, email, username);
         app.getUiboHelper().uploadFile(By.cssSelector("input[type='file']"), "C:/Work/Files/self.jpg");
 
         Thread.sleep(700);
