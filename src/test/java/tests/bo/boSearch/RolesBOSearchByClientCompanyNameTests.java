@@ -9,20 +9,20 @@ import static org.hamcrest.CoreMatchers.*;
 public class RolesBOSearchByClientCompanyNameTests extends TestBase {
     String cookie = null;
     String username = "EVGENYA";
-    String phone = "380992871946";
-    String email = "e.kononenko0312+1@gmail.com";
+    String phone = "380685448615";
+    String email = "pavelburinskiy@gmail.com";
     String companyName = "Dipocket";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
         baseURI = app.BOURL;
         basePath = "BOServices";
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
     @Test(priority = 2)
     public void test_BOServices_v1_user_authenticated() {
-        app.getBoRequestsHelper().boServices_v1_user_authenticated(cookie, username, phone, email);
+        app.getBoRequestsHelper().boServices_v1_user_authenticated(cookie, app.BOusername, phone, email);
     }
 
     @Test(priority = 3)

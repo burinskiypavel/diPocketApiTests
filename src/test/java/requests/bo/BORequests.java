@@ -50,9 +50,9 @@ public class BORequests {
                         "stateId", notNullValue(),
                         "stateName", notNullValue(),
                         "username", notNullValue(),
-                        //"phone", notNullValue(),
+                        "phone", notNullValue(),
                         //"corpClientId", notNullValue(),
-                        //"email", notNullValue(),
+                        "email", notNullValue(),
                         "site", notNullValue(),
                         "username", equalTo(expectedUsername));
         return cookie;
@@ -488,7 +488,7 @@ public class BORequests {
                         "stateName", notNullValue(),
                         "username", notNullValue(),
                         "phone", notNullValue(),
-                        "corpClientId", notNullValue(),
+                        //"corpClientId", notNullValue(),
                         "email", notNullValue(),
                         "site", notNullValue(),
                         "username", equalTo(expectedUsername),

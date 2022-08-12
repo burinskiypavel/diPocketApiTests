@@ -110,9 +110,9 @@ public class ApplicationManagerUI {
     public String CBOuserPass3 = "12345678";
     public String BOuserLogin2 = "Evgenya";
     public String BOuserPass2 = "7RTwTUP";
-    public String BOuserLogin = "dipbo1";
-    public String BOuserPass = "12345678";
-    public String BOusername = "DIPBO1";
+    public String BOuserLogin = "PAVELB_AUTO_BO";
+    public String BOuserPass = "ZG7Y5gS";
+    public String BOusername = "PAVELB_AUTO_BO";
 
 
     //private MailHelper mailHelper;
