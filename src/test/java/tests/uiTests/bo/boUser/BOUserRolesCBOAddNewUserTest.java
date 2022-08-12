@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOAddNewUserTest extends UITestBase {
     String username = "PAVELB2";
-    String phone = "380685448615";
+    String phone = "380639348839";
     String role = "CBO";
     String site = "SODEXO";
     String email = "burinskiypavel@gmail.com";
