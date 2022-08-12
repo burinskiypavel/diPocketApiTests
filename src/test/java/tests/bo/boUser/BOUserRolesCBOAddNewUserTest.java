@@ -12,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 
 public class BOUserRolesCBOAddNewUserTest extends TestBase {
     String cookie = null;
-    String phone = "380685448615";
+    String phone = "380639348839";
     String username = "PAVELB2";
     String email = "burinskiypavel@gmail.com";
     String firstName = "Pavel";
