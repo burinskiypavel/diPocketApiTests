@@ -106,6 +106,8 @@ public class ApplicationManager {
     public String CBOuserPass = "kWmaB0s";
     public String CBOuserLogin2 = "PAVELBAuto";
     public String CBOuserPass2 = "mLjY6Ja";
+    public String CBOuserLogin3 = "dipcbo1";
+    public String CBOuserPass3 = "12345678";
     public String BOuserLogin2 = "Evgenya";
     public String BOuserPass2 = "7RTwTUP";
     public String BOuserLogin = "dipbo1";
