@@ -64,7 +64,7 @@ public class RolesBOUserClientPageTest extends UITestBase {
 
         softAssert.assertFalse(!app.getUiboHelper().areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Search']", "//app-button[@ng-reflect-label='Block client']", "//app-button[@ng-reflect-label='Ban client']",
                     "//app-button[@ng-reflect-label='Forget client']", "//app-button[@ng-reflect-label='Change credentials']", "//app-button[@ng-reflect-label='Send statements']",
-                    "//app-button[@ng-reflect-label='Upload docs']", "//app-button[@ng-reflect-label='Upload selfies']", "//app-button[@ng-reflect-label='Transfer back']", "//app-button[@ng-reflect-label='Report a bug']"}));
+                    "//app-button[@ng-reflect-label='Upload docs']", "//app-button[@ng-reflect-label='Upload selfies']", "//app-button[@ng-reflect-label='Transfer back']"}));
         softAssert.assertAll();
     }
 }
