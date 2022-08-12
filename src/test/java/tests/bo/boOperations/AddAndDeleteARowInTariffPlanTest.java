@@ -10,7 +10,7 @@ import java.util.List;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class AddAndDeleteARowTest extends TestBase {
+public class AddAndDeleteARowInTariffPlanTest extends TestBase {
     String cookie = null;
     String username = "PAVELBAUTO";
     int createdId;
@@ -52,23 +52,25 @@ public class AddAndDeleteARowTest extends TestBase {
                 .get( "/v1/fee/tariff/2");
                 res.then().log().all();
                 res.then().statusCode(200);
+
+        JsonPath jsonPathEvaluator = res.jsonPath();
+        List<Integer> id = jsonPathEvaluator.get("id");
+        int size = id.size() - 1;
+        int lastId = id.get(size);
+
                 res.then().body("id", hasItem(notNullValue()),
                         "tariffPlanId", hasItems(2),
                         "ruleId", hasItems(-100),
                         "ruleName", hasItems("Apple Pay bonus"),
                         "currencyId", hasItems(826),
                         "currencyCode", hasItems("GBP"),
-                        "feePercent", hasItems(0),
+                        "feePercent", hasItems(nullValue()),
                         "minFeeAmount", hasItems(0),
                         "maxFeeAmount", hasItems(0),
                         "flatFeeAmount", hasItems(0),
                         "feeCurrencyId", hasItems(826),
                         "feeCurrencyCode", hasItems("GBP"));
 
-        JsonPath jsonPathEvaluator = res.jsonPath();
-        List<Integer> id = jsonPathEvaluator.get("id");
-        int size = id.size() - 1;
-        int lastId = id.get(size);
         createdId = lastId;
     }
 
