@@ -539,7 +539,7 @@ public class UIBOHelper extends UIHelperBase {
 
     public void pressEditProfileDataFromClientPage() throws InterruptedException {
         click(By.cssSelector("div.edit-button"));
-        waitFor(By.cssSelector("p-dropdown[id*='select_gender_3']"));
+        waitFor(By.cssSelector("p-dropdown[id*='select_gender_']"));
         waitFor(By.xpath("//p-button[@ng-reflect-label='Save']"));
         Thread.sleep(1500);
     }
