@@ -816,4 +816,14 @@ public class UIBOHelper extends UIHelperBase {
         type(By.xpath("//p-calendar[@placeholder='Till'] //input"), till);
         click(By.xpath("//p-button[@label='Search']"));
     }
+
+    public void editProfileData(String firstName, String lastName, String mailingStreetLine1, String mailingStreetLine2, String city, String mailingPostcode) {
+        type(By.cssSelector("input[id*='input_firstName']"), firstName);
+        type(By.cssSelector("input[id*='input_lastName']"), lastName);
+        type(By.cssSelector("input[id*='_input_mailingStreetLine1_']"), mailingStreetLine1);
+        type(By.cssSelector("input[id*='_input_mailingStreetLine2_']"), mailingStreetLine2);
+        type(By.cssSelector("input[id*='_input_mailingCity_']"), city);
+        type(By.cssSelector("input[id*='_input_mailingPostcode_']"), mailingPostcode);
+        click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+    }
 }
