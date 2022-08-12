@@ -3,7 +3,6 @@ package requests.bo;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import model.bo.boClient.Supervisor_reqList;
-import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
@@ -525,6 +524,17 @@ public class BORequests {
                         "}")
                 .when()
                 .post( "/v1/fee/addTariffRule")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    public void boServices_v1_fee_deleteTariffRule(String cookie, int tarriffId){
+        given()
+                .spec(requestSpecBO)
+                .cookie(cookie)
+                .queryParam("tariffId", tarriffId)
+                .when()
+                .post( "/v1/fee/deleteTariffRule")
                 .then().log().all()
                 .statusCode(200);
     }

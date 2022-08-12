@@ -1,8 +1,12 @@
 package appmanager;
 
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import model.bo.User_roles;
 import model.bo.boClient.Account_client;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class BOHelper extends HelperBase {
 
@@ -83,6 +87,14 @@ public class BOHelper extends HelperBase {
             }
         }
         return bool;
+    }
+
+    public int getLastIdFromResponse(Response res) {
+        JsonPath jsonPathEvaluator = res.jsonPath();
+        List<Integer> id = jsonPathEvaluator.get("id");
+        int size = id.size() - 1;
+        int lastId = id.get(size);
+        return lastId;
     }
 
 //    public boolean isAccountClientAccountNameExist(Account_client[] account_clients, String name){

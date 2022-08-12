@@ -24,23 +24,8 @@ public class AddAndDeleteARowInTariffPlanTest extends TestBase {
 
     @Test(priority = 2)
     public void test_BOServices_v1_fee_addTariffRule(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .body("{\n" +
-                        "  \"tariffPlanId\" : 2,\n" +
-                        "  \"ruleId\" : -100,\n" +
-                        "  \"currencyId\" : 826,\n" +
-                        "  \"feePercent\" : 0,\n" +
-                        "  \"minFeeAmount\" : 0,\n" +
-                        "  \"maxFeeAmount\" : 0,\n" +
-                        "  \"flatFeeAmount\" : 0,\n" +
-                        "  \"feeCurrencyId\" : 826\n" +
-                        "}")
-                .when()
-                .post( "/v1/fee/addTariffRule")
-                .then().log().all()
-                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_fee_addTariffRule(cookie, 2, -100, 826, 0, 0, 0, 0, 826);
+
     }
 
     @Test(priority = 3)
@@ -52,13 +37,9 @@ public class AddAndDeleteARowInTariffPlanTest extends TestBase {
                 .get( "/v1/fee/tariff/2");
                 res.then().log().all();
                 res.then().statusCode(200);
-
-        JsonPath jsonPathEvaluator = res.jsonPath();
-        List<Integer> id = jsonPathEvaluator.get("id");
-        int size = id.size() - 1;
-        int lastId = id.get(size);
-
-                res.then().body("id", hasItem(notNullValue()),
+        int lastId = app.getBOHelper().getLastIdFromResponse(res);
+        createdId = lastId;
+        res.then().body("id", hasItem(notNullValue()),
                         "tariffPlanId", hasItems(2),
                         "ruleId", hasItems(-100),
                         "ruleName", hasItems("Apple Pay bonus"),
@@ -70,19 +51,10 @@ public class AddAndDeleteARowInTariffPlanTest extends TestBase {
                         "flatFeeAmount", hasItems(0),
                         "feeCurrencyId", hasItems(826),
                         "feeCurrencyCode", hasItems("GBP"));
-
-        createdId = lastId;
     }
 
     @Test(priority = 4)
     public void test_BOServices_v1_fee_deleteTariffRule(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .queryParam("tariffId", createdId)
-                .when()
-                .post( "/v1/fee/deleteTariffRule")
-                .then().log().all()
-                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_fee_deleteTariffRule(cookie, createdId);
     }
 }
