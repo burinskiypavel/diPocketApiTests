@@ -508,4 +508,24 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void boServices_v1_fee_addTariffRule(String cookie, int tariffPlanId, int ruleId, int currencyId, int feePercent, int minFeeAmount, int maxFeeAmount, int flatFeeAmount, int feeCurrencyId){
+        given()
+                .spec(requestSpecBO)
+                .cookie(cookie)
+                .body("{\n" +
+                        "  \"tariffPlanId\" : " + tariffPlanId + ",\n" +
+                        "  \"ruleId\" : " + ruleId + ",\n" +
+                        "  \"currencyId\" : " + currencyId + ",\n" +
+                        "  \"feePercent\" : " + feePercent + ",\n" +
+                        "  \"minFeeAmount\" : " + minFeeAmount + ",\n" +
+                        "  \"maxFeeAmount\" : " + maxFeeAmount + ",\n" +
+                        "  \"flatFeeAmount\" : " + flatFeeAmount + ",\n" +
+                        "  \"feeCurrencyId\" : " + feeCurrencyId + "\n" +
+                        "}")
+                .when()
+                .post( "/v1/fee/addTariffRule")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
