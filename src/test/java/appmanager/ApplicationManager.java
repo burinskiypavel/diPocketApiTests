@@ -112,6 +112,7 @@ public class ApplicationManager {
     public String BOuserPass2 = "7RTwTUP";
     public String BOuserLogin = "dipbo1";
     public String BOuserPass = "12345678";
+    public String BOusername = "DIPBO1";
 
 
     //private MailHelper mailHelper;

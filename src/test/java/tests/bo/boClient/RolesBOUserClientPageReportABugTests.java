@@ -15,7 +15,7 @@ public class RolesBOUserClientPageReportABugTests extends TestBase {
     public void test_BOServices_v1_auth_authentication(){
         baseURI = app.BOURL;
         basePath = "BOServices";
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, "EVGENYA");
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
     @Test(priority = 2)
