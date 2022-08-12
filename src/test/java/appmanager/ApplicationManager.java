@@ -106,8 +106,10 @@ public class ApplicationManager {
     public String CBOuserPass = "kWmaB0s";
     public String CBOuserLogin2 = "PAVELBAuto";
     public String CBOuserPass2 = "mLjY6Ja";
-    public String BOuserLogin = "Evgenya";
-    public String BOuserPass = "7RTwTUP";
+    public String BOuserLogin2 = "Evgenya";
+    public String BOuserPass2 = "7RTwTUP";
+    public String BOuserLogin = "dipbo1";
+    public String BOuserPass = "12345678";
 
 
     //private MailHelper mailHelper;
