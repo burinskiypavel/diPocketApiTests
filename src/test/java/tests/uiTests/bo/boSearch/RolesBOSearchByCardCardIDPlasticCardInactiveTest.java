@@ -240,7 +240,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Charge Fee')]"));
         app.getUiboHelper().fillAndPressDoneManualFeeChargePopUp("F", "test", "Fee for Cashback", "1000");
 
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Incorrect user (UserName = EVGENYA) role, expected: FINANCE, actual: BO')]"));
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Incorrect user (UserName = PAVELB_AUTO_BO) role, expected: FINANCE, actual: BO')]"));
     }
 
     @Test
