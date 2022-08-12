@@ -13,7 +13,7 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
     String phone = "380639348839";
     String role = "CBO";
     String site = "SODEXO";
-    String email = "burinskiypavel@gmail.com";
+    String email = "testdipocket@gmail.com";
 
     @Test //moved to api
     public void testBOUserRolesCBOAddNewUser() throws InterruptedException, SQLException, ClassNotFoundException {
