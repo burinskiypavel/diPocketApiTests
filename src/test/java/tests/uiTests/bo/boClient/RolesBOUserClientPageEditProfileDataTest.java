@@ -7,9 +7,9 @@ import org.testng.asserts.SoftAssert;
 
 public class RolesBOUserClientPageEditProfileDataTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
-    String phone = "380633192217";
+    String phone = "380685448615";
     String randomNumber = app.generateRandomNumber(3);
-    String id = "33539";
+    String id = "33062";
 
     @Test
     public void testRolesBOUserClientPageEditProfileData_VirifyEditProfileFields() throws InterruptedException {
