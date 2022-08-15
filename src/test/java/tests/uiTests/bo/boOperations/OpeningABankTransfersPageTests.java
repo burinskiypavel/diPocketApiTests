@@ -54,6 +54,7 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         List<Object[]> list = new ArrayList<Object[]>();
         list.add(new Object[] {"03.03.2019", "11.08.2022", "Error", "OpeningABankTransfersWithStateError.txt"});
         list.add(new Object[] {"03.03.2019", "11.08.2022", "To do", "OpeningABankTransfersWithStateToDo.txt"});
+        list.add(new Object[] {"03.03.2019", "11.08.2022", "Processing", "OpeningABankTransfersWithStateProcessing.txt"});
         return list.iterator();
     }
 }

@@ -1,0 +1,16 @@
+Tran id: 198106
+State: Processing
+Payer id: 34938
+Payer: Dante Terry
+Order data: 18.11.2021
+Amount: 1.00
+Currency id: 348
+CCY: HUF
+Reference: text
+Payee: Myron Myron
+Payee Account: 2222222222222222
+Payee SWIFT:
+Payee Country: Hungary
+Payee Address:
+Error Message:
+Ext. State:
