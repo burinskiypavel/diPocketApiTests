@@ -1,0 +1,16 @@
+Tran id: 193746
+State: Done
+Payer id: 7632
+Payer: Ted Red
+Order data: 23.09.2021
+Amount: 48.00
+Currency id: 348
+CCY: HUF
+Reference: PAYMENT REFERENCE
+Payee: Ted Red
+Payee Account: 117733770723677800000000
+Payee SWIFT:
+Payee Country: Hungary
+Payee Address:
+Error Message:
+Ext. State:

@@ -52,9 +52,10 @@ public class OpeningABankTransfersPageTests extends UITestBase {
     @DataProvider
     public Iterator<Object[]> OpeningABankTransfersWithStateErrorData(){
         List<Object[]> list = new ArrayList<Object[]>();
-        list.add(new Object[] {"03.03.2019", "11.08.2022", "Error", "OpeningABankTransfersWithStateError.txt"});
-        list.add(new Object[] {"03.03.2019", "11.08.2022", "To do", "OpeningABankTransfersWithStateToDo.txt"});
-        list.add(new Object[] {"03.03.2019", "11.08.2022", "Processing", "OpeningABankTransfersWithStateProcessing.txt"});
+        list.add(new Object[] {"03.03.2019", "11.08.2022", "Error", "openingABankTransfersWithStateError.txt"});
+        list.add(new Object[] {"03.03.2019", "11.08.2022", "To do", "openingABankTransfersWithStateToDo.txt"});
+        list.add(new Object[] {"03.03.2019", "11.08.2022", "Processing", "openingABankTransfersWithStateProcessing.txt"});
+        list.add(new Object[] {"03.03.2019", "11.08.2022", "Done", "openingABankTransfersWithStateDone.txt"});
         return list.iterator();
     }
 }
