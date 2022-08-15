@@ -9,20 +9,15 @@ import static io.restassured.RestAssured.*;
 
 public class DuplicateLimitPlanTest extends TestBase {
     String cookie = null;
-    int planId = 2;
-    int tranGroupId = 100;
-    int typeId = 105;
-    int baseCurrencyId = 975;
-    String limitLevel = "EDD";
-
-    String duplicateId = "123";
-    String duplicateName = "Pavel_QA_Auto";
+    String oldLimitPlanId = "1";
+    String newLimitPlanId = "123";
+    String newLimitPlanName = "Pavel_QA_Auto";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
         baseURI = app.BOURL;
         basePath = "BOServices";
-        app.getDbHelper().deleteLimitPlanFromDB(duplicateId, duplicateName);
+        app.getDbHelper().deleteLimitPlanFromDB(newLimitPlanId, newLimitPlanName);
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin2, app.CBOuserPass2, app.CBOusername2);
     }
 
@@ -31,9 +26,9 @@ public class DuplicateLimitPlanTest extends TestBase {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .queryParam("oldLimitPlanId", "1")
-                .queryParam("newLimitPlanId", "123")
-                .queryParam("limitPlanName", "Pavel_QA_Auto")
+                .queryParam("oldLimitPlanId", oldLimitPlanId)
+                .queryParam("newLimitPlanId", newLimitPlanId)
+                .queryParam("newLimitPlanName", newLimitPlanName)
                 .when()
                 .post( "/v1/limit/plan/duplicate")
                 .then().log().all()
