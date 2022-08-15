@@ -771,6 +771,12 @@
         </classes>
     </test>
 
+    <test name="OpeningTicketPageTest">
+        <classes>
+            <class name="tests.uiTests.bo.boTicket.OpeningTicketPageTest"/>
+        </classes>
+    </test>
+
     <!--EmailsVerification-->
 
 <!--    <test name="EmailsVerificationBankTransferTests">-->

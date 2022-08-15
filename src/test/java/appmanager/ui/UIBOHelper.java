@@ -58,6 +58,11 @@ public class UIBOHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Card')]"));
     }
 
+    public void gotoTakeTicket() {
+        click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+        waitFor(By.id("takeTicketContent"));
+    }
+
     public void gotoOperations() {
         click(By.cssSelector("div[ng-reflect-router-link='operations']"));
         //waitFor(By.xpath("//*[contains(text(), 'Add merchant')]"));
