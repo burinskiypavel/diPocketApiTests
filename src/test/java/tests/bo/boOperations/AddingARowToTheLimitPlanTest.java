@@ -22,38 +22,11 @@ public class AddingARowToTheLimitPlanTest extends TestBase {
 
     @Test(priority = 2)
     public void test_BOServices_v1_limit_addLimitValues(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .body("{\n" +
-                        "  \"planId\" : "+planId+",\n" +
-                        "  \"tranGroupId\" : "+tranGroupId+",\n" +
-                        "  \"typeId\" : "+typeId+",\n" +
-                        "  \"baseCurrencyId\" : "+baseCurrencyId+",\n" +
-                        "  \"limitLevel\" : \""+limitLevel+"\",\n" +
-                        "  \"limitAmount\" : 10000\n" +
-                        "}")
-                .when()
-                .post("/v1/limit/addLimitValues")
-                .then().log().all()
-                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_limit_addLimitValues(cookie, planId, tranGroupId, typeId, baseCurrencyId, limitLevel, "10000");
     }
 
     @Test(priority = 3)
     public void test_BOServices_v1_limit_delete(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .body("{\n" +
-                        "  \"planId\" : "+planId+",\n" +
-                        "  \"tranGroupId\" : "+tranGroupId+",\n" +
-                        "  \"typeId\" : "+typeId+",\n" +
-                        "  \"baseCurrencyId\" : "+baseCurrencyId+",\n" +
-                        "  \"limitLevel\" : \""+limitLevel+"\"\n" +
-                        "}")
-                .when()
-                .post("/v1/limit/delete")
-                .then().log().all()
-                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_limit_delete(cookie, planId, tranGroupId, typeId, baseCurrencyId, limitLevel);
     }
 }

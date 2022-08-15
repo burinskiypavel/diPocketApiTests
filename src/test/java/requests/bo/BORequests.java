@@ -538,4 +538,39 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void boServices_v1_limit_addLimitValues(String cookie, int planId, int tranGroupId, int typeId, int baseCurrencyId, String limitLevel, final String limitAmount){
+        given()
+                .spec(requestSpecBO)
+                .cookie(cookie)
+                .body("{\n" +
+                        "  \"planId\" : "+planId+",\n" +
+                        "  \"tranGroupId\" : "+tranGroupId+",\n" +
+                        "  \"typeId\" : "+typeId+",\n" +
+                        "  \"baseCurrencyId\" : "+baseCurrencyId+",\n" +
+                        "  \"limitLevel\" : \""+limitLevel+"\",\n" +
+                        "  \"limitAmount\" : " + limitAmount + "\n" +
+                        "}")
+                .when()
+                .post("/v1/limit/addLimitValues")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    public void boServices_v1_limit_delete(String cookie, int planId, int tranGroupId, int typeId, int baseCurrencyId, String limitLevel){
+        given()
+                .spec(requestSpecBO)
+                .cookie(cookie)
+                .body("{\n" +
+                        "  \"planId\" : "+planId+",\n" +
+                        "  \"tranGroupId\" : "+tranGroupId+",\n" +
+                        "  \"typeId\" : "+typeId+",\n" +
+                        "  \"baseCurrencyId\" : "+baseCurrencyId+",\n" +
+                        "  \"limitLevel\" : \""+limitLevel+"\"\n" +
+                        "}")
+                .when()
+                .post("/v1/limit/delete")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
