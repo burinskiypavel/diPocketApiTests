@@ -585,4 +585,27 @@ public class BORequests {
          .statusCode(200);
          return res;
     }
+
+    public void boServices_v1_limit_plan_create(String cookie, int limitPlanId, String limitPlanName){
+        given()
+                .spec(requestSpecBO)
+                .cookie(cookie)
+                .queryParam("limitPlanId", limitPlanId)
+                .queryParam("limitPlanName", limitPlanName)
+                .when()
+                .post( "/v1/limit/plan/create")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    public void boServices_v1_limit_plan_delete(String cookie, int limitPlanId){
+        given()
+                .spec(requestSpecBO)
+                .cookie(cookie)
+                .queryParam("limitPlanId", limitPlanId)
+                .when()
+                .post( "/v1/limit/plan/delete")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

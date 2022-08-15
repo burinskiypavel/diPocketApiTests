@@ -30,15 +30,7 @@ public class DeleteLimitPlanTest extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_limit_plan_create(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .queryParam("limitPlanId", limitPlanId)
-                .queryParam("limitPlanName", limitPlanName)
-                .when()
-                .post( "/v1/limit/plan/create")
-                .then().log().all()
-                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_limit_plan_create(cookie, limitPlanId, limitPlanName);
     }
 
     @Test(priority = 4)
@@ -51,14 +43,7 @@ public class DeleteLimitPlanTest extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_limit_plan_delete(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .queryParam("limitPlanId", limitPlanId)
-                .when()
-                .post( "/v1/limit/plan/delete")
-                .then().log().all()
-                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_limit_plan_delete(cookie, limitPlanId);
     }
 
     @Test(priority = 2)
