@@ -1,6 +1,7 @@
 package tests.bo.boOperations;
 
 import base.TestBase;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -66,15 +67,9 @@ public class DuplicateTariffPlanTest extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_limit_plans(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .when()
-                .get( "/v1/limit/plans")
-                .then().log().all()
-                .statusCode(200)
-                .body("id", hasItems(1, 3, 7, 8, 70, 11122233),
-                        "name", hasItems("Peak", "Sodexo", "Getsby", "UpandGo", "Duplicate limit plan"));
+        Response res = app.getBoRequestsHelper().boServices_v1_limit_plans(cookie);
+        res.then().body("id", hasItems(1, 3, 7, 8, 70),
+                "name", hasItems("Peak", "Sodexo", "Getsby", "UpandGo"));
     }
 
     @Test(priority = 6)

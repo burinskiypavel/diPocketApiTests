@@ -7,6 +7,7 @@ import model.bo.boClient.Supervisor_reqList;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItems;
 import static org.testng.Assert.assertFalse;
 
 public class BORequests {
@@ -572,5 +573,16 @@ public class BORequests {
                 .post("/v1/limit/delete")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    public Response boServices_v1_limit_plans(String cookie){
+        Response res = given()
+                .spec(requestSpecBO)
+                .cookie(cookie)
+                .when()
+                .get( "/v1/limit/plans");
+         res.then().log().all()
+         .statusCode(200);
+         return res;
     }
 }
