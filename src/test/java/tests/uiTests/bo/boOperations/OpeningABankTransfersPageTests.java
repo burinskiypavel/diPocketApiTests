@@ -68,40 +68,6 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         app.getUiboHelper().searchForPeriod("07.05.2012", "11.08.2022");
         app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
 
-
-        WebElement table = app.getUiboHelper().findElement(By.cssSelector("div.transactions table"));
-        List<WebElement> webElements = table.findElements(By.xpath("//div[@class='transactions'] //table //tr //td[1]"));
-        List<String> tableIdText = new ArrayList<>();
-
-        for(WebElement element : webElements){
-            System.out.println(element.getText());
-            tableIdText.add(element.getText());
-        }
-
-        for (int i = 0; i< tableIdText.size(); i++){
-            String currentId = tableIdText.get(i);
-            System.out.println("count: " + i);
-            Thread.sleep(1500);
-
-            app.getUiboHelper().click(By.xpath("//td[@ng-reflect-text='"+currentId+"']"));
-            Thread.sleep(1500);
-            app.getUiboHelper().click(By.xpath("//p-button[@label='Check operation']"));
-
-            Thread.sleep(1000);
-            if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Revert']"))){
-                System.out.println("Curent id with Revert button " + i +"_ " +  currentId);
-                app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Revert']"));
-                app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='errorMessage'] //input"), "test");
-                Thread.sleep(1500);
-                app.getUiboHelper().click(By.xpath("//app-revert-modal //p-button[@ng-reflect-label='Revert']"));
-                app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Message')]"));
-
-                break;
-            }
-            else {
-                continue;
-            }
-
-        }
+        app.getUiboOperationsHelper().verifyOperationRevertForTheBankTransfersWithStateError();
     }
 }
