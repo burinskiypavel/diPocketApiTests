@@ -70,4 +70,15 @@ public class OpeningABankTransfersPageTests extends UITestBase {
 
         app.getUiboOperationsHelper().verifyOperationRevertForTheBankTransfersWithStateError();
     }
+
+    @Test(enabled = false)
+    public void testOperationSendAgainForTheBankTransfersWithStateError() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
+        app.getUiboHelper().gotoOperations();
+        app.getUiboHelper().gotoBankTransfersTab();
+        app.getUiboHelper().searchForPeriod("07.05.2012", "11.08.2022");
+        app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
+
+        app.getUiboOperationsHelper().verifyOperationSendAgaintForTheBankTransfersWithStateError();
+    }
 }
