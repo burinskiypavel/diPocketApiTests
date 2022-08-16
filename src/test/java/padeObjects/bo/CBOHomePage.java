@@ -5,22 +5,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class BOHomePage {
+public class CBOHomePage {
     WebDriver driver;
 
-    public BOHomePage(WebDriver driver){
+    public CBOHomePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = "div[ng-reflect-router-link='take_ticket']")
-    WebElement take_ticket;
+    @FindBy(xpath = "//p[contains(text(), 'BO Users')]")
+    WebElement boUsers;
 
     @FindBy(css = "div[ng-reflect-router-link='search']")
     WebElement search;
 
-    public void gotoTakeTicket(){
-        take_ticket.click();
+    public void gotoBOUsers(){
+        boUsers.click();
     }
 
     public void gotoSearch(){

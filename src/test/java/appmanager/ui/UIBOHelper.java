@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import padeObjects.bo.CBOHomePage;
 
 import java.util.List;
 
@@ -49,7 +50,9 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void gotoBOUsersPage() {
-        click(By.xpath("//p[contains(text(), 'BO Users')]"));
+        //click(By.xpath("//p[contains(text(), 'BO Users')]"));
+        CBOHomePage cboHomePage = new CBOHomePage(driver);
+        cboHomePage.gotoBOUsers();
         waitFor(By.xpath("//span[contains(text(), 'Active users')]"));
     }
 
