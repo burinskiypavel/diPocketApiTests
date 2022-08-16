@@ -64,7 +64,7 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoOperations();
         app.getUiboHelper().gotoBankTransfersTab();
-        //app.getUiboHelper().searchForPeriod("", "");
+        app.getUiboHelper().searchForPeriod("07.05.2012", "11.08.2022");
         //app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), stateName);
         //app.getUiboHelper().selectsTransfer(By.xpath("//td[@ng-reflect-text='"+stateName+"']"));
     }
