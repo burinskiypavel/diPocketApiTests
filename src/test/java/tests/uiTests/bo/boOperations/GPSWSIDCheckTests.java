@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class GPSWSIDCheckTests extends UITestBase {
 
-    @Test
+    @Test//bug DEV-3246
     public void testGPSWSIDCheck() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
         app.getUiboOperationsHelper().gotoOperations();
