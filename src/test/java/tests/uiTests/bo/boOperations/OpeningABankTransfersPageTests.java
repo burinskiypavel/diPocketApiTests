@@ -2,7 +2,7 @@ package tests.uiTests.bo.boOperations;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -41,7 +41,7 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoBankTransfersTab();
         app.getUiboOperationsHelper().searchForPeriod(from, till);
-        app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), stateName);
+        app.getUiboOperationsHelper().setState(stateName);
         app.getUiboOperationsHelper().selectsTransfer(By.xpath("//td[@ng-reflect-text='"+stateName+"']"));
 
         List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-transactions-details //table //tbody //tr"));
@@ -66,7 +66,7 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoBankTransfersTab();
         app.getUiboOperationsHelper().searchForPeriod("07.05.2012", "11.08.2022");
-        app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
+        app.getUiboOperationsHelper().setState("Error");
 
         app.getUiboOperationsHelper().verifyOperationRevertForTheBankTransfersWithStateError();
     }
@@ -77,7 +77,7 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoBankTransfersTab();
         app.getUiboOperationsHelper().searchForPeriod("07.05.2012", "11.08.2022");
-        app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
+        app.getUiboOperationsHelper().setState("Error");
 
         app.getUiboOperationsHelper().verifyOperationSendAgaintForTheBankTransfersWithStateError();
     }
@@ -88,10 +88,11 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoBankTransfersTab();
         app.getUiboOperationsHelper().searchForPeriod("07.05.2012", "11.08.2022");
-        app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
-
+        app.getUiboOperationsHelper().setState("Error");
         app.getUiboOperationsHelper().selectsTransfer(By.xpath("//td[@ng-reflect-text='Error']"));
-
         app.getUiboOperationsHelper().pressCheckOperation();
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//p-button[@label='Check operation']"));
+
+        app.getUiboHelper().verifyAmountOfButtonsOnThePage(By.cssSelector("div.action-buttons p-button"), 0);
     }
 }

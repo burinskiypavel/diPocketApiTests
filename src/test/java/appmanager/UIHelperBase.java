@@ -482,9 +482,12 @@ public class UIHelperBase {
         return elements;
     }
 
-    public void verifyAmountOfTheSameElements(By locator, int amount) {
-        List<WebElement> elements = findElements(locator);
-        int actualElementsSize = elements.size();
-        Assert.assertEquals(actualElementsSize, amount);
+    public void verifyAmountOfTheSameElements(By locator, int expectedAmount) {
+        int acutalAmount = findElements(locator).size();
+        Assert.assertEquals(acutalAmount, expectedAmount);
+    }
+
+    public void verifyAmountOfButtonsOnThePage(By locator, int expectedAmount) {
+        verifyAmountOfTheSameElements(locator, expectedAmount);
     }
 }

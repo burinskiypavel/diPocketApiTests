@@ -279,4 +279,8 @@ public class UIBOOperationsHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
         waitFor(By.xpath("//div[contains(text(), 'Tariff plan renamed successfully')]"));
     }
+
+    public void setState(String error) throws InterruptedException {
+        selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), error);
+    }
 }
