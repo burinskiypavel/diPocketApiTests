@@ -121,6 +121,10 @@ public class UIBOOperationsHelper extends UIHelperBase {
         click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Bank transfers')]"));
     }
 
+    public void gotoGPSWSIDCheckTab() {
+        click(By.xpath("//a[@role='tab'] //span[contains(text(), 'GPS WSID check')]"));
+    }
+
     public void searchForPeriod(String from, String till) throws InterruptedException {
         selectFromDropDown(By.xpath("//app-search-by-period //p-dropdown[@optionlabel='value']"), "For period");
         type(By.xpath("//p-calendar[@placeholder='From'] //input"), from);
