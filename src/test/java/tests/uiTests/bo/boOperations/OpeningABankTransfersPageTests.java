@@ -19,8 +19,8 @@ public class OpeningABankTransfersPageTests extends UITestBase {
     @Test
     public void testOpeningABankTransfersPage() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoBankTransfersTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoBankTransfersTab();
 
         softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//table //th[contains(text(), 'Tran id')]",
                 "//table //th[contains(text(), 'State')]", "//table //th[contains(text(), 'Payer id')]",
@@ -38,11 +38,11 @@ public class OpeningABankTransfersPageTests extends UITestBase {
     @Test(dataProvider = "OpeningABankTransfersWithStateData")
     public void testOpeningABankTransfersWithState(String from, String till, String stateName, String file) throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoBankTransfersTab();
-        app.getUiboHelper().searchForPeriod(from, till);
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoBankTransfersTab();
+        app.getUiboOperationsHelper().searchForPeriod(from, till);
         app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), stateName);
-        app.getUiboHelper().selectsTransfer(By.xpath("//td[@ng-reflect-text='"+stateName+"']"));
+        app.getUiboOperationsHelper().selectsTransfer(By.xpath("//td[@ng-reflect-text='"+stateName+"']"));
 
         List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-transactions-details //table //tbody //tr"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boOperations/"+file+"");
@@ -63,9 +63,9 @@ public class OpeningABankTransfersPageTests extends UITestBase {
     @Test
     public void testOperationRevertForTheBankTransfersWithStateError() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoBankTransfersTab();
-        app.getUiboHelper().searchForPeriod("07.05.2012", "11.08.2022");
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoBankTransfersTab();
+        app.getUiboOperationsHelper().searchForPeriod("07.05.2012", "11.08.2022");
         app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
 
         app.getUiboOperationsHelper().verifyOperationRevertForTheBankTransfersWithStateError();
@@ -74,9 +74,9 @@ public class OpeningABankTransfersPageTests extends UITestBase {
     @Test(enabled = false)
     public void testOperationSendAgainForTheBankTransfersWithStateError() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoBankTransfersTab();
-        app.getUiboHelper().searchForPeriod("07.05.2012", "11.08.2022");
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoBankTransfersTab();
+        app.getUiboOperationsHelper().searchForPeriod("07.05.2012", "11.08.2022");
         app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
 
         app.getUiboOperationsHelper().verifyOperationSendAgaintForTheBankTransfersWithStateError();
@@ -85,12 +85,12 @@ public class OpeningABankTransfersPageTests extends UITestBase {
     @Test
     public void testNoNewOperationButtonInBankTransfer() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoBankTransfersTab();
-        app.getUiboHelper().searchForPeriod("07.05.2012", "11.08.2022");
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoBankTransfersTab();
+        app.getUiboOperationsHelper().searchForPeriod("07.05.2012", "11.08.2022");
         app.getUiboHelper().selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), "Error");
 
-        app.getUiboHelper().selectsTransfer(By.xpath("//td[@ng-reflect-text='Error']"));
+        app.getUiboOperationsHelper().selectsTransfer(By.xpath("//td[@ng-reflect-text='Error']"));
 
         app.getUiboOperationsHelper().pressCheckOperation();
     }

@@ -14,9 +14,9 @@ public class DuplicateTariffPlanTests extends UITestBase {
     public void testDuplicateTariffPlan() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getDbHelper().deleteFeeTariffPlanDB(id, name);
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().duplicateTarifPlan(id, name);
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
+        app.getUiboOperationsHelper().duplicateTarifPlan(id, name);
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff plan duplicated successfully')]"));
     }
@@ -24,8 +24,8 @@ public class DuplicateTariffPlanTests extends UITestBase {
     @Test
     public void testTheUserChangedHisMindAboutDuplicatingTheTariff() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoFeeTariffPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Duplicate tariff plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
 

@@ -11,8 +11,8 @@ public class SMSCounterResetTest extends UITestBase {
     @Test
     public void testSMSCounterReset() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoResetSMSCounterTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoResetSMSCounterTab();
         app.getUiboHelper().click(By.xpath("//button[@label='Reset']"));
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'SMS counter was successfully reset')]"));

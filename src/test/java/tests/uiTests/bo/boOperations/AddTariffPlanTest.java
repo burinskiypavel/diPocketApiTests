@@ -14,9 +14,9 @@ public class AddTariffPlanTest extends UITestBase {
     public void testAddTariffPlan() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getDbHelper().deleteFeeTariffPlanDB(id, name);
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().addTarifPlan(id, name);
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
+        app.getUiboOperationsHelper().addTarifPlan(id, name);
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff plan added successfully')]"));
     }
@@ -24,8 +24,8 @@ public class AddTariffPlanTest extends UITestBase {
     @Test
     public void testTheUserChangedHisMindAboutAddRariffPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoFeeTariffPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Add tariff plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));
 

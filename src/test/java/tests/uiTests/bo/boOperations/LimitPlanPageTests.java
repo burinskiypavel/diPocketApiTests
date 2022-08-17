@@ -21,8 +21,8 @@ public class LimitPlanPageTests extends UITestBase {
     @Test
     public void testOpeningALimitPlanPage() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
 
         softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//h5[contains(text(), 'Limit plan')]",
                 "//h5[contains(text(), 'Limit level')]", "//h5[contains(text(), 'Base currency')]"}), "Text Verifications");
@@ -38,10 +38,10 @@ public class LimitPlanPageTests extends UITestBase {
     @Test
     public void testOpeningALimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
 
-        app.getUiboHelper().selectLimitPlan("Getsby");
+        app.getUiboOperationsHelper().selectLimitPlan("Getsby");
         app.getUiboHelper().selectFromDropDown(By.xpath("//div[@class='dropdowns'] //p-dropdown[@optionlabel='label']"), "FDD");
         app.getUiboHelper().selectFromDropDown(By.xpath("//div[@class='dropdowns'] //p-dropdown[@optionlabel='code']"), "EUR");
         Thread.sleep(1000);
@@ -54,18 +54,18 @@ public class LimitPlanPageTests extends UITestBase {
     @Test
     public void testAddingARowToTheLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
-        app.getUiboHelper().addRowInLimitPlan("100", "Face to Face (Out)", "Max Daily");
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().addRowInLimitPlan("100", "Face to Face (Out)", "Max Daily");
 
-        app.getUiboHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
+        app.getUiboOperationsHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
     }
 
     @Test
     public void testTheUserChangedHisMindAboutAddingARowToTheLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
         app.getUiboHelper().click(By.xpath("//app-limit-plan-tab //p-button[@ng-reflect-label='+ Add row']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));
 
@@ -75,28 +75,28 @@ public class LimitPlanPageTests extends UITestBase {
     @Test
     public void testEditRowInLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
 
-        app.getUiboHelper().selectLimitPlan("Unlimited");
+        app.getUiboOperationsHelper().selectLimitPlan("Unlimited");
 
-        app.getUiboHelper().addRowInLimitPlan("150", "Face to Face (Out)", "Max Daily");
+        app.getUiboOperationsHelper().addRowInLimitPlan("150", "Face to Face (Out)", "Max Daily");
 
-        app.getUiboHelper().pressPencilEditButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-pencil']"));
+        app.getUiboOperationsHelper().pressPencilEditButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-pencil']"));
 
-        app.getUiboHelper().editLimitPlanRow("All transactions (In)", "Max Monthly", "12");
+        app.getUiboOperationsHelper().editLimitPlanRow("All transactions (In)", "Max Monthly", "12");
 
-        app.getUiboHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
+        app.getUiboOperationsHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
     }
 
     @Test
     public void testTheUserChangedHisMindAboutEditRowInLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
 
-        app.getUiboHelper().pressPencilEditButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-pencil']"));
-        app.getUiboHelper().pressXCancelButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-times']"));
+        app.getUiboOperationsHelper().pressPencilEditButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-pencil']"));
+        app.getUiboOperationsHelper().pressXCancelButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-times']"));
 
         app.getUiboHelper().waitFor(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"));
     }
@@ -104,22 +104,22 @@ public class LimitPlanPageTests extends UITestBase {
     @Test
     public void testDeleteRowInLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
-        app.getUiboHelper().selectLimitPlan("Unlimited");
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().selectLimitPlan("Unlimited");
 
-        app.getUiboHelper().addRowInLimitPlan("170", "Face to Face (Out)", "Max Daily");
+        app.getUiboOperationsHelper().addRowInLimitPlan("170", "Face to Face (Out)", "Max Daily");
 
-        app.getUiboHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
+        app.getUiboOperationsHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
     }
 
     @Test
     public void testDuplicateLimitPlan() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getDbHelper().deleteLimitPlanFromDB(duplicateId, duplicateName);
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
-        app.getUiboHelper().duplicateLimitPlan(duplicateId, duplicateName);
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().duplicateLimitPlan(duplicateId, duplicateName);
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit duplicated successfully')]"));
     }
@@ -127,8 +127,8 @@ public class LimitPlanPageTests extends UITestBase {
     @Test
     public void testTheUserChangedHisMindAboutDuplicateLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Duplicate limit plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
 
@@ -141,10 +141,10 @@ public class LimitPlanPageTests extends UITestBase {
         String limitPlanName = app.getDbHelper().getLimitPlanFromDB("1");
 
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
-        app.getUiboHelper().selectLimitPlan(limitPlanName);
-        app.getUiboHelper().renameLimitPlan("Pavel_rename_AUTO_" + randomNumber);
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().selectLimitPlan(limitPlanName);
+        app.getUiboOperationsHelper().renameLimitPlan("Pavel_rename_AUTO_" + randomNumber);
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit renamed successfully')]"));
     }
@@ -152,8 +152,8 @@ public class LimitPlanPageTests extends UITestBase {
     @Test
     public void testTheUserChangedHisMindAboutRenameLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Rename limit plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
 
@@ -164,13 +164,13 @@ public class LimitPlanPageTests extends UITestBase {
     public void testDeleteLimitPlan() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getDbHelper().deleteLimitPlanFromDB(limitPlanIdForDeletion, limitPlanNameForDeletion);
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
 
-        app.getUiboHelper().addLimitPlan(limitPlanIdForDeletion, limitPlanNameForDeletion);
+        app.getUiboOperationsHelper().addLimitPlan(limitPlanIdForDeletion, limitPlanNameForDeletion);
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Tariff limit added successfully')]"));
-        app.getUiboHelper().selectLimitPlan(limitPlanNameForDeletion);
-        app.getUiboHelper().deleteLimitPlan();
+        app.getUiboOperationsHelper().selectLimitPlan(limitPlanNameForDeletion);
+        app.getUiboOperationsHelper().deleteLimitPlan();
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit deleted successfully')]"));
     }
@@ -178,8 +178,8 @@ public class LimitPlanPageTests extends UITestBase {
     @Test
     public void testTheUserChangedHisMindAboutDeleteLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Delete limit plan']"));
 
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
@@ -190,18 +190,18 @@ public class LimitPlanPageTests extends UITestBase {
     public void testAddLimitPlan() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getDbHelper().deleteLimitPlanFromDB(limitPlanIdForDeletion, limitPlanNameForDeletion);
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
 
-        app.getUiboHelper().addLimitPlan(limitPlanIdForDeletion, limitPlanNameForDeletion);
+        app.getUiboOperationsHelper().addLimitPlan(limitPlanIdForDeletion, limitPlanNameForDeletion);
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Tariff limit added successfully')]"));
     }
 
     @Test
     public void testTheUserChangedHisMindAboutAddLimitPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoLimitPlanTab();
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Add limit plan']"));
 
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;

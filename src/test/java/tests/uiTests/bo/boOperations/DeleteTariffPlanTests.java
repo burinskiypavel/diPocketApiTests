@@ -14,12 +14,12 @@ public class DeleteTariffPlanTests extends UITestBase {
     public void testDeleteTariffPlan() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getDbHelper().deleteFeeTariffPlanDB(id, name);
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().addTarifPlan(id, name);
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
+        app.getUiboOperationsHelper().addTarifPlan(id, name);
         app.getUiboHelper().selectFromDropDown("name", name);
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Tariff plan added successfully')]"));
-        app.getUiboHelper().deleteTarifPlan(name);
+        app.getUiboOperationsHelper().deleteTarifPlan(name);
 
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Tariff plan deleted successfully')]"));
     }
@@ -27,8 +27,8 @@ public class DeleteTariffPlanTests extends UITestBase {
     @Test
     public void testTheUserChangedHisMindAboutDeleteTariffPlan() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
-        app.getUiboHelper().gotoOperations();
-        app.getUiboHelper().gotoFeeTariffPlanTab();
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
         app.getUiboHelper().selectFromDropDown("name", "QA_autotest_name_1");
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Delete tariff plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));
