@@ -71,7 +71,7 @@ public class OpeningABankTransfersPageTests extends UITestBase {
         app.getUiboOperationsHelper().verifyOperationRevertForTheBankTransfersWithStateError();
     }
 
-    @Test(enabled = false)
+    @Test(enabled = false)//DEV-3243
     public void testOperationSendAgainForTheBankTransfersWithStateError() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
