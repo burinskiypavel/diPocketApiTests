@@ -4,6 +4,7 @@ import appmanager.UIHelperBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import padeObjects.bo.boOperations.BOOperationsBankTransfersPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,11 @@ public class UIBOOperationsHelper extends UIHelperBase {
 
     public UIBOOperationsHelper(WebDriver driver) {
         super(driver);
+    }
+
+    public void pressCheckOperation(){
+        BOOperationsBankTransfersPage boOperationsBankTransfersPage = new BOOperationsBankTransfersPage(driver);
+        boOperationsBankTransfersPage.pressCheckOperation();
     }
 
     public void verifyOperationRevertForTheBankTransfersWithStateError() throws InterruptedException {
