@@ -109,6 +109,10 @@ public class UIBOOperationsHelper extends UIHelperBase {
         click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Fee tariff plan')]"));
     }
 
+    public void gotoCreatCorporateClientTab() {
+        click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Create corporate client')]"));
+    }
+
     public void gotoLimitPlanTab() {
         click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Limit plan')]"));
     }
