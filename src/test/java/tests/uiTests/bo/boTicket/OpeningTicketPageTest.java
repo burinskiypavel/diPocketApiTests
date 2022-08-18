@@ -36,29 +36,54 @@ public class OpeningTicketPageTest extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
+            app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='gender']"), "M");
+            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdTypeId']"), "Passport");
+            app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='photoIdNo'] //input"), "12345678");
+            app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='identifyCode'] //input"), "12345678");
+            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdCountryId']"), "Poland");
 
-        app.getUiboTicketHelper().setGender("M");
+            Thread.sleep(1500);
+            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Save']"));
 
+            app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
 
-        app.getUiboTicketHelper().setDocumentType("Passport");
-        app.getUiboTicketHelper().setDocSerialNumber("12345678");
-        app.getUiboTicketHelper().setIDCode("12345678");
-        app.getUiboTicketHelper().setDocCountryOfIssue("Poland");
-
-        Thread.sleep(1500);
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Save']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
-
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+            app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
 
 
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
+            app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
 
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
+            app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
 
-        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
+            assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
+        }
+
+
+        //not ssd
+
+//        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+//        app.getUiboTicketHelper().setGender("M");
+//
+//
+//        app.getUiboTicketHelper().setDocumentType("Passport");
+//        app.getUiboTicketHelper().setDocSerialNumber("12345678");
+//        app.getUiboTicketHelper().setIDCode("12345678");
+//        app.getUiboTicketHelper().setDocCountryOfIssue("Poland");
+//
+//        Thread.sleep(1500);
+//        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+//
+//        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
+//
+//        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+//
+//
+//        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
+//
+//        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
+//
+//        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
     }
 
     @Test
