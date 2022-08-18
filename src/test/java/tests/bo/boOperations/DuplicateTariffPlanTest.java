@@ -362,13 +362,13 @@ public class DuplicateTariffPlanTest extends TestBase {
                         "today4", hasItems(notNullValue()),
                         "today5", hasItems(notNullValue()),
                         "today6", hasItems(notNullValue()),
-                        "amount_T0", hasItems(2246),
-                        "amount_T1", hasItems(2246),
-                        "amount_T2", hasItems(2246),
-                        "amount_T3", hasItems(2246),
-                        "amount_T4", hasItems(2246),
-                        "amount_T5", hasItems(2246),
-                        "amount_T6", hasItems(2246));
+                        "amount_T0", hasItems(notNullValue()),
+                        "amount_T1", hasItems(notNullValue()),
+                        "amount_T2", hasItems(notNullValue()),
+                        "amount_T3", hasItems(notNullValue()),
+                        "amount_T4", hasItems(notNullValue()),
+                        "amount_T5", hasItems(notNullValue()),
+                        "amount_T6", hasItems(notNullValue()));
     }
 
     @Test(priority = 26)
