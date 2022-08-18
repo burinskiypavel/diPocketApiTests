@@ -437,7 +437,7 @@ public class DiscontuRegistrationTest extends TestBase {
 
     @Test(priority = 18)
     public void testEmailLink() throws InterruptedException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistrationDiscontu(HelperBase.prop.getProperty("mobile.registration.email"), "password1<", "oangitprvdsqwrgh");
         System.out.println("link_link " + link);
         given()
                 .when()
