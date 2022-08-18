@@ -144,7 +144,7 @@ public class OpeningTicketPageTest extends UITestBase {
 
         //app-select-async[@ng-reflect-name='gender'] //span[contains(text(), 'All')]
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//p-dropdown[contains(@id, 'select_gender')] //span[contains(text(), 'All')]"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//app-select-async[@ng-reflect-name='gender'] //span[contains(text(), 'All')]"))){
             app.getUiboHelper().click(By.cssSelector("div.p-dialog-header-icons"));
         }
 
