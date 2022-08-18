@@ -18,12 +18,24 @@ public class OpeningTicketPageTest extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        app.getUiboHelper().waitFor(By.xpath("//app-client-details-info"));
-        app.getUiboHelper().waitFor(By.id("takeTicketContent"));
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
+            app.getUiboHelper().waitFor(By.xpath("//app-client-details-info"));
+            app.getUiboHelper().waitFor(By.id("takeTicketContent"));
 
-        assertTrue(app.getUiboHelper().areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Approve']", "//app-button[@ng-reflect-label='Edit']",
-                "//app-button[@ng-reflect-label='Ask for']", "//app-button[@ng-reflect-label='Ask new selfie']",
-                "//app-button[@ng-reflect-label='Ban']", "//app-button[@ng-reflect-label='Postpone']", "//app-button[@ng-reflect-label='Reassign']"}), "button bo tickets");
+            assertTrue(app.getUiboHelper().areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Approve']", "//app-button[@ng-reflect-label='Edit']",
+                    "//app-button[@ng-reflect-label='Ask for']", "//app-button[@ng-reflect-label='Ask new selfie']",
+                    "//app-button[@ng-reflect-label='Ban']", "//app-button[@ng-reflect-label='Postpone']", "//app-button[@ng-reflect-label='Reassign']"}), "button bo tickets");
+        }
+
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+            app.getUiboHelper().waitFor(By.xpath("//app-client-details-info"));
+            app.getUiboHelper().waitFor(By.id("takeTicketContent"));
+
+            assertTrue(app.getUiboHelper().areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Approve']", "//app-button[@ng-reflect-label='Edit']",
+                    "//app-button[@ng-reflect-label='Ask for']", "//app-button[@ng-reflect-label='Ask new selfie']",
+                    "//app-button[@ng-reflect-label='Ban']", "//app-button[@ng-reflect-label='Postpone']", "//app-button[@ng-reflect-label='Reassign']"}), "button bo tickets");
+
+        }
     }
 
     @Test
