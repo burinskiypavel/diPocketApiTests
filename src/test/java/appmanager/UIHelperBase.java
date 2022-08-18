@@ -459,6 +459,18 @@ public class UIHelperBase {
         }
     }
 
+    public void selectFromDropDown(WebElement element, String dropdownItem) throws InterruptedException {
+        element.click();
+        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        try{
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        }
+    }
+
     public void selectDropDownFromMultipleElements(By locator, int index, final String item) throws InterruptedException {
         List<WebElement> elements = driver.findElements(locator);
         WebElement element = elements.get(index);

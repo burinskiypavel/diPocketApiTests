@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import padeObjects.bo.boOperations.BOOperationsBankTransfersPage;
+import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientFirstPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +110,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
         click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Fee tariff plan')]"));
     }
 
-    public void gotoCreatCorporateClientTab() {
+    public void gotoCreateCorporateClientTab() {
         click(By.xpath("//a[@role='tab'] //span[contains(text(), 'Create corporate client')]"));
     }
 
@@ -290,5 +291,70 @@ public class UIBOOperationsHelper extends UIHelperBase {
 
     public void setState(String error) throws InterruptedException {
         selectFromDropDown(By.xpath("//p-columnfilter[@field='stateName']"), error);
+    }
+
+    public void setClientType(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.clientTypeDropdown, item);
+    }
+
+    public void setCompanyName(String text) {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        BOOperationsCreateCorporateClientFirstPage.setCompanyName(text);
+    }
+
+    public void setIdentificationCode(String code) {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        BOOperationsCreateCorporateClientFirstPage.setIdentificationCode(code);
+    }
+
+    public void setSite(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.clientSiteDropDown, item);
+    }
+
+    public void setLanguage(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.languageDropDown, item);
+    }
+
+    public void setCurrency(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.currencyDropdown, item);
+    }
+
+    public void setDueDiligenceStatus(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.dueDiligenceStatusDropdown, item);
+    }
+
+    public void setFeeTariffPlan(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.feeTariffPlanDropdown, item);
+    }
+
+    public void setCardProgramByDefault(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.cardProgramByDefaultDropdown, item);
+    }
+
+    public void setOperationsLimitPlan(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.operLimitPlanDropdown, item);
+    }
+
+    public void setTransactionsLimitPlan(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.transactionsLimitPlanDropdown, item);
+    }
+
+    public void setCountryOfContract(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        selectFromDropDown(BOOperationsCreateCorporateClientFirstPage.countryOfContractDropdown, item);
+    }
+
+    public void pressNext() {
+        BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
+        BOOperationsCreateCorporateClientFirstPage.pressNext();
     }
 }
