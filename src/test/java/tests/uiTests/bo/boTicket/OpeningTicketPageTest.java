@@ -36,6 +36,11 @@ public class OpeningTicketPageTest extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
+
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
             app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
             app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='gender']"), "M");
@@ -92,6 +97,11 @@ public class OpeningTicketPageTest extends UITestBase {
         app.getUiboTicketHelper().gotoTakeTicket();
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
+
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().delayTicketForOneMinute();
             app.getUiboTicketHelper().gotoTakeTicket();
         }

@@ -20,11 +20,13 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.id("takeTicketContent"));
     }
 
-    public void delayTicketForOneMinute() {
+    public void delayTicketForOneMinute() throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Postpone']"));
         click(By.xpath("//button[@ng-reflect-icon='pi pi-calendar']"));
         click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
         pressKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        click(By.xpath("//app-postpone-modal //p-button[@ng-reflect-label='Postpone']"));
         waitFor(By.xpath("//div[contains(text(), 'Ticket was successfully delayed')]"));
     }
 
