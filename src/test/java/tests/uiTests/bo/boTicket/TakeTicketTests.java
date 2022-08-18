@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-public class OpeningTicketPageTest extends UITestBase {
+public class TakeTicketTests extends UITestBase {
 
     @Test
     public void testOpeningTicketPage() throws InterruptedException {
