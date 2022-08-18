@@ -38,17 +38,13 @@ public class OpeningTicketPageTest extends UITestBase {
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
 
-        app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='gender']"), "M");
+        app.getUiboTicketHelper().setGender("M");
 
 
-        app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdTypeId']"), "Passport");
-
-        app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='photoIdNo'] //input"), "12345678");
-
-        app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='identifyCode'] //input"), "12345678");
-
-        app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdCountryId']"), "Poland");
-
+        app.getUiboTicketHelper().setDocumentType("Passport");
+        app.getUiboTicketHelper().setDocSerialNumber("12345678");
+        app.getUiboTicketHelper().setIDCode("12345678");
+        app.getUiboTicketHelper().setDocCountryOfIssue("Poland");
 
         Thread.sleep(1500);
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Save']"));

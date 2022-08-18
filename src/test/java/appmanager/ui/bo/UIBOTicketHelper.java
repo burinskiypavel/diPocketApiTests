@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
+import padeObjects.bo.boTicket.TakeTicketEditDataPage;
 
 public class UIBOTicketHelper extends UIHelperBase {
 
@@ -25,5 +26,54 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
         pressKeys(Keys.ENTER);
         waitFor(By.xpath("//div[contains(text(), 'Ticket was successfully delayed')]"));
+    }
+
+    public void setGender(String dropdownItem) throws InterruptedException {
+        TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
+        takeTicketEditDataPage.clickOnGenderDropDown();
+        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        try{
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        }
+    }
+
+    public void setDocumentType(String dropdownItem) throws InterruptedException {
+        TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
+        takeTicketEditDataPage.clickOnDocumentTypeDropDown();
+        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        try{
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        }
+    }
+
+    public void setDocSerialNumber(String text){
+        TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
+        takeTicketEditDataPage.setDocSerialNumber(text);
+    }
+
+    public void setIDCode(String text){
+        TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
+        takeTicketEditDataPage.setIDCode(text);
+    }
+
+    public void setDocCountryOfIssue(String dropdownItem) throws InterruptedException {
+        TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
+        takeTicketEditDataPage.clickDocCountryOfIssueDropDown();
+        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        try{
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+
+            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        }
     }
 }
