@@ -13,6 +13,11 @@ public class OpeningTicketPageTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicket();
 
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
+
         app.getUiboHelper().waitFor(By.xpath("//app-client-details-info"));
         app.getUiboHelper().waitFor(By.id("takeTicketContent"));
 
@@ -25,6 +30,11 @@ public class OpeningTicketPageTest extends UITestBase {
     public void  testApproveSDDTicket() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicket();
+
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
 
@@ -59,6 +69,11 @@ public class OpeningTicketPageTest extends UITestBase {
     public void  testApproveSDDTicketWithoutGenderChoice() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicket();
+
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
 
 
 
