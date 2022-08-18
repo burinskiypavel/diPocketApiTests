@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class OpeningABankTransfersPageTests extends UITestBase {
+public class BankTransfersPageTests extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
 
     @Test

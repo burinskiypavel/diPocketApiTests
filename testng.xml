@@ -765,9 +765,9 @@
         </classes>
     </test>
 
-    <test name="OpeningABankTransfersPageTests">
+    <test name="BankTransfersPageTests">
         <classes>
-            <class name="tests.uiTests.bo.boOperations.OpeningABankTransfersPageTests"/>
+            <class name="tests.uiTests.bo.boOperations.BankTransfersPageTests"/>
         </classes>
     </test>
 
