@@ -49,6 +49,11 @@ public class UIHelperBase {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public void waitFor(WebElement element){
+        wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public void waitForSeveralItems(String mas []){
         wait = new WebDriverWait(driver, 25);
         for(int i = 0; i < mas.length; i++){
@@ -460,9 +465,11 @@ public class UIHelperBase {
     }
 
     public void selectFromDropDown(WebElement element, String dropdownItem) throws InterruptedException {
+        waitFor(element);
         element.click();
-        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        waitForElementToBeClickable(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
         try{
+            Thread.sleep(400);
             click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
 
         } catch (org.openqa.selenium.StaleElementReferenceException ex) {
