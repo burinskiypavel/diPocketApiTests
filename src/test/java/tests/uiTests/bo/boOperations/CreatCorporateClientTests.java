@@ -1,6 +1,7 @@
 package tests.uiTests.bo.boOperations;
 
 import base.UITestBase;
+import com.cs.dipocketback.base.data.Site;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -26,21 +27,7 @@ public class CreatCorporateClientTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoCreateCorporateClientTab();
-
-        app.getUiboOperationsHelper().setClientType("Corporate");
-        app.getUiboOperationsHelper().setCompanyName("Predict");
-        app.getUiboOperationsHelper().setIdentificationCode("12345678909");
-        app.getUiboOperationsHelper().setSite("DIPOCKET");
-        app.getUiboOperationsHelper().setLanguage("English");
-        app.getUiboOperationsHelper().setCurrency("EUR");
-        app.getUiboOperationsHelper().setDueDiligenceStatus("FDD");
-        app.getUiboOperationsHelper().setFeeTariffPlan("United Kingdom - standard");
-        app.getUiboOperationsHelper().setCardProgramByDefault("DiPocket");
-        app.getUiboOperationsHelper().setOperationsLimitPlan("Unlimited");
-        app.getUiboOperationsHelper().setTransactionsLimitPlan("Unlimited");
-        app.getUiboOperationsHelper().setCountryOfContract("United Kingdom");
-        Thread.sleep(1500);
-        app.getUiboOperationsHelper().pressNext();
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFirstPage("Corporate", "Predict", "12345678909", Site.DIPOCKET.toString(), "English", "EUR", "FDD", "United Kingdom - standard", "DiPocket", "Unlimited", "Unlimited", "United Kingdom");
 
         app.getUiboHelper().waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
     }

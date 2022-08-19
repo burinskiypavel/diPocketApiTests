@@ -357,4 +357,21 @@ public class UIBOOperationsHelper extends UIHelperBase {
         BOOperationsCreateCorporateClientFirstPage BOOperationsCreateCorporateClientFirstPage = new BOOperationsCreateCorporateClientFirstPage(driver);
         BOOperationsCreateCorporateClientFirstPage.pressNext();
     }
+
+    public void creationOfACorporateClientFillingInTheDataOfTheFirstPage(String clientType, String companyName, String identificationCode, String site, String language, String currency, String dueDiligenceStatus, String feeTariffPlan, String cardProgramByDefault, String operationsLimitPlan, String transactionsLimitPlan, String countryOfContract) throws InterruptedException {
+        setClientType(clientType);
+        setCompanyName(companyName);
+        setIdentificationCode(identificationCode);
+        setSite(site);
+        setLanguage(language);
+        setCurrency(currency);
+        setDueDiligenceStatus(dueDiligenceStatus);
+        setFeeTariffPlan(feeTariffPlan);
+        setCardProgramByDefault(cardProgramByDefault);
+        setOperationsLimitPlan(operationsLimitPlan);
+        setTransactionsLimitPlan(transactionsLimitPlan);
+        setCountryOfContract(countryOfContract);
+        Thread.sleep(1500);
+        pressNext();
+    }
 }
