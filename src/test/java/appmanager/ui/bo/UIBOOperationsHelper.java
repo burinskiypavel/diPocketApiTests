@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import padeObjects.bo.boOperations.BOOperationsBankTransfersPage;
 import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientFirstPage;
+import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientSecondPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -372,6 +373,46 @@ public class UIBOOperationsHelper extends UIHelperBase {
         setTransactionsLimitPlan(transactionsLimitPlan);
         setCountryOfContract(countryOfContract);
         Thread.sleep(1500);
+        pressNext();
+    }
+
+    public void setCountry(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientSecondPage boOperationsCreateCorporateClientSecondPage = new BOOperationsCreateCorporateClientSecondPage(driver);
+        selectFromDropDown(boOperationsCreateCorporateClientSecondPage.countryDropdown, item);
+    }
+
+    public void setPostalCode(String text) {
+        BOOperationsCreateCorporateClientSecondPage boOperationsCreateCorporateClientSecondPage = new BOOperationsCreateCorporateClientSecondPage(driver);
+        boOperationsCreateCorporateClientSecondPage.setPostalCode(text);
+    }
+
+    public void setCity(String text) {
+        BOOperationsCreateCorporateClientSecondPage boOperationsCreateCorporateClientSecondPage = new BOOperationsCreateCorporateClientSecondPage(driver);
+        boOperationsCreateCorporateClientSecondPage.setCity(text);
+    }
+
+    public void setAddress(String text) {
+        BOOperationsCreateCorporateClientSecondPage boOperationsCreateCorporateClientSecondPage = new BOOperationsCreateCorporateClientSecondPage(driver);
+        boOperationsCreateCorporateClientSecondPage.setAddress(text);
+    }
+
+    public void setAddressLine2(String text) {
+        BOOperationsCreateCorporateClientSecondPage boOperationsCreateCorporateClientSecondPage = new BOOperationsCreateCorporateClientSecondPage(driver);
+        boOperationsCreateCorporateClientSecondPage.setAddressLine2(text);
+    }
+
+    public void clickUseThisAsMailingCheckbox() {
+        BOOperationsCreateCorporateClientSecondPage boOperationsCreateCorporateClientSecondPage = new BOOperationsCreateCorporateClientSecondPage(driver);
+        boOperationsCreateCorporateClientSecondPage.clickUseThisAsMailingCheckbox();
+    }
+
+    public void creationOfACorporateClientFillingInTheDataOfTheSecondPage(String country, String postalCode, String city, String address, String addressLine2) throws InterruptedException {
+        setCountry(country);
+        setPostalCode(postalCode);
+        setCity(city);
+        setAddress(address);
+        setAddressLine2(addressLine2);
+        clickUseThisAsMailingCheckbox();
         pressNext();
     }
 }

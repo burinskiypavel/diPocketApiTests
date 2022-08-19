@@ -23,11 +23,15 @@ public class CreatCorporateClientTests extends UITestBase {
     }
 
     @Test
-    public void testCreationOfACorporateClientFillingInTheDataOfTheFirstPage() throws InterruptedException {
+    public void testCreationOfACorporateClientFillingInTheDataOfTheFirstSecondPage() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoCreateCorporateClientTab();
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFirstPage("Corporate", "Predict", "12345678909", Site.DIPOCKET.toString(), "English", "EUR", "FDD", "United Kingdom - standard", "DiPocket", "Unlimited", "Unlimited", "United Kingdom");
+
+        app.getUiboHelper().waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
+
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62");
 
         app.getUiboHelper().waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
     }
