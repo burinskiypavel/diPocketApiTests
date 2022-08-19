@@ -27,7 +27,6 @@ public class CreatCorporateClientTests extends UITestBase {
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoCreateCorporateClientTab();
 
-        app.getUiboOperationsHelper().setTransactionsLimitPlan("Unlimited");
         app.getUiboOperationsHelper().setClientType("Corporate");
         app.getUiboOperationsHelper().setCompanyName("Predict");
         app.getUiboOperationsHelper().setIdentificationCode("12345678909");
@@ -38,7 +37,7 @@ public class CreatCorporateClientTests extends UITestBase {
         app.getUiboOperationsHelper().setFeeTariffPlan("United Kingdom - standard");
         app.getUiboOperationsHelper().setCardProgramByDefault("DiPocket");
         app.getUiboOperationsHelper().setOperationsLimitPlan("Unlimited");
-        //app.getUiboOperationsHelper().setTransactionsLimitPlan("Unlimited");
+        app.getUiboOperationsHelper().setTransactionsLimitPlan("Unlimited");
         app.getUiboOperationsHelper().setCountryOfContract("United Kingdom");
         Thread.sleep(1500);
         app.getUiboOperationsHelper().pressNext();
