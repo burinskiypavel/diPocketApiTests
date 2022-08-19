@@ -1,9 +1,6 @@
 package appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -42,6 +39,11 @@ public class UIHelperBase {
 
     public void click(By locator){
         driver.findElement(locator).click();
+    }
+
+    public void clickWithJS(By locator){
+        WebElement webElement = driver.findElement(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", webElement);
     }
 
     public void waitFor(By locator){

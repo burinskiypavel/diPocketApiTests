@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import padeObjects.bo.boOperations.BOOperationsBankTransfersPage;
 import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientFirstPage;
+import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientForthPage;
 import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientSecondPage;
 
 import java.util.ArrayList;
@@ -406,13 +407,31 @@ public class UIBOOperationsHelper extends UIHelperBase {
         boOperationsCreateCorporateClientSecondPage.clickUseThisAsMailingCheckbox();
     }
 
-    public void creationOfACorporateClientFillingInTheDataOfTheSecondPage(String country, String postalCode, String city, String address, String addressLine2) throws InterruptedException {
+    public void creationOfACorporateClientFillingInTheDataOfTheSecondPage(String country, String postalCode, String city, String address, String addressLine2, boolean checkbox) throws InterruptedException {
         setCountry(country);
         setPostalCode(postalCode);
         setCity(city);
         setAddress(address);
         setAddressLine2(addressLine2);
-        clickUseThisAsMailingCheckbox();
-        pressNext();
+        if(checkbox){
+            clickUseThisAsMailingCheckbox();
+        }
+            Thread.sleep(1500);
+            pressNext();
+    }
+
+    public void setAccountName(String text) {
+        BOOperationsCreateCorporateClientForthPage boOperationsCreateCorporateClientForthPage = new BOOperationsCreateCorporateClientForthPage(driver);
+        boOperationsCreateCorporateClientForthPage.setAccountName(text);
+    }
+
+    public void setAccountType(String item) throws InterruptedException {
+        BOOperationsCreateCorporateClientForthPage boOperationsCreateCorporateClientForthPage = new BOOperationsCreateCorporateClientForthPage(driver);
+        selectFromDropDown(boOperationsCreateCorporateClientForthPage.accountType, item);
+    }
+
+    public void pressNext4Page() {
+        BOOperationsCreateCorporateClientForthPage boOperationsCreateCorporateClientForthPage = new BOOperationsCreateCorporateClientForthPage(driver);
+        boOperationsCreateCorporateClientForthPage.pressNext();
     }
 }
