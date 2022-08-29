@@ -57,5 +57,9 @@ public class CreatCorporateClientTests extends UITestBase {
         List<String> expectedText = app.getUiboHelper().getDateFromFile("files/bo/boOperations/creationOfACorporateClient.txt");
 
         assertEquals(actualText, expectedText);
+
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Create']"));
+
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
     }
 }
