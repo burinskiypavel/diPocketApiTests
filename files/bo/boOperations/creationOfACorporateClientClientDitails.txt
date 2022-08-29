@@ -1,0 +1,4 @@
+Cardholder name: Predict
+Fee tariff plan: United Kingdom - standard
+Currency: EUR
+Language: English

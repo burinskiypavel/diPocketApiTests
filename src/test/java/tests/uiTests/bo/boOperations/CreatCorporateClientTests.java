@@ -4,6 +4,7 @@ import base.UITestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import static org.testng.Assert.assertTrue;
 
 public class CreatCorporateClientTests extends UITestBase {
     String currency = "EUR";
+    SoftAssert softAssert = new SoftAssert();
 
     @Test
     public void testOpeningAPageForCreatingACorporateClient() throws InterruptedException {
@@ -49,17 +51,23 @@ public class CreatCorporateClientTests extends UITestBase {
         String fourhPagecurrency = app.getUiboHelper().getAttributeValue(By.xpath("//app-input[@ng-reflect-name='currency'] //input"));
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
 
-        assertEquals(fourhPagecurrency, currency);
+        softAssert.assertEquals(fourhPagecurrency, currency, "Currency");
 
         app.getUiboHelper().waitFor(By.xpath("//p-button[@ng-reflect-label='Create']"));
 
         List<String> actualText = app.getUiboHelper().getActualText(By.xpath("//app-confirmation-step //tbody //tr"));
         List<String> expectedText = app.getUiboHelper().getDateFromFile("files/bo/boOperations/creationOfACorporateClient.txt");
 
-        assertEquals(actualText, expectedText);
+        softAssert.assertEquals(actualText, expectedText, "5 page data");
 
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Create']"));
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
+
+
+        List<String> actualClientDetails = app.getUiboHelper().getActualText(By.xpath("//app-corp-client-details-info //div[3] //p"));
+        List<String> expectedClientDetails = app.getUiboHelper().getDateFromFile("files/bo/boOperations/creationOfACorporateClientClientDitails.txt");
+
+        softAssert.assertEquals(actualClientDetails, expectedClientDetails, "client datails page");
     }
 }
