@@ -1,17 +1,25 @@
 package tests.uiTests.bo.boTicket;
 
+import appmanager.Login_RegistrationHelper;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import java.sql.SQLException;
 
 import static org.testng.Assert.assertTrue;
 
 public class TakeTicketTests extends UITestBase {
 
-    @Test
+    @Test(priority = 1)
     public void testOpeningTicketPage() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicket();
+
+//        if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+//            Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+//            login_registrationHelper.dipocketReg();
+//            app.getUiboTicketHelper().gotoTakeTicket();
+//        }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
             app.getUiboTicketHelper().delayTicketForOneMinute();
@@ -38,19 +46,27 @@ public class TakeTicketTests extends UITestBase {
         }
     }
 
-    @Test
-    public void  testApproveSDDTicket() throws InterruptedException {
+    @Test(priority = 2)
+    public void  testApproveSDDTicket() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        app.getUiboTicketHelper().gotoTakeTicket();
+        app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+        if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+            Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+            login_registrationHelper.dipocketRegistration();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
             app.getUiboTicketHelper().delayTicketForOneMinute();
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
+        for(int i = 0; i < 3; i++) {
+            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().gotoTakeTicket();
+            }
         }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
@@ -103,21 +119,28 @@ public class TakeTicketTests extends UITestBase {
 //        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
     }
 
-    @Test
-    public void  testApproveSDDTicketWithoutGenderChoice() throws InterruptedException {
+    @Test(priority = 3)
+    public void  testApproveSDDTicketWithoutGenderChoice() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        app.getUiboTicketHelper().gotoTakeTicket();
+        app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+        if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+            Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+            login_registrationHelper.dipocketRegistration();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
             app.getUiboTicketHelper().delayTicketForOneMinute();
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
+        for(int i = 0; i < 3; i++) {
+            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().gotoTakeTicket();
+            }
         }
-
 
 
 //        if(app.getUiboHelper().areElementsPresent(new String[]{"//td[contains(text(), 'Gender')]"})){

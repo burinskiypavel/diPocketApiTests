@@ -7,22 +7,36 @@ import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
 import padeObjects.bo.boTicket.TakeTicketEditDataPage;
 
+import java.sql.SQLException;
+
 public class UIBOTicketHelper extends UIHelperBase {
 
     public UIBOTicketHelper(WebDriver driver) {
         super(driver);
     }
 
-    public void gotoTakeTicket() {
+    public void gotoTakeTicket() throws InterruptedException {
         //click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         BOHomePage boHomePage = new BOHomePage(driver);
         boHomePage.gotoTakeTicket();
         waitFor(By.id("takeTicketContent"));
     }
 
+    public void gotoTakeTicketWithReg() throws InterruptedException, SQLException, ClassNotFoundException {
+        //click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+        BOHomePage boHomePage = new BOHomePage(driver);
+        boHomePage.gotoTakeTicket();
+        Thread.sleep(1500);
+        //waitFor(By.id("takeTicketContent"));
+    }
+
     public void delayTicketForOneMinute() throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Postpone']"));
         click(By.xpath("//button[@ng-reflect-icon='pi pi-calendar']"));
+        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
+        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
+        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
+        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
         click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
         pressKeys(Keys.ENTER);
         Thread.sleep(1000);
