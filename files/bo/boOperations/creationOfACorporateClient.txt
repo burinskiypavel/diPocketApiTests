@@ -1,0 +1,28 @@
+Client type: Corporate
+Company name: Predict
+Site: DiPocket
+Language: English
+Currency: EUR
+Due diligence status: FDD
+Fee tariff plan: United Kingdom - standard
+Card program by default: DiPocket
+Operations limit plan: Unlimited
+Transactions limit plan: Unlimited
+Country of contract: United Kingdom
+Account Name:
+Account type:
+Client:
+Account:
+Country: Poland
+State:
+Postal code: 2123123
+City: Krakiv
+Address: Gagarina ave
+Address line #2: 62
+Use this as mailing: false
+Country: Poland
+State:
+Postal code: 2123123
+City: Krakiv
+Address: Gagarina ave
+Address line #2: 62

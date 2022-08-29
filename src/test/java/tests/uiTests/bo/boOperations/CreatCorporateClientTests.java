@@ -3,12 +3,11 @@ package tests.uiTests.bo.boOperations;
 import base.UITestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class CreatCorporateClientTests extends UITestBase {
@@ -50,8 +49,13 @@ public class CreatCorporateClientTests extends UITestBase {
         String fourhPagecurrency = app.getUiboHelper().getAttributeValue(By.xpath("//app-input[@ng-reflect-name='currency'] //input"));
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
 
-        Assert.assertEquals(fourhPagecurrency, currency);
+        assertEquals(fourhPagecurrency, currency);
 
         app.getUiboHelper().waitFor(By.xpath("//p-button[@ng-reflect-label='Create']"));
+
+        List<String> actualText = app.getUiboHelper().getActualText(By.xpath("//app-confirmation-step //tbody //tr"));
+        List<String> expectedText = app.getUiboHelper().getDateFromFile("files/bo/boOperations/creationOfACorporateClient.txt");
+
+        assertEquals(actualText, expectedText);
     }
 }
