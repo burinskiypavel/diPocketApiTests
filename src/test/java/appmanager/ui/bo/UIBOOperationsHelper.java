@@ -375,6 +375,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
         setCountryOfContract(countryOfContract);
         Thread.sleep(1500);
         pressNext();
+        waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
     }
 
     public void setCountry(String item) throws InterruptedException {
@@ -418,6 +419,21 @@ public class UIBOOperationsHelper extends UIHelperBase {
         }
             Thread.sleep(1500);
             pressNext();
+        waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
+    }
+
+    public void creationOfACorporateClientFillingInTheDataOfTheThirdPage(String country, String postalCode, String city, String address, String addressLine2, boolean checkbox) throws InterruptedException {
+        setCountry(country);
+        setPostalCode(postalCode);
+        setCity(city);
+        setAddress(address);
+        setAddressLine2(addressLine2);
+        if(checkbox){
+            clickUseThisAsMailingCheckbox();
+        }
+        Thread.sleep(1500);
+        pressNext();
+        waitFor(By.cssSelector("app-input[ng-reflect-name='accName']"));
     }
 
     public void setAccountName(String text) {
@@ -433,5 +449,10 @@ public class UIBOOperationsHelper extends UIHelperBase {
     public void pressNext4Page() {
         BOOperationsCreateCorporateClientForthPage boOperationsCreateCorporateClientForthPage = new BOOperationsCreateCorporateClientForthPage(driver);
         boOperationsCreateCorporateClientForthPage.pressNext();
+    }
+
+    public void creationOfACorporateClientFillingInTheDataOfTheFourthPage(String accountName, String accountType) throws InterruptedException {
+        setAccountName(accountName);
+        setAccountType(accountType);
     }
 }

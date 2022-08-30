@@ -33,24 +33,14 @@ public class CreatCorporateClientTests extends UITestBase {
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoCreateCorporateClientTab();
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFirstPage("Corporate", "Predict", "12345678909", Site.DIPOCKET.toString(), "English", currency, "FDD", "United Kingdom - standard", "DiPocket", "Unlimited", "Unlimited", "United Kingdom");
-
-        app.getUiboHelper().waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
-
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", true);
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheThirdPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", false);
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFourthPage("Test Test", "No GPS");
 
-        app.getUiboHelper().waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
-
-        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", false);
-
-        app.getUiboHelper().waitFor(By.cssSelector("app-input[ng-reflect-name='accName']"));
-
-        app.getUiboOperationsHelper().setAccountName("Test Test");
-        app.getUiboOperationsHelper().setAccountType("No GPS");
-
-        String fourhPagecurrency = app.getUiboHelper().getAttributeValue(By.xpath("//app-input[@ng-reflect-name='currency'] //input"));
+        String fourhPageCurrency = app.getUiboHelper().getAttributeValue(By.xpath("//app-input[@ng-reflect-name='currency'] //input"));
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
 
-        softAssert.assertEquals(fourhPagecurrency, currency, "Currency");
+        softAssert.assertEquals(fourhPageCurrency, currency, "Currency");
 
         app.getUiboHelper().waitFor(By.xpath("//p-button[@ng-reflect-label='Create']"));
 
@@ -62,7 +52,6 @@ public class CreatCorporateClientTests extends UITestBase {
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Create']"));
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
-
 
         List<String> actualClientDetails = app.getUiboHelper().getActualText(By.xpath("//app-corp-client-details-info //div[3] //p"));
         List<String> expectedClientDetails = app.getUiboHelper().getDateFromFile("files/bo/boOperations/creationOfACorporateClientClientDitails.txt");
