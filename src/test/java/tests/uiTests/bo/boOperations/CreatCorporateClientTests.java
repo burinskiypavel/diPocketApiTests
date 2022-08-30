@@ -66,8 +66,6 @@ public class CreatCorporateClientTests extends UITestBase {
         app.getUiboOperationsHelper().gotoCreateCorporateClientTab();
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFirstPage("Corporate", "Predict", "12345678909", Site.DIPOCKET.toString(), "English", currency, "FDD", "United Kingdom - standard", "DiPocket", "Unlimited", "Unlimited", "United Kingdom");
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("United States", "2123123", "Krakiv", "Gagarina ave", "62", false, "Test");
-
-
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFourthPage("Test Test", "No GPS");
 
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
