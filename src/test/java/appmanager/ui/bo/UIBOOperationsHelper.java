@@ -408,7 +408,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
         boOperationsCreateCorporateClientSecondPage.clickUseThisAsMailingCheckbox();
     }
 
-    public void creationOfACorporateClientFillingInTheDataOfTheSecondPage(String country, String postalCode, String city, String address, String addressLine2, boolean checkbox) throws InterruptedException {
+    public void creationOfACorporateClientFillingInTheDataOfTheSecondPage(String country, String postalCode, String city, String address, String addressLine2, boolean checkbox, String state) throws InterruptedException {
         setCountry(country);
         setPostalCode(postalCode);
         setCity(city);
@@ -417,9 +417,16 @@ public class UIBOOperationsHelper extends UIHelperBase {
         if(checkbox){
             clickUseThisAsMailingCheckbox();
         }
+
+        if(!state.equals("")){
+            type(By.xpath("//app-input[@ng-reflect-name='state'] //input"), state);
             Thread.sleep(1500);
             pressNext();
-        waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
+        } else {
+            Thread.sleep(1500);
+            pressNext();
+            waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
+        }
     }
 
     public void creationOfACorporateClientFillingInTheDataOfTheThirdPage(String country, String postalCode, String city, String address, String addressLine2, boolean checkbox) throws InterruptedException {

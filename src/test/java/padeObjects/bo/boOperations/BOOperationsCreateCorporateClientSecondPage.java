@@ -25,6 +25,9 @@ public class BOOperationsCreateCorporateClientSecondPage {
     @FindBy(xpath = "//app-input[@ng-reflect-name='streetLine1'] //input")
     public WebElement address;
 
+    @FindBy(xpath = "//app-input[@ng-reflect-name='state'] //input")
+    public WebElement state;
+
     @FindBy(xpath = "//app-input[@ng-reflect-name='streetLine2'] //input")
     public WebElement addressLine2;
 
@@ -50,6 +53,12 @@ public class BOOperationsCreateCorporateClientSecondPage {
         address.click();
         address.clear();
         address.sendKeys(text);
+    }
+
+    public void setState(String text){
+        state.click();
+        state.clear();
+        state.sendKeys(text);
     }
 
     public void setAddressLine2(String text){

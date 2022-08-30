@@ -28,12 +28,12 @@ public class CreatCorporateClientTests extends UITestBase {
     }
 
     @Test
-    public void testCreationOfACorporateClientFillingInTheDataOfTheFirstSecondThirdPage() throws InterruptedException {
+    public void testCreationOfACorporateClientFillingInTheDataOfTheFirstSecondThirdFourthPage() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoCreateCorporateClientTab();
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFirstPage("Corporate", "Predict", "12345678909", Site.DIPOCKET.toString(), "English", currency, "FDD", "United Kingdom - standard", "DiPocket", "Unlimited", "Unlimited", "United Kingdom");
-        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", true);
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", true, "");
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheThirdPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", false);
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFourthPage("Test Test", "No GPS");
 
@@ -57,5 +57,23 @@ public class CreatCorporateClientTests extends UITestBase {
         List<String> expectedClientDetails = app.getUiboHelper().getDateFromFile("files/bo/boOperations/creationOfACorporateClientClientDitails.txt");
 
         softAssert.assertEquals(actualClientDetails, expectedClientDetails, "client datails page");
+    }
+
+    @Test
+    public void testCreationOfACorporateClientIfTheClientsRegistrationAddressIsInTheUSA() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoCreateCorporateClientTab();
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFirstPage("Corporate", "Predict", "12345678909", Site.DIPOCKET.toString(), "English", currency, "FDD", "United Kingdom - standard", "DiPocket", "Unlimited", "Unlimited", "United Kingdom");
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("United States", "2123123", "Krakiv", "Gagarina ave", "62", false, "Test");
+
+
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFourthPage("Test Test", "No GPS");
+
+        app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
+
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Create']"));
+
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
     }
 }
