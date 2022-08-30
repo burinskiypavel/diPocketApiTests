@@ -101,7 +101,8 @@ public class ApplicationManager {
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
     public String registrationPhone = "380636083315";
     public String registrationEmail = "testdipocket4@gmail.com";
-    public String BOURL = "https://support.dipocket.dev";
+    //public String BOURL = "https://support.dipocket.dev";
+    public String BOURL = null;
     public String CBOuserLogin = "Viktoria";
     public String CBOuserPass = "kWmaB0s";
     public String CBOuserLogin2 = "PAVELBAuto";
@@ -156,6 +157,7 @@ public class ApplicationManager {
         mobile_site_snowAttack = HelperBase.prop.getProperty("mobile.site.snowAttack");
         emailsVerificationsCountryId = HelperBase.prop.getProperty("emailsVerifications.countryId");
         emailsVerificationsCurrencyId = HelperBase.prop.getProperty("emailsVerifications.currencyId");
+        BOURL = HelperBase.prop.getProperty("bo.base.url");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()
