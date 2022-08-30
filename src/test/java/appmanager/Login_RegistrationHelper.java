@@ -298,6 +298,7 @@ public class Login_RegistrationHelper extends HelperBase {
         dbHelper.deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         given()
                 //.spec(app.requestSpecDipocketRegistration)
+                .log().uri().log().headers().log().body()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -311,6 +312,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -324,6 +326,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -337,6 +340,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -350,6 +354,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -387,6 +392,7 @@ public class Login_RegistrationHelper extends HelperBase {
             smsCode = dbHelper.getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -400,6 +406,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             Response res = given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -431,6 +438,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -464,6 +472,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -510,6 +519,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -564,6 +574,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -586,6 +597,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -640,6 +652,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -658,6 +671,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -678,6 +692,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -733,6 +748,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
@@ -762,6 +778,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             given()
                     //.spec(requestSpecDipocketRegistration)
+                    .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))

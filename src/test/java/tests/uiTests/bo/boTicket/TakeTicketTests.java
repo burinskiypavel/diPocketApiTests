@@ -21,6 +21,13 @@ public class TakeTicketTests extends UITestBase {
 //            app.getUiboTicketHelper().gotoTakeTicket();
 //        }
 
+        for(int i = 0; i < 3; i++) {
+            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().gotoTakeTicket();
+            }
+        }
+
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
             app.getUiboTicketHelper().delayTicketForOneMinute();
             app.getUiboTicketHelper().gotoTakeTicket();

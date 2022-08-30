@@ -16,9 +16,9 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void gotoTakeTicket() throws InterruptedException {
-        //click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
-        BOHomePage boHomePage = new BOHomePage(driver);
-        boHomePage.gotoTakeTicket();
+        click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+        //BOHomePage boHomePage = new BOHomePage(driver);
+        //boHomePage.gotoTakeTicket();
         waitFor(By.id("takeTicketContent"));
     }
 
@@ -40,7 +40,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
         pressKeys(Keys.ENTER);
         Thread.sleep(1000);
-        click(By.xpath("//app-postpone-modal //p-button[@ng-reflect-label='Postpone']"));
+        clickWithJS(By.xpath("//app-postpone-modal //p-button[@ng-reflect-label='Postpone']"));
         waitFor(By.xpath("//div[contains(text(), 'Ticket was successfully delayed')]"));
     }
 
