@@ -92,4 +92,15 @@ public class UIBOTicketHelper extends UIHelperBase {
             click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
         }
     }
+
+    public void editAndSaveSSDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='gender']"), gender);
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdTypeId']"), documentType);
+        type(By.xpath("//app-input[@ng-reflect-name='photoIdNo'] //input"), docSerialNumber);
+        type(By.xpath("//app-input[@ng-reflect-name='identifyCode'] //input"), pesel);
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdCountryId']"), docCountryOfIssue);
+        Thread.sleep(1500);
+        click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+    }
 }
