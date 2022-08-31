@@ -180,15 +180,7 @@ public class TakeTicketTests extends UITestBase {
         }
 
         app.getUiboTicketHelper().unsuccessfulApprove("Impossible to approve ticket. “Gender” field should be filled");
-
-
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
-        app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='gender']"), "M");
-        Thread.sleep(1500);
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Save']"));
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
-
-
+        app.getUiboTicketHelper().editAndSaveSSDTicket("M", "", "", "", "");
         app.getUiboTicketHelper().approveTicketSuccessfully();
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
