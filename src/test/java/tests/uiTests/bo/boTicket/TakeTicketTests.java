@@ -79,12 +79,7 @@ public class TakeTicketTests extends UITestBase {
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
             app.getUiboTicketHelper().editAndSaveSSDTicket("M", "Passport", "12345678", "12345678", "Poland");
-
-            app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
-
-            app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
-
-            app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
+            app.getUiboTicketHelper().approveTicketSuccessfully();
 
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
 
@@ -206,9 +201,7 @@ public class TakeTicketTests extends UITestBase {
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
 
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
+        app.getUiboTicketHelper().approveTicketSuccessfully();
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
 
