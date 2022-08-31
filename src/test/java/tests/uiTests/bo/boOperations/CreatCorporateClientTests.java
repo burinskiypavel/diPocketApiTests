@@ -74,4 +74,24 @@ public class CreatCorporateClientTests extends UITestBase {
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
     }
+
+    @Test
+    public void testCreatingACorporateClientWithoutAnAccount() throws InterruptedException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
+        app.getUiboOperationsHelper().gotoOperations();
+        app.getUiboOperationsHelper().gotoCreateCorporateClientTab();
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFirstPage("Corporate", "Predict", "12345678909", Site.DIPOCKET.toString(), "English", currency, "FDD", "United Kingdom - standard", "DiPocket", "Unlimited", "Unlimited", "United Kingdom");
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", true, "");
+        app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheThirdPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", false);
+
+        app.getUiboHelper().click(By.xpath("//p-radiobutton[@ng-reflect-label='No account']"));
+
+        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//app-input[@ng-reflect-name='accName'] //input"));
+
+        app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
+
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Create']"));
+
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
+    }
 }
