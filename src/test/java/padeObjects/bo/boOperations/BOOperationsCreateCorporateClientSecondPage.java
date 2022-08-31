@@ -37,8 +37,9 @@ public class BOOperationsCreateCorporateClientSecondPage {
     @FindBy(xpath = "//p-button[@ng-reflect-label='Next']")
     public WebElement nextBtn;
 
-    public void setPostalCode(String text){
+    public void setPostalCode(String text) throws InterruptedException {
         postalCode.click();
+        Thread.sleep(1000);
         postalCode.clear();
         postalCode.sendKeys(text);
     }

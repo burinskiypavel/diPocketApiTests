@@ -383,7 +383,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
         selectFromDropDown(boOperationsCreateCorporateClientSecondPage.countryDropdown, item);
     }
 
-    public void setPostalCode(String text) {
+    public void setPostalCode(String text) throws InterruptedException {
         BOOperationsCreateCorporateClientSecondPage boOperationsCreateCorporateClientSecondPage = new BOOperationsCreateCorporateClientSecondPage(driver);
         boOperationsCreateCorporateClientSecondPage.setPostalCode(text);
     }
