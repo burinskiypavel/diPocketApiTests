@@ -109,4 +109,9 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
     }
+
+    public void unsuccessfulApprove(final String message) {
+        click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
+    }
 }

@@ -179,27 +179,15 @@ public class TakeTicketTests extends UITestBase {
             app.getUiboHelper().click(By.cssSelector("div.p-dialog-header-icons"));
         }
 
+        app.getUiboTicketHelper().unsuccessfulApprove("Impossible to approve ticket. “Gender” field should be filled");
 
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Impossible to approve ticket. “Gender” field should be filled')]"));
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
-        ;
-
         app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='gender']"), "M");
-
-
-
-        //app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdTypeId']"), "Passport");
-        //app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='photoIdNo'] //input"), "12345678");
-        //app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='identifyCode'] //input"), "12345678");
-        //app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdCountryId']"), "Poland");
-
         Thread.sleep(1500);
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Save']"));
-
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
+
 
         app.getUiboTicketHelper().approveTicketSuccessfully();
 
