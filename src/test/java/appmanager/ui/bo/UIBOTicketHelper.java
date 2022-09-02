@@ -125,4 +125,13 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
     }
+
+    public void escalateToCBOSuccessfully(String assignTo, String reason) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), assignTo); //Assign to
+        type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), reason);
+        Thread.sleep(1300);
+        click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        waitFor(By.xpath("//*[contains(text(), 'Ticket escalated successfully')]"));
+    }
 }

@@ -233,7 +233,7 @@ public class TakeTicketTests extends UITestBase {
     @Test
     public void testTheUserNeedsToEscalateToCBOTicketWithReason() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        app.getUiboTicketHelper().gotoTakeTicket();
+        app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
             Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
@@ -254,13 +254,7 @@ public class TakeTicketTests extends UITestBase {
         }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
-            app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), "AQA"); //Assign to
-            app.getUiboHelper().type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), "test");
-            app.getUiboHelper().click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
-
-            app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Ticket escalated successfully')]"));
-
+            app.getUiboTicketHelper().escalateToCBOSuccessfully("AQA", "test");
 
 
         } else {
