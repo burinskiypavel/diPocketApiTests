@@ -231,6 +231,43 @@ public class TakeTicketTests extends UITestBase {
     }
 
     @Test
+    public void testTheUserNeedsToEscalateToCBOTicketWithoutReason() throws InterruptedException, SQLException, ClassNotFoundException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+        if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+            Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+            login_registrationHelper.dipocketRegistration();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
+
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().gotoTakeTicket();
+        }
+
+        for(int i = 0; i < 3; i++) {
+            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().gotoTakeTicket();
+            }
+        }
+
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
+            app.getUiboTicketHelper().escalateToCBOSuccessfully("AQA", "");
+
+
+        } else {
+            Assert.fail("There is no sdd ticket");
+        }
+
+        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
+
+        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
+    }
+
+
+    @Test
     public void testTheUserNeedsToEscalateToCBOTicketWithReason() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
