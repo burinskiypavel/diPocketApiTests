@@ -12,8 +12,8 @@ public class BOUserRolesCBOBlockUserAlternativeFlowTest extends UITestBase {
     public void testBOUserRolesCBOBlockUserAlternativeFlow() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoBOUsersPage();
-        app.getUiboHelper().gotoAllUsersTab();
-        app.getUiboHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
+        app.getUiboUserHelper().gotoAllUsersTab();
+        app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
         app.getUiboHelper().click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Block user']"));
 
         app.getUiboHelper().waitFor(By.cssSelector("div[role='dialog']"));

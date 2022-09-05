@@ -18,22 +18,22 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
             app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(login, pass);
             app.getUiboHelper().gotoBOUsersPage();
-            app.getUiboHelper().gotoRolesTab();
-            app.getUiboHelper().selectRoleFromDropDown(roleID);
-            app.getUiboHelper().deleteRole();
+            app.getUiboUserHelper().gotoRolesTab();
+            app.getUiboUserHelper().selectRoleFromDropDown(roleID);
+            app.getUiboUserHelper().deleteRole();
         }
 
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(login, pass);
         app.getUiboHelper().gotoBOUsersPage();
-        app.getUiboHelper().gotoRolesTab();
-        app.getUiboHelper().addRole(roleID, "testqa2");
-        app.getUiboHelper().selectRoleFromDropDown(roleID);
+        app.getUiboUserHelper().gotoRolesTab();
+        app.getUiboUserHelper().addRole(roleID, "testqa2");
+        app.getUiboUserHelper().selectRoleFromDropDown(roleID);
 
         app.getUiboHelper().clickCheckbox(By.cssSelector("div[role='checkbox']"));
         app.getUiboHelper().click(By.cssSelector("p-button[label='Update']"));
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role changed successfully')]"));
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'User role changed successfully')]")));
-        app.getUiboHelper().deleteRole();
+        app.getUiboUserHelper().deleteRole();
     }
 }

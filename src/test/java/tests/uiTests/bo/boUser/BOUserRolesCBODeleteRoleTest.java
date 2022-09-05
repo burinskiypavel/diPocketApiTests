@@ -19,17 +19,17 @@ public class BOUserRolesCBODeleteRoleTest extends UITestBase {
         if(app.getDbHelper().isRoleExistInDB(roleID)){
             app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(login, pass);
             app.getUiboHelper().gotoBOUsersPage();
-            app.getUiboHelper().gotoRolesTab();
-            app.getUiboHelper().selectRoleFromDropDown(roleID);
-            app.getUiboHelper().deleteRole();
+            app.getUiboUserHelper().gotoRolesTab();
+            app.getUiboUserHelper().selectRoleFromDropDown(roleID);
+            app.getUiboUserHelper().deleteRole();
             app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
         }
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(login, pass);
         app.getUiboHelper().gotoBOUsersPage();
-        app.getUiboHelper().gotoRolesTab();
-        app.getUiboHelper().addRole(roleID, "a_roleName");
-        app.getUiboHelper().selectRoleFromDropDown(roleID);
-        app.getUiboHelper().deleteRole();
+        app.getUiboUserHelper().gotoRolesTab();
+        app.getUiboUserHelper().addRole(roleID, "a_roleName");
+        app.getUiboUserHelper().selectRoleFromDropDown(roleID);
+        app.getUiboUserHelper().deleteRole();
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role deleted successfully')]"));
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'User role deleted successfully')]")));

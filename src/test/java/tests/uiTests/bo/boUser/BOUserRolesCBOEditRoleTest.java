@@ -17,9 +17,9 @@ public class BOUserRolesCBOEditRoleTest extends UITestBase {
     public void testBOUserRolesCBOEditRole() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoBOUsersPage();
-        app.getUiboHelper().gotoRolesTab();
-        app.getUiboHelper().selectRoleFromDropDown("1");
-        app.getUiboHelper().editUserRole(roleName);
+        app.getUiboUserHelper().gotoRolesTab();
+        app.getUiboUserHelper().selectRoleFromDropDown("1");
+        app.getUiboUserHelper().editUserRole(roleName);
 
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role edited successfully')]"));
         String roleNameDB = app.getDbHelper().getRoleNameFromDB("1");

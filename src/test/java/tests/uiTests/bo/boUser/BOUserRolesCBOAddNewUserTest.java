@@ -31,9 +31,9 @@ public class BOUserRolesCBOAddNewUserTest extends UITestBase {
         assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
         assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Add user")));
 
-        app.getUiboHelper().selectFromSelectAddNewUserPage("role", role);
-        app.getUiboHelper().selectFromSelectAddNewUserPage("site", site);
-        app.getUiboHelper().fillBOUserFieldsInPopup("Pavel", "Burinskiy", phone, email, username);
+        app.getUiboUserHelper().selectFromSelectAddNewUserPage("role", role);
+        app.getUiboUserHelper().selectFromSelectAddNewUserPage("site", site);
+        app.getUiboUserHelper().fillBOUserFieldsInPopup("Pavel", "Burinskiy", phone, email, username);
         app.getUiboHelper().uploadFile(By.cssSelector("input[type='file']"), "C:/Work/Files/self.jpg");
 
         Thread.sleep(700);

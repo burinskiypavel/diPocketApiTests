@@ -15,7 +15,7 @@ public class BOUserRolesCBORolesTableTest extends UITestBase {
     public void testBOUserRolesCBORolesTable() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboHelper().gotoBOUsersPage();
-        app.getUiboHelper().gotoRolesTab();
+        app.getUiboUserHelper().gotoRolesTab();
 
         softAssert.assertTrue(app.getUiboHelper().isTabActiveAndSelected(By.xpath("//a[@id='p-tabpanel-3-label'][@aria-selected='true']")));
         softAssert.assertTrue(app.getUiboHelper().isPageOpen(By.xpath("//div[@id='p-tabpanel-3'][@aria-hidden='false']")));

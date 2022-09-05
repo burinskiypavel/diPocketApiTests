@@ -12,20 +12,20 @@ public class BOUserRolesCBOUnblockUserAlternativeFlowTest extends UITestBase {
     public void testBOUserRolesCBOUnblockUserAlternativeFlow() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
         app.getUiboHelper().gotoBOUsersPage();
-        app.getUiboHelper().gotoAllUsersTab();
-        app.getUiboHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
+        app.getUiboUserHelper().gotoAllUsersTab();
+        app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
         if(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Unblock user']"))){
-            app.getUiboHelper().unblockUser();
-            app.getUiboHelper().selectBOUser("PAVELB");
+            app.getUiboUserHelper().unblockUser();
+            app.getUiboUserHelper().selectBOUser("PAVELB");
         }
 
         softAssert.assertTrue(app.getUiboHelper().isButtonEnabled2(By.cssSelector("p-button[ng-reflect-label='Edit']")));
         softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Reset password']")));
         softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Block user']")));
 
-        app.getUiboHelper().blockUser("test");
+        app.getUiboUserHelper().blockUser("test");
 
-        app.getUiboHelper().selectBOUser("PAVELB");
+        app.getUiboUserHelper().selectBOUser("PAVELB");
         softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Unblock user']")));
         softAssert.assertFalse(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Block user']")));
 
@@ -38,7 +38,7 @@ public class BOUserRolesCBOUnblockUserAlternativeFlowTest extends UITestBase {
         softAssert.assertFalse(app.getUiboHelper().isElementPresent(By.cssSelector("div[role='dialog']")));
 
         if(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Unblock user']"))){
-            app.getUiboHelper().unblockUser();
+            app.getUiboUserHelper().unblockUser();
         }
         softAssert.assertAll();
     }
