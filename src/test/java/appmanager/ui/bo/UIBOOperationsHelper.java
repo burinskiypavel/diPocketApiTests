@@ -463,8 +463,9 @@ public class UIBOOperationsHelper extends UIHelperBase {
         setAccountType(accountType);
     }
 
-    public void setNoAccount() {
+    public void setNoAccount() throws InterruptedException {
         waitForElementToBeClickable(By.xpath("//p-radiobutton[@ng-reflect-label='No account']"));
+        Thread.sleep(500);
         click(By.xpath("//p-radiobutton[@ng-reflect-label='No account']"));
     }
 
