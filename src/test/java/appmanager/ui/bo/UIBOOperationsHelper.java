@@ -462,4 +462,18 @@ public class UIBOOperationsHelper extends UIHelperBase {
         setAccountName(accountName);
         setAccountType(accountType);
     }
+
+    public void setNoAccount() {
+        waitForElementToBeClickable(By.xpath("//p-radiobutton[@ng-reflect-label='No account']"));
+        click(By.xpath("//p-radiobutton[@ng-reflect-label='No account']"));
+    }
+
+    public void createCorporateClientWithMessage(final String message) {
+        click(By.xpath("//p-button[@ng-reflect-label='Create']"));
+        waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
+    }
+
+    public void verifyInvisibilityOfTheFieldsOnFourthPageAfterSetNoAccount() {
+        waitForInvisibilityOfElement(By.xpath("//app-input[@ng-reflect-name='accName'] //input"));
+    }
 }

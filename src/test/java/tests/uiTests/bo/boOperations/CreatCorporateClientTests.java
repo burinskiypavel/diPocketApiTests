@@ -49,9 +49,7 @@ public class CreatCorporateClientTests extends UITestBase {
 
         softAssert.assertEquals(actualText, expectedText, "5 page data");
 
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Create']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
+        app.getUiboOperationsHelper().createCorporateClientWithMessage("Corporate client was created successfully");
 
         List<String> actualClientDetails = app.getUiboHelper().getActualText(By.xpath("//app-corp-client-details-info //div[3] //p"));
         List<String> expectedClientDetails = app.getUiboHelper().getDateFromFile("files/bo/boOperations/creationOfACorporateClientClientDitails.txt");
@@ -70,9 +68,7 @@ public class CreatCorporateClientTests extends UITestBase {
 
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
 
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Create']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
+        app.getUiboOperationsHelper().createCorporateClientWithMessage("Corporate client was created successfully");
     }
 
     @Test
@@ -83,15 +79,11 @@ public class CreatCorporateClientTests extends UITestBase {
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheFirstPage("Corporate", "Predict", "12345678909", Site.DIPOCKET.toString(), "English", currency, "FDD", "United Kingdom - standard", "DiPocket", "Unlimited", "Unlimited", "United Kingdom");
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheSecondPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", true, "");
         app.getUiboOperationsHelper().creationOfACorporateClientFillingInTheDataOfTheThirdPage("Poland", "2123123", "Krakiv", "Gagarina ave", "62", false);
-
-        app.getUiboHelper().click(By.xpath("//p-radiobutton[@ng-reflect-label='No account']"));
-
-        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//app-input[@ng-reflect-name='accName'] //input"));
+        app.getUiboOperationsHelper().setNoAccount();
+        app.getUiboOperationsHelper().verifyInvisibilityOfTheFieldsOnFourthPageAfterSetNoAccount();
 
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
 
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Create']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Corporate client was created successfully')]"));
+        app.getUiboOperationsHelper().createCorporateClientWithMessage("Corporate client was created successfully");
     }
 }
