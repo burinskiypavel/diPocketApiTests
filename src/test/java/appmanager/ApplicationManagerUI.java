@@ -5,6 +5,7 @@ import appmanager.ui.UITelenorHelper;
 import appmanager.ui.UIUpAndGoHelper;
 import appmanager.ui.bo.UIBOOperationsHelper;
 import appmanager.ui.bo.UIBOTicketHelper;
+import appmanager.ui.bo.UIBOUserHelper;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -40,6 +41,7 @@ public class ApplicationManagerUI {
     public UIBOHelper uiboHelper;
     public UIBOOperationsHelper uiboOperationsHelper;
     public UIBOTicketHelper uiboTicketHelper;
+    public UIBOUserHelper uiboUserHelper;
     public UIUpAndGoHelper uiUpAndGoHelper;
     public UITelenorHelper uiTelenorHelper;
     public String pan = null;
@@ -132,6 +134,7 @@ public class ApplicationManagerUI {
         uiboHelper = new UIBOHelper(driver);
         uiboOperationsHelper = new UIBOOperationsHelper(driver);
         uiboTicketHelper = new UIBOTicketHelper(driver);
+        uiboUserHelper = new UIBOUserHelper(driver);
         uiUpAndGoHelper = new UIUpAndGoHelper(driver);
         uiTelenorHelper = new UITelenorHelper(driver);
         configTimeout = RestAssured.config()
@@ -312,5 +315,7 @@ public class ApplicationManagerUI {
     public UIBOOperationsHelper getUiboOperationsHelper() { return uiboOperationsHelper; }
 
     public UIBOTicketHelper getUiboTicketHelper() { return uiboTicketHelper; }
+
+    public UIBOUserHelper getUiboUserHelper() { return uiboUserHelper; }
 
 }
