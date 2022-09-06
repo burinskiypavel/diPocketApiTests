@@ -78,7 +78,7 @@ public class TakeTicketTests extends UITestBase {
         }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
-            app.getUiboTicketHelper().editAndSaveSSDTicket("M", "Passport", "12345678", "12345678", "Poland");
+            app.getUiboTicketHelper().editAndSaveSDDTicket("M", "Passport", "12345678", "12345678", "Poland");
             app.getUiboTicketHelper().approveTicketSuccessfully();
 
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
@@ -180,7 +180,7 @@ public class TakeTicketTests extends UITestBase {
         }
 
         app.getUiboTicketHelper().unsuccessfulApprove("Impossible to approve ticket. “Gender” field should be filled");
-        app.getUiboTicketHelper().editAndSaveSSDTicket("M", "", "", "", "");
+        app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
         app.getUiboTicketHelper().approveTicketSuccessfully();
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
@@ -222,12 +222,6 @@ public class TakeTicketTests extends UITestBase {
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
 
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
-    }
-
-    @Test(enabled = false)
-    public void testApproveFDDTiketWithDocumentTypePassport() throws InterruptedException {
-        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        app.getUiboTicketHelper().gotoTakeTicket();
     }
 
     @Test

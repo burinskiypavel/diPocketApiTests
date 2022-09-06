@@ -93,7 +93,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         }
     }
 
-    public void editAndSaveSSDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
+    public void editAndSaveSDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
         if(!gender.equals("")){
             selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='gender']"), gender);
@@ -110,6 +110,30 @@ public class UIBOTicketHelper extends UIHelperBase {
         }
         if(!docCountryOfIssue.equals("")){
             selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdCountryId']"), docCountryOfIssue);
+        }
+        Thread.sleep(1500);
+        click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+        waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
+    }
+
+    public void editAndSaveFDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        waitFor(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"));
+        if(!gender.equals("")){
+            selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
+        }
+        if(!documentType.equals("")){
+            selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"), documentType);
+        }
+        if(!docSerialNumber.equals("")){
+            type(By.cssSelector("input[id*='_input_photoIdNo_']"), docSerialNumber);
+        }
+        if(!pesel.equals("")){
+            type(By.cssSelector("input[id*='_input_identifyCode_']"), pesel);
+
+        }
+        if(!docCountryOfIssue.equals("")){
+            selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdCountryId_']"), docCountryOfIssue);
         }
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Save']"));
