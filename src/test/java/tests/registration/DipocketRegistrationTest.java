@@ -484,7 +484,8 @@ public class DipocketRegistrationTest extends TestBase {
         checkboxList.add(checkboxContainer2);
 
         regSavepointData2.setSecAnswer("QA");
-        regSavepointData2.setPin(app.generateRandomString(8));
+        //regSavepointData2.setPin(app.generateRandomString(8));
+        regSavepointData2.setPin("pasword1");
         regSavepointData2.setCheckboxList(checkboxList);
         String json = gson.toJson(regSavepointData2);
 
@@ -550,7 +551,7 @@ public class DipocketRegistrationTest extends TestBase {
                 .body("resultCode", equalTo(0));
     }
 
-    @Test(priority = 18 ,enabled = false)
+    @Test(priority = 18)
     public void testEmailLink() throws InterruptedException {
         String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
         System.out.println("link_link " + link);
@@ -563,7 +564,7 @@ public class DipocketRegistrationTest extends TestBase {
                         "html.body.div.div.div.h2", equalTo("Большое спасибо!"));
     }
 
-    @Test(priority = 19)
+    @Test(priority = 19, enabled = false)
     public void testEmailLink_() throws InterruptedException {
         //String redirectedLink = "https://http.dipocket.dev/Mail/v1/view/eMailConfirmation/successful?site=DIPOCKET&langId=4&lang=ru";
         String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
