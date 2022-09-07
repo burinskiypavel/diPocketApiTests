@@ -782,10 +782,15 @@
             <class name="tests.uiTests.bo.boTicket.TakeTicketTests"/>
         </classes>
     </test>
-
     <test name="TakeFDDTicketTests">
         <classes>
             <class name="tests.uiTests.bo.boTicket.TakeFDDTicketTests"/>
+        </classes>
+    </test>
+
+    <test name="EscalateToCBOTests">
+        <classes>
+            <class name="tests.uiTests.bo.boTicket.EscalateToCBOTests"/>
         </classes>
     </test>
 
