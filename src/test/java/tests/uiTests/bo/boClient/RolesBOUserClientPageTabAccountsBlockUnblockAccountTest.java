@@ -23,16 +23,16 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
 
         if(!app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
-            app.getUiboHelper().unblockAccount();
+            app.getUiboClientHelper().unblockAccount();
             app.getUiboHelper().moveToElementAndPerformContextClick(accountName);
         }
 
-        String actualPopupText = app.getUiboHelper().blockAccount();
+        String actualPopupText = app.getUiboClientHelper().blockAccount();
 
         assertEquals(actualPopupText, "Are you sure want to block account with name: "+accountName+"?");
 
@@ -47,16 +47,16 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
 
         if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
-            app.getUiboHelper().boClientPageBlockAccount();
+            app.getUiboClientHelper().boClientPageBlockAccount();
             app.getUiboHelper().moveToElementAndPerformContextClick(accountName);
         }
 
-        String actualPopupText = app.getUiboHelper().unblockAccountAndGetPopupText();
+        String actualPopupText = app.getUiboClientHelper().unblockAccountAndGetPopupText();
 
         assertEquals(actualPopupText, "Are you sure want to unblock account with name: "+accountName+"?");
 
@@ -71,12 +71,12 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
 
         app.getUiboHelper().click(By.xpath("//span[contains(text(), 'Overdraft limit')]"));
-        app.getUiboHelper().updateLimits(randomLimit, randomLimit);
+        app.getUiboClientHelper().updateLimits(randomLimit, randomLimit);
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'Account limits was changed successfull')]")));
     }
@@ -86,21 +86,21 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId2, phone2);
-        app.getUiboHelper().goToClientPage(phone2);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone2);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName2+"']"));
 
         app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='Plastic']"));
 
-        app.getUiboHelper().setClientPageFilter("id", "188989");
+        app.getUiboClientHelper().setClientPageFilter("id", "188989");
         assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='188989']")));
         app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='id'] input[type='text']"));
 
-        app.getUiboHelper().setClientPageFilter("publicToken", "893529504");
+        app.getUiboClientHelper().setClientPageFilter("publicToken", "893529504");
         assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='893529504']")));
         app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='publicToken'] input[type='text']"));
 
-        app.getUiboHelper().setClientPageFilter("dipToken", "32842383");
+        app.getUiboClientHelper().setClientPageFilter("dipToken", "32842383");
         assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='32842383']")));
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='186406']"));
 
@@ -115,19 +115,19 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
         app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
 
         if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='1'] a[tabindex='0']"))){
-            app.getUiboHelper().unblockCard();
+            app.getUiboClientHelper().unblockCard();
             app.getUiboHelper().moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
             app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
 
-        app.getUiboHelper().blockCard();
+        app.getUiboClientHelper().blockCard();
 
         app.getUiboHelper().moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         String actualState = app.getUiboHelper().getNextElementFromTheTable(cardId, 3);
@@ -140,19 +140,19 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
         app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
 
         if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='0'] a[tabindex='0']"))){
-            app.getUiboHelper().blockCard();
+            app.getUiboClientHelper().blockCard();
             app.getUiboHelper().moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
             app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         }
 
-        app.getUiboHelper().unblockCard();
+        app.getUiboClientHelper().unblockCard();
         app.getUiboHelper().moveToElement(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         String actualState = app.getUiboHelper().getNextElementFromTheTable(cardId, 3);
 
@@ -164,8 +164,8 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
         app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
@@ -191,8 +191,8 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
         app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));

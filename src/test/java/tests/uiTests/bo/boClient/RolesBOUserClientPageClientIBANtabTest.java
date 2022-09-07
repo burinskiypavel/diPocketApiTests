@@ -13,8 +13,8 @@ public class RolesBOUserClientPageClientIBANtabTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", "33217", phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToClientIBANTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToClientIBANTab();
 
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//table //th[contains(text(), 'Currency code')]", "//table //th[contains(text(), 'Account name')]",
         "//table //th[contains(text(), 'Bank id')]", "//table //th[contains(text(), 'Iban')]", "//table //th[contains(text(), 'Ref')]",

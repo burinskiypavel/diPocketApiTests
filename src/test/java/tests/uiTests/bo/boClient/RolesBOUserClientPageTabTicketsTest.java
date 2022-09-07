@@ -15,8 +15,8 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToTicketsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToTicketsTab();
         app.getUiboHelper().waitFor(By.xpath("//thead //th[contains(text(), 'Ticket Type')]"));
 
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{
@@ -26,14 +26,14 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
                 "//thead //th[contains(text(), 'Last comment')]"}));
 
 
-        app.getUiboHelper().verifyClientPageFilterWithCollection("id", "25596", 1);
-        app.getUiboHelper().verifyClientPageFilter("created", "02.02.2022");
-        app.getUiboHelper().verifyDropDownClientPageFilter("typeName", "FDD check");
-        app.getUiboHelper().verifyDropDownClientPageFilter("username", "EVGENYA");
-        app.getUiboHelper().verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@field='stateName']"), "Closed", 2);
-        app.getUiboHelper().verifyClientPageFilter("closed", "07.02.2022");
+        app.getUiboClientHelper().verifyClientPageFilterWithCollection("id", "25596", 1);
+        app.getUiboClientHelper().verifyClientPageFilter("created", "02.02.2022");
+        app.getUiboClientHelper().verifyDropDownClientPageFilter("typeName", "FDD check");
+        app.getUiboClientHelper().verifyDropDownClientPageFilter("username", "EVGENYA");
+        app.getUiboClientHelper().verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@field='stateName']"), "Closed", 2);
+        app.getUiboClientHelper().verifyClientPageFilter("closed", "07.02.2022");
 
-        app.getUiboHelper().setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
+        app.getUiboClientHelper().setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
         assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Ticket reassigned. Reason: test')]")));
     }
 }

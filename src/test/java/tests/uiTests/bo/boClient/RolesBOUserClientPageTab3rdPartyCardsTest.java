@@ -17,8 +17,8 @@ public class RolesBOUserClientPageTab3rdPartyCardsTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goTo3rdPartyCardsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goTo3rdPartyCardsTab();
         app.getUiboHelper().waitFor(By.xpath("//thead //th[contains(text(), 'Card name')]"));
         List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//thead //th"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boClient/Tab3rdPartyCards.txt");

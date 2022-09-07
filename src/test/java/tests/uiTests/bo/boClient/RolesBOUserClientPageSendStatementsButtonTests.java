@@ -28,8 +28,8 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().sendAllStatemenstToDefaultEmail();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().sendAllStatemenstToDefaultEmail();
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass, appPass);
         String actualSubject = senderAndSubject.get(1);
@@ -47,8 +47,8 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().sendAllStatementsToEnteredEmail(app.emailsVerificationsEmail);
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().sendAllStatementsToEnteredEmail(app.emailsVerificationsEmail);
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(app.emailsVerificationsEmail, app.emailsVerificationsPass);
         String actualSubject = senderAndSubject.get(1);
@@ -66,8 +66,8 @@ public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().sendStatementForChosenPeriodAndDefaultEmail();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().sendStatementForChosenPeriodAndDefaultEmail();
 
         List<String> senderAndSubject = EmailVerificationHelper.getEmailSenderAndSubject(email, pass, appPass);
         String actualSubject = senderAndSubject.get(1);

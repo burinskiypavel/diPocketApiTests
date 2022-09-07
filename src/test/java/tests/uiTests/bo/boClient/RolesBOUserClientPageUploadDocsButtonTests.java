@@ -17,7 +17,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId);
-        app.getUiboHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToClientPage(phone);
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Upload docs']"));
         app.getUiboHelper().click(By.cssSelector("app-select-async[ng-reflect-name='typeId']"));

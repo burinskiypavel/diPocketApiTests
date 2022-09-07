@@ -16,8 +16,8 @@ public class RolesBOUserClientPageEditProfileDataTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", id, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().pressEditProfileDataFromClientPage();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().pressEditProfileDataFromClientPage();
 
         softAssert.assertTrue(app.getUiboHelper().isElementPresent(By.cssSelector("input[id*='input_firstName']")), "First name");
         softAssert.assertTrue(app.getUiboHelper().isElementPresent(By.cssSelector("input[id*='input_lastName']")), "Surname");
@@ -42,10 +42,10 @@ public class RolesBOUserClientPageEditProfileDataTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", id, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().pressEditProfileDataFromClientPage();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().pressEditProfileDataFromClientPage();
 
-        app.getUiboHelper().editProfileData("Pavel" + randomNumber, "Burinsky" + randomNumber, "Main str" + randomNumber, "Main str" + randomNumber, "City" + randomNumber, "30-000" + randomNumber);
+        app.getUiboClientHelper().editProfileData("Pavel" + randomNumber, "Burinsky" + randomNumber, "Main str" + randomNumber, "Main str" + randomNumber, "City" + randomNumber, "30-000" + randomNumber);
 
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Client data updated successfully')]"));
     }

@@ -15,8 +15,8 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToTransactionTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToTransactionTab();
 
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{
                 "//thead //th[contains(text(), 'TranItemId')]", "//thead //th[contains(text(), 'Account name')]",
@@ -31,9 +31,9 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToTransactionTab();
-        app.getUiboHelper().searchByTransactionTab("All");
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToTransactionTab();
+        app.getUiboClientHelper().searchByTransactionTab("All");
 
         app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='629314']"));
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='629314']"));

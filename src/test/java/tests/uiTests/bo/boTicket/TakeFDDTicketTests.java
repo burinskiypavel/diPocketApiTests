@@ -24,7 +24,7 @@ public class TakeFDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().approveTicketSuccessfully();
             app.getUiboHelper().gotoSearchPage();
             app.getUiboHelper().search("id", id);
-            app.getUiboHelper().goToClientPage("380685448615");
+            app.getUiboClientHelper().goToClientPage("380685448615");
 
             app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
             app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
@@ -82,7 +82,7 @@ public class TakeFDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().approveTicketSuccessfully();
             app.getUiboHelper().gotoSearchPage();
             app.getUiboHelper().search("id", id);
-            app.getUiboHelper().goToClientPage("380685448615");
+            app.getUiboClientHelper().goToClientPage("380685448615");
 
             app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
             app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");

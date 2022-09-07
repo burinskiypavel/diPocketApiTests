@@ -17,34 +17,34 @@ public class RolesBOUserClientPageTabPayeeTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToPayeeTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToPayeeTab();
 
-        app.getUiboHelper().verifyClientPageFilter("nickName", "Txcy", "Den");
-        app.getUiboHelper().verifyDropDownClientPageFilter("paymentTypeName", "PLN in Poland", "Other payments");
+        app.getUiboClientHelper().verifyClientPageFilter("nickName", "Txcy", "Den");
+        app.getUiboClientHelper().verifyDropDownClientPageFilter("paymentTypeName", "PLN in Poland", "Other payments");
 
-        app.getUiboHelper().setDropDownClientPageFilter("currencyCode", "GBP");
+        app.getUiboClientHelper().setDropDownClientPageFilter("currencyCode", "GBP");
         String actualCurrencyCode = app.getUiboHelper().getAttributeFromMultiple(By.xpath("//table/tbody/tr[1]/td[3]"), 2);
         assertEquals(actualCurrencyCode, "GBP");
-        app.getUiboHelper().clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        app.getUiboClientHelper().clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
-        app.getUiboHelper().verifyClientPageFilter("bankId", "WBKPPLPP", "VHHFRGUF");
+        app.getUiboClientHelper().verifyClientPageFilter("bankId", "WBKPPLPP", "VHHFRGUF");
 
-        app.getUiboHelper().setClientPageFilter("accountNo", "64109000047341800000085706");
+        app.getUiboClientHelper().setClientPageFilter("accountNo", "64109000047341800000085706");
         String actualaccountNo = app.getUiboHelper().getAttributeFromMultiple(By.xpath("//table/tbody/tr[1]/td[5]"), 2);
         assertEquals(actualaccountNo, "64109000047341800000085706");
         app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='accountNo'] input[type='text']"));
 
-        app.getUiboHelper().verifyClientPageFilter("countryName", "Australia", "Poland");
-        app.getUiboHelper().verifyClientPageFilter("zip", "JUVUV");
-        app.getUiboHelper().verifyClientPageFilter("address1", "Hchc");
+        app.getUiboClientHelper().verifyClientPageFilter("countryName", "Australia", "Poland");
+        app.getUiboClientHelper().verifyClientPageFilter("zip", "JUVUV");
+        app.getUiboClientHelper().verifyClientPageFilter("address1", "Hchc");
 
         WebElement element = app.getUiboHelper().findElement(By.cssSelector("p-columnfilter[field='companyName'] input[type='text']"));
         app.getUiboHelper().moveToElementAction(element);
 
-        app.getUiboHelper().verifyClientPageFilter("firstName", "Gfu");
+        app.getUiboClientHelper().verifyClientPageFilter("firstName", "Gfu");
 
-        app.getUiboHelper().setClientPageFilter("lastName", "Hchc");
+        app.getUiboClientHelper().setClientPageFilter("lastName", "Hchc");
         String actualLastName = app.getUiboHelper().findElement(By.xpath("//table/tbody/tr[1]/td[11]")).getAttribute("ng-reflect-text");
         assertEquals(actualLastName, "Hchc");
     }

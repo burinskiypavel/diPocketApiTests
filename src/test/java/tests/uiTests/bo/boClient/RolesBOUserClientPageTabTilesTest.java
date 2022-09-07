@@ -14,8 +14,8 @@ public class RolesBOUserClientPageTabTilesTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToTilesTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToTilesTab();
 
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//table //th[contains(text(), 'Types')]", "//table //th[contains(text(), 'Messages')]"}));
     }

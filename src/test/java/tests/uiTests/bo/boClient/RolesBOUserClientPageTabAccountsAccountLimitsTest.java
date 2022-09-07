@@ -15,8 +15,8 @@ public class RolesBOUserClientPageTabAccountsAccountLimitsTest extends UITestBas
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId, phone);
-        app.getUiboHelper().goToClientPage(phone);
-        app.getUiboHelper().goToAccountsTab();
+        app.getUiboClientHelper().goToClientPage(phone);
+        app.getUiboClientHelper().goToAccountsTab();
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='Bbh']"));
         app.getUiboHelper().click(By.xpath("//span[contains(text(), 'Account limits')]"));
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//th[contains(text(), 'Name')]", "//th[contains(text(), 'Type')]", "//th[contains(text(), 'Currency')]", "//th[contains(text(), 'Max amount')]", "//th[contains(text(), 'Limit amount')]"}));
