@@ -286,7 +286,7 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void goToTransactionTab() {
-        click(By.id("p-tabpanel-10-label"));
+        click(By.xpath("//span[contains(text(), 'Transaction')]"));
         waitFor(By.xpath("//thead //th[contains(text(), 'TranItemId')]"));
     }
 
