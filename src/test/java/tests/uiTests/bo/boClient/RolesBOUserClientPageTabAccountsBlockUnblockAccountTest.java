@@ -36,12 +36,10 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
         assertEquals(actualPopupText, "Are you sure want to block account with name: "+accountName+"?");
 
-//        Thread.sleep(500);
-//        moveToElement(By.xpath("//td[text() = '"+accountName+"']"));
-//        Thread.sleep(1000);
-//        String actualState = driver.findElement(By.xpath("//td[text() = 'test']/following-sibling::td[1]")).getText();
-//
-//        assertEquals(actualState, "Active(Blocked)");
+        app.getUiboHelper().moveToElement(By.xpath("//td[text() = '"+accountName+"']"));
+        String actualState = app.getUiboHelper().getText(By.xpath("//app-accounts-table //tbody //tr[1] //td[2]"));
+
+        assertEquals(actualState, "Active(Blocked)");
     }
 
     @Test(priority = 2)
@@ -61,6 +59,11 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         String actualPopupText = app.getUiboHelper().unblockAccountAndGetPopupText();
 
         assertEquals(actualPopupText, "Are you sure want to unblock account with name: "+accountName+"?");
+
+        app.getUiboHelper().moveToElement(By.xpath("//td[text() = '"+accountName+"']"));
+        String actualState = app.getUiboHelper().getText(By.xpath("//app-accounts-table //tbody //tr[1] //td[2]"));
+
+        assertEquals(actualState, "Active");
     }
 
     @Test(priority = 3)
