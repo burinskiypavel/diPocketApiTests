@@ -282,7 +282,7 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void goTo3rdPartyCardsTab() {
-        click(By.id("p-tabpanel-9-label"));
+        click(By.xpath("//span[contains(text(), '3rd party cards')]"));
     }
 
     public void goToTransactionTab() {
