@@ -116,6 +116,10 @@ public class UIBOClientHelper extends UIHelperBase {
         click(By.id("p-tabpanel-2-label"));
     }
 
+    public void goToDocsTab() {
+        click(By.id("p-tabpanel-7-label"));
+    }
+
     public void goToTransactionTab() {
         click(By.xpath("//span[contains(text(), 'Transaction')]"));
         waitFor(By.xpath("//thead //th[contains(text(), 'TranItemId')]"));

@@ -273,9 +273,9 @@ public class UIBOHelper extends UIHelperBase {
 //        return actualPopupText;
 //    }
 
-    public void goToDocsTab() {
-        click(By.id("p-tabpanel-7-label"));
-    }
+//    public void goToDocsTab() {
+//        click(By.id("p-tabpanel-7-label"));
+//    }
 
 //    public void goToAccountsTab() {
 //        click(By.xpath("//span[contains(text(), 'Accounts')]"));
