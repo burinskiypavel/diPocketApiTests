@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import static org.testng.Assert.assertEquals;
 
 public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetClientButtonsTests extends UITestBase {
-    String phone = "380634413376";
-    String clientId = "33217";
+    String phone = "380980316499"; //380634413376
+    String clientId = "34138";// 33217
     String forgotPhone = "380685448615";
 
     @Test(priority = 1)
