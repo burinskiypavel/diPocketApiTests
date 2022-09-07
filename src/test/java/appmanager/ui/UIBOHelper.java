@@ -75,7 +75,7 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void goToMessagesTab() {
-        click(By.id("p-tabpanel-3-label"));
+        click(By.xpath("//span[contains(text(), 'Messages')]"));
     }
 
     public void goToClientIBANTab() {
