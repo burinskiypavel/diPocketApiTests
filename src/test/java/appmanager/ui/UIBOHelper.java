@@ -83,7 +83,7 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void goToPayeeTab() {
-        click(By.id("p-tabpanel-5-label"));
+        click(By.xpath("//span[contains(text(), 'Payee')]"));
         waitFor(By.cssSelector("p-columnfilter[field='nickName']"));
     }
 
