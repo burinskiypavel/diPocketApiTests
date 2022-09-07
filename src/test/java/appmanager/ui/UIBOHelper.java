@@ -278,7 +278,7 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void goToAccountsTab() {
-        click(By.id("p-tabpanel-8-label"));
+        click(By.xpath("//span[contains(text(), 'Accounts')]"));
     }
 
     public void goTo3rdPartyCardsTab() {
