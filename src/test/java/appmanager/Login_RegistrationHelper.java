@@ -2,6 +2,7 @@ package appmanager;
 
 import com.cs.dipocketback.base.data.Site;
 import com.cs.dipocketback.pojo.client.CheckboxContainer;
+import com.cs.dipocketback.pojo.client.CheckboxType;
 import com.cs.dipocketback.pojo.client.ClientAddress;
 import com.cs.dipocketback.pojo.registration.AttachedCard;
 import com.cs.dipocketback.pojo.registration.RegSavepointData;
@@ -13,8 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.cs.dipocketback.pojo.client.CheckboxType.ELECTRONIC_COMMUNICATION;
-import static com.cs.dipocketback.pojo.client.CheckboxType.TERMS_AND_CONDITIONS_PL;
+import static com.cs.dipocketback.pojo.client.CheckboxType.*;
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -283,10 +283,10 @@ public class Login_RegistrationHelper extends HelperBase {
         return cliSessionId;
     }
 
-    public void dipocketRegistration() throws InterruptedException, SQLException, ClassNotFoundException {
+    public void dipocketRegistration(int countryId1, int currencyId1, String terms1, String terms2) throws InterruptedException, SQLException, ClassNotFoundException {
         String smsCode = null;
-        int countryId = 616;
-        int currencyId = 985;
+        int countryId = countryId1;
+        int currencyId = currencyId1;
         String site = "DIPOCKET";
         int langId = 4;
 
@@ -681,8 +681,8 @@ public class Login_RegistrationHelper extends HelperBase {
                     .get("references/questions")
                     .then().log().all()
                     .statusCode(200)
-                    .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"),
-                            "checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
+                    .body("checkboxList.typeId[0]", equalTo(terms1),
+                            "checkboxList.typeId[1]", equalTo(terms2));
 
 
             regSavepointData2.setEmail(HelperBase.prop.getProperty("mobile.registration.email"));
@@ -760,11 +760,11 @@ public class Login_RegistrationHelper extends HelperBase {
 
 
             CheckboxContainer checkboxContainer1 = new CheckboxContainer();
-            checkboxContainer1.setTypeId(TERMS_AND_CONDITIONS_PL);
+            checkboxContainer1.setTypeId(CheckboxType.valueOf(terms1));
             checkboxContainer1.setSelected(true);
 
             CheckboxContainer checkboxContainer2 = new CheckboxContainer();
-            checkboxContainer2.setTypeId(ELECTRONIC_COMMUNICATION);
+            checkboxContainer2.setTypeId(CheckboxType.valueOf(terms2));
             checkboxContainer2.setSelected(true);
 
             List<CheckboxContainer> checkboxList = new ArrayList<>();
