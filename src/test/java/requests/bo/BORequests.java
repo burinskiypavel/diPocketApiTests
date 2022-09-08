@@ -116,6 +116,18 @@ public class BORequests {
                             "accountStateName", hasItem("Closed"));
     }
 
+    public Response boServices_v1_account_other_client_(String cookie, int clientId){
+        Response res = given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get( "/v1/account/other/client/"+clientId+"");
+
+                res.then().log().all().statusCode(200);
+                return res;
+    }
+
     public void boServices_v1_account_client_33217(String cookie, int clientId) {
         given()
                 .spec(requestSpecBO)
@@ -139,6 +151,32 @@ public class BORequests {
                         "clientIdOwner", hasItem(33217),
                         "owner", hasItem(true),
                         "shared", hasItem(false));
+    }
+
+    public Response boServices_v1_account_client_(String cookie, int clientId) {
+        Response res = given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get( "/v1/account/client/"+clientId+"");
+
+                res.then().log().all().statusCode(200);
+                return res;
+//                .body("id", hasItem(102690),
+//                        "accountName", hasItem("Bbh"),
+//                        "clientId", hasItem(clientId),
+//                        "ccyId", hasItem(826),
+//                        "ccyCode", hasItem("GBP"),
+//                        "restAmount", hasItem(0),
+//                        "stateId", hasItem(-100),
+//                        "stateName", hasItem("Closed"),
+//                        "typeId", hasItem(1),
+//                        "created", hasItem("2021-10-12"),
+//                        "accStateNameExt", hasItem("Closed"),
+//                        "clientIdOwner", hasItem(33217),
+//                        "owner", hasItem(true),
+//                        "shared", hasItem(false));
     }
 
     public void boServices_v1_client_33217_paymentDetails(String cookie, int clientId) {
@@ -170,7 +208,20 @@ public class BORequests {
 
     }
 
-    public void boServices_v1_client_availCurrencies(String cookie){
+    public Response boServices_v1_client_paymentDetails(String cookie, int clientId) {
+        Response res = given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get("/v1/client/" + clientId + "/paymentDetails");
+
+        res.then().log().all().statusCode(200);
+        return res;
+    }
+
+
+        public void boServices_v1_client_availCurrencies(String cookie){
         given()
                 .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))
@@ -204,6 +255,18 @@ public class BORequests {
                         "restricted", hasItem(false));
     }
 
+    public Response boServices_v1_client_address(String cookie, int clientId){
+        Response res = given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get( "/v1/client/"+ clientId +"/address");
+
+                res.then().log().all().statusCode(200);
+                return res;
+    }
+
     public void boServices_v1_clientImage_33217_docHistory(String cookie, int clientId){
         given()
                 .spec(requestSpecBO)
@@ -220,6 +283,18 @@ public class BORequests {
                         "added", hasItem("2022-05-02"),
                         "stateId", hasItem(-10),
                         "stateName", hasItem("Rejected"));
+    }
+
+    public Response boServices_v1_clientImage_docHistory(String cookie, int clientId){
+        Response res =given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get( "/v1/clientImage/"+clientId+"/docHistory");
+
+                res.then().log().all().statusCode(200);
+                return res;
     }
 
     public void boServices_v1_client_states(String cookie){
@@ -250,6 +325,17 @@ public class BORequests {
                         "firstName", equalTo("Nona"),
                         "lastName", equalTo("Qwerty"),
                         "stateName", equalTo("Active"));
+    }
+
+    public Response boServices_v1_client_(String cookie, int clientId){
+        Response response = given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get( "/v1/client/"+ clientId +"");
+        response.then().log().all().statusCode(200);
+        return response;
     }
 
     public void boServices_v1_client_search(String cookie, String by, String value, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite){
@@ -332,6 +418,17 @@ public class BORequests {
         assertThat(supervisor_reqLists[0].getStateName(), equalTo("Finished"));
         assertFalse(supervisor_reqLists[0].getCreatedAt().isEmpty());
         assertFalse(supervisor_reqLists[0].getApprovedAt().isEmpty());
+    }
+
+    public Response boServices_v1_supervisor_reqList(String cookie, int clientId){
+        Response res = given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get( "/v1/supervisor/"+clientId+"/reqList");
+        res.then().log().all().statusCode(200);
+        return res;
     }
 
     public void boServices_v1_clientImage_docTypes(String cookie) {

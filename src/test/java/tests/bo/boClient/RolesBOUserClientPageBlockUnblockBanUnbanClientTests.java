@@ -3,17 +3,19 @@ package tests.bo.boClient;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
-import model.bo.boClient.*;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBase {
     String cookie = null;
-    int clientId = 33217;
+    int clientId = 34138;
     String reason = "test";
+    String firstName = "Pavel";
+    String lastName = "auto QA";
+    String phone = "380980316499";
+    String email = "testdipocket2@gmail.com";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication(){
@@ -41,17 +43,21 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
 
     @Test(priority = 4)
     public void test_BOServices_v1_client_search(){
-        app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId, "Nona", "Qwerty", "380634413376", "vikarez20@gmail.com", Site.DIPOCKET.toString());
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId, firstName, lastName, phone, email, Site.SODEXO.toString());
     }
 
     @Test(priority = 5)
-    public void test_BOServices_v1_supervisor_33217_reqList(){
-        app.getBoRequestsHelper().boServices_v1_supervisor_33217_reqList(cookie, clientId);
+    public void test_BOServices_v1_supervisor_34138_reqList(){
+        Response res = app.getBoRequestsHelper().boServices_v1_supervisor_reqList(cookie, clientId);
     }
 
     @Test(priority = 6)
-    public void test_BOServices_v1_client_33217(){
-        app.getBoRequestsHelper().boServices_v1_client_33217(cookie, clientId);
+    public void test_BOServices_v1_client_34138(){
+        Response res = app.getBoRequestsHelper().boServices_v1_client_(cookie, clientId);
+        res.then().body("mainPhone", equalTo(phone),
+                "firstName", equalTo(firstName),
+                "lastName", equalTo(lastName),
+                "email", equalTo(email));
     }
 
     @Test(priority = 7)
@@ -85,18 +91,13 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 10)
-    public void test_BOServices_v1_clientImage_33217_selfie(){
+    public void test_BOServices_v1_clientImage_34138_selfie(){
         Response res = given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/selfie");
         res.then().log().all().statusCode(200);
-        ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
-        assertThat(clientImage_selfies[0].getId(), equalTo(30920));
-        assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
-        assertThat(clientImage_selfies[0].getTypeId(), equalTo(1));
-        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAQwAABtbnRyUkdCIFhZWi"));
     }
 
     @Test(priority = 11)
@@ -116,8 +117,8 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 13)
-    public void test_BOServices_v1_account_other_client_33217(){
-        app.getBoRequestsHelper().boServices_v1_account_other_client_33217(cookie, clientId);
+    public void test_BOServices_v1_account_other_client_34138(){
+        app.getBoRequestsHelper().boServices_v1_account_other_client_(cookie, clientId);
     }
 
     @Test(priority = 14)
@@ -134,28 +135,27 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 15)
-    public void test_BOServices_v1_account_client_33217(){
-        app.getBoRequestsHelper().boServices_v1_account_client_33217(cookie, clientId);
+    public void test_BOServices_v1_account_client_34138(){
+        Response res = app.getBoRequestsHelper().boServices_v1_account_client_(cookie, clientId);
+        res.then().body("accountName", hasItems("Main Account"),
+                "clientId", hasItems(clientId));
     }
 
     @Test(priority = 16)
-    public void test_BOServices_v1_clientImage_33217_docs(){
+    public void test_BOServices_v1_clientImage_34138_docs(){
         Response res = given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
                 .when()
                 .get( "/v1/clientImage/"+clientId+"/docs");
         res.then().log().all().statusCode(200);
-        ClientImage_Selfie[] clientImage_selfies = res.as(ClientImage_Selfie[].class);
-        assertThat(clientImage_selfies[0].getId(), equalTo(31456));
-        assertThat(clientImage_selfies[0].getClientId(), equalTo(clientId));
-        assertThat(clientImage_selfies[0].getTypeId(), equalTo(2));
-        assertThat(clientImage_selfies[0].getImageInBase64(), containsString("/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAAqACAAQAAAABAAAEOKADAAQAAAABAAAF7gAAAAD"));
     }
 
     @Test(priority = 17)
-    public void test_BOServices_v1_client_33217_paymentDetails(){
-        app.getBoRequestsHelper().boServices_v1_client_33217_paymentDetails(cookie, clientId);
+    public void test_BOServices_v1_client_34138_paymentDetails(){
+        Response res = app.getBoRequestsHelper().boServices_v1_client_paymentDetails(cookie, clientId);
+        res.then().body("accountName", hasItems("Pavel auto QA"),
+                "currencyCode", hasItems("PLN"));
     }
 
     @Test(priority = 18)
@@ -172,20 +172,14 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 19)
-    public void test_BOServices_v1_payee_33217(){
+    public void test_BOServices_v1_payee_34138(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
                 .when()
                 .get( "/v1/payee/"+clientId+"")
                 .then().log().all()
-                .statusCode(200)
-                .body("id", hasItem(3952),
-                        "clientId", hasItems(clientId),
-                        "nickName", hasItem("Den"),
-                        "paymentTypeId", hasItem(1),
-                        "paymentTypeName", hasItem("PLN in Poland"),
-                        "currencyId", hasItem(985));
+                .statusCode(200);
     }
 
     @Test(priority = 20)
@@ -194,7 +188,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 21)
-    public void test_BOServices_v1_client_33217_tiles(){
+    public void test_BOServices_v1_client_34138_tiles(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -205,12 +199,12 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 22)
-    public void test_BOServices_v1_client_33217_address(){
-        app.getBoRequestsHelper().boServices_v1_client_33217_address(cookie, clientId);
+    public void test_BOServices_v1_client_34138_address(){
+        app.getBoRequestsHelper().boServices_v1_client_address(cookie, clientId);
     }
 
     @Test(priority = 23)
-    public void test_BOServices_v1_ticket_client_33217(){
+    public void test_BOServices_v1_ticket_client_34138(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -218,21 +212,21 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
                 .get( "/v1/ticket/client/"+clientId+"")
                 .then().log().all()
                 .statusCode(200)
-                .body("id", hasItem(26276),
+                .body("id", hasItem(29232),
                         "typeId", hasItem(700),
                         "typeName", hasItem("Client restriction"),
                         "stateId", hasItem(100),
                         "stateName", hasItem("Closed"),
-                        "username", hasItem("EVGENYA"),
-                        "created", hasItem("2022-05-05"),
-                        "closed", hasItem("2022-05-05"),
-                        "queueOrder", hasItem("2022-05-05"),
+                        "username", hasItem("VIKTORIA"),
+                        "created", hasItem("2022-09-08"),
+                        "closed", hasItem("2022-09-08"),
+                        "queueOrder", hasItem("2022-09-08"),
                         "clientId", hasItem(clientId),
-                        "clientFullName", hasItem("Nona Qwerty"),
-                        "clientSite", hasItem(Site.DIPOCKET.toString()),
+                        "clientFullName", hasItem("Pavel auto QA"),
+                        "clientSite", hasItem(Site.SODEXO.toString()),
                         "clientStateId", hasItem(1),
                         "clientStateName", hasItem("Active"),
-                        "lastMessage", hasItem("Ticket closed. Reason: Client unblocked."));
+                        "lastMessage", hasItem("Ticket closed. Reason: Client unbanned."));
     }
 
     @Test(priority = 24)
@@ -250,29 +244,23 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 25)
-    public void test_BOServices_v1_client_33217_pushMsgs(){
+    public void test_BOServices_v1_client_34138_pushMsgs(){
                 given()
                 .cookie(cookie)
                 .spec(app.requestSpecBO)
                 .when()
                 .get( "/v1/client/"+clientId+"/pushMsgs")
                 .then().log().all()
-                .statusCode(200)
-                .body("id", hasItem(660119),
-                        "clientId", hasItem(clientId),
-                        "channel", hasItem("P"),
-                        "created", hasItem("21.02.2022 10:57:46"),
-                        "sent", hasItem("21.02.2022 10:59:49"),
-                        "message", hasItem("Ви не прийняли переказ від Eva Fisher протягом 7 днів, кошти були повернуті платнику"));
+                .statusCode(200);
     }
 
     @Test(priority = 26)
-    public void test_BOServices_v1_clientImage_33217_docHistory(){
-        app.getBoRequestsHelper().boServices_v1_clientImage_33217_docHistory(cookie, clientId);
+    public void test_BOServices_v1_clientImage_34138_docHistory(){
+        app.getBoRequestsHelper().boServices_v1_clientImage_docHistory(cookie, clientId);
     }
 
     @Test(priority = 27, enabled = false)
-    public void test_BOServices_v1_clientImage_33217_selfieHistory(){
+    public void test_BOServices_v1_clientImage_34138_selfieHistory(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -290,7 +278,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 28)
-    public void test_BOServices_v1_client_33217_block(){
+    public void test_BOServices_v1_client_34138_block(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -304,7 +292,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 29)
-    public void test_BOServices_v1_client_33217_(){
+    public void test_BOServices_v1_client_34138_(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -316,7 +304,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 30)
-    public void test_BOServices_v1_client_33217_unblock() {
+    public void test_BOServices_v1_client_34138_unblock() {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -330,7 +318,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 31)
-    public void test_BOServices_v1_client_33217__(){
+    public void test_BOServices_v1_client_34138__(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -342,7 +330,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 32)
-    public void test_BOServices_v1_client_33217_ban_WithoutBlockingClientDevice(){
+    public void test_BOServices_v1_client_34138_ban_WithoutBlockingClientDevice(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -357,7 +345,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 33)
-    public void test_BOServices_v1_client_33217___(){
+    public void test_BOServices_v1_client_34138___(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -369,7 +357,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 34)
-    public void test_BOServices_v1_client_33217_unban(){
+    public void test_BOServices_v1_client_34138_unban(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -381,7 +369,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 35)
-    public void test_BOServices_v1_client_33217____(){
+    public void test_BOServices_v1_client_34138____(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -393,7 +381,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 36)
-    public void test_BOServices_v1_client_33217_ban(){
+    public void test_BOServices_v1_client_34138_ban(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -408,7 +396,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 37)
-    public void test_BOServices_v1_client_33217_____(){
+    public void test_BOServices_v1_client_34138_____(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -420,7 +408,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 38)
-    public void test_BOServices_v1_client_33217_unban_(){
+    public void test_BOServices_v1_client_34138_unban_(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -432,7 +420,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanClientTests extends TestBa
     }
 
     @Test(priority = 39)
-    public void test_BOServices_v1_client_33217______(){
+    public void test_BOServices_v1_client_34138______(){
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
