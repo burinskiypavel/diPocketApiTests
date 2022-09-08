@@ -18,35 +18,7 @@ public class TakeFDDTicketTests extends UITestBase {
             Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
             login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
             app.getUiboTicketHelper().gotoTakeTicket();
-
-            String id = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
-            app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
-            app.getUiboTicketHelper().approveTicketSuccessfully();
-            app.getUiboHelper().gotoSearchPage();
-            app.getUiboHelper().search("id", id);
-            app.getUiboClientHelper().goToClientPage("380685448615");
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Proof of address");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID Back");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
-            app.getUiboHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
-            app.getUiboTicketHelper().gotoTakeTicketWithReg();
-
+            app.getUiboTicketHelper().initFDDTicketDisplain();
         }
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))) {
@@ -76,35 +48,7 @@ public class TakeFDDTicketTests extends UITestBase {
             Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
             login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
             app.getUiboTicketHelper().gotoTakeTicket();
-
-            String id = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
-            app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
-            app.getUiboTicketHelper().approveTicketSuccessfully();
-            app.getUiboHelper().gotoSearchPage();
-            app.getUiboHelper().search("id", id);
-            app.getUiboClientHelper().goToClientPage("380685448615");
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Proof of address");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID Back");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
-            app.getUiboHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
-            app.getUiboTicketHelper().gotoTakeTicketWithReg();
-
+            app.getUiboTicketHelper().initFDDTicketDisplain();
         }
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))) {
@@ -133,46 +77,18 @@ public class TakeFDDTicketTests extends UITestBase {
             Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
             login_registrationHelper.dipocketRegistration(826, 826, "TERMS_AND_CONDITIONS_GB", "DATA_PROCESSING");
             app.getUiboTicketHelper().gotoTakeTicket();
-
-            String id = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
-            app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
-            app.getUiboTicketHelper().approveTicketSuccessfully();
-            app.getUiboHelper().gotoSearchPage();
-            app.getUiboHelper().search("id", id);
-            app.getUiboClientHelper().goToClientPage("380685448615");
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Proof of address");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-            app.getUiboHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID Back");
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file']"), "C:/Work/Files/self.jpg");
-            Thread.sleep(1000);
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-            app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
-            app.getUiboHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
-            app.getUiboTicketHelper().gotoTakeTicketWithReg();
-
+            app.getUiboTicketHelper().initFDDTicketDisplain();
         }
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))) {
             app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
+            app.getUiboTicketHelper().gotoTakeTicketWithReg();
         }
 
         for (int i = 0; i < 3; i++) {
             if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
                 app.getUiboTicketHelper().delayTicketForOneMinute();
-                app.getUiboTicketHelper().gotoTakeTicket();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
             }
         }
 
@@ -181,5 +97,4 @@ public class TakeFDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().approveTicketSuccessfully();
         }
     }
-
 }

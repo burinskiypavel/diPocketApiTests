@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
 import padeObjects.bo.boTicket.TakeTicketEditDataPage;
 
+import java.io.File;
 import java.sql.SQLException;
 
 public class UIBOTicketHelper extends UIHelperBase {
@@ -160,5 +161,52 @@ public class UIBOTicketHelper extends UIHelperBase {
         Thread.sleep(1300);
         click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         waitFor(By.xpath("//*[contains(text(), 'Ticket escalated successfully')]"));
+    }
+
+    public void initFDDTicketDisplain() throws InterruptedException, SQLException, ClassNotFoundException {
+        String id = getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
+        editAndSaveSDDTicket("M", "", "", "", "");
+        approveTicketSuccessfully();
+        gotoSearchPage();
+        search("id", id);
+        goToClientPage("380685448615");
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
+        File file = new File("files/bo/images/self.jpg");
+        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Proof of address");
+        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID Back");
+        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Home']"));
+        waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+        gotoTakeTicketWithReg();
+    }
+
+    public void gotoSearchPage() {
+        click(By.cssSelector("div[ng-reflect-router-link='search']"));
+        waitFor(By.xpath("//*[contains(text(), 'Card')]"));
+    }
+
+    public void search(String by, String value) {
+        waitFor(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"));
+        type(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"), value);
+        waitFor(By.cssSelector("td[ng-reflect-text='"+value+"']"));
+    }
+
+    public void goToClientPage(String phone) {
+        click(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
+        waitFor(By.cssSelector("p.user-name"));
     }
 }
