@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import static org.testng.Assert.assertTrue;
 
-public class TakeTicketTests extends UITestBase {
+public class TakeSDDTicketTests extends UITestBase {
 
     @Test(priority = 1)
     public void testOpeningTicketPage() throws InterruptedException {

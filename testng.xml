@@ -777,9 +777,9 @@
         </classes>
     </test>
 
-    <test name="TakeTicketTests">
+    <test name="TakeSDDTicketTests">
         <classes>
-            <class name="tests.uiTests.bo.boTicket.TakeTicketTests"/>
+            <class name="tests.uiTests.bo.boTicket.TakeSDDTicketTests"/>
         </classes>
     </test>
     <test name="TakeFDDTicketTests">
