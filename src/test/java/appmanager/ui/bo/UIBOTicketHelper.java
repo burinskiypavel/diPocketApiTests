@@ -1,5 +1,6 @@
 package appmanager.ui.bo;
 
+import appmanager.Login_RegistrationHelper;
 import appmanager.UIHelperBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -41,8 +42,13 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
         pressKeys(Keys.ENTER);
         Thread.sleep(1000);
-        clickWithJS(By.xpath("//app-postpone-modal //p-button[@ng-reflect-label='Postpone']"));
-        waitFor(By.xpath("//div[contains(text(), 'Ticket was successfully delayed')]"));
+
+        if(isElementPresent(By.xpath("//div[contains(text(), 'Ticket was successfully delayed')]"))){
+
+        } else {
+            clickWithJS(By.xpath("//app-postpone-modal //p-button[@ng-reflect-label='Postpone']"));
+            waitFor(By.xpath("//div[contains(text(), 'Ticket was successfully delayed')]"));
+        }
     }
 
     public void setGender(String dropdownItem) throws InterruptedException {
@@ -208,5 +214,32 @@ public class UIBOTicketHelper extends UIHelperBase {
     public void goToClientPage(String phone) {
         click(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
         waitFor(By.cssSelector("p.user-name"));
+    }
+
+    public void skipVideoCall(int countryId, int currencyId, String terms1, String terms2) throws InterruptedException, SQLException, ClassNotFoundException {
+        if (isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))) {
+            delayTicketForOneMinute();
+            gotoTakeTicketWithReg();
+
+            if (findElements(By.id("takeTicketContent")).size() == 0) {
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2);
+                gotoTakeTicket();
+                initFDDTicketDisplain();
+            }
+        }
+    }
+
+    public void skipSDDCheckClient() throws InterruptedException, SQLException, ClassNotFoundException {
+        if(isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+
+        } else {
+            for (int i = 0; i < 3; i++) {
+                if (isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
+                    delayTicketForOneMinute();
+                    gotoTakeTicketWithReg();
+                }
+            }
+        }
     }
 }

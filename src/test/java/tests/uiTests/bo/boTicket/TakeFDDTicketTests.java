@@ -21,17 +21,8 @@ public class TakeFDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().initFDDTicketDisplain();
         }
 
-        if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))) {
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
-
-        for (int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
-                app.getUiboTicketHelper().gotoTakeTicket();
-            }
-        }
+        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "CGH164279", "34999285098", "Poland");
@@ -51,17 +42,8 @@ public class TakeFDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().initFDDTicketDisplain();
         }
 
-        if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))) {
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
-
-        for (int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
-                app.getUiboTicketHelper().gotoTakeTicket();
-            }
-        }
+        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().unsuccessfulApprove("Impossible to approve ticket. Client already have documents. Fields “Document type“, “Doc serial number“, “Doc country of issue“ should be filled");
@@ -80,17 +62,8 @@ public class TakeFDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().initFDDTicketDisplain();
         }
 
-        if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))) {
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicketWithReg();
-        }
-
-        for (int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
-                app.getUiboTicketHelper().gotoTakeTicketWithReg();
-            }
-        }
+        app.getUiboTicketHelper().skipVideoCall(826, 826, "TERMS_AND_CONDITIONS_GB", "DATA_PROCESSING");
+        app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "National identification number", "11111111111", "", "United Kingdom");
