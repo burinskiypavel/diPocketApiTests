@@ -242,4 +242,20 @@ public class UIBOTicketHelper extends UIHelperBase {
             }
         }
     }
+
+    public void rescanRequestSuccessfully(boolean id, boolean proofOfAddress, boolean backOfId) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
+        if(id) {
+            click(By.cssSelector("p-checkbox[ng-reflect-input-id='Id'"));
+        }
+        if(proofOfAddress){
+            click(By.cssSelector("p-checkbox[ng-reflect-input-id='Proof of address'"));
+        }
+        if(backOfId){
+            click(By.cssSelector("p-checkbox[ng-reflect-input-id='Back of id'"));
+        }
+        Thread.sleep(700);
+        click(By.xpath("//app-button[@label='Send']"));
+        waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
+    }
 }
