@@ -116,4 +116,27 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
     }
+
+    @Test
+    public void testTheUserChangedHisMindAboutRescanRequestDocuments() throws InterruptedException, SQLException, ClassNotFoundException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+        app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+        if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
+            Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+            login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+            app.getUiboTicketHelper().gotoTakeTicket();
+            app.getUiboTicketHelper().initFDDTicketDisplain();
+        }
+
+        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        app.getUiboTicketHelper().skipSDDCheckClient();
+
+        if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+            app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
+            app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));
+
+            app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
+        }
+    }
 }
