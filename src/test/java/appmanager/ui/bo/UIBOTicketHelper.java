@@ -169,7 +169,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Ticket escalated successfully')]"));
     }
 
-    public void initFDDTicketDisplain() throws InterruptedException, SQLException, ClassNotFoundException {
+    public String initFDDTicketDisplain() throws InterruptedException, SQLException, ClassNotFoundException {
         String id = getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
         editAndSaveSDDTicket("M", "", "", "", "");
         approveTicketSuccessfully();
@@ -198,6 +198,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Home']"));
         waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         gotoTakeTicketWithReg();
+        return id;
     }
 
     public void gotoSearchPage() {
