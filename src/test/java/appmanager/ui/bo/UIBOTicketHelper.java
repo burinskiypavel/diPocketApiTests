@@ -259,4 +259,18 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//app-button[@label='Send']"));
         waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
     }
+
+    public void uploadDoc(String ticketId, String phone, String doc) throws InterruptedException {
+        gotoSearchPage();
+
+        search("id", ticketId);
+        goToClientPage(phone);
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), doc);
+        File file = new File("files/bo/images/self.jpg");
+        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+    }
 }

@@ -143,7 +143,7 @@ public class TakeFDDTicketTests extends UITestBase {
 
     @Test
     public void testApprovingChangesWhenChangingAProofOfAddress() throws InterruptedException, SQLException, ClassNotFoundException {
-        String ticketId = null;
+        String clientId = null;
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
@@ -151,7 +151,7 @@ public class TakeFDDTicketTests extends UITestBase {
             Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
             login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
             app.getUiboTicketHelper().gotoTakeTicket();
-            ticketId = app.getUiboTicketHelper().initFDDTicketDisplain();
+            clientId = app.getUiboTicketHelper().initFDDTicketDisplain();
         }
 
         app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
@@ -162,17 +162,7 @@ public class TakeFDDTicketTests extends UITestBase {
         }
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
-        app.getUiboTicketHelper().gotoSearchPage();
-
-        app.getUiboTicketHelper().search("id", ticketId);
-        app.getUiboTicketHelper().goToClientPage("380685448615");
-
-        app.getUiboTicketHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        app.getUiboTicketHelper().selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Proof of address");
-        File file = new File("files/bo/images/self.jpg");
-        app.getUiboTicketHelper().uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
-        Thread.sleep(1000);
-        app.getUiboTicketHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        app.getUiboTicketHelper().uploadDoc(clientId, "380685448615", "Proof of address");
 
         app.getUiboTicketHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
         app.getUiboTicketHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
@@ -182,4 +172,5 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "11111111111", "123456789", "Poland");
         app.getUiboTicketHelper().approveTicketSuccessfully();
     }
+
 }
