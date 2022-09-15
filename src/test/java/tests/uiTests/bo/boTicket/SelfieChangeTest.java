@@ -2,16 +2,14 @@ package tests.uiTests.bo.boTicket;
 
 import appmanager.Login_RegistrationHelper;
 import base.UITestBase;
-import com.cs.dipocketback.pojo.limit.gps.Limit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
-
-import static org.testng.Assert.assertTrue;
 
 public class SelfieChangeTest extends UITestBase {
 
@@ -43,15 +41,22 @@ public class SelfieChangeTest extends UITestBase {
             app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Upload selfies']"));
             File file = new File("files/bo/images/self.jpg");
 
-            List<WebElement> elements = app.getUiboHelper().findElements(By.xpath("//input[@type='file']"));
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file'][1]"), file.getAbsolutePath());
-            app.getUiboHelper().uploadFile(By.xpath("//input[@type='file'][2]"), file.getAbsolutePath());
-            Thread.sleep(1000);
+            List<WebElement> elements = app.getUiboHelper().findElements(By.xpath("//input[@type='file'][1]"));
+            app.getUiboHelper().uploadFile(By.cssSelector("app-upload-file-with-preview[ng-reflect-name='base64Selfie1'] input[type='file']"), file.getAbsolutePath());
+            app.getUiboHelper().uploadFile(By.cssSelector("app-upload-file-with-preview[ng-reflect-name='base64Selfie2'] input[type='file']"), file.getAbsolutePath());
+            Thread.sleep(700);
             app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+            app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Selfies were uploaded successfully')]"));
+
+            app.getUiboTicketHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
+            app.getUiboTicketHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+            app.getUiboTicketHelper().gotoTakeTicketWithReg();
         }
 
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
-        assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
+        if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
+            app.getUiboTicketHelper().approveTicketSuccessfully();
+        } else {
+            Assert.fail("There are no Update Selfie Ticket");
+        }
     }
-
 }

@@ -788,6 +788,12 @@
         </classes>
     </test>
 
+    <test name="SelfieChangeTest">
+        <classes>
+            <class name="tests.uiTests.bo.boTicket.SelfieChangeTest"/>
+        </classes>
+    </test>
+
     <test name="EscalateToCBOTests">
         <classes>
             <class name="tests.uiTests.bo.boTicket.EscalateToCBOTests"/>
