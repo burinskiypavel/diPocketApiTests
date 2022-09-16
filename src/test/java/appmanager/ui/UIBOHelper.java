@@ -49,6 +49,11 @@ public class UIBOHelper extends UIHelperBase {
         click(By.cssSelector("app-two-factor-auth-modal button[type='submit']"));
     }
 
+    public void gotoHomePageWithBOUser() {
+        click(By.xpath("//p-button[@ng-reflect-label='Home']"));
+        waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+    }
+
     public void gotoBOUsersPage() {
         //click(By.xpath("//p[contains(text(), 'BO Users')]"));
         CBOHomePage cboHomePage = new CBOHomePage(driver);

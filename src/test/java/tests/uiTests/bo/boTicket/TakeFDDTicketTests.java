@@ -1,14 +1,11 @@
 package tests.uiTests.bo.boTicket;
 
-import appmanager.Language;
 import appmanager.Login_RegistrationHelper;
 import base.UITestBase;
-import com.cs.dipocketback.base.data.Site;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -177,7 +174,7 @@ public class TakeFDDTicketTests extends UITestBase {
         }
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
-        app.getUiboTicketHelper().uploadDoc(clientId, "380685448615", document);
+        app.getUiboTicketHelper().uploadDoc(clientId, "380685448615", document, "files/bo/images/self.jpg");
 
         app.getUiboTicketHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
         app.getUiboTicketHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
@@ -187,7 +184,6 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "11111111111", "123456789", "Poland");
         app.getUiboTicketHelper().approveTicketSuccessfully();
     }
-
 
     @DataProvider
     public Iterator<Object[]> approvingChanges(){

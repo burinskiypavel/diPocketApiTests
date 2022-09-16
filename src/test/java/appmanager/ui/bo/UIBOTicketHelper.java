@@ -260,7 +260,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
     }
 
-    public void uploadDoc(String ticketId, String phone, String doc) throws InterruptedException {
+    public void uploadDoc(String ticketId, String phone, String doc, String path) throws InterruptedException {
         gotoSearchPage();
 
         search("id", ticketId);
@@ -268,9 +268,24 @@ public class UIBOTicketHelper extends UIHelperBase {
 
         click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
         selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), doc);
-        File file = new File("files/bo/images/self.jpg");
+        File file = new File(path);
         uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
         Thread.sleep(1000);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+    }
+
+    public void gotoClientPageAndUpdateSelfies(String clientId, String phone, String path) throws InterruptedException {
+        gotoSearchPage();
+        search("id", clientId);
+        goToClientPage(phone);
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload selfies']"));
+        File file = new File(path);
+
+        uploadFile(By.cssSelector("app-upload-file-with-preview[ng-reflect-name='base64Selfie1'] input[type='file']"), file.getAbsolutePath());
+        uploadFile(By.cssSelector("app-upload-file-with-preview[ng-reflect-name='base64Selfie2'] input[type='file']"), file.getAbsolutePath());
+        Thread.sleep(700);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        waitFor(By.xpath("//*[contains(text(), 'Selfies were uploaded successfully')]"));
     }
 }
