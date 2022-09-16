@@ -788,9 +788,9 @@
         </classes>
     </test>
 
-    <test name="SelfieChangeTest">
+    <test name="SelfieChangeTicketTests">
         <classes>
-            <class name="tests.uiTests.bo.boTicket.SelfieChangeTest"/>
+            <class name="tests.uiTests.bo.boTicket.SelfieChangeTicketTests"/>
         </classes>
     </test>
 

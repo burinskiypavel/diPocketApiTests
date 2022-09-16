@@ -288,4 +288,12 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//*[contains(text(), 'Selfies were uploaded successfully')]"));
     }
+
+    public void rejectTicketSuccessfully(String reason) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
+        type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), reason);
+        Thread.sleep(700);
+        click(By.xpath("//app-reject-modal //p-button[@ng-reflect-label='Reject']"));
+        waitFor(By.xpath("//*[contains(text(), 'Ticket rejected successfully')]"));
+    }
 }
