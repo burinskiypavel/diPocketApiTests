@@ -794,6 +794,12 @@
         </classes>
     </test>
 
+    <test name="UpdateDocumentTicketTests">
+        <classes>
+            <class name="tests.uiTests.bo.boTicket.UpdateDocumentTicketTests"/>
+        </classes>
+    </test>
+
     <test name="EscalateToCBOTests">
         <classes>
             <class name="tests.uiTests.bo.boTicket.EscalateToCBOTests"/>

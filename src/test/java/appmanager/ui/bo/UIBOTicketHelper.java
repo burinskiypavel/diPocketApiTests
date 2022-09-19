@@ -150,6 +150,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     public void approveTicketSuccessfully() {
         click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
     }
 
     public void unsuccessfulApprove(final String message) {
@@ -289,15 +290,31 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Selfies were uploaded successfully')]"));
     }
 
-    public void rejectTicketSuccessfully(String reason) throws InterruptedException {
+    public void gotoClientPageAndUpdateDocs(String clientId, String phone, String path) throws InterruptedException {
+        gotoSearchPage();
+        search("id", clientId);
+        goToClientPage(phone);
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
+        File file = new File(path);
+
+        uploadFile(By.cssSelector("input[type='file']"), file.getAbsolutePath());
+        Thread.sleep(700);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        waitFor(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
+    }
+
+    public void rejectTicketSuccessfully(String reason, final String message) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
         type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), reason);
         Thread.sleep(700);
         click(By.xpath("//app-reject-modal //p-button[@ng-reflect-label='Reject']"));
-        waitFor(By.xpath("//*[contains(text(), 'Ticket rejected successfully')]"));
+        waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
     }
 
-    public void verifyUserChangedHisMindAboutRejectionOfSelfieChangeTicket() {
+    public void verifyUserChangedHisMindAboutRejectionOfSelfieDocChangeTicket() {
         click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
         closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));

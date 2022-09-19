@@ -67,8 +67,8 @@ public class SelfieChangeTicketTests extends UITestBase {
         }
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
-            app.getUiboTicketHelper().verifyUserChangedHisMindAboutRejectionOfSelfieChangeTicket();
-            app.getUiboTicketHelper().rejectTicketSuccessfully("test");
+            app.getUiboTicketHelper().verifyUserChangedHisMindAboutRejectionOfSelfieDocChangeTicket();
+            app.getUiboTicketHelper().rejectTicketSuccessfully("test", "Ticket rejected successfully");
         } else {
             Assert.fail("There are no Update Selfie Ticket");
         }
