@@ -43,7 +43,7 @@ public class SelfieChangeTicketTests extends UITestBase {
     }
 
     @Test
-    public void testRejectionOfSelfieChangeTicket() throws InterruptedException, SQLException, ClassNotFoundException {
+    public void testRejectionOfSelfieChangeTicket_TheUserChangedHisMindAboutRejectionOfSelfieChangeTicket() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
@@ -67,6 +67,7 @@ public class SelfieChangeTicketTests extends UITestBase {
         }
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
+            app.getUiboTicketHelper().verifyUserChangedHisMindAboutRejectionOfSelfieChangeTicket();
             app.getUiboTicketHelper().rejectTicketSuccessfully("test");
         } else {
             Assert.fail("There are no Update Selfie Ticket");

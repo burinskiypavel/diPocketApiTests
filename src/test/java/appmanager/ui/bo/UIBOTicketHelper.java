@@ -296,4 +296,10 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//app-reject-modal //p-button[@ng-reflect-label='Reject']"));
         waitFor(By.xpath("//*[contains(text(), 'Ticket rejected successfully')]"));
     }
+
+    public void verifyUserChangedHisMindAboutRejectionOfSelfieChangeTicket() {
+        click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
+        closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
+        waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
+    }
 }
