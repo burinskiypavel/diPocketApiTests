@@ -416,7 +416,7 @@ public class Login_RegistrationHelper extends HelperBase {
             res.then().log().all();
             int statusCode = res.getStatusCode();
             assertEquals(statusCode, 200);
-            res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Италия", "Австрия", "Украина", "Бельгия", "Болгария", "Венгрия", "Германия", "Чехия"));
+            res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Италия", "Австрия", "Украина", "Бельгия", "Болгария", "Венгрия", "Германия"));
 
 
             clientAddress.setTypeId(0);
