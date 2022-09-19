@@ -4,15 +4,19 @@ import appmanager.Login_RegistrationHelper;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class UpdateDocumentTicketTests extends UITestBase {
     String clientId = null;
 
-    @Test
-    public void testRejectionOfPhotoIDChangeTicket_TheUserChangedHisMindAboutRejectionOfPhotoIDChangeTicket() throws InterruptedException, SQLException, ClassNotFoundException {
+    @Test(dataProvider = "rejectionOfDocs")
+    public void testRejectionOfPhotoIDChangeTicket_TheUserChangedHisMindAboutRejectionOfPhotoIDChangeTicket(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
@@ -30,7 +34,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "11111111111", "123456789", "Poland");
             app.getUiboTicketHelper().approveTicketSuccessfully();
 
-            app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId, "380685448615", "files/bo/images/self.jpg");
+            app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId, "380685448615", "files/bo/images/self.jpg", doc);
             app.getUiboHelper().gotoHomePageWithBOUser();
             app.getUiboTicketHelper().gotoTakeTicketWithReg();
         }
@@ -41,5 +45,14 @@ public class UpdateDocumentTicketTests extends UITestBase {
         } else {
             Assert.fail("There are no Update Document Ticket");
         }
+    }
+
+    @DataProvider
+    public Iterator<Object[]> rejectionOfDocs(){
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"PhotoID"});
+        list.add(new Object[] {"Proof of address"});
+        list.add(new Object[] {"PhotoID Back"});
+        return list.iterator();
     }
 }

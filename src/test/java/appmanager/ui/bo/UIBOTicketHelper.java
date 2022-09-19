@@ -290,14 +290,14 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Selfies were uploaded successfully')]"));
     }
 
-    public void gotoClientPageAndUpdateDocs(String clientId, String phone, String path) throws InterruptedException {
+    public void gotoClientPageAndUpdateDocs(String clientId, String phone, String path, String docItem) throws InterruptedException {
         gotoSearchPage();
         search("id", clientId);
         goToClientPage(phone);
 
         click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
 
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), docItem);
         File file = new File(path);
 
         uploadFile(By.cssSelector("input[type='file']"), file.getAbsolutePath());
