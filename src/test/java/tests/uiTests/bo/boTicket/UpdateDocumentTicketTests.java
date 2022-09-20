@@ -14,9 +14,21 @@ import java.util.List;
 
 public class UpdateDocumentTicketTests extends UITestBase {
     String clientId = null;
+    String clientId2 = "29818";
+    String phone2 = "380980316499";
 
-    @Test(dataProvider = "rejectionOfDocs")
-    public void testRejectionOfPhotoIDChangeTicket_TheUserChangedHisMindAboutRejectionOfPhotoIDChangeTicket(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
+    @DataProvider
+    public Iterator<Object[]> rejectionOfDocs(){
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"PhotoID"});
+        list.add(new Object[] {"Proof of address"});
+        list.add(new Object[] {"PhotoID Back"});
+        list.add(new Object[] {"Second ID"});
+        return list.iterator();
+    }
+
+    @Test(enabled = false, dataProvider = "rejectionOfDocs")
+    public void testRejectionOfPhotoIDChangeTicket_TheUserChangedHisMindAboutRejectionOfPhotoIDChangeTicket_withRegistration(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
@@ -47,12 +59,22 @@ public class UpdateDocumentTicketTests extends UITestBase {
         }
     }
 
-    @DataProvider
-    public Iterator<Object[]> rejectionOfDocs(){
-        List<Object[]> list = new ArrayList<Object[]>();
-        list.add(new Object[] {"PhotoID"});
-        list.add(new Object[] {"Proof of address"});
-        list.add(new Object[] {"PhotoID Back"});
-        return list.iterator();
+    @Test(dataProvider = "rejectionOfDocs")
+    public void testRejectionOfPhotoIDChangeTicket_TheUserChangedHisMindAboutRejectionOfPhotoIDChangeTicket_withCreatedUser(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+
+        app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId2, phone2, "files/bo/images/self.jpg", doc);
+        app.getUiboHelper().gotoHomePageWithBOUser();
+        app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        app.getUiboTicketHelper().skipSDDCheckClient();
+
+        if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update document')]"))) {
+            app.getUiboTicketHelper().verifyUserChangedHisMindAboutRejectionOfSelfieDocChangeTicket();
+            app.getUiboTicketHelper().rejectTicketSuccessfully("test", "Docs was rejected successfully");
+        } else {
+            Assert.fail("There are no Update Document Ticket");
+        }
     }
 }
