@@ -202,6 +202,45 @@ public class UIBOTicketHelper extends UIHelperBase {
         return id;
     }
 
+    public String initFDDTicketDisplainWithSecondID() throws InterruptedException, SQLException, ClassNotFoundException {
+        String id = getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
+        editAndSaveSDDTicket("M", "", "", "", "");
+        approveTicketSuccessfully();
+        gotoSearchPage();
+        search("id", id);
+        goToClientPage("380685448615");
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
+        File file = new File("files/bo/images/self.jpg");
+        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Proof of address");
+        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID Back");
+        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+
+        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Second ID");
+        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+
+        click(By.xpath("//p-button[@ng-reflect-label='Home']"));
+        waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+        gotoTakeTicketWithReg();
+        return id;
+    }
+
     public void gotoSearchPage() {
         click(By.cssSelector("div[ng-reflect-router-link='search']"));
         waitFor(By.xpath("//*[contains(text(), 'Card')]"));
@@ -245,7 +284,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         }
     }
 
-    public void rescanRequestSuccessfully(boolean id, boolean proofOfAddress, boolean backOfId) throws InterruptedException {
+    public void rescanRequestSuccessfully(boolean id, boolean proofOfAddress, boolean backOfId, boolean secondId) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
         if(id) {
             click(By.cssSelector("p-checkbox[ng-reflect-input-id='Id'"));
@@ -255,6 +294,9 @@ public class UIBOTicketHelper extends UIHelperBase {
         }
         if(backOfId){
             click(By.cssSelector("p-checkbox[ng-reflect-input-id='Back of id'"));
+        }
+        if(secondId){
+            click(By.cssSelector("p-checkbox[ng-reflect-input-id='Proof of change in name'"));
         }
         Thread.sleep(700);
         click(By.xpath("//app-button[@label='Send']"));

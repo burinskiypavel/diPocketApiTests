@@ -114,7 +114,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
-            app.getUiboTicketHelper().rescanRequestSuccessfully(true, true, true);
+            app.getUiboTicketHelper().rescanRequestSuccessfully(true, true, true, false);
         }
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
@@ -154,7 +154,7 @@ public class TakeFDDTicketTests extends UITestBase {
             Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
             login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
             app.getUiboTicketHelper().gotoTakeTicket();
-            clientId = app.getUiboTicketHelper().initFDDTicketDisplain();
+            clientId = app.getUiboTicketHelper().initFDDTicketDisplainWithSecondID();
         }
 
         app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
@@ -163,13 +163,16 @@ public class TakeFDDTicketTests extends UITestBase {
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
 
             if(document.equals("PhotoID")) {
-                app.getUiboTicketHelper().rescanRequestSuccessfully(true, false, false);
+                app.getUiboTicketHelper().rescanRequestSuccessfully(true, false, false, false);
             }
             if(document.equals("Proof of address")) {
-                app.getUiboTicketHelper().rescanRequestSuccessfully(false, true, false);
+                app.getUiboTicketHelper().rescanRequestSuccessfully(false, true, false, false);
             }
             if(document.equals("PhotoID Back")) {
-                app.getUiboTicketHelper().rescanRequestSuccessfully(false, false, true);
+                app.getUiboTicketHelper().rescanRequestSuccessfully(false, false, true, false);
+            }
+            if(document.equals("Second ID")) {
+                app.getUiboTicketHelper().rescanRequestSuccessfully(false, false, false, true);
             }
         }
 
@@ -191,6 +194,7 @@ public class TakeFDDTicketTests extends UITestBase {
         list.add(new Object[] {"PhotoID"});
         list.add(new Object[] {"Proof of address"});
         list.add(new Object[] {"PhotoID Back"});
+        list.add(new Object[] {"Second ID"});
         return list.iterator();
     }
 }
