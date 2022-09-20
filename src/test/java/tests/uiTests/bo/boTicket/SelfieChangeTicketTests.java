@@ -10,6 +10,8 @@ import java.sql.SQLException;
 
 public class SelfieChangeTicketTests extends UITestBase {
     String clientId = null;
+    String clientId2 = "29818";
+    String phone2 = "380980316499";
 
     @Test
     public void testApprovingChangesWhenChangingASelfie() throws InterruptedException, SQLException, ClassNotFoundException {
@@ -42,8 +44,8 @@ public class SelfieChangeTicketTests extends UITestBase {
         }
     }
 
-    @Test
-    public void testRejectionOfSelfieChangeTicket_TheUserChangedHisMindAboutRejectionOfSelfieChangeTicket() throws InterruptedException, SQLException, ClassNotFoundException {
+    @Test(enabled = false)
+    public void testRejectionOfSelfieChangeTicket_TheUserChangedHisMindAboutRejectionOfSelfieChangeTicket_withRegistration() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
@@ -65,6 +67,25 @@ public class SelfieChangeTicketTests extends UITestBase {
             app.getUiboHelper().gotoHomePageWithBOUser();
             app.getUiboTicketHelper().gotoTakeTicketWithReg();
         }
+
+        if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
+            app.getUiboTicketHelper().verifyUserChangedHisMindAboutRejectionOfSelfieDocChangeTicket();
+            app.getUiboTicketHelper().rejectTicketSuccessfully("test", "Ticket rejected successfully");
+        } else {
+            Assert.fail("There are no Update Selfie Ticket");
+        }
+    }
+
+    @Test
+    public void testRejectionOfSelfieChangeTicket_TheUserChangedHisMindAboutRejectionOfSelfieChangeTicket_withAlreadyExistClient() throws InterruptedException, SQLException, ClassNotFoundException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+
+        app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId2, phone2, "files/bo/images/self.jpg");
+        app.getUiboHelper().gotoHomePageWithBOUser();
+        app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
             app.getUiboTicketHelper().verifyUserChangedHisMindAboutRejectionOfSelfieDocChangeTicket();
