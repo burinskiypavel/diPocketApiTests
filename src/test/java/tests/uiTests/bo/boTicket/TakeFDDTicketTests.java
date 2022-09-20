@@ -15,6 +15,16 @@ import static org.testng.Assert.assertTrue;
 
 public class TakeFDDTicketTests extends UITestBase {
 
+    @DataProvider
+    public Iterator<Object[]> rescanRequesteAndUploadDocs(){
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"PhotoID"});
+        list.add(new Object[] {"Proof of address"});
+        list.add(new Object[] {"PhotoID Back"});
+        list.add(new Object[] {"Second ID"});
+        return list.iterator();
+    }
+
     @Test(priority = 1)
     public void testApproveFDDTiketWithDocumentTypePassport() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
@@ -144,8 +154,8 @@ public class TakeFDDTicketTests extends UITestBase {
         }
     }
 
-    @Test(dataProvider = "approvingChanges")
-    public void testApprovingChangesWhenChangingAProofOfAddress(String document) throws InterruptedException, SQLException, ClassNotFoundException {
+    @Test(dataProvider = "rescanRequesteAndUploadDocs")
+    public void testRescanRequesteAndUploadDocs(String document) throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = null;
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
@@ -183,18 +193,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboTicketHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-
         app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "11111111111", "123456789", "Poland");
         app.getUiboTicketHelper().approveTicketSuccessfully();
-    }
-
-    @DataProvider
-    public Iterator<Object[]> approvingChanges(){
-        List<Object[]> list = new ArrayList<Object[]>();
-        list.add(new Object[] {"PhotoID"});
-        list.add(new Object[] {"Proof of address"});
-        list.add(new Object[] {"PhotoID Back"});
-        list.add(new Object[] {"Second ID"});
-        return list.iterator();
     }
 }
