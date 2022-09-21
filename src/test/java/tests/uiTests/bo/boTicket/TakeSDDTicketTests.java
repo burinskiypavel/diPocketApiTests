@@ -34,6 +34,10 @@ public class TakeSDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
+            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
+        }
+
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
             app.getUiboHelper().waitFor(By.xpath("//app-client-details-info"));
             app.getUiboHelper().waitFor(By.id("takeTicketContent"));
@@ -70,6 +74,10 @@ public class TakeSDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
+            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
+        }
+
         for(int i = 0; i < 3; i++) {
             if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
                 app.getUiboTicketHelper().delayTicketForOneMinute();
@@ -103,6 +111,10 @@ public class TakeSDDTicketTests extends UITestBase {
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
             app.getUiboTicketHelper().delayTicketForOneMinute();
             app.getUiboTicketHelper().gotoTakeTicket();
+        }
+
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
+            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
         }
 
         for(int i = 0; i < 3; i++) {
@@ -141,6 +153,10 @@ public class TakeSDDTicketTests extends UITestBase {
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
             app.getUiboTicketHelper().delayTicketForOneMinute();
             app.getUiboTicketHelper().gotoTakeTicket();
+        }
+
+        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
+            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
         }
 
         for(int i = 0; i < 3; i++) {
