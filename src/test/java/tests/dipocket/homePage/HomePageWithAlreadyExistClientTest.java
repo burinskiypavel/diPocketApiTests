@@ -23,7 +23,6 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
         app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .auth().preemptive().basic(phone, pass)
                 .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
@@ -45,7 +44,6 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
         String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
         Response res =  given()
                 .spec(app.requestSpecDipocketHomePage)
-                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .auth().preemptive().basic(phone, pass)
                 .contentType("application/json; charset=UTF-8")
                 .body("{\n" +
@@ -68,56 +66,54 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("clientProfile/clientInfo2")
                 .then().log().all()
                 .statusCode(200)
-                .body("clientFirstName", equalTo("Pavel"))
-                .body("clientLastName", equalTo("Burinsky"));
+                .body("clientFirstName", equalTo("Pavel"),
+                        "clientLastName", equalTo("Burinsky"),
+                        "mainPhone",equalTo("380980316499"),
+                        "email", equalTo("testdipocket3@gmail.com"));
     }
 
     @Test(priority = 4)
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("clientProfile/clientConfig")
                 .then().log().all()
                 .statusCode(200)
-                .body("payeeCurrencyHash", notNullValue())
-                .body("payeePaymentTypeHash", notNullValue())
-                .body("bankTransferReasonHash", notNullValue())
-                .body("avlCurrencyForNewAccHash", notNullValue())
-                .body("dipTransferCurrencyHash", notNullValue())
-                .body("availCategoriesHash", notNullValue());
+                .body("payeeCurrencyHash", notNullValue(),
+                        "payeePaymentTypeHash", notNullValue(),
+                        "bankTransferReasonHash", notNullValue(),
+                        "avlCurrencyForNewAccHash", notNullValue(),
+                        "dipTransferCurrencyHash", notNullValue(),
+                        "availCategoriesHash", notNullValue());
     }
 
     @Test(priority = 5)
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
                 .get("accounts/clientDiPAccounts2?walletId=null")
                 .then().log().all()
                 .statusCode(200)
-                .body("accounts.state", equalTo(Arrays.asList("ACTIVE")))
-                .body("accounts.ccy", equalTo(Arrays.asList("PLN")));
+                .body("accounts.state", equalTo(Arrays.asList("ACTIVE")),
+                "accounts.ccy", equalTo(Arrays.asList("PLN")));
     }
 
     @Test(priority = 6)
     public void test_ClientServices_v1_tile_getMessage2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                //.header("authorization", HelperBase.prop.getProperty("mobile.login.authorizationBasic"))
                 .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
