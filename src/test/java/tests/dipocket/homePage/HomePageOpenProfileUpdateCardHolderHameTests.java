@@ -21,7 +21,7 @@ public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
     String oldCardHolderName = null;
     String actualCardHolderName = null;
     String cookie = null;
-    String username = "VIKTORIA";
+    String username = "PAVELB_AUTO_BO";
     int clientId = 29818;
     int ticketId = 0;
 
@@ -176,7 +176,7 @@ public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
     public void test_BOServices_v1_auth_authentication() {
         baseURI = app.BOURL;
         basePath = "BOServices";
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
     @Test(priority = 10)
@@ -236,8 +236,8 @@ public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
                 .statusCode(200)
                 .body("ticketId", hasItems(29938),
                         "typeName", hasItems("Cardholder name change"),
-                        "ticketsHistoryList.typeName", hasItems("SDD check"),
-                        "ticketsHistoryList.username", hasItems("DIPBO1"),
+                        "ticketsHistoryList[1].typeName", hasItems("Cardholder name change"),
+                        "ticketsHistoryList.username", hasItems("PAVELB_AUTO_BO"),
                         "ticketsHistoryList.changeDate", hasItems("2021-01-13T12:47:11.044646Z"),
                         "ticketsHistoryList.created", hasItems("2020-12-04T10:13:47.321483Z"),
                         "ticketsHistoryList.msg", hasItems("Ticket closed. Reason: Client banned."),
@@ -314,14 +314,14 @@ public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                //.pathParam("clientId", clientId)
+                .pathParam("clientId", clientId)
                 .header("content-type", "application/json")
                 .body("{\n" +
                         "  \"reason\": \"test\",\n" +
                         "  \"ticketId\": "+ticketId+"\n" +
                         "}")
                 .when()
-                .post( "/v1/client/29818/cardholder/approve")
+                .post( "/v1/client/{clientId}/cardholder/approve")
                 .then().log().all()
                 .statusCode(200);
 
