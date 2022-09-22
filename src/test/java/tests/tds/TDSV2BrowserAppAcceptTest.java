@@ -21,7 +21,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String tranId = null;
 
-    @Test(priority = 1)
+    @Test(timeOut = 30000, priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
         Response res = given()
@@ -88,7 +88,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
         assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 2)
+    @Test(timeOut = 30000, priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
         Response res = given()
@@ -128,7 +128,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
         assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 3)
+    @Test(timeOut = 30000, priority = 3)
     public void test_tranStatus_TDSServices_acs_tranStatus() {
         printCurentThredId();
         given()
@@ -143,7 +143,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 4)
+    @Test(timeOut = 30000, priority = 4)
     public void test_getTransId_TDSTestServices_v1_tranId_v2_txId_randomAcsTransId() {
         printCurentThredId();
         Response res = given()
@@ -157,7 +157,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 5)
+    @Test(timeOut = 30000, priority = 5)
     public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() throws SQLException, ClassNotFoundException {
         printCurentThredId();
         String cliSessionId = app.getLogin_registrationHelper().loginUpAndGo(app.tds_phone, app.tds_pass, app.mobile_login_deviceuuid_tds);
@@ -175,7 +175,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
         assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 6)
+    @Test(timeOut = 30000, priority = 6)
     public void test_tranStatus_TDSServices_acs_tranStatus_() {
         printCurentThredId();
         given()
@@ -190,7 +190,7 @@ public class TDSV2BrowserAppAcceptTest extends TestBase {
                 .body("value", equalTo("ACCEPTED"));
     }
 
-    @Test(priority = 7)
+    @Test(timeOut = 30000, priority = 7)
     public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
         Response res = given()

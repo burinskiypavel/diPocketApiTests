@@ -22,7 +22,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
 
-    @Test(priority = 1)
+    @Test(timeOut = 30000, priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
         String now = app.getTimeStamp("YYYYMMddHHmmss");
@@ -91,7 +91,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
         assertEquals(backgroundARes.getTransStatus(), "C");
     }
 
-    @Test(priority = 2)
+    @Test(timeOut = 30000, priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
         Response res = given()
@@ -131,7 +131,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
         assertEquals(backgroudCres.getChallengeCompletionInd(), "N");
     }
 
-    @Test(priority = 3)
+    @Test(timeOut = 30000, priority = 3)
     public void test_CReq_TDSServices_acs_bgAuth_() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
         Response res = given()
