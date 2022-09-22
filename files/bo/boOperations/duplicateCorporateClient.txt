@@ -1,0 +1,30 @@
+Client type: Corporate
+Company name: TS Corporate Company
+Site: DiPocket
+Language: English
+Currency: EUR
+Due diligence status: PSDD
+Fee tariff plan: EUR - standart
+Card program by default: DiPocket
+Operations limit plan: Standard client limits
+Transactions limit plan: Pavel_rename_AUTO_4416
+Country of contract: United Kingdom
+Identification code: 987654321
+Account Name:
+Account type:
+Client:
+Account:
+Country of contract:
+Country: Lithuania
+State:
+Postal code: LT-08128
+City: Vilnius
+Address: Upės g. 23
+Address line #2:
+Use this as mailing: true
+Country: Lithuania
+State:
+Postal code: LT-08128
+City: Vilnius
+Address: Upės g. 23
+Address line #2:

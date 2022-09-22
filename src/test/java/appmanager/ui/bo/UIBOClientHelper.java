@@ -20,6 +20,11 @@ public class UIBOClientHelper extends UIHelperBase {
         waitFor(By.cssSelector("p.user-name"));
     }
 
+    public void goToClientPageCorpClient(By locator) {
+        click(locator);
+        waitFor(By.cssSelector("app-corp-client-details-info"));
+    }
+
     public void unblockClient() {
         click(By.xpath("//app-button[@ng-reflect-label='Unblock client']"));
         click(By.xpath("//p-button[@ng-reflect-label='Unblock']"));

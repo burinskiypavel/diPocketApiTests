@@ -1,0 +1,4 @@
+Cardholder name: TS Corporate Company
+Fee tariff plan: EUR - standart
+Currency: EUR
+Language: English

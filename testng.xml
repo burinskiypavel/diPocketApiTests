@@ -777,6 +777,12 @@
         </classes>
     </test>
 
+    <test name="DuplicateCorporateClientTests">
+        <classes>
+            <class name="tests.uiTests.bo.boOperations.DuplicateCorporateClientTests"/>
+        </classes>
+    </test>
+
     <test name="TakeSDDTicketTests">
         <classes>
             <class name="tests.uiTests.bo.boTicket.TakeSDDTicketTests"/>
