@@ -22,7 +22,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     String randomTXID = app.generateRandomNumber(10);
     String tranId = null;
 
-    @Test(priority = 1)
+    @Test(timeOut = 30000, priority = 1)
     public void test_veReqAEx1_TDSServices_acs_bgAuth_v1() {
         printCurentThredId();
         System.out.println("app.TDSBaseUrl: " + app.TDSBaseUrl + " txid: " + randomTXID + " pan: " + app.pan);
@@ -52,7 +52,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                                 "backgroundResponse.backgroundVeres.enrollStatusCode", equalTo("0"));
     }
 
-    @Test(priority = 2)
+    @Test(timeOut = 30000, priority = 2)
     public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
         String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
@@ -110,7 +110,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         assertEquals(backgroudResponse.getPageId(), "bio-web.html");
     }
 
-    @Test(priority = 3)
+    @Test(timeOut = 30000, priority = 3)
     public void test_tranStatus_TDSServices_acs_tranStatus_v1() {
         printCurentThredId();
         System.out.println("txid: " + randomTXID);
@@ -126,7 +126,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .body("value", equalTo("AWAITING"));
     }
 
-    @Test(priority = 4)
+    @Test(timeOut = 30000, priority = 4)
     public void test_getTransId_TDSTestServices_v1_tranId_txId_randomTXID() {
         printCurentThredId();
         System.out.println("txid: " + randomTXID);
@@ -141,7 +141,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         assertEquals(res.getStatusCode(), 200);
     }
 
-    @Test(priority = 5)
+    @Test(timeOut = 30000, priority = 5)
     public void test_tranAccept_ClientServices_v1_tds_tranId_tranAccept() throws SQLException, ClassNotFoundException {
         printCurentThredId();
         System.out.println("tranId: " + tranId);
@@ -159,7 +159,7 @@ public class TDSV1BioAcceptTest extends TestBase {
         assertEquals(response.getStatusCode(), 200);
     }
 
-    @Test(priority = 6)
+    @Test(timeOut = 30000, priority = 6)
     public void test_tranStatus_TDSServices_acs_tranStatus_v1_() {
         printCurentThredId();
         System.out.println("txid: " + randomTXID);
@@ -175,7 +175,7 @@ public class TDSV1BioAcceptTest extends TestBase {
                 .body("value", equalTo("ACCEPTED"));
     }
 
-    @Test(priority = 7)
+    @Test(timeOut = 30000, priority = 7)
     public void test_paReq_TDSServices_acs_bgAuth_v1_() {
         printCurentThredId();
         System.out.println("txid: " + randomTXID);
