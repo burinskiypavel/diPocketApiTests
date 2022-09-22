@@ -4,6 +4,7 @@ import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -290,10 +291,8 @@ public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
                 .get("/v1/ticket/{key}/isTicketOwner")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
-                //.body("", hasItem(true));
 
-        JsonPath js = new JsonPath(response);
-        actualCardHolderName = js.getString("");
+        Assert.assertEquals(response, "true");
     }
 
     @Test(priority = 17)
@@ -315,13 +314,14 @@ public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .pathParam("clientId", clientId)
+                //.pathParam("clientId", clientId)
                 .header("content-type", "application/json")
                 .body("{\n" +
-                        "  \"ticketId\" : "+ticketId+"\n" +
+                        "  \"reason\": \"test\",\n" +
+                        "  \"ticketId\": "+ticketId+"\n" +
                         "}")
                 .when()
-                .post( "/v1/client/{clientId}/cardholder/approve")
+                .post( "/v1/client/29818/cardholder/approve")
                 .then().log().all()
                 .statusCode(200);
 
