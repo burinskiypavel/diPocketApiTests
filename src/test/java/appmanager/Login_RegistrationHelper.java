@@ -53,6 +53,7 @@ public class Login_RegistrationHelper extends HelperBase {
         String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, site);
 
         Response res =  given()
+                .log().uri().log().headers().log().body()
                 .auth().preemptive().basic(phone, pass)
                 .header("deviceuuid", deviceUUID)
                 .header("site", site)
@@ -78,7 +79,7 @@ public class Login_RegistrationHelper extends HelperBase {
         baseURI = HelperBase.prop.getProperty("mobile.base.url");
         dbHelper.deleteClientDeviceFromDB(deviceUUID);
 
-        given().log().all()
+        given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("9_" + phone, pass)
                 .header("deviceuuid", deviceUUID)
                 .header("site", site)
@@ -96,7 +97,7 @@ public class Login_RegistrationHelper extends HelperBase {
                 .body("errCode", equalTo("DIP-00591"));
 
         String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, "PLAYIT");
-        Response res = given().log().all()
+        Response res = given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("9_" + phone, pass)
                 .header("deviceuuid", deviceUUID)
                 .header("site", site)
@@ -121,7 +122,7 @@ public class Login_RegistrationHelper extends HelperBase {
         String site = "UPANDGO";
 
         dbHelper.deleteClientDeviceFromDB(mobileLoginDeviceUUID);
-        given().log().all()
+        given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("10_" + phone, pass)
                 .header("deviceuuid", mobileLoginDeviceUUID)
                 .header("site", site)
@@ -141,7 +142,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
 
         String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, mobileLoginDeviceUUID, site);
-        Response res =  given().log().all()
+        Response res =  given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("10_" + phone, pass)
                 .header("deviceuuid", mobileLoginDeviceUUID)
                 .header("site", site)
