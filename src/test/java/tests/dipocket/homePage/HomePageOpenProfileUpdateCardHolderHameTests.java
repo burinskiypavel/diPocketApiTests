@@ -64,7 +64,6 @@ public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
                 .post( "homePage/authenticateMobileApp");
         res.then().log().all().statusCode(200);
         cliSessionId = res.getHeader("cliSessionId");
-        System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
     }
 
