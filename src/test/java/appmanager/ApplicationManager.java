@@ -229,6 +229,7 @@ public class ApplicationManager {
                 .log().uri().log().headers().log().body()
                 .config(configTimeout)
                 .baseUri(TDSBaseUrl)
+                .basePath("")
                 .contentType("application/xml");
 
         requestSpecPeak = given()
@@ -240,6 +241,7 @@ public class ApplicationManager {
                 .log().uri().log().headers().log().body()
                 .config(configTimeout)
                 .baseUri(TDSBaseUrl)
+                .basePath("")
                 .contentType("application/json");
 
         requestSpecBO = given()
