@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.cs.dipocketback.pojo.client.CheckboxType.*;
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.testng.Assert.assertEquals;
@@ -28,6 +27,7 @@ public class Login_RegistrationHelper extends HelperBase {
         String cliSessionId = null;
         String site = "DIPOCKET";
         baseURI = HelperBase.prop.getProperty("mobile.base.url");
+        basePath = "";
 
         dbHelper.deleteClientDeviceFromDB(deviceUUID);
 
@@ -67,10 +67,8 @@ public class Login_RegistrationHelper extends HelperBase {
                 .when()
                 .post( "homePage/authenticateMobileApp");
         cliSessionId = res.getHeader("cliSessionId");
-        System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
-        int StatusCode = res.getStatusCode();
-        assertEquals(StatusCode, 200);
+        res.then().log().all().statusCode(200);
         return cliSessionId;
     }
 
@@ -113,10 +111,8 @@ public class Login_RegistrationHelper extends HelperBase {
                 .when()
                 .post("homePage/authenticateMobileApp");
         cliSessionId = res.getHeader("cliSessionId");
-        System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
-        int StatusCode = res.getStatusCode();
-        assertEquals(StatusCode, 200);
+        res.then().log().all().statusCode(200);
         return cliSessionId;
     }
 
@@ -160,11 +156,9 @@ public class Login_RegistrationHelper extends HelperBase {
                 .when()
                 .post( HelperBase.prop.getProperty("mobile.base.url")+"homePage/authenticateMobileApp");
         cliSessionId = res.getHeader("cliSessionId");
-        System.out.println(res.getHeaders());
         System.out.println("cliSessionId " + cliSessionId);
         //dbHelper.storeDataToTheFile("files\\tds\\cliSessionId.txt",cliSessionId);
-        int StatusCode = res.getStatusCode();
-        assertEquals(StatusCode, 200);
+        res.then().log().all().statusCode(200);
         return cliSessionId;
     }
 
