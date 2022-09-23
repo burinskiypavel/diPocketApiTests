@@ -211,6 +211,7 @@ public class ApplicationManager {
 
         requestSpecEmailVerification = given()
                 .baseUri(baseURL)
+                .basePath("")
                 .log().uri().log().headers().log().body()
                 .contentType("application/json");
 
