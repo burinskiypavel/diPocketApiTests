@@ -167,8 +167,8 @@ public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
                         "}")
                 .when()
                 .post("clientProfile/changeCardholderName")
-                .then().log().all();
-                //.statusCode(200);
+                .then().log().all()
+                .statusCode(200);
     }
 
     @Test(priority = 9)
