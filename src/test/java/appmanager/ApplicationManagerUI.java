@@ -209,6 +209,7 @@ public class ApplicationManagerUI {
         requestSpecDipocketHomePage = given()
                 .log().uri().log().headers().log().body()
                 .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .basePath("")
                 .header("site", HelperBase.prop.getProperty("mobile.site"))
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
 
