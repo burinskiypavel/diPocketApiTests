@@ -689,4 +689,22 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void boServices_v1_user_pathParam(String cookie, String username, String expectedEmail, String expectedRoleId, String expectedPhone, String expectedLastName, String expectedStateName){
+        given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .pathParam("username", username)
+                .when()
+                .get( "/v1/user/{username}")
+                .then().log().all()
+                .statusCode(200)
+                .body("username", equalTo(username),
+                        "email", equalTo(expectedEmail),
+                        "roleId", equalTo(expectedRoleId),
+                        "phone", equalTo(expectedPhone),
+                        "lastName", equalTo(expectedLastName),
+                        "stateName", equalTo(expectedStateName));
+    }
 }
