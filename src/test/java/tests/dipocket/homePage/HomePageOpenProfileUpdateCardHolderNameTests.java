@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class HomePageOpenProfileUpdateCardHolderHameTests extends TestBase {
+public class HomePageOpenProfileUpdateCardHolderNameTests extends TestBase {
     String cliSessionId = null;
     String phone = "380980316499";
     String pass = "reset246740";
