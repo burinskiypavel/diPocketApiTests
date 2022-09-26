@@ -39,10 +39,10 @@ public class DuplicateCorporateClientTests extends UITestBase {
 
         app.getUiboHelper().waitFor(By.xpath("//p-button[@ng-reflect-label='Create']"));
 
-        List<String> actualText = app.getUiboHelper().getActualText(By.xpath("//app-confirmation-step //tbody //tr"));
-        List<String> expectedText = app.getUiboHelper().getDateFromFile("files/bo/boOperations/duplicateCorporateClient.txt");
+        //List<String> actualText = app.getUiboHelper().getActualText(By.xpath("//app-confirmation-step //tbody //tr"));
+        //List<String> expectedText = app.getUiboHelper().getDateFromFile("files/bo/boOperations/duplicateCorporateClient.txt");
 
-        assertEquals(actualText, expectedText, "5 page data");
+        //assertEquals(actualText, expectedText, "5 page data");
 
         app.getUiboOperationsHelper().createCorporateClientWithMessage("Corporate client was created successfully");
 
