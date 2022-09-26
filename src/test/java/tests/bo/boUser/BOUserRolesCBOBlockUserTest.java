@@ -12,6 +12,11 @@ import static org.hamcrest.CoreMatchers.*;
 public class BOUserRolesCBOBlockUserTest extends TestBase {
     String cookie = null;
     String username = "PAVELB";
+    String email = "burinskiypavel@gmail.com";
+    String roleId = "CBO";
+    String phone = "380685448614";
+    String lastName = "Burinskiy";
+    String stateName = "Active";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication(){
@@ -121,20 +126,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     }
 
     @Test(priority = 8)
-    public void test_BOServices_v1_user_PAVELB(){
-        given()
-                .cookie(cookie)
-                .spec(app.requestSpecBO)
-                .when()
-                .get( "/v1/user/"+username+"")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", equalTo(username),
-                        "email", equalTo("burinskiypavel@gmail.com"),
-                        "role.id", equalTo("CBO"),
-                        "phone", equalTo("380685448614"),
-                        "lastName", equalTo("Burinskiy"),
-                        "stateName", equalTo("Active"));
+    public void test_BOServices_v1_user_pathParam(){
+        app.getBoRequestsHelper().boServices_v1_user_pathParam(cookie, username, email, roleId, phone, lastName, stateName);
     }
 
     @Test(priority = 9)
@@ -153,20 +146,8 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     }
 
     @Test(priority = 10)
-    public void test_BOServices_v1_user_PAVELB_(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .when()
-                .get( "/v1/user/"+username+"")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", equalTo(username),
-                        "email", equalTo("burinskiypavel@gmail.com"),
-                        "role.id", equalTo("CBO"),
-                        "phone", equalTo("380685448614"),
-                        "lastName", equalTo("Burinskiy"),
-                        "stateName", equalTo("Blocked"));
+    public void test_BOServices_v1_user_pathParam_(){
+        app.getBoRequestsHelper().boServices_v1_user_pathParam(cookie, username, email, roleId, phone, lastName, "Blocked");
     }
 
     @Test(priority = 11)
@@ -185,19 +166,7 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
     }
 
     @Test(priority = 12)
-    public void test_BOServices_v1_user_PAVELB__(){
-        given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .when()
-                .get( "/v1/user/"+username+"")
-                .then().log().all()
-                .statusCode(200)
-                .body("username", equalTo(username),
-                        "email", equalTo("burinskiypavel@gmail.com"),
-                        "role.id", equalTo("CBO"),
-                        "phone", equalTo("380685448614"),
-                        "lastName", equalTo("Burinskiy"),
-                        "stateName", equalTo("Active"));
+    public void test_BOServices_v1_user_pathParam__(){
+        app.getBoRequestsHelper().boServices_v1_user_pathParam(cookie, username, email, roleId, phone, lastName, stateName);
     }
 }
