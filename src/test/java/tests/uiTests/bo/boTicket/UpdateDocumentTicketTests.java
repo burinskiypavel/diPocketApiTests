@@ -49,7 +49,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
         }
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
-        app.getUiboTicketHelper().uploadDoc(clientId, "380685448615", document, "files/bo/images/self.jpg");
+        app.getUiboTicketHelper().uploadDoc(clientId, "380685448615", document, "files/bo/images/doc.jpg");
 
         app.getUiboTicketHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
         app.getUiboTicketHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
@@ -64,7 +64,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
     }
 
     @Test(enabled = false, dataProvider = "docs")
-    public void testRejectionOfPhotoIDChangeTicket_TheUserChangedHisMindAboutRejectionOfPhotoIDChangeTicket_withRegistration(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
+    public void testRejectionOfDocsChangeTicket_TheUserChangedHisMindAboutRejectionOfDocsChangeTicket_withRegistration(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
@@ -96,10 +96,10 @@ public class UpdateDocumentTicketTests extends UITestBase {
     }
 
     @Test(dataProvider = "docs")
-    public void testRejectionOfPhotoIDChangeTicket_TheUserChangedHisMindAboutRejectionOfPhotoIDChangeTicket_withCreatedUser(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
+    public void testRejectionOfDocsChangeTicket_TheUserChangedHisMindAboutRejectionOfDocsChangeTicket_withAlreadyExistClient(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
 
-        app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId2, phone2, "files/bo/images/self.jpg", doc);
+        app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId2, phone2, "files/bo/images/doc.jpg", doc);
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
