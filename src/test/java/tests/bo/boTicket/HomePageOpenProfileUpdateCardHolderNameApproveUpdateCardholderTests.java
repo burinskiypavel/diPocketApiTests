@@ -1,4 +1,4 @@
-package tests.dipocket.homePage;
+package tests.bo.boTicket;
 
 import appmanager.HelperBase;
 import base.TestBase;
@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.testng.Assert.assertEquals;
 
-public class HomePageOpenProfileUpdateCardHolderNameTests extends TestBase {
+public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests extends TestBase {
     String cliSessionId = null;
     String phone = "380980316499";
     String pass = "reset246740";
