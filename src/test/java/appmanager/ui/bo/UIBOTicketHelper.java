@@ -296,6 +296,19 @@ public class UIBOTicketHelper extends UIHelperBase {
         }
     }
 
+    public void skipFDDCheckClient() throws InterruptedException, SQLException, ClassNotFoundException {
+        if(isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
+
+        } else {
+            for (int i = 0; i < 3; i++) {
+                if (isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+                    delayTicketForOneMinute();
+                    gotoTakeTicketWithReg();
+                }
+            }
+        }
+    }
+
     public void rescanRequestSuccessfully(boolean id, boolean proofOfAddress, boolean backOfId, boolean secondId) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
         if(id) {
@@ -372,5 +385,26 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
         closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
+    }
+
+    public void askForSuccessfullySDD(boolean id, boolean proofOfAddress, boolean backOfId, boolean residencePermit) {
+        click(By.xpath("//app-button[@ng-reflect-label='Ask for']"));
+        if(id){
+            clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Id']"));
+        }
+        if(proofOfAddress){
+            clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Proof of address']"));
+        }
+        if(backOfId){
+            clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Back of id']"));
+        }
+        if(residencePermit){
+            clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Residence permit']"));
+        }
+
+        type(By.id("11"), "test");
+        click(By.xpath("//app-button[@label='Send']"));
+
+        waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
     }
 }
