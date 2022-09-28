@@ -191,6 +191,9 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
             JsonPath js = new JsonPath(response);
             ticketId = js.getInt("id");
+        String actualTypeName = js.getString("typeName");
+
+        assertEquals(actualTypeName, "Cardholder name change");
     }
 
     @Test(priority = 11)
