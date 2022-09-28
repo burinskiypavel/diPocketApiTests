@@ -2,7 +2,6 @@ package tests.bo.boTicket;
 
 import base.TestBase;
 import io.restassured.path.json.JsonPath;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
@@ -128,10 +127,7 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClientTests extends T
                 .cookie(cookie)
                 .pathParam("clientId", clientId)
                 .header("content-type", "application/json")
-                .body("{\n" +
-                        "  \"clientId\": \""+clientId+"\",\n" +
-                        "  \"ticketId\": "+ticketId+"\n" +
-                        "}")
+                .queryParam("ticketId", ticketId)
                 .when()
                 .post("/v1/client/{clientId}/approveSelfie")
                 .then().log().all()
