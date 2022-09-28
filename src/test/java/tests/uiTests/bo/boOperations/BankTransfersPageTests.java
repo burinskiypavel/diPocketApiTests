@@ -60,7 +60,7 @@ public class BankTransfersPageTests extends UITestBase {
         return list.iterator();
     }
 
-    @Test
+    @Test(enabled = false)//the data for this period don't have Operation revert to test
     public void testOperationRevertForTheBankTransfersWithStateError() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
@@ -71,7 +71,7 @@ public class BankTransfersPageTests extends UITestBase {
         app.getUiboOperationsHelper().verifyOperationRevertForTheBankTransfersWithStateError();
     }
 
-    @Test(enabled = false)//DEV-3243
+    @Test(enabled = false)//the data for this period don't have operation SendAgain to test
     public void testOperationSendAgainForTheBankTransfersWithStateError() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
