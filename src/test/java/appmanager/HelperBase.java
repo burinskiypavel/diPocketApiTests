@@ -76,4 +76,15 @@ public class HelperBase {
         }
         return table;
     }
+
+    public static String readFileReturnString(String path) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String data = null;
+            String d;
+            while ((d = br.readLine()) != null) {
+                data = d;
+            }
+            return data;
+        }
+    }
 }
