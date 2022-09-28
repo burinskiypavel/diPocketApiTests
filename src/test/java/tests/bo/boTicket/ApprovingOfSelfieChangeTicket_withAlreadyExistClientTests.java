@@ -2,6 +2,7 @@ package tests.bo.boTicket;
 
 import base.TestBase;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
@@ -105,13 +106,8 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClientTests extends T
 
     @Test(priority = 7)
     public void test_BOServices_v1_ticket_take() {
-        String response = given()
-                .spec(app.requestSpecBO)
-                .cookie(cookie)
-                .when()
-                .get("/v1/ticket/take")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+        Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
+        String response =res.then().extract().response().asString();
 
         JsonPath js = new JsonPath(response);
         ticketId = js.getInt("id");

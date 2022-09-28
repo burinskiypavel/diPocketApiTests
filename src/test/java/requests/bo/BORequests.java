@@ -707,4 +707,15 @@ public class BORequests {
                         "lastName", equalTo(expectedLastName),
                         "stateName", equalTo(expectedStateName));
     }
+
+    public Response  boServices_v1_ticket_take(String cookie) {
+        Response response = given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get("/v1/ticket/take");
+        response.then().log().all().statusCode(200);
+        return response;
+    }
 }
