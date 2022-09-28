@@ -191,7 +191,31 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
             ticketId = js.getInt("id");
         String actualTypeName = js.getString("typeName");
 
-        assertEquals(actualTypeName, "Cardholder name change");
+        if(actualTypeName.equals("SDD check")){
+            given()
+                    .spec(app.requestSpecBO)
+                    .cookie(cookie)
+                    .pathParam("ticketId", ticketId)
+                    .queryParam("postponeTill", "28.09.2022 17:53:50")
+                    .when()
+                    .post("/v1/ticket/{ticketId}/postpone")
+                    .then().log().all()
+                    .statusCode(200);
+        }
+
+        String response2 = given()
+                .spec(app.requestSpecBO)
+                .cookie(cookie)
+                .when()
+                .get("/v1/ticket/take")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+
+        JsonPath js2 = new JsonPath(response2);
+        ticketId = js2.getInt("id");
+        String actualTypeName2 = js2.getString("typeName");
+
+        assertEquals(actualTypeName2, "Cardholder name change");
     }
 
     @Test(priority = 11, enabled = false)
