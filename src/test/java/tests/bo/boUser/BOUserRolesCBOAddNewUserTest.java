@@ -23,8 +23,6 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
             app.getDbHelper().deleteBOUserFromDB(username);
         }
 
-        baseURI = app.BOURL;
-        basePath = "BOServices";
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
     }
 

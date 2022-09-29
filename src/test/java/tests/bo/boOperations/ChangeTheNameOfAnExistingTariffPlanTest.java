@@ -18,8 +18,6 @@ public class ChangeTheNameOfAnExistingTariffPlanTest extends TestBase {
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
-        baseURI = app.BOURL;
-        basePath = "BOServices";
         System.out.println("randomNumber: " + randomNumber);
         feeTariffPlanName = app.getDbHelper().getFeeTariffPlanFromDB(String.valueOf(id));
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin2, app.CBOuserPass2, username);

@@ -22,8 +22,6 @@ public class RolesBOUserClientPageUploadSelfiesButtonTests extends TestBase {
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
         clientId = app.getDbHelper().getClientIdFromDB2(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        baseURI = app.BOURL;
-        basePath = "BOServices";
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 

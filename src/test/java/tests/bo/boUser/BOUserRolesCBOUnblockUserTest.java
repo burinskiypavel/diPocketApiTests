@@ -17,8 +17,6 @@ public class BOUserRolesCBOUnblockUserTest extends TestBase {
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication(){
-        baseURI = app.BOURL;
-        basePath = "BOServices";
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
     }
 

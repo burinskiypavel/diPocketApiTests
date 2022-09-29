@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import model.bo.boClient.Supervisor_reqList;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItems;
@@ -24,6 +24,8 @@ public class BORequests {
         String cookie = null;
 
         Response responseCode = given()
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .basePath("BOServices")
                 .log().uri().log().headers()
                 .auth().preemptive().basic(login, pass)
                 .contentType("application/json")
@@ -36,6 +38,8 @@ public class BORequests {
 
         Response response = given()
                 .log().uri().log().headers()
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .basePath("BOServices")
                 .auth().preemptive().basic(login, pass)
                 .cookie(cookie)
                 .header("bo-auth-token", "123456")

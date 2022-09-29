@@ -174,8 +174,8 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 9)
     public void test_BOServices_v1_auth_authentication() {
-        baseURI = app.BOURL;
-        basePath = "BOServices";
+        //baseURI = app.BOURL;
+        //basePath = "BOServices";
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
