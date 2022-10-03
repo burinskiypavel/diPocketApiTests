@@ -74,7 +74,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 .body("images.typeId", hasItems(1, 2, 3, 4, 5, 6),
                         "images.stateID", hasItems(10),
                         "images.imageType", hasItems("SELFIE", "PHOTOID", "PROOFOFADDRESS", "SELFIE2", "PHOTOIDBACK", "SECONDID"),
-                        "images.imageState", hasItems("APPROVED", "REJECTED"));
+                        "images.imageState", hasItems("APPROVED"));
     }
 
     @Test(priority = 6)
@@ -120,18 +120,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
             oldCardHolderName = "Pavel Burinsky";
         }
 
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
-                .header("content-type", "application/json")
-                .body("{\n" +
-                        "  \"value\" : \""+newCardHolderName+"\"\n" +
-                        "}")
-                .when()
-                .post("clientProfile/changeCardholderName")
-                .then().log().all()
-                .statusCode(200);
+        app.getClientProfileRequestsHelper().clientServices_v1_clientProfile_changeCardholderName(cliSessionId, phone, pass, newCardHolderName);
     }
 
     @Test(priority = 9)
