@@ -130,25 +130,29 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_take() {
-        Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-        String response =res.then().extract().response().asString();
+        String actualTypeNameGlobal = null;
+        for(int i = 0; i < 5; i++) {
+            Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
+            String response = res.then().extract().response().asString();
 
-        JsonPath js = new JsonPath(response);
-        ticketId = js.getInt("id");
-        String actualTypeName = js.getString("typeName");
+            JsonPath js = new JsonPath(response);
+            ticketId = js.getInt("id");
+            String actualTypeName = js.getString("typeName");
 
-        if(actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check")){
-            app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "05.10.2022 23:35:50");
+            if (actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check")) {
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "05.10.2022 23:35:50");
+            }
+
+            Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
+            String response2 = res2.then().extract().response().asString();
+
+            JsonPath js2 = new JsonPath(response2);
+            ticketId = js2.getInt("id");
+            String actualTypeName2 = js2.getString("typeName");
+            actualTypeNameGlobal = actualTypeName2;
         }
 
-        Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-        String response2 =res2.then().extract().response().asString();
-
-        JsonPath js2 = new JsonPath(response2);
-        ticketId = js2.getInt("id");
-        String actualTypeName2 = js2.getString("typeName");
-
-        assertEquals(actualTypeName2, "Cardholder name change");
+        assertEquals(actualTypeNameGlobal, "Cardholder name change");
     }
 
     @Test(priority = 11)
