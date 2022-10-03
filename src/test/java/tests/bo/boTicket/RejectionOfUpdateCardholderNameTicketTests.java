@@ -56,18 +56,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
             oldCardHolderName = "Pavel Burinsky";
         }
 
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
-                .header("content-type", "application/json")
-                .body("{\n" +
-                        "  \"value\" : \""+newCardHolderName+"\"\n" +
-                        "}")
-                .when()
-                .post("clientProfile/changeCardholderName")
-                .then().log().all()
-                .statusCode(200);
+        app.getClientProfileRequestsHelper().clientServices_v1_clientProfile_changeCardholderName(cliSessionId, phone, pass, newCardHolderName);
     }
 
     @Test(priority = 9)
