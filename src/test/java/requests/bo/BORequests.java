@@ -722,4 +722,17 @@ public class BORequests {
         response.then().log().all().statusCode(200);
         return response;
     }
+
+    public void boServices_v1_ticket_ticketId_postpone(String cookie, int ticketId, String postponeTill) {
+        given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .pathParam("ticketId", ticketId)
+                .queryParam("postponeTill", postponeTill)
+                .when()
+                .post("/v1/ticket/{ticketId}/postpone")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

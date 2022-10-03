@@ -155,7 +155,6 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
         else {
             newCardHolderName = "Pavel Burinsk";
             oldCardHolderName = "Pavel Burinsky";
-
         }
 
         given()
@@ -174,8 +173,6 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 9)
     public void test_BOServices_v1_auth_authentication() {
-        //baseURI = app.BOURL;
-        //basePath = "BOServices";
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
@@ -184,8 +181,8 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
         Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
         String response =res.then().extract().response().asString();
 
-            JsonPath js = new JsonPath(response);
-            ticketId = js.getInt("id");
+        JsonPath js = new JsonPath(response);
+        ticketId = js.getInt("id");
         String actualTypeName = js.getString("typeName");
 
         assertEquals(actualTypeName, "Cardholder name change");

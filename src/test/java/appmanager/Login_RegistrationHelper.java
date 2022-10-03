@@ -27,7 +27,7 @@ public class Login_RegistrationHelper extends HelperBase {
         String cliSessionId = null;
         String site = "DIPOCKET";
         baseURI = HelperBase.prop.getProperty("mobile.base.url");
-        basePath = "";
+        //basePath = "";
 
         dbHelper.deleteClientDeviceFromDB(deviceUUID);
 
