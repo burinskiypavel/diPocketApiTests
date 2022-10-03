@@ -137,7 +137,18 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
         ticketId = js.getInt("id");
         String actualTypeName = js.getString("typeName");
 
-        assertEquals(actualTypeName, "Cardholder name change");
+        if(actualTypeName.equals("SDD check")){
+            app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "28.09.2022 17:53:50");
+        }
+
+        Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
+        String response2 =res2.then().extract().response().asString();
+
+        JsonPath js2 = new JsonPath(response2);
+        ticketId = js2.getInt("id");
+        String actualTypeName2 = js2.getString("typeName");
+
+        assertEquals(actualTypeName2, "Cardholder name change");
     }
 
     @Test(priority = 11)
