@@ -29,44 +29,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .contentType("application/json; charset=UTF-8")
-                .body("{\n" +
-                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
-                        "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
-                        "  \"appVersion\" : \"2.2.7\"\n" +
-                        "}")
-                .when()
-                .post( "homePage/authenticateMobileApp")
-                .then().log().all()
-                .statusCode(400)
-                //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
-                .body("errCode", equalTo("DIP-00591"));
-    }
-
-    @Test(priority = 2)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
-        Response res =  given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .contentType("application/json; charset=UTF-8")
-                .body("{\n" +
-                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
-                        "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
-                        "  \"appVersion\" : \"2.2.7\",\n" +
-                        "  \"otp\" : \""+loginSMSCode+"\"\n" +
-                        "}")
-                .when()
-                .post( "homePage/authenticateMobileApp");
-        res.then().log().all().statusCode(200);
-        cliSessionId = res.getHeader("cliSessionId");
-        System.out.println("cliSessionId " + cliSessionId);
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 3)
@@ -293,7 +256,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
-        Assert.assertEquals(response, "true");
+        assertEquals(response, "true");
     }
 
     @Test(priority = 17)
@@ -339,35 +302,5 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 .then().log().all()
                 .statusCode(200)
                 .body("cardholderName", equalTo(newCardHolderName));
-    }
-
-    @Test(priority = 10, enabled = false)
-    public void test_ClientServices_v1_clientProfile_changeCardholderName_(){
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
-                .header("content-type", "application/json")
-                .body("{\n" +
-                        "  \"value\" : \""+oldCardHolderName+"\"\n" +
-                        "}")
-                .when()
-                .post("clientProfile/changeCardholderName")
-                .then().log().all();
-                //.statusCode(200);
-    }
-
-    @Test(priority = 11, enabled = false)
-    public void test_ClientServices_v1_ClientProfile_ClientInfo2__() throws InterruptedException {
-        Thread.sleep(1500);
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
-                .when()
-                .get("clientProfile/clientInfo2")
-                .then().log().all()
-                .statusCode(200)
-                .body("cardholderName", equalTo(oldCardHolderName));
     }
 }
