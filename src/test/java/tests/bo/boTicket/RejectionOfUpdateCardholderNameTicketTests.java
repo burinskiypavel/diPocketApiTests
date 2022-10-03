@@ -73,8 +73,8 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
         ticketId = js.getInt("id");
         String actualTypeName = js.getString("typeName");
 
-        if(actualTypeName.equals("SDD check")){
-            app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "28.09.2022 17:53:50");
+        if(actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check")){
+            app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "05.10.2022 23:35:50");
         }
 
         Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
