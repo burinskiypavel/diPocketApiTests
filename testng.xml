@@ -806,6 +806,12 @@
         </classes>
     </test>
 
+    <test name="TheUserNeedsToReassignTheSDDTicketToAnotherBOUserTest">
+        <classes>
+            <class name="tests.uiTests.bo.boTicket.TheUserNeedsToReassignTheSDDTicketToAnotherBOUserTest"/>
+        </classes>
+    </test>
+
     <test name="EscalateToCBOTests">
         <classes>
             <class name="tests.uiTests.bo.boTicket.EscalateToCBOTests"/>

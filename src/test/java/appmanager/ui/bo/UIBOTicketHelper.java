@@ -407,4 +407,14 @@ public class UIBOTicketHelper extends UIHelperBase {
 
         waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
     }
+
+    public void reassignTicketSuccessfully(String username, String reason) throws InterruptedException {
+        click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
+        waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), username);
+        type(By.cssSelector("app-input[ng-reflect-name='reason'] input"), reason);
+        Thread.sleep(700);
+        click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        waitFor(By.xpath("//*[contains(text(), 'Ticket reassigned successfully')]"));
+    }
 }
