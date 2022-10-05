@@ -126,6 +126,8 @@ public class ApplicationManagerUI {
         ChromeOptions chromeOptions = new ChromeOptions();
         //chromeOptions.addArguments("--headless");
         //WebDriverManager.chromedriver().version("88").setup();
+        chromeOptions.addArguments("--ignore-ssl-errors=yes");
+        chromeOptions.addArguments("--ignore-certificate-errors");
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 20);

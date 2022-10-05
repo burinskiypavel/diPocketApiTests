@@ -89,7 +89,7 @@ public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
         assertEquals(actualTypeNameGlobal, "Cardholder name change");
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, enabled = false)
     public void test_BOServices_v1_client_clientId_block(){
         given()
                 .spec(app.requestSpecBO)
