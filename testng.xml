@@ -806,9 +806,9 @@
         </classes>
     </test>
 
-    <test name="TheUserNeedsToReassignTheSDDTicketToAnotherBOUserTest">
+    <test name="TheUserNeedsToReassignTheTicketsToAnotherBOUserTest">
         <classes>
-            <class name="tests.uiTests.bo.boTicket.TheUserNeedsToReassignTheSDDTicketToAnotherBOUserTest"/>
+            <class name="tests.uiTests.bo.boTicket.TheUserNeedsToReassignTheTicketsToAnotherBOUserTest"/>
         </classes>
     </test>
 
