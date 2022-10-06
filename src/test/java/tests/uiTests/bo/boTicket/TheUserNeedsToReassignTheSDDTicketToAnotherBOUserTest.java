@@ -24,6 +24,7 @@ public class TheUserNeedsToReassignTheSDDTicketToAnotherBOUserTest  extends UITe
         app.getUiboTicketHelper().skipFDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
+            app.getUiboTicketHelper().verifyTheUserChangedHisMindAboutReassignTheSDDTicketToAnotherBOUser();
             app.getUiboTicketHelper().reassignTicketSuccessfully("BOAUTOTEST", "test");
         }
     }

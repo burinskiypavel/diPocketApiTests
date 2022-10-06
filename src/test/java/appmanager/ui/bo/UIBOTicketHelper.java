@@ -417,4 +417,10 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         waitFor(By.xpath("//*[contains(text(), 'Ticket reassigned successfully')]"));
     }
+
+    public void verifyTheUserChangedHisMindAboutReassignTheSDDTicketToAnotherBOUser() {
+        click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
+        closePopUp(By.cssSelector("button.p-dialog-header-icon"));
+        waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
+    }
 }
