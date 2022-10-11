@@ -108,7 +108,7 @@ public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 7)
+    @Test(priority = 7, enabled = false)
     public void test_BOServices_v1_client_clientId_unblock(){
         given()
                 .spec(app.requestSpecBO)
