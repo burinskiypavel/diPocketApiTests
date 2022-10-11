@@ -3,11 +3,14 @@ package tests.uiTests.bo.boTicket;
 import appmanager.Login_RegistrationHelper;
 import base.UITestBase;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
 public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestBase {
+    String clientId2 = "29818";
+    String phone2 = "380980316499";
 
     @Test
     public void testTheUserNeedsToReassignTheSDDTicketToAnotherBOUser_TheUserChangedHisMindAboutReassignTheSDDTicket() throws InterruptedException, SQLException, ClassNotFoundException {
@@ -47,6 +50,25 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().verifyTheUserChangedHisMindAboutReassignTheSDDFDDTicketsToAnotherBOUser();
             app.getUiboTicketHelper().reassignTicketSuccessfully("BOAUTOTEST", "test");
+        }
+    }
+
+    @Test
+    public void testTheUserNeedsToReassignTheSelfieChangeTicketToAnotherBOUser_TheUserChangedHisMindAboutReassignTheSelfieChangeTicketToAnotherBOUser() throws InterruptedException, SQLException, ClassNotFoundException {
+        app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
+
+        app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId2, phone2, "files/bo/images/self.jpg");
+        app.getUiboHelper().gotoHomePageWithBOUser();
+        app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        app.getUiboTicketHelper().skipSDDCheckClient();
+
+        if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
+            app.getUiboTicketHelper().verifyTheUserChangedHisMindAboutReassignTheSDDFDDTicketsToAnotherBOUser();
+            app.getUiboTicketHelper().reassignTicketSuccessfully("BOAUTOTEST", "test");
+        } else {
+            Assert.fail("There are no Update Selfie Ticket");
         }
     }
 }
