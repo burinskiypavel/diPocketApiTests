@@ -50,8 +50,8 @@ public class TheUserNeedsToReassignTheSelfieChangeTicketToAnotherBOUserTest exte
                 break;
             }
 
-            if (actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check")) {
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "05.10.2022 23:35:50");
+            if (actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check") || actualTypeName.equals("Cardholder name change") || actualTypeName.equals("PhotoID change") || actualTypeName.equals("Proof of address change") || actualTypeName.equals("PhotoID Back change") || actualTypeName.equals("Second ID change")) {
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "30.12.2022 23:35:50");
             }
 
             Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
@@ -60,7 +60,6 @@ public class TheUserNeedsToReassignTheSelfieChangeTicketToAnotherBOUserTest exte
             JsonPath js2 = new JsonPath(response2);
             ticketId = js2.getInt("id");
             actualTypeName = js2.getString("typeName");
-
         }
 
         assertEquals(actualTypeName, "Selfie change");
