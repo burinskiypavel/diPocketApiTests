@@ -23,7 +23,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboClientHelper().goToClientPage(phone);
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
-            app.getUiboClientHelper().unblockClient();
+            app.getUiboClientHelper().unblockClient("test");
         }
 
         app.getUiboClientHelper().blockClient("test");
@@ -32,7 +32,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         assertEquals(actualState, "State: Blocked");
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
-            app.getUiboClientHelper().unblockClient();
+            app.getUiboClientHelper().unblockClient("test");
         }
     }
 
@@ -47,7 +47,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
             app.getUiboClientHelper().blockClient("test");
         }
 
-        app.getUiboClientHelper().unblockClient();
+        app.getUiboClientHelper().unblockClient("test");
         String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
         assertEquals(actualState, "State: Active");
@@ -190,7 +190,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboClientHelper().goToClientPage(forgotPhone);
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
-            app.getUiboClientHelper().unblockClient();
+            app.getUiboClientHelper().unblockClient("test");
         }
 
         app.getUiboClientHelper().forgetClient("test");

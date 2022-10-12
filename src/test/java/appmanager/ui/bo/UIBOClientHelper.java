@@ -25,9 +25,10 @@ public class UIBOClientHelper extends UIHelperBase {
         waitFor(By.cssSelector("app-corp-client-details-info"));
     }
 
-    public void unblockClient() {
+    public void unblockClient(String reason) {
         click(By.xpath("//app-button[@ng-reflect-label='Unblock client']"));
-        click(By.xpath("//p-button[@ng-reflect-label='Unblock']"));
+        type(By.cssSelector("input[id*=input_unblockOrUnbanReason]"), reason);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unblocked successfully')]"));
         waitFor(By.xpath("//app-button[@ng-reflect-label='Block client']"));
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
@@ -44,8 +45,8 @@ public class UIBOClientHelper extends UIHelperBase {
 
     public void unbanClient(String reason) {
         click(By.xpath("//app-button[@ng-reflect-label='Unban client']"));
-        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
-        click(By.xpath("//p-button[@ng-reflect-label='Unban']"));
+        type(By.cssSelector("input[id*='input_unblockOrUnbanReason']"), reason);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
     }
@@ -80,9 +81,9 @@ public class UIBOClientHelper extends UIHelperBase {
 
     public void forgetClient(String reason) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Forget client']"));
-        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
-        Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Forget']"));
+        type(By.cssSelector("input[id*='input_reason']"), reason);
+        Thread.sleep(700);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was forget successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Forgotten')]"));
     }
