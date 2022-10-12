@@ -17,6 +17,7 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClientTests extends T
     String username = "PAVELB_AUTO_BO";
     int clientId = 29818;
     int ticketId = 0;
+    String actualTypeName = null;
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
@@ -108,12 +109,29 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClientTests extends T
 
     @Test(priority = 7)
     public void test_BOServices_v1_ticket_take() {
-        Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-        String response =res.then().extract().response().asString();
+        for(int i = 0; i < 5; i++) {
+            Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
+            String response = res.then().extract().response().asString();
 
-        JsonPath js = new JsonPath(response);
-        ticketId = js.getInt("id");
-        String actualTypeName = js.getString("typeName");
+            JsonPath js = new JsonPath(response);
+            ticketId = js.getInt("id");
+            actualTypeName = js.getString("typeName");
+
+            if(actualTypeName.equals("Selfie change")){
+                break;
+            }
+
+            if (actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check") || actualTypeName.equals("Cardholder name change") || actualTypeName.equals("PhotoID change") || actualTypeName.equals("Proof of address change") || actualTypeName.equals("PhotoID Back change") || actualTypeName.equals("Second ID change")) {
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "05.12.2022 23:35:50");
+            }
+
+            Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
+            String response2 = res2.then().extract().response().asString();
+
+            JsonPath js2 = new JsonPath(response2);
+            ticketId = js2.getInt("id");
+            actualTypeName = js2.getString("typeName");
+        }
 
         assertEquals(actualTypeName, "Selfie change");
     }
