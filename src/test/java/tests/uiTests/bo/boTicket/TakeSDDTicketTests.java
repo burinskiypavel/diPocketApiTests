@@ -24,13 +24,13 @@ public class TakeSDDTicketTests extends UITestBase {
 
         for(int i = 0; i < 3; i++) {
             if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -70,7 +70,7 @@ public class TakeSDDTicketTests extends UITestBase {
         }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -80,7 +80,7 @@ public class TakeSDDTicketTests extends UITestBase {
 
         for(int i = 0; i < 3; i++) {
             if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -109,7 +109,7 @@ public class TakeSDDTicketTests extends UITestBase {
         }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -119,7 +119,7 @@ public class TakeSDDTicketTests extends UITestBase {
 
         for(int i = 0; i < 3; i++) {
             if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -151,7 +151,7 @@ public class TakeSDDTicketTests extends UITestBase {
         }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForOneMinute();
+            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -161,7 +161,7 @@ public class TakeSDDTicketTests extends UITestBase {
 
         for(int i = 0; i < 3; i++) {
             if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }

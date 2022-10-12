@@ -33,7 +33,7 @@ public class EscalateToCBOTests extends UITestBase {
             }
 
             if (!actualTicketType.equals("SDD - check client's data")) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -84,7 +84,7 @@ public class EscalateToCBOTests extends UITestBase {
             }
 
             if (!actualTicketType.equals("SDD - check client's data")) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -129,7 +129,7 @@ public class EscalateToCBOTests extends UITestBase {
             }
 
             if (!actualTicketType.equals("SDD - check client's data")) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -180,7 +180,7 @@ public class EscalateToCBOTests extends UITestBase {
             }
 
             if (!actualTicketType.equals("SDD - check client's data")) {
-                app.getUiboTicketHelper().delayTicketForOneMinute();
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }

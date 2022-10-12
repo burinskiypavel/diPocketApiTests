@@ -32,7 +32,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         //waitFor(By.id("takeTicketContent"));
     }
 
-    public void delayTicketForOneMinute() throws InterruptedException {
+    public void delayTicketForSeveralMinutes() throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Postpone']"));
         click(By.xpath("//button[@ng-reflect-icon='pi pi-calendar']"));
         click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
@@ -271,7 +271,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public void skipVideoCall(int countryId, int currencyId, String terms1, String terms2) throws InterruptedException, SQLException, ClassNotFoundException {
         if (isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))) {
-            delayTicketForOneMinute();
+            delayTicketForSeveralMinutes();
             gotoTakeTicketWithReg();
 
             if (findElements(By.id("takeTicketContent")).size() == 0) {
@@ -289,7 +289,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         } else {
             for (int i = 0; i < 3; i++) {
                 if (isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
-                    delayTicketForOneMinute();
+                    delayTicketForSeveralMinutes();
                     gotoTakeTicketWithReg();
                 }
             }
@@ -302,7 +302,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         } else {
             for (int i = 0; i < 3; i++) {
                 if (isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
-                    delayTicketForOneMinute();
+                    delayTicketForSeveralMinutes();
                     gotoTakeTicketWithReg();
                 }
             }
