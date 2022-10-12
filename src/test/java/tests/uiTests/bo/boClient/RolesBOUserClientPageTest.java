@@ -43,7 +43,7 @@ public class RolesBOUserClientPageTest extends UITestBase {
         String actualMailingAdd = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Mailing add:')]"));
 
         softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
-                "//*[contains(text(), '06.10.1976 (45)')]", "//*[contains(text(), '380634413376')]", "//*[contains(text(), '33217')]",
+                "//*[contains(text(), '06.10.1976')]", "//*[contains(text(), '380634413376')]", "//*[contains(text(), '33217')]",
                 "//*[contains(text(), 'FDD')]", "//*[contains(text(), 'EUR - standart')]", "//*[contains(text(), 'EUR')]",
                 "//*[contains(text(), 'English')]",}));
 
