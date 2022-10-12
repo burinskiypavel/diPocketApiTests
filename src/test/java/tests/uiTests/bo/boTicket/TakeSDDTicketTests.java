@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import static org.testng.Assert.assertTrue;
 
 public class TakeSDDTicketTests extends UITestBase {
+    String actualTicketType = null;
 
     @Test(priority = 1)
     public void testOpeningTicketPage() throws InterruptedException {
@@ -69,21 +70,41 @@ public class TakeSDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
-            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
-        }
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("SDD - check client's data")){
+                break;
+            }
 
-        for(int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+            if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
+
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+//            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+//            app.getUiboTicketHelper().gotoTakeTicket();
+//        }
+//
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
+//            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
+//        }
+//
+//        for(int i = 0; i < 3; i++) {
+//            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+//                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+//                app.getUiboTicketHelper().gotoTakeTicket();
+//            }
+//        }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
             app.getUiboTicketHelper().editAndSaveSDDTicket("M", "Passport", "12345678", "12345678", "Poland");
@@ -93,6 +114,7 @@ public class TakeSDDTicketTests extends UITestBase {
 
             assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]", "//*[contains(text(), 'Search')]"}));
         } else {
+            System.out.println("actualTicketType: " + actualTicketType);
             Assert.fail("There is no sdd ticket");
         }
     }
@@ -108,21 +130,41 @@ public class TakeSDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
-            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
-        }
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("SDD - check client's data")){
+                break;
+            }
 
-        for(int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+            if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
+
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+//            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+//            app.getUiboTicketHelper().gotoTakeTicket();
+//        }
+//
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
+//            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
+//        }
+//
+//        for(int i = 0; i < 3; i++) {
+//            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+//                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+//                app.getUiboTicketHelper().gotoTakeTicket();
+//            }
+//        }
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
 
@@ -150,27 +192,48 @@ public class TakeSDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
-            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
-        }
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("SDD - check client's data")){
+                break;
+            }
 
-        for(int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+            if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
+
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+//            app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+//            app.getUiboTicketHelper().gotoTakeTicket();
+//        }
+//
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update cardholder')]"))){
+//            app.getUiboTicketHelper().approveTicketSuccessfullyUpdateCardholder();
+//        }
+//
+//        for(int i = 0; i < 3; i++) {
+//            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+//                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+//                app.getUiboTicketHelper().gotoTakeTicket();
+//            }
+//        }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
             app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Ask new selfie']"));
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Ticket rejected successfully')]"));
 
         } else {
+            System.out.println("actualTicketType: " + actualTicketType);
             Assert.fail("There is no sdd ticket");
         }
 
@@ -190,8 +253,27 @@ public class TakeSDDTicketTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
-        app.getUiboTicketHelper().skipFDDCheckClient();
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("SDD - check client's data")){
+                break;
+            }
+
+            if (!actualTicketType.equals("SDD - check client's data")) {
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+                app.getUiboTicketHelper().gotoTakeTicket();
+            }
+        }
+        //app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        //app.getUiboTicketHelper().skipFDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
             app.getUiboTicketHelper().askForSuccessfullySDD(false, false, false, true);

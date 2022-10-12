@@ -34,6 +34,12 @@ public class EscalateToCBOTests extends UITestBase {
 
             if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -85,6 +91,12 @@ public class EscalateToCBOTests extends UITestBase {
 
             if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -130,6 +142,12 @@ public class EscalateToCBOTests extends UITestBase {
 
             if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -181,6 +199,12 @@ public class EscalateToCBOTests extends UITestBase {
 
             if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
