@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import static org.testng.Assert.assertTrue;
 
 public class EscalateToCBOTests extends UITestBase {
+    String actualTicketType = null;
+
     @Test
     public void testTheUserNeedsToEscalateToCBOTicketWithoutReason() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
@@ -22,23 +24,38 @@ public class EscalateToCBOTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
-        for(int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("SDD - check client's data")){
+                break;
+            }
+
+            if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForOneMinute();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
+
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+//            app.getUiboTicketHelper().delayTicketForOneMinute();
+//            app.getUiboTicketHelper().gotoTakeTicket();
+//        }
+
+//        for(int i = 0; i < 3; i++) {
+//            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+//                app.getUiboTicketHelper().delayTicketForOneMinute();
+//                app.getUiboTicketHelper().gotoTakeTicket();
+//            }
+//        }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
             app.getUiboTicketHelper().escalateToCBOSuccessfully("AQA", "");
 
 
         } else {
+            System.out.println("actualTicketType: " + actualTicketType);
             Assert.fail("There is no sdd ticket");
         }
 
@@ -58,27 +75,39 @@ public class EscalateToCBOTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
-        for(int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("SDD - check client's data")){
+                break;
+            }
+
+            if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForOneMinute();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
 
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+//            app.getUiboTicketHelper().delayTicketForOneMinute();
+//            app.getUiboTicketHelper().gotoTakeTicket();
+//        }
+//
+//        for(int i = 0; i < 3; i++) {
+//            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+//                app.getUiboTicketHelper().delayTicketForOneMinute();
+//                app.getUiboTicketHelper().gotoTakeTicket();
+//            }
+//        }
+
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
-            app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
-            app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));
-            app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
+            app.getUiboTicketHelper().verifyTheUserChangedHisMindAboutEscalateToCBO();
         } else {
+            System.out.println("actualTicketType: " + actualTicketType);
             Assert.fail("There is no sdd ticket");
         }
     }
-
 
     @Test
     public void testTheUserNeedsToEscalateToCBOTicketWithReason() throws InterruptedException, SQLException, ClassNotFoundException {
@@ -91,23 +120,38 @@ public class EscalateToCBOTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
-        for(int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("SDD - check client's data")){
+                break;
+            }
+
+            if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForOneMinute();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
+
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+//            app.getUiboTicketHelper().delayTicketForOneMinute();
+//            app.getUiboTicketHelper().gotoTakeTicket();
+//        }
+//
+//        for(int i = 0; i < 3; i++) {
+//            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+//                app.getUiboTicketHelper().delayTicketForOneMinute();
+//                app.getUiboTicketHelper().gotoTakeTicket();
+//            }
+//        }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
             app.getUiboTicketHelper().escalateToCBOSuccessfully("AQA", "test");
 
 
         } else {
+            System.out.println("actualTicketType: " + actualTicketType);
             Assert.fail("There is no sdd ticket");
         }
 
@@ -127,23 +171,34 @@ public class EscalateToCBOTests extends UITestBase {
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
-            app.getUiboTicketHelper().delayTicketForOneMinute();
-            app.getUiboTicketHelper().gotoTakeTicket();
-        }
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
-        for(int i = 0; i < 3; i++) {
-            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("SDD - check client's data")){
+                break;
+            }
+
+            if (!actualTicketType.equals("SDD - check client's data")) {
                 app.getUiboTicketHelper().delayTicketForOneMinute();
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
 
+//        if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Video Call')]"))){
+//            app.getUiboTicketHelper().delayTicketForOneMinute();
+//            app.getUiboTicketHelper().gotoTakeTicket();
+//        }
+//
+//        for(int i = 0; i < 3; i++) {
+//            if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
+//                app.getUiboTicketHelper().delayTicketForOneMinute();
+//                app.getUiboTicketHelper().gotoTakeTicket();
+//            }
+//        }
+
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))){
-            app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
-            Thread.sleep(1300);
-            app.getUiboHelper().click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
-            app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Assign to is required ')]"));
+            app.getUiboTicketHelper().verifyTheUserNeedsToEscalateToCBOTicketTriesToEscalateWithoutChoosingAssignTo();
         }
     }
 }

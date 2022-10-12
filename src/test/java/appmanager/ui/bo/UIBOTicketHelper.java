@@ -424,4 +424,22 @@ public class UIBOTicketHelper extends UIHelperBase {
         closePopUp(By.cssSelector("button.p-dialog-header-icon"));
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
     }
+
+    public String getActualTicketType() {
+        return getText(By.cssSelector("div.mb-3 h3.title"));
+    }
+
+    public void verifyTheUserChangedHisMindAboutEscalateToCBO() {
+            click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
+            waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+            closePopUp(By.cssSelector("div.p-dialog-header-icons"));
+            waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
+    }
+
+    public void verifyTheUserNeedsToEscalateToCBOTicketTriesToEscalateWithoutChoosingAssignTo() {
+        click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
+        waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        waitFor(By.xpath("//*[contains(text(), 'Assign to is required ')]"));
+    }
 }
