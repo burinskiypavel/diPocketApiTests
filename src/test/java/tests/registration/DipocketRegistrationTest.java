@@ -232,6 +232,7 @@ public class DipocketRegistrationTest extends TestBase {
         regSavepointData2.setCountryId(countryId);
         regSavepointData2.setCurrencyId(currencyId);
         regSavepointData2.setBirthDate("715611173985");
+        //regSavepointData2.setBirthDate("1230768000000"); // less then 16
         regSavepointData2.setResidenceCountryId(countryId);
         regSavepointData2.setStepNo(2);
         regSavepointData2.setRegisteredAddrAsmail(true);
