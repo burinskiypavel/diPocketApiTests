@@ -110,14 +110,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_tile_getMessage2(){
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
-                .when()
-                .get("tile/getMessages2")
-                .then().log().all()
-                .statusCode(200)
-                .body("unreadMessageCount", equalTo(0));
+        Response response = app.getClientServicesRequests().clientServices_v1_tile_getMessages2(cliSessionId, phone, pass);
+        response.then().body("unreadMessageCount", equalTo(0));
     }
 }
