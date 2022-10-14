@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.cs.dipocketback.pojo.client.CheckboxType.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -278,7 +277,7 @@ public class Login_RegistrationHelper extends HelperBase {
         return cliSessionId;
     }
 
-    public void dipocketRegistration(int countryId1, int currencyId1, String terms1, String terms2) throws InterruptedException, SQLException, ClassNotFoundException {
+    public void dipocketRegistration(int countryId1, int currencyId1, String terms1, String terms2, String pin) throws InterruptedException, SQLException, ClassNotFoundException {
         String smsCode = null;
         int countryId = countryId1;
         int currencyId = currencyId1;
@@ -767,7 +766,7 @@ public class Login_RegistrationHelper extends HelperBase {
             checkboxList.add(checkboxContainer2);
 
             regSavepointData2.setSecAnswer("QA");
-            regSavepointData2.setPin(generateRandomString(8));
+            regSavepointData2.setPin(pin);
             regSavepointData2.setCheckboxList(checkboxList);
             String json5 = gson.toJson(regSavepointData2);
 

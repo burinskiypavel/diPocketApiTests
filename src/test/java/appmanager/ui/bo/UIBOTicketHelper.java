@@ -276,7 +276,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
             if (findElements(By.id("takeTicketContent")).size() == 0) {
                 Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2);
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, login_registrationHelper.generateRandomString(8));
                 gotoTakeTicket();
                 initFDDTicketDisplain();
             }
