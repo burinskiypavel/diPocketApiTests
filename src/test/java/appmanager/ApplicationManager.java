@@ -14,6 +14,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import requests.bo.BORequests;
 import requests.bo.ClientProfileRequests;
+import requests.bo.ClientServicesRequests;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,6 +38,7 @@ public class ApplicationManager {
     private JsonHelper jsonHelper = new JsonHelper();
     private BORequests boRequestsHelper = new BORequests();
     private ClientProfileRequests clientProfileRequestsHelper = new ClientProfileRequests();
+    private ClientServicesRequests clientServicesRequests = new ClientServicesRequests();
     public UIBOHelper uiboHelper;
     public UIUpAndGoHelper uiUpAndGoHelper;
     public UITelenorHelper uiTelenorHelper;
@@ -306,6 +308,8 @@ public class ApplicationManager {
     public BORequests getBoRequestsHelper() { return boRequestsHelper; }
 
     public ClientProfileRequests getClientProfileRequestsHelper() { return clientProfileRequestsHelper; }
+
+    public ClientServicesRequests getClientServicesRequests() { return clientServicesRequests; }
 
     public UIBOHelper getUiboHelper() { return uiboHelper; }
 
