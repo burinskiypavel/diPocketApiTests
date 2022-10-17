@@ -132,7 +132,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_take() {
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 12; i++) {
             Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
             String response = res.then().extract().response().asString();
 
@@ -144,8 +144,8 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 break;
             }
 
-            if (actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check")) {
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "05.10.2022 23:35:50");
+            if(!actualTypeName.equals("Cardholder name change")){
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "29.12.2022 23:35:50");
             }
 
             Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
