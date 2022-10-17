@@ -20,8 +20,9 @@ public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
     String actualCardHolderName = null;
     String cookie = null;
     String username = "PAVELB_AUTO_BO";
-    int clientId = 29818;
+    int clientId = 39571;
     int ticketId = 0;
+    String actualTypeName = null;
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
@@ -43,7 +44,7 @@ public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
         actualCardHolderName = js.getString("cardholderName");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, enabled = false)
     public void test_ClientServices_v1_clientProfile_changeCardholderName(){
         if(actualCardHolderName.equals("Pavel Burinsk")){
             newCardHolderName = "Pavel Burinsky";
@@ -64,17 +65,20 @@ public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_ticket_take() {
-        String actualTypeNameGlobal = null;
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 12; i++) {
             Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
             String response = res.then().extract().response().asString();
 
             JsonPath js = new JsonPath(response);
             ticketId = js.getInt("id");
-            String actualTypeName = js.getString("typeName");
+            actualTypeName = js.getString("typeName");
 
-            if (actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check")) {
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "05.10.2022 23:35:50");
+            if(actualTypeName.equals("Cardholder name change")){
+                break;
+            }
+
+            if(!actualTypeName.equals("Cardholder name change")){
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "29.12.2022 23:35:50");
             }
 
             Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
@@ -82,11 +86,10 @@ public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
 
             JsonPath js2 = new JsonPath(response2);
             ticketId = js2.getInt("id");
-            String actualTypeName2 = js2.getString("typeName");
-            actualTypeNameGlobal = actualTypeName2;
+            actualTypeName = js2.getString("typeName");
         }
 
-        assertEquals(actualTypeNameGlobal, "Cardholder name change");
+        assertEquals(actualTypeName, "Cardholder name change");
     }
 
     @Test(priority = 6, enabled = false)
