@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestBase {
-    String clientId2 = "39571";
+    String clientId2 = app.homePageLoginId;
     String phone2 = "380980316499";
     String actualTicketType = null;
 

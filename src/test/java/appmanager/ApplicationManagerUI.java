@@ -119,6 +119,7 @@ public class ApplicationManagerUI {
     public String BOuserLogin = "PAVELB_AUTO_BO";
     public String BOuserPass = "ZG7Y5gS";
     public String BOusername = "PAVELB_AUTO_BO";
+    public String homePageLoginId = "39571";
 
 
     public void initStart() {

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class SelfieChangeTicketTests extends UITestBase {
     String clientId = null;
-    String clientId2 = "29818";
+    String clientId2 = app.homePageLoginId;
     String phone2 = "380980316499";
 
     @Test(enabled = false)
