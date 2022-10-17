@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 public class ApprovingOfSelfieChangeTicket_withAlreadyExistClientTests extends TestBase {
     String cookie = null;
     String username = "PAVELB_AUTO_BO";
-    int clientId = 29818;
+    int clientId = 39571;
     int ticketId = 0;
     String actualTypeName = null;
 
@@ -109,7 +109,7 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClientTests extends T
 
     @Test(priority = 7)
     public void test_BOServices_v1_ticket_take() {
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 12; i++) {
             Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
             String response = res.then().extract().response().asString();
 
@@ -121,8 +121,8 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClientTests extends T
                 break;
             }
 
-            if (actualTypeName.equals("SDD check") || actualTypeName.equals("FDD check") || actualTypeName.equals("Cardholder name change") || actualTypeName.equals("PhotoID change") || actualTypeName.equals("Proof of address change") || actualTypeName.equals("PhotoID Back change") || actualTypeName.equals("Second ID change")) {
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "05.12.2022 23:35:50");
+            if(!actualTypeName.equals("Selfie change")){
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "29.12.2022 23:35:50");
             }
 
             Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
