@@ -24,7 +24,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     String actualCardHolderName = null;
     String cookie = null;
     String username = "PAVELB_AUTO_BO";
-    int clientId = 29818;
+    int clientId = 39571;
     int ticketId = 0;
     String actualTypeName = null;
 
@@ -74,9 +74,9 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 .then().log().all()
                 .statusCode(200)
                 .body("images.typeId", hasItems(1, 2, 3, 4, 5, 6),
-                        "images.stateID", hasItems(10),
+                        "images.stateID", hasItems(0),
                         "images.imageType", hasItems("SELFIE", "PHOTOID", "PROOFOFADDRESS", "SELFIE2", "PHOTOIDBACK", "SECONDID"),
-                        "images.imageState", hasItems("APPROVED"));
+                        "images.imageState", hasItems("NEW"));
     }
 
     @Test(priority = 6)
@@ -93,7 +93,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 .body("typeId", equalTo(1),
                         "base64Image", notNullValue(),
                         "imageType", equalTo("SELFIE"),
-                        "imageState", equalTo("APPROVED"));
+                        "imageState", equalTo("NEW"));
     }
 
     @Test(priority = 7)
@@ -201,7 +201,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
                 res.then().log().all()
                 .statusCode(200)
-                .body("ticketId", hasItems(29938),
+                .body("ticketId", hasItems(31435),
                         "typeName", hasItems("Cardholder name change"));
 
                 //List<String> typeNameValues = res.then().extract().jsonPath().getList("ticketsHistoryList.typeName");
