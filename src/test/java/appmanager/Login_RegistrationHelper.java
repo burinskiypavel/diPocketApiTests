@@ -277,7 +277,7 @@ public class Login_RegistrationHelper extends HelperBase {
         return cliSessionId;
     }
 
-    public void dipocketRegistration(int countryId1, int currencyId1, String terms1, String terms2, String pin) throws InterruptedException, SQLException, ClassNotFoundException {
+    public void dipocketRegistration(int countryId1, int currencyId1, String terms1, String terms2, String pin, String birthDate) throws InterruptedException, SQLException, ClassNotFoundException {
         String smsCode = null;
         int countryId = countryId1;
         int currencyId = currencyId1;
@@ -499,7 +499,8 @@ public class Login_RegistrationHelper extends HelperBase {
             regSavepointData2.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
             regSavepointData2.setCountryId(countryId);
             regSavepointData2.setCurrencyId(currencyId);
-            regSavepointData2.setBirthDate("715611173985");
+            regSavepointData2.setBirthDate(birthDate);
+            //regSavepointData2.setBirthDate("1230768000000"); // less then 16
             regSavepointData2.setResidenceCountryId(countryId);
             regSavepointData2.setStepNo(2);
             regSavepointData2.setRegisteredAddrAsmail(true);
