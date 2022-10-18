@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
-public class ApprovingOfSelfieChangeTicket_withAlreadyExistClientTests extends TestBase {
+public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests extends TestBase {
     String cookie = null;
     String username = "PAVELB_AUTO_BO";
     int clientId = 39571;
