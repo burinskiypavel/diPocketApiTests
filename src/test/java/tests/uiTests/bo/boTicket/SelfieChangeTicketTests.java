@@ -12,6 +12,7 @@ public class SelfieChangeTicketTests extends UITestBase {
     String clientId = null;
     String clientId2 = app.homePageLoginId;
     String phone2 = "380980316499";
+    String actualTicketType = null;
 
     @Test(enabled = false)
     public void testApprovingChangesWhenChangingASelfie_withRegistration() throws InterruptedException, SQLException, ClassNotFoundException {
@@ -84,12 +85,33 @@ public class SelfieChangeTicketTests extends UITestBase {
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
-        app.getUiboTicketHelper().skipSDDCheckClient();
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("Update Selfie")){
+                break;
+            }
+
+            if (!actualTicketType.equals("Update Selfie")) {
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985");
+                app.getUiboTicketHelper().gotoTakeTicket();
+            }
+        }
+
+        //app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        //app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
             app.getUiboTicketHelper().approveTicketSuccessfully();
         } else {
+            System.out.println("actualTicketType: " + actualTicketType);
             Assert.fail("There are no Update Selfie Ticket");
         }
     }
@@ -102,13 +124,34 @@ public class SelfieChangeTicketTests extends UITestBase {
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
-        app.getUiboTicketHelper().skipSDDCheckClient();
+        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            if(actualTicketType.equals("Update Selfie")){
+                break;
+            }
+
+            if (!actualTicketType.equals("Update Selfie")) {
+                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+            }
+
+            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985");
+                app.getUiboTicketHelper().gotoTakeTicket();
+            }
+        }
+
+        //app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        //app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
             app.getUiboTicketHelper().verifyUserChangedHisMindAboutRejectionOfSelfieDocChangeTicket();
             app.getUiboTicketHelper().rejectTicketSuccessfully("test", "Ticket rejected successfully");
         } else {
+            System.out.println("actualTicketType: " + actualTicketType);
             Assert.fail("There are no Update Selfie Ticket");
         }
     }
