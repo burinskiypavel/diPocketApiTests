@@ -119,6 +119,8 @@ public class ApplicationManagerUI {
     public String BOuserLogin = "PAVELB_AUTO_BO";
     public String BOuserPass = "ZG7Y5gS";
     public String BOusername = "PAVELB_AUTO_BO";
+    public String homePageLoginPhone = "380980316499";
+    public String homePagePass = "reset246740";
     public String homePageLoginId = "39571";
 
 

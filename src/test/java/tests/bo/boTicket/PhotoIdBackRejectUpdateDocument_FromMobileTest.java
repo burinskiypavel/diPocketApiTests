@@ -13,11 +13,11 @@ import static org.testng.Assert.assertEquals;
 
 public class PhotoIdBackRejectUpdateDocument_FromMobileTest extends TestBase {
     String cliSessionId = null;
-    String phone = "380980316499";
-    String pass = "reset246740";
+    String phone = app.homePageLoginPhone;
+    String pass = app.homePagePass;
     String cookie = null;
     String username = "PAVELB_AUTO_BO";
-    int clientId = 39571;
+    int clientId = app.homePageClientId;
     int ticketId = 0;
     String actualTypeName = null;
 
