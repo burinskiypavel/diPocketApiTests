@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import requests.bo.BORequests;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -289,6 +290,17 @@ public class ApplicationManagerUI {
     public String getTimeStamp(String pattern) {
         String timeStamp = new SimpleDateFormat(pattern).format(Calendar.getInstance().getTime());
         return timeStamp;
+    }
+
+    public String getTimeStampWithAddSomeAmountOfDays(String pattern) throws ParseException {
+        String curentDate = getTimeStamp(pattern);
+        String dt = curentDate;  // Start date
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        Calendar c = Calendar.getInstance();
+        c.setTime(sdf.parse(dt));
+        c.add(Calendar.DATE, 1);  // number of days to add
+        dt = sdf.format(c.getTime());  // dt is now the new date
+        return dt;
     }
 
     public DBHelper getDbHelper() {

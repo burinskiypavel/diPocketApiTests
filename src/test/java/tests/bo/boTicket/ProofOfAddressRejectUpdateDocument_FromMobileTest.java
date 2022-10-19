@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
@@ -20,9 +21,11 @@ public class ProofOfAddressRejectUpdateDocument_FromMobileTest extends TestBase 
     int clientId = app.homePageClientId;
     int ticketId = 0;
     String actualTypeName = null;
+    String tomorrow = null;
 
     @Test(priority = 1)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException {
+        tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss");
         cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
@@ -62,7 +65,7 @@ public class ProofOfAddressRejectUpdateDocument_FromMobileTest extends TestBase 
             }
 
             if(!actualTypeName.equals("Proof of address change")){
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "29.12.2022 23:35:50");
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, tomorrow);
             }
 
             Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
