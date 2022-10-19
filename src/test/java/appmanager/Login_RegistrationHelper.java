@@ -839,7 +839,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
             System.out.println("link_link " + link);
-            given()
+            given().log().uri().log().headers().log().body()
                     .when()
                     .get(link)
                     .then().log().all()
