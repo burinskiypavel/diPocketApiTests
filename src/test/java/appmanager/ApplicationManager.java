@@ -283,13 +283,13 @@ public class ApplicationManager {
         return timeStamp;
     }
 
-    public String getTimeStampWithAddSomeAmountOfDays(String pattern) throws ParseException {
+    public String getTimeStampWithAddSomeAmountOfDays(String pattern, int amountOfDays) throws ParseException {
         String curentDate = getTimeStamp(pattern);
         String dt = curentDate;  // Start date
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         Calendar c = Calendar.getInstance();
         c.setTime(sdf.parse(dt));
-        c.add(Calendar.DATE, 1);  // number of days to add
+        c.add(Calendar.DATE, amountOfDays);  // number of days to add
         dt = sdf.format(c.getTime());  // dt is now the new date
         return dt;
     }
