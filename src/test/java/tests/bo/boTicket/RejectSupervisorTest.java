@@ -18,9 +18,6 @@ public class RejectSupervisorTest extends TestBase {
     String pass = "pasword1";
     String regPhone = "380685448615";
     String regPass = "pasword1";
-    String newCardHolderName = null;
-    String oldCardHolderName = null;
-    String actualCardHolderName = null;
     String cookie = null;
     String username = "PAVELB_AUTO_BO";
     int ticketId = 0;
@@ -68,9 +65,6 @@ public class RejectSupervisorTest extends TestBase {
 
     @Test(priority = 4)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException, InterruptedException {
-        //app.getDbHelper().deleteClientFromDB(regPhone, "DIPOCKET");
-        //app.getDbHelper().updateClientPhoneFromDB("380685448617", childId);
-        //app.getDbHelper().updateClientPhoneFromDB("380685448615", parentClientId);
         cliSessionId = app.getLogin_registrationHelper().loginDipocket("380980316499", "reset246740", HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
@@ -88,13 +82,6 @@ public class RejectSupervisorTest extends TestBase {
                 .then().log().all()
                 .statusCode(200);
     }
-
-    //@Test(priority = 6)
-    //public void updatePhoneNumber() throws SQLException, ClassNotFoundException {
-        //app.getDbHelper().updateClientPhoneFromDB("380685448616", parentClientId);
-        //app.getDbHelper().updateClientPhoneFromDB("380685448615", childId);
-
-    //}
 
     @Test(priority = 7)
     public void test_BOServices_v1_auth_authentication() {
@@ -131,8 +118,7 @@ public class RejectSupervisorTest extends TestBase {
     }
 
     @Test(priority = 9)
-    public void test_ClientServices_v1_supervisor_reject() throws SQLException, ClassNotFoundException {
-        //String childId = app.getDbHelper().getClientIdFromDB("testdipocket@gmail.com", "DIPOCKET");
+    public void test_ClientServices_v1_supervisor_reject() {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)

@@ -18,9 +18,6 @@ public class ApproveSupervisorTest extends TestBase {
     String pass = "pasword1";
     String regPhone = "380685448615";
     String regPass = "pasword1";
-    String newCardHolderName = null;
-    String oldCardHolderName = null;
-    String actualCardHolderName = null;
     String cookie = null;
     String username = "PAVELB_AUTO_BO";
     int ticketId = 0;
@@ -121,7 +118,7 @@ public class ApproveSupervisorTest extends TestBase {
     }
 
     @Test(priority = 9)
-    public void test_ClientServices_v1_supervisor_approve() throws SQLException, ClassNotFoundException {
+    public void test_ClientServices_v1_supervisor_approve() {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
