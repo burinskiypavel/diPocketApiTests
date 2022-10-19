@@ -16,7 +16,7 @@ public class PhotoIdBackRejectUpdateDocument_FromMobileTest extends TestBase {
     String phone = app.homePageLoginPhone;
     String pass = app.homePagePass;
     String cookie = null;
-    String username = "PAVELB_AUTO_BO";
+    String username = app.BOusername;
     int clientId = app.homePageClientId;
     int ticketId = 0;
     String actualTypeName = null;

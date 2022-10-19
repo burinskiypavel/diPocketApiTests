@@ -13,11 +13,11 @@ import static org.testng.Assert.assertEquals;
 
 public class PhotoIdRejectUpdateDocument_FromMobileTest extends TestBase {
     String cliSessionId = null;
-    String phone = "380980316499";
-    String pass = "reset246740";
+    String phone = app.homePageLoginPhone;
+    String pass = app.homePagePass;
     String cookie = null;
-    String username = "PAVELB_AUTO_BO";
-    int clientId = 39571;
+    String username = app.BOusername;
+    int clientId = app.homePageClientId;
     int ticketId = 0;
     String actualTypeName = null;
 
@@ -79,6 +79,5 @@ public class PhotoIdRejectUpdateDocument_FromMobileTest extends TestBase {
     @Test(priority = 5)
     public void test_BOServices_v1_clientId_changeDoc_reject() {
         app.getBoRequestsHelper().boServices_v1_clientId_changeDoc_reject(cookie, clientId, 2, ticketId);
-
     }
 }
