@@ -7,22 +7,25 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
 public class ApproveSelfieChangeTicket_FromMobileTest extends TestBase {
     String cliSessionId = null;
-    String phone = "380980316499";
-    String pass = "reset246740";
+    String phone = app.homePageLoginPhone;
+    String pass = app.homePagePass;
     String cookie = null;
-    String username = "PAVELB_AUTO_BO";
-    int clientId = 39571;
+    String username = app.BOusername;
+    int clientId = app.homePageClientId;
     int ticketId = 0;
     String actualTypeName = null;
+    String tomorrow = null;
 
     @Test(priority = 1)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException {
+        tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
         cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
@@ -63,7 +66,7 @@ public class ApproveSelfieChangeTicket_FromMobileTest extends TestBase {
             }
 
             if(!actualTypeName.equals("Selfie change")){
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "29.12.2022 23:35:50");
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, tomorrow);
             }
 
             Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
