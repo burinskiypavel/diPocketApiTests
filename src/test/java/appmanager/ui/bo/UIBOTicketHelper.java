@@ -387,6 +387,12 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
     }
 
+    public void verifyUserChangedHisMindAboutRescanRequest() {
+        click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
+        closePopUp(By.cssSelector("div.p-dialog-header-icons"));
+        waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
+    }
+
     public void askForSuccessfullySDD(boolean id, boolean proofOfAddress, boolean backOfId, boolean residencePermit) {
         click(By.xpath("//app-button[@ng-reflect-label='Ask for']"));
         if(id){
