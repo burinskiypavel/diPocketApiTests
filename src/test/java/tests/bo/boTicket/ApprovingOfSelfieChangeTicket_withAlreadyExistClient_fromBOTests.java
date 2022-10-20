@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -14,13 +15,15 @@ import static org.testng.Assert.assertEquals;
 
 public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests extends TestBase {
     String cookie = null;
-    String username = "PAVELB_AUTO_BO";
-    int clientId = 39571;
+    String username = app.BOusername;
+    int clientId = app.homePageClientId;
     int ticketId = 0;
     String actualTypeName = null;
+    String tomorrow = null;
 
     @Test(priority = 1)
-    public void test_BOServices_v1_auth_authentication() {
+    public void test_BOServices_v1_auth_authentication() throws ParseException {
+        tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
@@ -122,7 +125,7 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests ex
             }
 
             if(!actualTypeName.equals("Selfie change")){
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, "29.12.2022 23:35:50");
+                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, tomorrow);
             }
 
             Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
