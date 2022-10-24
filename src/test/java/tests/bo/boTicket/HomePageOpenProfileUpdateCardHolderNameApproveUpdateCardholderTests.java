@@ -134,7 +134,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_take() {
-        for(int i = 0; i < 12; i++) {
+        for(int i = 0; i < 18; i++) {
             Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
             String response = res.then().extract().response().asString();
 
