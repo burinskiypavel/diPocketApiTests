@@ -63,6 +63,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
         app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Account limits')]"));
         app.getUiboHelper().click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Account limits')]"));
+        app.getUiboHelper().waitFor(By.xpath("//table //th[contains(text(), 'Name')]"));
 
         softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//table //th[contains(text(), 'Name')]", "//table //th[contains(text(), 'Type')]",
                 "//table //th[contains(text(), 'Currency')]", "//table //th[contains(text(), 'Max amount')]", "//table //th[contains(text(), 'Limit amount')]"}), "Account limits has incorrect headers ");
