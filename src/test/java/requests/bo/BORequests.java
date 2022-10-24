@@ -769,4 +769,21 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void boServices_v1_clientId_changeDoc_approve(String cookie, int clientId, int imageTypeId, int ticketId) {
+        given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .pathParam("clientId", clientId)
+                .header("content-type", "application/json")
+                .body("{\n" +
+                        "  \"imageTypeId\" : "+imageTypeId+",\n" +
+                        "  \"ticketId\" : "+ticketId+"\n" +
+                        "}")
+                .when()
+                .post("/v1/client/{clientId}/changeDoc/approve")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
