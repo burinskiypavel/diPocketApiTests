@@ -17,7 +17,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class RolesBOUserClientPageSendStatementsButtonTests extends UITestBase {
     String phone = "380980316499";
-    String clientId = "29818";
+    String clientId = app.homePageLoginId;
     String email = "testdipocket3@gmail.com";
     String pass = "pasword12!";
     String appPass = "whotpsgrehudbtqv";
