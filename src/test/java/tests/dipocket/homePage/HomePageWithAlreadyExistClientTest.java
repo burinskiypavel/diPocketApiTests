@@ -9,8 +9,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.testng.Assert.assertEquals;
 
 public class HomePageWithAlreadyExistClientTest extends TestBase {
@@ -104,8 +103,8 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
                 .get("accounts/clientDiPAccounts2?walletId=null")
                 .then().log().all()
                 .statusCode(200)
-                .body("accounts.state", equalTo(Arrays.asList("ACTIVE")),
-                "accounts.ccy", equalTo(Arrays.asList("PLN")));
+                .body("accounts.state", hasItem("ACTIVE"),
+                "accounts.ccy", hasItem("PLN"));
     }
 
     @Test(priority = 6)
