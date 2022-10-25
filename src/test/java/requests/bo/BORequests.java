@@ -736,7 +736,7 @@ public class BORequests {
                 .statusCode(200);
     }
 
-    public void boServices_v1_ticket_ticketId_reassign(String cookie, int ticketId) {
+    public void boServices_v1_ticket_ticketId_reassign(String cookie, int ticketId, String username, final String reason) {
         given()
                 .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))
@@ -744,8 +744,8 @@ public class BORequests {
                 .pathParam("ticketId", ticketId)
                 .header("content-type", "application/json")
                 .body("{\n" +
-                        "  \"newUsername\" : \"AUTO\",\n" +
-                        "  \"reason\" : \"test\"\n" +
+                        "  \"newUsername\" : \"" + username + "\",\n" +
+                        "  \"reason\" : \"" + reason + "\"\n" +
                         "}")
                 .when()
                 .post( "/v1/ticket/{ticketId}/reassign")

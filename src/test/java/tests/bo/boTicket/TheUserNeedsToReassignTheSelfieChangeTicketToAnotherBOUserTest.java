@@ -70,6 +70,6 @@ public class TheUserNeedsToReassignTheSelfieChangeTicketToAnotherBOUserTest exte
 
     @Test(priority = 5)
     public void test_BOServices_v1_ticket_ticketId_reassign() {
-        app.getBoRequestsHelper().boServices_v1_ticket_ticketId_reassign(cookie, ticketId);
+        app.getBoRequestsHelper().boServices_v1_ticket_ticketId_reassign(cookie, ticketId, "AUTO", "test");
     }
 }
