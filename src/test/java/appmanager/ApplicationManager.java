@@ -120,7 +120,7 @@ public class ApplicationManager {
     public String BOusername = "PAVELB_AUTO_BO";
     public String homePageLoginPhone = "380980316499";
     public String homePagePass = "reset246740";
-    public int homePageClientId = 39571;
+    public int homePageClientId = 40022;
 
     public void initStart() {
 //        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");

@@ -75,10 +75,10 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 .get("clientProfile/imageStatus")
                 .then().log().all()
                 .statusCode(200)
-                .body("images.typeId", hasItems(1, 2, 3, 4, 5, 6),
-                        "images.stateID", hasItems(0),
-                        "images.imageType", hasItems("SELFIE", "PHOTOID", "PROOFOFADDRESS", "SELFIE2", "PHOTOIDBACK", "SECONDID"),
-                        "images.imageState", hasItems("NEW"));
+                .body("images.typeId", hasItems(1, 2, 3, 4, 5),
+                        "images.stateID", hasItems(10),
+                        "images.imageType", hasItems("SELFIE", "PHOTOID", "PROOFOFADDRESS", "SELFIE2", "PHOTOIDBACK"),
+                        "images.imageState", hasItems("APPROVED"));
     }
 
     @Test(priority = 6)
@@ -95,7 +95,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 .body("typeId", equalTo(1),
                         "base64Image", notNullValue(),
                         "imageType", equalTo("SELFIE"),
-                        "imageState", equalTo("NEW"));
+                        "imageState", equalTo("APPROVED"));
     }
 
     @Test(priority = 7)
@@ -203,7 +203,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
                 res.then().log().all()
                 .statusCode(200)
-                .body("ticketId", hasItems(31435),
+                .body("ticketId", hasItems(32333),
                         "typeName", hasItems("Cardholder name change"));
 
                 //List<String> typeNameValues = res.then().extract().jsonPath().getList("ticketsHistoryList.typeName");
