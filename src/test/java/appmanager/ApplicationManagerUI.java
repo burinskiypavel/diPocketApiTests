@@ -122,7 +122,7 @@ public class ApplicationManagerUI {
     public String BOusername = "PAVELB_AUTO_BO";
     public String homePageLoginPhone = "380980316499";
     public String homePagePass = "reset246740";
-    public String homePageLoginId = "40022";
+    public String homePageLoginId = "40263";
 
 
     public void initStart() {
