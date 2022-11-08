@@ -78,7 +78,7 @@ public class ApplicationManager {
     public String tds_pass = "a111111";
     public String site = "DiPocket";
     public String site_discontu = "discontu";
-    public String site_PlayIT = "PlayIT";
+    public String site_PlayIT = "Eventure Card";
     public String site_upAndGo = "up and go";
     public String site_SnowAttack = "Snow Attack";
     public String site_Sodexo = "Sodexo";
