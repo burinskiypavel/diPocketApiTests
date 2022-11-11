@@ -18,14 +18,14 @@ import static org.testng.Assert.assertEquals;
 
 public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests extends TestBase {
     String cliSessionId = null;
-    String phone = app.homePageLoginPhone;
+    String phone = "420703666872";
     String pass = app.homePagePass;
     String newCardHolderName = null;
     String oldCardHolderName = null;
     String actualCardHolderName = null;
     String cookie = null;
     String username = app.BOusername;
-    int clientId = app.homePageClientId;
+    int clientId = 40560;
     int ticketId = 0;
     String actualTypeName = null;
     String tomorrow = null;
