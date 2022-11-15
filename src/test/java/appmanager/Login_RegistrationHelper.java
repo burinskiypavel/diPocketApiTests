@@ -277,7 +277,7 @@ public class Login_RegistrationHelper extends HelperBase {
         return cliSessionId;
     }
 
-    public void dipocketRegistration(int countryId1, int currencyId1, String terms1, String terms2, String pin, String birthDate) throws InterruptedException, SQLException, ClassNotFoundException {
+    public void dipocketRegistration(int countryId1, int currencyId1, String terms1, String terms2, String pin, String birthDate, String phone, String email) throws InterruptedException, SQLException, ClassNotFoundException {
         String smsCode = null;
         int countryId = countryId1;
         int currencyId = currencyId1;
@@ -289,7 +289,7 @@ public class Login_RegistrationHelper extends HelperBase {
         ClientAddress regAddress = new ClientAddress();
         RegSavepointData regSavepointData2 = new RegSavepointData();
 
-        dbHelper.deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
+        dbHelper.deleteClientFromDB(phone, site);
         given()
                 //.spec(app.requestSpecDipocketRegistration)
                 .log().uri().log().headers().log().body()
@@ -353,7 +353,7 @@ public class Login_RegistrationHelper extends HelperBase {
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                     .queryParam("langID", "4")
-                    .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                    .queryParam("phoneNum", phone)
                     .body("{\n" +
                             "  \"smsNumber\" : 1\n" +
                             "}")
@@ -372,7 +372,7 @@ public class Login_RegistrationHelper extends HelperBase {
 
             String smsMessage = given()
                     .log().uri().log().headers().log().body()
-                    .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                    .queryParam("phone", phone)
                     .queryParam("site", site)
                     .when()
                     .get("http://app.dipocket.dev:8091/sms/by_phone_and_site")
@@ -383,14 +383,14 @@ public class Login_RegistrationHelper extends HelperBase {
             String  smsFromMemCash = smsMessage.substring(6, 12);
             System.out.println("smsFromMemCash: " + smsFromMemCash);
 
-            smsCode = dbHelper.getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
+            smsCode = dbHelper.getSMSCodeFromDB(phone, site);
             given()
                     //.spec(requestSpecDipocketRegistration)
                     .log().uri().log().headers().log().body()
                     .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                    .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                    .queryParam("phone", phone)
                     .when()
                     .get("references/verifyPhone")
                     .then().log().all()
@@ -420,7 +420,7 @@ public class Login_RegistrationHelper extends HelperBase {
             RegSavepointData regSavepointData = new RegSavepointData();
             regSavepointData.setDeviceUUID(HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
             regSavepointData.setLangId(langId);
-            regSavepointData.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+            regSavepointData.setMainPhone(phone);
             regSavepointData.setStepNo(1);
             regSavepointData.setRegisteredAddrAsmail(true);
             regSavepointData.setAddress(clientAddress);
@@ -471,7 +471,7 @@ public class Login_RegistrationHelper extends HelperBase {
                     .header("site", HelperBase.prop.getProperty("mobile.site"))
                     .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                     .queryParam("langID", "4")
-                    .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+                    .queryParam("phoneNum", phone)
                     .queryParam("code", smsCode)
                     .when()
                     .get("userRegistration/checkPhoneAndLoadSavePoint")
@@ -496,7 +496,7 @@ public class Login_RegistrationHelper extends HelperBase {
             regSavepointData2.setLangId(langId);
             regSavepointData2.setFirstName(HelperBase.prop.getProperty("mobile.registration.firstName"));
             regSavepointData2.setLastName(HelperBase.prop.getProperty("mobile.registration.lastName"));
-            regSavepointData2.setMainPhone(HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+            regSavepointData2.setMainPhone(phone);
             regSavepointData2.setCountryId(countryId);
             regSavepointData2.setCurrencyId(currencyId);
             regSavepointData2.setBirthDate(birthDate);
@@ -680,7 +680,7 @@ public class Login_RegistrationHelper extends HelperBase {
                             "checkboxList.typeId[1]", equalTo(terms2));
 
 
-            regSavepointData2.setEmail(HelperBase.prop.getProperty("mobile.registration.email"));
+            regSavepointData2.setEmail(email);
             regSavepointData2.setStepNo(4);
             String json4 = gson.toJson(regSavepointData2);
             System.out.println(json);
@@ -837,7 +837,7 @@ public class Login_RegistrationHelper extends HelperBase {
                     .body("resultCode", equalTo(0));
 
 
-            String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
+            String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com", email, "password1<");
             System.out.println("link_link " + link);
             given().log().uri().log().headers().log().body()
                     .when()

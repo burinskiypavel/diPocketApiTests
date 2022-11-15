@@ -1,5 +1,6 @@
 package appmanager.ui.bo;
 
+import appmanager.HelperBase;
 import appmanager.Login_RegistrationHelper;
 import appmanager.UIHelperBase;
 import org.openqa.selenium.By;
@@ -276,7 +277,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
             if (findElements(By.id("takeTicketContent")).size() == 0) {
                 Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, login_registrationHelper.generateRandomString(8), "715611173985");
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, login_registrationHelper.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"));
                 gotoTakeTicket();
                 initFDDTicketDisplain();
             }

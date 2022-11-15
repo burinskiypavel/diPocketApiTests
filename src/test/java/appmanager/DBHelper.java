@@ -713,4 +713,18 @@ public class DBHelper extends HelperBase {
         stmt.executeQuery(commit);
         con.close();
     }
+
+    public void updateClientEmailFromDB(String email, String id) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "update client set EMAIL = '"+email+"' where ID = '"+id+"'";
+        String commit = "commit";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        stmt.executeQuery(query);
+        stmt.executeQuery(commit);
+        con.close();
+    }
 }
