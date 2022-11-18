@@ -36,7 +36,7 @@ public class UIBOClientHelper extends UIHelperBase {
 
     public void blockClient(String reason) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Block client']"));
-        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
+        type(By.cssSelector("input[id*=input_blockOrBanReason]"), reason);
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was blocked successfully')]"));
@@ -48,15 +48,16 @@ public class UIBOClientHelper extends UIHelperBase {
         type(By.cssSelector("input[id*='input_unblockOrUnbanReason']"), reason);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
     }
 
     public void banClient(String reason) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Ban client']"));
-        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
+        type(By.cssSelector("input[id*=blockOrBanReason]"), reason);
         Thread.sleep(1500);
-        clickCheckbox(By.cssSelector("app-dynamic-form p-checkbox"));
-        click(By.xpath("//p-button[@ng-reflect-label='Ban']"));
+        clickCheckbox(By.cssSelector("p-checkbox[id*='blockClientDevice']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//div[contains(text(), 'User was ban successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
     }
