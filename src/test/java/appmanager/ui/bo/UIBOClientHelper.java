@@ -58,7 +58,7 @@ public class UIBOClientHelper extends UIHelperBase {
         Thread.sleep(1500);
         clickCheckbox(By.cssSelector("p-checkbox[id*='blockClientDevice']"));
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-        waitFor(By.xpath("//div[contains(text(), 'User was ban successfully')]"));
+        waitFor(By.xpath("//div[contains(text(), 'Client was ban successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
     }
 
