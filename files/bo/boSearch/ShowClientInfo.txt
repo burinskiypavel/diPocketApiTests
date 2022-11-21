@@ -10,7 +10,7 @@ Fee tariff plan: EUR - standart
 ID Code:
 Citizenship: Ukraine
 Currency: EUR
-Language: English
+Language: Ukrainian
 Risk: 3
 Cardholder name: Nona Qwertii
 Registry add: Address44, City, UA

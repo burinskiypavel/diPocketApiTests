@@ -573,7 +573,7 @@ public class UIBOHelper extends UIHelperBase {
     public void blockAccountFromSearchByCard() {
         waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
         click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
-        click(By.xpath("//app-button[@label='Block']"));
+        click(By.xpath("//p-button[@label='Block']"));
         waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
     }
