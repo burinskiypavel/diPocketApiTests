@@ -190,7 +190,7 @@ public class UIBOClientHelper extends UIHelperBase {
 
     public String blockAccount() {
         click(By.xpath("//span[contains(text(), 'Block account')]"));
-        String actualPopupText = getTextFromPopUp2(By.cssSelector("app-block-account-modal p"));
+        String actualPopupText = getTextFromPopUp2(By.cssSelector("app-block-account p"));
         click(By.cssSelector("p-button[label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Account was blocked successfully')]"));
         return actualPopupText;

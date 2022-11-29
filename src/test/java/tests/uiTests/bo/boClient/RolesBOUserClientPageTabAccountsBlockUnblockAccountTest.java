@@ -172,12 +172,12 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
         app.getUiboHelper().waitFor(By.xpath("//span[contains(text(), 'Card id:')]"));
 
-        List<String> actualElementsHeaderText = app.getUiboHelper().getActualText(By.xpath("//app-card-limits-modal //app-limits-info //span[@class='pr-3']"));
+        List<String> actualElementsHeaderText = app.getUiboHelper().getActualText(By.xpath("//app-card-limits //app-limits-info //span[@class='pr-3']"));
         List<String> expectedElementsHeaderText = app.getUiboHelper().getDateFromFile("files/bo/boClient/rolesBOUserClientPageTabAccountsCardLimitsHeader.txt");
 
         assertEquals(actualElementsHeaderText, expectedElementsHeaderText);
 
-        List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-card-limits-modal //p"));
+        List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-card-limits //p"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boClient/rolesBOUserClientPageTabAccountsCardLimits.txt");
 
         assertEquals(actualElementsText, expectedElementsText);
