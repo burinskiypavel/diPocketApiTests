@@ -69,6 +69,7 @@ public class Login_RegistrationHelper extends HelperBase {
         cliSessionId = res.getHeader("cliSessionId");
         System.out.println("cliSessionId " + cliSessionId);
         res.then().log().all().statusCode(200);
+        System.out.println("Login done");
         return cliSessionId;
     }
 
@@ -847,5 +848,6 @@ public class Login_RegistrationHelper extends HelperBase {
                     //.body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"),
                    //         "html.body.div.div.div.h2", equalTo("Большое спасибо!"));
 
+        System.out.println("Registration done");
     }
 }
