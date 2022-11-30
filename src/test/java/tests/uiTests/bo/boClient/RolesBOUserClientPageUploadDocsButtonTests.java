@@ -21,6 +21,7 @@ public class RolesBOUserClientPageUploadDocsButtonTests extends UITestBase {
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Upload docs']"));
         app.getUiboHelper().click(By.cssSelector("app-select-async[ng-reflect-name='typeId']"));
+        app.getUiboHelper().waitFor(By.cssSelector("li[aria-label='PhotoID']"));
         app.getUiboHelper().click(By.cssSelector("li[aria-label='PhotoID']"));
         app.getUiboHelper().uploadFile(By.cssSelector("p-fileupload[ng-reflect-choose-label='Browse'] input[type='file']"), "C:/Work/Files/self.jpg");
         Thread.sleep(1500);
