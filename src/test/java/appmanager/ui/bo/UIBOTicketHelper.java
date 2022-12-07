@@ -29,7 +29,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         //click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         BOHomePage boHomePage = new BOHomePage(driver);
         boHomePage.gotoTakeTicket();
-        Thread.sleep(1500);
+        Thread.sleep(1700);
         //waitFor(By.id("takeTicketContent"));
     }
 
@@ -353,7 +353,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
         uploadFile(By.cssSelector("app-upload-file-with-preview[ng-reflect-name='base64Selfie1'] input[type='file']"), file.getAbsolutePath());
         uploadFile(By.cssSelector("app-upload-file-with-preview[ng-reflect-name='base64Selfie2'] input[type='file']"), file.getAbsolutePath());
-        Thread.sleep(700);
+        Thread.sleep(1300);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//*[contains(text(), 'Selfies were uploaded successfully')]"));
     }
