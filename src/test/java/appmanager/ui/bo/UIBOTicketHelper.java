@@ -28,8 +28,16 @@ public class UIBOTicketHelper extends UIHelperBase {
     public void gotoTakeTicketWithReg() throws InterruptedException, SQLException, ClassNotFoundException {
         //click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         BOHomePage boHomePage = new BOHomePage(driver);
+        waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         boHomePage.gotoTakeTicket();
-        Thread.sleep(1700);
+
+        int count = 0;
+        while(areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]"}) && count < 10){
+            click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+            Thread.sleep(4000);
+            count++;
+        }
+        Thread.sleep(2000);
         //waitFor(By.id("takeTicketContent"));
     }
 
