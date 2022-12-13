@@ -339,4 +339,15 @@ public class UIBOClientHelper extends UIHelperBase {
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='" + text + "']")));
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
     }
+
+    public void setDropDownClientPageFilter_messageTab(final String text) {
+        click(By.xpath("//p-dropdown"));
+        click(By.cssSelector("li[aria-label=" + text + "]"));
+        waitFor(By.cssSelector("i.p-dropdown-clear-icon"));
+    }
+
+    public void setClientPageFilter_messageTab(final String filter, String text) {
+        type(By.cssSelector("p-columnfilter[ng-reflect-field='" + filter + "'] input[type='text']"), text);
+        pressKeys(Keys.ENTER);
+    }
 }

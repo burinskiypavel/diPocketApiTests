@@ -2,6 +2,7 @@ package tests.uiTests.bo.boClient;
 
 import base.UITestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -23,19 +24,23 @@ public class RolesBOUserClientPageMessagesTabTest extends UITestBase {
                 "//table //th[contains(text(), 'Created')]", "//table //th[contains(text(), 'Send')]",
         "//table //th[contains(text(), 'Messages')]", "//table //th[contains(text(), 'Error message')]"}), "Incorrect headers");
 
-        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='S']"));
-        app.getUiboClientHelper().setDropDownClientPageFilter("channel", "S");
-        softAssert.assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='S']")), "Incorrect channel filter");
-        softAssert.assertFalse(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='P']")), "Incorrect channel filter");
+        app.getUiboHelper().waitFor(By.xpath("//td[contains(text(), 'S')]"));
+        //app.getUiboClientHelper().setDropDownClientPageFilter("channel", "S");
+        app.getUiboClientHelper().setDropDownClientPageFilter_messageTab("'S'");
+
+        softAssert.assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'S')]")), "Incorrect channel filter");
+        //softAssert.assertFalse(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'P')]")), "Incorrect channel filter");
         app.getUiboClientHelper().clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
-        app.getUiboClientHelper().setClientPageFilter("message", "Password change code: 839429 (#3)");
-        softAssert.assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Password change code: 839429 (#3)')]")), "Incorrect message filter");
-        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='message'] input[type='text']"));
+        //app.getUiboClientHelper().setClientPageFilter("message", "Password change code: 839429 (#3)");
+        app.getUiboClientHelper().setClientPageFilter_messageTab("message", "Password change code: 839429 (#3)");
 
-        app.getUiboClientHelper().setClientPageFilter("errMsg", "java");
+        softAssert.assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Password change code: 839429 (#3)')]")), "Incorrect message filter");
+        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[ng-reflect-field='message'] input[type='text']"));
+
+        app.getUiboClientHelper().setClientPageFilter_messageTab("errMsg", "java");
         softAssert.assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'java.sql.SQLException: ORA-12899')]")), "Incorrect error message filter");
-        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='errMsg'] input[type='text']"));
+        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[ng-reflect-field='errMsg'] input[type='text']"));
 
         softAssert.assertAll();
     }
