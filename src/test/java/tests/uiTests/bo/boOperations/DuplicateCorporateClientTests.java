@@ -33,7 +33,7 @@ public class DuplicateCorporateClientTests extends UITestBase {
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
 
 
-        app.getUiboHelper().waitFor(By.xpath("//p-button[@ng-reflect-label='Create']"));
+        app.getUiboHelper().waitFor(By.xpath("//app-create-corporate-client //p-button[@ng-reflect-label='Create']"));
 
         //List<String> actualText = app.getUiboHelper().getActualText(By.xpath("//app-confirmation-step //tbody //tr"));
         //List<String> expectedText = app.getUiboHelper().getDateFromFile("files/bo/boOperations/duplicateCorporateClient.txt");
@@ -65,7 +65,7 @@ public class DuplicateCorporateClientTests extends UITestBase {
         app.getUiboOperationsHelper().setNoAccount();
         app.getUiboOperationsHelper().verifyInvisibilityOfTheFieldsOnFourthPageAfterSetNoAccount();
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
-        app.getUiboHelper().waitFor(By.xpath("//p-button[@ng-reflect-label='Create']"));
+        app.getUiboHelper().waitFor(By.xpath("//app-create-corporate-client //p-button[@ng-reflect-label='Create']"));
 
         app.getUiboOperationsHelper().createCorporateClientWithMessage("Corporate client was created successfully");
 
