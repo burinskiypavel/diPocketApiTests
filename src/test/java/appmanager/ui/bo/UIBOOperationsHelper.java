@@ -472,7 +472,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
     public void createCorporateClientWithMessage(final String message) {
         click(By.xpath("//app-create-corporate-client //p-button[@ng-reflect-label='Create']"));
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
-        waitFor(By.xpath("//*[contains(text(), 'PSDD')]"));
+        waitFor(By.xpath("//app-client-button-block //span[contains(text(), 'Search')]"));
     }
 
     public void verifyInvisibilityOfTheFieldsOnFourthPageAfterSetNoAccount() {
