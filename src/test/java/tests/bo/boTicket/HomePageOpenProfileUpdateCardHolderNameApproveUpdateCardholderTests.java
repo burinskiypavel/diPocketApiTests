@@ -150,7 +150,9 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_take() {
-        for(int i = 0; i < 18; i++) {
+        int count = 0;
+        for(int i = 0; i < 27; i++) {
+            count++;
             Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
             String response = res.then().extract().response().asString();
 
@@ -173,6 +175,8 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
             ticketId = js2.getInt("id");
             actualTypeName = js2.getString("typeName");
         }
+
+        System.out.println("count: " + count);
 
         assertEquals(actualTypeName, "Cardholder name change");
     }
