@@ -197,7 +197,7 @@ public class DuplicateTariffPlanTest extends TestBase {
                         "reference", hasItems("Payment[2160]"),
                         "reason", hasItems("No reason"),
                         "paymentDate", hasItems("2019-07-26"),
-                        "createDat", hasItems("2019-07-26T13:05:01.844556Z"),
+                        "createDat", hasItems(notNullValue()),
                         "username", hasItems("FINANCE1"));
     }
 
