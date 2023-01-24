@@ -20,7 +20,7 @@ public class SnowAttackRegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), app.mobile_site_snowAttack);
+        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), app.mobile_site_snowAttack, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecSnowAttackRegistration)
                 .queryParam("langID", "4")
@@ -85,7 +85,7 @@ public class SnowAttackRegistrationTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), app.mobile_site_snowAttack);
+        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), app.mobile_site_snowAttack, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecSnowAttackRegistration)
                 .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))

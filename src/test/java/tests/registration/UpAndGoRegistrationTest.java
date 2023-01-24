@@ -39,7 +39,7 @@ public class UpAndGoRegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_appConfig() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(app.registrationPhone, site);
+        app.getDbHelper().deleteClientFromDB(app.registrationPhone, site, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecUpAndGoRegistration)
                 .queryParam("platform", "android")
@@ -112,7 +112,7 @@ public class UpAndGoRegistrationTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDB(app.registrationPhone, site);
+        smsCode = app.getDbHelper().getSMSCodeFromDB(app.registrationPhone, site, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecUpAndGoRegistration)
                 .queryParam("phone", app.registrationPhone)

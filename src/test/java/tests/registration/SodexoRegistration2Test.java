@@ -1,6 +1,7 @@
 package tests.registration;
 
 import appmanager.EmailIMAPHelper;
+import appmanager.HelperBase;
 import base.TestBase;
 import org.testng.annotations.Test;
 
@@ -25,7 +26,7 @@ public class SodexoRegistration2Test extends TestBase {
 
     @Test(priority = 1)
     public void test_WebServices_v1_references_getRegisterInfoByCard() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(phone, site);
+        app.getDbHelper().deleteClientFromDB(phone, site, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecSodexoRegistration)
                 .contentType("application/json; charset=utf-8")
@@ -90,7 +91,7 @@ public class SodexoRegistration2Test extends TestBase {
 
     @Test(priority = 5)
     public void test_WebServices_v1_registration_checkCodeForPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDB(phone, site);
+        smsCode = app.getDbHelper().getSMSCodeFromDB(phone, site, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecSodexoRegistration)
                 .contentType("application/json; charset=utf-8")

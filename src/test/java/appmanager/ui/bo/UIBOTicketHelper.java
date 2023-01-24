@@ -285,7 +285,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
             if (findElements(By.id("takeTicketContent")).size() == 0) {
                 Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, login_registrationHelper.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"));
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, login_registrationHelper.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
                 gotoTakeTicket();
                 initFDDTicketDisplain();
             }

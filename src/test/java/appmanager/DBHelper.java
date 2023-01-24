@@ -6,8 +6,8 @@ import java.util.Objects;
 public class DBHelper extends HelperBase {
     String nulll = null;
 
-    public String getSMSCodeFromDB(String number, final String site) throws ClassNotFoundException, SQLException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+    public String getSMSCodeFromDB(String number, final String site, String dbEnvUrl) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ dbEnvUrl +"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
         //String query = "select * from VERIFYPHONECODE where PHONE = '"+number+"' and SITE = 'DIPOCKET'";
@@ -61,8 +61,8 @@ public class DBHelper extends HelperBase {
         return smsCode;
     }
 
-    public void deleteClientFromDB(String number, final String site) throws SQLException, ClassNotFoundException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+    public void deleteClientFromDB(String number, final String site, String envUrl) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ envUrl +"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
 

@@ -40,7 +40,7 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(app.playITRegistrationPhone, site);
+        app.getDbHelper().deleteClientFromDB(app.playITRegistrationPhone, site, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecPlayITRegistration)
                 .queryParam("langID", langId)
@@ -108,7 +108,7 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
-        smsCode = app.getDbHelper().getSMSCodeFromDB(app.playITRegistrationPhone, site);
+        smsCode = app.getDbHelper().getSMSCodeFromDB(app.playITRegistrationPhone, site, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecPlayITRegistration)
                 .queryParam("phone", app.playITRegistrationPhone)
