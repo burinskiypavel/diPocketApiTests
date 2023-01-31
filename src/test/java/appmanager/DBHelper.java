@@ -727,4 +727,27 @@ public class DBHelper extends HelperBase {
         stmt.executeQuery(commit);
         con.close();
     }
+
+    public String getBOLoginSMSCodeFromTestDB() throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM PUSHMSG p ORDER BY id DESC";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String message = null;
+        while (rs.next()){
+            message = rs.getString(12);
+
+            System. out.println("Message : " + message);
+            break;
+        }
+        con.close();
+        return message;
+    }
+
 }

@@ -1,9 +1,12 @@
 package requests.bo;
 
+import appmanager.DBHelper;
 import appmanager.HelperBase;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import model.bo.boClient.Supervisor_reqList;
+
+import java.sql.SQLException;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -12,6 +15,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.testng.Assert.assertFalse;
 
 public class BORequests {
+    DBHelper dbHelper = new DBHelper();
 
     public RequestSpecification requestSpecBO = given()
             .log().uri().log().headers().log().body()
@@ -43,6 +47,55 @@ public class BORequests {
                 .auth().preemptive().basic(login, pass)
                 .cookie(cookie)
                 .header("bo-auth-token", "123456")
+                .contentType("application/json")
+                .when()
+                .post( "/v1/auth/authentication");
+        //cookie = response.getHeader("Set-Cookie");
+        response.then().log().all()
+                .statusCode(200)
+                .body("firstName", notNullValue(),
+                        "lastName", notNullValue(),
+                        "roleId", notNullValue(),
+                        "stateId", notNullValue(),
+                        "stateName", notNullValue(),
+                        "username", notNullValue(),
+                        "phone", notNullValue(),
+                        //"corpClientId", notNullValue(),
+                        "email", notNullValue(),
+                        "site", notNullValue(),
+                        "username", equalTo(expectedUsername));
+        return cookie;
+    }
+
+    public String boServices_v1_auth_authentication_test(String login, String pass, String expectedUsername) throws SQLException, ClassNotFoundException {
+        String cookie = null;
+
+        Response responseCode = given()
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .basePath("BOServices")
+                .log().uri().log().headers()
+                .auth().preemptive().basic(login, pass)
+                .contentType("application/json")
+                .queryParam("smsCounter", 1)
+                .queryParam("username", "PAVELB_BO")
+                .when()
+                .post( "/v1/auth/genSecureCodeWithCounter");
+        cookie = responseCode.getHeader("Set-Cookie");
+        responseCode.then().log().all()
+                .statusCode(200);
+
+
+        String message = dbHelper.getBOLoginSMSCodeFromTestDB();
+        String sms = message.substring(13);
+
+
+        Response response = given()
+                .log().uri().log().headers()
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .basePath("BOServices")
+                .auth().preemptive().basic(login, pass)
+                .cookie(cookie)
+                .header("bo-auth-token", sms)
                 .contentType("application/json")
                 .when()
                 .post( "/v1/auth/authentication");
