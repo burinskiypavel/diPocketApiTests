@@ -99,6 +99,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecTDSJson;
     public RequestSpecification requestSpecPeak;
     public RequestSpecification requestSpecBO;
+    public RequestSpecification requestSpecBOTest;
     public RestAssuredConfig configTimeout;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
@@ -106,6 +107,7 @@ public class ApplicationManager {
     public String registrationEmail = "testdipocket4@gmail.com";
     //public String BOURL = "https://support.dipocket.dev";
     public String BOURL = null;
+    public String BOTestURL = null;
     public String CBOuserLogin = "Viktoria";
     public String CBOuserPass = "kWmaB0s";
     public String CBOuserLogin2 = "PAVELBAuto";
@@ -164,6 +166,7 @@ public class ApplicationManager {
         emailsVerificationsCountryId = HelperBase.prop.getProperty("emailsVerifications.countryId");
         emailsVerificationsCurrencyId = HelperBase.prop.getProperty("emailsVerifications.currencyId");
         BOURL = HelperBase.prop.getProperty("bo.base.url");
+        BOTestURL = HelperBase.prop.getProperty("bo.test.base.url");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()
@@ -257,6 +260,13 @@ public class ApplicationManager {
                 .baseUri(BOURL)
                 .basePath("BOServices")
                 .header("bo-auth-token", "123456")
+                .contentType("application/json");
+
+        requestSpecBOTest = given()
+                .log().uri().log().headers().log().body()
+                .config(configTimeout)
+                .baseUri(BOTestURL)
+                .basePath("BOServices")
                 .contentType("application/json");
     }
 
