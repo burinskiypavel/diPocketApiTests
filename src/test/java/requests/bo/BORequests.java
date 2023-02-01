@@ -821,6 +821,20 @@ public class BORequests {
                 .statusCode(200);
     }
 
+    public void boServices_v1_ticket_ticketId_postpone_test(String cookie, int ticketId, String postponeTill, String secureCode) {
+        given()
+                .spec(requestSpecBOTest)
+                .header("bo-auth-token", secureCode)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .cookie(cookie)
+                .pathParam("ticketId", ticketId)
+                .queryParam("postponeTill", postponeTill)
+                .when()
+                .post("/v1/ticket/{ticketId}/postpone")
+                .then().log().all()
+                .statusCode(200);
+    }
+
     public void boServices_v1_ticket_ticketId_reassign(String cookie, int ticketId, String username, final String reason) {
         given()
                 .spec(requestSpecBO)
