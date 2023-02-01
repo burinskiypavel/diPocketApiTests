@@ -773,4 +773,25 @@ public class DBHelper extends HelperBase {
         return message;
     }
 
+    public String getClientDDStatusFromTestDB(String clientId) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM CLIENT where id = '" + clientId + "'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String status = null;
+        while (rs.next()){
+            status = rs.getString(26);
+
+            System. out.println("status : " + status);
+            break;
+        }
+        con.close();
+        return status;
+    }
 }
