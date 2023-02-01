@@ -520,6 +520,23 @@ public class BORequests {
                 .statusCode(200);
     }
 
+    public void boServices_v1_clientImage_uploadDoc_test(String cookie, int clientId, int typeId, String secureCode, String image) {
+        given()
+                .spec(requestSpecBOTest)
+                .header("bo-auth-token", secureCode)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .cookie(cookie)
+                .body("{\n" +
+                        "  \"clientId\" : "+ clientId +",\n" +
+                        "  \"base64data\" : \""+image+"\",\n" +
+                        "  \"typeId\" : "+ typeId +"\n" +
+                        "}")
+                .when()
+                .post( "/v1/clientImage/uploadDoc")
+                .then().log().all()
+                .statusCode(200);
+    }
+
     public void boServices_v1_clientImage_uploadSelfie(String cookie, int clientId, String image1, String image2) {
         given()
                 .spec(requestSpecBO)
