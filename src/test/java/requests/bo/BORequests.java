@@ -23,6 +23,11 @@ public class BORequests {
             .header("bo-auth-token", "123456")
             .contentType("application/json");
 
+    public RequestSpecification requestSpecBOTest = given()
+            .log().uri().log().headers().log().body()
+            .basePath("BOServices")
+            .contentType("application/json");
+
 
     public String boServices_v1_auth_authentication(String login, String pass, String expectedUsername) {
         String cookie = null;
@@ -76,14 +81,12 @@ public class BORequests {
                 .log().uri().log().headers()
                 .auth().preemptive().basic(login, pass)
                 .contentType("application/json")
-                .queryParam("smsCounter", 1)
                 .queryParam("username", "PAVELB_BO")
                 .when()
-                .post( "/v1/auth/genSecureCodeWithCounter");
+                .post( "/v1/auth/getSecureCode");
         cookie = responseCode.getHeader("Set-Cookie");
         responseCode.then().log().all()
                 .statusCode(200);
-
 
         String message = dbHelper.getBOLoginSMSCodeFromTestDB();
         String sms = message.substring(13);
@@ -769,6 +772,18 @@ public class BORequests {
         Response response = given()
                 .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .when()
+                .get("/v1/ticket/take");
+        response.then().log().all().statusCode(200);
+        return response;
+    }
+
+    public Response  boServices_v1_ticket_take_test(String cookie, String secureCode) {
+        Response response = given()
+                .spec(requestSpecBOTest)
+                .header("bo-auth-token", secureCode)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
                 .cookie(cookie)
                 .when()
                 .get("/v1/ticket/take");
