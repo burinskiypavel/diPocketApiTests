@@ -205,4 +205,10 @@ public class GenerationTest extends TestBase {
         String actualClientStatus = app.getDbHelper().getVirtualIBANFromTestDB();
         assertThat(actualClientStatus, notNullValue());
     }
+
+    @Test(priority = 11)
+    public void test_verifyStatusRequest() throws SQLException, ClassNotFoundException, InterruptedException {
+        String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB();
+        assertThat(actualStatusRequest, equalTo("D"));
+    }
 }
