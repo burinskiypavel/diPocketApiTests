@@ -811,7 +811,7 @@ public class DBHelper extends HelperBase {
         while (rs.next()){
             vIban = rs.getString(3);
 
-            while (vIban == null && count < 80){
+            while (vIban == null && count < 110){
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
@@ -819,7 +819,7 @@ public class DBHelper extends HelperBase {
                 count++;
             }
 
-            System.out.println("count" + count);
+            System.out.println("count: " + count);
             System. out.println("vIban : " + vIban);
             break;
         }
