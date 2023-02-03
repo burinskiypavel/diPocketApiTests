@@ -11,6 +11,9 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
 
 public class GenerationTest extends TestBase {
@@ -195,5 +198,11 @@ public class GenerationTest extends TestBase {
     public void test_verifyFDDStatus() throws SQLException, ClassNotFoundException {
         String actualClientStatus = app.getDbHelper().getClientDDStatusFromTestDB(clientId);
         assertEquals(actualClientStatus, "FDD");
+    }
+
+    @Test(priority = 10)
+    public void test_verifyVirtualIBANCreation() throws SQLException, ClassNotFoundException, InterruptedException {
+        String actualClientStatus = app.getDbHelper().getVirtualIBANFromTestDB();
+        assertThat(actualClientStatus, notNullValue());
     }
 }

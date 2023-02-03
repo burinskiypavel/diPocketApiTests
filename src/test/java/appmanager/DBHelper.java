@@ -794,4 +794,36 @@ public class DBHelper extends HelperBase {
         con.close();
         return status;
     }
+
+    public String getVirtualIBANFromTestDB() throws SQLException, ClassNotFoundException, InterruptedException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String vIban = null;
+        int count = 0;
+        while (rs.next()){
+            vIban = rs.getString(3);
+
+            while (vIban == null && count < 80){
+                Thread.sleep(6000);
+                rs= stmt.executeQuery(query);
+                rs.next();
+                vIban = rs.getString(3);
+                count++;
+            }
+
+            System.out.println("count" + count);
+            System. out.println("vIban : " + vIban);
+            break;
+        }
+        con.close();
+        return vIban;
+    }
 }
