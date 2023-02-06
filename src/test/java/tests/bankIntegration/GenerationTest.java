@@ -33,6 +33,10 @@ public class GenerationTest extends TestBase {
     int countryId = 440;
     int clientIdSandbox = 0;
 
+    String  currencyCode = "GBP";
+    String sandboxLogin = "SANDBOX";
+    String sandboxPass = "W6qQnx7";
+
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
 
 
@@ -221,8 +225,9 @@ public class GenerationTest extends TestBase {
     public void test_customerServices_v1_client_register(){
         String response = given()
                 .log().uri().log().headers().log().body()
+                //.spec(app.requestSpecCustomerServicesSandoxTest)
                 .contentType("application/json")
-                .auth().basic("SANDBOX", "W6qQnx7")
+                .auth().basic(sandboxLogin, sandboxPass)
                 .body("{\n" +
                         "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
                         "  \"langCode\" : \"en\",\n" +
@@ -233,7 +238,7 @@ public class GenerationTest extends TestBase {
                         "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
                         "  \"dob\" : \"1990-08-31\",\n" +
                         "  \"ddStatus\" : \"FDD\",\n" +
-                        "  \"currencyCode\" : \"GBP\",\n" +
+                        "  \"currencyCode\" : \""+currencyCode+"\",\n" +
                         "  \"rStreetLine1\" : \"StreetLine1\",\n" +
                         "  \"rStreetLine2\" : \"StreetLine2\",\n" +
                         "  \"rCity\" : \"City\",\n" +
@@ -260,12 +265,12 @@ public class GenerationTest extends TestBase {
         given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
-                .auth().basic("SANDBOX", "W6qQnx7")
+                .auth().basic(sandboxLogin, sandboxPass)
                 .body("{\n" +
                         "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
                         "    \"clientId\": \""+clientIdSandbox+"\",\n" +
                         "    \"program\":  \"Sandbox\",\n" +
-                        "    \"currencyCode\":  \"GBP\",\n" +
+                        "    \"currencyCode\":  \""+currencyCode+"\",\n" +
                         "    \"cardType\":  \"PLASTIC\",\n" +
                         "    \"accFeeTariffPlanId\":  \"2000\",\n" +
                         "    \"ePin\": \"1111\",\n" +
@@ -282,7 +287,7 @@ public class GenerationTest extends TestBase {
         given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
-                .auth().basic("SANDBOX", "W6qQnx7")
+                .auth().basic(sandboxLogin, sandboxPass)
                 .body("{\n" +
                         "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
                         "    \"clientId\": \""+clientIdSandbox+"\",\n" +

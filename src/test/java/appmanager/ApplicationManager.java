@@ -100,6 +100,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecPeak;
     public RequestSpecification requestSpecBO;
     public RequestSpecification requestSpecBOTest;
+    public RequestSpecification requestSpecCustomerServicesSandoxTest;
     public RestAssuredConfig configTimeout;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
@@ -268,6 +269,11 @@ public class ApplicationManager {
                 .baseUri(BOTestURL)
                 .basePath("BOServices")
                 .contentType("application/json");
+
+        requestSpecCustomerServicesSandoxTest = given()
+                .log().uri().log().headers().log().body()
+                .config(configTimeout)
+                .baseUri(BOTestURL);
     }
 
     public void init() {
