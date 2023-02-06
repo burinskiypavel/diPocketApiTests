@@ -639,15 +639,15 @@ public class UIBOHelper extends UIHelperBase {
 
     public void fillAndPressDoneManualFeeChargePopUp(String source, String feeDescription, String feeRule, String feeAmount) throws InterruptedException {
         Thread.sleep(1000);
-        waitFor(By.xpath("//p-dropdown[@ng-reflect-option-label='accountName']"));
-        selectFromDropDown("accountName", source);
+        waitFor(By.cssSelector("p-dropdown[id*='select_accountId']"));
+        selectFromDropDown2("select_accountId", source);
         Thread.sleep(1000);
-        type(By.cssSelector("app-input[ng-reflect-name='feeTranNote'] input[type='text']"), feeDescription);
-        selectFromDropDown("name", feeRule);
+        type(By.cssSelector("p-inputnumber[id*='input-number_amount'] input"), feeAmount);
         Thread.sleep(1000);
-        type(By.cssSelector("app-input-number[ng-reflect-name='amount'] input"), feeAmount);
-        Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Done']"));
+        type(By.cssSelector("input[id*='input_feeTranNote']"), feeDescription);
+        selectFromDropDown2("select_feeRuleId", feeRule);
+        Thread.sleep(1000);
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
     }
 
     public void goToCardClientInfoTab() {

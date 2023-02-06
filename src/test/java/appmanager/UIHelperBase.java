@@ -454,6 +454,12 @@ public class UIHelperBase {
         click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
     }
 
+    public void selectFromDropDown2(String dropdown, String dropdownItem) {
+        click(By.cssSelector("p-dropdown[id*='" + dropdown + "']"));
+        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+    }
+
     public void selectFromDropDown(By locator, String dropdownItem) throws InterruptedException {
         driver.findElement(locator).click();
         waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
