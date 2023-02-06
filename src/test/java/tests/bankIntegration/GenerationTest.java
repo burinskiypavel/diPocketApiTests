@@ -211,4 +211,40 @@ public class GenerationTest extends TestBase {
         String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB();
         assertThat(actualStatusRequest, equalTo("D"));
     }
+
+
+    @Test(priority = 12)
+    public void test_customerServices_v1_client_register(){
+        given()
+                .log().uri().log().headers().log().body()
+                .contentType("application/json")
+                .auth().basic("SANDBOX", "W6qQnx7")
+                .body("{\n" +
+                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
+                        "  \"langCode\" : \"en\",\n" +
+                        "  \"firstName\" : \"BILLON\",\n" +
+                        "  \"lastName\" : \"Test\",\n" +
+                        "  \"cardHolderName\" : \"cardHolderName\",\n" +
+                        "  \"email\" : \"testBillon"+app.generateRandomString(5)+"@gmail.com\",\n" +
+                        "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
+                        "  \"dob\" : \"1990-08-31\",\n" +
+                        "  \"ddStatus\" : \"FDD\",\n" +
+                        "  \"currencyCode\" : \"EUR\",\n" +
+                        "  \"rStreetLine1\" : \"StreetLine1\",\n" +
+                        "  \"rStreetLine2\" : \"StreetLine2\",\n" +
+                        "  \"rCity\" : \"City\",\n" +
+                        "  \"rState\" : \"State\",\n" +
+                        "  \"rZip\" : \"Zip\",\n" +
+                        "  \"rCountryCode\" : \"BA\",\n" +
+                        "  \"mStreetLine1\" : \"StreetLine1\",\n" +
+                        "  \"mStreetLine2\" : \"StreetLine2\",\n" +
+                        "  \"mCity\" : \"City\",\n" +
+                        "  \"mState\" : \"State\",\n" +
+                        "  \"mZip\" : \"Zip\",\n" +
+                        "  \"mCountryCode\" : \"BA\"\n" +
+                        "}")
+                .post("https://api.dipocket.site/CustomerServices/v1/client/register")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
