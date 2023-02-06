@@ -75,9 +75,9 @@ public class UIBOClientHelper extends UIHelperBase {
         click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
         click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
         waitForInvisibilityOfElement(By.cssSelector("input[placeholder='New phone'][disabled]"));
-        type(By.cssSelector("input[placeholder='New phone']"), newPhone);
-        Thread.sleep(1000);
-        click(By.cssSelector("p-button[ng-reflect-label='Change']"));
+        type(By.cssSelector("p-inputnumber[id*='input-number_mainPhone'] input"), newPhone);
+        Thread.sleep(1500);
+        click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
     }
 
     public void forgetClient(String reason) throws InterruptedException {

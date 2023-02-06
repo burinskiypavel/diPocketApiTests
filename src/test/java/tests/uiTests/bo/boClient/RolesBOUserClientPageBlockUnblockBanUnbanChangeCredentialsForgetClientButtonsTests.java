@@ -131,7 +131,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
         app.getUiboHelper().click(By.xpath("//label[contains(text(), 'Change password:')]"));
-        app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Change']"));
+        app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
@@ -145,12 +145,12 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
         app.getUiboHelper().click(By.xpath("//label[contains(text(), 'Change secret answer:')]"));
-        app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Change']"));
+        app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
     @Test(priority = 8)
-    public void testRolesBOUserClientPageChangeCredentialsButtonChangeChangePhoneNumber() throws InterruptedException, SQLException, ClassNotFoundException {
+    public void testRolesBOUserClientPageChangeCredentialsButtonChangePhoneNumber() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
