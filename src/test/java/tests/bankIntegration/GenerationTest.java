@@ -262,16 +262,33 @@ public class GenerationTest extends TestBase {
                 .contentType("application/json")
                 .auth().basic("SANDBOX", "W6qQnx7")
                 .body("{\n" +
-                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-194ba4be5fde\",\n" +
+                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
                         "    \"clientId\": \""+clientIdSandbox+"\",\n" +
                         "    \"program\":  \"Sandbox\",\n" +
                         "    \"currencyCode\":  \"GBP\",\n" +
                         "    \"cardType\":  \"PLASTIC\",\n" +
                         "    \"accFeeTariffPlanId\":  \"2000\",\n" +
                         "    \"ePin\": \"1111\",\n" +
+                        "    \"token\":  \"28837957\",\n" +
                         "    \"accountId\": \"\"\n" +
                         "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/card/create")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 14)
+    public void test_CustomerServicesDev_v1_card_activate(){
+        given()
+                .log().uri().log().headers().log().body()
+                .contentType("application/json")
+                .auth().basic("SANDBOX", "W6qQnx7")
+                .body("{\n" +
+                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
+                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
+                        "    \"token\":  \"28837957\"\n" +
+                        "}")
+                .post("https://api.dipocket.site/CustomerServices/v1/card/activate")
                 .then().log().all()
                 .statusCode(200);
     }
