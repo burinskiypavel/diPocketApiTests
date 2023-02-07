@@ -106,7 +106,7 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
                         "  \"emailIsVerified\" : false,\n" +
                         "  \"stateId\" : 1,\n" +
                         "  \"stateName\" : \"Active\",\n" +
-                        "  \"currencyId\" : 985,\n" +
+                        "  \"currencyId\" : 978,\n" +
                         "  \"currencyCode\" : \"PLN\",\n" +
                         "  \"langId\" : 4,\n" +
                         "  \"langCode\" : \"rus\",\n" +
