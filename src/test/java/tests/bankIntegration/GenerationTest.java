@@ -36,6 +36,7 @@ public class GenerationTest extends TestBase {
     String  currencyCode = "GBP";
     String sandboxLogin = "SANDBOX";
     String sandboxPass = "W6qQnx7";
+    String token = null;
 
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
 
@@ -262,7 +263,7 @@ public class GenerationTest extends TestBase {
 
     @Test(priority = 13)
     public void test_CustomerServices_v1_card_create(){
-        given()
+        String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
@@ -274,12 +275,14 @@ public class GenerationTest extends TestBase {
                         "    \"cardType\":  \"PLASTIC\",\n" +
                         "    \"accFeeTariffPlanId\":  \"2000\",\n" +
                         "    \"ePin\": \"1111\",\n" +
-                        "    \"token\":  \"28837957\",\n" +
                         "    \"accountId\": \"\"\n" +
                         "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/card/create")
                 .then().log().all()
-                .statusCode(200);
+                .statusCode(200).extract().response().asString();
+
+        JsonPath jsonPath = new JsonPath(response);
+        token = jsonPath.getString("token");
     }
 
     @Test(priority = 14)
@@ -291,7 +294,7 @@ public class GenerationTest extends TestBase {
                 .body("{\n" +
                         "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
                         "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-                        "    \"token\":  \"28837957\"\n" +
+                        "    \"token\":  \""+token+"\"\n" +
                         "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/card/activate")
                 .then().log().all()
