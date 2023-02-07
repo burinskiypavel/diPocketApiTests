@@ -300,4 +300,16 @@ public class GenerationTest extends TestBase {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    @Test(priority = 15)
+    public void test_verifyVirtualIBANCreation_() throws SQLException, ClassNotFoundException, InterruptedException {
+        String actualClientStatus = app.getDbHelper().getVirtualIBANFromTestDB();
+        assertThat(actualClientStatus, notNullValue());
+    }
+
+    @Test(priority = 16)
+    public void test_verifyStatusRequest__() throws SQLException, ClassNotFoundException, InterruptedException {
+        String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB();
+        assertThat(actualStatusRequest, equalTo("D"));
+    }
 }
