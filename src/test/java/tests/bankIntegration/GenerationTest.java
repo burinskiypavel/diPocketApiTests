@@ -33,7 +33,7 @@ public class GenerationTest extends TestBase {
     int countryId = 440;
     int clientIdSandbox = 0;
 
-    String  currencyCode = "GBP";
+    String currencyCodeGBP = "GBP";
     String sandboxLogin = "SANDBOX";
     String sandboxPass = "W6qQnx7";
     String token = null;
@@ -239,7 +239,7 @@ public class GenerationTest extends TestBase {
                         "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
                         "  \"dob\" : \"1990-08-31\",\n" +
                         "  \"ddStatus\" : \"FDD\",\n" +
-                        "  \"currencyCode\" : \""+currencyCode+"\",\n" +
+                        "  \"currencyCode\" : \""+ currencyCodeGBP +"\",\n" +
                         "  \"rStreetLine1\" : \"StreetLine1\",\n" +
                         "  \"rStreetLine2\" : \"StreetLine2\",\n" +
                         "  \"rCity\" : \"City\",\n" +
@@ -271,7 +271,7 @@ public class GenerationTest extends TestBase {
                         "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
                         "    \"clientId\": \""+clientIdSandbox+"\",\n" +
                         "    \"program\":  \"Sandbox\",\n" +
-                        "    \"currencyCode\":  \""+currencyCode+"\",\n" +
+                        "    \"currencyCode\":  \""+ currencyCodeGBP +"\",\n" +
                         "    \"cardType\":  \"PLASTIC\",\n" +
                         "    \"accFeeTariffPlanId\":  \"2000\",\n" +
                         "    \"ePin\": \"1111\",\n" +
@@ -308,7 +308,7 @@ public class GenerationTest extends TestBase {
     }
 
     @Test(priority = 16)
-    public void test_verifyStatusRequest__() throws SQLException, ClassNotFoundException, InterruptedException {
+    public void test_verifyStatusRequest_() throws SQLException, ClassNotFoundException, InterruptedException {
         String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB();
         assertThat(actualStatusRequest, equalTo("D"));
     }
