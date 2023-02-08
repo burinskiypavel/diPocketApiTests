@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
@@ -19,7 +18,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"), HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
@@ -40,7 +39,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET");
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET", HelperBase.prop.getProperty("db.url"));
         Response res =  given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)

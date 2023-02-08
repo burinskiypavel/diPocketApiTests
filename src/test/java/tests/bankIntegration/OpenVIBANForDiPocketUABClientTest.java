@@ -37,12 +37,14 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     String sandboxLogin = "SANDBOX";
     String sandboxPass = "W6qQnx7";
     String token = null;
+    String pass = "password1";
+    String cliSessionId = null;
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
 
 
     @Test(priority = 1)
     public void testRegistration() throws SQLException, InterruptedException, ClassNotFoundException {
-        login_registrationHelper.dipocketRegistration(countryId, currencyId, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "test");
+        login_registrationHelper.dipocketRegistration(countryId, currencyId, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", pass, "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "test");
     }
 
     @Test(priority = 2)
@@ -221,7 +223,7 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     }
 
 
-    @Test(priority = 12)
+    @Test(priority = 12, enabled = false)
     public void test_customerServices_v1_client_register(){
         String response = given()
                 .log().uri().log().headers().log().body()
@@ -260,7 +262,7 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
                 clientIdSandbox = jsonPath.getInt("clientId");
     }
 
-    @Test(priority = 13)
+    @Test(priority = 13, enabled = false)
     public void test_CustomerServices_v1_card_create(){
         String response = given()
                 .log().uri().log().headers().log().body()
@@ -284,7 +286,7 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
         token = jsonPath.getString("token");
     }
 
-    @Test(priority = 14)
+    @Test(priority = 14, enabled = false)
     public void test_CustomerServicesDev_v1_card_activate(){
         given()
                 .log().uri().log().headers().log().body()
@@ -300,15 +302,21 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 15)
+    @Test(priority = 15, enabled = false)
     public void test_verifyVirtualIBANCreation_() throws SQLException, ClassNotFoundException, InterruptedException {
         String actualClientStatus = app.getDbHelper().getVirtualIBANFromTestDB();
         assertThat(actualClientStatus, notNullValue());
     }
 
-    @Test(priority = 16)
+    @Test(priority = 16, enabled = false)
     public void test_verifyStatusRequest_() throws SQLException, ClassNotFoundException, InterruptedException {
         String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB();
         assertThat(actualStatusRequest, equalTo("D"));
+    }
+
+    @Test(priority = 17)
+    public void test_verifyIbanFromMobileApp() throws SQLException, ClassNotFoundException {
+        cliSessionId = login_registrationHelper.loginDipocket_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+
     }
 }

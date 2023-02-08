@@ -124,10 +124,10 @@ public class DBHelper extends HelperBase {
         return clientDevice;
     }
 
-    public String getLoginSMSFromDB(String number, String uuid, String site) throws ClassNotFoundException, SQLException {
+    public String getLoginSMSFromDB(String number, String uuid, String site, String envUrl) throws ClassNotFoundException, SQLException {
         String clienDevice = getClientDeviceFromDB(number, uuid, site);
 
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String dbUrl = "jdbc:oracle:thin:@"+ envUrl +"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
         String query = "select CODE from VERIFYCODE where SRCID = '"+clienDevice+"'";
@@ -150,8 +150,8 @@ public class DBHelper extends HelperBase {
         return smsLoginCode;
     }
 
-    public void deleteClientDeviceFromDB(String clientDevice) throws ClassNotFoundException, SQLException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+    public void deleteClientDeviceFromDB(String clientDevice, String envUrl) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ envUrl +"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
         String query2 = "delete from clientdevice where uuid = '"+clientDevice+"'";

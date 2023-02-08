@@ -28,7 +28,7 @@ public class Login_RegistrationHelper extends HelperBase {
         baseURI = HelperBase.prop.getProperty("mobile.base.url");
         basePath = "";
 
-        dbHelper.deleteClientDeviceFromDB(deviceUUID);
+        dbHelper.deleteClientDeviceFromDB(deviceUUID, prop.getProperty("db.url"));
 
         given()
                 .log().uri().log().headers().log().body()
@@ -49,7 +49,7 @@ public class Login_RegistrationHelper extends HelperBase {
                 //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
                 .body("errCode", equalTo("DIP-00591"));
 
-        String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, site);
+        String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, site, prop.getProperty("db.url"));
 
         Response res =  given()
                 .log().uri().log().headers().log().body()
@@ -73,11 +73,64 @@ public class Login_RegistrationHelper extends HelperBase {
         return cliSessionId;
     }
 
+    public String loginDipocket_test(String phone, String pass, String deviceUUID) throws ClassNotFoundException, SQLException {
+        String cliSessionId = null;
+        String site = "DIPOCKET";
+        //baseURI = HelperBase.prop.getProperty("mobile.test.base.url");
+        basePath = "";
+
+        dbHelper.deleteClientDeviceFromDB(deviceUUID, prop.getProperty("db.test.url"));
+
+        given()
+                .log().uri().log().headers().log().body()
+                .auth().preemptive().basic(phone, pass)
+                .baseUri(HelperBase.prop.getProperty("mobile.test.base.url"))
+                .header("deviceuuid", deviceUUID)
+                .header("site", site)
+                .contentType("application/json; charset=UTF-8")
+                .body("{\n" +
+                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
+                        "  \"devType\" : \"android\",\n" +
+                        "  \"deviceUUID\" : \"" + deviceUUID + "\",\n" +
+                        "  \"appVersion\" : \"2.2.7\"\n" +
+                        "}")
+                .when()
+                .post("homePage/authenticateMobileApp")
+                .then().log().all()
+                .statusCode(400)
+                //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
+                .body("errCode", equalTo("DIP-00591"));
+
+        String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, site, prop.getProperty("db.test.url"));
+
+        Response res =  given()
+                .log().uri().log().headers().log().body()
+                .auth().preemptive().basic(phone, pass)
+                .baseUri(HelperBase.prop.getProperty("mobile.test.base.url"))
+                .header("deviceuuid", deviceUUID)
+                .header("site", site)
+                .contentType("application/json; charset=UTF-8")
+                .body("{\n" +
+                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
+                        "  \"devType\" : \"android\",\n" +
+                        "  \"deviceUUID\" : \""+deviceUUID+"\",\n" +
+                        "  \"appVersion\" : \"2.2.7\",\n" +
+                        "  \"otp\" : \""+loginSMSCode+"\"\n" +
+                        "}")
+                .when()
+                .post( "homePage/authenticateMobileApp");
+        cliSessionId = res.getHeader("cliSessionId");
+        System.out.println("cliSessionId " + cliSessionId);
+        res.then().log().all().statusCode(200);
+        System.out.println("Login done");
+        return cliSessionId;
+    }
+
     public String loginPlayIT(String phone, String pass, final String deviceUUID) throws ClassNotFoundException, SQLException {
         String cliSessionId = null;
         String site = "PLAYIT";
         baseURI = HelperBase.prop.getProperty("mobile.base.url");
-        dbHelper.deleteClientDeviceFromDB(deviceUUID);
+        dbHelper.deleteClientDeviceFromDB(deviceUUID, prop.getProperty("db.url"));
 
         given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("9_" + phone, pass)
@@ -96,7 +149,7 @@ public class Login_RegistrationHelper extends HelperBase {
                 .statusCode(400)
                 .body("errCode", equalTo("DIP-00591"));
 
-        String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, "PLAYIT");
+        String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, deviceUUID, "PLAYIT", prop.getProperty("db.url"));
         Response res = given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("9_" + phone, pass)
                 .header("deviceuuid", deviceUUID)
@@ -121,7 +174,7 @@ public class Login_RegistrationHelper extends HelperBase {
         String cliSessionId = null;
         String site = "UPANDGO";
 
-        dbHelper.deleteClientDeviceFromDB(mobileLoginDeviceUUID);
+        dbHelper.deleteClientDeviceFromDB(mobileLoginDeviceUUID, prop.getProperty("db.url"));
         given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("10_" + phone, pass)
                 .header("deviceuuid", mobileLoginDeviceUUID)
@@ -141,7 +194,7 @@ public class Login_RegistrationHelper extends HelperBase {
                 .body("errCode", equalTo("DIP-00591"));
 
 
-        String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, mobileLoginDeviceUUID, site);
+        String loginSMSCode = dbHelper.getLoginSMSFromDB(phone, mobileLoginDeviceUUID, site, prop.getProperty("db.url"));
         Response res =  given().log().uri().log().headers().log().body()
                 .auth().preemptive().basic("10_" + phone, pass)
                 .header("deviceuuid", mobileLoginDeviceUUID)

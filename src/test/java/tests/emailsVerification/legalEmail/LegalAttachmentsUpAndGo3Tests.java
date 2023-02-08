@@ -28,7 +28,7 @@ public class LegalAttachmentsUpAndGo3Tests extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientDeviceFromDB(app.mobile_login_deviceuuid_tds);
+        app.getDbHelper().deleteClientDeviceFromDB(app.mobile_login_deviceuuid_tds, HelperBase.prop.getProperty("db.url"));
         given().log().all()
                 .auth().preemptive().basic("10_" + app.tds_phone, app.tds_pass)
                 .header("deviceuuid", app.mobile_login_deviceuuid_tds)
@@ -50,7 +50,7 @@ public class LegalAttachmentsUpAndGo3Tests extends TestBase {
 
     @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(app.tds_phone, app.mobile_login_deviceuuid_tds, "UPANDGO");
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(app.tds_phone, app.mobile_login_deviceuuid_tds, "UPANDGO", HelperBase.prop.getProperty("db.url"));
         Response res =  given().log().all()
                 .auth().preemptive().basic("10_" + app.tds_phone, app.tds_pass)
                 .header("deviceuuid", app.mobile_login_deviceuuid_tds)
@@ -223,7 +223,7 @@ public class LegalAttachmentsUpAndGo3Tests extends TestBase {
                 .body("errCode", equalTo("DIP-00591"));
 
 
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, deviceUUID, site);
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, deviceUUID, site, HelperBase.prop.getProperty("db.url"));
 
         Response res =  given()
                 .spec(app.requestSpecDipocketHomePage)
