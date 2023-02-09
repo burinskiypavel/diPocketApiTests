@@ -6,6 +6,7 @@ import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -26,10 +27,8 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     String sms = null;
     String tomorrow = null;
     String clientId = null;
-
     String actualClientId = null;
     int currencyId = 978;
-
     int countryId = 440;
     int clientIdSandbox = 0;
     String currencyCodeEUR = "EUR";
@@ -39,6 +38,8 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     String token = null;
     String pass = "password1";
     String cliSessionId = null;
+    String actualVIbanFromMobileApp = null;
+    String actualVIbanFromDB = null;
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
 
 
@@ -212,8 +213,8 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
 
     @Test(priority = 10)
     public void test_verifyVirtualIBANCreation() throws SQLException, ClassNotFoundException, InterruptedException {
-        String actualClientStatus = app.getDbHelper().getVirtualIBANFromTestDB();
-        assertThat(actualClientStatus, notNullValue());
+        actualVIbanFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
+        assertThat(actualVIbanFromDB, notNullValue());
     }
 
     @Test(priority = 11)
@@ -317,5 +318,19 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     @Test(priority = 17)
     public void test_verifyIbanFromMobileApp() throws SQLException, ClassNotFoundException {
         cliSessionId = login_registrationHelper.loginDipocket_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        String response = given()
+                .log().uri().log().headers().log().body()
+                .contentType("application/json")
+                .header("clisessionid", ""+cliSessionId+"")
+                .auth().basic(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass)
+                .get("https://http.dipocket.site/ClientServices/v1/clientProfile/paymentDetails")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+
+
+        JsonPath jsonPath = new JsonPath(response);
+        actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");
+
+        Assert.assertEquals(actualVIbanFromDB, actualVIbanFromMobileApp);
     }
 }
