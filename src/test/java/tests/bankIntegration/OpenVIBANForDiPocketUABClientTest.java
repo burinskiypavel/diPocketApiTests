@@ -317,6 +317,5 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     @Test(priority = 17)
     public void test_verifyIbanFromMobileApp() throws SQLException, ClassNotFoundException {
         cliSessionId = login_registrationHelper.loginDipocket_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
-
     }
 }
