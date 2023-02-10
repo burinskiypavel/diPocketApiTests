@@ -40,6 +40,8 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     String cliSessionId = null;
     String actualVIbanFromMobileApp = null;
     String actualVIbanFromDB = null;
+    String actualVIbanSandboxFromDB = null;
+
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
 
 
@@ -305,8 +307,8 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
 
     @Test(priority = 15, enabled = false)
     public void test_verifyVirtualIBANCreation_() throws SQLException, ClassNotFoundException, InterruptedException {
-        String actualClientStatus = app.getDbHelper().getVirtualIBANFromTestDB();
-        assertThat(actualClientStatus, notNullValue());
+        actualVIbanSandboxFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
+        assertThat(actualVIbanSandboxFromDB, notNullValue());
     }
 
     @Test(priority = 16, enabled = false)
@@ -330,7 +332,20 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
 
         JsonPath jsonPath = new JsonPath(response);
         actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");
+        System.out.println("actualVIbanFromMobileApp : " + actualVIbanFromMobileApp);
 
         Assert.assertEquals(actualVIbanFromDB, actualVIbanFromMobileApp);
+    }
+
+    @Test(priority = 18)
+    public void test_BOServices_v1_client_clientId_paymentDetails(){
+        given()
+                .spec(app.requestSpecBOTest)
+                .pathParam("clientId", clientId)
+                .header("bo-auth-token", sms)
+                .cookie(cookie)
+                .get("/v1/client/{clientId}/paymentDetails")
+                .then().log().all()
+                .statusCode(200);
     }
 }
