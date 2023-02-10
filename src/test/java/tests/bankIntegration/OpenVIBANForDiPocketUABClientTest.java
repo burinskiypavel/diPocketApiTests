@@ -39,6 +39,8 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     String pass = "password1";
     String cliSessionId = null;
     String actualVIbanFromMobileApp = null;
+
+    String actualVIbanFromBO = null;
     String actualVIbanFromDB = null;
     String actualVIbanSandboxFromDB = null;
 
@@ -338,14 +340,19 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
     }
 
     @Test(priority = 18)
-    public void test_BOServices_v1_client_clientId_paymentDetails(){
-        given()
+    public void test_verifyIbanFromBO(){
+        Response response = given()
                 .spec(app.requestSpecBOTest)
                 .pathParam("clientId", clientId)
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
-                .get("/v1/client/{clientId}/paymentDetails")
-                .then().log().all()
-                .statusCode(200);
+                .get("/v1/client/{clientId}/paymentDetails");
+
+                response.then().log().all().statusCode(200);
+
+        actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
+        System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
+
+        Assert.assertEquals(actualVIbanFromDB, actualVIbanFromBO);
     }
 }
