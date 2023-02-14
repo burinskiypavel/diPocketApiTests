@@ -227,8 +227,45 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
         assertThat(actualStatusRequest, equalTo("D"));
     }
 
+    @Test(priority = 12)
+    public void test_verifyIbanFromMobileApp() throws SQLException, ClassNotFoundException {
+        cliSessionId = login_registrationHelper.loginDipocket_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        String response = given()
+                .log().uri().log().headers().log().body()
+                .contentType("application/json")
+                .header("clisessionid", ""+cliSessionId+"")
+                .auth().basic(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass)
+                .get("https://http.dipocket.site/ClientServices/v1/clientProfile/paymentDetails")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
 
-    @Test(priority = 12, enabled = false)
+
+        JsonPath jsonPath = new JsonPath(response);
+        actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");
+        System.out.println("actualVIbanFromMobileApp : " + actualVIbanFromMobileApp);
+
+        Assert.assertEquals(actualVIbanFromDB, actualVIbanFromMobileApp);
+    }
+
+    @Test(priority = 13)
+    public void test_verifyIbanFromBO(){
+        Response response = given()
+                .spec(app.requestSpecBOTest)
+                .pathParam("clientId", clientId)
+                .header("bo-auth-token", sms)
+                .cookie(cookie)
+                .get("/v1/client/{clientId}/paymentDetails");
+
+                response.then().log().all().statusCode(200);
+
+        actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
+        System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
+
+        Assert.assertEquals(actualVIbanFromDB, actualVIbanFromBO);
+    }
+
+
+    @Test(priority = 14)
     public void test_customerServices_v1_client_register(){
         String response = given()
                 .log().uri().log().headers().log().body()
@@ -238,7 +275,7 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
                 .body("{\n" +
                         "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
                         "  \"langCode\" : \"en\",\n" +
-                        "  \"firstName\" : \"BILLON\",\n" +
+                        "  \"firstName\" : \"QA\",\n" +
                         "  \"lastName\" : \"Test\",\n" +
                         "  \"cardHolderName\" : \"cardHolderName\",\n" +
                         "  \"email\" : \"testBillon"+app.generateRandomString(5)+"@gmail.com\",\n" +
@@ -263,11 +300,11 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
-                JsonPath jsonPath = new JsonPath(response);
-                clientIdSandbox = jsonPath.getInt("clientId");
+        JsonPath jsonPath = new JsonPath(response);
+        clientIdSandbox = jsonPath.getInt("clientId");
     }
 
-    @Test(priority = 13, enabled = false)
+    @Test(priority = 15)
     public void test_CustomerServices_v1_card_create(){
         String response = given()
                 .log().uri().log().headers().log().body()
@@ -291,7 +328,7 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
         token = jsonPath.getString("token");
     }
 
-    @Test(priority = 14, enabled = false)
+    @Test(priority = 16)
     public void test_CustomerServicesDev_v1_card_activate(){
         given()
                 .log().uri().log().headers().log().body()
@@ -307,52 +344,32 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
                 .statusCode(200);
     }
 
-    @Test(priority = 15, enabled = false)
+    @Test(priority = 17)
     public void test_verifyVirtualIBANCreation_() throws SQLException, ClassNotFoundException, InterruptedException {
         actualVIbanSandboxFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
         assertThat(actualVIbanSandboxFromDB, notNullValue());
     }
 
-    @Test(priority = 16, enabled = false)
+    @Test(priority = 18)
     public void test_verifyStatusRequest_() throws SQLException, ClassNotFoundException, InterruptedException {
         String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB();
         assertThat(actualStatusRequest, equalTo("D"));
     }
 
-    @Test(priority = 17)
-    public void test_verifyIbanFromMobileApp() throws SQLException, ClassNotFoundException {
-        cliSessionId = login_registrationHelper.loginDipocket_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
-        String response = given()
-                .log().uri().log().headers().log().body()
-                .contentType("application/json")
-                .header("clisessionid", ""+cliSessionId+"")
-                .auth().basic(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass)
-                .get("https://http.dipocket.site/ClientServices/v1/clientProfile/paymentDetails")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
-
-
-        JsonPath jsonPath = new JsonPath(response);
-        actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");
-        System.out.println("actualVIbanFromMobileApp : " + actualVIbanFromMobileApp);
-
-        Assert.assertEquals(actualVIbanFromDB, actualVIbanFromMobileApp);
-    }
-
-    @Test(priority = 18)
-    public void test_verifyIbanFromBO(){
+    @Test(priority = 19)
+    public void test_verifyIbanFromBO_sandbox() {
         Response response = given()
                 .spec(app.requestSpecBOTest)
-                .pathParam("clientId", clientId)
+                .pathParam("clientId", clientIdSandbox)
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
                 .get("/v1/client/{clientId}/paymentDetails");
 
-                response.then().log().all().statusCode(200);
+        response.then().log().all().statusCode(200);
 
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
 
-        Assert.assertEquals(actualVIbanFromDB, actualVIbanFromBO);
+        Assert.assertEquals(actualVIbanSandboxFromDB, actualVIbanFromBO);
     }
 }
