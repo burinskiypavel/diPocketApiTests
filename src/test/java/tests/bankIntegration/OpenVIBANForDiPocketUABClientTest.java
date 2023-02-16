@@ -278,7 +278,7 @@ public class OpenVIBANForDiPocketUABClientTest extends TestBase {
                         "  \"firstName\" : \"QA\",\n" +
                         "  \"lastName\" : \"Test\",\n" +
                         "  \"cardHolderName\" : \"cardHolderName\",\n" +
-                        "  \"email\" : \"testBillon"+app.generateRandomString(5)+"@gmail.com\",\n" +
+                        "  \"email\" : \"testqa"+app.generateRandomString(5)+"@gmail.com\",\n" +
                         "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
                         "  \"dob\" : \"1990-08-31\",\n" +
                         "  \"ddStatus\" : \"FDD\",\n" +
