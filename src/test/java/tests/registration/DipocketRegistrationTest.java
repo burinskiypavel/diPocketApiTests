@@ -28,7 +28,7 @@ public class DipocketRegistrationTest extends TestBase {
     String smsCode = null;
     int countryId = 616;
     int currencyId = 978;
-    String site = "GETSBYCARD";
+    String site = "DIPOCKET";
     int langId = 4;
 
     Gson gson = new Gson();
@@ -38,7 +38,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.test.url"));
+        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .queryParam("langID", "4")
@@ -123,7 +123,7 @@ public class DipocketRegistrationTest extends TestBase {
         String  smsFromMemCash = smsMessage.substring(6, 12);
         System.out.println("smsFromMemCash: " + smsFromMemCash);
 
-        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.test.url"));
+        smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
