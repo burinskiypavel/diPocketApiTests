@@ -12,11 +12,11 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 public class DipocketConfigurations extends TestBase {
-    List<String> sites = new ArrayList<>();
+    List<String> actualSites = new ArrayList<>();
 
-        @Test(priority = 1)
+    @Test(priority = 1)
     public void test_verifySiteDipocket() throws SQLException, ClassNotFoundException {
-        sites = app.getDbHelper().getSiteFromLHV_EE_MASTERSITE_FromTestDB(Site.DIPOCKET.toString());
-        assertEquals(sites, Arrays.asList("DIPOCKET", "DIPOCKET", "DIPOCKET", "DIPOCKET"));
+        actualSites = app.getDbHelper().getSiteFromLHV_EE_MASTERSITE_FromTestDB(Site.DIPOCKET.toString());
+        assertEquals(actualSites, Arrays.asList("DIPOCKET", "DIPOCKET", "DIPOCKET", "DIPOCKET"));
     }
 }
