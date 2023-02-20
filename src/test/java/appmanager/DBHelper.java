@@ -1,6 +1,8 @@
 package appmanager;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class DBHelper extends HelperBase {
@@ -857,5 +859,32 @@ public class DBHelper extends HelperBase {
         }
         con.close();
         return statusRequest;
+    }
+
+    public List<String> getSiteFromLHV_EE_MASTERSITE_FromTestDB(String site) throws SQLException, ClassNotFoundException {
+        List<String> sites = new ArrayList<>();
+
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM LHV_EE_MASTERSITE lem WHERE CURRENCYID IN (978,826) and site = '"+site+"'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String columnSite = null;
+        int row = 0;
+        while (rs.next()){
+            columnSite = rs.getString(2);
+            row = rs.getRow();
+            System. out.println("columnSite : " + columnSite);
+            System.out.println("row : " + row);
+
+            sites.add(columnSite);
+        }
+        con.close();
+        return sites;
     }
 }
