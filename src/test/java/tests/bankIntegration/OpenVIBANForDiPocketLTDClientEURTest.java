@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class OpenVIBANForDiPocketLTDClientTest extends TestBase {
+public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     String cookie = null;
     String username = "PAVELB_BO";
     int ticketId = 0;
