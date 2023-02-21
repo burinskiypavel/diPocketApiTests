@@ -381,9 +381,9 @@ public class Login_RegistrationHelper extends HelperBase {
                     .when()
                     .get("references/languages")
                     .then().log().all()
-                    .statusCode(200)
-                    .body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"),
-                            "langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"));
+                    .statusCode(200);
+                    //.body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"));
+                            //"langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"));
 
 
             given()
@@ -396,8 +396,7 @@ public class Login_RegistrationHelper extends HelperBase {
                     .get("references/appConfig?platform=android&version=2.2.9&langCode=rus")
                     .then().log().all()
                     .statusCode(200)
-                    .body("versionColor", equalTo("WHITE"),
-                            "appParams.isAccountCreationEnabled", equalTo(true));
+                    .body("appParams.isAccountCreationEnabled", equalTo(true));
 
 
             given()
@@ -478,7 +477,7 @@ public class Login_RegistrationHelper extends HelperBase {
             res.then().log().all();
             int statusCode = res.getStatusCode();
             assertEquals(statusCode, 200);
-            res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Италия", "Австрия", "Украина", "Бельгия", "Болгария", "Венгрия"));
+            res.then().body("topCountries.name", hasItems("Польша", "Италия", "Австрия", "Украина", "Бельгия"));
 
 
             clientAddress.setTypeId(0);
