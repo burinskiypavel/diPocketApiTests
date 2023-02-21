@@ -34,6 +34,7 @@ public class ApplicationManager {
     private Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
     private AttachmentHelper attachmentHelper = new AttachmentHelper();
     private BOHelper boHelper = new BOHelper();
+    private BankIntegrationHelper bankIntegrationHelper = new BankIntegrationHelper();
     private JsonHelper jsonHelper = new JsonHelper();
     private BORequests boRequestsHelper = new BORequests();
     private ClientProfileRequests clientProfileRequestsHelper = new ClientProfileRequests();
@@ -331,6 +332,8 @@ public class ApplicationManager {
     }
 
     public BOHelper getBOHelper() { return boHelper; }
+
+    public BankIntegrationHelper getBankIntegrationHelper() { return bankIntegrationHelper; }
 
     public JsonHelper getJsonHelper() { return jsonHelper; }
 

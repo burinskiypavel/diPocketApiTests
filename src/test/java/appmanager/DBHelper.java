@@ -813,7 +813,7 @@ public class DBHelper extends HelperBase {
         while (rs.next()){
             vIban = rs.getString(3);
 
-            while (vIban == null && count < 110){
+            while (vIban == null && count < 140){
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();

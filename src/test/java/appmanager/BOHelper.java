@@ -5,10 +5,90 @@ import io.restassured.response.Response;
 import model.bo.User_roles;
 import model.bo.boClient.Account_client;
 import org.testng.Assert;
+import requests.bo.BORequests;
 
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 public class BOHelper extends HelperBase {
+
+    BORequests boRequests = new BORequests();
+    int ticketId = 0;
+    String actualTypeName = null;
+    String actualClientId = null;
+
+    public int takeSDDTicketFromTest(String cookie, String sms, String clientId, String date) {
+        //int ticketId = 0;
+        //String actualTypeName = null;
+        //String actualClientId = null;
+
+        int count = 0;
+        for(int i = 0; i < 27; i++) {
+            count++;
+            Response res = boRequests.boServices_v1_ticket_take_test(cookie, sms);
+            String response = res.then().extract().response().asString();
+
+            JsonPath js = new JsonPath(response);
+            ticketId = js.getInt("id");
+            actualTypeName = js.getString("typeName");
+            actualClientId = js.getString("clientId");
+
+            if(actualTypeName.equals("SDD check") && actualClientId.equals(clientId)){
+                break;
+            }
+
+            if(!actualTypeName.equals("SDD check")){
+                boRequests.boServices_v1_ticket_ticketId_postpone_test(cookie, ticketId, date, sms);
+            }
+
+            Response res2 = boRequests.boServices_v1_ticket_take_test(cookie, sms);
+            String response2 = res2.then().extract().response().asString();
+
+            JsonPath js2 = new JsonPath(response2);
+            ticketId = js2.getInt("id");
+            actualTypeName = js2.getString("typeName");
+        }
+
+        System.out.println("count: " + count);
+
+        assertEquals(actualTypeName, "SDD check");
+        return  ticketId;
+    }
+
+    public int takeFDDTicketFromTest(String cookie, String sms, String clientId, String date) {
+        int count = 0;
+        for(int i = 0; i < 27; i++) {
+            count++;
+            Response res = boRequests.boServices_v1_ticket_take_test(cookie, sms);
+            String response = res.then().extract().response().asString();
+
+            JsonPath js = new JsonPath(response);
+            ticketId = js.getInt("id");
+            actualTypeName = js.getString("typeName");
+            actualClientId = js.getString("clientId");
+
+            if(actualTypeName.equals("FDD check") && actualClientId.equals(clientId)){
+                break;
+            }
+
+            if(!actualTypeName.equals("FDD check")){
+                boRequests.boServices_v1_ticket_ticketId_postpone_test(cookie, ticketId, date, sms);
+            }
+
+            Response res2 = boRequests.boServices_v1_ticket_take_test(cookie, sms);
+            String response2 = res2.then().extract().response().asString();
+
+            JsonPath js2 = new JsonPath(response2);
+            ticketId = js2.getInt("id");
+            actualTypeName = js2.getString("typeName");
+        }
+
+        System.out.println("count: " + count);
+
+        assertEquals(actualTypeName, "FDD check");
+        return  ticketId;
+    }
 
     public void checkUserRolesId(User_roles[] user_roles, String id) {
         for(int i = 0; i < user_roles.length; i++){
