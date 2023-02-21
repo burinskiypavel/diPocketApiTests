@@ -861,8 +861,8 @@ public class DBHelper extends HelperBase {
         return statusRequest;
     }
 
-    public List<String> getSiteFromLHV_EE_MASTERSITE_FromTestDB(String site) throws SQLException, ClassNotFoundException {
-        List<String> sites = new ArrayList<>();
+    public List<String> getRowWithMasterACCID_Site_CountryId_CurrencyId_FromLHV_EE_MASTERSITE_FromTestDB(String site, int indexOfRow) throws SQLException, ClassNotFoundException {
+        List<String> rows = new ArrayList<>();
 
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
         String username = prop.getProperty("db.username");
@@ -874,17 +874,37 @@ public class DBHelper extends HelperBase {
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
+        String masterACCID = null;
         String columnSite = null;
+        String countryId = null;
+        String currencyId = null;
         int row = 0;
         while (rs.next()){
-            columnSite = rs.getString(2);
             row = rs.getRow();
-            System. out.println("columnSite : " + columnSite);
-            System.out.println("row : " + row);
+            if(row != indexOfRow){
+                continue;
+            }
+            masterACCID = rs.getString(1);
+            columnSite = rs.getString(2);
+            countryId = rs.getString(3);
+            currencyId = rs.getString(4);
 
-            sites.add(columnSite);
+            System.out.println("row : " + row);
+            System. out.println("masterACCID : " + masterACCID);
+            System. out.println("columnSite : " + columnSite);
+            System. out.println("countryId : " + countryId);
+            System. out.println("currencyId : " + currencyId);
+
+            rows.add(masterACCID);
+            rows.add(columnSite);
+            rows.add(countryId);
+            rows.add(currencyId);
+
+            if(row == indexOfRow){
+                break;
+            }
         }
         con.close();
-        return sites;
+        return rows;
     }
 }

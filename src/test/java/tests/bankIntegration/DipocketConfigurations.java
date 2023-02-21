@@ -12,11 +12,28 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 public class DipocketConfigurations extends TestBase {
-    List<String> actualSites = new ArrayList<>();
+    List<String> actualrow = new ArrayList<>();
 
     @Test(priority = 1)
-    public void test_verifySiteDipocket() throws SQLException, ClassNotFoundException {
-        actualSites = app.getDbHelper().getSiteFromLHV_EE_MASTERSITE_FromTestDB(Site.DIPOCKET.toString());
-        assertEquals(actualSites, Arrays.asList("DIPOCKET", "DIPOCKET", "DIPOCKET", "DIPOCKET"));
+    public void test_verifySiteDipocketRowWithMasterACCIDSiteCountryIdCurrencyIdFromLHV_EE_MASTERSITE() throws SQLException, ClassNotFoundException {
+        actualrow = app.getDbHelper().getRowWithMasterACCID_Site_CountryId_CurrencyId_FromLHV_EE_MASTERSITE_FromTestDB(Site.DIPOCKET.toString(), 1);
+        assertEquals(actualrow, Arrays.asList("1", "DIPOCKET", "440", "978"));
+    }
+    @Test(priority = 2)
+    public void test_verifySiteDipocketRowWithMasterACCIDSiteCountryIdCurrencyIdFromLHV_EE_MASTERSITE_2() throws SQLException, ClassNotFoundException {
+        actualrow = app.getDbHelper().getRowWithMasterACCID_Site_CountryId_CurrencyId_FromLHV_EE_MASTERSITE_FromTestDB(Site.DIPOCKET.toString(), 2);
+        assertEquals(actualrow, Arrays.asList("2", "DIPOCKET", "440", "826"));
+    }
+
+    @Test(priority = 3)
+    public void test_verifySiteDipocketRowWithMasterACCIDSiteCountryIdCurrencyIdFromLHV_EE_MASTERSITE_3() throws SQLException, ClassNotFoundException {
+        actualrow = app.getDbHelper().getRowWithMasterACCID_Site_CountryId_CurrencyId_FromLHV_EE_MASTERSITE_FromTestDB(Site.DIPOCKET.toString(), 3);
+        assertEquals(actualrow, Arrays.asList("3", "DIPOCKET", "826", "978"));
+    }
+
+    @Test(priority = 4)
+    public void test_verifySiteDipocketRowWithMasterACCIDSiteCountryIdCurrencyIdFromLHV_EE_MASTERSITE_4() throws SQLException, ClassNotFoundException {
+        actualrow = app.getDbHelper().getRowWithMasterACCID_Site_CountryId_CurrencyId_FromLHV_EE_MASTERSITE_FromTestDB(Site.DIPOCKET.toString(), 4);
+        assertEquals(actualrow, Arrays.asList("4", "DIPOCKET", "826", "826"));
     }
 }
