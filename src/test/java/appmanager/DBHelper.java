@@ -861,7 +861,7 @@ public class DBHelper extends HelperBase {
         return statusRequest;
     }
 
-    public List<String> getRowWithMasterACCID_Site_CountryId_CurrencyId_FromLHV_EE_MASTERSITE_FromTestDB(String site, int indexOfRow) throws SQLException, ClassNotFoundException {
+    public List<String> getAllRow_FromLHV_EE_MASTERSITE_FromTestDB(String site, int indexOfRow) throws SQLException, ClassNotFoundException {
         List<String> rows = new ArrayList<>();
 
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
