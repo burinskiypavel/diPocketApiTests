@@ -185,7 +185,6 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");
         System.out.println("actualVIbanFromMobileApp : " + actualVIbanFromMobileApp);
 
-        //Assert.assertEquals(actualVIbanFromDB, actualVIbanFromMobileApp);
         assertThat(actualVIbanFromDB, equalTo(actualVIbanFromMobileApp));
     }
 
@@ -203,7 +202,6 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
 
-        //Assert.assertEquals(actualVIbanFromDB, actualVIbanFromBO);
         assertThat(actualVIbanFromDB, equalTo(actualVIbanFromBO));
     }
 
@@ -312,9 +310,14 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
 
-        //Assert.assertEquals(actualVIbanSandboxFromDB, actualVIbanFromBO);
         assertThat(actualVIbanSandboxFromDB, equalTo(actualVIbanFromBO));
     }
+
+
+
+
+
+
 
 
 

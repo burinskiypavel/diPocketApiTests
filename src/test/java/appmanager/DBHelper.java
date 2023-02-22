@@ -813,7 +813,7 @@ public class DBHelper extends HelperBase {
         while (rs.next()){
             vIban = rs.getString(3);
 
-            while (vIban == null && count < 140){
+            while (vIban == null && count < 170){
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
@@ -878,27 +878,44 @@ public class DBHelper extends HelperBase {
         String columnSite = null;
         String countryId = null;
         String currencyId = null;
+        int columnCount = 0;
+        String columnName = null;
+        String currentCollumn = null;
         int row = 0;
         while (rs.next()){
             row = rs.getRow();
             if(row != indexOfRow){
                 continue;
             }
-            masterACCID = rs.getString(1);
-            columnSite = rs.getString(2);
-            countryId = rs.getString(3);
-            currencyId = rs.getString(4);
-
             System.out.println("row : " + row);
-            System. out.println("masterACCID : " + masterACCID);
-            System. out.println("columnSite : " + columnSite);
-            System. out.println("countryId : " + countryId);
-            System. out.println("currencyId : " + currencyId);
+            //masterACCID = rs.getString(1);
+            //columnSite = rs.getString(2);
+            //countryId = rs.getString(3);
+            //currencyId = rs.getString(4);
 
-            rows.add(masterACCID);
-            rows.add(columnSite);
-            rows.add(countryId);
-            rows.add(currencyId);
+            ResultSetMetaData m = rs.getMetaData();
+            columnCount = m.getColumnCount();
+
+            for(int i  = 1; i <= columnCount; i++){
+                columnName = m.getColumnName(i);
+                currentCollumn = rs.getString(i);
+
+                System.out.println(columnName +" "+ currentCollumn);
+                rows.add(currentCollumn);
+
+            }
+
+
+            //System.out.println("row : " + row);
+            //System. out.println("masterACCID : " + masterACCID);
+            //System. out.println("columnSite : " + columnSite);
+            //System. out.println("countryId : " + countryId);
+            //System. out.println("currencyId : " + currencyId);
+
+            //rows.add(masterACCID);
+            //rows.add(columnSite);
+            //rows.add(countryId);
+            //rows.add(currencyId);
 
             if(row == indexOfRow){
                 break;
