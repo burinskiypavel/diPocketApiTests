@@ -17,7 +17,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body("{ \n" +
                         "\n" +
-                        "  \"requestId\" : \"47f3ccdf-dc36-462d-87f7-cccb6b789077\", \n" +
+                        "  \"requestId\" : \"47"+app.getBOHelper().generateRandomString(8)+"-dc36-462d-87f7-"+app.getBOHelper().generateRandomString(12)+"\", \n" +
                         "  \"langCode\" : \"en\", \n" +
                         "  \"companyName\" : \"Hand, Hilll and Russel\", \n" +
                         "  \"rStreetLine1\" : \"155 Stehr Squares\", \n" +
