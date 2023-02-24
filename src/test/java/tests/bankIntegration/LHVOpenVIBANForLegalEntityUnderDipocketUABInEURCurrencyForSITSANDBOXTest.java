@@ -28,13 +28,13 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                         "  \"rCountryCode\" : \"LT\", \n" +
                         "  \"mStreetLine1\" : \"393 Willis Ridges\", \n" +
                         "  \"mStreetLine2\" : \"1299 Marianne Junctions\", \n" +
-                        "  \"mCity\" : \"Adolfoland\", \n" +
+                        "  \"mCity\" : \"Kharkiv\", \n" +
                         "  \"mState\" : \"\", \n" +
                         "  \"mZip\" : \"81101\", \n" +
                         "  \"mCountryCode\" : \"LT\", \n" +
                         "  \"ddStatus\" : \"FDD\", \n" +
                         "  \"currencyCode\" : \"EUR\", \n" +
-                        "  \"type\" : \"CARD_STORAGE\" \n" +
+                        "  \"type\" : \"LEGAL_ENTITY\" \n" +
                         "\n" +
                         "} ")
                 .post("https://api.dipocket.site/CustomerServices/v1/company/register")
