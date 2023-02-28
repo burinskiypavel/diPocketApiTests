@@ -925,6 +925,50 @@ public class DBHelper extends HelperBase {
         return rows;
     }
 
+    public List<String> getMasterIBAN_FromTestDB(int indexOfRow) throws SQLException, ClassNotFoundException {
+        List<String> rows = new ArrayList<>();
+
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT x.*,x.ROWID FROM DIPOCKET.LHV_EE_MASTERACC x";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String id = null;
+        String account = null;
+        String countryId = null;
+        int row = 0;
+
+        while (rs.next()){
+            row = rs.getRow();
+            if(row != indexOfRow){
+                continue;
+            }
+            System.out.println("row : " + row);
+            id = rs.getString(1);
+            account = rs.getString(2);
+            countryId = rs.getString(5);
+
+            System. out.println("id : " + id);
+            System. out.println("account : " + account);
+            System. out.println("countryId : " + countryId);
+
+            rows.add(id);
+            rows.add(account);
+            rows.add(countryId);
+
+            if(row == indexOfRow){
+                break;
+            }
+        }
+        con.close();
+        return rows;
+    }
+
     public void createAccountFromTestDB(int clientID, int currencyId, String accountName) throws SQLException, ClassNotFoundException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
         String username = prop.getProperty("db.username");
