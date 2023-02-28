@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class DipocketConfigurations extends TestBase {
+public class DipocketConfigurationsTests extends TestBase {
     List<String> actualrow = new ArrayList<>();
 
     @Test(priority = 1)
