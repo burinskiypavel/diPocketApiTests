@@ -20,10 +20,11 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     String sms = null;
     String firstName = "Pavel";
     String lastName = "Burinskiy";
-    int individualClientId = 55588;
+    int individualClientId = 55669;
+    int currencyId = 978;
 
     @Test(priority = 1)
-    public void test_CustomerServicesDev_v1_company_register(){
+    public void test_CustomerServicesDev_v1_company_register() throws SQLException, ClassNotFoundException {
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
@@ -57,6 +58,8 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
         JsonPath jsonPath = new JsonPath(response);
         legalClientId = jsonPath.getString("clientId");
         System.out.println("clientId : " + legalClientId);
+
+        app.getDbHelper().createAccountFromTestDB(Integer.parseInt(legalClientId), currencyId, "test acc");
     }
 
     @Test(priority = 2)
@@ -128,6 +131,20 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     }
 
     @Test(priority = 7)
+    public void test_BOServices_v1_representative_legalClientId_(){
+        given()
+                .spec(app.requestSpecBOTest)
+                .header("bo-auth-token", sms)
+                .cookie(cookie)
+                .pathParam("legalClientId", legalClientId)
+                .get("/v1/representative/{legalClientId}")
+                .then().log().all()
+                .statusCode(200)
+                .body("firstName", hasItem(firstName),
+                        "lastName", hasItem(lastName));
+    }
+
+    @Test(priority = 8, enabled = false)
     public void test_BOServices_v1_representative_legalClientId_unlink_individualClientId(){
         given()
                 .spec(app.requestSpecBOTest)

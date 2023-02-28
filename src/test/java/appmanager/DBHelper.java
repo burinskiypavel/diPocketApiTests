@@ -924,4 +924,44 @@ public class DBHelper extends HelperBase {
         con.close();
         return rows;
     }
+
+    public void createAccountFromTestDB(int clientID, int currencyId, String accountName) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+
+        String query2 = "commit";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection connection = DriverManager.getConnection(dbUrl, username, password);
+
+        CallableStatement myCall = connection.prepareCall("{call PKM_ACCOUNT.CREATEACCOUNT(?, ?, ?, ?, ?, ?, ?)}");
+
+        myCall.registerOutParameter(1, Types.NUMERIC);
+        myCall.setInt(2, 55720);
+        myCall.setInt(3, 826);
+        myCall.setString(4, "Test_acc");
+        myCall.setInt(5, 1);
+        myCall.setInt(6, 1);
+        myCall.setInt(7, 1);
+
+        //myCall.setInt(2, clientID);
+
+
+
+
+        myCall.executeUpdate();
+
+
+        String name = myCall.getString(1);
+
+
+
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs2= stmt.executeQuery(query2);
+
+        connection.close();
+    }
 }
