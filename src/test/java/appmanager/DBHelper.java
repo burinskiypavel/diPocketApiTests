@@ -828,6 +828,26 @@ public class DBHelper extends HelperBase {
         con.close();
         return vIban;
     }
+    public int getLastVIbanIdFromLHV_EE_VIBAN_REQUESTFromTestDB() throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        int vIbanId = 0;
+        while (rs.next()){
+            vIbanId = rs.getInt(1);
+            System. out.println("vIbanId : " + vIbanId);
+            break;
+        }
+        con.close();
+        return vIbanId;
+    }
 
     public String getvIbanStatusRequestFromTestDB() throws SQLException, ClassNotFoundException, InterruptedException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
