@@ -983,24 +983,17 @@ public class DBHelper extends HelperBase {
         CallableStatement myCall = connection.prepareCall("{call PKM_ACCOUNT.CREATEACCOUNT(?, ?, ?, ?, ?, ?, ?)}");
 
         myCall.registerOutParameter(1, Types.NUMERIC);
-        myCall.setInt(2, 55720);
-        myCall.setInt(3, 826);
-        myCall.setString(4, "Test_acc");
+        myCall.setInt(2, clientID);
+        myCall.setInt(3, currencyId);
+        myCall.setString(4, accountName);
         myCall.setInt(5, 1);
         myCall.setInt(6, 1);
         myCall.setInt(7, 1);
-
         //myCall.setInt(2, clientID);
-
-
-
 
         myCall.executeUpdate();
 
-
         String name = myCall.getString(1);
-
-
 
         Statement stmt = connection.createStatement();
 

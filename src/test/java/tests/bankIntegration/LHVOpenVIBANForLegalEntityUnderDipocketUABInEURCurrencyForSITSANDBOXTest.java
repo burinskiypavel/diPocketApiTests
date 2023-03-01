@@ -33,7 +33,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                         "\n" +
                         "  \"requestId\" : \"47"+app.getBOHelper().generateRandomString(8)+"-dc36-462d-87f7-"+app.getBOHelper().generateRandomString(12)+"\", \n" +
                         "  \"langCode\" : \"en\", \n" +
-                        "  \"companyName\" : \"Hand, Hilll and Russel\", \n" +
+                        "  \"companyName\" : \"Hill\", \n" +
                         "  \"rStreetLine1\" : \"155 Stehr Squares\", \n" +
                         "  \"rStreetLine2\" : \"4925 Cremin Branch\", \n" +
                         "  \"rCity\" : \"Edmundport\", \n" +
@@ -86,7 +86,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                         "  \"phoneNumber\" : \"38068"+app.generateRandomNumber(7)+"\",\n" +
                         "  \"email\" : \"pavelburinskiy"+app.generateRandomNumber(7)+"@gmail.com\",\n" +
                         "  \"ddStatus\" : \"FDD\",\n" +
-                        "  \"currencyId\" : 978,\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"langId\" : 1,\n" +
                         "  \"identifyCode\" : \"13124124124\",\n" +
                         "  \"citizenshipCountryId\" : 440,\n" +
