@@ -849,6 +849,27 @@ public class DBHelper extends HelperBase {
         return vIbanId;
     }
 
+    public String getLastSCRIDFromLHV_EE_VIBAN_REQUESTFromTestDB() throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String srcid = null;
+        while (rs.next()){
+            srcid = rs.getString(7);
+            System. out.println("srcid : " + srcid);
+            break;
+        }
+        con.close();
+        return srcid;
+    }
+
     public String getvIbanStatusRequestFromTestDB() throws SQLException, ClassNotFoundException, InterruptedException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
         String username = prop.getProperty("db.username");
@@ -915,10 +936,13 @@ public class DBHelper extends HelperBase {
 
             ResultSetMetaData m = rs.getMetaData();
             columnCount = m.getColumnCount();
+            //String s = String.valueOf(m.getScale(2));
 
             for(int i  = 1; i <= columnCount; i++){
                 columnName = m.getColumnName(i);
                 currentCollumn = rs.getString(i);
+
+                String t = m.getColumnTypeName(i);
 
                 System.out.println(columnName +" "+ currentCollumn);
                 rows.add(currentCollumn);
@@ -1020,5 +1044,47 @@ public class DBHelper extends HelperBase {
         ResultSet rs2= stmt.executeQuery(query2);
 
         connection.close();
+    }
+
+    public void updateClientIdintifyCodeFromTestDB(String idintifyCode, String id) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "update client set identifycode = "+idintifyCode+" where id = "+id+"";
+        String commit = "commit";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        stmt.executeQuery(query);
+        stmt.executeQuery(commit);
+        con.close();
+    }
+
+    public void updateClientCitizenshipCountryIdFromTestDB(int citizenshipcountryid, String id) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "update client set citizenshipcountryid = "+citizenshipcountryid+" where id = "+id+"";
+        String commit = "commit";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        stmt.executeQuery(query);
+        stmt.executeQuery(commit);
+        con.close();
+    }
+
+    public void updateAccountStateIdFromTestDB(int stateid, String clientid) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "update account set stateid = "+stateid+" where clientid = "+clientid+"";
+        String commit = "commit";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        stmt.executeQuery(query);
+        stmt.executeQuery(commit);
+        con.close();
     }
 }

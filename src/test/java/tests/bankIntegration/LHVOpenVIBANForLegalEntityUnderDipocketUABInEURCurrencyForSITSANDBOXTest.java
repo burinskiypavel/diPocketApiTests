@@ -7,6 +7,9 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
 public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBOXTest extends TestBase {
@@ -22,6 +25,10 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     String lastName = "Burinskiy";
     int individualClientId = 55669;
     int currencyId = 978;
+    int countryId = 440;
+    String city = "London";
+    String countryCode = "LT";
+    String ddStatus = "FDD";
 
     @Test(priority = 1)
     public void test_CustomerServicesDev_v1_company_register() throws SQLException, ClassNotFoundException {
@@ -36,17 +43,17 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                         "  \"companyName\" : \"Hill\", \n" +
                         "  \"rStreetLine1\" : \"155 Stehr Squares\", \n" +
                         "  \"rStreetLine2\" : \"4925 Cremin Branch\", \n" +
-                        "  \"rCity\" : \"Edmundport\", \n" +
+                        "  \"rCity\" : \""+city+"\", \n" +
                         "  \"rState\" : \"\", \n" +
                         "  \"rZip\" : \"660820\", \n" +
-                        "  \"rCountryCode\" : \"LT\", \n" +
+                        "  \"rCountryCode\" : \""+countryCode+"\", \n" +
                         "  \"mStreetLine1\" : \"393 Willis Ridges\", \n" +
                         "  \"mStreetLine2\" : \"1299 Marianne Junctions\", \n" +
-                        "  \"mCity\" : \"Kharkiv\", \n" +
+                        "  \"mCity\" : \""+city+"\", \n" +
                         "  \"mState\" : \"\", \n" +
                         "  \"mZip\" : \"81101\", \n" +
-                        "  \"mCountryCode\" : \"LT\", \n" +
-                        "  \"ddStatus\" : \"FDD\", \n" +
+                        "  \"mCountryCode\" : \""+countryCode+"\", \n" +
+                        "  \"ddStatus\" : \""+ddStatus+"\", \n" +
                         "  \"currencyCode\" : \"EUR\", \n" +
                         "  \"type\" : \"LEGAL_ENTITY\" \n" +
                         "\n" +
@@ -59,7 +66,11 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
         legalClientId = jsonPath.getString("clientId");
         System.out.println("clientId : " + legalClientId);
 
-        app.getDbHelper().createAccountFromTestDB(Integer.parseInt(legalClientId), currencyId, "test acc");
+        //app.getDbHelper().createAccountFromTestDB(Integer.parseInt(legalClientId), currencyId, "test acc");
+
+        app.getDbHelper().updateClientIdintifyCodeFromTestDB("49687542145", legalClientId);
+        app.getDbHelper().updateClientCitizenshipCountryIdFromTestDB(countryId, legalClientId);
+
     }
 
     @Test(priority = 2)
@@ -71,7 +82,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     public void test_BOServices_v1_representative_createScreened() throws SQLException, ClassNotFoundException {
         String message = app.getDbHelper().getBOLoginSMSCodeFromTestDB();
         sms = message.substring(13);
-
         given()
                 .spec(app.requestSpecBOTest)
                 .cookie(cookie)
@@ -85,15 +95,15 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                         "  \"birthDate\" : \"14.02.1992\",\n" +
                         "  \"phoneNumber\" : \"38068"+app.generateRandomNumber(7)+"\",\n" +
                         "  \"email\" : \"pavelburinskiy"+app.generateRandomNumber(7)+"@gmail.com\",\n" +
-                        "  \"ddStatus\" : \"FDD\",\n" +
+                        "  \"ddStatus\" : \""+ddStatus+"\",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"langId\" : 1,\n" +
                         "  \"identifyCode\" : \"13124124124\",\n" +
-                        "  \"citizenshipCountryId\" : 440,\n" +
-                        "  \"residenceCountryId\" : 440,\n" +
+                        "  \"citizenshipCountryId\" : "+countryId+",\n" +
+                        "  \"residenceCountryId\" : "+countryId+",\n" +
                         "  \"streetLine1\" : \"Address\",\n" +
                         "  \"streetLine2\" : \"Address\",\n" +
-                        "  \"city\" : \"Kharkiv\",\n" +
+                        "  \"city\" : \""+city+"\",\n" +
                         "  \"zip\" : \"12314124124124\"\n" +
                         "}")
                 .post("/v1/representative/createScreened")
@@ -102,7 +112,9 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     }
 
     @Test(priority = 4)
-    public void test_BOServices_v1_representative_legalClientId(){
+    public void test_BOServices_v1_representative_legalClientId() throws SQLException, ClassNotFoundException {
+        app.getDbHelper().createAccountFromTestDB(Integer.parseInt(legalClientId), currencyId, "test acc");
+        app.getDbHelper().updateAccountStateIdFromTestDB(20, legalClientId);
         given()
                 .spec(app.requestSpecBOTest)
                 .header("bo-auth-token", sms)
@@ -144,7 +156,15 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                         "lastName", hasItem(lastName));
     }
 
-    @Test(priority = 8, enabled = false)
+    @Test(priority = 8)
+    public void test_verifyVirtualIBANCreation_() throws SQLException, ClassNotFoundException, InterruptedException {
+        String actualVIbanFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
+        String lastSRCID = app.getDbHelper().getLastSCRIDFromLHV_EE_VIBAN_REQUESTFromTestDB();
+        assertThat(actualVIbanFromDB, notNullValue());
+        assertThat(lastSRCID, equalTo(legalClientId));
+    }
+
+    @Test(priority = 9, enabled = false)
     public void test_BOServices_v1_representative_legalClientId_unlink_individualClientId(){
         given()
                 .spec(app.requestSpecBOTest)
