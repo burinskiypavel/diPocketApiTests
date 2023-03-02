@@ -66,8 +66,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
         legalClientId = jsonPath.getString("clientId");
         System.out.println("clientId : " + legalClientId);
 
-        //app.getDbHelper().createAccountFromTestDB(Integer.parseInt(legalClientId), currencyId, "test acc");
-
         app.getDbHelper().updateClientIdintifyCodeFromTestDB("49687542145", legalClientId);
         app.getDbHelper().updateClientCitizenshipCountryIdFromTestDB(countryId, legalClientId);
 
