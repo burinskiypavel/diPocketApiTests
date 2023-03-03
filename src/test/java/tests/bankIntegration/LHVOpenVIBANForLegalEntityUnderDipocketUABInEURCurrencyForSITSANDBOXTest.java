@@ -32,6 +32,9 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 
     @Test(priority = 1)
     public void test_CustomerServicesDev_v1_company_register() throws SQLException, ClassNotFoundException {
+//        app.getDbHelper().createСlientTestDB("Pavel", "SANDBOX", "L", 1, "La-la", currencyId, ddStatus, 1, 0, 2000,
+//                10, "Address", "Address", city, "no", 123456, countryId, "pavelburinskiy@gmai.com", "Address", "Address",
+//                city, "no", 123456, countryId, "noGPS", "test acc", 0, 496842145, countryId, 0);
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
