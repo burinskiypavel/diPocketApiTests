@@ -1,7 +1,6 @@
 package tests.bankIntegration;
 
 import base.TestBase;
-import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -11,7 +10,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class CreatCorporateClientNegativeTest extends TestBase {
+public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEURCurrencyForSiteSANDBOXTests extends TestBase {
     String  cboUserLogin = "PavelB_CBO";
     String cboUserPass = "CGc22S0";
     String username = "PAVELB_CBO";
