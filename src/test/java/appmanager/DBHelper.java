@@ -1046,6 +1046,66 @@ public class DBHelper extends HelperBase {
         connection.close();
     }
 
+    public void createСlientTestDB(String userName, String cite, String clientType,
+                                   int langID, String companyName, int currencyID, String ddStatus, int feeTariffPlanID, int defCardProgramID,
+                                   int limitPlanID, int operLimitPlanID, String raStreetLine1, String raStreetLine2, String raCity, String raState,
+                                   int raZip, int raCountryId, String registeredAddrAsMail, String maStreetLine1, String maStreetLine2, String maCity, String maState,
+                                   int maZip, int maCountryId, String accountType, String accountName, int sharedAccountId, int identifyCode, int countryId, int accountCountryId) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+
+        String query2 = "commit";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+
+        Connection connection = DriverManager.getConnection(dbUrl, username, password);
+
+        CallableStatement myCall = connection.prepareCall("{call pkb_CorpClient.CreateClient(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+
+        myCall.registerOutParameter(1, Types.NUMERIC);
+        myCall.setString(2, userName);
+        myCall.setString(3, cite);
+        myCall.setString(4, clientType);
+        myCall.setInt(5, langID);
+        myCall.setString(6, companyName);
+        myCall.setInt(7, currencyID);
+        myCall.setString(8, ddStatus);
+        myCall.setInt(9, feeTariffPlanID);
+        myCall.setInt(10, defCardProgramID);
+        myCall.setInt(11, limitPlanID);
+        myCall.setInt(12, operLimitPlanID);
+        myCall.setString(13, raStreetLine1);
+        myCall.setString(14, raStreetLine2);
+        myCall.setString(15, raCity);
+        myCall.setString(16, raState);
+        myCall.setInt(17, raZip);
+        myCall.setInt(18, raCountryId);
+        myCall.setString(19, registeredAddrAsMail);
+        myCall.setString(20, maStreetLine1);
+        myCall.setString(21, maStreetLine2);
+        myCall.setString(22, maCity);
+        myCall.setString(23, maState);
+        myCall.setInt(24, maZip);
+        myCall.setInt(25, maCountryId);
+        myCall.setString(26, accountType);
+        myCall.setString(27, accountName);
+        myCall.setInt(28, sharedAccountId);
+        myCall.setInt(29, identifyCode);
+        myCall.setInt(30, countryId);
+        myCall.setInt(31, accountCountryId);
+
+        myCall.executeUpdate();
+
+        String responseId = myCall.getString(1);
+
+        Statement stmt = connection.createStatement();
+
+        ResultSet rs2= stmt.executeQuery(query2);
+
+        connection.close();
+    }
+
     public void updateClientIdintifyCodeFromTestDB(String idintifyCode, String id) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
         String username = prop.getProperty("db.username");
