@@ -17,6 +17,9 @@ public class CreatCorporateClientNegativeTest extends TestBase {
     String username = "PAVELB_CBO";
     String cookie = null;
     String sms = null;
+    String site = "SANDBOX";
+    int currencyId = 978;
+    int countryId = 616;
     int lastVIbanIdBeforeTest = 0;
     int vIbanIdAfterCorpClientCreation = 0;
 
@@ -39,7 +42,7 @@ public class CreatCorporateClientNegativeTest extends TestBase {
                 .spec(app.requestSpecBOTest)
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
-                .pathParam("key", Site.DIPOCKET.toString())
+                .pathParam("key", site)
                 .when()
                 .get( "/v1/user/corpClient/checkSysParam/site/{key}")
                 .then().log().all()
@@ -54,11 +57,11 @@ public class CreatCorporateClientNegativeTest extends TestBase {
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
                 .body("{\n" +
-                        "  \"site\" : \"SANDBOX\",\n" +
+                        "  \"site\" : \""+site+"\",\n" +
                         "  \"clientType\" : \"C\",\n" +
                         "  \"langId\" : 1,\n" +
                         "  \"companyName\" : \"Predict\",\n" +
-                        "  \"currencyId\" : 978,\n" +
+                        "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"ddStatus\" : \"FDD\",\n" +
                         "  \"feeTariffPlanId\" : 2,\n" +
                         "  \"defCardProgramId\" : 1,\n" +
@@ -68,14 +71,14 @@ public class CreatCorporateClientNegativeTest extends TestBase {
                         "  \"streetLine2Reg\" : \"62\",\n" +
                         "  \"cityReg\" : \"Krakiv\",\n" +
                         "  \"zipReg\" : \"2123123\",\n" +
-                        "  \"countryIdReg\" : 616,\n" +
+                        "  \"countryIdReg\" : "+countryId+",\n" +
                         "  \"registeredAddrAsMail\" : false,\n" +
                         "  \"streetLine1Mail\" : \"Gagarina ave\",\n" +
                         "  \"streetLine2Mail\" : \"62\",\n" +
                         "  \"cityMail\" : \"Krakiv\",\n" +
                         "  \"zipMail\" : \"2123123\",\n" +
-                        "  \"countryIdMail\" : 616,\n" +
-                        "  \"contractCountryId\" : 826\n" +
+                        "  \"countryIdMail\" : "+countryId+",\n" +
+                        "  \"contractCountryId\" : "+countryId+"\n" +
                         "}")
                 .when()
                 .post( "/v1/user/corpClients/create")
