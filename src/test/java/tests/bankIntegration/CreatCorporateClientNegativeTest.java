@@ -54,7 +54,7 @@ public class CreatCorporateClientNegativeTest extends TestBase {
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
                 .body("{\n" +
-                        "  \"site\" : \""+Site.DIPOCKET.toString()+"\",\n" +
+                        "  \"site\" : \"SANDBOX\",\n" +
                         "  \"clientType\" : \"C\",\n" +
                         "  \"langId\" : 1,\n" +
                         "  \"companyName\" : \"Predict\",\n" +
