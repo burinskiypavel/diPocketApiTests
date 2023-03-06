@@ -461,14 +461,15 @@ public class UIHelperBase {
     }
 
     public void selectFromDropDown(By locator, String dropdownItem) throws InterruptedException {
+        waitFor(locator);
         driver.findElement(locator).click();
-        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        waitFor(By.cssSelector("p-dropdownitem[ng-reflect-label='" + dropdownItem + "']"));
         try{
-            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+            click(By.cssSelector("p-dropdownitem[ng-reflect-label='" + dropdownItem + "']"));
 
         } catch (org.openqa.selenium.StaleElementReferenceException ex) {
 
-            click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+            click(By.cssSelector("p-dropdownitem[ng-reflect-label='" + dropdownItem + "']"));
         }
     }
 

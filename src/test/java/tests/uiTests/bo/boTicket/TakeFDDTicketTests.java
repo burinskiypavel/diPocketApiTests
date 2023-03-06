@@ -371,7 +371,7 @@ public class TakeFDDTicketTests extends UITestBase {
                     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
                     login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
                     app.getUiboTicketHelper().gotoTakeTicket();
-                    app.getUiboTicketHelper().initFDDTicketDisplain();
+                    clientId = app.getUiboTicketHelper().initFDDTicketDisplain();
                 }
                 continue;
             }
@@ -385,7 +385,7 @@ public class TakeFDDTicketTests extends UITestBase {
                 Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
                 login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
-                app.getUiboTicketHelper().initFDDTicketDisplain();
+                clientId = app.getUiboTicketHelper().initFDDTicketDisplain();
             }
         }
         //app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");

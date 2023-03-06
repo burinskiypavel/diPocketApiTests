@@ -254,7 +254,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
     }
 
     public void duplicateLimitPlan(String id, String name) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Duplicate limit plan']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Duplicate limit plan']"));
         type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
         type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
         Thread.sleep(1500);
@@ -262,19 +262,19 @@ public class UIBOOperationsHelper extends UIHelperBase {
     }
 
     public void renameLimitPlan(String name) {
-        click(By.xpath("//app-button[@ng-reflect-label='Rename limit plan']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Rename limit plan']"));
         type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
         click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
     }
 
     public void deleteLimitPlan() throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Delete limit plan']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Delete limit plan']"));
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Delete']"));
     }
 
     public void addLimitPlan(String id, String name) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Add limit plan']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Add limit plan']"));
         type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
         type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
         Thread.sleep(1500);

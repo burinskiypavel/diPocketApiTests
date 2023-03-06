@@ -112,7 +112,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     public void editAndSaveSDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
         if(!gender.equals("")){
-            selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='gender']"), gender);
+            selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);//app-select-async[@ng-reflect-name='gender']
         }
         if(!documentType.equals("")){
             selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdTypeId']"), documentType);

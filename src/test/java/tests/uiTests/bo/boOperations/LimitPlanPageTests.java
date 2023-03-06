@@ -129,7 +129,7 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoLimitPlanTab();
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Duplicate limit plan']"));
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Duplicate limit plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
 
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
@@ -154,7 +154,7 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoLimitPlanTab();
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Rename limit plan']"));
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Rename limit plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
 
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
@@ -180,7 +180,7 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoLimitPlanTab();
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Delete limit plan']"));
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Delete limit plan']"));
 
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//app-delete-tariff-plan-modal"));
@@ -202,7 +202,7 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoLimitPlanTab();
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Add limit plan']"));
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Add limit plan']"));
 
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));;
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[role='dialog']"));
