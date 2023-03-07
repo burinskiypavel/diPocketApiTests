@@ -231,7 +231,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public String initFDDTicketDisplainWithSecondID() throws InterruptedException, SQLException, ClassNotFoundException {
-        waitFor(By.cssSelector("//*[contains(text(), 'ID:')] //span"));
+        waitFor(By.xpath("//*[contains(text(), 'ID:')] //span"));
         String id = getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
         editAndSaveSDDTicket("M", "", "", "", "");
         approveTicketSuccessfully();
