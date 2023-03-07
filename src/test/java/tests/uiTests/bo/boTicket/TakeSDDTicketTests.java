@@ -168,6 +168,7 @@ public class TakeSDDTicketTests extends UITestBase {
 //        }
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        app.getUiboHelper().waitFor(By.xpath("//p-dropdown[contains(@id, '_select_gender_')] //span[contains(text(), 'All')]"));
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//p-dropdown[contains(@id, '_select_gender_')] //span[contains(text(), 'All')]"))){
             app.getUiboHelper().click(By.cssSelector("div.p-dialog-header-icons"));
