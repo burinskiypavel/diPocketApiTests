@@ -110,22 +110,27 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void editAndSaveSDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
+        TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
         click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
         if(!gender.equals("")){
-            selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);//app-select-async[@ng-reflect-name='gender']
+            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
+            selectFromDropDown(takeTicketEditDataPage.genderDropDown, gender);
         }
         if(!documentType.equals("")){
-            selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdTypeId']"), documentType);
+            //selectFromDropDown(By.cssSelector("p-dropdown[id*='select_photoIdTypeId']"), documentType);
+            selectFromDropDown(takeTicketEditDataPage.documentTypeDropDown, documentType);
         }
         if(!docSerialNumber.equals("")){
-            type(By.xpath("//app-input[@ng-reflect-name='photoIdNo'] //input"), docSerialNumber);
+            //type(By.cssSelector("input[id*='_input_photoIdNo_']"), docSerialNumber);
+            type(takeTicketEditDataPage.docSerialNumber, docSerialNumber);
         }
         if(!pesel.equals("")){
-            type(By.xpath("//app-input[@ng-reflect-name='identifyCode'] //input"), pesel);
-
+            //type(By.cssSelector("input[id*='_input_identifyCode_']"), pesel);
+            type(takeTicketEditDataPage.pesel, pesel);
         }
         if(!docCountryOfIssue.equals("")){
-            selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='photoIdCountryId']"), docCountryOfIssue);
+            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdCountryId_']"), docCountryOfIssue);
+            selectFromDropDown(takeTicketEditDataPage.docCountryOfIssueDropDown, docCountryOfIssue);
         }
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Save']"));
@@ -175,6 +180,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void unsuccessfulApprove(final String message) {
+        waitFor(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
     }

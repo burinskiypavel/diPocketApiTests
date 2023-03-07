@@ -16,7 +16,7 @@ public class TakeSDDTicketTests extends UITestBase {
     @Test(priority = 1)
     public void testOpeningTicketPage() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
-        app.getUiboTicketHelper().gotoTakeTicket();
+         app.getUiboTicketHelper().gotoTakeTicket();
 
 //        if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
 //            Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
@@ -41,7 +41,7 @@ public class TakeSDDTicketTests extends UITestBase {
         }
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
-            app.getUiboHelper().waitFor(By.xpath("//app-client-details-info"));
+            app.getUiboHelper().waitFor(By.xpath("//app-client-details"));
             app.getUiboHelper().waitFor(By.id("takeTicketContent"));
 
             assertTrue(app.getUiboHelper().areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Approve']", "//app-button[@ng-reflect-label='Edit']",
@@ -169,7 +169,7 @@ public class TakeSDDTicketTests extends UITestBase {
 
         app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-select-async[@ng-reflect-name='gender'] //span[contains(text(), 'All')]"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-dropdown[contains(@id, '_select_gender_')] //span[contains(text(), 'All')]"))){
             app.getUiboHelper().click(By.cssSelector("div.p-dialog-header-icons"));
         }
 

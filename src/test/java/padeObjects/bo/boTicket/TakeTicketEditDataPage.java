@@ -14,19 +14,22 @@ public class TakeTicketEditDataPage {
     }
 
     @FindBy(css = "p-dropdown[id*='_select_gender_']")
-    WebElement genderDropDown;
+    public WebElement genderDropDown;
 
     @FindBy(css = "p-dropdown[id*='photoIdTypeId']")
-    WebElement documentTypeDropDown;
+    public WebElement documentTypeDropDown;
 
-    @FindBy(css = "input[id*='photoIdNo']")
-    WebElement docSerialNumber;
+    @FindBy(css = "input[id*='_input_photoIdNo_']")
+     public WebElement docSerialNumber;
+
+    @FindBy(css = "input[id*='_input_identifyCode_']")
+    public WebElement pesel;
 
     @FindBy(css = "input[id*='identifyCode']")
     WebElement iDCode;
 
-    @FindBy(css = "p-dropdown[id*='photoIdCountryId']")
-    WebElement docCountryOfIssueDropDown;
+    @FindBy(css = "p-dropdown[id*='_select_photoIdCountryId_']")
+    public WebElement docCountryOfIssueDropDown;
 
     public void clickOnGenderDropDown(){
         genderDropDown.click();
