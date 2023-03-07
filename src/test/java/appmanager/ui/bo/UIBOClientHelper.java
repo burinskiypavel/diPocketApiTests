@@ -22,7 +22,7 @@ public class UIBOClientHelper extends UIHelperBase {
 
     public void goToClientPageCorpClient(By locator) {
         click(locator);
-        waitFor(By.cssSelector("app-corp-client-details-info"));
+        waitFor(By.cssSelector("app-corp-client-info"));
     }
 
     public void unblockClient(String reason) {
