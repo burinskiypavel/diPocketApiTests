@@ -347,7 +347,7 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void setClientPageFilter_messageTab(final String filter, String text) {
-        type(By.cssSelector("p-columnfilter[ng-reflect-field='" + filter + "'] input[type='text']"), text);
+        type(By.cssSelector("div[id='p-tabpanel-2'] p-columnfilter[ng-reflect-field='" + filter + "'] input[type='text']"), text);
         pressKeys(Keys.ENTER);
     }
 }
