@@ -87,6 +87,9 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
 
     @Test(priority = 4)
     public void test_verifyVirtualIBANCreation() throws SQLException, ClassNotFoundException, InterruptedException {
+        int corpClientId = app.getDbHelper().getClientIdFromClientFromTestDB("C", "Predict");
+        app.getDbHelper().isRowWithSRCIDPresentInTheTableLHV_EE_VIBAN_REQUESTFromTestDB(corpClientId);
+
         vIbanIdAfterCorpClientCreation = app.getDbHelper().getLastVIbanIdFromLHV_EE_VIBAN_REQUESTFromTestDB();
         assertThat(lastVIbanIdBeforeTest,equalTo(vIbanIdAfterCorpClientCreation));
     }

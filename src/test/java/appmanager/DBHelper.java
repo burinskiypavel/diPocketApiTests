@@ -1,5 +1,7 @@
 package appmanager;
 
+import org.testng.Assert;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -1146,5 +1148,49 @@ public class DBHelper extends HelperBase {
         stmt.executeQuery(query);
         stmt.executeQuery(commit);
         con.close();
+    }
+
+    public int getClientIdFromClientFromTestDB(String clienttype, String companyname) throws SQLException, ClassNotFoundException, InterruptedException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select * from client where clienttype = '" + clienttype + "' and companyname = '"+companyname+"' order by id desc";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        int clientId = 0;
+        int count = 0;
+        while (rs.next()){
+            clientId = rs.getInt(1);
+            System. out.println("clientId : " + clientId);
+            break;
+        }
+        con.close();
+        return clientId;
+    }
+
+    public void isRowWithSRCIDPresentInTheTableLHV_EE_VIBAN_REQUESTFromTestDB(int srcid) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr where SRCID = "+srcid+" ORDER BY id desc";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        if(rs.next() == false){
+            Assert.assertTrue(true, "row with srcid not present in table");
+            System.out.println("row with srcid: "+srcid+" not present in table");
+        }
+        else {
+            Assert.fail("row with srcid: "+srcid+" present in table");
+        }
+        con.close();
+        return;
     }
 }
