@@ -280,7 +280,7 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .statusCode(200)
                 .body("id", hasItems(57),
                         "tariffPlanId", hasItems(1),
-                        "ruleId", hasItems(500),
+                        "ruleId", hasItems(10101),
                         "ruleName", hasItems("Fee for ATM used worldwide with conversion"),
                         "flatFeeAmount", hasItems(75),
                         "feeCurrencyId", hasItems(985),
