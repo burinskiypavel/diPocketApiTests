@@ -460,8 +460,8 @@ public class UIHelperBase {
 
     public void selectFromDropDown(String dropdown, String dropdownItem) {
         click(By.xpath("//p-dropdown[@ng-reflect-option-label='" + dropdown + "']"));
-        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
-        click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        waitFor(By.cssSelector("p-dropdownitem[ng-reflect-label='" + dropdownItem + "']"));
+        click(By.cssSelector("p-dropdownitem[ng-reflect-label='" + dropdownItem + "']"));
     }
 
     public void selectFromDropDown(By dropdownLocator, By dropdownItemLocator) {

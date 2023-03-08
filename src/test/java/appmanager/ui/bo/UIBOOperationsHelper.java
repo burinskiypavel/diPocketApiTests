@@ -20,8 +20,8 @@ public class UIBOOperationsHelper extends UIHelperBase {
 
     public void selectDropDownFilter(String dropdown, String dropdownItem) {
         click(By.xpath("//p-columnfilter[@field='" + dropdown + "']"));
-        waitFor(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
-        click(By.cssSelector("p-dropdownitem li[aria-label='" + dropdownItem + "']"));
+        waitFor(By.cssSelector("p-dropdownitem[ng-reflect-label='" + dropdownItem + "']"));
+        click(By.cssSelector("p-dropdownitem[ng-reflect-label='" + dropdownItem + "']"));
     }
 
     public void pressCheckOperation(){

@@ -13,9 +13,9 @@ public class AddAndDeleteRowInTariffPlanTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
-        app.getUiboOperationsHelper().selectFeeTariffPlanAndSelectRuleFilterInTheTable("United Kingdom - standard", "Fee for cashload");
+        app.getUiboOperationsHelper().selectFeeTariffPlanAndSelectRuleFilterInTheTable("2 United Kingdom - standard", "50 Fee for cashload");
 
-        app.getUiboOperationsHelper().addRowInTariffPlan("Fee for cashload", "0", "GBP", "GBP", "0", "0", "0");
+        app.getUiboOperationsHelper().addRowInTariffPlan("50 Fee for cashload", "0", "GBP", "GBP", "0", "0", "0");
 
         app.getUiboOperationsHelper().deleteRow(0);
     }
@@ -47,8 +47,8 @@ public class AddAndDeleteRowInTariffPlanTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
-        app.getUiboOperationsHelper().selectFeeTariffPlanAndSelectRuleFilterInTheTable("United Kingdom - standard", "Fee for cashload");
-        app.getUiboOperationsHelper().fillTheFieldsForAddRowInTariffPlan("Fee for cashload", "-1", "PLN", "PLN", "-1", "-1", "-1");
+        app.getUiboOperationsHelper().selectFeeTariffPlanAndSelectRuleFilterInTheTable("2 United Kingdom - standard", "50 Fee for cashload");
+        app.getUiboOperationsHelper().fillTheFieldsForAddRowInTariffPlan("50 Fee for cashload", "-1", "PLN", "PLN", "-1", "-1", "-1");
 
         assertFalse(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[label='Add']")));
         app.getUiboHelper().verifyAmountOfTheSameElements(By.xpath("//*[contains(text(), 'This value should be more than 0')]"), 4);
