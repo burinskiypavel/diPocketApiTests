@@ -26,14 +26,14 @@ public class RolesBOUserClientPageTabTicketsTest extends UITestBase {
                 "//thead //th[contains(text(), 'Last comment')]"}));
 
 
-        app.getUiboClientHelper().verifyClientPageFilterWithCollection("id", "25596", 1);
-        app.getUiboClientHelper().verifyClientPageFilter("created", "02.02.2022");
-        app.getUiboClientHelper().verifyDropDownClientPageFilter("typeName", "FDD check");
-        app.getUiboClientHelper().verifyDropDownClientPageFilter("username", "EVGENYA");
-        app.getUiboClientHelper().verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@field='stateName']"), "Closed", 2);
-        app.getUiboClientHelper().verifyClientPageFilter("closed", "07.02.2022");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-tickets-tab p-columnfilter[ng-reflect-field='id'] input[type='text']"), "25596", "id", By.cssSelector("td[ng-reflect-text='25596']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='created'] input[type='text']"), "02.02.2022", "created", By.cssSelector("td[ng-reflect-text='02.02.2022']"));
+        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='typeName']"), "FDD check");
+        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='username'] "), "EVGENYA");
+        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("app-tickets-tab p-columnfilter[ng-reflect-field='stateName'] "), "Closed");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='closed'] input[type='text']"), "07.02.2022", "closed", By.cssSelector("td[ng-reflect-text='07.02.2022']"));
 
-        app.getUiboClientHelper().setClientPageFilter("lastMessage", "Ticket reassigned. Reason: test");
+        app.getUiboClientHelper().setClientPageFilter(By.cssSelector("app-tickets-tab p-columnfilter[ng-reflect-field='lastMessage'] input[type='text']"), "Ticket reassigned. Reason: test");
         assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'Ticket reassigned. Reason: test')]")));
     }
 }

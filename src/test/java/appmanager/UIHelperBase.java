@@ -266,6 +266,10 @@ public class UIHelperBase {
         return driver.findElements(locator).get(index).getAttribute("ng-reflect-text");
     }
 
+    public String getAttributeText(By locator) {
+        return driver.findElement(locator).getAttribute("ng-reflect-text");
+    }
+
     public WebElement findElement(By by) {
         return driver.findElement(by);
     }

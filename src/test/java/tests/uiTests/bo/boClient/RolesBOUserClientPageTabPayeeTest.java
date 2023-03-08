@@ -3,7 +3,6 @@ package tests.uiTests.bo.boClient;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -20,32 +19,32 @@ public class RolesBOUserClientPageTabPayeeTest extends UITestBase {
         app.getUiboClientHelper().goToClientPage(phone);
         app.getUiboClientHelper().goToPayeeTab();
 
-        app.getUiboClientHelper().verifyClientPageFilter("nickName", "Txcy", "Den");
-        app.getUiboClientHelper().verifyDropDownClientPageFilter("paymentTypeName", "PLN in Poland", "Other payments");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='nickName'] input[type='text']"), "Txcy", "Den", "nickName");
+        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='paymentTypeName']"), "PLN in Poland", "Other payments");
 
-        app.getUiboClientHelper().setDropDownClientPageFilter("currencyCode", "GBP");
-        String actualCurrencyCode = app.getUiboHelper().getAttributeFromMultiple(By.xpath("//table/tbody/tr[1]/td[3]"), 2);
+        app.getUiboClientHelper().setDropDownClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='currencyCode']"), "GBP");
+        String actualCurrencyCode = app.getUiboHelper().getAttributeText(By.xpath("//app-payee //table/tbody/tr[1]/td[3] //span"));
         assertEquals(actualCurrencyCode, "GBP");
         app.getUiboClientHelper().clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
 
-        app.getUiboClientHelper().verifyClientPageFilter("bankId", "WBKPPLPP", "VHHFRGUF");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='bankId'] input[type='text']"), "WBKPPLPP", "VHHFRGUF", "bankId");
 
-        app.getUiboClientHelper().setClientPageFilter("accountNo", "64109000047341800000085706");
-        String actualaccountNo = app.getUiboHelper().getAttributeFromMultiple(By.xpath("//table/tbody/tr[1]/td[5]"), 2);
+        app.getUiboClientHelper().setClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='accountNo'] input[type='text']"), "64109000047341800000085706");
+        String actualaccountNo = app.getUiboHelper().getAttributeText(By.xpath("//app-payee //table/tbody/tr[1]/td[5] //span"));
         assertEquals(actualaccountNo, "64109000047341800000085706");
-        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='accountNo'] input[type='text']"));
+        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='accountNo'] input[type='text']"));
 
-        app.getUiboClientHelper().verifyClientPageFilter("countryName", "Australia", "Poland");
-        app.getUiboClientHelper().verifyClientPageFilter("zip", "JUVUV");
-        app.getUiboClientHelper().verifyClientPageFilter("address1", "Hchc");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='countryName'] input[type='text']"), "Australia", "Poland", "countryName");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='zip'] input[type='text']"), "JUVUV", "zip", By.cssSelector("td span[ng-reflect-text='" + "JUVUV" + "']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='address1'] input[type='text']"), "Hchc", "address1", By.cssSelector("td span[ng-reflect-text='" + "Hchc" + "']"));
 
-        WebElement element = app.getUiboHelper().findElement(By.cssSelector("p-columnfilter[field='companyName'] input[type='text']"));
+        WebElement element = app.getUiboHelper().findElement(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='companyName'] input[type='text']"));
         app.getUiboHelper().moveToElementAction(element);
 
-        app.getUiboClientHelper().verifyClientPageFilter("firstName", "Gfu");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='firstName'] input[type='text']"), "Gfu", "firstName", By.cssSelector("td span[ng-reflect-text='" + "Gfu" + "']"));
 
-        app.getUiboClientHelper().setClientPageFilter("lastName", "Hchc");
-        String actualLastName = app.getUiboHelper().findElement(By.xpath("//table/tbody/tr[1]/td[11]")).getAttribute("ng-reflect-text");
+        app.getUiboClientHelper().setClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='lastName'] input[type='text']"), "Hchc");
+        String actualLastName = app.getUiboHelper().getAttributeText(By.xpath("//app-payee //table/tbody/tr[1]/td[11] //span"));
         assertEquals(actualLastName, "Hchc");
     }
 }

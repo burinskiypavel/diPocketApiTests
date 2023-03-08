@@ -92,15 +92,11 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
         app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='Plastic']"));
 
-        app.getUiboClientHelper().setClientPageFilter("id", "188989");
-        assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='188989']")));
-        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='id'] input[type='text']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-accounts-table-card p-columnfilter[field='id'] input[type='text']"), "188989", "id", By.cssSelector("td[ng-reflect-text='188989']"));
 
-        app.getUiboClientHelper().setClientPageFilter("publicToken", "893529504");
-        assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='893529504']")));
-        app.getUiboHelper().deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='publicToken'] input[type='text']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-accounts-table-card p-columnfilter[field='publicToken'] input[type='text']"), "893529504", "id", By.cssSelector("td[ng-reflect-text='893529504']"));
 
-        app.getUiboClientHelper().setClientPageFilter("dipToken", "32842383");
+        app.getUiboClientHelper().setClientPageFilter(By.cssSelector("app-accounts-table-card p-columnfilter[ng-reflect-field='dipToken'] input[type='text']"), "32842383");
         assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='32842383']")));
         app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='186406']"));
 

@@ -26,14 +26,13 @@ public class RolesBOUserClientPageTabSupervisorRequestsTests extends UITestBase 
                 "//thead //th[contains(text(), 'Full name')]", "//thead //th[contains(text(), 'State')]",
                 "//thead //th[contains(text(), 'Created date')]", "//thead //th[contains(text(), 'Approved date')]"}));
 
-        app.getUiboClientHelper().verifyClientPageFilter("reqId", "3079");
-        app.getUiboClientHelper().verifyDropDownClientPageFilter("role", "Child");
-        app.getUiboClientHelper().verifyClientPageFilter("rClientId", "33655");
-        app.getUiboClientHelper().verifyClientPageFilter("rClientPhone", "380638918373");
-        app.getUiboClientHelper().verifyClientPageFilter("rFullName", "Vika Qwerty");
-        app.getUiboClientHelper().verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@field='stateName']"), "Finished", 3);
-        app.getUiboClientHelper().verifyClientPageFilter("createdAt", "21.01.2022");
-        app.getUiboClientHelper().verifyClientPageFilter("approvedAt", "30.08.2021");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-supervisor-requests-tab p-columnfilter[ng-reflect-field='reqId'] input[type='text']"), "3079", "reqId", By.cssSelector("td[ng-reflect-text='3079']"));
+        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='role']"), "Child");
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='rClientPhone'] input[type='text']"), "380638918373", "rClientPhone", By.cssSelector("td[ng-reflect-text='380638918373']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='rFullName'] input[type='text']"), "Vika Qwerty", "rFullName", By.cssSelector("td[ng-reflect-text='Vika Qwerty']"));
+        app.getUiboClientHelper().verifyDropDownClientPageFilterWithCollection(By.xpath("//p-columnfilter[@ng-reflect-field='stateName']"), "Finished", 3);
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='createdAt'] input[type='text']"), "21.01.2022", "createdAt", By.cssSelector("td[ng-reflect-text='21.01.2022']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='approvedAt'] input[type='text']"), "30.08.2021", "approvedAt", By.cssSelector("td[ng-reflect-text='30.08.2021']"));
     }
 
     @Test

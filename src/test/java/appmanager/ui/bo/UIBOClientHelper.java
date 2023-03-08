@@ -107,7 +107,7 @@ public class UIBOClientHelper extends UIHelperBase {
 
     public void goToPayeeTab() {
         click(By.xpath("//span[contains(text(), 'Payee')]"));
-        waitFor(By.cssSelector("p-columnfilter[field='nickName']"));
+        waitFor(By.cssSelector("p-columnfilter[ng-reflect-field='nickName']"));
     }
 
     public void goToSupervisorRequestsTab() {
@@ -240,36 +240,36 @@ public class UIBOClientHelper extends UIHelperBase {
         waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Card was blocked successfully')]"));
     }
 
-    public void verifyClientPageFilter(String filter, String text, String mustNotBe) {
-        setClientPageFilter(filter, text);
+    public void verifyClientPageFilter(By locator, String text, String mustNotBe, String filter) {
+        setClientPageFilter(locator, text);
         waitForSeveralItems(new String[]{text});
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
-        assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+mustNotBe+"']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='"+filter+"'] input[type='text']"));
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+text+"']")));
+        assertFalse(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+mustNotBe+"']")));
+        deleteTextFromTextarea(locator);
     }
 
-    public void verifyClientPageFilter(String filter, String text) {
-        setClientPageFilter(filter, text);
+    public void verifyClientPageFilter(By locator, String text, String filter, By tableResultLocator) {
+        setClientPageFilter(locator, text);
         waitForSeveralItems(new String[]{text});
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
-        deleteTextFromTextarea(By.cssSelector("p-columnfilter[field='"+filter+"'] input[type='text']"));
+        assertTrue(areElementsPresentAfterSorting(tableResultLocator));
+        deleteTextFromTextarea(locator);
     }
 
-    public void setClientPageFilter(String filter, String text) {
-        type(By.cssSelector("p-columnfilter[field='" + filter + "'] input[type='text']"), text);
+    public void setClientPageFilter(By locator, String text) {
+        type(locator, text);
         pressKeys(Keys.ENTER);
     }
 
-    public void verifyDropDownClientPageFilter(String filter, String text, String mustNotBe) {
-        setDropDownClientPageFilter(filter, text);
+    public void verifyDropDownClientPageFilter(By locator, String text, String mustNotBe) {
+        setDropDownClientPageFilter(locator, text);
         waitForSeveralItems(new String[]{text});
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
-        assertFalse(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+mustNotBe+"']")));
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+text+"']")));
+        assertFalse(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+mustNotBe+"']")));
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
     }
 
-    public void verifyDropDownClientPageFilter(String filter, String text) {
-        setDropDownClientPageFilter(filter, text);
+    public void verifyDropDownClientPageFilter(By locator, String text) {
+        setDropDownClientPageFilter(locator, text);
         waitForSeveralItems(new String[]{text});
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
         clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
@@ -284,9 +284,9 @@ public class UIBOClientHelper extends UIHelperBase {
         deleteText(fil);
     }
 
-    public void setDropDownClientPageFilter(String filter, String value) {
-        click(By.cssSelector("p-columnfilter[field='" + filter + "']"));
-        click(By.cssSelector("li[aria-label='" + value + "']"));
+    public void setDropDownClientPageFilter(By locator, String value) {
+        click(locator);
+        click(By.cssSelector("p-dropdownitem[ng-reflect-label='" + value + "']"));
         waitFor(By.cssSelector("i.p-dropdown-clear-icon"));
     }
 
