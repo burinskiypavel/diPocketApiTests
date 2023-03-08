@@ -1,4 +1,4 @@
-8 Fee for Paying Face to Face GBP 0.00 0.00 0.10
-10 PLN to Poland Bank transfer fee GBP 0.00 0.00 0.00
-11 EUR in Single Euro Payments Area Bank transfer fee GBP 0.00 0.00 0.50
-12 Other foreign currency transfers Payment Fee GBP 0.00 0.00 2.00
+8 110 Fee for Paying Face to Face GBP 0.10
+10 300 PLN to Poland Bank transfer fee GBP 0
+11 310 EUR in Single Euro Payments Area Bank transfer fee GBP 0.50
+12 320 Other foreign currency transfers Payment Fee GBP 2.00

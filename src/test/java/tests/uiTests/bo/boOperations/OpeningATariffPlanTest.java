@@ -15,7 +15,7 @@ public class OpeningATariffPlanTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().selectFromDropDown("name", "United Kingdom - standard");
+        app.getUiboHelper().selectFromDropDown(By.xpath("//p-dropdown[@ng-reflect-option-label='name']"), By.cssSelector("p-dropdownitem[ng-reflect-label='2 United Kingdom - standard']"));
         Thread.sleep(1000);
         List<String> actualElementsText = app.getUiboHelper().getActualText2(By.xpath("//table //tbody //tr"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile2("files/bo/boOperations/openingATariffPlan.txt");
