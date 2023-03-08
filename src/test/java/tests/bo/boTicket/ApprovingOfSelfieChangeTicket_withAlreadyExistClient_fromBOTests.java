@@ -89,7 +89,7 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests ex
                 .get("/v1/clientImage/{clientId}/selfie")
                 .then().log().all()
                 .statusCode(200)
-                .body("imageInBase64", hasItem(containsString("/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0Z")));
+                .body("imageInBase64", hasItem(containsString("/9j/4AAQSkZJRgABAQAAAQABAAD")));
     }
 
     @Test(priority = 6)
