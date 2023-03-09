@@ -17,7 +17,7 @@ public class DeleteTariffPlanTests extends UITestBase {
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
         app.getUiboOperationsHelper().addTarifPlan(id, name);
-        app.getUiboHelper().selectFromDropDown("name", name);
+        app.getUiboHelper().selectFromDropDown(By.xpath("//p-dropdown[@ng-reflect-option-label='name']"), By.cssSelector("p-dropdownitem li[aria-label*='"+name+"']"));
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Tariff plan added successfully')]"));
         app.getUiboOperationsHelper().deleteTarifPlan(name);
 
@@ -29,7 +29,8 @@ public class DeleteTariffPlanTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().selectFromDropDown("name", "QA_autotest_name_1");
+        app.getUiboHelper().selectFromDropDown(By.xpath("//p-dropdown[@ng-reflect-option-label='name']"), By.cssSelector("p-dropdownitem li[aria-label*='QA_autotest_name_1']"));
+
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Delete tariff plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("div.p-dialog-header-icons"));
 

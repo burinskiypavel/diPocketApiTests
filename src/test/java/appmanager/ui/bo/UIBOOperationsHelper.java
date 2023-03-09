@@ -170,17 +170,17 @@ public class UIBOOperationsHelper extends UIHelperBase {
 
     public void addTarifPlan(String id, String name) throws InterruptedException {
         click(By.xpath("//p-button[@ng-reflect-label='Add tariff plan']"));
-        type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
-        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
+        type(By.xpath("//p-inputnumber[contains(@id, 'input-number_feeTariffPlanId')] //input"), id);
+        type(By.xpath("//input[contains(@id, 'input_feeTariffPlanName')]"), name);
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
     }
 
     public void deleteTarifPlan(String name) throws InterruptedException {
         click(By.xpath("//p-button[@ng-reflect-label='Delete tariff plan']"));
-        waitFor(By.xpath("//app-delete-tariff-plan-modal //*[contains(text(), '"+name+"')]"));
+        waitFor(By.xpath("//app-confirm //*[contains(text(), '"+name+"')]"));
         Thread.sleep(1200);
-        click(By.xpath("//p-button[@ng-reflect-label='Delete']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
     }
 
     public void duplicateTarifPlan(String id, String name) throws InterruptedException {
