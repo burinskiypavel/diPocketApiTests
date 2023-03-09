@@ -173,7 +173,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
         type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
         type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
         Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Add']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
     }
 
     public void deleteTarifPlan(String name) throws InterruptedException {
@@ -201,15 +201,15 @@ public class UIBOOperationsHelper extends UIHelperBase {
     }
 
     public void editTariffPlanRow(String rule, String currency, String feePercent, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
-        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[2] //p-dropdown"), rule);
-        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[4] //p-dropdown"), currency);
-        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[5] //input"), feePercent);
-        selectFromDropDown(By.xpath("//app-fee-tariff-plan-tab //tbody //td[6] //p-dropdown"), feeCurrency);
-        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[7] //input"), minFeeAmount);
-        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[8] //input"), maxFeeAmount);
-        type(By.xpath("//app-fee-tariff-plan-tab //tbody //td[9] //input"), flatFeeAmount);
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan //tbody //td[2] //p-dropdown"), rule);
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan //tbody //td[4] //p-dropdown"), currency);
+        type(By.xpath("//app-fee-tariff-plan //tbody //td[5] //input"), feePercent);
+        selectFromDropDown(By.xpath("//app-fee-tariff-plan //tbody //td[6] //p-dropdown"), feeCurrency);
+        type(By.xpath("//app-fee-tariff-plan //tbody //td[7] //input"), minFeeAmount);
+        type(By.xpath("//app-fee-tariff-plan //tbody //td[8] //input"), maxFeeAmount);
+        type(By.xpath("//app-fee-tariff-plan //tbody //td[9] //input"), flatFeeAmount);
         click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
-        waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
+        waitFor(By.xpath("//*[contains(text(), 'Row updated successfully')]"));
     }
 
     public void deleteRow(int index) {
