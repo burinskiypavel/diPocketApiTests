@@ -28,7 +28,7 @@ public class DipocketConfigurationsTests extends TestBase {
     @Test
     public void test_verifySiteDipocketRowWithMasterACCIDSiteCountryIdCurrencyIdFromLHV_EE_MASTERSITE_3() throws SQLException, ClassNotFoundException {
         actualrow = app.getDbHelper().getAllRow_FromLHV_EE_MASTERSITE_FromTestDB(Site.DIPOCKET.toString(), 3);
-        assertEquals(actualrow, Arrays.asList("3", "DIPOCKET", "826", "978", null));//
+        assertEquals(actualrow, Arrays.asList("3", "DIPOCKET", "826", "978", null));//test
     }
 
     @Test
