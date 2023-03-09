@@ -16,7 +16,7 @@ public class ChangeTheNameOfAnExistingTariffPlanTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().selectFromDropDown("name", feeTariffPlanName);
+        app.getUiboHelper().selectFromDropDown(By.xpath("//p-dropdown[@ng-reflect-option-label='name']"), By.cssSelector("p-dropdownitem li[aria-label*='"+feeTariffPlanName+"']"));
 
         app.getUiboOperationsHelper().renameTariffPlan("QA_autotest_name_" + randomNumber);
     }
@@ -26,7 +26,7 @@ public class ChangeTheNameOfAnExistingTariffPlanTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
-        app.getUiboHelper().selectFromDropDown("name", "QA_autotest_name_1");
+        app.getUiboHelper().selectFromDropDown("name", "1436137 QA_autotest_name_1");
         app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Rename tariff plan']"));
         app.getUiboHelper().closePopUp(By.cssSelector("button.p-dialog-header-icon"));
 

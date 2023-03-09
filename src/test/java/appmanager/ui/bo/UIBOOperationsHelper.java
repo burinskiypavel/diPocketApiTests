@@ -284,10 +284,10 @@ public class UIBOOperationsHelper extends UIHelperBase {
 
     public void renameTariffPlan(String newName) throws InterruptedException {
         click(By.xpath("//p-button[@ng-reflect-label='Rename tariff plan']"));
-        waitFor(By.xpath("//app-input[@ng-reflect-name='name'] //input"));
-        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), newName);
+        waitFor(By.xpath("//input[contains(@id, 'newFeeTariffPlanName')]"));
+        type(By.xpath("//input[contains(@id, 'newFeeTariffPlanName')]"), newName);
         Thread.sleep(1000);
-        click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//div[contains(text(), 'Tariff plan renamed successfully')]"));
     }
 
