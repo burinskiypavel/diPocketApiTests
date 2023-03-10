@@ -4,6 +4,11 @@ import appmanager.HelperBase;
 import appmanager.Login_RegistrationHelper;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
+import com.cs.dipocketback.pojo.client.ClientAddress;
+import com.cs.dipocketback.pojo.customer.CardActivateRequest;
+import com.cs.dipocketback.pojo.customer.CardActivateResponse;
+import com.cs.dipocketback.pojo.registration.RegSavepointData;
+import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -43,6 +48,10 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
     String actualVIbanFromDB = null;
     String actualVIbanSandboxFromDB = null;
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+
+
+    Gson gson = new Gson();
+    CardActivateRequest cardActivateRequest = new CardActivateRequest();
 
 
     @Test(priority = 1)
@@ -268,15 +277,23 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 16)
     public void test_CustomerServicesDev_v1_card_activate(){
+        cardActivateRequest.setRequestId("fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"");
+        cardActivateRequest.setClientId(Long.valueOf(clientIdSandbox));
+        cardActivateRequest.setToken(token);
+
+        String json = gson.toJson(cardActivateRequest);
+        System.out.println(json);
+
         given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
-                .body("{\n" +
-                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-                        "    \"token\":  \""+token+"\"\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
+//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
+//                        "    \"token\":  \""+token+"\"\n" +
+//                        "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/card/activate")
                 .then().log().all()
                 .statusCode(200);
