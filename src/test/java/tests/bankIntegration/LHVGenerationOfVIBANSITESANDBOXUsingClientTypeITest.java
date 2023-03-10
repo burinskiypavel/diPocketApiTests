@@ -1,6 +1,7 @@
 package tests.bankIntegration;
 
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -24,6 +25,9 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     String program = "Sandbox";
     String actualVIbanFromBO = null;
     String actualVIbanSandboxFromDB = null;
+    String  boUserLogin = "PavelB_BO";
+    String boUserPass = "vVahVkR";
+    String username = "PAVELB_BO";
 
     @Test(priority = 1)
     public void test_customerServices_v1_client_register(){
@@ -116,6 +120,11 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     }
 
     @Test(priority = 6)
+    public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(boUserLogin, boUserPass, username);
+    }
+
+    @Test(priority = 7)
     public void test_verifyIbanFromBO_sandbox() throws SQLException, ClassNotFoundException {
         String message = app.getDbHelper().getBOLoginSMSCodeFromTestDB();
         sms = message.substring(13);
