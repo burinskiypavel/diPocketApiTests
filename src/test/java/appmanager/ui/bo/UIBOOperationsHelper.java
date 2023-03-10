@@ -174,6 +174,8 @@ public class UIBOOperationsHelper extends UIHelperBase {
         type(By.xpath("//input[contains(@id, 'input_feeTariffPlanName')]"), name);
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        waitFor(By.xpath("//*[contains(text(), 'Tariff plan added successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Tariff plan added successfully')]"));
     }
 
     public void deleteTarifPlan(String name) throws InterruptedException {

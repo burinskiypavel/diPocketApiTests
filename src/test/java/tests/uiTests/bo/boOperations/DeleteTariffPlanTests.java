@@ -18,7 +18,6 @@ public class DeleteTariffPlanTests extends UITestBase {
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
         app.getUiboOperationsHelper().addTarifPlan(id, name);
         app.getUiboHelper().selectFromDropDown(By.xpath("//p-dropdown[@ng-reflect-option-label='name']"), By.cssSelector("p-dropdownitem li[aria-label*='"+name+"']"));
-        app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Tariff plan added successfully')]"));
         app.getUiboOperationsHelper().deleteTarifPlan(name);
 
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Tariff plan deleted successfully')]"));
