@@ -24,6 +24,9 @@ public class TakeTicketPage {
     @FindBy(xpath = "//app-button[@ng-reflect-label='Reassign']")
     public WebElement reassignBtn;
 
+    @FindBy(xpath = "//app-button[@ng-reflect-label='Postpone']")
+    public WebElement postponeBtn;
+
 
     public void clickOnApproveButton(){
         approveBtn.click();
@@ -39,5 +42,9 @@ public class TakeTicketPage {
 
     public void clickOnReassignButton(){
         reassignBtn.click();
+    }
+
+    public void clickOnPostponeButton(){
+        postponeBtn.click();
     }
 }

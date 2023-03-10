@@ -8,12 +8,15 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
 import padeObjects.bo.boTicket.TakeTicketEditDataPage;
+import padeObjects.bo.boTicket.TakeTicketPage;
 
 import java.io.File;
 import java.sql.SQLException;
 
 public class UIBOTicketHelper extends UIHelperBase {
     TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
+    TakeTicketPage takeTicketPage = new TakeTicketPage(driver);
+
 
     public UIBOTicketHelper(WebDriver driver) {
         super(driver);
@@ -111,8 +114,9 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void editAndSaveSDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
-        TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
-        click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        click(takeTicketPage.editBtn);
+
         if(!gender.equals("")){
             //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
             selectFromDropDown(takeTicketEditDataPage.genderDropDown, gender);
@@ -140,7 +144,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void editAndSaveFDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        click(takeTicketPage.editBtn);
         waitFor(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"));
         if(!gender.equals("")){
             //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
@@ -169,31 +174,36 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void approveTicketSuccessfullyUpdateCardholder() {
-        click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Ticket was approved successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket was approved successfully')]"));
     }
 
     public void approveTicketSuccessfully() {
-        click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
     }
 
     public void approveTicketSuccessfullyDocsChange() {
-        click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs was approved successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs was approved successfully')]"));
     }
 
     public void unsuccessfulApprove(final String message) {
         waitFor(By.xpath("//app-button[@ng-reflect-label='Approve']"));
-        click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
+        click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
     }
 
     public void escalateToCBOSuccessfully(String assignTo, String reason) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
+        click(takeTicketPage.escalateToCBOBtn);
         selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), assignTo);
         if(!reason.equals("")){
             type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), reason);
@@ -397,7 +407,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
     }
 
-    public void rejectTicketSuccessfully(String reason, final String message) throws InterruptedException {
+    public void rejectTicketSuccessfully(String reason, String message) throws InterruptedException {
         click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
         type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), reason);
         Thread.sleep(700);
