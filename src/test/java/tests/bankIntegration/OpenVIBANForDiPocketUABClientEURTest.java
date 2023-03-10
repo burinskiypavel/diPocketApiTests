@@ -6,7 +6,6 @@ import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -110,7 +109,6 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
                 .post("/v1/client/{clientId}/update")
                 .then().log().all()
                 .statusCode(200);
-
     }
 
     @Test(priority = 5)
