@@ -46,7 +46,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void delayTicketForSeveralMinutes() throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Postpone']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Postpone']"));
+        click(takeTicketPage.postponeBtn);
         click(By.xpath("//button[@ng-reflect-icon='pi pi-calendar']"));
         click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
         click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
@@ -344,7 +345,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void rescanRequestSuccessfully(boolean id, boolean proofOfAddress, boolean backOfId, boolean secondId) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
+        click(takeTicketPage.rescanRequestBtn);
         if(id) {
             click(By.cssSelector("p-checkbox[ng-reflect-input-id='Id'"));
         }
@@ -422,7 +424,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void verifyUserChangedHisMindAboutRescanRequest() {
-        click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
+        click(takeTicketPage.rescanRequestBtn);
         closePopUp(By.cssSelector("div.p-dialog-header-icons"));
         waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
     }
@@ -449,7 +452,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void reassignTicketSuccessfully(String username, String reason) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
+        click(takeTicketPage.reassignBtn);
         waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), username);
         type(By.cssSelector("app-input[ng-reflect-name='reason'] input"), reason);
@@ -459,7 +463,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void verifyTheUserChangedHisMindAboutReassignTheTicketToAnotherBOUser() {
-        click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
+        click(takeTicketPage.reassignBtn);
         waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         closePopUp(By.cssSelector("button.p-dialog-header-icon"));
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
@@ -470,14 +475,16 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void verifyTheUserChangedHisMindAboutEscalateToCBO() {
-            click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
-            waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
-            closePopUp(By.cssSelector("div.p-dialog-header-icons"));
-            waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
+        click(takeTicketPage.escalateToCBOBtn);
+        waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        closePopUp(By.cssSelector("div.p-dialog-header-icons"));
+        waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
     }
 
     public void verifyTheUserNeedsToEscalateToCBOTicketTriesToEscalateWithoutChoosingAssignTo() {
-        click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
+        click(takeTicketPage.escalateToCBOBtn);
         waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         waitFor(By.xpath("//*[contains(text(), 'Assign to is required ')]"));

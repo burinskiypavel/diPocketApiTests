@@ -27,6 +27,9 @@ public class TakeTicketPage {
     @FindBy(xpath = "//app-button[@ng-reflect-label='Postpone']")
     public WebElement postponeBtn;
 
+    @FindBy(xpath = "//app-button[@ng-reflect-label='Rescan request']")
+    public WebElement rescanRequestBtn;
+
 
     public void clickOnApproveButton(){
         approveBtn.click();
