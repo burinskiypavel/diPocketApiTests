@@ -47,6 +47,10 @@ public class UIHelperBase {
         driver.findElement(locator).click();
     }
 
+    public void click(WebElement element){
+        element.click();
+    }
+
     public void clickWithJS(By locator){
         WebElement webElement = driver.findElement(locator);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", webElement);

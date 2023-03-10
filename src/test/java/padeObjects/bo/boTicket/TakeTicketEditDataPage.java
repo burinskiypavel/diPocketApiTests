@@ -31,6 +31,9 @@ public class TakeTicketEditDataPage {
     @FindBy(css = "p-dropdown[id*='_select_photoIdCountryId_']")
     public WebElement docCountryOfIssueDropDown;
 
+    @FindBy(xpath = "//p-button[@ng-reflect-label='Save']")
+    public WebElement saveBtn;
+
     public void clickOnGenderDropDown(){
         genderDropDown.click();
     }

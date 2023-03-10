@@ -13,6 +13,7 @@ import java.io.File;
 import java.sql.SQLException;
 
 public class UIBOTicketHelper extends UIHelperBase {
+    TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
 
     public UIBOTicketHelper(WebDriver driver) {
         super(driver);
@@ -133,7 +134,8 @@ public class UIBOTicketHelper extends UIHelperBase {
             selectFromDropDown(takeTicketEditDataPage.docCountryOfIssueDropDown, docCountryOfIssue);
         }
         Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+        click(takeTicketEditDataPage.saveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
     }
 
@@ -141,23 +143,28 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
         waitFor(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"));
         if(!gender.equals("")){
-            selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
+            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
+            selectFromDropDown(takeTicketEditDataPage.genderDropDown, gender);
         }
         if(!documentType.equals("")){
-            selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"), documentType);
+            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"), documentType);
+            selectFromDropDown(takeTicketEditDataPage.documentTypeDropDown, documentType);
         }
         if(!docSerialNumber.equals("")){
-            type(By.cssSelector("input[id*='_input_photoIdNo_']"), docSerialNumber);
+            //type(By.cssSelector("input[id*='_input_photoIdNo_']"), docSerialNumber);
+            type(takeTicketEditDataPage.docSerialNumber, docSerialNumber);
         }
         if(!pesel.equals("")){
-            type(By.cssSelector("input[id*='_input_identifyCode_']"), pesel);
-
+            //type(By.cssSelector("input[id*='_input_identifyCode_']"), pesel);
+            type(takeTicketEditDataPage.pesel, pesel);
         }
         if(!docCountryOfIssue.equals("")){
-            selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdCountryId_']"), docCountryOfIssue);
+            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdCountryId_']"), docCountryOfIssue);
+            selectFromDropDown(takeTicketEditDataPage.docCountryOfIssueDropDown, docCountryOfIssue);
         }
         Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Save']"));
+        click(takeTicketEditDataPage.saveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
     }
 
