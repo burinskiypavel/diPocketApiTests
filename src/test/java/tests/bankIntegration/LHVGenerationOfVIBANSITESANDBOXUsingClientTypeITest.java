@@ -116,7 +116,10 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     }
 
     @Test(priority = 6)
-    public void test_verifyIbanFromBO_sandbox() {
+    public void test_verifyIbanFromBO_sandbox() throws SQLException, ClassNotFoundException {
+        String message = app.getDbHelper().getBOLoginSMSCodeFromTestDB();
+        sms = message.substring(13);
+
         Response response = given()
                 .spec(app.requestSpecBOTest)
                 .pathParam("clientId", clientIdSandbox)
