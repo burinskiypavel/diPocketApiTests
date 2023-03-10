@@ -59,7 +59,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                         "  \"site\" : \""+site+"\",\n" +
                         "  \"clientType\" : \"C\",\n" +
                         "  \"langId\" : 1,\n" +
-                        "  \"companyName\" : \"CorporateCompany\",\n" +
+                        "  \"companyName\" : \"CorporateTest\",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"ddStatus\" : \"FDD\",\n" +
                         "  \"feeTariffPlanId\" : 2,\n" +
