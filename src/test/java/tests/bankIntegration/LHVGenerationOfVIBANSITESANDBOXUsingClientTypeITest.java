@@ -21,7 +21,6 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     String sandboxLogin = "SANDBOX";
     String sandboxPass = "W6qQnx7";
     String token = null;
-
     String program = "Sandbox";
     String actualVIbanFromBO = null;
     String actualVIbanSandboxFromDB = null;
