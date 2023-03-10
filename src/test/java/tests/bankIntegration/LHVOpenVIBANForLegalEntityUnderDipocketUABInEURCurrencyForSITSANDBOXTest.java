@@ -43,7 +43,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                         "\n" +
                         "  \"requestId\" : \"47"+app.getBOHelper().generateRandomString(8)+"-dc36-462d-87f7-"+app.getBOHelper().generateRandomString(12)+"\", \n" +
                         "  \"langCode\" : \"en\", \n" +
-                        "  \"companyName\" : \"Hill\", \n" +
+                        "  \"companyName\" : \"LegalTest\", \n" +
                         "  \"rStreetLine1\" : \"155 Stehr Squares\", \n" +
                         "  \"rStreetLine2\" : \"4925 Cremin Branch\", \n" +
                         "  \"rCity\" : \""+city+"\", \n" +
