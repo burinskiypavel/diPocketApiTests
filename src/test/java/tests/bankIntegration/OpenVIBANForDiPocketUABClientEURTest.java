@@ -9,6 +9,7 @@ import com.cs.dipocketback.pojo.client.ClientAddress;
 import com.cs.dipocketback.pojo.customer.CardActivateRequest;
 import com.cs.dipocketback.pojo.customer.CardActivateResponse;
 import com.cs.dipocketback.pojo.customer.CardCreateRequest;
+import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
 import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
@@ -55,6 +56,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
     Gson gson = new Gson();
     CardActivateRequest cardActivateRequest = new CardActivateRequest();
     CardCreateRequest cardCreateRequest = new CardCreateRequest();
+    ClientRegisterRequest clientRegisterRequest = new ClientRegisterRequest();
 
 
     @Test(priority = 1)
@@ -218,34 +220,61 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 14)
     public void test_customerServices_v1_client_register(){
+        clientRegisterRequest.setRequestId("d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"");
+        clientRegisterRequest.setLangCode("en");
+        clientRegisterRequest.setFirstName("QA");
+        clientRegisterRequest.setLastName("Test");
+        clientRegisterRequest.setCardHolderName("cardHolderName");
+        clientRegisterRequest.setEmail("testqa"+app.generateRandomString(5)+"@gmail.com");
+        clientRegisterRequest.setMainPhone(app.generateRandomNumber(12));
+        clientRegisterRequest.setDob("1990-08-31");
+        clientRegisterRequest.setDdStatus("FDD");
+        clientRegisterRequest.setCurrencyCode(currencyCodeEUR);
+        clientRegisterRequest.setRStreetLine1("StreetLine1");
+        clientRegisterRequest.setRStreetLine2("StreetLine2");
+        clientRegisterRequest.setRCity("City");
+        clientRegisterRequest.setRState("State");
+        clientRegisterRequest.setRZip("Zip");
+        clientRegisterRequest.setRCountryCode(countryCode);
+        clientRegisterRequest.setMStreetLine1("StreetLine1");
+        clientRegisterRequest.setMStreetLine2("StreetLine2");
+        clientRegisterRequest.setMCity("City");
+        clientRegisterRequest.setMState("State");
+        clientRegisterRequest.setMZip("Zip");
+        clientRegisterRequest.setMCountryCode(countryCode);
+
+        String json = gson.toJson(clientRegisterRequest);
+        System.out.println(json);
+
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
-                .body("{\n" +
-                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
-                        "  \"langCode\" : \"en\",\n" +
-                        "  \"firstName\" : \"QA\",\n" +
-                        "  \"lastName\" : \"Test\",\n" +
-                        "  \"cardHolderName\" : \"cardHolderName\",\n" +
-                        "  \"email\" : \"testqa"+app.generateRandomString(5)+"@gmail.com\",\n" +
-                        "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
-                        "  \"dob\" : \"1990-08-31\",\n" +
-                        "  \"ddStatus\" : \"FDD\",\n" +
-                        "  \"currencyCode\" : \""+ currencyCodeEUR +"\",\n" +
-                        "  \"rStreetLine1\" : \"StreetLine1\",\n" +
-                        "  \"rStreetLine2\" : \"StreetLine2\",\n" +
-                        "  \"rCity\" : \"City\",\n" +
-                        "  \"rState\" : \"State\",\n" +
-                        "  \"rZip\" : \"Zip\",\n" +
-                        "  \"rCountryCode\" : \""+countryCode+"\",\n" +
-                        "  \"mStreetLine1\" : \"StreetLine1\",\n" +
-                        "  \"mStreetLine2\" : \"StreetLine2\",\n" +
-                        "  \"mCity\" : \"City\",\n" +
-                        "  \"mState\" : \"State\",\n" +
-                        "  \"mZip\" : \"Zip\",\n" +
-                        "  \"mCountryCode\" : \""+countryCode+"\"\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
+//                        "  \"langCode\" : \"en\",\n" +
+//                        "  \"firstName\" : \"QA\",\n" +
+//                        "  \"lastName\" : \"Test\",\n" +
+//                        "  \"cardHolderName\" : \"cardHolderName\",\n" +
+//                        "  \"email\" : \"testqa"+app.generateRandomString(5)+"@gmail.com\",\n" +
+//                        "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
+//                        "  \"dob\" : \"1990-08-31\",\n" +
+//                        "  \"ddStatus\" : \"FDD\",\n" +
+//                        "  \"currencyCode\" : \""+ currencyCodeEUR +"\",\n" +
+//                        "  \"rStreetLine1\" : \"StreetLine1\",\n" +
+//                        "  \"rStreetLine2\" : \"StreetLine2\",\n" +
+//                        "  \"rCity\" : \"City\",\n" +
+//                        "  \"rState\" : \"State\",\n" +
+//                        "  \"rZip\" : \"Zip\",\n" +
+//                        "  \"rCountryCode\" : \""+countryCode+"\",\n" +
+//                        "  \"mStreetLine1\" : \"StreetLine1\",\n" +
+//                        "  \"mStreetLine2\" : \"StreetLine2\",\n" +
+//                        "  \"mCity\" : \"City\",\n" +
+//                        "  \"mState\" : \"State\",\n" +
+//                        "  \"mZip\" : \"Zip\",\n" +
+//                        "  \"mCountryCode\" : \""+countryCode+"\"\n" +
+//                        "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/client/register")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -267,7 +296,6 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
         String json = gson.toJson(cardCreateRequest);
         System.out.println(json);
-
 
         String response = given()
                 .log().uri().log().headers().log().body()
