@@ -4,9 +4,11 @@ import appmanager.HelperBase;
 import appmanager.Login_RegistrationHelper;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
+import com.cs.dipocketback.pojo.card.CardType;
 import com.cs.dipocketback.pojo.client.ClientAddress;
 import com.cs.dipocketback.pojo.customer.CardActivateRequest;
 import com.cs.dipocketback.pojo.customer.CardActivateResponse;
+import com.cs.dipocketback.pojo.customer.CardCreateRequest;
 import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
@@ -52,6 +54,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     Gson gson = new Gson();
     CardActivateRequest cardActivateRequest = new CardActivateRequest();
+    CardCreateRequest cardCreateRequest = new CardCreateRequest();
 
 
     @Test(priority = 1)
@@ -253,20 +256,34 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 15)
     public void test_CustomerServices_v1_card_create(){
+        cardCreateRequest.setRequestId("fea3af96-50b5-48c2-9456"+app.generateRandomString(12)+"");
+        cardCreateRequest.setClientId(Long.valueOf(clientIdSandbox));
+        cardCreateRequest.setProgram("Sandbox");
+        cardCreateRequest.setCurrencyCode(currencyCodeEUR);
+        cardCreateRequest.setCardType(CardType.PLASTIC);
+        cardCreateRequest.setAccFeeTariffPlanId(Long.valueOf(2000));
+        cardCreateRequest.setePin(Long.valueOf(1111));
+        cardCreateRequest.setAccountId(null);
+
+        String json = gson.toJson(cardCreateRequest);
+        System.out.println(json);
+
+
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
-                .body("{\n" +
-                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-                        "    \"program\":  \"Sandbox\",\n" +
-                        "    \"currencyCode\":  \""+ currencyCodeEUR +"\",\n" +
-                        "    \"cardType\":  \"PLASTIC\",\n" +
-                        "    \"accFeeTariffPlanId\":  \"2000\",\n" +
-                        "    \"ePin\": \"1111\",\n" +
-                        "    \"accountId\": \"\"\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
+//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
+//                        "    \"program\":  \"Sandbox\",\n" +
+//                        "    \"currencyCode\":  \""+ currencyCodeEUR +"\",\n" +
+//                        "    \"cardType\":  \"PLASTIC\",\n" +
+//                        "    \"accFeeTariffPlanId\":  \"2000\",\n" +
+//                        "    \"ePin\": \"1111\",\n" +
+//                        "    \"accountId\": \"\"\n" +
+//                        "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/card/create")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();

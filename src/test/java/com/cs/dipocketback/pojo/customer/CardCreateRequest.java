@@ -13,6 +13,7 @@ public class CardCreateRequest {
     private Long accFeeTariffPlanId;
     private Long corpClientId;
     private String cardHolderName;
+    private Long ePin;
 
     public CardCreateRequest() {
     }
@@ -99,4 +100,9 @@ public class CardCreateRequest {
     public void setCardHolderName(String cardHolderName) {
         this.cardHolderName = cardHolderName;
     }
+
+    public Long getePin(){
+        return ePin;
+    }
+    public void setePin(Long ePin){this.ePin = ePin;}
 }
