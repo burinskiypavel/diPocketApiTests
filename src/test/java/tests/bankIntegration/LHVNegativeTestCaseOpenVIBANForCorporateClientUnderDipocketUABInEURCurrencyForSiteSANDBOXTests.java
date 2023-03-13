@@ -35,6 +35,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     String sandboxLogin = "SANDBOX";
     String sandboxPass = "W6qQnx7";
     String token = null;
+    String companyName = "CorporateTest";
 
 
     @Test(priority = 0, enabled = false)
@@ -74,7 +75,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                         "  \"site\" : \""+site+"\",\n" +
                         "  \"clientType\" : \"C\",\n" +
                         "  \"langId\" : 1,\n" +
-                        "  \"companyName\" : \"CorporateTest\",\n" +
+                        "  \"companyName\" : \""+companyName+"\",\n" +
                         "  \"currencyId\" : "+currencyId+",\n" +
                         "  \"ddStatus\" : \"FDD\",\n" +
                         "  \"feeTariffPlanId\" : 2,\n" +
@@ -181,7 +182,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
 
     @Test(priority = 7)
     public void test_BOServices_v1_representative_createScreened() throws SQLException, ClassNotFoundException, InterruptedException {
-        corpClientId = app.getDbHelper().getClientIdFromClientFromTestDB("C", "Predict");
+        corpClientId = app.getDbHelper().getClientIdFromClientFromTestDB("C", companyName);
 
         given()
                 .spec(app.requestSpecBOTest)
