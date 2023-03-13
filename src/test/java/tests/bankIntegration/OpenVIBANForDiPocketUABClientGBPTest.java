@@ -298,7 +298,8 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
                         "  \"mCity\" : \"City\",\n" +
                         "  \"mState\" : \"State\",\n" +
                         "  \"mZip\" : \"Zip\",\n" +
-                        "  \"mCountryCode\" : \""+countryCode+"\"\n" +
+                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
+                        "  \"citizenship\" : \""+countryCode+"\"\n" +
                         "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/client/register")
                 .then().log().all()

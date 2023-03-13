@@ -59,6 +59,7 @@ public class ClientRegisterRequest {
     private String mZip;
     //@JsonProperty(value = "mCountryCode")
     private String mCountryCode;
+    private String citizenship;
     private String cardHolderName;
     private String email;
     private String mainPhone;
@@ -118,6 +119,14 @@ public class ClientRegisterRequest {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getCitizenship() {
+        return citizenship;
+    }
+
+    public void setCitizenship(String citizenship) {
+        this.citizenship = citizenship;
     }
 
     public String getFirstName() {

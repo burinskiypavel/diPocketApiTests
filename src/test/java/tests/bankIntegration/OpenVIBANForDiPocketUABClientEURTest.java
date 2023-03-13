@@ -278,6 +278,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         clientRegisterRequest.setMState("State");
         clientRegisterRequest.setMZip("Zip");
         clientRegisterRequest.setMCountryCode(countryCode);
+        clientRegisterRequest.setCitizenship(countryCode);
 
         String json = gson.toJson(clientRegisterRequest);
         System.out.println(json);
