@@ -14,6 +14,7 @@ import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import model.bo.boServices.Client_clientId_update;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -51,12 +52,11 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
     String actualVIbanFromDB = null;
     String actualVIbanSandboxFromDB = null;
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-
-
     Gson gson = new Gson();
     CardActivateRequest cardActivateRequest = new CardActivateRequest();
     CardCreateRequest cardCreateRequest = new CardCreateRequest();
     ClientRegisterRequest clientRegisterRequest = new ClientRegisterRequest();
+    Client_clientId_update client_clientId_update = new Client_clientId_update();
 
 
     @Test(priority = 1)
@@ -80,46 +80,82 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 4)
     public void test_BOServices_v1_client_clientID_update() {
+        client_clientId_update.setId(Integer.parseInt(clientId));
+        client_clientId_update.setMainPhone(380685448615l);
+        client_clientId_update.setFirstName("Pavel");
+        client_clientId_update.setLastName("Burinsky");
+        client_clientId_update.setBirthDate("04.09.1992");
+        client_clientId_update.setEmail("testdipocket@gmail.com");
+        client_clientId_update.setEmailIsVerified(false);
+        client_clientId_update.setStateId(1);
+        client_clientId_update.setStateName("Active");
+        client_clientId_update.setCurrencyId(currencyId);
+        client_clientId_update.setCurrencyCode("PLN");
+        client_clientId_update.setLangId(4);
+        client_clientId_update.setLangCode("rus");
+        client_clientId_update.setLangName("Russian");
+        client_clientId_update.setPhotoIdTypeId(1);
+        client_clientId_update.setPhotoIdTypeName("Passport");
+        client_clientId_update.setPhotoIdNo(234234324324l);
+        client_clientId_update.setPhotoIdCountryId(countryId);
+        client_clientId_update.setPhotoIdCountryName("Poland");
+        client_clientId_update.setGender("M");
+        client_clientId_update.setDdStatus("PSDD");
+        client_clientId_update.setCardHolderName("Pavel Burinsky");
+        client_clientId_update.setIdentifyCode(13124244234l);
+        client_clientId_update.setClientType("I");
+        client_clientId_update.setSite("DIPOCKET");
+        client_clientId_update.setRegisteredAddrAsMail(true);
+        client_clientId_update.setResidenceCountryId(countryId);
+        client_clientId_update.setFeeTariffPlanId(1);
+        client_clientId_update.setFeeTariffPlanName("EUR - standard");
+        client_clientId_update.setAge(30);
+        client_clientId_update.setMigrated(false);
+        client_clientId_update.setSkippedReg(false);
+
+        String json = gson.toJson(client_clientId_update);
+
         given()
                 .spec(app.requestSpecBOTest)
                 .pathParam("clientId", clientId)
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
                 .when()
-                .body("{\n" +
-                        "  \"id\" : "+clientId+",\n" +
-                        "  \"mainPhone\" : \"380685448615\",\n" +
-                        "  \"firstName\" : \"Pavel\",\n" +
-                        "  \"lastName\" : \"Burinsky\",\n" +
-                        "  \"birthDate\" : \"04.09.1992\",\n" +
-                        "  \"email\" : \"testdipocket@gmail.com\",\n" +
-                        "  \"emailIsVerified\" : false,\n" +
-                        "  \"stateId\" : 1,\n" +
-                        "  \"stateName\" : \"Active\",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"currencyCode\" : \"PLN\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"langCode\" : \"rus\",\n" +
-                        "  \"langName\" : \"Russian\",\n" +
-                        "  \"photoIdTypeId\" : 1,\n" +
-                        "  \"photoIdTypeName\" : \"Passport\",\n" +
-                        "  \"photoIdNo\" : \"234234324324\",\n" +
-                        "  \"photoIdCountryId\" : "+countryId+",\n" +
-                        "  \"photoIdCountryName\" : \"Poland\",\n" +
-                        "  \"gender\" : \"M\",\n" +
-                        "  \"ddStatus\" : \"PSDD\",\n" +
-                        "  \"cardHolderName\" : \"Pavel Burinsky\",\n" +
-                        "  \"identifyCode\" : \"13124244234\",\n" +
-                        "  \"clientType\" : \"I\",\n" +
-                        "  \"site\" : \"DIPOCKET\",\n" +
-                        "  \"registeredAddrAsMail\" : true,\n" +
-                        "  \"residenceCountryId\" : "+countryId+",\n" +
-                        "  \"feeTariffPlanId\" : 1,\n" +
-                        "  \"feeTariffPlanName\" : \"EUR - standard\",\n" +
-                        "  \"age\" : 30,\n" +
-                        "  \"migrated\" : false,\n" +
-                        "  \"skippedReg\" : false\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"id\" : "+clientId+",\n" +
+//                        "  \"mainPhone\" : \"380685448615\",\n" +
+//                        "  \"firstName\" : \"Pavel\",\n" +
+//                        "  \"lastName\" : \"Burinsky\",\n" +
+//                        "  \"birthDate\" : \"04.09.1992\",\n" +
+//                        "  \"email\" : \"testdipocket@gmail.com\",\n" +
+//                        "  \"emailIsVerified\" : false,\n" +
+//                        "  \"stateId\" : 1,\n" +
+//                        "  \"stateName\" : \"Active\",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"currencyCode\" : \"PLN\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"langCode\" : \"rus\",\n" +
+//                        "  \"langName\" : \"Russian\",\n" +
+//                        "  \"photoIdTypeId\" : 1,\n" +
+//                        "  \"photoIdTypeName\" : \"Passport\",\n" +
+//                        "  \"photoIdNo\" : \"234234324324\",\n" +
+//                        "  \"photoIdCountryId\" : "+countryId+",\n" +
+//                        "  \"photoIdCountryName\" : \"Poland\",\n" +
+//                        "  \"gender\" : \"M\",\n" +
+//                        "  \"ddStatus\" : \"PSDD\",\n" +
+//                        "  \"cardHolderName\" : \"Pavel Burinsky\",\n" +
+//                        "  \"identifyCode\" : \"13124244234\",\n" +
+//                        "  \"clientType\" : \"I\",\n" +
+//                        "  \"site\" : \"DIPOCKET\",\n" +
+//                        "  \"registeredAddrAsMail\" : true,\n" +
+//                        "  \"residenceCountryId\" : "+countryId+",\n" +
+//                        "  \"feeTariffPlanId\" : 1,\n" +
+//                        "  \"feeTariffPlanName\" : \"EUR - standard\",\n" +
+//                        "  \"age\" : 30,\n" +
+//                        "  \"migrated\" : false,\n" +
+//                        "  \"skippedReg\" : false\n" +
+//                        "}")
                 .post("/v1/client/{clientId}/update")
                 .then().log().all()
                 .statusCode(200);
@@ -170,7 +206,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 10)
     public void test_verifyVirtualIBANCreation() throws SQLException, ClassNotFoundException, InterruptedException {
-        actualVIbanFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
+        actualVIbanFromDB = app.getDbHelper().getVirtualIBANFromTestDB(clientId);
         assertThat(actualVIbanFromDB, notNullValue());
     }
 
@@ -346,7 +382,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 17)
     public void test_verifyVirtualIBANCreation_() throws SQLException, ClassNotFoundException, InterruptedException {
-        actualVIbanSandboxFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
+        actualVIbanSandboxFromDB = app.getDbHelper().getVirtualIBANFromTestDB(String.valueOf(clientIdSandbox));
         assertThat(actualVIbanSandboxFromDB, notNullValue());
     }
 

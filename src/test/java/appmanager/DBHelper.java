@@ -798,8 +798,7 @@ public class DBHelper extends HelperBase {
         con.close();
         return status;
     }
-
-    public String getVirtualIBANFromTestDB() throws SQLException, ClassNotFoundException, InterruptedException {
+    public String getVirtualIBANFromTestDB(String clientId) throws SQLException, ClassNotFoundException, InterruptedException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
@@ -811,18 +810,22 @@ public class DBHelper extends HelperBase {
         ResultSet rs= stmt.executeQuery(query);
 
         String vIban = null;
+        String srcid = null;
         int count = 0;
         while (rs.next()){
             vIban = rs.getString(3);
+            srcid = rs.getString(7);
 
-            while (vIban == null && count < 220){
+
+            while (vIban == null && count < 220 && srcid.equals(clientId)){
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
                 vIban = rs.getString(3);
                 count++;
             }
-
+            System.out.println("srcid: " + srcid);
+            System.out.println("clietnId: " + clientId);
             System.out.println("count: " + count);
             System. out.println("vIban : " + vIban);
             break;

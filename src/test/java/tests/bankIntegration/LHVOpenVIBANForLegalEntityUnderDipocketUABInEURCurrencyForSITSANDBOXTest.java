@@ -159,7 +159,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 
     @Test(priority = 8)
     public void test_verifyVirtualIBANCreation_() throws SQLException, ClassNotFoundException, InterruptedException {
-        String actualVIbanFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
+        String actualVIbanFromDB = app.getDbHelper().getVirtualIBANFromTestDB(legalClientId);
         String lastSRCID = app.getDbHelper().getLastSCRIDFromLHV_EE_VIBAN_REQUESTFromTestDB();
         assertThat(actualVIbanFromDB, notNullValue());
         assertThat(lastSRCID, equalTo(legalClientId));

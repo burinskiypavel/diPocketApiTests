@@ -220,7 +220,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 10)
     public void test_verifyVirtualIBANCreation() throws SQLException, ClassNotFoundException, InterruptedException {
-        actualVIbanFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
+        actualVIbanFromDB = app.getDbHelper().getVirtualIBANFromTestDB(clientId);
         assertThat(actualVIbanFromDB, notNullValue());
     }
 
@@ -350,7 +350,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 17)
     public void test_verifyVirtualIBANCreation_() throws SQLException, ClassNotFoundException, InterruptedException {
-        actualVIbanSandboxFromDB = app.getDbHelper().getVirtualIBANFromTestDB();
+        actualVIbanSandboxFromDB = app.getDbHelper().getVirtualIBANFromTestDB(String.valueOf(clientIdSandbox));
         assertThat(actualVIbanSandboxFromDB, notNullValue());
     }
 
