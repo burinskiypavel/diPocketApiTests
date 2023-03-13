@@ -26,7 +26,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     int individualClientId = 55669;
     int currencyId = 978;
     int countryId = 440;
-    String city = "London";
+    String city = "Vilnius";
     String countryCode = "LT";
     String ddStatus = "FDD";
 
