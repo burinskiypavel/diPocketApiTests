@@ -93,7 +93,8 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                         "  \"cityMail\" : \"Krakiv\",\n" +
                         "  \"zipMail\" : \"2123123\",\n" +
                         "  \"countryIdMail\" : "+countryId+",\n" +
-                        "  \"contractCountryId\" : "+countryId+"\n" +
+                        "  \"contractCountryId\" : "+countryId+",\n" +
+                        "  \"citizenship\" : \""+countryCode+"\"\n" +
                         "}")
                 .when()
                 .post( "/v1/user/corpClients/create")
