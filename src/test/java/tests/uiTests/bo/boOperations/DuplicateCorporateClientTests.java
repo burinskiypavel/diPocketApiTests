@@ -41,9 +41,9 @@ public class DuplicateCorporateClientTests extends UITestBase {
         //assertEquals(actualText, expectedText, "5 page data");
 
         app.getUiboOperationsHelper().createCorporateClientWithMessage("Corporate client was created successfully");
+        app.getUiboHelper().waitFor(By.xpath("//app-corp-client-info //div[3] //p"));
 
-
-        List<String> actualClientDetails = app.getUiboHelper().getActualText(By.xpath("//app-corp-client-details-info //div[3] //p"));
+        List<String> actualClientDetails = app.getUiboHelper().getActualText(By.xpath("//app-corp-client-info //div[3] //p"));
         List<String> expectedClientDetails = app.getUiboHelper().getDateFromFile("files/bo/boOperations/duplicateCorporateClientClientDitails.txt");
 
         assertEquals(actualClientDetails, expectedClientDetails, "client datails page");
@@ -68,8 +68,9 @@ public class DuplicateCorporateClientTests extends UITestBase {
         app.getUiboHelper().waitFor(By.xpath("//app-create-corporate-client //p-button[@ng-reflect-label='Create']"));
 
         app.getUiboOperationsHelper().createCorporateClientWithMessage("Corporate client was created successfully");
+        app.getUiboHelper().waitFor(By.xpath("//app-corp-client-info //div[3] //p"));
 
-        List<String> actualClientDetails = app.getUiboHelper().getActualText(By.xpath("//app-corp-client-details-info //div[3] //p"));
+        List<String> actualClientDetails = app.getUiboHelper().getActualText(By.xpath("//app-corp-client-info //div[3] //p"));
         List<String> expectedClientDetails = app.getUiboHelper().getDateFromFile("files/bo/boOperations/duplicateCorporateClientClientWithoutAccountDitails.txt");
 
         assertEquals(actualClientDetails, expectedClientDetails, "client datails page");
