@@ -907,6 +907,45 @@ public class DBHelper extends HelperBase {
         return statusRequest;
     }
 
+    public String getvIbanStatusRequestFromTestDB2(int clientId) throws SQLException, ClassNotFoundException, InterruptedException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        int row = 0;
+        String statusRequest = null;
+        String srcid = null;
+        int count = 0;
+        while (rs.next()){
+            row = rs.getRow();
+            System.out.println("row: " + row);
+            statusRequest = rs.getString(10);
+            srcid = rs.getString(7);
+
+            while (statusRequest == null && count < 110 && srcid.equals(clientId)){
+                Thread.sleep(6000);
+                rs= stmt.executeQuery(query);
+                rs.next();
+                statusRequest = rs.getString(10);
+                count++;
+            }
+
+            System.out.println("count: " + count);
+            System.out.println("srcid: " + srcid);
+            System.out.println("clietnId: " + clientId);
+            System. out.println("statusRequest : " + statusRequest);
+            break;
+        }
+        con.close();
+        return statusRequest;
+    }
+
     public List<String> getAllRow_FromLHV_EE_MASTERSITE_FromTestDB(String site, int indexOfRow) throws SQLException, ClassNotFoundException {
         List<String> rows = new ArrayList<>();
 
