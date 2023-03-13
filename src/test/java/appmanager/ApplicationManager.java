@@ -101,7 +101,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecPeak;
     public RequestSpecification requestSpecBO;
     public RequestSpecification requestSpecBOTest;
-    public RequestSpecification requestSpecCustomerServicesSandoxTest;
+    public RequestSpecification requestSpecCustomerServicesTest;
     public RestAssuredConfig configTimeout;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
@@ -110,6 +110,7 @@ public class ApplicationManager {
     //public String BOURL = "https://support.dipocket.dev";
     public String BOURL = null;
     public String BOTestURL = null;
+    public String baseTestURL = null;
     public String CBOuserLogin = "Viktoria";
     public String CBOuserPass = "kWmaB0s";
     public String CBOuserLogin2 = "PAVELBAuto";
@@ -169,6 +170,7 @@ public class ApplicationManager {
         emailsVerificationsCurrencyId = HelperBase.prop.getProperty("emailsVerifications.currencyId");
         BOURL = HelperBase.prop.getProperty("bo.base.url");
         BOTestURL = HelperBase.prop.getProperty("bo.test.base.url");
+        baseTestURL = HelperBase.prop.getProperty("test.base.url");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()
@@ -271,10 +273,11 @@ public class ApplicationManager {
                 .basePath("BOServices")
                 .contentType("application/json");
 
-        requestSpecCustomerServicesSandoxTest = given()
+        requestSpecCustomerServicesTest = given()
                 .log().uri().log().headers().log().body()
                 .config(configTimeout)
-                .baseUri(BOTestURL);
+                .baseUri(baseTestURL)
+                .basePath("/CustomerServices");
     }
 
     public void init() {

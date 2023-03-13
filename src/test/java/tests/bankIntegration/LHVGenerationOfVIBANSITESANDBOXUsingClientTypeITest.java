@@ -30,10 +30,10 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     String username = "PAVELB_BO";
 
     @Test(priority = 1)
-    public void test_customerServices_v1_client_register(){
+    public void test_CustomerServices_v1_client_register(){
         String response = given()
-                .log().uri().log().headers().log().body()
                 .contentType("application/json")
+                .spec(app.requestSpecCustomerServicesTest)
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body("{\n" +
                         "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
@@ -60,7 +60,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
                         "  \"mCountryCode\" : \""+countryCode+"\",\n" +
                         "  \"citizenship\" : \""+countryCode+"\"\n" +
                         "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/client/register")
+                .post("/v1/client/register")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -71,7 +71,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     @Test(priority = 2)
     public void test_CustomerServices_v1_card_create(){
         String response = given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body("{\n" +
@@ -84,7 +84,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
                         "    \"ePin\": \"1111\",\n" +
                         "    \"accountId\": \"\"\n" +
                         "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/card/create")
+                .post("/v1/card/create")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -95,7 +95,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     @Test(priority = 3)
     public void test_CustomerServices_v1_card_activate(){
         given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body("{\n" +
@@ -103,7 +103,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
                         "    \"clientId\": \""+clientIdSandbox+"\",\n" +
                         "    \"token\":  \""+token+"\"\n" +
                         "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/card/activate")
+                .post("/v1/card/activate")
                 .then().log().all()
                 .statusCode(200);
     }
