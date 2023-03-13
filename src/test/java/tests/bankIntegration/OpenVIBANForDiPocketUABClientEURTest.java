@@ -358,7 +358,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
     }
 
     @Test(priority = 16)
-    public void test_CustomerServicesDev_v1_card_activate(){
+    public void test_CustomerServices_v1_card_activate(){
         cardActivateRequest.setRequestId("fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"");
         cardActivateRequest.setClientId(Long.valueOf(clientIdSandbox));
         cardActivateRequest.setToken(token);

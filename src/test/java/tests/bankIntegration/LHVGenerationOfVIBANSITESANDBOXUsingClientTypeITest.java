@@ -93,7 +93,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     }
 
     @Test(priority = 3)
-    public void test_CustomerServicesDev_v1_card_activate(){
+    public void test_CustomerServices_v1_card_activate(){
         given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
