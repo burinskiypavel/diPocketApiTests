@@ -255,7 +255,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
 
     @Test(priority = 14)
-    public void test_customerServices_v1_client_register(){
+    public void test_CustomerServices_v1_client_register(){
         clientRegisterRequest.setRequestId("d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"");
         clientRegisterRequest.setLangCode("en");
         clientRegisterRequest.setFirstName("QA");
@@ -409,79 +409,4 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
         assertThat(actualVIbanSandboxFromDB, equalTo(actualVIbanFromBO));
     }
-
-
-
-
-
-
-
-
-
-
-    //    public void takeSDDTicketFromTest(String cookie, String sms, String clientId, String date) {
-//        int count = 0;
-//        for(int i = 0; i < 27; i++) {
-//            count++;
-//            Response res = app.getBoRequestsHelper().boServices_v1_ticket_take_test(cookie, sms);
-//            String response = res.then().extract().response().asString();
-//
-//            JsonPath js = new JsonPath(response);
-//            ticketId = js.getInt("id");
-//            actualTypeName = js.getString("typeName");
-//            actualClientId = js.getString("clientId");
-//
-//            if(actualTypeName.equals("SDD check") && actualClientId.equals(clientId)){
-//                break;
-//            }
-//
-//            if(!actualTypeName.equals("SDD check")){
-//                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone_test(cookie, ticketId, date, sms);
-//            }
-//
-//            Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take_test(cookie, sms);
-//            String response2 = res2.then().extract().response().asString();
-//
-//            JsonPath js2 = new JsonPath(response2);
-//            ticketId = js2.getInt("id");
-//            actualTypeName = js2.getString("typeName");
-//        }
-//
-//        System.out.println("count: " + count);
-//
-//        assertEquals(actualTypeName, "SDD check");
-//    }
-
-    //    private void takeFDDTicketFromTest() {
-//        int count = 0;
-//        for(int i = 0; i < 27; i++) {
-//            count++;
-//            Response res = app.getBoRequestsHelper().boServices_v1_ticket_take_test(cookie, sms);
-//            String response = res.then().extract().response().asString();
-//
-//            JsonPath js = new JsonPath(response);
-//            ticketId = js.getInt("id");
-//            actualTypeName = js.getString("typeName");
-//            actualClientId = js.getString("clientId");
-//
-//            if(actualTypeName.equals("FDD check") && actualClientId.equals(clientId)){
-//                break;
-//            }
-//
-//            if(!actualTypeName.equals("FDD check")){
-//                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone_test(cookie, ticketId, tomorrow, sms);
-//            }
-//
-//            Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take_test(cookie, sms);
-//            String response2 = res2.then().extract().response().asString();
-//
-//            JsonPath js2 = new JsonPath(response2);
-//            ticketId = js2.getInt("id");
-//            actualTypeName = js2.getString("typeName");
-//        }
-//
-//        System.out.println("count: " + count);
-//
-//        assertEquals(actualTypeName, "FDD check");
-//    }
 }
