@@ -806,13 +806,18 @@ public class DBHelper extends HelperBase {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
-        Statement stmt = con.createStatement();
+        //Statement stmt = con.createStatement();
+        Statement stmt = con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
         ResultSet rs= stmt.executeQuery(query);
 
+        int row = 0;
         String vIban = null;
         String srcid = null;
         int count = 0;
         while (rs.next()){
+            row = rs.getRow();
+            System.out.println("row: " + row);
             vIban = rs.getString(3);
             srcid = rs.getString(7);
 
@@ -821,8 +826,19 @@ public class DBHelper extends HelperBase {
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
+                if(row != 1){
+                    rs.absolute(row);
+                }
                 vIban = rs.getString(3);
+                srcid = rs.getString(7);
+                if(!srcid.equals(clientId)){
+                    continue;
+                }
                 count++;
+            }
+
+            if(!srcid.equals(clientId)){
+                continue;
             }
             System.out.println("srcid: " + srcid);
             System.out.println("clietnId: " + clientId);
