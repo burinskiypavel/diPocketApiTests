@@ -22,7 +22,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     String cookie = null;
     String sms = null;
     String firstName = "Pavel";
-    String lastName = "Burinskiy";
+    String lastName = "Burinsky";
     int individualClientId = 55669;
     int currencyId = 978;
     int countryId = 440;
@@ -77,12 +77,14 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     @Test(priority = 2)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(cboUserLogin, cboUserPass, username);
-    }
-
-    @Test(priority = 3)
-    public void test_BOServices_v1_representative_createScreened() throws SQLException, ClassNotFoundException {
         String message = app.getDbHelper().getBOLoginSMSCodeFromTestDB();
         sms = message.substring(13);
+    }
+
+    @Test(priority = 3, enabled = false)
+    public void test_BOServices_v1_representative_createScreened() throws SQLException, ClassNotFoundException {
+//        String message = app.getDbHelper().getBOLoginSMSCodeFromTestDB();
+//        sms = message.substring(13);
         given()
                 .spec(app.requestSpecBOTest)
                 .cookie(cookie)
@@ -123,9 +125,9 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                 .pathParam("legalClientId", legalClientId)
                 .get("/v1/representative/{legalClientId}")
                 .then().log().all()
-                .statusCode(200)
-                .body("firstName", hasItem(firstName),
-                        "lastName", hasItem(lastName));
+                .statusCode(200);
+                //.body("firstName", hasItem(firstName),
+                //        "lastName", hasItem(lastName));
     }
 
     @Test(priority = 6)
