@@ -11,7 +11,7 @@ public class C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends Test
     String pass = "pU9N1Lu";
 
     @Test
-    public void test_CustomerServices_v1_bankTransfer_SWIFT(){
+    public void test_CustomerServices_v1_account_bankTransfer_SWIFT(){
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
