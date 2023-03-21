@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class BankTransferSWIFTTest extends TestBase {
+public class B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends TestBase {
     String city = "Vilnius";
     String login = "APIOLENA";
     String pass = "pU9N1Lu";
@@ -17,20 +17,20 @@ public class BankTransferSWIFTTest extends TestBase {
                 .contentType("application/json")
                 .auth().basic(login, pass)
                 .body("{\n" +
-                        "  \"accountId\": 111231,\n" +
+                        "  \"accountId\": 115975,\n" +
                         "  \"amount\": 148,\n" +
                         "  \"bankId\": \"LHVBEE22\",\n" +
-                        "  \"beneficiaryAccount\": \"EE407777000012064164\",\n" +
+                        "  \"beneficiaryAccount\": \"117250\",\n" +
                         "  \"beneficiaryType\": \"COMPANY\",\n" +
                         "  \"city\": \"Vilnius\",\n" +
-                        "  \"companyName\": \"OCORPTEST\",\n" +
+                        "  \"companyName\": \"Mantest\",\n" +
                         "  \"countryCode\": \"LT\",\n" +
                         "  \"currencyCode\": \"EUR\",\n" +
                         "  \"feeAmount\": 250,\n" +
                         "  \"feeCurrencyCode\": \"EUR\",\n" +
                         "  \"firstName\": \"\",\n" +
                         "  \"lastName\": \"\",\n" +
-                        "  \"reference\": \"oki\",\n" +
+                        "  \"reference\": \"test\",\n" +
                         "  \"requestId\": \"d1f202fe-df2e-46da-94ba"+app.generateRandomString(12)+"\",\n" +
                         "  \"streetLine1\": \"Upes 2\",\n" +
                         "  \"streetLine2\": \"Upes 2\",\n" +
