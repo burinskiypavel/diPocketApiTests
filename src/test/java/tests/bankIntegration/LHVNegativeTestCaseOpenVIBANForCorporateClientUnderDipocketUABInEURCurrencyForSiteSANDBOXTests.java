@@ -72,6 +72,14 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
                 .body("{\n" +
+                        "  \"accName\" : \"TestAcc\",\n" +
+                        "  \"accTypeId\" : \"1\",\n" +
+                        "  \"accountContractCountryId\" : \"440\",\n" +
+                        "  \"identifyCode\" : \"12132131231\",\n" +
+                        //"  \"sharedAccountId\" : \"0\",\n" +
+                        "  \"stateMail\" : \"String\",\n" +
+                        "  \"stateReg\" : \"String\",\n" +
+                        "  \"stateReg\" : \"String\",\n" +
                         "  \"site\" : \""+site+"\",\n" +
                         "  \"clientType\" : \"C\",\n" +
                         "  \"langId\" : 1,\n" +
