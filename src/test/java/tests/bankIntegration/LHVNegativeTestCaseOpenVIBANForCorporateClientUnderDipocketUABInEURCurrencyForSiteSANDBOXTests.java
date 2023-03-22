@@ -105,7 +105,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                         "  \"citizenship\" : \""+countryCode+"\"\n" +
                         "}")
                 .when()
-                .post( "/v1/user/corpClients/create")
+                .post( "/v1/user/corpClients/createScreened")
                 .then().log().all()
                 .statusCode(200);
     }
