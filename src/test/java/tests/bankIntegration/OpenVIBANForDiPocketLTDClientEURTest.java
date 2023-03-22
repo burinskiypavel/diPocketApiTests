@@ -4,8 +4,14 @@ import appmanager.HelperBase;
 import appmanager.Login_RegistrationHelper;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
+import com.cs.dipocketback.pojo.card.CardType;
+import com.cs.dipocketback.pojo.customer.CardActivateRequest;
+import com.cs.dipocketback.pojo.customer.CardCreateRequest;
+import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
+import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import model.bo.boServices.Client_clientId_update;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -43,8 +49,12 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     String actualVIbanFromBO = null;
     String actualVIbanFromDB = null;
     String actualVIbanSandboxFromDB = null;
-
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+    Gson gson = new Gson();
+    CardActivateRequest cardActivateRequest = new CardActivateRequest();
+    CardCreateRequest cardCreateRequest = new CardCreateRequest();
+    ClientRegisterRequest clientRegisterRequest = new ClientRegisterRequest();
+    Client_clientId_update client_clientId_update = new Client_clientId_update();
 
 
     @Test(priority = 1)
@@ -68,46 +78,82 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 4)
     public void test_BOServices_v1_client_clientID_update() {
+        client_clientId_update.setId(Integer.parseInt(clientId));
+        client_clientId_update.setMainPhone(380685448615l);
+        client_clientId_update.setFirstName("Pavel");
+        client_clientId_update.setLastName("Burinsky");
+        client_clientId_update.setBirthDate("04.09.1992");
+        client_clientId_update.setEmail("testdipocket@gmail.com");
+        client_clientId_update.setEmailIsVerified(false);
+        client_clientId_update.setStateId(1);
+        client_clientId_update.setStateName("Active");
+        client_clientId_update.setCurrencyId(currencyId);
+        client_clientId_update.setCurrencyCode("PLN");
+        client_clientId_update.setLangId(4);
+        client_clientId_update.setLangCode("rus");
+        client_clientId_update.setLangName("Russian");
+        client_clientId_update.setPhotoIdTypeId(1);
+        client_clientId_update.setPhotoIdTypeName("Passport");
+        client_clientId_update.setPhotoIdNo(234234324324l);
+        client_clientId_update.setPhotoIdCountryId(countryId);
+        client_clientId_update.setPhotoIdCountryName("Poland");
+        client_clientId_update.setGender("M");
+        client_clientId_update.setDdStatus("PSDD");
+        client_clientId_update.setCardHolderName("Pavel Burinsky");
+        client_clientId_update.setIdentifyCode(13124244234l);
+        client_clientId_update.setClientType("I");
+        client_clientId_update.setSite("DIPOCKET");
+        client_clientId_update.setRegisteredAddrAsMail(true);
+        client_clientId_update.setResidenceCountryId(countryId);
+        client_clientId_update.setFeeTariffPlanId(1);
+        client_clientId_update.setFeeTariffPlanName("EUR - standard");
+        client_clientId_update.setAge(30);
+        client_clientId_update.setMigrated(false);
+        client_clientId_update.setSkippedReg(false);
+
+        String json = gson.toJson(client_clientId_update);
+
         given()
                 .spec(app.requestSpecBOTest)
                 .pathParam("clientId", clientId)
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
                 .when()
-                .body("{\n" +
-                        "  \"id\" : "+clientId+",\n" +
-                        "  \"mainPhone\" : \"380685448615\",\n" +
-                        "  \"firstName\" : \"Pavel\",\n" +
-                        "  \"lastName\" : \"Burinsky\",\n" +
-                        "  \"birthDate\" : \"04.09.1992\",\n" +
-                        "  \"email\" : \"testdipocket@gmail.com\",\n" +
-                        "  \"emailIsVerified\" : false,\n" +
-                        "  \"stateId\" : 1,\n" +
-                        "  \"stateName\" : \"Active\",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"currencyCode\" : \""+currencyCodeEUR+"\",\n" +
-                        "  \"langId\" : 4,\n" +
-                        "  \"langCode\" : \"rus\",\n" +
-                        "  \"langName\" : \"Russian\",\n" +
-                        "  \"photoIdTypeId\" : 1,\n" +
-                        "  \"photoIdTypeName\" : \"Passport\",\n" +
-                        "  \"photoIdNo\" : \"234234324324\",\n" +
-                        "  \"photoIdCountryId\" : "+countryId+",\n" +
-                        "  \"photoIdCountryName\" : \"United Kingdom\",\n" +
-                        "  \"gender\" : \"M\",\n" +
-                        "  \"ddStatus\" : \"PSDD\",\n" +
-                        "  \"cardHolderName\" : \"Pavel Burinsky\",\n" +
-                        "  \"identifyCode\" : \"13124244234\",\n" +
-                        "  \"clientType\" : \"I\",\n" +
-                        "  \"site\" : \"DIPOCKET\",\n" +
-                        "  \"registeredAddrAsMail\" : true,\n" +
-                        "  \"residenceCountryId\" : "+countryId+",\n" +
-                        "  \"feeTariffPlanId\" : 1,\n" +
-                        "  \"feeTariffPlanName\" : \"EUR - standard\",\n" +
-                        "  \"age\" : 30,\n" +
-                        "  \"migrated\" : false,\n" +
-                        "  \"skippedReg\" : false\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"id\" : "+clientId+",\n" +
+//                        "  \"mainPhone\" : \"380685448615\",\n" +
+//                        "  \"firstName\" : \"Pavel\",\n" +
+//                        "  \"lastName\" : \"Burinsky\",\n" +
+//                        "  \"birthDate\" : \"04.09.1992\",\n" +
+//                        "  \"email\" : \"testdipocket@gmail.com\",\n" +
+//                        "  \"emailIsVerified\" : false,\n" +
+//                        "  \"stateId\" : 1,\n" +
+//                        "  \"stateName\" : \"Active\",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"currencyCode\" : \""+currencyCodeEUR+"\",\n" +
+//                        "  \"langId\" : 4,\n" +
+//                        "  \"langCode\" : \"rus\",\n" +
+//                        "  \"langName\" : \"Russian\",\n" +
+//                        "  \"photoIdTypeId\" : 1,\n" +
+//                        "  \"photoIdTypeName\" : \"Passport\",\n" +
+//                        "  \"photoIdNo\" : \"234234324324\",\n" +
+//                        "  \"photoIdCountryId\" : "+countryId+",\n" +
+//                        "  \"photoIdCountryName\" : \"United Kingdom\",\n" +
+//                        "  \"gender\" : \"M\",\n" +
+//                        "  \"ddStatus\" : \"PSDD\",\n" +
+//                        "  \"cardHolderName\" : \"Pavel Burinsky\",\n" +
+//                        "  \"identifyCode\" : \"13124244234\",\n" +
+//                        "  \"clientType\" : \"I\",\n" +
+//                        "  \"site\" : \"DIPOCKET\",\n" +
+//                        "  \"registeredAddrAsMail\" : true,\n" +
+//                        "  \"residenceCountryId\" : "+countryId+",\n" +
+//                        "  \"feeTariffPlanId\" : 1,\n" +
+//                        "  \"feeTariffPlanName\" : \"EUR - standard\",\n" +
+//                        "  \"age\" : 30,\n" +
+//                        "  \"migrated\" : false,\n" +
+//                        "  \"skippedReg\" : false\n" +
+//                        "}")
                 .post("/v1/client/{clientId}/update")
                 .then().log().all()
                 .statusCode(200);
@@ -208,35 +254,62 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 14)
     public void test_CustomerServices_v1_client_register(){
+        clientRegisterRequest.setRequestId("d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"");
+        clientRegisterRequest.setLangCode("en");
+        clientRegisterRequest.setFirstName("QA");
+        clientRegisterRequest.setLastName("Test");
+        clientRegisterRequest.setCardHolderName("cardHolderName");
+        clientRegisterRequest.setEmail("testqa"+app.generateRandomString(5)+"@gmail.com");
+        clientRegisterRequest.setMainPhone(app.generateRandomNumber(12));
+        clientRegisterRequest.setDob("1990-08-31");
+        clientRegisterRequest.setDdStatus("FDD");
+        clientRegisterRequest.setCurrencyCode(currencyCodeEUR);
+        clientRegisterRequest.setRStreetLine1("StreetLine1");
+        clientRegisterRequest.setRStreetLine2("StreetLine2");
+        clientRegisterRequest.setRCity("City");
+        clientRegisterRequest.setRState("State");
+        clientRegisterRequest.setRZip("Zip");
+        clientRegisterRequest.setRCountryCode(countryCode);
+        clientRegisterRequest.setMStreetLine1("StreetLine1");
+        clientRegisterRequest.setMStreetLine2("StreetLine2");
+        clientRegisterRequest.setMCity("City");
+        clientRegisterRequest.setMState("State");
+        clientRegisterRequest.setMZip("Zip");
+        clientRegisterRequest.setMCountryCode(countryCode);
+        clientRegisterRequest.setCitizenship(countryCode);
+
+        String json = gson.toJson(clientRegisterRequest);
+
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
-                .body("{\n" +
-                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
-                        "  \"langCode\" : \"en\",\n" +
-                        "  \"firstName\" : \"QA\",\n" +
-                        "  \"lastName\" : \"Test\",\n" +
-                        "  \"cardHolderName\" : \"cardHolderName\",\n" +
-                        "  \"email\" : \"testqa"+app.generateRandomString(5)+"@gmail.com\",\n" +
-                        "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
-                        "  \"dob\" : \"1990-08-31\",\n" +
-                        "  \"ddStatus\" : \"FDD\",\n" +
-                        "  \"currencyCode\" : \""+ currencyCodeEUR +"\",\n" +
-                        "  \"rStreetLine1\" : \"StreetLine1\",\n" +
-                        "  \"rStreetLine2\" : \"StreetLine2\",\n" +
-                        "  \"rCity\" : \"City\",\n" +
-                        "  \"rState\" : \"State\",\n" +
-                        "  \"rZip\" : \"Zip\",\n" +
-                        "  \"rCountryCode\" : \""+countryCode+"\",\n" +
-                        "  \"mStreetLine1\" : \"StreetLine1\",\n" +
-                        "  \"mStreetLine2\" : \"StreetLine2\",\n" +
-                        "  \"mCity\" : \"City\",\n" +
-                        "  \"mState\" : \"State\",\n" +
-                        "  \"mZip\" : \"Zip\",\n" +
-                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
-                        "  \"citizenship\" : \""+countryCode+"\"\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
+//                        "  \"langCode\" : \"en\",\n" +
+//                        "  \"firstName\" : \"QA\",\n" +
+//                        "  \"lastName\" : \"Test\",\n" +
+//                        "  \"cardHolderName\" : \"cardHolderName\",\n" +
+//                        "  \"email\" : \"testqa"+app.generateRandomString(5)+"@gmail.com\",\n" +
+//                        "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
+//                        "  \"dob\" : \"1990-08-31\",\n" +
+//                        "  \"ddStatus\" : \"FDD\",\n" +
+//                        "  \"currencyCode\" : \""+ currencyCodeEUR +"\",\n" +
+//                        "  \"rStreetLine1\" : \"StreetLine1\",\n" +
+//                        "  \"rStreetLine2\" : \"StreetLine2\",\n" +
+//                        "  \"rCity\" : \"City\",\n" +
+//                        "  \"rState\" : \"State\",\n" +
+//                        "  \"rZip\" : \"Zip\",\n" +
+//                        "  \"rCountryCode\" : \""+countryCode+"\",\n" +
+//                        "  \"mStreetLine1\" : \"StreetLine1\",\n" +
+//                        "  \"mStreetLine2\" : \"StreetLine2\",\n" +
+//                        "  \"mCity\" : \"City\",\n" +
+//                        "  \"mState\" : \"State\",\n" +
+//                        "  \"mZip\" : \"Zip\",\n" +
+//                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
+//                        "  \"citizenship\" : \""+countryCode+"\"\n" +
+//                        "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/client/register")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -247,20 +320,32 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 15)
     public void test_CustomerServices_v1_card_create(){
+        cardCreateRequest.setRequestId("fea3af96-50b5-48c2-9456"+app.generateRandomString(12)+"");
+        cardCreateRequest.setClientId(Long.valueOf(clientIdSandbox));
+        cardCreateRequest.setProgram("Sandbox");
+        cardCreateRequest.setCurrencyCode(currencyCodeEUR);
+        cardCreateRequest.setCardType(CardType.PLASTIC);
+        cardCreateRequest.setAccFeeTariffPlanId(Long.valueOf(2000));
+        cardCreateRequest.setePin(Long.valueOf(1111));
+        cardCreateRequest.setAccountId(null);
+
+        String json = gson.toJson(cardCreateRequest);
+
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
-                .body("{\n" +
-                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-                        "    \"program\":  \"Sandbox\",\n" +
-                        "    \"currencyCode\":  \""+ currencyCodeEUR +"\",\n" +
-                        "    \"cardType\":  \"PLASTIC\",\n" +
-                        "    \"accFeeTariffPlanId\":  \"2000\",\n" +
-                        "    \"ePin\": \"1111\",\n" +
-                        "    \"accountId\": \"\"\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
+//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
+//                        "    \"program\":  \"Sandbox\",\n" +
+//                        "    \"currencyCode\":  \""+ currencyCodeEUR +"\",\n" +
+//                        "    \"cardType\":  \"PLASTIC\",\n" +
+//                        "    \"accFeeTariffPlanId\":  \"2000\",\n" +
+//                        "    \"ePin\": \"1111\",\n" +
+//                        "    \"accountId\": \"\"\n" +
+//                        "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/card/create")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -272,16 +357,23 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 16)
     public void test_CustomerServices_v1_card_activate(){
+        cardActivateRequest.setRequestId("fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"");
+        cardActivateRequest.setClientId(Long.valueOf(clientIdSandbox));
+        cardActivateRequest.setToken(token);
+
+        String json = gson.toJson(cardActivateRequest);
+
         given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
-                .body("{\n" +
-                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-                        "    \"pan\": \""+pan+"\",\n" +
-                        "    \"token\":  \""+token+"\"\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
+//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
+//                        "    \"pan\": \""+pan+"\",\n" +
+//                        "    \"token\":  \""+token+"\"\n" +
+//                        "}")
                 .post("https://api.dipocket.site/CustomerServices/v1/card/activate")
                 .then().log().all()
                 .statusCode(200);
