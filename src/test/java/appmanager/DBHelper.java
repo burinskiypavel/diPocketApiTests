@@ -849,6 +849,51 @@ public class DBHelper extends HelperBase {
         con.close();
         return vIban;
     }
+
+    public String getStatusPTSFromTestDB() throws SQLException, ClassNotFoundException, InterruptedException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "SELECT * FROM PTS_OUT_TRAN ORDER BY ID DESC";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        //Statement stmt = con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+        ResultSet rs= stmt.executeQuery(query);
+
+        int row = 0;
+        String statusPts = null;
+        String massegeForPayee = null;
+        int count = 0;
+        while (rs.next()){
+            row = rs.getRow();
+            System.out.println("row: " + row);
+            statusPts = rs.getString(4);
+            massegeForPayee = rs.getString(30);
+
+
+            while (statusPts == null && count < 5){
+                Thread.sleep(6000);
+                rs= stmt.executeQuery(query);
+                rs.next();
+
+                statusPts = rs.getString(4);
+                massegeForPayee = rs.getString(30);
+                count++;
+
+            }
+
+            System.out.println("massegeForPayee: " + massegeForPayee);
+            //System.out.println("clietnId: " + clientId);
+            System.out.println("count: " + count);
+            System. out.println("statusPts : " + statusPts);
+            break;
+        }
+        con.close();
+        return statusPts;
+    }
     public int getLastVIbanIdFromLHV_EE_VIBAN_REQUESTFromTestDB() throws SQLException, ClassNotFoundException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
         String username = prop.getProperty("db.username");
