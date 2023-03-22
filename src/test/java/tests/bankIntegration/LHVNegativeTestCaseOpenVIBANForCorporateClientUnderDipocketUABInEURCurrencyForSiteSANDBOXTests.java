@@ -66,7 +66,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     }
 
     @Test(priority = 3)
-    public void test_BOServices_v1_user_corpClients_create(){
+    public void test_BOServices_v1_user_corpClients_createScreened(){
         given()
                 .spec(app.requestSpecBOTest)
                 .header("bo-auth-token", sms)
