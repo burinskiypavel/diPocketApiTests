@@ -1,7 +1,9 @@
 package tests.bankIntegration;
 
 import base.TestBase;
+import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
+import model.customerServices.AccountBankTransferRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -16,6 +18,9 @@ public class B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest extends TestB
     int feeAmount = 0;
     String currencyCode = "EUR";
     int accountId = 115975;
+
+    Gson gson = new Gson();
+    AccountBankTransferRequest accountBankTransferRequest = new AccountBankTransferRequest();
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_account_calculateBankTransfer_SEPA(){
@@ -39,6 +44,28 @@ public class B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest extends TestB
 
     @Test(priority = 2)
     public void test_CustomerServices_v1_account_bankTransfer_SEPA(){
+//        accountBankTransferRequest.setAccountId(accountId);
+//        accountBankTransferRequest.setAmount(148);
+//        accountBankTransferRequest.setBankId("LHVBEE22");
+//        accountBankTransferRequest.setBeneficiaryAccount(117997);
+//        accountBankTransferRequest.setBeneficiaryType("INDIVIDUAL");//-//-----------
+//        accountBankTransferRequest.setCity(city);
+//        accountBankTransferRequest.setCompanyName("Mantest");
+//        accountBankTransferRequest.setCountryCode("LT");
+//        accountBankTransferRequest.setCurrencyCode(currencyCode);
+//        accountBankTransferRequest.setFeeAmount(feeAmount);
+//        accountBankTransferRequest.setFeeCurrencyCode(currencyCode);
+//        accountBankTransferRequest.setFirstName("Test");
+//        accountBankTransferRequest.setLastName("QA");
+//        accountBankTransferRequest.setReference("test");
+//        accountBankTransferRequest.setRequestId("d1f202fe-df2e-46da-94ba"+app.generateRandomString(12)+"");
+//        accountBankTransferRequest.setStreetLine1("Upes 2");
+//        accountBankTransferRequest.setStreetLine2("Upes 2");
+//        accountBankTransferRequest.setZip(09100);
+//
+//        String json = gson.toJson(accountBankTransferRequest);
+
+
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
