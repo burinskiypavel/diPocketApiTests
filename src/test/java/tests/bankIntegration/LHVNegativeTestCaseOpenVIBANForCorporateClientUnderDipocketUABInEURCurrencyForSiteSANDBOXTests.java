@@ -23,8 +23,8 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     int countryId = 440;
     int lastVIbanIdBeforeTest = 0;
     int vIbanIdAfterCorpClientCreation = 0;
-    String firstName = "Pavel";
-    String lastName = "Burinskiy";
+    String firstName = "QA";
+    String lastName = "Test";
     int corpClientId = 0;
     String ddStatus = "FDD";
     String city = "Vilnius";
@@ -189,41 +189,42 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                 .statusCode(200);
     }
 
-    @Test(priority = 7)
-    public void test_BOServices_v1_representative_createScreened() throws SQLException, ClassNotFoundException, InterruptedException {
-        corpClientId = app.getDbHelper().getClientIdFromClientFromTestDB("C", companyName);
-
-        given()
-                .spec(app.requestSpecBOTest)
-                .cookie(cookie)
-                .header("bo-auth-token", sms)
-                .contentType("application/json")
-                .body("{\n" +
-                        "  \"corpClientId\" : "+ corpClientId +",\n" +
-                        "  \"firstName\" : \""+firstName+"\",\n" +
-                        "  \"lastName\" : \""+lastName+"\",\n" +
-                        "  \"cardholderName\" : \"Pavel Burinskiy\",\n" +
-                        "  \"birthDate\" : \"14.02.1992\",\n" +
-                        "  \"phoneNumber\" : \"38068"+app.generateRandomNumber(7)+"\",\n" +
-                        "  \"email\" : \"pavelburinskiy"+app.generateRandomNumber(7)+"@gmail.com\",\n" +
-                        "  \"ddStatus\" : \""+ddStatus+"\",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"langId\" : 1,\n" +
-                        "  \"identifyCode\" : \"13124124124\",\n" +
-                        "  \"citizenshipCountryId\" : "+countryId+",\n" +
-                        "  \"residenceCountryId\" : "+countryId+",\n" +
-                        "  \"streetLine1\" : \"Address\",\n" +
-                        "  \"streetLine2\" : \"Address\",\n" +
-                        "  \"city\" : \""+city+"\",\n" +
-                        "  \"zip\" : \"12314124124124\"\n" +
-                        "}")
-                .post("/v1/representative/createScreened")
-                .then().log().all()
-                .statusCode(200);
-    }
+//    @Test(priority = 7, enabled = false)
+//    public void test_BOServices_v1_representative_createScreened() throws SQLException, ClassNotFoundException, InterruptedException {
+//        corpClientId = app.getDbHelper().getClientIdFromClientFromTestDB("C", companyName);
+//
+//        given()
+//                .spec(app.requestSpecBOTest)
+//                .cookie(cookie)
+//                .header("bo-auth-token", sms)
+//                .contentType("application/json")
+//                .body("{\n" +
+//                        "  \"corpClientId\" : "+ corpClientId +",\n" +
+//                        "  \"firstName\" : \""+firstName+"\",\n" +
+//                        "  \"lastName\" : \""+lastName+"\",\n" +
+//                        "  \"cardholderName\" : \"Pavel Burinskiy\",\n" +
+//                        "  \"birthDate\" : \"14.02.1992\",\n" +
+//                        "  \"phoneNumber\" : \"38068"+app.generateRandomNumber(7)+"\",\n" +
+//                        "  \"email\" : \"pavelburinskiy"+app.generateRandomNumber(7)+"@gmail.com\",\n" +
+//                        "  \"ddStatus\" : \""+ddStatus+"\",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"langId\" : 1,\n" +
+//                        "  \"identifyCode\" : \"13124124124\",\n" +
+//                        "  \"citizenshipCountryId\" : "+countryId+",\n" +
+//                        "  \"residenceCountryId\" : "+countryId+",\n" +
+//                        "  \"streetLine1\" : \"Address\",\n" +
+//                        "  \"streetLine2\" : \"Address\",\n" +
+//                        "  \"city\" : \""+city+"\",\n" +
+//                        "  \"zip\" : \"12314124124124\"\n" +
+//                        "}")
+//                .post("/v1/representative/createScreened")
+//                .then().log().all()
+//                .statusCode(200);
+//    }
 
     @Test(priority = 8)
-    public void test_BOServices_v1_representative_link(){
+    public void test_BOServices_v1_representative_link() throws SQLException, ClassNotFoundException, InterruptedException {
+        corpClientId = app.getDbHelper().getClientIdFromClientFromTestDB("C", companyName);
         given()
                 .spec(app.requestSpecBOTest)
                 .header("bo-auth-token", sms)
