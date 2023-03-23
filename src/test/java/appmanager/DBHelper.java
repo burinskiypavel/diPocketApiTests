@@ -864,12 +864,14 @@ public class DBHelper extends HelperBase {
         ResultSet rs= stmt.executeQuery(query);
 
         int row = 0;
+        int id = 0;
         String statusPts = null;
         String massegeForPayee = null;
         int count = 0;
         while (rs.next()){
             row = rs.getRow();
             System.out.println("row: " + row);
+            id = rs.getInt(1);
             statusPts = rs.getString(4);
             massegeForPayee = rs.getString(30);
 
@@ -881,10 +883,12 @@ public class DBHelper extends HelperBase {
 
                 statusPts = rs.getString(4);
                 massegeForPayee = rs.getString(30);
+                id = rs.getInt(1);
                 count++;
 
             }
 
+            System.out.println("id: " + id);
             System.out.println("massegeForPayee: " + massegeForPayee);
             //System.out.println("clietnId: " + clientId);
             System.out.println("count: " + count);
