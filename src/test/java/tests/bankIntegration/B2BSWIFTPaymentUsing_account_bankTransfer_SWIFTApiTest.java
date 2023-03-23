@@ -15,7 +15,7 @@ public class B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends Test
     String pass = "pU9N1Lu";
     int feeAmount = 0;
     String currencyCode = "EUR";
-    String randomRequestId = app.generateRandomString(12);
+    int accountId = 115975;
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_account_calculateBankTransfer_SWIFT(){
@@ -24,8 +24,8 @@ public class B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends Test
                 .contentType("application/json")
                 .auth().basic(login, pass)
                 .body("{\n" +
-                        "  \"accountId\": 115975,\n" +
-                        "  \"requestId\": \"d1f202fe-df2e-46da-94ba"+randomRequestId+"\",\n" +
+                        "  \"accountId\": "+accountId+",\n" +
+                        "  \"requestId\": \"d1f202fe-df2e-46da-94ba"+app.generateRandomString(12)+"\",\n" +
                         "  \"currencyCode\": \""+currencyCode+"\",\n" +
                         "  \"amount\": \"10\"\n" +
                         "}")
@@ -44,12 +44,12 @@ public class B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends Test
                 .contentType("application/json")
                 .auth().basic(login, pass)
                 .body("{\n" +
-                        "  \"accountId\": 115975,\n" +
+                        "  \"accountId\": "+accountId+",\n" +
                         "  \"amount\": 148,\n" +
                         "  \"bankId\": \"LHVBEE22\",\n" +
                         "  \"beneficiaryAccount\": \"117250\",\n" +
                         "  \"beneficiaryType\": \"COMPANY\",\n" +
-                        "  \"city\": \"Vilnius\",\n" +
+                        "  \"city\": \""+city+"\",\n" +
                         "  \"companyName\": \"Mantest\",\n" +
                         "  \"countryCode\": \"LT\",\n" +
                         "  \"currencyCode\": \""+currencyCode+"\",\n" +
