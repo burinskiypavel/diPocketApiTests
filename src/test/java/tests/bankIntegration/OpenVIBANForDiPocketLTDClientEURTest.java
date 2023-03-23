@@ -360,6 +360,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         cardActivateRequest.setRequestId("fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"");
         cardActivateRequest.setClientId(Long.valueOf(clientIdSandbox));
         cardActivateRequest.setToken(token);
+        cardActivateRequest.setPan(pan);
 
         String json = gson.toJson(cardActivateRequest);
 
