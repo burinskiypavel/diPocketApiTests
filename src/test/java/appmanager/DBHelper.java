@@ -947,10 +947,12 @@ public class DBHelper extends HelperBase {
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
+        String srcid = null;
         String statusRequest = null;
         int count = 0;
         while (rs.next()){
             statusRequest = rs.getString(10);
+            srcid = rs.getString(7);
 
             while (statusRequest == null && count < 110){
                 Thread.sleep(6000);
@@ -961,6 +963,7 @@ public class DBHelper extends HelperBase {
             }
 
             System.out.println("count: " + count);
+            System. out.println("srcid : " + srcid);
             System. out.println("statusRequest : " + statusRequest);
             break;
         }
