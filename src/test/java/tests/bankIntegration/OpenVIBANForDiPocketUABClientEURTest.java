@@ -244,9 +244,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         clientRegisterRequest.setMZip("Zip");
         clientRegisterRequest.setMCountryCode(countryCode);
         clientRegisterRequest.setCitizenship(countryCode);
-
         String json = gson.toJson(clientRegisterRequest);
-        System.out.println(json);
 
         String response = given()
                 .spec(app.requestSpecCustomerServicesTest)
@@ -271,9 +269,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         cardCreateRequest.setAccFeeTariffPlanId(Long.valueOf(2000));
         cardCreateRequest.setePin(Long.valueOf(1111));
         cardCreateRequest.setAccountId(null);
-
         String json = gson.toJson(cardCreateRequest);
-        System.out.println(json);
 
         String response = given()
                 .spec(app.requestSpecCustomerServicesTest)
@@ -293,9 +289,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         cardActivateRequest.setRequestId("fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"");
         cardActivateRequest.setClientId(Long.valueOf(clientIdSandbox));
         cardActivateRequest.setToken(token);
-
         String json = gson.toJson(cardActivateRequest);
-        System.out.println(json);
 
         given()
                 .spec(app.requestSpecCustomerServicesTest)

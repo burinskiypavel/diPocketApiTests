@@ -109,7 +109,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         client_clientId_update.setAge(30);
         client_clientId_update.setMigrated(false);
         client_clientId_update.setSkippedReg(false);
-
         String json = gson.toJson(client_clientId_update);
 
         given()
