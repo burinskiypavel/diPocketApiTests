@@ -49,9 +49,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
     String actualVIbanFromBO = null;
     String actualVIbanFromDB = null;
     String actualVIbanSandboxFromDB = null;
-
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-
     Gson gson = new Gson();
     CardActivateRequest cardActivateRequest = new CardActivateRequest();
     CardCreateRequest cardCreateRequest = new CardCreateRequest();
@@ -103,7 +101,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         client_clientId_update.setCardHolderName("Pavel Burinsky");
         client_clientId_update.setIdentifyCode(13124244234l);
         client_clientId_update.setClientType("I");
-        client_clientId_update.setSite("DIPOCKET");
+        client_clientId_update.setSite(Site.DIPOCKET.toString());
         client_clientId_update.setRegisteredAddrAsMail(true);
         client_clientId_update.setResidenceCountryId(countryId);
         client_clientId_update.setFeeTariffPlanId(1);
@@ -233,7 +231,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");
         System.out.println("actualVIbanFromMobileApp : " + actualVIbanFromMobileApp);
 
-        Assert.assertEquals(actualVIbanFromDB, actualVIbanFromMobileApp);
+        assertThat(actualVIbanFromDB, equalTo(actualVIbanFromMobileApp));
     }
 
     @Test(priority = 13)
@@ -250,7 +248,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
 
-        Assert.assertEquals(actualVIbanFromDB, actualVIbanFromBO);
+        assertThat(actualVIbanFromDB, equalTo(actualVIbanFromBO));
     }
 
 
@@ -282,7 +280,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         String json = gson.toJson(clientRegisterRequest);
 
         String response = given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
@@ -311,7 +309,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 //                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
 //                        "  \"citizenship\" : \""+countryCode+"\"\n" +
 //                        "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/client/register")
+                .post("/v1/client/register")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -332,7 +330,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         String json = gson.toJson(cardCreateRequest);
 
         String response = given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
@@ -346,7 +344,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 //                        "    \"ePin\": \"1111\",\n" +
 //                        "    \"accountId\": \"\"\n" +
 //                        "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/card/create")
+                .post("/v1/card/create")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -362,7 +360,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         String json = gson.toJson(cardActivateRequest);
 
         given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
@@ -371,7 +369,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 //                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
 //                        "    \"token\":  \""+token+"\"\n" +
 //                        "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/card/activate")
+                .post("/v1/card/activate")
                 .then().log().all()
                 .statusCode(200);
     }
@@ -402,6 +400,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
 
-        Assert.assertEquals(actualVIbanSandboxFromDB, actualVIbanFromBO);
+        assertThat(actualVIbanSandboxFromDB, equalTo(actualVIbanFromBO));
     }
 }
