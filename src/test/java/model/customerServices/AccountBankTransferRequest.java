@@ -3,8 +3,9 @@ package model.customerServices;
 public class AccountBankTransferRequest {
     private int accountId;
     private int amount;
+    private int zip;
     private String bankId;
-    private int beneficiaryAccount;
+    private String beneficiaryAccount;
     private String beneficiaryType;
     private String city;
     private String companyName;
@@ -18,7 +19,6 @@ public class AccountBankTransferRequest {
     private String requestId;
     private String streetLine1;
     private String streetLine2;
-    private int zip;
 
     public int getAccountId() {
         return accountId;
@@ -26,6 +26,14 @@ public class AccountBankTransferRequest {
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
+    }
+
+    public int getZip() {
+        return zip;
+    }
+
+    public void setZip(int zip) {
+        this.zip = zip;
     }
 
     public int getAmount() {
@@ -44,11 +52,11 @@ public class AccountBankTransferRequest {
         this.bankId = bankId;
     }
 
-    public int getBeneficiaryAccount() {
+    public String getBeneficiaryAccount() {
         return beneficiaryAccount;
     }
 
-    public void setBeneficiaryAccount(int beneficiaryAccount) {
+    public void setBeneficiaryAccount(String beneficiaryAccount) {
         this.beneficiaryAccount = beneficiaryAccount;
     }
 
@@ -154,13 +162,5 @@ public class AccountBankTransferRequest {
 
     public void setStreetLine2(String streetLine2) {
         this.streetLine2 = streetLine2;
-    }
-
-    public int getZip() {
-        return zip;
-    }
-
-    public void setZip(int zip) {
-        this.zip = zip;
     }
 }
