@@ -126,6 +126,8 @@ public class ApplicationManager {
     public String homePageLoginPhone = "380980316499";
     public String homePagePass = "reset246740";
     public int homePageClientId = 40263;
+    public String sandboxLogin = null;
+    public String sandboxPass = null;
 
     public void initStart() {
 //        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
@@ -171,6 +173,8 @@ public class ApplicationManager {
         BOURL = HelperBase.prop.getProperty("bo.base.url");
         BOTestURL = HelperBase.prop.getProperty("bo.test.base.url");
         baseTestURL = HelperBase.prop.getProperty("test.base.url");
+        sandboxLogin = HelperBase.prop.getProperty("test.sandbox.login");
+        sandboxPass = HelperBase.prop.getProperty("test.sandbox.pass");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()

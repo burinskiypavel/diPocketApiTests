@@ -38,8 +38,8 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     int clientIdSandbox = 0;
     String currencyCodeEUR = "EUR";
     String countryCode = "GB";
-    String sandboxLogin = "SANDBOX";
-    String sandboxPass = "W6qQnx7";
+    //String sandboxLogin = "SANDBOX";
+    //String sandboxPass = "W6qQnx7";
     String token = null;
     String pan = null;
     String pass = "password1";
@@ -246,7 +246,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         String response = given()
                 .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
+                .auth().basic(app.sandboxLogin, app.sandboxPass)
                 .body(json)
                 .post("/v1/client/register")
                 .then().log().all()
@@ -271,7 +271,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         String response = given()
                 .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
+                .auth().basic(app.sandboxLogin, app.sandboxPass)
                 .body(json)
                 .post("/v1/card/create")
                 .then().log().all()
@@ -293,7 +293,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         given()
                 .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
+                .auth().basic(app.sandboxLogin, app.sandboxPass)
                 .body(json)
                 .post("/v1/card/activate")
                 .then().log().all()
