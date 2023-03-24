@@ -48,7 +48,7 @@ public class B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest extends TestB
 //        accountBankTransferRequest.setAmount(148);
 //        accountBankTransferRequest.setBankId("LHVBEE22");
 //        accountBankTransferRequest.setBeneficiaryAccount(117997);
-//        accountBankTransferRequest.setBeneficiaryType("INDIVIDUAL");//-//-----------
+//        accountBankTransferRequest.setBeneficiaryType("INDIVIDUAL");
 //        accountBankTransferRequest.setCity(city);
 //        accountBankTransferRequest.setCompanyName("Mantest");
 //        accountBankTransferRequest.setCountryCode("LT");
