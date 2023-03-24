@@ -281,7 +281,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         String json = gson.toJson(clientRegisterRequest);
 
         String response = given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
@@ -310,7 +310,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 //                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
 //                        "  \"citizenship\" : \""+countryCode+"\"\n" +
 //                        "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/client/register")
+                .post("/v1/client/register")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -332,7 +332,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         String json = gson.toJson(cardCreateRequest);
 
         String response = given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
@@ -346,7 +346,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 //                        "    \"ePin\": \"1111\",\n" +
 //                        "    \"accountId\": \"\"\n" +
 //                        "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/card/create")
+                .post("/v1/card/create")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -365,7 +365,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         String json = gson.toJson(cardActivateRequest);
 
         given()
-                .log().uri().log().headers().log().body()
+                .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
@@ -375,7 +375,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 //                        "    \"pan\": \""+pan+"\",\n" +
 //                        "    \"token\":  \""+token+"\"\n" +
 //                        "}")
-                .post("https://api.dipocket.site/CustomerServices/v1/card/activate")
+                .post("/v1/card/activate")
                 .then().log().all()
                 .statusCode(200);
     }
