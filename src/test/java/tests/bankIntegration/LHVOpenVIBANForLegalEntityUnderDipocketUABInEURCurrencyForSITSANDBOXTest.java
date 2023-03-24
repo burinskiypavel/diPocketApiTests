@@ -32,9 +32,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_company_register() throws SQLException, ClassNotFoundException {
-//        app.getDbHelper().createСlientTestDB("Pavel", "SANDBOX", "L", 1, "La-la", currencyId, ddStatus, 1, 0, 2000,
-//                10, "Address", "Address", city, "no", 123456, countryId, "pavelburinskiy@gmai.com", "Address", "Address",
-//                city, "no", 123456, countryId, "noGPS", "test acc", 0, 496842145, countryId, 0);
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
@@ -83,8 +80,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 
     @Test(priority = 3, enabled = false)
     public void test_BOServices_v1_representative_createScreened() throws SQLException, ClassNotFoundException {
-//        String message = app.getDbHelper().getBOLoginSMSCodeFromTestDB();
-//        sms = message.substring(13);
         given()
                 .spec(app.requestSpecBOTest)
                 .cookie(cookie)
@@ -126,8 +121,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
                 .get("/v1/representative/{legalClientId}")
                 .then().log().all()
                 .statusCode(200);
-                //.body("firstName", hasItem(firstName),
-                //        "lastName", hasItem(lastName));
     }
 
     @Test(priority = 6)
