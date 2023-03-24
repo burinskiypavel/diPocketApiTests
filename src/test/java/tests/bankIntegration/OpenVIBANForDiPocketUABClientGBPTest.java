@@ -109,7 +109,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         client_clientId_update.setAge(30);
         client_clientId_update.setMigrated(false);
         client_clientId_update.setSkippedReg(false);
-
         String json = gson.toJson(client_clientId_update);
 
         given()
@@ -199,7 +198,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
     @Test(priority = 9)
     public void test_verifyFDDStatus() throws SQLException, ClassNotFoundException {
         String actualClientStatus = app.getDbHelper().getClientDDStatusFromTestDB(clientId);
-        //assertEquals(actualClientStatus, "FDD");
         assertThat(actualClientStatus, equalTo("FDD"));
 
     }
