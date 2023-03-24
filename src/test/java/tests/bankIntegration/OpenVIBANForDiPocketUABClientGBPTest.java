@@ -199,7 +199,9 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
     @Test(priority = 9)
     public void test_verifyFDDStatus() throws SQLException, ClassNotFoundException {
         String actualClientStatus = app.getDbHelper().getClientDDStatusFromTestDB(clientId);
-        assertEquals(actualClientStatus, "FDD");
+        //assertEquals(actualClientStatus, "FDD");
+        assertThat(actualClientStatus, equalTo("FDD"));
+
     }
 
     @Test(priority = 10)

@@ -102,7 +102,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         client_clientId_update.setCardHolderName("Pavel Burinsky");
         client_clientId_update.setIdentifyCode(13124244234l);
         client_clientId_update.setClientType("I");
-        client_clientId_update.setSite("DIPOCKET");
+        client_clientId_update.setSite(Site.DIPOCKET.toString());
         client_clientId_update.setRegisteredAddrAsMail(true);
         client_clientId_update.setResidenceCountryId(countryId);
         client_clientId_update.setFeeTariffPlanId(1);
@@ -200,7 +200,8 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     @Test(priority = 9)
     public void test_verifyFDDStatus() throws SQLException, ClassNotFoundException {
         String actualClientStatus = app.getDbHelper().getClientDDStatusFromTestDB(clientId);
-        assertEquals(actualClientStatus, "FDD");
+        //assertEquals(actualClientStatus, "FDD");
+        assertThat(actualClientStatus, equalTo("FDD"));
     }
 
     @Test(priority = 10)
@@ -249,7 +250,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
 
-        assertEquals(actualVIbanFromDB, actualVIbanFromBO);
+        assertThat(actualVIbanFromDB, equalTo(actualVIbanFromBO));
     }
 
     @Test(priority = 14)
@@ -406,6 +407,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
 
-        assertEquals(actualVIbanSandboxFromDB, actualVIbanFromBO);
+        assertThat(actualVIbanSandboxFromDB, equalTo(actualVIbanFromBO));
     }
 }
