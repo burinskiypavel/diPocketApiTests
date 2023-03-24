@@ -4,6 +4,7 @@ import base.TestBase;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
 import model.customerServices.AccountBankTransferRequest;
+import model.customerServices.CalculateBankTransferRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -20,19 +21,21 @@ public class B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest extends TestB
     int accountId = 115975;
     Gson gson = new Gson();
     AccountBankTransferRequest accountBankTransferRequest = new AccountBankTransferRequest();
+    CalculateBankTransferRequest calculateBankTransferRequest = new CalculateBankTransferRequest();
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_account_calculateBankTransfer_SEPA(){
+        calculateBankTransferRequest.setAccountId(accountId);
+        calculateBankTransferRequest.setRequestId("d1f202fe-df2e-46da-94ba"+app.generateRandomString(12)+"");
+        calculateBankTransferRequest.setCurrencyCode(currencyCode);
+        calculateBankTransferRequest.setAmount(10);
+        String json = gson.toJson(calculateBankTransferRequest);
+
         String response = given()
                 .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
                 .auth().basic(login, pass)
-                .body("{\n" +
-                        "  \"accountId\": "+accountId+",\n" +
-                        "  \"requestId\": \"d1f202fe-df2e-46da-94ba"+app.generateRandomString(12)+"\",\n" +
-                        "  \"currencyCode\": \""+currencyCode+"\",\n" +
-                        "  \"amount\": \"10\"\n" +
-                        "}")
+                .body(json)
                 .post("/v1/account/calculateBankTransfer/SEPA")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
