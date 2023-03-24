@@ -34,12 +34,10 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
     String  boUserLogin = "PavelB_BO";
     String boUserPass = "vVahVkR";
     String username = "PAVELB_BO";
-
     Gson gson = new Gson();
     CardActivateRequest cardActivateRequest = new CardActivateRequest();
     CardCreateRequest cardCreateRequest = new CardCreateRequest();
     ClientRegisterRequest clientRegisterRequest = new ClientRegisterRequest();
-    Client_clientId_update client_clientId_update = new Client_clientId_update();
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_client_register(){
@@ -73,31 +71,6 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
                 .spec(app.requestSpecCustomerServicesTest)
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
-//                .body("{\n" +
-//                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
-//                        "  \"langCode\" : \"en\",\n" +
-//                        "  \"firstName\" : \"QA\",\n" +
-//                        "  \"lastName\" : \"Test\",\n" +
-//                        "  \"cardHolderName\" : \"cardHolderName\",\n" +
-//                        "  \"email\" : \"testqa"+app.generateRandomString(5)+"@gmail.com\",\n" +
-//                        "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
-//                        "  \"dob\" : \"1990-08-31\",\n" +
-//                        "  \"ddStatus\" : \"FDD\",\n" +
-//                        "  \"currencyCode\" : \""+ currencyCodeEUR +"\",\n" +
-//                        "  \"rStreetLine1\" : \"StreetLine1\",\n" +
-//                        "  \"rStreetLine2\" : \"StreetLine2\",\n" +
-//                        "  \"rCity\" : \"City\",\n" +
-//                        "  \"rState\" : \"State\",\n" +
-//                        "  \"rZip\" : \"Zip\",\n" +
-//                        "  \"rCountryCode\" : \""+countryCode+"\",\n" +
-//                        "  \"mStreetLine1\" : \"StreetLine1\",\n" +
-//                        "  \"mStreetLine2\" : \"StreetLine2\",\n" +
-//                        "  \"mCity\" : \"City\",\n" +
-//                        "  \"mState\" : \"State\",\n" +
-//                        "  \"mZip\" : \"Zip\",\n" +
-//                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
-//                        "  \"citizenship\" : \""+countryCode+"\"\n" +
-//                        "}")
                 .post("/v1/client/register")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -123,16 +96,6 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
-//                .body("{\n" +
-//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-//                        "    \"program\":  \""+program+"\",\n" +
-//                        "    \"currencyCode\":  \""+ currencyCodeEUR +"\",\n" +
-//                        "    \"cardType\":  \"PLASTIC\",\n" +
-//                        "    \"accFeeTariffPlanId\":  \"2000\",\n" +
-//                        "    \"ePin\": \"1111\",\n" +
-//                        "    \"accountId\": \"\"\n" +
-//                        "}")
                 .post("/v1/card/create")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -153,11 +116,6 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
-//                .body("{\n" +
-//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-//                        "    \"token\":  \""+token+"\"\n" +
-//                        "}")
                 .post("/v1/card/activate")
                 .then().log().all()
                 .statusCode(200);
