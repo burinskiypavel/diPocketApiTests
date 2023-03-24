@@ -75,7 +75,7 @@ public class B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest extends TestB
                         "  \"amount\": 148,\n" +
                         "  \"bankId\": \"LHVBEE22\",\n" +
                         "  \"beneficiaryAccount\": \"117997\",\n" +
-                        "  \"beneficiaryType\": \"COMPANY\",\n" +
+                        "  \"beneficiaryType\": \"INDIVIDUAL\",\n" +
                         "  \"city\": \""+city+"\",\n" +
                         "  \"companyName\": \"Mantest\",\n" +
                         "  \"countryCode\": \"LT\",\n" +
