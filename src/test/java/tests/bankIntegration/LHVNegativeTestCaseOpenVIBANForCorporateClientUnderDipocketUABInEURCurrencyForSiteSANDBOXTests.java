@@ -7,6 +7,7 @@ import com.cs.dipocketback.pojo.customer.CardCreateRequest;
 import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
+import model.bo.boOperations.CorpClientCreateRequest;
 import model.bo.boServices.Client_clientId_update;
 import org.testng.annotations.Test;
 
@@ -42,13 +43,11 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     String sandboxPass = "W6qQnx7";
     String token = null;
     String companyName = "CorporateTest";
-
     Gson gson = new Gson();
     CardActivateRequest cardActivateRequest = new CardActivateRequest();
     CardCreateRequest cardCreateRequest = new CardCreateRequest();
     ClientRegisterRequest clientRegisterRequest = new ClientRegisterRequest();
-    Client_clientId_update client_clientId_update = new Client_clientId_update();
-
+    CorpClientCreateRequest corpClientCreateRequest = new CorpClientCreateRequest();
 
     @Test(priority = 0, enabled = false)
     public void test_getIdOfLastVIbanFromTestDB() throws SQLException, ClassNotFoundException {
@@ -79,43 +78,42 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
 
     @Test(priority = 3)
     public void test_BOServices_v1_user_corpClients_createScreened(){
+        corpClientCreateRequest.setAccName("TestAcc");
+        corpClientCreateRequest.setAccTypeId(1);
+        corpClientCreateRequest.setAccountContractCountryId(countryId);
+        corpClientCreateRequest.setIdentifyCode(12132131231l);
+        corpClientCreateRequest.setStateMail("String");
+        corpClientCreateRequest.setStateReg("String");
+        corpClientCreateRequest.setSite(site);
+        corpClientCreateRequest.setClientType("C");
+        corpClientCreateRequest.setLangId(1);
+        corpClientCreateRequest.setCompanyName(companyName);
+        corpClientCreateRequest.setCurrencyId(currencyId);
+        corpClientCreateRequest.setDdStatus("FDD");
+        corpClientCreateRequest.setFeeTariffPlanId(2);
+        corpClientCreateRequest.setDefCardProgramId(1);
+        corpClientCreateRequest.setLimitPlanId(2);
+        corpClientCreateRequest.setOperLimitPlanId(1);
+        corpClientCreateRequest.setStreetLine1Reg("Main str");
+        corpClientCreateRequest.setStreetLine2Reg("50");
+        corpClientCreateRequest.setCityReg("Krakiv");
+        corpClientCreateRequest.setZipReg(2123123);
+        corpClientCreateRequest.setCountryIdReg(countryId);
+        corpClientCreateRequest.setRegisteredAddrAsMail(false);
+        corpClientCreateRequest.setStreetLine1Mail("Main str");
+        corpClientCreateRequest.setStreetLine2Mail("50");
+        corpClientCreateRequest.setCityMail("Krakiv");
+        corpClientCreateRequest.setZipMail(2123123);
+        corpClientCreateRequest.setCountryIdMail(countryId);
+        corpClientCreateRequest.setContractCountryId(countryId);
+        corpClientCreateRequest.setCitizenship(countryCode);
+        String json = gson.toJson(corpClientCreateRequest);
+
         given()
                 .spec(app.requestSpecBOTest)
                 .header("bo-auth-token", sms)
                 .cookie(cookie)
-                .body("{\n" +
-                        "  \"accName\" : \"TestAcc\",\n" +
-                        "  \"accTypeId\" : \"1\",\n" +
-                        "  \"accountContractCountryId\" : \"440\",\n" +
-                        "  \"identifyCode\" : \"12132131231\",\n" +
-                        //"  \"sharedAccountId\" : \"0\",\n" +
-                        "  \"stateMail\" : \"String\",\n" +
-                        "  \"stateReg\" : \"String\",\n" +
-                        "  \"stateReg\" : \"String\",\n" +
-                        "  \"site\" : \""+site+"\",\n" +
-                        "  \"clientType\" : \"C\",\n" +
-                        "  \"langId\" : 1,\n" +
-                        "  \"companyName\" : \""+companyName+"\",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"ddStatus\" : \"FDD\",\n" +
-                        "  \"feeTariffPlanId\" : 2,\n" +
-                        "  \"defCardProgramId\" : 1,\n" +
-                        "  \"limitPlanId\" : 2,\n" +
-                        "  \"operLimitPlanId\" : 1,\n" +
-                        "  \"streetLine1Reg\" : \"Gagarina ave\",\n" +
-                        "  \"streetLine2Reg\" : \"62\",\n" +
-                        "  \"cityReg\" : \"Krakiv\",\n" +
-                        "  \"zipReg\" : \"2123123\",\n" +
-                        "  \"countryIdReg\" : "+countryId+",\n" +
-                        "  \"registeredAddrAsMail\" : false,\n" +
-                        "  \"streetLine1Mail\" : \"Gagarina ave\",\n" +
-                        "  \"streetLine2Mail\" : \"62\",\n" +
-                        "  \"cityMail\" : \"Krakiv\",\n" +
-                        "  \"zipMail\" : \"2123123\",\n" +
-                        "  \"countryIdMail\" : "+countryId+",\n" +
-                        "  \"contractCountryId\" : "+countryId+",\n" +
-                        "  \"citizenship\" : \""+countryCode+"\"\n" +
-                        "}")
+                .body(json)
                 .when()
                 .post( "/v1/user/corpClients/createScreened")
                 .then().log().all()
@@ -154,31 +152,6 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
-//                .body("{\n" +
-//                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
-//                        "  \"langCode\" : \"en\",\n" +
-//                        "  \"firstName\" : \"QA\",\n" +
-//                        "  \"lastName\" : \"Test\",\n" +
-//                        "  \"cardHolderName\" : \"cardHolderName\",\n" +
-//                        "  \"email\" : \"testqa"+app.generateRandomString(5)+"@gmail.com\",\n" +
-//                        "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
-//                        "  \"dob\" : \"1990-08-31\",\n" +
-//                        "  \"ddStatus\" : \"FDD\",\n" +
-//                        "  \"currencyCode\" : \""+ currencyCodeEUR +"\",\n" +
-//                        "  \"rStreetLine1\" : \"StreetLine1\",\n" +
-//                        "  \"rStreetLine2\" : \"StreetLine2\",\n" +
-//                        "  \"rCity\" : \"City\",\n" +
-//                        "  \"rState\" : \"State\",\n" +
-//                        "  \"rZip\" : \"Zip\",\n" +
-//                        "  \"rCountryCode\" : \""+countryCode+"\",\n" +
-//                        "  \"mStreetLine1\" : \"StreetLine1\",\n" +
-//                        "  \"mStreetLine2\" : \"StreetLine2\",\n" +
-//                        "  \"mCity\" : \"City\",\n" +
-//                        "  \"mState\" : \"State\",\n" +
-//                        "  \"mZip\" : \"Zip\",\n" +
-//                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
-//                        "  \"citizenship\" : \""+countryCode+"\"\n" +
-//                        "}")
                 .post("/v1/client/register")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -204,16 +177,6 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
-//                .body("{\n" +
-//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-//                        "    \"program\":  \"Sandbox\",\n" +
-//                        "    \"currencyCode\":  \""+ currencyCodeEUR +"\",\n" +
-//                        "    \"cardType\":  \"PLASTIC\",\n" +
-//                        "    \"accFeeTariffPlanId\":  \"2000\",\n" +
-//                        "    \"ePin\": \"1111\",\n" +
-//                        "    \"accountId\": \"\"\n" +
-//                        "}")
                 .post("/v1/card/create")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -234,11 +197,6 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
                 .body(json)
-//                .body("{\n" +
-//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-//                        "    \"token\":  \""+token+"\"\n" +
-//                        "}")
                 .post("/v1/card/activate")
                 .then().log().all()
                 .statusCode(200);
