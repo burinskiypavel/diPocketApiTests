@@ -40,7 +40,7 @@ public class BORequests {
                 .contentType("application/json")
                 .queryParam("smsCounter", 1)
                 .when()
-                .post( "/v1/auth/genSecureCodeWithCounter");
+                .post( "/v1/auth/getSecureCode");
         cookie = responseCode.getHeader("Set-Cookie");
         responseCode.then().log().all()
                 .statusCode(200);
