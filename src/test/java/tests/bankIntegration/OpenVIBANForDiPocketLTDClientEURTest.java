@@ -108,18 +108,17 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         client_clientId_update.setMigrated(false);
         client_clientId_update.setSkippedReg(false);
         String json = gson.toJson(client_clientId_update);
-
-        given()
-                .spec(app.requestSpecBOTest)
-                .pathParam("clientId", clientId)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .when()
-                .body(json)
-                .post("/v1/client/{clientId}/update")
-                .then().log().all()
-                .statusCode(200);
-
+        app.getBoRequestsHelper().boServices_v1_client_clientID_update_test(cookie, sms, clientId, json);
+//        given()
+//                .spec(app.requestSpecBOTest)
+//                .pathParam("clientId", clientId)
+//                .header("bo-auth-token", sms)
+//                .cookie(cookie)
+//                .when()
+//                .body(json)
+//                .post("/v1/client/{clientId}/update")
+//                .then().log().all()
+//                .statusCode(200);
     }
 
     @Test(priority = 5)
