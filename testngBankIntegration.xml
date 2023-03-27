@@ -2,23 +2,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestingSuite" parallel="none">
 
-<!--    <test name="B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest">
+        <classes>
+            <class name="tests.bankIntegration.B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
+        <classes>
+            <class name="tests.bankIntegration.B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
+        </classes>
+    </test>
 
     <test name="DipocketConfigurationsTests">
         <classes>
@@ -26,52 +26,46 @@
         </classes>
     </test>
 
-<!--    <test name="LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest">
+        <classes>
+            <class name="tests.bankIntegration.LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest"/>
+        </classes>
+    </test>
 
-<!--    <test name="LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEURCurrencyForSiteSANDBOXTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEURCurrencyForSiteSANDBOXTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEURCurrencyForSiteSANDBOXTests">
+        <classes>
+            <class name="tests.bankIntegration.LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEURCurrencyForSiteSANDBOXTests"/>
+        </classes>
+    </test>
 
-<!--    <test name="LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBOXTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBOXTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBOXTest">
+        <classes>
+            <class name="tests.bankIntegration.LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBOXTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="MasterIbanConfigurationTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.MasterIbanConfigurationTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="MasterIbanConfigurationTests">
+        <classes>
+            <class name="tests.bankIntegration.MasterIbanConfigurationTests"/>
+        </classes>
+    </test>
 
-<!--    <test name="OpenVIBANForDiPocketLTDClientEURTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.OpenVIBANForDiPocketLTDClientEURTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="OpenVIBANForDiPocketLTDClientEURTest">
+        <classes>
+            <class name="tests.bankIntegration.OpenVIBANForDiPocketLTDClientEURTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="OpenVIBANForDiPocketUABClientEURTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.OpenVIBANForDiPocketUABClientEURTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="OpenVIBANForDiPocketUABClientEURTest">
+        <classes>
+            <class name="tests.bankIntegration.OpenVIBANForDiPocketUABClientEURTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="OpenVIBANForDiPocketUABClientGBPTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.OpenVIBANForDiPocketUABClientGBPTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-<!--    <test name="SandboxConfigurationsTests">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.SandboxConfigurationsTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="OpenVIBANForDiPocketUABClientGBPTest">
+        <classes>
+            <class name="tests.bankIntegration.OpenVIBANForDiPocketUABClientGBPTest"/>
+        </classes>
+    </test>
 
 </suite>
