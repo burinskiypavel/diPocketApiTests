@@ -17,8 +17,8 @@ public class C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest extends TestBa
     String login = "APIOLENA";
     String pass = "pU9N1Lu";
     int feeAmount = 0;
-    String currencyCode = "GBP";
-    int accountId = 112099;
+    String currencyCode = "EUR";
+    int accountId = 111231;
     Gson gson = new Gson();
     AccountBankTransferRequest accountBankTransferRequest = new AccountBankTransferRequest();
     CalculateBankTransferRequest calculateBankTransferRequest = new CalculateBankTransferRequest();
