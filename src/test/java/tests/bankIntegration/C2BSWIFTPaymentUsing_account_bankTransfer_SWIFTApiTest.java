@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
-import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends TestBase {
     String city = "Vilnius";
@@ -31,14 +31,7 @@ public class C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends Test
         calculateBankTransferRequest.setAmount(10);
         String json = gson.toJson(calculateBankTransferRequest);
 
-        String response = given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(login, pass)
-                .body(json)
-                .post("/v1/account/calculateBankTransfer/SWIFT")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_SWIFT_test(login, pass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         feeAmount = jsonPath.getInt("feeAmount");
@@ -66,19 +59,12 @@ public class C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends Test
         accountBankTransferRequest.setZip(11111);
         String json = gson.toJson(accountBankTransferRequest);
 
-        String response = given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(login, pass)
-                .body(json)
-                .post("/v1/account/bankTransfer/SWIFT")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+        app.getCustomerServicesRequestsHelper().customerServices_v1_account_bankTransfer_SWIFT_test(login, pass, json);
     }
 
     @Test(priority = 3)
     public void test_verifyStatusPTSFromPTS_OUT_TRAN() throws SQLException, ClassNotFoundException, InterruptedException {
         String actualPTSStatus = app.getDbHelper().getStatusPTSFromTestDB();
-        assertEquals(actualPTSStatus, "INPRCS");
+        assertThat(actualPTSStatus, equalTo("INPRCS"));
     }
 }
