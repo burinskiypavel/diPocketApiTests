@@ -891,7 +891,7 @@ public class BORequests {
                 .statusCode(200);
     }
 
-    public void boServices_v1_client_clientId_approveSDD_test(String cookie, String smsSecureCode, String clientId, String ticketId){
+    public void boServices_v1_client_clientId_approveSDD_test(String cookie, String smsSecureCode, String clientId, int ticketId){
         given()
                 .spec(requestSpecBOTest)
                 .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
@@ -958,7 +958,7 @@ public class BORequests {
 
     }
 
-    public void boServices_v1_client_clientId_approveFDD_test(String cookie, String smsSecureCode, String clientId, String ticketId){
+    public void boServices_v1_client_clientId_approveFDD_test(String cookie, String smsSecureCode, String clientId, int ticketId){
         given()
                 .spec(requestSpecBOTest)
                 .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
