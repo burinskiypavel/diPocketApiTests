@@ -29,8 +29,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
     String username = "PAVELB_BO";
     int ticketId = 0;
     String actualTypeName = null;
-    //String  boUserLogin = "PavelB_BO";
-    //String boUserPass = "vVahVkR";
     String sms = null;
     String tomorrow = null;
     String clientId = null;
@@ -40,8 +38,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
     int clientIdSandbox = 0;
     String currencyCodeGBP = "GBP";
     String countryCode = "LT";
-    //String sandboxLogin = "SANDBOX";
-    //String sandboxPass = "W6qQnx7";
     String token = null;
     String pass = "password1";
     String cliSessionId = null;
@@ -110,14 +106,8 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         client_clientId_update.setMigrated(false);
         client_clientId_update.setSkippedReg(false);
         String json = gson.toJson(client_clientId_update);
+        app.getBoRequestsHelper().boServices_v1_client_clientID_update_test(cookie, sms, clientId, json);
 
-        given()
-                .spec(app.requestSpecBOTest)
-                .pathParam("clientId", clientId)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .when()
-                .body(json)
 //                .body("{\n" +
 //                        "  \"id\" : "+clientId+",\n" +
 //                        "  \"mainPhone\" : \"380685448615\",\n" +
@@ -152,10 +142,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 //                        "  \"migrated\" : false,\n" +
 //                        "  \"skippedReg\" : false\n" +
 //                        "}")
-                .post("/v1/client/{clientId}/update")
-                .then().log().all()
-                .statusCode(200);
-
     }
 
     @Test(priority = 5)
@@ -183,7 +169,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
     public void test_verifyFDDStatus() throws SQLException, ClassNotFoundException {
         String actualClientStatus = app.getDbHelper().getClientDDStatusFromTestDB(clientId);
         assertThat(actualClientStatus, equalTo("FDD"));
-
     }
 
     @Test(priority = 10)

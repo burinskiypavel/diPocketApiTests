@@ -31,8 +31,6 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
     String username = "PAVELB_BO";
     int ticketId = 0;
     String actualTypeName = null;
-    //String  boUserLogin = "PavelB_BO";
-    //String boUserPass = "vVahVkR";
     String sms = null;
     String tomorrow = null;
     String clientId = null;
@@ -42,8 +40,6 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
     int clientIdSandbox = 0;
     String currencyCodeEUR = "EUR";
     String countryCode = "LT";
-    //String sandboxLogin = "SANDBOX";
-    //String sandboxPass = "W6qQnx7";
     String token = null;
     String pass = "password1";
     String cliSessionId = null;
@@ -92,8 +88,8 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         client_clientId_update.setCurrencyId(currencyId);
         client_clientId_update.setCurrencyCode("PLN");
         client_clientId_update.setLangId(4);
-        client_clientId_update.setLangCode("rus");
-        client_clientId_update.setLangName("Russian");
+        client_clientId_update.setLangCode("eng");
+        client_clientId_update.setLangName("English");
         client_clientId_update.setPhotoIdTypeId(1);
         client_clientId_update.setPhotoIdTypeName("Passport");
         client_clientId_update.setPhotoIdNo(234234324324l);
@@ -113,17 +109,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         client_clientId_update.setMigrated(false);
         client_clientId_update.setSkippedReg(false);
         String json = gson.toJson(client_clientId_update);
-
-        given()
-                .spec(app.requestSpecBOTest)
-                .pathParam("clientId", clientId)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .when()
-                .body(json)
-                .post("/v1/client/{clientId}/update")
-                .then().log().all()
-                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_client_clientID_update_test(cookie, sms, clientId, json);
     }
 
     @Test(priority = 5)

@@ -27,8 +27,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     String username = "PAVELB_BO";
     int ticketId = 0;
     String actualTypeName = null;
-    //String  boUserLogin = "PavelB_BO";
-    //String boUserPass = "vVahVkR";
     String sms = null;
     String tomorrow = null;
     String clientId = null;
@@ -87,8 +85,8 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         client_clientId_update.setCurrencyId(currencyId);
         client_clientId_update.setCurrencyCode("PLN");
         client_clientId_update.setLangId(4);
-        client_clientId_update.setLangCode("rus");
-        client_clientId_update.setLangName("Russian");
+        client_clientId_update.setLangCode("eng");
+        client_clientId_update.setLangName("English");
         client_clientId_update.setPhotoIdTypeId(1);
         client_clientId_update.setPhotoIdTypeName("Passport");
         client_clientId_update.setPhotoIdNo(234234324324l);
@@ -109,16 +107,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         client_clientId_update.setSkippedReg(false);
         String json = gson.toJson(client_clientId_update);
         app.getBoRequestsHelper().boServices_v1_client_clientID_update_test(cookie, sms, clientId, json);
-//        given()
-//                .spec(app.requestSpecBOTest)
-//                .pathParam("clientId", clientId)
-//                .header("bo-auth-token", sms)
-//                .cookie(cookie)
-//                .when()
-//                .body(json)
-//                .post("/v1/client/{clientId}/update")
-//                .then().log().all()
-//                .statusCode(200);
     }
 
     @Test(priority = 5)
