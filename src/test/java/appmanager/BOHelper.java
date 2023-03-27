@@ -1,28 +1,32 @@
 package appmanager;
 
+import com.cs.dipocketback.base.data.Site;
+import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import model.bo.User_roles;
 import model.bo.boClient.Account_client;
+import model.bo.boServices.Client_clientId_update;
 import org.testng.Assert;
 import requests.bo.BORequests;
 
 import java.util.List;
 
+import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
 public class BOHelper extends HelperBase {
-
     BORequests boRequests = new BORequests();
     int ticketId = 0;
     String actualTypeName = null;
     String actualClientId = null;
+    String clientStateName = null;
+    int currencyId = 978;
+    int countryId = 826;
+    Client_clientId_update client_clientId_update = new Client_clientId_update();
+    Gson gson = new Gson();
 
     public int takeSDDTicketFromTest(String cookie, String sms, String clientId, String date) {
-        //int ticketId = 0;
-        //String actualTypeName = null;
-        //String actualClientId = null;
-
         int count = 0;
         for(int i = 0; i < 27; i++) {
             count++;
@@ -33,12 +37,79 @@ public class BOHelper extends HelperBase {
             ticketId = js.getInt("id");
             actualTypeName = js.getString("typeName");
             actualClientId = js.getString("clientId");
+            clientStateName = js.getString("clientStateName");
 
             if(actualTypeName.equals("SDD check") && actualClientId.equals(clientId)){
                 break;
             }
 
-            if(!actualTypeName.equals("SDD check") && !actualClientId.equals(clientId)){
+            if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
+                client_clientId_update.setId(Integer.parseInt(clientId));
+                client_clientId_update.setMainPhone(380685448615l);
+                client_clientId_update.setFirstName("Pavel");
+                client_clientId_update.setLastName("Burinsky");
+                client_clientId_update.setBirthDate("04.09.1992");
+                //client_clientId_update.setEmail("testdipocket@gmail.com");
+                client_clientId_update.setEmailIsVerified(false);
+                client_clientId_update.setStateId(1);
+                client_clientId_update.setStateName("Active");
+                client_clientId_update.setCurrencyId(currencyId);
+                client_clientId_update.setCurrencyCode("PLN");
+                client_clientId_update.setLangId(4);
+                client_clientId_update.setLangCode("eng");
+                client_clientId_update.setLangName("English");
+                client_clientId_update.setPhotoIdTypeId(1);
+                client_clientId_update.setPhotoIdTypeName("Passport");
+                client_clientId_update.setPhotoIdNo(234234324324l);
+                client_clientId_update.setPhotoIdCountryId(countryId);
+                client_clientId_update.setPhotoIdCountryName("Poland");
+                client_clientId_update.setGender("M");
+                client_clientId_update.setDdStatus("PSDD");
+                client_clientId_update.setCardHolderName("Pavel Burinsky");
+                client_clientId_update.setIdentifyCode(13124244234l);
+                client_clientId_update.setClientType("I");
+                client_clientId_update.setSite(Site.DIPOCKET.toString());
+                client_clientId_update.setRegisteredAddrAsMail(true);
+                client_clientId_update.setResidenceCountryId(countryId);
+                client_clientId_update.setFeeTariffPlanId(1);
+                client_clientId_update.setFeeTariffPlanName("EUR - standard");
+                client_clientId_update.setAge(30);
+                client_clientId_update.setMigrated(false);
+                client_clientId_update.setSkippedReg(false);
+                String json = gson.toJson(client_clientId_update);
+
+                given()
+                        .log().uri().log().headers().log().body()
+                        //.config(configTimeout)
+                        .baseUri("https://support.dipocket.site")
+                        .basePath("BOServices")
+                        .contentType("application/json")
+                        .pathParam("clientId", actualClientId)
+                        .header("bo-auth-token", sms)
+                        .cookie(cookie)
+                        .when()
+                        .body(json)
+                        .post("/v1/client/{clientId}/update")
+                        .then().log().all()
+                        .statusCode(200);
+
+                given()
+                        .log().uri().log().headers().log().body()
+                        //.config(configTimeout)
+                        .baseUri("https://support.dipocket.site")
+                        .basePath("BOServices")
+                        .contentType("application/json")
+                        .pathParam("clientId", actualClientId)
+                        .header("bo-auth-token", sms)
+                        .queryParam("ticketId", ticketId)
+                        .cookie(cookie)
+                        .post("/v1/client/{clientId}/approveSDD")
+                        .then().log().all()
+                        .statusCode(200);
+                continue;
+            }
+
+            if(!actualTypeName.equals("SDD check") || !actualClientId.equals(clientId)){
                 boRequests.boServices_v1_ticket_ticketId_postpone_test(cookie, ticketId, date, sms);
             }
 
