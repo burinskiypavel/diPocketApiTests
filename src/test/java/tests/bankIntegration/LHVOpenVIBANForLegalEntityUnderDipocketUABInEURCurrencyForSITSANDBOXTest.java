@@ -1,7 +1,9 @@
 package tests.bankIntegration;
 
 import base.TestBase;
+import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
+import model.customerServices.CompanyRegisterRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -29,35 +31,58 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     String city = "Vilnius";
     String countryCode = "LT";
     String ddStatus = "FDD";
+    Gson gson = new Gson();
+    CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_company_register() throws SQLException, ClassNotFoundException {
+        companyRegisterRequest.setRequestId(app.getBOHelper().generateRandomString(8) + "-dc36-462d-87f7-"+app.getBOHelper().generateRandomString(12)+"");
+        companyRegisterRequest.setLangCode("en");
+        companyRegisterRequest.setCompanyName("LegalTest");
+        companyRegisterRequest.setrStreetLine1("155 Stehr Squares");
+        companyRegisterRequest.setrStreetLine2("4925 Cremin Branch");
+        companyRegisterRequest.setrCity(city);
+        companyRegisterRequest.setrState("");
+        companyRegisterRequest.setrZip(660820);
+        companyRegisterRequest.setrCountryCode(countryCode);
+        companyRegisterRequest.setmStreetLine1("393 Willis Ridges");
+        companyRegisterRequest.setmStreetLine2("1299 Marianne Junctions");
+        companyRegisterRequest.setmCity(city);
+        companyRegisterRequest.setmState("");
+        companyRegisterRequest.setmZip(81101);
+        companyRegisterRequest.setmCountryCode(countryCode);
+        companyRegisterRequest.setDdStatus(ddStatus);
+        companyRegisterRequest.setCurrencyCode("EUR");
+        companyRegisterRequest.setType("LEGAL_ENTITY");
+        String json = gson.toJson(companyRegisterRequest);
+
         String response = given()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
                 .auth().basic(sandboxLogin, sandboxPass)
-                .body("{ \n" +
-                        "\n" +
-                        "  \"requestId\" : \"47"+app.getBOHelper().generateRandomString(8)+"-dc36-462d-87f7-"+app.getBOHelper().generateRandomString(12)+"\", \n" +
-                        "  \"langCode\" : \"en\", \n" +
-                        "  \"companyName\" : \"LegalTest\", \n" +
-                        "  \"rStreetLine1\" : \"155 Stehr Squares\", \n" +
-                        "  \"rStreetLine2\" : \"4925 Cremin Branch\", \n" +
-                        "  \"rCity\" : \""+city+"\", \n" +
-                        "  \"rState\" : \"\", \n" +
-                        "  \"rZip\" : \"660820\", \n" +
-                        "  \"rCountryCode\" : \""+countryCode+"\", \n" +
-                        "  \"mStreetLine1\" : \"393 Willis Ridges\", \n" +
-                        "  \"mStreetLine2\" : \"1299 Marianne Junctions\", \n" +
-                        "  \"mCity\" : \""+city+"\", \n" +
-                        "  \"mState\" : \"\", \n" +
-                        "  \"mZip\" : \"81101\", \n" +
-                        "  \"mCountryCode\" : \""+countryCode+"\", \n" +
-                        "  \"ddStatus\" : \""+ddStatus+"\", \n" +
-                        "  \"currencyCode\" : \"EUR\", \n" +
-                        "  \"type\" : \"LEGAL_ENTITY\" \n" +
-                        "\n" +
-                        "} ")
+                .body(json)
+//                .body("{ \n" +
+//                        "\n" +
+//                        "  \"requestId\" : \"47"+app.getBOHelper().generateRandomString(8)+"-dc36-462d-87f7-"+app.getBOHelper().generateRandomString(12)+"\", \n" +
+//                        "  \"langCode\" : \"en\", \n" +
+//                        "  \"companyName\" : \"LegalTest\", \n" +
+//                        "  \"rStreetLine1\" : \"155 Stehr Squares\", \n" +
+//                        "  \"rStreetLine2\" : \"4925 Cremin Branch\", \n" +
+//                        "  \"rCity\" : \""+city+"\", \n" +
+//                        "  \"rState\" : \"\", \n" +
+//                        "  \"rZip\" : \"660820\", \n" +
+//                        "  \"rCountryCode\" : \""+countryCode+"\", \n" +
+//                        "  \"mStreetLine1\" : \"393 Willis Ridges\", \n" +
+//                        "  \"mStreetLine2\" : \"1299 Marianne Junctions\", \n" +
+//                        "  \"mCity\" : \""+city+"\", \n" +
+//                        "  \"mState\" : \"\", \n" +
+//                        "  \"mZip\" : \"81101\", \n" +
+//                        "  \"mCountryCode\" : \""+countryCode+"\", \n" +
+//                        "  \"ddStatus\" : \""+ddStatus+"\", \n" +
+//                        "  \"currencyCode\" : \"EUR\", \n" +
+//                        "  \"type\" : \"LEGAL_ENTITY\" \n" +
+//                        "\n" +
+//                        "} ")
                 .post("https://api.dipocket.site/CustomerServices/v1/company/register")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();

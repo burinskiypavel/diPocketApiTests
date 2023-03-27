@@ -1,0 +1,166 @@
+package model.customerServices;
+
+public class CompanyRegisterRequest {
+    private String requestId;
+    private String langCode;
+    private String companyName;
+    private String rStreetLine1;
+    private String rStreetLine2;
+    private String rCity;
+    private String rState;
+    private int rZip;
+    private String rCountryCode;
+    private String mStreetLine1;
+    private String mStreetLine2;
+    private String mCity;
+    private String mState;
+    private int mZip;
+    private String mCountryCode;
+    private String ddStatus;
+    private String currencyCode;
+    private String type;
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    public String getLangCode() {
+        return langCode;
+    }
+
+    public void setLangCode(String langCode) {
+        this.langCode = langCode;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getrStreetLine1() {
+        return rStreetLine1;
+    }
+
+    public void setrStreetLine1(String rStreetLine1) {
+        this.rStreetLine1 = rStreetLine1;
+    }
+
+    public String getrStreetLine2() {
+        return rStreetLine2;
+    }
+
+    public void setrStreetLine2(String rStreetLine2) {
+        this.rStreetLine2 = rStreetLine2;
+    }
+
+    public String getrCity() {
+        return rCity;
+    }
+
+    public void setrCity(String rCity) {
+        this.rCity = rCity;
+    }
+
+    public String getrState() {
+        return rState;
+    }
+
+    public void setrState(String rState) {
+        this.rState = rState;
+    }
+
+    public int getrZip() {
+        return rZip;
+    }
+    public void setrZip(int rZip) {
+        this.rZip = rZip;
+    }
+
+    public String getrCountryCode() {
+        return rCountryCode;
+    }
+
+    public void setrCountryCode(String rCountryCode) {
+        this.rCountryCode = rCountryCode;
+    }
+
+    public String getmStreetLine1() {
+        return mStreetLine1;
+    }
+
+    public void setmStreetLine1(String mStreetLine1) {
+        this.mStreetLine1 = mStreetLine1;
+    }
+
+    public String getmStreetLine2() {
+        return mStreetLine2;
+    }
+
+    public void setmStreetLine2(String mStreetLine2) {
+        this.mStreetLine2 = mStreetLine2;
+    }
+
+    public String getmCity() {
+        return mCity;
+    }
+
+    public void setmCity(String mCity) {
+        this.mCity = mCity;
+    }
+
+    public String getmState() {
+        return mState;
+    }
+
+    public void setmState(String mState) {
+        this.mState = mState;
+    }
+
+    public int getmZip() {
+        return mZip;
+    }
+
+    public void setmZip(int mZip) {
+        this.mZip = mZip;
+    }
+
+    public String getmCountryCode() {
+        return mCountryCode;
+    }
+
+    public void setmCountryCode(String mCountryCode) {
+        this.mCountryCode = mCountryCode;
+    }
+
+    public String getDdStatus() {
+        return ddStatus;
+    }
+
+    public void setDdStatus(String ddStatus) {
+        this.ddStatus = ddStatus;
+    }
+
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+}
