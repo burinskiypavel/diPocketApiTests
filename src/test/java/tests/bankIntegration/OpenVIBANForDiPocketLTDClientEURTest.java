@@ -212,14 +212,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         clientRegisterRequest.setCitizenship(countryCode);
         String json = gson.toJson(clientRegisterRequest);
 
-        String response = given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(app.sandboxLogin, app.sandboxPass)
-                .body(json)
-                .post("/v1/client/register")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.sandboxLogin, app.sandboxPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         clientIdSandbox = jsonPath.getInt("clientId");
@@ -237,14 +230,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         cardCreateRequest.setAccountId(null);
         String json = gson.toJson(cardCreateRequest);
 
-        String response = given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(app.sandboxLogin, app.sandboxPass)
-                .body(json)
-                .post("/v1/card/create")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_card_create_test(app.sandboxLogin, app.sandboxPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         token = jsonPath.getString("token");
@@ -259,14 +245,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         cardActivateRequest.setPan(pan);
         String json = gson.toJson(cardActivateRequest);
 
-        given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(app.sandboxLogin, app.sandboxPass)
-                .body(json)
-                .post("/v1/card/activate")
-                .then().log().all()
-                .statusCode(200);
+        app.getCustomerServicesRequestsHelper().customerServices_v1_card_activate_test(app.sandboxLogin, app.sandboxPass, json);
     }
 
     @Test(priority = 17)

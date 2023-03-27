@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import requests.bo.BORequests;
 import requests.bo.ClientProfileRequests;
 import requests.bo.ClientServicesRequests;
+import requests.customerServices.CustomerServicesRequests;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,6 +38,7 @@ public class ApplicationManager {
     private BankIntegrationHelper bankIntegrationHelper = new BankIntegrationHelper();
     private JsonHelper jsonHelper = new JsonHelper();
     private BORequests boRequestsHelper = new BORequests();
+    private CustomerServicesRequests customerServicesRequestsHelper = new CustomerServicesRequests();
     private ClientProfileRequests clientProfileRequestsHelper = new ClientProfileRequests();
     private ClientServicesRequests clientServicesRequests = new ClientServicesRequests();
     public UIBOHelper uiboHelper;
@@ -349,6 +351,8 @@ public class ApplicationManager {
     public JsonHelper getJsonHelper() { return jsonHelper; }
 
     public BORequests getBoRequestsHelper() { return boRequestsHelper; }
+
+    public CustomerServicesRequests getCustomerServicesRequestsHelper() { return customerServicesRequestsHelper; }
 
     public ClientProfileRequests getClientProfileRequestsHelper() { return clientProfileRequestsHelper; }
 

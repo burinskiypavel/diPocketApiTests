@@ -14,7 +14,6 @@ public class CustomerServicesRequests {
     public RequestSpecification requestSpecCustomerServices = given()
             .log().uri().log().headers().log().body()
             .basePath("CustomerServices")
-            //.header("bo-auth-token", "123456")
             .contentType("application/json");
 
 //    public RequestSpecification requestSpecCustomerServicesTest = given()
@@ -22,16 +21,39 @@ public class CustomerServicesRequests {
 //            .basePath("CustomerServices")
 //            .contentType("application/json");
 
-    public Response customerServicesRequests_v1_client_register_(String authLogin, String authPass){
-        Response res = given()
+    public String customerServices_v1_client_register_test(String authLogin, String authPass, String json){
+        String response = given()
                 .spec(requestSpecCustomerServices)
                 .baseUri(HelperBase.prop.getProperty("test.base.url"))
                 .auth().basic(authLogin, authPass)
                 .when()
-                //.body()
-                .post( "/CustomerServices/v1/client/register");
+                .body(json)
+                .post( "/v1/client/register")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+        return response;
+    }
 
-        res.then().log().all().statusCode(200);
-        return res;
+    public String customerServices_v1_card_create_test(String authLogin, String authPass, String json){
+        String response = given()
+                .spec(requestSpecCustomerServices)
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .auth().basic(authLogin, authPass)
+                .when()
+                .body(json)
+                .post( "/v1/card/create")
+                .then().log().all().statusCode(200).extract().response().asString();
+        return response;
+    }
+
+    public void customerServices_v1_card_activate_test(String authLogin, String authPass, String json){
+        given()
+                .spec(requestSpecCustomerServices)
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .auth().basic(authLogin, authPass)
+                .when()
+                .body(json)
+                .post( "/v1/card/activate")
+                .then().log().all().statusCode(200);
     }
 }
