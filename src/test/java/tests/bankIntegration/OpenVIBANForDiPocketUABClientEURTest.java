@@ -42,8 +42,8 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
     int clientIdSandbox = 0;
     String currencyCodeEUR = "EUR";
     String countryCode = "LT";
-    String sandboxLogin = "SANDBOX";
-    String sandboxPass = "W6qQnx7";
+    //String sandboxLogin = "SANDBOX";
+    //String sandboxPass = "W6qQnx7";
     String token = null;
     String pass = "password1";
     String cliSessionId = null;
@@ -128,15 +128,16 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_client_clientId_approveSDD(){
-        given()
-                .spec(app.requestSpecBOTest)
-                .pathParam("clientId", clientId)
-                .header("bo-auth-token", sms)
-                .queryParam("ticketId", ticketId)
-                .cookie(cookie)
-                .post("/v1/client/{clientId}/approveSDD")
-                .then().log().all()
-                .statusCode(200);
+//        given()
+//                .spec(app.requestSpecBOTest)
+//                .pathParam("clientId", clientId)
+//                .header("bo-auth-token", sms)
+//                .queryParam("ticketId", ticketId)
+//                .cookie(cookie)
+//                .post("/v1/client/{clientId}/approveSDD")
+//                .then().log().all()
+//                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_client_clientId_approveSDD_test(cookie, sms, clientId, ticketId);
     }
 
     @Test(priority = 6)
@@ -152,15 +153,16 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 8)
     public void test_BOServices_v1_client_clientId_approveFDD(){
-        given()
-                .spec(app.requestSpecBOTest)
-                .pathParam("clientId", clientId)
-                .header("bo-auth-token", sms)
-                .queryParam("ticketId", ticketId)
-                .cookie(cookie)
-                .post("/v1/client/{clientId}/approveFDD")
-                .then().log().all()
-                .statusCode(200);
+//        given()
+//                .spec(app.requestSpecBOTest)
+//                .pathParam("clientId", clientId)
+//                .header("bo-auth-token", sms)
+//                .queryParam("ticketId", ticketId)
+//                .cookie(cookie)
+//                .post("/v1/client/{clientId}/approveFDD")
+//                .then().log().all()
+//                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_client_clientId_approveFDD_test(cookie, sms, clientId, ticketId);
     }
 
     @Test(priority = 9)
@@ -249,7 +251,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         String response = given()
                 .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
+                .auth().basic(app.sandboxLogin, app.sandboxPass)
                 .body(json)
                 .post("/v1/client/register")
                 .then().log().all()
@@ -274,7 +276,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         String response = given()
                 .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
+                .auth().basic(app.sandboxLogin, app.sandboxPass)
                 .body(json)
                 .post("/v1/card/create")
                 .then().log().all()
@@ -294,7 +296,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
         given()
                 .spec(app.requestSpecCustomerServicesTest)
                 .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
+                .auth().basic(app.sandboxLogin, app.sandboxPass)
                 .body(json)
                 .post("/v1/card/activate")
                 .then().log().all()

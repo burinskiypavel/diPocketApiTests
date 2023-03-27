@@ -124,15 +124,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_client_clientId_approveSDD(){
-//        given()
-//                .spec(app.requestSpecBOTest)
-//                .pathParam("clientId", clientId)
-//                .header("bo-auth-token", sms)
-//                .queryParam("ticketId", ticketId)
-//                .cookie(cookie)
-//                .post("/v1/client/{clientId}/approveSDD")
-//                .then().log().all()
-//                .statusCode(200);
         app.getBoRequestsHelper().boServices_v1_client_clientId_approveSDD_test(cookie, sms, clientId, ticketId);
     }
 
@@ -149,15 +140,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 8)
     public void test_BOServices_v1_client_clientId_approveFDD(){
-//        given()
-//                .spec(app.requestSpecBOTest)
-//                .pathParam("clientId", clientId)
-//                .header("bo-auth-token", sms)
-//                .queryParam("ticketId", ticketId)
-//                .cookie(cookie)
-//                .post("/v1/client/{clientId}/approveFDD")
-//                .then().log().all()
-//                .statusCode(200);
         app.getBoRequestsHelper().boServices_v1_client_clientId_approveFDD_test(cookie, sms, clientId, ticketId);
     }
 
