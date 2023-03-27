@@ -27,8 +27,8 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     String username = "PAVELB_BO";
     int ticketId = 0;
     String actualTypeName = null;
-    String  boUserLogin = "PavelB_BO";
-    String boUserPass = "vVahVkR";
+    //String  boUserLogin = "PavelB_BO";
+    //String boUserPass = "vVahVkR";
     String sms = null;
     String tomorrow = null;
     String clientId = null;
@@ -63,7 +63,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     @Test(priority = 2)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
         clientId = app.getDbHelper().getClientIdFromTestDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(boUserLogin, boUserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(app.boUserLogin_test, app.boUserPass_test, username);
     }
 
     @Test(priority = 3)

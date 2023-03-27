@@ -29,8 +29,8 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
     String username = "PAVELB_BO";
     int ticketId = 0;
     String actualTypeName = null;
-    String  boUserLogin = "PavelB_BO";
-    String boUserPass = "vVahVkR";
+    //String  boUserLogin = "PavelB_BO";
+    //String boUserPass = "vVahVkR";
     String sms = null;
     String tomorrow = null;
     String clientId = null;
@@ -65,7 +65,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
     @Test(priority = 2)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
         clientId = app.getDbHelper().getClientIdFromTestDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(boUserLogin, boUserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(app.boUserLogin_test, app.boUserPass_test, username);
     }
 
     @Test(priority = 3)
@@ -160,15 +160,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 
     @Test(priority = 5)
     public void test_BOServices_v1_client_clientId_approveSDD(){
-//        given()
-//                .spec(app.requestSpecBOTest)
-//                .pathParam("clientId", clientId)
-//                .header("bo-auth-token", sms)
-//                .queryParam("ticketId", ticketId)
-//                .cookie(cookie)
-//                .post("/v1/client/{clientId}/approveSDD")
-//                .then().log().all()
-//                .statusCode(200);
         app.getBoRequestsHelper().boServices_v1_client_clientId_approveSDD_test(cookie, sms, clientId, ticketId);
     }
 
@@ -185,15 +176,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 
     @Test(priority = 8)
     public void test_BOServices_v1_client_clientId_approveFDD(){
-//        given()
-//                .spec(app.requestSpecBOTest)
-//                .pathParam("clientId", clientId)
-//                .header("bo-auth-token", sms)
-//                .queryParam("ticketId", ticketId)
-//                .cookie(cookie)
-//                .post("/v1/client/{clientId}/approveFDD")
-//                .then().log().all()
-//                .statusCode(200);
         app.getBoRequestsHelper().boServices_v1_client_clientId_approveFDD_test(cookie, sms, clientId, ticketId);
     }
 

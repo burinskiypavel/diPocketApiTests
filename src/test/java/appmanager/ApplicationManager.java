@@ -128,6 +128,8 @@ public class ApplicationManager {
     public int homePageClientId = 40263;
     public String sandboxLogin = null;
     public String sandboxPass = null;
+    public String boUserLogin_test = null;
+    public String boUserPass_test = null;
 
     public void initStart() {
 //        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
@@ -175,6 +177,8 @@ public class ApplicationManager {
         baseTestURL = HelperBase.prop.getProperty("test.base.url");
         sandboxLogin = HelperBase.prop.getProperty("test.sandbox.login");
         sandboxPass = HelperBase.prop.getProperty("test.sandbox.pass");
+        boUserLogin_test = HelperBase.prop.getProperty("test.bo.userlogin");
+        boUserPass_test = HelperBase.prop.getProperty("test.bo.userpass");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()

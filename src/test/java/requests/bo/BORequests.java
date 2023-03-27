@@ -955,6 +955,20 @@ public class BORequests {
                 .post("/v1/client/{clientId}/update")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    public void boServices_v1_client_clientID_update_test2(String cookie, String smsSecureCode, String clientId, String json) {
+        given()
+                .spec(requestSpecBOTest)
+                .pathParam("clientId", clientId)
+                .header("bo-auth-token", smsSecureCode)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .cookie(cookie)
+                .when()
+                .body(json)
+                .post("/v1/client/{clientId}/update")
+                .then().log().all()
+                .statusCode(200);
 
     }
 
