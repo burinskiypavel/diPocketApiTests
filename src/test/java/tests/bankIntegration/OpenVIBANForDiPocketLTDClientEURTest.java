@@ -161,7 +161,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
-
         JsonPath jsonPath = new JsonPath(response);
         actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");
         System.out.println("actualVIbanFromMobileApp : " + actualVIbanFromMobileApp);
