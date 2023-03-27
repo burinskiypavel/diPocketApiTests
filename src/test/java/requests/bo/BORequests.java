@@ -2,9 +2,12 @@ package requests.bo;
 
 import appmanager.DBHelper;
 import appmanager.HelperBase;
+import com.cs.dipocketback.base.data.Site;
+import com.google.gson.Gson;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import model.bo.boClient.Supervisor_reqList;
+import model.bo.boServices.Client_clientId_update;
 
 import java.sql.SQLException;
 
@@ -16,6 +19,8 @@ import static org.testng.Assert.assertFalse;
 
 public class BORequests {
     DBHelper dbHelper = new DBHelper();
+    Gson gson = new Gson();
+    Client_clientId_update client_clientId_update = new Client_clientId_update();
 
     public RequestSpecification requestSpecBO = given()
             .log().uri().log().headers().log().body()
@@ -882,6 +887,86 @@ public class BORequests {
                         "}")
                 .when()
                 .post("/v1/client/{clientId}/changeDoc/approve")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    public void boServices_v1_client_clientId_approveSDD_test(String cookie, String smsSecureCode, String clientId, String ticketId){
+        given()
+                .spec(requestSpecBOTest)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .pathParam("clientId", clientId)
+                .header("bo-auth-token", smsSecureCode)
+                .queryParam("ticketId", ticketId)
+                .cookie(cookie)
+                .post("/v1/client/{clientId}/approveSDD")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    public void boServices_v1_client_clientID_update_test(String cookie, String smsSecureCode, String clientId, long phone,
+                                                          String firstName, String lastName, String birthDate, String email, int stateId, String stateName, int currencyId,
+                                                          String currencyCode, int langId, String langCode, String langName, int photoIdTypeId, String photoIdTypeName,
+                                                          long photoIdNo, int photoIdCountryId, String photoIdCountryName, String gender, String ddStatus, String cardHolderName,
+                                                          long identifyCode, String clientType, String site, int residenceCountryId, int feeTariffPlanId, String feeTariffPlanName,
+                                                          int age) {
+        client_clientId_update.setId(Integer.parseInt(clientId));
+        client_clientId_update.setMainPhone(phone);
+        client_clientId_update.setFirstName(firstName);
+        client_clientId_update.setLastName(lastName);
+        client_clientId_update.setBirthDate(birthDate);
+        client_clientId_update.setEmail(email);
+        client_clientId_update.setEmailIsVerified(false);
+        client_clientId_update.setStateId(stateId);
+        client_clientId_update.setStateName(stateName);
+        client_clientId_update.setCurrencyId(currencyId);
+        client_clientId_update.setCurrencyCode(currencyCode);
+        client_clientId_update.setLangId(langId);
+        client_clientId_update.setLangCode(langCode);
+        client_clientId_update.setLangName(langName);
+        client_clientId_update.setPhotoIdTypeId(photoIdTypeId);
+        client_clientId_update.setPhotoIdTypeName(photoIdTypeName);
+        client_clientId_update.setPhotoIdNo(photoIdNo);
+        client_clientId_update.setPhotoIdCountryId(photoIdCountryId);
+        client_clientId_update.setPhotoIdCountryName(photoIdCountryName);
+        client_clientId_update.setGender(gender);
+        client_clientId_update.setDdStatus(ddStatus);
+        client_clientId_update.setCardHolderName(cardHolderName);
+        client_clientId_update.setIdentifyCode(identifyCode);
+        client_clientId_update.setClientType(clientType);
+        client_clientId_update.setSite(site);
+        client_clientId_update.setRegisteredAddrAsMail(true);
+        client_clientId_update.setResidenceCountryId(residenceCountryId);
+        client_clientId_update.setFeeTariffPlanId(feeTariffPlanId);
+        client_clientId_update.setFeeTariffPlanName(feeTariffPlanName);
+        client_clientId_update.setAge(age);
+        client_clientId_update.setMigrated(false);
+        client_clientId_update.setSkippedReg(false);
+        String json = gson.toJson(client_clientId_update);
+
+        given()
+                .spec(requestSpecBOTest)
+                .pathParam("clientId", clientId)
+                .header("bo-auth-token", smsSecureCode)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .cookie(cookie)
+                .when()
+                .body(json)
+                .post("/v1/client/{clientId}/update")
+                .then().log().all()
+                .statusCode(200);
+
+    }
+
+    public void boServices_v1_client_clientId_approveFDD_test(String cookie, String smsSecureCode, String clientId, String ticketId){
+        given()
+                .spec(requestSpecBOTest)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .pathParam("clientId", clientId)
+                .header("bo-auth-token", smsSecureCode)
+                .queryParam("ticketId", ticketId)
+                .cookie(cookie)
+                .post("/v1/client/{clientId}/approveFDD")
                 .then().log().all()
                 .statusCode(200);
     }
