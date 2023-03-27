@@ -106,6 +106,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         client_clientId_update.setMigrated(false);
         client_clientId_update.setSkippedReg(false);
         String json = gson.toJson(client_clientId_update);
+
         app.getBoRequestsHelper().boServices_v1_client_clientID_update_test(cookie, sms, clientId, json);
     }
 
@@ -212,7 +213,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
         clientRegisterRequest.setCitizenship(countryCode);
         String json = gson.toJson(clientRegisterRequest);
 
-         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.sandboxLogin, app.sandboxPass, json);
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.sandboxLogin, app.sandboxPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         clientIdSandbox = jsonPath.getInt("clientId");

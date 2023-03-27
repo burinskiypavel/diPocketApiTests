@@ -106,6 +106,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         client_clientId_update.setMigrated(false);
         client_clientId_update.setSkippedReg(false);
         String json = gson.toJson(client_clientId_update);
+
         app.getBoRequestsHelper().boServices_v1_client_clientID_update_test(cookie, sms, clientId, json);
 
 //                .body("{\n" +
@@ -248,11 +249,8 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         clientRegisterRequest.setCitizenship(countryCode);
         String json = gson.toJson(clientRegisterRequest);
 
-        String response = given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(app.sandboxLogin, app.sandboxPass)
-                .body(json)
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.sandboxLogin, app.sandboxPass, json);
+
 //                .body("{\n" +
 //                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
 //                        "  \"langCode\" : \"en\",\n" +
@@ -278,9 +276,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 //                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
 //                        "  \"citizenship\" : \""+countryCode+"\"\n" +
 //                        "}")
-                .post("/v1/client/register")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
 
         JsonPath jsonPath = new JsonPath(response);
         clientIdSandbox = jsonPath.getInt("clientId");
@@ -298,11 +293,8 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         cardCreateRequest.setAccountId(null);
         String json = gson.toJson(cardCreateRequest);
 
-        String response = given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(app.sandboxLogin, app.sandboxPass)
-                .body(json)
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_card_create_test(app.sandboxLogin, app.sandboxPass, json);
+
 //                .body("{\n" +
 //                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
 //                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
@@ -313,9 +305,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 //                        "    \"ePin\": \"1111\",\n" +
 //                        "    \"accountId\": \"\"\n" +
 //                        "}")
-                .post("/v1/card/create")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
 
         JsonPath jsonPath = new JsonPath(response);
         token = jsonPath.getString("token");
@@ -328,19 +317,14 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         cardActivateRequest.setToken(token);
         String json = gson.toJson(cardActivateRequest);
 
-        given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(app.sandboxLogin, app.sandboxPass)
-                .body(json)
+        app.getCustomerServicesRequestsHelper().customerServices_v1_card_activate_test(app.sandboxLogin, app.sandboxPass, json);
+
 //                .body("{\n" +
 //                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
 //                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
 //                        "    \"token\":  \""+token+"\"\n" +
 //                        "}")
-                .post("/v1/card/activate")
-                .then().log().all()
-                .statusCode(200);
+
     }
 
     @Test(priority = 17)
