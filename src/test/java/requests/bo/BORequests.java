@@ -1024,17 +1024,17 @@ public class BORequests {
                 .statusCode(200);
     }
 
-    public void boServices_v1_representative_legalClientId_test(String cookie, String smsCode, int corpClientId, String expectedFirstName, String expectedLastName){
-        given()
+    public Response boServices_v1_representative_legalClientId_test(String cookie, String smsCode, String corpClientId){
+        Response response = given()
                 .spec(requestSpecBOTest)
                 .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
                 .header("bo-auth-token", smsCode)
                 .cookie(cookie)
                 .pathParam("legalClientId", corpClientId)
-                .get("/v1/representative/{legalClientId}")
-                .then().log().all()
-                .statusCode(200)
-                .body("firstName", hasItem(expectedFirstName),
-                        "lastName", hasItem(expectedLastName));
+                .get("/v1/representative/{legalClientId}");
+
+        response.then().log().all()
+                .statusCode(200);
+        return response;
     }
 }

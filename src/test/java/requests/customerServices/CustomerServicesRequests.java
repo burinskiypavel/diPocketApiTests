@@ -6,6 +6,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.sql.SQLException;
+
 import static io.restassured.RestAssured.given;
 
 public class CustomerServicesRequests {
@@ -102,5 +104,17 @@ public class CustomerServicesRequests {
                 .post("/v1/account/bankTransfer/SWIFT")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    public String customerServices_v1_company_register_test(String authLogin, String authPass, String json)  {
+        String response = given()
+                .spec(requestSpecCustomerServices)
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .auth().basic(authLogin, authPass)
+                .body(json)
+                .post("/v1/company/register")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+        return response;
     }
 }

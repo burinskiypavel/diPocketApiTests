@@ -3,20 +3,22 @@ package tests.bankIntegration;
 import base.TestBase;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import model.customerServices.CompanyRegisterRequest;
+import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.nullValue;
 
 public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBOXTest extends TestBase {
-    String sandboxLogin = "SANDBOX";
-    String sandboxPass = "W6qQnx7";
     String  cboUserLogin = "PavelB_CBO";
     String cboUserPass = "CGc22S0";
     String username = "PAVELB_CBO";
@@ -56,11 +58,8 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
         companyRegisterRequest.setType("LEGAL_ENTITY");
         String json = gson.toJson(companyRegisterRequest);
 
-        String response = given()
-                .log().uri().log().headers().log().body()
-                .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
-                .body(json)
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_company_register_test(app.sandboxLogin, app.sandboxPass, json);
+
 //                .body("{ \n" +
 //                        "\n" +
 //                        "  \"requestId\" : \"47"+app.getBOHelper().generateRandomString(8)+"-dc36-462d-87f7-"+app.getBOHelper().generateRandomString(12)+"\", \n" +
@@ -83,9 +82,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 //                        "  \"type\" : \"LEGAL_ENTITY\" \n" +
 //                        "\n" +
 //                        "} ")
-                .post("https://api.dipocket.site/CustomerServices/v1/company/register")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
 
         JsonPath jsonPath = new JsonPath(response);
         legalClientId = jsonPath.getString("clientId");
@@ -93,7 +89,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 
         app.getDbHelper().updateClientIdintifyCodeFromTestDB("49687542145", legalClientId);
         app.getDbHelper().updateClientCitizenshipCountryIdFromTestDB(countryId, legalClientId);
-
     }
 
     @Test(priority = 2)
@@ -104,7 +99,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     }
 
     @Test(priority = 3, enabled = false)
-    public void test_BOServices_v1_representative_createScreened() throws SQLException, ClassNotFoundException {
+    public void test_BOServices_v1_representative_createScreened() {
         given()
                 .spec(app.requestSpecBOTest)
                 .cookie(cookie)
@@ -138,14 +133,19 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     public void test_BOServices_v1_representative_legalClientId() throws SQLException, ClassNotFoundException {
         app.getDbHelper().createAccountFromTestDB(Integer.parseInt(legalClientId), currencyId, "test acc");
         app.getDbHelper().updateAccountStateIdFromTestDB(20, legalClientId);
-        given()
-                .spec(app.requestSpecBOTest)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .pathParam("legalClientId", legalClientId)
-                .get("/v1/representative/{legalClientId}")
-                .then().log().all()
-                .statusCode(200);
+
+        Response response = app.getBoRequestsHelper().boServices_v1_representative_legalClientId_test(cookie, sms, legalClientId);
+
+        response.then().body("isEmpty()", Matchers.is(true));
+//        given()
+//                .spec(app.requestSpecBOTest)
+//                .header("bo-auth-token", sms)
+//                .cookie(cookie)
+//                .pathParam("legalClientId", legalClientId)
+//                .get("/v1/representative/{legalClientId}")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("isEmpty()", Matchers.is(true));
     }
 
     @Test(priority = 6)

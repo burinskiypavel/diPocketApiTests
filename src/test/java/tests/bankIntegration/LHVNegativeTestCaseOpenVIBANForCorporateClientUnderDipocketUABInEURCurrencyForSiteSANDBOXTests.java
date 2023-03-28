@@ -6,12 +6,17 @@ import com.cs.dipocketback.pojo.customer.CardActivateRequest;
 import com.cs.dipocketback.pojo.customer.CardCreateRequest;
 import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
 import com.google.gson.Gson;
+import com.sun.org.apache.regexp.internal.RE;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import model.bo.boOperations.CorpClientCreateRequest;
 import model.bo.boServices.RepresentativeLinkRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 
 
 public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEURCurrencyForSiteSANDBOXTests extends TestBase {
@@ -204,7 +209,9 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
 
     @Test(priority = 9)
     public void test_BOServices_v1_representative_legalClientId_(){
-        app.getBoRequestsHelper().boServices_v1_representative_legalClientId_test(cookie, sms, corpClientId, firstName, lastName);
+        Response response = app.getBoRequestsHelper().boServices_v1_representative_legalClientId_test(cookie, sms, String.valueOf(corpClientId));
+
+        response.then().body("firstName", hasItem(firstName), "lastName", hasItem(lastName));
     }
 
     @Test(priority = 10)
