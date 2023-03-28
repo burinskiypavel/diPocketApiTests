@@ -14,6 +14,12 @@
         </classes>
     </test>
 
+    <test name="C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
+        </classes>
+    </test>
+
     <test name="C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
         <classes>
             <class name="tests.bankIntegration.C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
