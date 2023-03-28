@@ -42,7 +42,7 @@ public class C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest extends Test
         accountBankTransferRequest.setAccountId(accountId);
         accountBankTransferRequest.setAmount(148);
         accountBankTransferRequest.setBankId("LHVBEE22");
-        accountBankTransferRequest.setBeneficiaryAccount("GB83LHVB04032900539021");
+        accountBankTransferRequest.setBeneficiaryAccount("EE897777000012127205");
         accountBankTransferRequest.setBeneficiaryType("COMPANY");
         accountBankTransferRequest.setCity(city);
         accountBankTransferRequest.setCompanyName("Mantest");
