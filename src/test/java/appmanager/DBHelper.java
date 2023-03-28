@@ -1000,7 +1000,12 @@ public class DBHelper extends HelperBase {
                 continue;
             }
 
-            while (statusRequest == null && count < 110 && srcid.equals(clientId)){
+//            while (!statusRequest.equals("A") && count < 10){
+//                Thread.sleep(2000);
+//                statusRequest = rs.getString(10);
+//            }
+
+            while (!statusRequest.equals("D") && count < 110 && srcid.equals(clientId)){
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
@@ -1018,7 +1023,7 @@ public class DBHelper extends HelperBase {
         return statusRequest;
     }
 
-    public String getvIbanStatusRequestFromTestDB3(int clientId) throws SQLException, ClassNotFoundException, InterruptedException {
+    public String getvIbanStatusRequestFromTestDB3(String clientId) throws SQLException, ClassNotFoundException, InterruptedException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
@@ -1044,7 +1049,7 @@ public class DBHelper extends HelperBase {
             vIban = rs.getString(3);
 
 
-            while (vIban == null && count < 220 && srcid.equals(clientId)){
+            while (!statusRequest.equals("D") && count < 220 || srcid.equals(clientId)){
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
@@ -1054,6 +1059,9 @@ public class DBHelper extends HelperBase {
                 vIban = rs.getString(3);
                 srcid = rs.getString(7);
                 statusRequest = rs.getString(10);
+                if(statusRequest.equals("D")){
+                    break;
+                }
                 if(!srcid.equals(clientId)){
                     continue;
                 }

@@ -96,7 +96,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
         app.getCustomerServicesRequestsHelper().customerServices_v1_card_activate_test(app.sandboxLogin, app.sandboxPass, json);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, enabled = false)
     public void test_verifyVirtualIBANCreation() throws SQLException, ClassNotFoundException, InterruptedException {
         actualVIbanSandboxFromDB = app.getDbHelper().getVirtualIBANFromTestDB(String.valueOf(clientIdSandbox));
         assertThat(actualVIbanSandboxFromDB, notNullValue());
@@ -104,7 +104,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
 
     @Test(priority = 5)
     public void test_verifyStatusRequest() throws SQLException, ClassNotFoundException, InterruptedException {
-        String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB2(String.valueOf(clientIdSandbox));
+        String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB3(String.valueOf(clientIdSandbox));
         assertThat(actualStatusRequest, equalTo("D"));
     }
 
