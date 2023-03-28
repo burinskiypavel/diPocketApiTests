@@ -982,4 +982,17 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void boServices_v1_user_corpClients_createScreened_test(String cookie, String smsCode, String json){
+        given()
+                .spec(requestSpecBOTest)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .header("bo-auth-token", smsCode)
+                .cookie(cookie)
+                .body(json)
+                .when()
+                .post( "/v1/user/corpClients/createScreened")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

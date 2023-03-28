@@ -107,15 +107,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
         corpClientCreateRequest.setCitizenship(countryCode);
         String json = gson.toJson(corpClientCreateRequest);
 
-        given()
-                .spec(app.requestSpecBOTest)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .body(json)
-                .when()
-                .post( "/v1/user/corpClients/createScreened")
-                .then().log().all()
-                .statusCode(200);
+        app.getBoRequestsHelper().boServices_v1_user_corpClients_createScreened_test(cookie, sms, json);
     }
 
     @Test(priority = 4)
