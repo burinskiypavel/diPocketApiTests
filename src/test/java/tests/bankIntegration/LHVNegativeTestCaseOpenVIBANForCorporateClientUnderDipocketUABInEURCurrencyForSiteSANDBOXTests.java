@@ -39,8 +39,6 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     int clientIdSandbox = 0;
     String currencyCodeEUR = "EUR";
     String countryCode = "LT";
-    String sandboxLogin = "SANDBOX";
-    String sandboxPass = "W6qQnx7";
     String token = null;
     String companyName = "CorporateTest";
     Gson gson = new Gson();
@@ -121,7 +119,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     }
 
     @Test(priority = 4)
-    public void test_customerServices_v1_client_register(){
+    public void test_CustomerServices_v1_client_register(){
         clientRegisterRequest.setRequestId("d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"");
         clientRegisterRequest.setLangCode("en");
         clientRegisterRequest.setFirstName("QA");
@@ -147,14 +145,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
         clientRegisterRequest.setCitizenship(countryCode);
         String json = gson.toJson(clientRegisterRequest);
 
-        String response = given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
-                .body(json)
-                .post("/v1/client/register")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.sandboxLogin, app.sandboxPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         clientIdSandbox = jsonPath.getInt("clientId");
@@ -172,14 +163,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
         cardCreateRequest.setAccountId(null);
         String json = gson.toJson(cardCreateRequest);
 
-        String response = given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
-                .body(json)
-                .post("/v1/card/create")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_card_create_test(app.sandboxLogin, app.sandboxPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         token = jsonPath.getString("token");
@@ -192,14 +176,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
         cardActivateRequest.setToken(token);
         String json = gson.toJson(cardActivateRequest);
 
-        given()
-                .spec(app.requestSpecCustomerServicesTest)
-                .contentType("application/json")
-                .auth().basic(sandboxLogin, sandboxPass)
-                .body(json)
-                .post("/v1/card/activate")
-                .then().log().all()
-                .statusCode(200);
+        app.getCustomerServicesRequestsHelper().customerServices_v1_card_activate_test(app.sandboxLogin, app.sandboxPass, json);
     }
 
 //    @Test(priority = 7, enabled = false)
