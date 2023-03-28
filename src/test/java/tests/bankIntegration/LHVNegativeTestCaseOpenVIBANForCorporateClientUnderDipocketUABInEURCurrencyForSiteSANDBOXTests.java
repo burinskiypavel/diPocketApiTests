@@ -8,16 +8,11 @@ import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
 import model.bo.boOperations.CorpClientCreateRequest;
-import model.bo.boServices.Client_clientId_update;
+import model.bo.boServices.RepresentativeLinkRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
 
 public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEURCurrencyForSiteSANDBOXTests extends TestBase {
     String  cboUserLogin = "PavelB_CBO";
@@ -46,6 +41,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     CardCreateRequest cardCreateRequest = new CardCreateRequest();
     ClientRegisterRequest clientRegisterRequest = new ClientRegisterRequest();
     CorpClientCreateRequest corpClientCreateRequest = new CorpClientCreateRequest();
+    RepresentativeLinkRequest representativeLinkRequest = new RepresentativeLinkRequest();
 
     @Test(priority = 0, enabled = false)
     public void test_getIdOfLastVIbanFromTestDB() throws SQLException, ClassNotFoundException {
@@ -198,31 +194,17 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     @Test(priority = 8)
     public void test_BOServices_v1_representative_link() throws SQLException, ClassNotFoundException, InterruptedException {
         corpClientId = app.getDbHelper().getClientIdFromClientFromTestDB("C", companyName);
-        given()
-                .spec(app.requestSpecBOTest)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .body("{\n" +
-                        "  \"clientId\" : "+clientIdSandbox+",\n" +
-                        "  \"corpClientId\" : "+ corpClientId +"\n" +
-                        "}")
-                .post("/v1/representative/link")
-                .then().log().all()
-                .statusCode(200);
+
+        representativeLinkRequest.setClientId(clientIdSandbox);
+        representativeLinkRequest.setCorpClientId(corpClientId);
+        String json = gson.toJson(representativeLinkRequest);
+
+        app.getBoRequestsHelper().boServices_v1_representative_link_test(cookie, sms, json);
     }
 
     @Test(priority = 9)
     public void test_BOServices_v1_representative_legalClientId_(){
-        given()
-                .spec(app.requestSpecBOTest)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .pathParam("legalClientId", corpClientId)
-                .get("/v1/representative/{legalClientId}")
-                .then().log().all()
-                .statusCode(200)
-                .body("firstName", hasItem(firstName),
-                        "lastName", hasItem(lastName));
+        app.getBoRequestsHelper().boServices_v1_representative_legalClientId_test(cookie, sms, corpClientId, firstName, lastName);
     }
 
     @Test(priority = 10)

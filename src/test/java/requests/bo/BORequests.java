@@ -15,6 +15,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.testng.Assert.assertFalse;
 
@@ -1009,5 +1010,31 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200)
                 .body("value", equalTo(false));
+    }
+
+    public void boServices_v1_representative_link_test(String cookie, String smsCode, String json) {
+        given()
+                .spec(requestSpecBOTest)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .header("bo-auth-token", smsCode)
+                .cookie(cookie)
+                .body(json)
+                .post("/v1/representative/link")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    public void boServices_v1_representative_legalClientId_test(String cookie, String smsCode, int corpClientId, String expectedFirstName, String expectedLastName){
+        given()
+                .spec(requestSpecBOTest)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .header("bo-auth-token", smsCode)
+                .cookie(cookie)
+                .pathParam("legalClientId", corpClientId)
+                .get("/v1/representative/{legalClientId}")
+                .then().log().all()
+                .statusCode(200)
+                .body("firstName", hasItem(expectedFirstName),
+                        "lastName", hasItem(expectedLastName));
     }
 }
