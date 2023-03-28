@@ -1037,4 +1037,17 @@ public class BORequests {
                 .statusCode(200);
         return response;
     }
+
+    public void boServices_v1_representative_createScreened(String cookie, String smsCode, String json) {
+        given()
+                .spec(requestSpecBOTest)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .cookie(cookie)
+                .header("bo-auth-token", smsCode)
+                .contentType("application/json")
+                .body(json)
+                .post("/v1/representative/createScreened")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

@@ -4,19 +4,19 @@ import base.TestBase;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import model.bo.boServices.RepresentativeCreateRequest;
+import model.bo.boServices.RepresentativeLinkRequest;
 import model.customerServices.CompanyRegisterRequest;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
-import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.nullValue;
 
 public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBOXTest extends TestBase {
     String  cboUserLogin = "PavelB_CBO";
@@ -35,6 +35,8 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     String ddStatus = "FDD";
     Gson gson = new Gson();
     CompanyRegisterRequest companyRegisterRequest = new CompanyRegisterRequest();
+    RepresentativeLinkRequest representativeLinkRequest = new RepresentativeLinkRequest();
+    RepresentativeCreateRequest representativeCreateRequest = new RepresentativeCreateRequest();
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_company_register() throws SQLException, ClassNotFoundException {
@@ -100,33 +102,46 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 
     @Test(priority = 3, enabled = false)
     public void test_BOServices_v1_representative_createScreened() {
-        given()
-                .spec(app.requestSpecBOTest)
-                .cookie(cookie)
-                .header("bo-auth-token", sms)
-                .contentType("application/json")
-                .body("{\n" +
-                        "  \"corpClientId\" : "+ legalClientId +",\n" +
-                        "  \"firstName\" : \""+firstName+"\",\n" +
-                        "  \"lastName\" : \""+lastName+"\",\n" +
-                        "  \"cardholderName\" : \"Pavel Burinskiy\",\n" +
-                        "  \"birthDate\" : \"14.02.1992\",\n" +
-                        "  \"phoneNumber\" : \"38068"+app.generateRandomNumber(7)+"\",\n" +
-                        "  \"email\" : \"pavelburinskiy"+app.generateRandomNumber(7)+"@gmail.com\",\n" +
-                        "  \"ddStatus\" : \""+ddStatus+"\",\n" +
-                        "  \"currencyId\" : "+currencyId+",\n" +
-                        "  \"langId\" : 1,\n" +
-                        "  \"identifyCode\" : \"13124124124\",\n" +
-                        "  \"citizenshipCountryId\" : "+countryId+",\n" +
-                        "  \"residenceCountryId\" : "+countryId+",\n" +
-                        "  \"streetLine1\" : \"Address\",\n" +
-                        "  \"streetLine2\" : \"Address\",\n" +
-                        "  \"city\" : \""+city+"\",\n" +
-                        "  \"zip\" : \"12314124124124\"\n" +
-                        "}")
-                .post("/v1/representative/createScreened")
-                .then().log().all()
-                .statusCode(200);
+        representativeCreateRequest.setCorpClientId(legalClientId);
+        representativeCreateRequest.setFirstName(firstName);
+        representativeCreateRequest.setLastName(lastName);
+        representativeCreateRequest.setCardholderName("Pavel Burinskiy");
+        representativeCreateRequest.setBirthDate("14.02.1992");
+        representativeCreateRequest.setPhoneNumber("38068" + app.generateRandomNumber(7));
+        representativeCreateRequest.setEmail("pavelburinskiy" + app.generateRandomNumber(7)+"@gmail.com");
+        representativeCreateRequest.setDdStatus(ddStatus);
+        representativeCreateRequest.setCurrencyId(currencyId);
+        representativeCreateRequest.setLangId(1);
+        representativeCreateRequest.setIdentifyCode(13124124124l);
+        representativeCreateRequest.setCitizenshipCountryId(countryId);
+        representativeCreateRequest.setResidenceCountryId(countryId);
+        representativeCreateRequest.setStreetLine1("Address");
+        representativeCreateRequest.setStreetLine2("Address");
+        representativeCreateRequest.setCity(city);
+        representativeCreateRequest.setZip(12314124124124l);
+        String json = gson.toJson(representativeCreateRequest);
+
+        app.getBoRequestsHelper().boServices_v1_representative_createScreened(cookie, sms, json);
+
+//                .body("{\n" +
+//                        "  \"corpClientId\" : "+ legalClientId +",\n" +
+//                        "  \"firstName\" : \""+firstName+"\",\n" +
+//                        "  \"lastName\" : \""+lastName+"\",\n" +
+//                        "  \"cardholderName\" : \"Pavel Burinskiy\",\n" +
+//                        "  \"birthDate\" : \"14.02.1992\",\n" +
+//                        "  \"phoneNumber\" : \"38068"+app.generateRandomNumber(7)+"\",\n" +
+//                        "  \"email\" : \"pavelburinskiy"+app.generateRandomNumber(7)+"@gmail.com\",\n" +
+//                        "  \"ddStatus\" : \""+ddStatus+"\",\n" +
+//                        "  \"currencyId\" : "+currencyId+",\n" +
+//                        "  \"langId\" : 1,\n" +
+//                        "  \"identifyCode\" : \"13124124124\",\n" +
+//                        "  \"citizenshipCountryId\" : "+countryId+",\n" +
+//                        "  \"residenceCountryId\" : "+countryId+",\n" +
+//                        "  \"streetLine1\" : \"Address\",\n" +
+//                        "  \"streetLine2\" : \"Address\",\n" +
+//                        "  \"city\" : \""+city+"\",\n" +
+//                        "  \"zip\" : \"12314124124124\"\n" +
+//                        "}")
     }
 
     @Test(priority = 4)
@@ -135,46 +150,22 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
         app.getDbHelper().updateAccountStateIdFromTestDB(20, legalClientId);
 
         Response response = app.getBoRequestsHelper().boServices_v1_representative_legalClientId_test(cookie, sms, legalClientId);
-
         response.then().body("isEmpty()", Matchers.is(true));
-//        given()
-//                .spec(app.requestSpecBOTest)
-//                .header("bo-auth-token", sms)
-//                .cookie(cookie)
-//                .pathParam("legalClientId", legalClientId)
-//                .get("/v1/representative/{legalClientId}")
-//                .then().log().all()
-//                .statusCode(200)
-//                .body("isEmpty()", Matchers.is(true));
     }
 
     @Test(priority = 6)
     public void test_BOServices_v1_representative_link(){
-        given()
-                .spec(app.requestSpecBOTest)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .body("{\n" +
-                        "  \"clientId\" : "+individualClientId+",\n" +
-                        "  \"corpClientId\" : "+ legalClientId +"\n" +
-                        "}")
-                .post("/v1/representative/link")
-                .then().log().all()
-                .statusCode(200);
+        representativeLinkRequest.setClientId(individualClientId);
+        representativeLinkRequest.setCorpClientId(Integer.parseInt(legalClientId));
+        String json = gson.toJson(representativeLinkRequest);
+
+        app.getBoRequestsHelper().boServices_v1_representative_link_test(cookie, sms, json);
     }
 
     @Test(priority = 7)
     public void test_BOServices_v1_representative_legalClientId_(){
-        given()
-                .spec(app.requestSpecBOTest)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .pathParam("legalClientId", legalClientId)
-                .get("/v1/representative/{legalClientId}")
-                .then().log().all()
-                .statusCode(200)
-                .body("firstName", hasItem(firstName),
-                        "lastName", hasItem(lastName));
+        Response response = app.getBoRequestsHelper().boServices_v1_representative_legalClientId_test(cookie, sms, legalClientId);
+        response.then().body("firstName", hasItem(firstName), "lastName", hasItem(lastName));
     }
 
     @Test(priority = 8)
