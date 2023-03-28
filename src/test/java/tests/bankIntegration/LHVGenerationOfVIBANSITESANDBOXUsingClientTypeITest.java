@@ -104,7 +104,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
 
     @Test(priority = 5)
     public void test_verifyStatusRequest() throws SQLException, ClassNotFoundException, InterruptedException {
-        String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB2(clientIdSandbox);
+        String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB2(String.valueOf(clientIdSandbox));
         assertThat(actualStatusRequest, equalTo("D"));
     }
 
