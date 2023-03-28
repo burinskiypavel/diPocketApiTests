@@ -62,16 +62,7 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
         String message = app.getDbHelper().getBOLoginSMSCodeFromTestDB();
         sms = message.substring(13);
 
-        given()
-                .spec(app.requestSpecBOTest)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .pathParam("key", site)
-                .when()
-                .get( "/v1/user/corpClient/checkSysParam/site/{key}")
-                .then().log().all()
-                .statusCode(200)
-                .body("value", equalTo(false));
+        app.getBoRequestsHelper().boServices_v1_user_corpClient_checkSysParam_site(cookie, sms, site);
     }
 
     @Test(priority = 3)

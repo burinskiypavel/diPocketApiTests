@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.testng.Assert.assertFalse;
 
@@ -994,5 +995,19 @@ public class BORequests {
                 .post( "/v1/user/corpClients/createScreened")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    public void boServices_v1_user_corpClient_checkSysParam_site(String cookie, String smsCode, String site) {
+        given()
+                .spec(requestSpecBOTest)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .header("bo-auth-token", smsCode)
+                .cookie(cookie)
+                .pathParam("key", site)
+                .when()
+                .get( "/v1/user/corpClient/checkSysParam/site/{key}")
+                .then().log().all()
+                .statusCode(200)
+                .body("value", equalTo(false));
     }
 }
