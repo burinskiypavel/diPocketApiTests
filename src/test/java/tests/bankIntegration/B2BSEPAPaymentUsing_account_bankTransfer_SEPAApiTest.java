@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest extends TestBase {
+public class B2BSEPAPaymentUsing_account_bankTransfer_SEPAApiTest extends TestBase {
     String city = "Vilnius";
     String login = "APIOLENA";
     String pass = "pU9N1Lu";

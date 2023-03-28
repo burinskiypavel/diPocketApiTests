@@ -2,27 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="TestingSuite" parallel="none">
 
-    <test name="B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest">
+    <test name="B2BSEPAPaymentUsing_account_bankTransfer_SEPAApiTest">
         <classes>
-            <class name="tests.bankIntegration.B2BSWIFTPaymentUsing_account_bankTransfer_SEPAApiTest"/>
-        </classes>
-    </test>
-
-    <test name="C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest">
-        <classes>
-            <class name="tests.bankIntegration.C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest"/>
-        </classes>
-    </test>
-
-    <test name="C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
-        <classes>
-            <class name="tests.bankIntegration.C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
-        </classes>
-    </test>
-
-    <test name="C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
-        <classes>
-            <class name="tests.bankIntegration.C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
+            <class name="tests.bankIntegration.B2BSEPAPaymentUsing_account_bankTransfer_SEPAApiTest"/>
         </classes>
     </test>
 
@@ -35,6 +17,18 @@
     <test name="C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
         <classes>
             <class name="tests.bankIntegration.C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
+        </classes>
+    </test>
+
+    <test name="C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest"/>
+        </classes>
+    </test>
+
+    <test name="C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
         </classes>
     </test>
 
