@@ -756,13 +756,14 @@ public class DBHelper extends HelperBase {
     }
 
     public String getBOLoginSMSCodeFromTestDB() throws SQLException, ClassNotFoundException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM PUSHMSG p ORDER BY id DESC";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -778,13 +779,14 @@ public class DBHelper extends HelperBase {
     }
 
     public String getClientDDStatusFromTestDB(String clientId) throws SQLException, ClassNotFoundException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM CLIENT where id = '" + clientId + "'";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -799,13 +801,14 @@ public class DBHelper extends HelperBase {
         return status;
     }
     public String getVirtualIBANFromTestDB(String clientId) throws SQLException, ClassNotFoundException, InterruptedException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         //Statement stmt = con.createStatement();
         Statement stmt = con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
@@ -851,13 +854,14 @@ public class DBHelper extends HelperBase {
     }
 
     public String getStatusPTSFromTestDB() throws SQLException, ClassNotFoundException, InterruptedException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM PTS_OUT_TRAN ORDER BY ID DESC";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         //Statement stmt = con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
@@ -899,13 +903,14 @@ public class DBHelper extends HelperBase {
         return statusPts;
     }
     public int getLastVIbanIdFromLHV_EE_VIBAN_REQUESTFromTestDB() throws SQLException, ClassNotFoundException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -920,13 +925,14 @@ public class DBHelper extends HelperBase {
     }
 
     public String getLastSCRIDFromLHV_EE_VIBAN_REQUESTFromTestDB() throws SQLException, ClassNotFoundException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -941,13 +947,14 @@ public class DBHelper extends HelperBase {
     }
 
     public String getvIbanStatusRequestFromTestDB() throws SQLException, ClassNotFoundException, InterruptedException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -976,13 +983,14 @@ public class DBHelper extends HelperBase {
     }
 
     public String getvIbanStatusRequestFromTestDB2(String clientId) throws SQLException, ClassNotFoundException, InterruptedException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -1024,13 +1032,14 @@ public class DBHelper extends HelperBase {
     }
 
     public String getvIbanStatusRequestFromTestDB3(String clientId) throws SQLException, ClassNotFoundException, InterruptedException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr ORDER BY id desc";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         //Statement stmt = con.createStatement();
         Statement stmt = con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
@@ -1083,15 +1092,15 @@ public class DBHelper extends HelperBase {
     }
 
     public List<String> getAllRow_FromLHV_EE_MASTERSITE_FromTestDB(String site, int indexOfRow) throws SQLException, ClassNotFoundException {
+        Connection con = connectToTestDB();
         List<String> rows = new ArrayList<>();
-
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM LHV_EE_MASTERSITE lem WHERE CURRENCYID IN (978,826) and site = '"+site+"'";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -1150,15 +1159,15 @@ public class DBHelper extends HelperBase {
     }
 
     public List<String> getMasterIBAN_FromTestDB(int indexOfRow) throws SQLException, ClassNotFoundException {
+        Connection con = connectToTestDB();
         List<String> rows = new ArrayList<>();
-
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT x.*,x.ROWID FROM DIPOCKET.LHV_EE_MASTERACC x";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -1194,15 +1203,16 @@ public class DBHelper extends HelperBase {
     }
 
     public void createAccountFromTestDB(int clientID, int currencyId, String accountName) throws SQLException, ClassNotFoundException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection connection = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
 
         String query2 = "commit";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
 
-        Connection connection = DriverManager.getConnection(dbUrl, username, password);
+        //Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
         CallableStatement myCall = connection.prepareCall("{call PKM_ACCOUNT.CREATEACCOUNT(?, ?, ?, ?, ?, ?, ?)}");
 
@@ -1287,13 +1297,14 @@ public class DBHelper extends HelperBase {
     }
 
     public void updateClientIdintifyCodeFromTestDB(String idintifyCode, String id) throws ClassNotFoundException, SQLException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "update client set identifycode = "+idintifyCode+" where id = "+id+"";
         String commit = "commit";
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         stmt.executeQuery(query);
         stmt.executeQuery(commit);
@@ -1301,13 +1312,14 @@ public class DBHelper extends HelperBase {
     }
 
     public void updateClientCitizenshipCountryIdFromTestDB(int citizenshipcountryid, String id) throws ClassNotFoundException, SQLException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "update client set citizenshipcountryid = "+citizenshipcountryid+" where id = "+id+"";
         String commit = "commit";
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         stmt.executeQuery(query);
         stmt.executeQuery(commit);
@@ -1315,13 +1327,14 @@ public class DBHelper extends HelperBase {
     }
 
     public void updateAccountStateIdFromTestDB(int stateid, String clientid) throws ClassNotFoundException, SQLException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "update account set stateid = "+stateid+" where clientid = "+clientid+"";
         String commit = "commit";
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         stmt.executeQuery(query);
         stmt.executeQuery(commit);
@@ -1329,13 +1342,14 @@ public class DBHelper extends HelperBase {
     }
 
     public int getClientIdFromClientFromTestDB(String clienttype, String companyname) throws SQLException, ClassNotFoundException, InterruptedException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "select * from client where clienttype = '" + clienttype + "' and companyname = '"+companyname+"' order by id desc";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -1351,13 +1365,14 @@ public class DBHelper extends HelperBase {
     }
 
     public void isRowWithSRCIDPresentInTheTableLHV_EE_VIBAN_REQUESTFromTestDB(int srcid) throws SQLException, ClassNotFoundException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
-        String username = prop.getProperty("db.username");
-        String password = prop.getProperty("db.password");
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
         String query = "SELECT * FROM LHV_EE_VIBAN_REQUEST levr where SRCID = "+srcid+" ORDER BY id desc";
 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        Connection con = DriverManager.getConnection(dbUrl, username, password);
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
