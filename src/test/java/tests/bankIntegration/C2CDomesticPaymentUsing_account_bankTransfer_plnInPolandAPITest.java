@@ -79,23 +79,23 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
                 .auth().basic(login, pass)
                 .body("{\n" +
                         "    \"accountId\": "+accountId+",\n" +
-                        "    \"amount\": 600,\n" +
-                        "    \"zip\": 11111,\n" +
-                        "    \"sortCode\": \"LHVBEE22\",\n" +
+                        "    \"amount\": 10,\n" +
+                        //"    \"zip\": 11111,\n" +
+                        //"    \"sortCode\": \"LHVBEE22\",\n" +
                         "    \"beneficiaryAccount\": \"EE617777000011780546\",\n" +
                         "    \"beneficiaryType\": \"COMPANY\",\n" +
-                        "    \"city\": \"Vilnius\",\n" +
-                        "    \"companyName\": \"OCORPTEST\",\n" +
-                        "    \"countryCode\": \"LT\",\n" +
+                        //"    \"city\": \"Vilnius\",\n" +
+                        "    \"name\": \"OCORPTEST\",\n" +
+                        //"    \"countryCode\": \"LT\",\n" +
                         "    \"currencyCode\": \"PLN\",\n" +
                         "    \"feeAmount\": "+feeAmount+",\n" +
                         "    \"feeCurrencyCode\": \"EUR\",\n" +
-                        "    \"firstName\": \"\",\n" +
-                        "    \"lastName\": \"\",\n" +
+                        //"    \"firstName\": \"\",\n" +
+                        //"    \"lastName\": \"\",\n" +
                         "    \"reference\": \"test\",\n" +
-                        "    \"requestId\": \"d1f202fe-df2e-46da-94baoA7FnwZ7HiIs\",\n" +
-                        "    \"streetLine1\": \"Upes 2\",\n" +
-                        "    \"streetLine2\": \"Upes 2\"\n" +
+                        "    \"requestId\": \"d1f202fe-df2e-46da-94baoA7FnwZ7HiIs\"\n" +
+                        //"    \"streetLine1\": \"Upes 2\",\n" +
+                        //"    \"streetLine2\": \"Upes 2\"\n" +
                         "}")
                 .post("/v1/account/bankTransfer/plnInPoland")
                 .then().log().all()
