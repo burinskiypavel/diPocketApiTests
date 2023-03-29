@@ -3,6 +3,7 @@ package tests.registration;
 import appmanager.EmailIMAPHelper;
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
 import com.cs.dipocketback.pojo.client.CheckboxContainer;
 import com.cs.dipocketback.pojo.client.ClientAddress;
 import com.cs.dipocketback.pojo.registration.AttachedCard;
@@ -29,7 +30,7 @@ public class DipocketRegistrationTest extends TestBase {
     String smsCode = null;
     int countryId = 616;
     int currencyId = 978;
-    String site = "DIPOCKET";
+    String site = Site.DIPOCKET.toString();
     int langId = 4;
     Gson gson = new Gson();
     ClientAddress clientAddress = new ClientAddress();
