@@ -20,6 +20,7 @@ import static com.cs.dipocketback.pojo.client.CheckboxType.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -31,7 +32,6 @@ public class UpAndGoRegistrationTest extends TestBase {
     String site = Site.UPANDGO.toString();
     int langId = 4;
     String redirectedLink = "https://upandgo-test.dipocket.org/en/verify/email";
-
     Gson gson = new Gson();
     ClientAddress clientAddress = new ClientAddress();
     ClientAddress regAddress = new ClientAddress();
@@ -71,7 +71,7 @@ public class UpAndGoRegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_availableCountries() {
         given()
                 .spec(app.requestSpecUpAndGoRegistration)
-                .queryParam("langID", "4")
+                .queryParam("langID", langId)
                 .when()
                 .get( "references/availableCountries")
                 .then()
@@ -98,7 +98,7 @@ public class UpAndGoRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
         given()
                 .spec(app.requestSpecUpAndGoRegistration)
-                .queryParam("langID", "4")
+                .queryParam("langID", langId)
                 .queryParam("phoneNum", app.registrationPhone)
                 .body("{\n" +
                         "  \"smsNumber\" : 1\n" +
@@ -128,7 +128,7 @@ public class UpAndGoRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
         given()
                 .spec(app.requestSpecUpAndGoRegistration)
-                .queryParam("langID", "4")
+                .queryParam("langID", langId)
                 .queryParam("phoneNum", app.registrationPhone)
                 .queryParam("code", smsCode)
                 .when()
@@ -196,7 +196,7 @@ public class UpAndGoRegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_topCountries() {
         Response res = given()
                 .spec(app.requestSpecUpAndGoRegistration)
-                .queryParam("langID", "4")
+                .queryParam("langID", langId)
                 .when()
                 .get("references/topCountries");
         res.then().log().all();
@@ -453,7 +453,7 @@ public class UpAndGoRegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_questions() {
         given()
                 .spec(app.requestSpecUpAndGoRegistration)
-                .queryParam("langID", "4")
+                .queryParam("langID", langId)
                 .queryParam("countryId", countryId)
                 .when()
                 .get("references/questions")
@@ -644,5 +644,11 @@ public class UpAndGoRegistrationTest extends TestBase {
                 .statusCode(200);
 
         assertTrue(app.getDbHelper().isClientExistInDB(app.registrationPhone, site));
+    }
+
+    @Test(priority = 21)
+    public void testVerifyEmailIsVerifiedFromDB() throws SQLException, ClassNotFoundException {
+        int emailisverified =  app.getDbHelper().getEMAILISVERIFIEDFromClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
+        assertThat(emailisverified, equalTo(1));
     }
 }
