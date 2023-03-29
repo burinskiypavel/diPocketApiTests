@@ -33,16 +33,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
         calculateBankTransferRequest.setAmount(10);
         String json = gson.toJson(calculateBankTransferRequest);
 
-        String response = given()
-                .log().uri().log().headers().log().body()
-                .basePath("CustomerServices")
-                .baseUri(HelperBase.prop.getProperty("test.base.url"))
-                .contentType("application/json")
-                .auth().basic(login, pass)
-                .body(json)
-                .post("/v1/account/calculateBankTransfer/gbpInBritain")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_gbpInBritain(login, pass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         feeAmount = jsonPath.getInt("feeAmount");

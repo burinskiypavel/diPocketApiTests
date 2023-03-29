@@ -117,4 +117,28 @@ public class CustomerServicesRequests {
                 .statusCode(200).extract().response().asString();
         return response;
     }
+
+    public String customerServices_v1_account_calculateBankTransfer_gbpInBritain(String authLogin, String authPass, String json){
+        String response = given()
+                .spec(requestSpecCustomerServices)
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .auth().basic(authLogin, authPass)
+                .body(json)
+                .post("/v1/account/calculateBankTransfer/gbpInBritain")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+        return response;
+    }
+
+    public String customerServices_v1_account_calculateBankTransfer_plnInPoland(String authLogin, String authPass, String json){
+        String response = given()
+                .spec(requestSpecCustomerServices)
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .auth().basic(authLogin, authPass)
+                .body(json)
+                .post("/v1/account/calculateBankTransfer/plnInPoland")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+        return response;
+    }
 }

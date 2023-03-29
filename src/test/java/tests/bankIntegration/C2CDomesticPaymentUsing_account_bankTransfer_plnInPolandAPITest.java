@@ -34,16 +34,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
         calculateBankTransferRequest.setAmount(10);
         String json = gson.toJson(calculateBankTransferRequest);
 
-        String response = given()
-                .log().uri().log().headers().log().body()
-                .basePath("CustomerServices")
-                .baseUri(HelperBase.prop.getProperty("test.base.url"))
-                .contentType("application/json")
-                .auth().basic(login, pass)
-                .body(json)
-                .post("/v1/account/calculateBankTransfer/plnInPoland")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_plnInPoland(login, pass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         feeAmount = jsonPath.getInt("feeAmount");
