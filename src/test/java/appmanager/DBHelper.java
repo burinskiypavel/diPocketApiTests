@@ -18,11 +18,9 @@ public class DBHelper extends HelperBase {
         String query = "select * from VERIFYCODE where SRCID  = '" + site + ":" +number+"'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         ResultSet rs= stmt.executeQuery(query);
 
         String smsCode = null;
@@ -44,11 +42,9 @@ public class DBHelper extends HelperBase {
         String query = "select * from VERIFYCODE where SRCID  = 'TELENOR:"+number+"'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         ResultSet rs= stmt.executeQuery(query);
 
         String smsCode = null;
@@ -69,11 +65,9 @@ public class DBHelper extends HelperBase {
         String dbUrl = "jdbc:oracle:thin:@"+ envUrl +"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-
         String commit = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
         CallableStatement myCall = connection.prepareCall("{call PKI_CLIENT.CLEARCLIENTBYPHONE(p_Site=>'" + site + "',p_Phone=>'" +number+"')}");
@@ -91,7 +85,6 @@ public class DBHelper extends HelperBase {
         String commit = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
         CallableStatement myCall = connection.prepareCall("{call PKI_CLIENT.CLEARCLIENTBYPHONE(p_Site=>'TELENOR',p_Phone=>'"+number+"')}");
@@ -111,11 +104,9 @@ public class DBHelper extends HelperBase {
                 "and clientid = (select id from client where MAINPHONE = '"+number+ "' and site = '" + site + "')";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         ResultSet rs= stmt.executeQuery(query);
 
         String clientDevice = null;
@@ -137,11 +128,9 @@ public class DBHelper extends HelperBase {
         String query = "select CODE from VERIFYCODE where SRCID = '"+clienDevice+"'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         ResultSet rs= stmt.executeQuery(query);
 
         String smsLoginCode = null;
@@ -180,11 +169,9 @@ public class DBHelper extends HelperBase {
                 "order by id desc";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         ResultSet rs= stmt.executeQuery(query);
 
         String stateId = null;
@@ -210,13 +197,10 @@ public class DBHelper extends HelperBase {
         String commit = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         stmt.executeQuery(query);
-
         stmt.executeQuery(commit);
         con.close();
     }
@@ -229,13 +213,10 @@ public class DBHelper extends HelperBase {
         String commit = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         stmt.executeQuery(query);
-
         stmt.executeQuery(commit);
         con.close();
     }
@@ -244,18 +225,15 @@ public class DBHelper extends HelperBase {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-
         String query2 = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
         CallableStatement myCall = connection.prepareCall("{call PKB_CLIENTPROFILE.UNBLOCKCLIENT(p_Username=>'DIPCBO1',p_ClientID=>" + clientID + ",p_UnblockReason=>'test',p_TicketID=>null)}");
         myCall.executeUpdate();
 
         Statement stmt = connection.createStatement();
-
         ResultSet rs2= stmt.executeQuery(query2);
 
         connection.close();
@@ -265,18 +243,15 @@ public class DBHelper extends HelperBase {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
-
         String query2 = "commit";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection connection = DriverManager.getConnection(dbUrl, username, password);
 
         CallableStatement myCall = connection.prepareCall("{call PKB_CLIENTPROFILE.BLOCKCLIENT(p_Username=>'DIPCBO1',p_ClientID=>" + clientID + ",p_BlockReason=>'test',p_TicketID=>null)}");
         myCall.executeUpdate();
 
         Statement stmt = connection.createStatement();
-
         ResultSet rs2= stmt.executeQuery(query2);
 
         connection.close();
@@ -291,11 +266,9 @@ public class DBHelper extends HelperBase {
                 "order by cardcreatedat desc";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         ResultSet rs= stmt.executeQuery(query);
 
         String publicToken = null;
@@ -305,12 +278,9 @@ public class DBHelper extends HelperBase {
                 String stateId = rs.getString(2);
                 String accountId = rs.getString(3);
                 publicToken = rs.getString(14);
-
-
                 System. out.println("id: " + id+" stateId: " + stateId + " accountId: " + accountId + " publicToken: " + publicToken);
                 break;
             }
-
         }
         con.close();
         return publicToken;
@@ -324,14 +294,13 @@ public class DBHelper extends HelperBase {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
-        Statement stmt = con.createStatement();
 
+        Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
         String id = null;
         while (rs.next()){
                  id = rs.getString(1);
-
                 System. out.println("id: " + id);
                 break;
         }
@@ -347,14 +316,13 @@ public class DBHelper extends HelperBase {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
-        Statement stmt = con.createStatement();
 
+        Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
         int id = 0;
         while (rs.next()){
             id = rs.getInt(1);
-
             System. out.println("id: " + id);
             break;
         }
@@ -370,8 +338,8 @@ public class DBHelper extends HelperBase {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
-        Statement stmt = con.createStatement();
 
+        Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
         String id = null;
@@ -393,8 +361,8 @@ public class DBHelper extends HelperBase {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
-        Statement stmt = con.createStatement();
 
+        Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
         String langId = null;
@@ -443,8 +411,8 @@ public class DBHelper extends HelperBase {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
-        Statement stmt = con.createStatement();
 
+        Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
         String currrentEmail = null;
@@ -509,11 +477,9 @@ public class DBHelper extends HelperBase {
         String query = "select STATEID from client  where MAINPHONE = '"+phone+"' and site = '"+site+"'";
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
-
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         ResultSet rs= stmt.executeQuery(query);
 
         int stateID = 0;
@@ -532,11 +498,11 @@ public class DBHelper extends HelperBase {
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
         String query = "select * from client  where MAINPHONE = '"+phone+"' and site = '"+site+"'";
+
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         Statement stmt = con.createStatement();
-
         ResultSet rs= stmt.executeQuery(query);
 
         int id = 0;
@@ -574,6 +540,7 @@ public class DBHelper extends HelperBase {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
+
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -596,6 +563,7 @@ public class DBHelper extends HelperBase {
                 "where ID = '" + roleID + "'";
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
+
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -677,6 +645,7 @@ public class DBHelper extends HelperBase {
 
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(dbUrl, username, password);
+
         Statement stmt = con.createStatement();
         ResultSet rs= stmt.executeQuery(query);
 
@@ -1412,6 +1381,18 @@ public class DBHelper extends HelperBase {
 
         //Statement stmt = con.createStatement();
         //ResultSet rs= stmt.executeQuery(query);
+
+        //con.close();
+        return con;
+    }
+
+    public Connection connectToDB(String dbEnvUrl) throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ dbEnvUrl +"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
 
         //con.close();
         return con;
