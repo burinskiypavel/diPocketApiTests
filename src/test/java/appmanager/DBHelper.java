@@ -10,7 +10,7 @@ import java.util.Objects;
 public class DBHelper extends HelperBase {
     String nulll = null;
 
-    public String getSMSCodeFromDB(String number, final String site, String dbEnvUrl) throws ClassNotFoundException, SQLException {
+    public String getSMSCodeFromDB(String number, String site, String dbEnvUrl) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ dbEnvUrl +"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
@@ -65,7 +65,7 @@ public class DBHelper extends HelperBase {
         return smsCode;
     }
 
-    public void deleteClientFromDB(String number, final String site, String envUrl) throws SQLException, ClassNotFoundException {
+    public void deleteClientFromDB(String number, String site, String envUrl) throws SQLException, ClassNotFoundException {
         String dbUrl = "jdbc:oracle:thin:@"+ envUrl +"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
@@ -1370,5 +1370,35 @@ public class DBHelper extends HelperBase {
         }
         con.close();
         return;
+    }
+
+    public Connection connectToTestDB() throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        //Statement stmt = con.createStatement();
+        //ResultSet rs= stmt.executeQuery(query);
+
+        //con.close();
+        return con;
+    }
+
+    public Connection connectToDevDB() throws SQLException, ClassNotFoundException {
+        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        //Statement stmt = con.createStatement();
+        //ResultSet rs= stmt.executeQuery(query);
+
+        //con.close();
+        return con;
     }
 }
