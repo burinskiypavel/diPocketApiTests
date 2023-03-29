@@ -1397,4 +1397,28 @@ public class DBHelper extends HelperBase {
         //con.close();
         return con;
     }
+
+    public int getEMAILISVERIFIEDFromClientFromDB(String number, String site, String dbEnvUrl) throws ClassNotFoundException, SQLException {
+        Connection con = connectToDB(dbEnvUrl);
+        //String dbUrl = "jdbc:oracle:thin:@"+ dbEnvUrl +"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
+        String query = "select * from CLIENT where MAINPHONE = '"+number+"' and SITE = 'DIPOCKET'";
+
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        int emailisverified = 0;
+        while (rs.next()){
+            String numberFromDB = rs.getString(5);
+            emailisverified = rs.getInt(7);
+
+            System. out.println("phone: " + numberFromDB+" emailisverified: "+emailisverified);
+        }
+        con.close();
+        return emailisverified;
+    }
 }
