@@ -7,7 +7,10 @@ import com.google.gson.Gson;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.sql.SQLException;
+
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class ClientServicesRequests {
     DBHelper dbHelper = new DBHelper();
@@ -23,6 +26,21 @@ public class ClientServicesRequests {
             .log().uri().log().headers().log().body()
             .header("site", Site.DIPOCKET.toString())
             .header("deviceuuid", "380980316499-AutoTest-Login");
+
+    public void  clientServices_v1_homePage_AutintificateMobileApp(String phone, String pass, String json) {
+        given()
+                .spec(requestSpecDipocketHomePage)
+                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
+                .auth().preemptive().basic(phone, pass)
+                .contentType("application/json")
+                .body(json)
+                .when()
+                .post( "homePage/authenticateMobileApp")
+                .then().log().all()
+                .statusCode(400)
+                //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
+                .body("errCode", equalTo("DIP-00591"));
+    }
 
     public Response clientServices_v1_tile_getMessages2(String cliSessionId, String phone, String pass){
         Response response =  given()

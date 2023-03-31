@@ -2,55 +2,53 @@ package tests.dipocket.homePage;
 
 import appmanager.HelperBase;
 import base.TestBase;
+import com.cs.dipocketback.base.data.Site;
+import com.google.gson.Gson;
 import io.restassured.response.Response;
+import model.clientServices.HomePageAuthenticateMobileAppRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
-import static org.testng.Assert.assertEquals;
 
 public class HomePageWithAlreadyExistClientTest extends TestBase {
     String cliSessionId = null;
     String phone = "380980316499";
     String pass = "reset246740";
+    Gson gson = new Gson();
+    HomePageAuthenticateMobileAppRequest homePageAuthenticateMobileAppRequest = new HomePageAuthenticateMobileAppRequest();
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"), HelperBase.prop.getProperty("db.url"));
-        given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .contentType("application/json; charset=UTF-8")
-                .body("{\n" +
-                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
-                        "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
-                        "  \"appVersion\" : \"2.2.7\"\n" +
-                        "}")
-                .when()
-                .post( "homePage/authenticateMobileApp")
-                .then().log().all()
-                .statusCode(400)
-                //.body("errDesc", equalTo("Введите код (#1) из SMS, что б подтвердить вход на этом устройстве"))
-                .body("errCode", equalTo("DIP-00591"));
+
+        homePageAuthenticateMobileAppRequest.setDevToken("eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8");
+        homePageAuthenticateMobileAppRequest.setDevType("android");
+        homePageAuthenticateMobileAppRequest.setDeviceUUID(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        homePageAuthenticateMobileAppRequest.setAppVersion("2.2.7");
+        String json = gson.toJson(homePageAuthenticateMobileAppRequest);
+
+        app.getClientServicesRequestsHelper().clientServices_v1_homePage_AutintificateMobileApp(phone, pass, json);
     }
 
     @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), "DIPOCKET", HelperBase.prop.getProperty("db.url"));
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
+
+        homePageAuthenticateMobileAppRequest.setDevToken("eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8");
+        homePageAuthenticateMobileAppRequest.setDevType("android");
+        homePageAuthenticateMobileAppRequest.setDeviceUUID(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        homePageAuthenticateMobileAppRequest.setAppVersion("2.2.7");
+        homePageAuthenticateMobileAppRequest.setOtp(loginSMSCode);
+        String json = gson.toJson(homePageAuthenticateMobileAppRequest);
+
         Response res =  given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .contentType("application/json; charset=UTF-8")
-                .body("{\n" +
-                        "  \"devToken\" : \"eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8\",\n" +
-                        "  \"devType\" : \"android\",\n" +
-                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.login.deviceuuid")+"\",\n" +
-                        "  \"appVersion\" : \"2.2.7\",\n" +
-                        "  \"otp\" : \""+loginSMSCode+"\"\n" +
-                        "}")
+                .contentType("application/json")
+                .body(json)
                 .when()
                 .post( "homePage/authenticateMobileApp");
         res.then().log().all().statusCode(200);
