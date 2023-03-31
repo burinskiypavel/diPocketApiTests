@@ -2,6 +2,7 @@ package requests.clientServices;
 
 import appmanager.DBHelper;
 import appmanager.HelperBase;
+import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -14,12 +15,13 @@ public class ClientServicesRequests {
 
     public RequestSpecification requestSpecClientServices = given()
             .log().uri().log().headers().log().body()
-            .basePath("/ClientServices")
+            //.basePath("/ClientServices")
+            //.baseUri(HelperBase.prop.getProperty("mobile.test.base.url"))
             .contentType("application/json");
 
     public RequestSpecification requestSpecDipocketHomePage = given()
             .log().uri().log().headers().log().body()
-            .header("site", "DIPOCKET")
+            .header("site", Site.DIPOCKET.toString())
             .header("deviceuuid", "380980316499-AutoTest-Login");
 
     public Response clientServices_v1_tile_getMessages2(String cliSessionId, String phone, String pass){
@@ -37,10 +39,10 @@ public class ClientServicesRequests {
     public String clientServices_v1_clientProfile_paymentDetails(String authLogin, String authPass, String cliSessionId) {
         String response = given()
                 .spec(requestSpecClientServices)
-                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
-                .header("clisessionid", ""+cliSessionId+"")
+                .baseUri(HelperBase.prop.getProperty("mobile.test.base.url"))
+                .header("clisessionid", cliSessionId)
                 .auth().basic(authLogin, authPass)
-                .get("/v1/clientProfile/paymentDetails")
+                .get("clientProfile/paymentDetails")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
         return response;
