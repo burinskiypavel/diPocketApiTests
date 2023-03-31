@@ -258,7 +258,6 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 19)
     public void test_verifyIbanFromBO_sandbox() {
-
         Response response = app.getBoRequestsHelper().boServices_v1_client_clientId_paymentDetails(cookie, sms, clientIdSandbox);
 
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));

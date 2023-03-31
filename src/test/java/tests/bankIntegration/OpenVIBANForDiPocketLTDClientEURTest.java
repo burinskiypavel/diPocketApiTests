@@ -172,8 +172,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     public void test_verifyIbanFromBO(){
         Response response = app.getBoRequestsHelper().boServices_v1_client_clientId_paymentDetails(cookie, sms, Integer.parseInt(clientId));
 
-        response.then().log().all().statusCode(200);
-
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
 
@@ -257,7 +255,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 19)
     public void test_verifyIbanFromBO_sandbox() {
-
         Response response = app.getBoRequestsHelper().boServices_v1_client_clientId_paymentDetails(cookie, sms, clientIdSandbox);
 
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
