@@ -152,8 +152,7 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     @Test(priority = 12)
     public void test_verifyIbanFromMobileApp() throws SQLException, ClassNotFoundException {
         cliSessionId = login_registrationHelper.loginDipocket_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
-
-        String response = app.getClientServicesRequestsHelper().clientServices_v1_clientProfile_paymentDetails(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, cliSessionId);
+        String response = app.getClientServicesRequestsHelper().clientServices_v1_clientProfile_paymentDetails_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, cliSessionId);
 
         JsonPath jsonPath = new JsonPath(response);
         actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");

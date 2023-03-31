@@ -36,7 +36,7 @@ public class ClientServicesRequests {
         return response;
     }
 
-    public String clientServices_v1_clientProfile_paymentDetails(String authLogin, String authPass, String cliSessionId) {
+    public String clientServices_v1_clientProfile_paymentDetails_test(String authLogin, String authPass, String cliSessionId) {
         String response = given()
                 .spec(requestSpecClientServices)
                 .baseUri(HelperBase.prop.getProperty("mobile.test.base.url"))
