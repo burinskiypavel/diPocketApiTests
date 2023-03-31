@@ -108,7 +108,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 6)
     public void test_ClientServices_v1_tile_getMessage2(){
-        Response response = app.getClientServicesRequests().clientServices_v1_tile_getMessages2(cliSessionId, phone, pass);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, phone, pass);
         response.then().body("unreadMessageCount", equalTo(0));
     }
 }

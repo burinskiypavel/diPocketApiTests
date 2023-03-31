@@ -61,7 +61,7 @@ public class TheUserNeedsToReassignTheSupervisionTicketToAnotherBOUserTest exten
     @Test(priority = 3)
     public void test_ClientServices_v1_tile_getMessages2() throws SQLException, ClassNotFoundException {
         childId = app.getDbHelper().getClientIdFromDB("testdipocket@gmail.com", Site.DIPOCKET.toString());
-        Response response = app.getClientServicesRequests().clientServices_v1_tile_getMessages2(cliSessionId, regPhone, regPass);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, regPhone, regPass);
         response.then().body("communicationTileList.shortName", hasItem("Ожидаем ответ Опекуна"));
 
     }

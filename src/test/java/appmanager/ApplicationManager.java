@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import requests.bo.BORequests;
 import requests.bo.ClientProfileRequests;
-import requests.bo.ClientServicesRequests;
+import requests.clientServices.ClientServicesRequests;
 import requests.customerServices.CustomerServicesRequests;
 
 import java.text.ParseException;
@@ -41,7 +41,7 @@ public class ApplicationManager {
     private ClientServicesRequests clientServicesRequestsHelper = new ClientServicesRequests();
     private CustomerServicesRequests customerServicesRequestsHelper = new CustomerServicesRequests();
     private ClientProfileRequests clientProfileRequestsHelper = new ClientProfileRequests();
-    private ClientServicesRequests clientServicesRequests = new ClientServicesRequests();
+    //private ClientServicesRequests clientServicesRequests = new ClientServicesRequests();
     public UIBOHelper uiboHelper;
     public UIUpAndGoHelper uiUpAndGoHelper;
     public UITelenorHelper uiTelenorHelper;
@@ -358,7 +358,7 @@ public class ApplicationManager {
 
     public ClientProfileRequests getClientProfileRequestsHelper() { return clientProfileRequestsHelper; }
 
-    public ClientServicesRequests getClientServicesRequests() { return clientServicesRequests; }
+    //public ClientServicesRequests getClientServicesRequests() { return clientServicesRequests; }
 
     public UIBOHelper getUiboHelper() { return uiboHelper; }
 
