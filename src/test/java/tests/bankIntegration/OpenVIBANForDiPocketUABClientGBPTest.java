@@ -335,7 +335,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 
     @Test(priority = 18)
     public void test_verifyStatusRequest_() throws SQLException, ClassNotFoundException, InterruptedException {
-        String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB3(clientId);
+        String actualStatusRequest = app.getDbHelper().getvIbanStatusRequestFromTestDB3(String.valueOf(clientIdSandbox));
         assertThat(actualStatusRequest, equalTo("D"));
     }
 
