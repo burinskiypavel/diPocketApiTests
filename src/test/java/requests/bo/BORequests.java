@@ -1050,4 +1050,17 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public Response boServices_v1_client_clientId_paymentDetails(String cookie, String smsCode, String clientId) {
+        Response response = given()
+                .spec(requestSpecBOTest)
+                .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
+                .pathParam("clientId", clientId)
+                .header("bo-auth-token", smsCode)
+                .cookie(cookie)
+                .get("/v1/client/{clientId}/paymentDetails");
+
+        response.then().log().all().statusCode(200);
+        return response;
+    }
 }
