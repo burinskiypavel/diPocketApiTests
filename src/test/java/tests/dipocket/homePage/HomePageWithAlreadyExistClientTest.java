@@ -30,29 +30,19 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
         homePageAuthenticateMobileAppRequest.setAppVersion("2.2.7");
         String json = gson.toJson(homePageAuthenticateMobileAppRequest);
 
-        app.getClientServicesRequestsHelper().clientServices_v1_homePage_AutintificateMobileApp(phone, pass, json);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_homePage_AutintificateMobileApp(phone, pass, json, 400);
+        response.then().body("errCode", equalTo("DIP-00591"));
     }
 
     @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
         String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
 
-        homePageAuthenticateMobileAppRequest.setDevToken("eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8");
-        homePageAuthenticateMobileAppRequest.setDevType("android");
-        homePageAuthenticateMobileAppRequest.setDeviceUUID(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
-        homePageAuthenticateMobileAppRequest.setAppVersion("2.2.7");
         homePageAuthenticateMobileAppRequest.setOtp(loginSMSCode);
         String json = gson.toJson(homePageAuthenticateMobileAppRequest);
 
-        Response res =  given()
-                .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .contentType("application/json")
-                .body(json)
-                .when()
-                .post( "homePage/authenticateMobileApp");
-        res.then().log().all().statusCode(200);
-        cliSessionId = res.getHeader("cliSessionId");
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_homePage_AutintificateMobileApp(phone, pass, json, 200);
+        cliSessionId = response.getHeader("cliSessionId");
         System.out.println("cliSessionId " + cliSessionId);
     }
 
