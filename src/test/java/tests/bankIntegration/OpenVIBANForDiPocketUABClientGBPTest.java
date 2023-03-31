@@ -206,14 +206,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 
     @Test(priority = 13)
     public void test_verifyIbanFromBO(){
-        Response response = given()
-                .spec(app.requestSpecBOTest)
-                .pathParam("clientId", clientId)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .get("/v1/client/{clientId}/paymentDetails");
-
-                response.then().log().all().statusCode(200);
+        Response response = app.getBoRequestsHelper().boServices_v1_client_clientId_paymentDetails(cookie, sms, Integer.parseInt(clientId));
 
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);
@@ -341,14 +334,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 
     @Test(priority = 19)
     public void test_verifyIbanFromBO_sandbox() {
-        Response response = given()
-                .spec(app.requestSpecBOTest)
-                .pathParam("clientId", clientIdSandbox)
-                .header("bo-auth-token", sms)
-                .cookie(cookie)
-                .get("/v1/client/{clientId}/paymentDetails");
-
-        response.then().log().all().statusCode(200);
+        Response response = app.getBoRequestsHelper().boServices_v1_client_clientId_paymentDetails(cookie, sms, clientIdSandbox);
 
         actualVIbanFromBO = String.valueOf(response.jsonPath().getList("accountNo").get(0));
         System.out.println("actualVIbanFromBO : " + actualVIbanFromBO);

@@ -1051,7 +1051,7 @@ public class BORequests {
                 .statusCode(200);
     }
 
-    public Response boServices_v1_client_clientId_paymentDetails(String cookie, String smsCode, String clientId) {
+    public Response boServices_v1_client_clientId_paymentDetails(String cookie, String smsCode, int clientId) {
         Response response = given()
                 .spec(requestSpecBOTest)
                 .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
