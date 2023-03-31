@@ -38,6 +38,7 @@ public class ApplicationManager {
     private BankIntegrationHelper bankIntegrationHelper = new BankIntegrationHelper();
     private JsonHelper jsonHelper = new JsonHelper();
     private BORequests boRequestsHelper = new BORequests();
+    private ClientServicesRequests clientServicesRequestsHelper = new ClientServicesRequests();
     private CustomerServicesRequests customerServicesRequestsHelper = new CustomerServicesRequests();
     private ClientProfileRequests clientProfileRequestsHelper = new ClientProfileRequests();
     private ClientServicesRequests clientServicesRequests = new ClientServicesRequests();
@@ -351,6 +352,7 @@ public class ApplicationManager {
     public JsonHelper getJsonHelper() { return jsonHelper; }
 
     public BORequests getBoRequestsHelper() { return boRequestsHelper; }
+    public ClientServicesRequests getClientServicesRequestsHelper() { return clientServicesRequestsHelper; }
 
     public CustomerServicesRequests getCustomerServicesRequestsHelper() { return customerServicesRequestsHelper; }
 
