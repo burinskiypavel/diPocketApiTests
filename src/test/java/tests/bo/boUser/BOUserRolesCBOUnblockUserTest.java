@@ -17,7 +17,7 @@ public class BOUserRolesCBOUnblockUserTest extends TestBase {
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication(){
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, app.CBOusername);
     }
 
     @Test(priority = 2)
@@ -40,7 +40,7 @@ public class BOUserRolesCBOUnblockUserTest extends TestBase {
                 .get( "/v1/user/authenticated")
                 .then().log().all()
                 .statusCode(200)
-                .body("username", equalTo("VIKTORIA"),
+                .body("username", equalTo(app.CBOusername),
                         "email", equalTo("vikarezznik60@gmail.com"),
                         "roleId", equalTo("CBO"),
                         "phone", equalTo("380634413376"),

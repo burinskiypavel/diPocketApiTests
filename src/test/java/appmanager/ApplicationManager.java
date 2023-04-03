@@ -116,6 +116,7 @@ public class ApplicationManager {
     public String baseTestURL = null;
     public String CBOuserLogin = "Viktoria";
     public String CBOuserPass = "kWmaB0s";
+    public String CBOusername = "VIKTORIA";
     public String CBOuserLogin2 = "PAVELBAuto";
     public String CBOuserPass2 = "mLjY6Ja";
     public String CBOusername2 = "PAVELBAUTO";

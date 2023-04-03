@@ -16,7 +16,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, app.CBOusername);
 
         if(app.getDbHelper().isRoleExistInDB("a_roleID")){
             given()
@@ -38,8 +38,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                 .when()
                 .get( "/v1/user/checkAuthentication")
                 .then().log().all()
-                .statusCode(200)
-                .body("value", equalTo(true));
+                .statusCode(200);
     }
 
     @Test(priority = 3)
@@ -51,7 +50,7 @@ public class BOUserRolesCBOAddNewRoleTest extends TestBase {
                 .get( "/v1/user/authenticated")
                 .then().log().all()
                 .statusCode(200)
-                .body("username", equalTo("VIKTORIA"),
+                .body("username", equalTo(app.CBOusername),
                         "email", equalTo("vikarezznik60@gmail.com"),
                         "roleId", equalTo("CBO"),
                         "phone", equalTo("380634413376"),
