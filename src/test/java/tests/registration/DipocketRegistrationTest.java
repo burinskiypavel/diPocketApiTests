@@ -71,8 +71,11 @@ public class DipocketRegistrationTest extends TestBase {
     public void test_ClientServices_v1_references_appConfig(){
         given()
                 .spec(app.requestSpecDipocketRegistration)
+                .queryParam("platform", "android")
+                .queryParam("version", "2.2.9")
+                .queryParam("langCode", "rus")
                 .when()
-                .get("references/appConfig?platform=android&version=2.2.9&langCode=rus")
+                .get("references/appConfig")
                 .then().log().all()
                 .statusCode(200)
                 .body("versionColor", equalTo("WHITE"),
