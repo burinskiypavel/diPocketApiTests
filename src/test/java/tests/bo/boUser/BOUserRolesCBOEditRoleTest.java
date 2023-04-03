@@ -15,7 +15,7 @@ public class BOUserRolesCBOEditRoleTest extends TestBase {
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, app.CBOusername);
     }
 
     @Test(priority = 2)
@@ -36,7 +36,7 @@ public class BOUserRolesCBOEditRoleTest extends TestBase {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .queryParam("roleId", "1")
+                .queryParam("roleId", "pavel")
                 .queryParam("roleName",newRoleName)
                 .when()
                 .post( "/v1/user/role/update")
