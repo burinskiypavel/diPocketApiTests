@@ -143,7 +143,7 @@ public class BOHelper extends HelperBase {
                 break;
             }
 
-            if(!actualTypeName.equals("FDD check")){
+            if(!actualTypeName.equals("FDD check") || !actualClientId.equals(clientId)){
                 boRequests.boServices_v1_ticket_ticketId_postpone_test(cookie, ticketId, date, sms);
             }
 
