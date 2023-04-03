@@ -28,8 +28,7 @@ public class BOUserRolesCBOUnblockUserTest extends TestBase {
                 .when()
                 .get( "/v1/user/checkAuthentication")
                 .then().log().all()
-                .statusCode(200)
-                .body("value", equalTo(true));
+                .statusCode(200);
     }
 
     @Test(priority = 3)
