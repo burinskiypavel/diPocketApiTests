@@ -86,9 +86,10 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
+                .queryParam("walletId","null" )
                 .header("clisessionid", ""+cliSessionId+"")
                 .when()
-                .get("accounts/clientDiPAccounts2?walletId=null")
+                .get("accounts/clientDiPAccounts2")
                 .then().log().all()
                 .statusCode(200)
                 .body("accounts.state", hasItem("ACTIVE"),
