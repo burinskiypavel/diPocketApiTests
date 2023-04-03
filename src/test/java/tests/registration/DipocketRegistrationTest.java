@@ -40,6 +40,10 @@ public class DipocketRegistrationTest extends TestBase {
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
+        String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), site);
+        if(!(clientId == null)){
+            app.getDbHelper().deleteClientFromDB("420703666872", site, HelperBase.prop.getProperty("db.url"));
+        }
         given()
                 .spec(app.requestSpecDipocketRegistration)
                 .queryParam("langID", langId)
