@@ -15,12 +15,12 @@ public class BOUserRolesCBOResetPasswordTests extends TestBase {
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, app.CBOusername);
     }
 
     @Test(priority = 2)
     public void test_BOServices_v1_user_authenticated(){
-        app.getBoRequestsHelper().boServices_v1_user_authenticated(cookie, "VIKTORIA", "380634413376", "vikarezznik60@gmail.com");
+        app.getBoRequestsHelper().boServices_v1_user_authenticated(cookie, app.CBOusername, "380634413376", "vikarezznik60@gmail.com");
     }
 
     @Test(priority = 3)
