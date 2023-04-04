@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.sql.SQLException;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -128,5 +130,17 @@ public class ClientServicesRequests {
                 .post("userRegistration/sendSMSCodeForPhone")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    public Response сlientServices_v1_references_verifyPhone(String urlEnv, String phoneNumber)  {
+        Response response = given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .queryParam("phone", phoneNumber)
+                .when()
+                .get("references/verifyPhone");
+        response.then().log().all()
+                .statusCode(200);
+                return response;
     }
 }

@@ -153,14 +153,17 @@ public class DipocketRegistrationTest extends TestBase {
         System.out.println("smsFromMemCash: " + smsFromMemCash);
 
         smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
-                .when()
-                .get("references/verifyPhone")
-                .then().log().all()
-                .statusCode(200)
-                .body("value", equalTo(true));
+
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_verifyPhone(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+        response.then().body("value", equalTo(true));
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .queryParam("phone", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+//                .when()
+//                .get("references/verifyPhone")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("value", equalTo(true));
     }
 
     @Test(priority = 7)
