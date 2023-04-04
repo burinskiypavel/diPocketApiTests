@@ -79,4 +79,15 @@ public class ClientServicesRequests {
         response.then().statusCode(200);
                 return response;
     }
+
+    public Response clientServices_v1_references_languages(String urlEnv){
+        Response response = given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .when()
+                .get("references/languages");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
+    }
 }
