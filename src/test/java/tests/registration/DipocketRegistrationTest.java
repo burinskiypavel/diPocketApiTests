@@ -44,15 +44,20 @@ public class DipocketRegistrationTest extends TestBase {
         if(!(clientId == null)){
             app.getDbHelper().deleteClientFromDB("420703666872", site, HelperBase.prop.getProperty("db.url"));
         }
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .queryParam("langID", langId)
-                .when()
-                .get( "references/availableCountries")
-                .then().log().all()
-                .statusCode(200)
-                .body("countryList.code", hasItems("AU", "MK", "JP"),
-                        "countryList.name", hasItems("Австралия", "Македония", "Япония"));
+
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_availableCountries(HelperBase.prop.getProperty("mobile.base.url"), langId);
+        response.then().body("countryList.code", hasItems("AU", "MK", "JP"),
+                "countryList.name", hasItems("Австралия", "Македония", "Япония"));
+
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .queryParam("langID", langId)
+//                .when()
+//                .get( "references/availableCountries")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("countryList.code", hasItems("AU", "MK", "JP"),
+//                        "countryList.name", hasItems("Австралия", "Македония", "Япония"));
     }
 
         @Test(priority = 2)
