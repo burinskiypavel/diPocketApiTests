@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.testng.Assert.assertEquals;
 
 public class ClientServicesRequests {
     DBHelper dbHelper = new DBHelper();
@@ -142,5 +143,18 @@ public class ClientServicesRequests {
         response.then().log().all()
                 .statusCode(200);
                 return response;
+    }
+
+    public Response сlientServices_v1_references_topCountries(String urlEnv, int langId) {
+        Response res = given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .queryParam("langID", langId)
+                .when()
+                .get("references/topCountries");
+        res.then().log().all();
+        int statusCode = res.getStatusCode();
+        assertEquals(statusCode, 200);
+        return res;
     }
 }
