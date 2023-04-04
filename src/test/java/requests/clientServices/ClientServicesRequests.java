@@ -3,11 +3,15 @@ package requests.clientServices;
 import appmanager.DBHelper;
 import appmanager.HelperBase;
 import com.cs.dipocketback.base.data.Site;
+import com.cs.dipocketback.pojo.registration.AttachedCard;
+import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -156,5 +160,16 @@ public class ClientServicesRequests {
         int statusCode = res.getStatusCode();
         assertEquals(statusCode, 200);
         return res;
+    }
+
+    public void clientServices_v1_userRegistration_registrationSavePoint2(String urlEnv, String json) {
+        given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .body(json)
+                .when()
+                .put("userRegistration/registrationSavePoint2")
+                .then().log().all()
+                .statusCode(200);
     }
 }
