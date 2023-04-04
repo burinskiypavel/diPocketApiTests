@@ -10,6 +10,7 @@ import com.cs.dipocketback.pojo.registration.AttachedCard;
 import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
+import model.clientServices.UserRegistrationSendSMSCodeForPhoneRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -36,6 +37,7 @@ public class DipocketRegistrationTest extends TestBase {
     ClientAddress clientAddress = new ClientAddress();
     ClientAddress regAddress = new ClientAddress();
     RegSavepointData regSavepointData2 = new RegSavepointData();
+    UserRegistrationSendSMSCodeForPhoneRequest userRegistrationSendSMSCodeForPhoneRequest = new UserRegistrationSendSMSCodeForPhoneRequest();
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
@@ -109,17 +111,23 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 5)
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .queryParam("langID", langId)
-                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
-                .body("{\n" +
-                        "  \"smsNumber\" : 1\n" +
-                        "}")
-                .when()
-                .post("userRegistration/sendSMSCodeForPhone")
-                .then().log().all()
-                .statusCode(200);
+        userRegistrationSendSMSCodeForPhoneRequest.setSmsNumber(1);
+        String json = gson.toJson(userRegistrationSendSMSCodeForPhoneRequest);
+
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_sendSMSCodeForPhone(HelperBase.prop.getProperty("mobile.base.url"), langId, HelperBase.prop.getProperty("mobile.registration.phoneNumber"), json);
+
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .queryParam("langID", langId)
+//                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+//                //.body(json)
+//                .body("{\n" +
+//                        "  \"smsNumber\" : 1\n" +
+//                        "}")
+//                .when()
+//                .post("userRegistration/sendSMSCodeForPhone")
+//                .then().log().all()
+//                .statusCode(200);
     }
 
     @Test(priority = 6)

@@ -104,7 +104,7 @@ public class ClientServicesRequests {
     }
 
     public Response сlientServices_v1_userRegistration_loadSavePointData2(String urlEnv, String devUUID) {
-        Response response =given()
+        Response response = given()
                 .spec(requestSpecClientServices)
                 .baseUri(urlEnv)
                 .queryParam("devUUID", devUUID)
@@ -113,5 +113,20 @@ public class ClientServicesRequests {
         response.then().log().all()
                 .statusCode(200);
         return response;
+    }
+
+    public void clientServices_v1_userRegistration_sendSMSCodeForPhone(String urlEnv, int langId, String phoneNumber, String json){
+        given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
+                .queryParam("langID", langId)
+                .queryParam("phoneNum", phoneNumber)
+                .body(json)
+                .when()
+                .post("userRegistration/sendSMSCodeForPhone")
+                .then().log().all()
+                .statusCode(200);
     }
 }
