@@ -215,7 +215,7 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         clientRegisterRequest.setLastName("Test");
         clientRegisterRequest.setCardHolderName("cardHolderName");
         clientRegisterRequest.setEmail("testqa"+app.generateRandomString(5)+"@gmail.com");
-        clientRegisterRequest.setMainPhone(app.generateRandomNumber(12));
+        clientRegisterRequest.setMainPhone("616"+app.generateRandomNumber(12));
         clientRegisterRequest.setDob("1990-08-31");
         clientRegisterRequest.setDdStatus("FDD");
         clientRegisterRequest.setCurrencyCode(currencyCodeGBP);
