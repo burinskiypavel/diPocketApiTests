@@ -77,17 +77,20 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 3)
     public void test_ClientServices_v1_references_appConfig(){
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .queryParam("platform", "android")
-                .queryParam("version", "2.2.9")
-                .queryParam("langCode", "rus")
-                .when()
-                .get("references/appConfig")
-                .then().log().all()
-                .statusCode(200)
-                .body("versionColor", equalTo("WHITE"),
-                        "appParams.isAccountCreationEnabled", equalTo(true));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_appConfig(HelperBase.prop.getProperty("mobile.base.url"), "android", "2.2.9", "rus");
+        response.then().body("versionColor", equalTo("WHITE"),
+                "appParams.isAccountCreationEnabled", equalTo(true));
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .queryParam("platform", "android")
+//                .queryParam("version", "2.2.9")
+//                .queryParam("langCode", "rus")
+//                .when()
+//                .get("references/appConfig")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("versionColor", equalTo("WHITE"),
+//                        "appParams.isAccountCreationEnabled", equalTo(true));
     }
 
     @Test(priority = 4)
