@@ -172,4 +172,18 @@ public class ClientServicesRequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public Response clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(String urlEnv, int langId, String phoneNumber, String smsCode) {
+        Response response = given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .queryParam("langID", langId)
+                .queryParam("phoneNum", phoneNumber)
+                .queryParam("code", smsCode)
+                .when()
+                .get("userRegistration/checkPhoneAndLoadSavePoint");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
+    }
 }

@@ -234,17 +234,20 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 9)
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .queryParam("langID", langId)
-                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
-                .queryParam("code", smsCode)
-                .when()
-                .get("userRegistration/checkPhoneAndLoadSavePoint")
-                .then().log().all()
-                .statusCode(200)
-                .body("isInvited", equalTo(false),
-                        "smsCode", equalTo(smsCode));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(HelperBase.prop.getProperty("mobile.base.url"), langId, HelperBase.prop.getProperty("mobile.registration.phoneNumber"), smsCode);
+        response.then().body("isInvited", equalTo(false),
+                "smsCode", equalTo(smsCode));
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .queryParam("langID", langId)
+//                .queryParam("phoneNum", HelperBase.prop.getProperty("mobile.registration.phoneNumber"))
+//                .queryParam("code", smsCode)
+//                .when()
+//                .get("userRegistration/checkPhoneAndLoadSavePoint")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("isInvited", equalTo(false),
+//                        "smsCode", equalTo(smsCode));
     }
 
     @Test(priority = 10)
