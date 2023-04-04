@@ -8,6 +8,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
 
 public class ClientServicesRequests {
@@ -97,9 +98,20 @@ public class ClientServicesRequests {
                 .queryParam("langCode", langCode)
                 .when()
                 .get("references/appConfig");
-
         response.then().log().all()
                 .statusCode(200);
                 return response;
+    }
+
+    public Response сlientServices_v1_userRegistration_loadSavePointData2(String urlEnv, String devUUID) {
+        Response response =given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .queryParam("devUUID", devUUID)
+                .when()
+                .get("userRegistration/loadSavePointData2");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
     }
 }
