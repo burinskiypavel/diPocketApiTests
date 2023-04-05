@@ -526,13 +526,14 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 16)
     public void test_ClientServices_v1_userRegistration_sendTermsAndConditions() {
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .queryParam("deviceUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .when()
-                .put("userRegistration/sendTermsAndConditions")
-                .then().log().all()
-                .statusCode(200);
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_sendTermsAndConditions(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .queryParam("deviceUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
+//                .when()
+//                .put("userRegistration/sendTermsAndConditions")
+//                .then().log().all()
+//                .statusCode(200);
     }
 
     @Test(priority = 17)

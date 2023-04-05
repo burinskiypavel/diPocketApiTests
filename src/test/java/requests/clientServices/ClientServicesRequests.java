@@ -211,4 +211,15 @@ public class ClientServicesRequests {
                 .statusCode(200);
                 return response;
     }
+
+    public void clientServices_v1_userRegistration_sendTermsAndConditions(String urlEnv, String deviceUUID) {
+        given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .queryParam("deviceUUID", deviceUUID)
+                .when()
+                .put("userRegistration/sendTermsAndConditions")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
