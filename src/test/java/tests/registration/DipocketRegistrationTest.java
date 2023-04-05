@@ -368,12 +368,14 @@ public class DipocketRegistrationTest extends TestBase {
     public void test_ClientServices_v1_userRegistration_registrationSavePoint2__() {
         regSavepointData2.setStepNo(3);
         String json = gson.toJson(regSavepointData2);
-        System.out.println(json);
 
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .contentType("application/json")
-                .body(json)
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json);
+
+
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .contentType("application/json")
+//                .body(json)
 //                .body("{\n" +
 //                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
 //                        "  \"langId\" : 4,\n" +
@@ -415,10 +417,10 @@ public class DipocketRegistrationTest extends TestBase {
 //                        "  },\n" +
 //                        "  \"attachedCardIds\" : [ ]\n" +
 //                        "}")
-                .when()
-                .put("userRegistration/registrationSavePoint2")
-                .then().log().all()
-                .statusCode(200);
+//                .when()
+//                .put("userRegistration/registrationSavePoint2")
+//                .then().log().all()
+//                .statusCode(200);
     }
 
         @Test(priority = 13)
