@@ -556,10 +556,12 @@ public class DipocketRegistrationTest extends TestBase {
         regSavepointData2.setCheckboxList(checkboxList);
         String json = gson.toJson(regSavepointData2);
 
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .contentType("application/json")
-                .body(json)
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registerNewClient2(HelperBase.prop.getProperty("mobile.base.url"), json);
+        response.then().body("resultCode", equalTo(0));
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .contentType("application/json")
+//                .body(json)
 //                .body("{\n" +
 //                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
 //                        "  \"langId\" : 4,\n" +
@@ -611,11 +613,11 @@ public class DipocketRegistrationTest extends TestBase {
 //                        "  },\n" +
 //                        "  \"attachedCardIds\" : [ ]\n" +
 //                        "}")
-                .when()
-                .post("userRegistration/registerNewClient2")
-                .then().log().all()
-                .statusCode(200)
-                .body("resultCode", equalTo(0));
+//                .when()
+//                .post("userRegistration/registerNewClient2")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("resultCode", equalTo(0));
     }
 
     @Test(priority = 18)

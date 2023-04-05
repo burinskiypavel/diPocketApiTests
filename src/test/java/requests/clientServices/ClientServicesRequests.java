@@ -3,6 +3,7 @@ package requests.clientServices;
 import appmanager.DBHelper;
 import appmanager.HelperBase;
 import com.cs.dipocketback.base.data.Site;
+import com.cs.dipocketback.pojo.client.CheckboxContainer;
 import com.cs.dipocketback.pojo.registration.AttachedCard;
 import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.cs.dipocketback.pojo.client.CheckboxType.ELECTRONIC_COMMUNICATION;
+import static com.cs.dipocketback.pojo.client.CheckboxType.TERMS_AND_CONDITIONS_PL;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -221,5 +224,17 @@ public class ClientServicesRequests {
                 .put("userRegistration/sendTermsAndConditions")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    public Response clientServices_v1_userRegistration_registerNewClient2(String urlEnv, String json){
+        Response response =given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .body(json)
+                .when()
+                .post("userRegistration/registerNewClient2");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
     }
 }
