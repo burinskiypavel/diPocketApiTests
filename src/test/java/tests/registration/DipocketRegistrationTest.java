@@ -449,16 +449,19 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 14)
     public void test_ClientServices_v1_references_questions() {
-        given()
-                .spec(app.requestSpecDipocketRegistration)
-                .queryParam("langID", langId)
-                .queryParam("countryId", countryId)
-                .when()
-                .get("references/questions")
-                .then().log().all()
-                .statusCode(200)
-                .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"),
-                        "checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_questions(HelperBase.prop.getProperty("mobile.base.url"), langId, countryId);
+        response.then().body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"),
+                "checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
+//        given()
+//                .spec(app.requestSpecDipocketRegistration)
+//                .queryParam("langID", langId)
+//                .queryParam("countryId", countryId)
+//                .when()
+//                .get("references/questions")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("checkboxList.typeId[0]", equalTo("TERMS_AND_CONDITIONS_PL"),
+//                        "checkboxList.typeId[1]", equalTo("ELECTRONIC_COMMUNICATION"));
     }
 
     @Test(priority = 15)

@@ -198,4 +198,17 @@ public class ClientServicesRequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public Response clientServices_v1_references_questions(String urlEnv, int langId, int countryId) {
+        Response response = given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .queryParam("langID", langId)
+                .queryParam("countryId", countryId)
+                .when()
+                .get("references/questions");
+        response.then().log().all()
+                .statusCode(200);
+                return response;
+    }
 }
