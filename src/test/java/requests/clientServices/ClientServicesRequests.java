@@ -8,6 +8,7 @@ import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -185,5 +186,16 @@ public class ClientServicesRequests {
         response.then().log().all()
                 .statusCode(200);
         return response;
+    }
+
+    public void clientServices_v1_userRegistration_clientImage(String urlEnv, String json) {
+        given()
+                .spec(requestSpecClientServices)
+                .baseUri(urlEnv)
+                .body(json)
+                .when()
+                .put("userRegistration/clientImage")
+                .then().log().all()
+                .statusCode(200);
     }
 }
