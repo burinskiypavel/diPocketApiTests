@@ -16,7 +16,7 @@ public class RolesBOUserClientPageTabSelfieTests extends TestBase {
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication(){
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, "VIKTORIA");
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin2, app.CBOuserPass2, app.CBOusername2);
     }
 
     @Test(priority = 2)
