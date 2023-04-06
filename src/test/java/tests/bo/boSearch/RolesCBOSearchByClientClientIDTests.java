@@ -4,24 +4,21 @@ import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.basePath;
-import static io.restassured.RestAssured.baseURI;
-
 public class RolesCBOSearchByClientClientIDTests extends TestBase {
     String cookie = null;
     int clientId = 33217;
-    String username = "VIKTORIA";
     String phone = "380634413376";
-    String email = "vikarezznik60@gmail.com";
+    String phone2 = "380980316499";
+    String email = "pavelburinskiy@gmail.com";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin, app.CBOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.CBOuserLogin2, app.CBOuserPass2, app.CBOusername2);
     }
 
     @Test(priority = 2)
     public void test_BOServices_v1_user_authenticated(){
-        app.getBoRequestsHelper().boServices_v1_user_authenticated(cookie, username, phone, email);
+        app.getBoRequestsHelper().boServices_v1_user_authenticated(cookie, app.CBOusername2, phone2, email);
     }
 
     @Test(priority = 3)
