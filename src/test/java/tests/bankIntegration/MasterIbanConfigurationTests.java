@@ -22,13 +22,13 @@ public class MasterIbanConfigurationTests extends TestBase {
     @Test
     public void test_masterIbanConfiguration_2row() throws SQLException, ClassNotFoundException {
         actualrow = app.getDbHelper().getMasterIBAN_FromTestDB(2);
-        assertEquals(actualrow, Arrays.asList("2", "GB61LHVB04032800005804", "826"));
+        assertEquals(actualrow, Arrays.asList("2", "GB61LHVB04032800005804", "440"));
     }
 
     @Test
     public void test_masterIbanConfiguration_3row() throws SQLException, ClassNotFoundException {
         actualrow = app.getDbHelper().getMasterIBAN_FromTestDB(3);
-        assertEquals(actualrow, Arrays.asList("3", "EE127700771001359306", "440"));
+        assertEquals(actualrow, Arrays.asList("3", "EE127700771001359306", "826"));
     }
 
     @Test
