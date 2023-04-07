@@ -17,6 +17,7 @@ import java.util.List;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 public class Login_RegistrationHelper extends HelperBase {
@@ -913,6 +914,9 @@ public class Login_RegistrationHelper extends HelperBase {
                     //.statusCode(200);
                     //.body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"),
                    //         "html.body.div.div.div.h2", equalTo("Большое спасибо!"));
+
+        int emailisverified =  dbHelper.getEMAILISVERIFIEDFromClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
+        assertThat(emailisverified, equalTo(1));
 
         System.out.println("Registration done");
     }
