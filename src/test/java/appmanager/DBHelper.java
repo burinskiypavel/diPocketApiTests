@@ -849,7 +849,7 @@ public class DBHelper extends HelperBase {
             massegeForPayee = rs.getString(30);
 
 
-            while (statusPts == null && count < 220){
+            while (statusPts == null && count < 160){
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
