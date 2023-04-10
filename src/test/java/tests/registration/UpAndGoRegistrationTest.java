@@ -625,7 +625,7 @@ public class UpAndGoRegistrationTest extends TestBase {
                 .log().uri()
                 .when()
                 .redirects().follow(false)
-                .urlEncodingEnabled(false)
+                //.urlEncodingEnabled(false)
                 .get(link)
                 .then()
                 .log().all()
@@ -648,7 +648,7 @@ public class UpAndGoRegistrationTest extends TestBase {
 
     @Test(priority = 21)
     public void testVerifyEmailIsVerifiedFromDB() throws SQLException, ClassNotFoundException {
-        int emailisverified =  app.getDbHelper().getEMAILISVERIFIEDFromClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
+        int emailisverified =  app.getDbHelper().getEMAILISVERIFIEDFromClientFromDB(app.registrationPhone, site, HelperBase.prop.getProperty("db.url"));
         assertThat(emailisverified, equalTo(1));
     }
 }
