@@ -563,7 +563,7 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 19)
     public void testVerifyEmailIsVerifiedFromDB() throws SQLException, ClassNotFoundException {
-        int emailisverified =  app.getDbHelper().getEMAILISVERIFIEDFromClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
+        int emailisverified =  app.getDbHelper().getEMAILISVERIFIEDFromClientFromDB(app.playITRegistrationPhone, site, HelperBase.prop.getProperty("db.url"));
         assertThat(emailisverified, equalTo(1));
     }
 }
