@@ -915,7 +915,7 @@ public class Login_RegistrationHelper extends HelperBase {
                     //.body("html.body.div.div.div.p", equalTo("Адрес электронной почты подтвержден"),
                    //         "html.body.div.div.div.h2", equalTo("Большое спасибо!"));
 
-        int emailisverified =  dbHelper.getEMAILISVERIFIEDFromClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
+        int emailisverified =  dbHelper.getEMAILISVERIFIEDFromClientFromDB(phone, site, HelperBase.prop.getProperty("db.url"));
         assertThat(emailisverified, equalTo(1));
 
         System.out.println("Registration done");
