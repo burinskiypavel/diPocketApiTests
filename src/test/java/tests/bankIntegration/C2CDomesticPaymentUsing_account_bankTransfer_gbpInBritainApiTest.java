@@ -4,7 +4,7 @@ import appmanager.HelperBase;
 import base.TestBase;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
-import model.customerServices.AccountBankTransferRequest;
+import model.customerServices.AccountBankTransferGbpInBritainRequest;
 import model.customerServices.CalculateBankTransferRequest;
 import org.testng.annotations.Test;
 
@@ -22,7 +22,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
     String currencyCode = "GBP";
     int accountId = 112099;
     Gson gson = new Gson();
-    AccountBankTransferRequest accountBankTransferRequest = new AccountBankTransferRequest();
+    AccountBankTransferGbpInBritainRequest accountBankTransferGbpInBritainRequest = new AccountBankTransferGbpInBritainRequest();
     CalculateBankTransferRequest calculateBankTransferRequest = new CalculateBankTransferRequest();
 
     @Test(priority = 1)
@@ -41,25 +41,25 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
 
     @Test(priority = 2)
     public void test_CustomerServices_v1_account_bankTransfer_gbpInBritain(){
-//        accountBankTransferRequest.setAccountId(accountId);
-//        accountBankTransferRequest.setAmount(10);
-//        accountBankTransferRequest.setBankId("LHVBGB2L");
-//        accountBankTransferRequest.setBeneficiaryAccount("GB83LHVB04032900539021");
-//        accountBankTransferRequest.setBeneficiaryType("COMPANY");
-//        accountBankTransferRequest.setCity(city);
-//        accountBankTransferRequest.setCompanyName("OCORPTEST");
-//        accountBankTransferRequest.setCountryCode("LT");
-//        accountBankTransferRequest.setCurrencyCode(currencyCode);
-//        accountBankTransferRequest.setFeeAmount(feeAmount);
-//        accountBankTransferRequest.setFeeCurrencyCode(currencyCode);
-//        accountBankTransferRequest.setFirstName("");
-//        accountBankTransferRequest.setLastName("");
-//        accountBankTransferRequest.setReference("test");
-//        accountBankTransferRequest.setRequestId("d1f202fe-df2e-46da-94ba"+app.generateRandomString(12)+"");
-//        accountBankTransferRequest.setStreetLine1("Upes 2");
-//        accountBankTransferRequest.setStreetLine2("Upes 2");
-//        accountBankTransferRequest.setZip(11111);
-//        String json = gson.toJson(accountBankTransferRequest);
+//        accountBankTransferGbpInBritainRequest.setAccountId(accountId);
+//        accountBankTransferGbpInBritainRequest.setAmount(10);
+//        accountBankTransferGbpInBritainRequest.setZip(11111);
+//        accountBankTransferGbpInBritainRequest.setSortCode(04328l);
+//        accountBankTransferGbpInBritainRequest.setBeneficiaryAccount("EE897777000012127205");
+//        accountBankTransferGbpInBritainRequest.setBeneficiaryType("COMPANY");
+//        accountBankTransferGbpInBritainRequest.setCity("Vilnius");
+//        accountBankTransferGbpInBritainRequest.setCompanyName("OCORPTEST");
+//        accountBankTransferGbpInBritainRequest.setCountryCode("LT");
+//        accountBankTransferGbpInBritainRequest.setCurrencyCode("GBP");
+//        accountBankTransferGbpInBritainRequest.setFeeAmount(feeAmount);
+//        accountBankTransferGbpInBritainRequest.setFeeCurrencyCode("EUR");
+//        accountBankTransferGbpInBritainRequest.setFirstName("");
+//        accountBankTransferGbpInBritainRequest.setLastName("");
+//        accountBankTransferGbpInBritainRequest.setReference("test");
+//        accountBankTransferGbpInBritainRequest.setRequestId("d1f101fe-df2e-46da-"+app.generateRandomString(15));
+//        accountBankTransferGbpInBritainRequest.setStreetLine1("Upes 2");
+//        accountBankTransferGbpInBritainRequest.setStreetLine2("Upes 2");
+//        String json = gson.toJson(accountBankTransferGbpInBritainRequest);
 
         given()
                 .log().uri().log().headers().log().body()
