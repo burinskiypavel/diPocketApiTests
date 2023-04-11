@@ -83,7 +83,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
                         "    \"firstName\": \"\",\n" +
                         "    \"lastName\": \"\",\n" +
                         "    \"reference\": \"test\",\n" +
-                        "    \"requestId\": \"d1f202fe-df2e-46da-94baoA7FnwZ7HiIs\",\n" +
+                        "    \"requestId\": \"d1f101fe-df2e-46da-"+app.generateRandomString(15)+"\",\n" +
                         "    \"streetLine1\": \"Upes 2\",\n" +
                         "    \"streetLine2\": \"Upes 2\"\n" +
                         "}")
