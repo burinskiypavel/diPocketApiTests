@@ -141,4 +141,15 @@ public class CustomerServicesRequests {
                 .statusCode(200).extract().response().asString();
         return response;
     }
+
+    public void customerServices_v1_account_bankTransfer_plnInPoland(String authLogin, String authPass, String json){
+        given()
+                .spec(requestSpecCustomerServices)
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .auth().basic(authLogin, authPass)
+                .body(json)
+                .post("/v1/account/bankTransfer/plnInPoland")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

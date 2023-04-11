@@ -54,16 +54,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
         accountBankTransferPlnInPolandRequest.setRequestId("d1f202fe-df2e"+app.generateRandomString(16));
         String json = gson.toJson(accountBankTransferPlnInPolandRequest);
 
-        given()
-                .log().uri().log().headers().log().body()
-                .baseUri(HelperBase.prop.getProperty("test.base.url"))
-                .basePath("CustomerServices")
-                .contentType("application/json")
-                .auth().basic(login, pass)
-                .body(json)
-                .post("/v1/account/bankTransfer/plnInPoland")
-                .then().log().all()
-                .statusCode(200);
+        app.getCustomerServicesRequestsHelper().customerServices_v1_account_bankTransfer_plnInPoland(login, pass, json);
     }
 
     @Test(priority = 3)
