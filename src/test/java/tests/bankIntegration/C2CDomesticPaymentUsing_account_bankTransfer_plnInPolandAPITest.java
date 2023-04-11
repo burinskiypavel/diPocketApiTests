@@ -4,7 +4,7 @@ import appmanager.HelperBase;
 import base.TestBase;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
-import model.customerServices.AccountBankTransferRequest;
+import model.customerServices.AccountBankTransferPlnInPolandRequest;
 import model.customerServices.CalculateBankTransferRequest;
 import org.testng.annotations.Test;
 
@@ -23,7 +23,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
     String currencyCode = "PLN";
     int accountId = 116413;
     Gson gson = new Gson();
-    AccountBankTransferRequest accountBankTransferRequest = new AccountBankTransferRequest();
+    AccountBankTransferPlnInPolandRequest accountBankTransferPlnInPolandRequest = new AccountBankTransferPlnInPolandRequest();
     CalculateBankTransferRequest calculateBankTransferRequest = new CalculateBankTransferRequest();
 
     @Test(priority = 1)
@@ -42,25 +42,17 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
 
     @Test(priority = 2)
     public void test_CustomerServices_v1_account_bankTransfer_plnInPoland(){
-//        accountBankTransferRequest.setAccountId(accountId);
-//        accountBankTransferRequest.setAmount(10);
-//        accountBankTransferRequest.setBankId("LHVBGB2L");
-//        accountBankTransferRequest.setBeneficiaryAccount("GB83LHVB04032900539021");
-//        accountBankTransferRequest.setBeneficiaryType("COMPANY");
-//        accountBankTransferRequest.setCity(city);
-//        accountBankTransferRequest.setCompanyName("OCORPTEST");
-//        accountBankTransferRequest.setCountryCode("LT");
-//        accountBankTransferRequest.setCurrencyCode(currencyCode);
-//        accountBankTransferRequest.setFeeAmount(feeAmount);
-//        accountBankTransferRequest.setFeeCurrencyCode(currencyCode);
-//        accountBankTransferRequest.setFirstName("");
-//        accountBankTransferRequest.setLastName("");
-//        accountBankTransferRequest.setReference("test");
-//        accountBankTransferRequest.setRequestId("d1f202fe-df2e-46da-94ba"+app.generateRandomString(12)+"");
-//        accountBankTransferRequest.setStreetLine1("Upes 2");
-//        accountBankTransferRequest.setStreetLine2("Upes 2");
-//        accountBankTransferRequest.setZip(11111);
-//        String json = gson.toJson(accountBankTransferRequest);
+        accountBankTransferPlnInPolandRequest.setAccountId(accountId);
+        accountBankTransferPlnInPolandRequest.setAmount(1000);
+        accountBankTransferPlnInPolandRequest.setBeneficiaryAccount("EE617777000011780546");
+        accountBankTransferPlnInPolandRequest.setBeneficiaryType("COMPANY");
+        accountBankTransferPlnInPolandRequest.setName("OCORPTEST");
+        accountBankTransferPlnInPolandRequest.setCurrencyCode("PLN");
+        accountBankTransferPlnInPolandRequest.setFeeAmount(feeAmount);
+        accountBankTransferPlnInPolandRequest.setFeeCurrencyCode("EUR");
+        accountBankTransferPlnInPolandRequest.setReference("test");
+        accountBankTransferPlnInPolandRequest.setRequestId("d1f202fe-df2e"+app.generateRandomString(16));
+        String json = gson.toJson(accountBankTransferPlnInPolandRequest);
 
         given()
                 .log().uri().log().headers().log().body()
@@ -68,18 +60,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
                 .basePath("CustomerServices")
                 .contentType("application/json")
                 .auth().basic(login, pass)
-                .body("{\n" +
-                        "    \"accountId\": "+accountId+",\n" +
-                        "    \"amount\": 1000,\n" +
-                        "    \"beneficiaryAccount\": \"EE617777000011780546\",\n" +
-                        "    \"beneficiaryType\": \"COMPANY\",\n" +
-                        "    \"name\": \"OCORPTEST\",\n" +
-                        "    \"currencyCode\": \"PLN\",\n" +
-                        "    \"feeAmount\": "+feeAmount+",\n" +
-                        "    \"feeCurrencyCode\": \"EUR\",\n" +
-                        "    \"reference\": \"test\",\n" +
-                        "    \"requestId\": \"d1f202fe-df2e-"+app.generateRandomString(16)+"\"\n" +
-                        "}")
+                .body(json)
                 .post("/v1/account/bankTransfer/plnInPoland")
                 .then().log().all()
                 .statusCode(200);
