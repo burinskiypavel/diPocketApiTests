@@ -32,6 +32,18 @@
         </classes>
     </test>
 
+    <test name="C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest"/>
+        </classes>
+    </test>
+
+    <test name="C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest">
+        <classes>
+            <class name="tests.bankIntegration.C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest"/>
+        </classes>
+    </test>
+
     <test name="DipocketConfigurationsTests">
         <classes>
             <class name="tests.bankIntegration.DipocketConfigurationsTests"/>
