@@ -168,14 +168,14 @@ public class UIBOOperationsHelper extends UIHelperBase {
         selectFromDropDown(By.cssSelector("p-dropdown[id*='select_feeCurrencyId_2']"), feeCurrency);
     }
 
-    public void addTarifPlan(String id, String name) throws InterruptedException {
+    public void addTarifPlanSuccsesfullu(String id, String name, String message) throws InterruptedException {
         click(By.xpath("//p-button[@ng-reflect-label='Add tariff plan']"));
         type(By.xpath("//p-inputnumber[contains(@id, 'input-number_feeTariffPlanId')] //input"), id);
         type(By.xpath("//input[contains(@id, 'input_feeTariffPlanName')]"), name);
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-        waitFor(By.xpath("//*[contains(text(), 'Tariff plan added successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Tariff plan added successfully')]"));
+        waitFor(By.xpath("//*[contains(text(), '"+message+"')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), '"+message+"')]"));
     }
 
     public void deleteTarifPlan(String name) throws InterruptedException {

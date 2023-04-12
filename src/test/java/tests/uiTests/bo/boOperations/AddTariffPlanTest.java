@@ -16,9 +16,7 @@ public class AddTariffPlanTest extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoFeeTariffPlanTab();
-        app.getUiboOperationsHelper().addTarifPlan(id, name);
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff plan added successfully')]"));
+        app.getUiboOperationsHelper().addTarifPlanSuccsesfullu(id, name, "Tariff plan added successfully");
     }
 
     @Test
