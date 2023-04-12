@@ -101,13 +101,14 @@ public class ClientServicesRequests {
         return response;
     }
 
-    public Response clientServices_v1_references_appConfig(String urlEnv, String platform, String version, String langCode){
+    public Response clientServices_v1_references_appConfig(String urlEnv, String platform, String version, String langCode, String site){
         Response response = given()
                 .spec(requestSpecClientServices)
                 .baseUri(urlEnv)
                 .queryParam("platform", platform)
                 .queryParam("version", version)
                 .queryParam("langCode", langCode)
+                .header("site", site)
                 .when()
                 .get("references/appConfig");
         response.then().log().all()

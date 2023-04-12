@@ -66,7 +66,7 @@ public class DipocketRegistrationTest extends TestBase {
 
         @Test(priority = 2)
         public void test_ClientServices_v1_references_languages(){
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_languages(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.site"));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_languages(HelperBase.prop.getProperty("mobile.base.url"), Site.DIPOCKET.toString());
         response.then().body("languageList.name", hasItems("English", "Polski", "Русский", "Українська"),
                     "langHash", equalTo("6f17331d1fd95282099858d04b3b7c3032bb3b654fbcfe73774b0e190eb16a08"));
 //            given()
@@ -81,7 +81,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 3)
     public void test_ClientServices_v1_references_appConfig(){
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_appConfig(HelperBase.prop.getProperty("mobile.base.url"), "android", "2.2.9", "rus");
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_appConfig(HelperBase.prop.getProperty("mobile.base.url"), "android", "2.2.9", "rus", Site.DIPOCKET.toString());
         response.then().body("versionColor", equalTo("WHITE"),
                 "appParams.isAccountCreationEnabled", equalTo(true));
 //        given()

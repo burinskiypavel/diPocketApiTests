@@ -59,7 +59,7 @@ public class PlayITRegistrationTest extends TestBase {
 
         @Test(priority = 2)
         public void test_ClientServices_v1_references_languages(){
-            Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_languages(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.site.playIt"));
+            Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_languages(HelperBase.prop.getProperty("mobile.base.url"), Site.PLAYIT.toString());
             response.then().body("languageList.name", hasItems("English", "Magyar"));
 //            given()
 //                    .spec(app.requestSpecPlayITRegistration)
@@ -72,15 +72,18 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 3)
     public void test_ClientServices_v1_references_appConfig(){
-        given()
-                .spec(app.requestSpecPlayITRegistration)
-                .when()
-                .get("references/appConfig?platform=android&version=2.2.9&langCode=rus")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("versionColor", equalTo("BLACK"),
-                        "appParams.isAccountCreationEnabled", equalTo(true));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_appConfig(HelperBase.prop.getProperty("mobile.base.url"), "android", "2.2.9", "rus", Site.PLAYIT.toString());
+        response.then().body("versionColor", equalTo("BLACK"),
+                "appParams.isAccountCreationEnabled", equalTo(true));
+//        given()
+//                .spec(app.requestSpecPlayITRegistration)
+//                .when()
+//                .get("references/appConfig?platform=android&version=2.2.9&langCode=rus")
+//                .then()
+//                .log().all()
+//                .statusCode(200)
+//                .body("versionColor", equalTo("BLACK"),
+//                        "appParams.isAccountCreationEnabled", equalTo(true));
     }
 
     @Test(priority = 4)
