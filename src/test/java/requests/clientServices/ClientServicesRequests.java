@@ -89,9 +89,10 @@ public class ClientServicesRequests {
                 return response;
     }
 
-    public Response clientServices_v1_references_languages(String urlEnv){
+    public Response clientServices_v1_references_languages(String urlEnv, String site){
         Response response = given()
                 .spec(requestSpecClientServices)
+                .header("site", site)
                 .baseUri(urlEnv)
                 .when()
                 .get("references/languages");

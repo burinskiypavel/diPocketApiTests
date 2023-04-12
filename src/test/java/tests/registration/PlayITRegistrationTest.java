@@ -41,27 +41,33 @@ public class PlayITRegistrationTest extends TestBase {
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
         app.getDbHelper().deleteClientFromDB(app.playITRegistrationPhone, site, HelperBase.prop.getProperty("db.url"));
-        given()
-                .spec(app.requestSpecPlayITRegistration)
-                .queryParam("langID", langId)
-                .when()
-                .get( "references/availableCountries")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("countryList.code", hasItems("AU", "MK", "JP"),
-                        "countryList.name", hasItems("Австралия", "Македония", "Япония"));
+
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_availableCountries(HelperBase.prop.getProperty("mobile.base.url"), langId);
+        response.then().body("countryList.code", hasItems("AU", "MK", "JP"),
+                "countryList.name", hasItems("Австралия", "Македония", "Япония"));
+//        given()
+//                .spec(app.requestSpecPlayITRegistration)
+//                .queryParam("langID", langId)
+//                .when()
+//                .get( "references/availableCountries")
+//                .then()
+//                .log().all()
+//                .statusCode(200)
+//                .body("countryList.code", hasItems("AU", "MK", "JP"),
+//                        "countryList.name", hasItems("Австралия", "Македония", "Япония"));
     }
 
         @Test(priority = 2)
         public void test_ClientServices_v1_references_languages(){
-            given()
-                    .spec(app.requestSpecPlayITRegistration)
-                    .when()
-                    .get("references/languages")
-                    .then().log().all()
-                    .statusCode(200)
-                    .body("languageList.name", hasItems("English", "Magyar"));
+            Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_languages(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.site.playIt"));
+            response.then().body("languageList.name", hasItems("English", "Magyar"));
+//            given()
+//                    .spec(app.requestSpecPlayITRegistration)
+//                    .when()
+//                    .get("references/languages")
+//                    .then().log().all()
+//                    .statusCode(200)
+//                    .body("languageList.name", hasItems("English", "Magyar"));
         }
 
     @Test(priority = 3)
