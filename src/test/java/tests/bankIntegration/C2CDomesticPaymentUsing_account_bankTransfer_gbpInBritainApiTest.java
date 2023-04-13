@@ -69,7 +69,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
                 .auth().basic(login, pass)
                 .body("{\n" +
                         "    \"accountId\": "+accountId+",\n" +
-                        "    \"amount\": 10,\n" +
+                        "    \"amount\": 80,\n" +
                         "    \"zip\": 11111,\n" +
                         "    \"sortCode\": \"040328\",\n" +
                         "    \"beneficiaryAccount\": \"EE897777000012127205\",\n" +
