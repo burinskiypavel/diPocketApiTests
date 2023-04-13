@@ -8,40 +8,40 @@
         </classes>
     </test>
 
-<!--    <test name="B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
+        <classes>
+            <class name="tests.bankIntegration.B2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2BSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2CSWIFTPaymentUsing_account_bankTransfer_SWIFTApiTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest">
+        <classes>
+            <class name="tests.bankIntegration.C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest"/>
+        </classes>
+    </test>
 
-<!--    <test name="C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest">-->
-<!--        <classes>-->
-<!--            <class name="tests.bankIntegration.C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest">
+        <classes>
+            <class name="tests.bankIntegration.C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest"/>
+        </classes>
+    </test>
 
 </suite>
