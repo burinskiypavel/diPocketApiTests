@@ -15,7 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest extends TestBase {
-    String city = "Vilnius";
     String login = "APIOLENA";
     String pass = "pU9N1Lu";
     int feeAmount = 0;
@@ -69,23 +68,18 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
                 .auth().basic(login, pass)
                 .body("{\n" +
                         "    \"accountId\": "+accountId+",\n" +
-                        "    \"amount\": 80,\n" +
-                        "    \"zip\": 11111,\n" +
+                        "    \"amount\": 200,\n" +
                         "    \"sortCode\": \"040328\",\n" +
-                        "    \"beneficiaryAccount\": \"EE897777000012127205\",\n" +
-                        "    \"beneficiaryType\": \"COMPANY\",\n" +
-                        "    \"city\": \"Vilnius\",\n" +
-                        "    \"companyName\": \"OCORPTEST\",\n" +
-                        "    \"countryCode\": \"LT\",\n" +
+                        "    \"beneficiaryAccount\": \"00539021\",\n" +
+                        "    \"beneficiaryType\": \"INDIVIDUAL\",\n" +
+                        "    \"companyName\": \"DIPOCKET\",\n" +
                         "    \"currencyCode\": \"GBP\",\n" +
                         "    \"feeAmount\": "+feeAmount+",\n" +
                         "    \"feeCurrencyCode\": \"EUR\",\n" +
-                        "    \"firstName\": \"\",\n" +
-                        "    \"lastName\": \"\",\n" +
+                        "    \"firstName\": \"Ltd\",\n" +
+                        "    \"lastName\": \"Test\",\n" +
                         "    \"reference\": \"test\",\n" +
-                        "    \"requestId\": \"d1f101fe-df2e-46da-"+app.generateRandomString(15)+"\",\n" +
-                        "    \"streetLine1\": \"Upes 2\",\n" +
-                        "    \"streetLine2\": \"Upes 2\"\n" +
+                        "    \"requestId\": \"d1f108fe-df2e-46da-"+app.generateRandomString(15)+"\",\n" +
                         "}")
                 .post("/v1/account/bankTransfer/gbpInBritain")
                 .then().log().all()

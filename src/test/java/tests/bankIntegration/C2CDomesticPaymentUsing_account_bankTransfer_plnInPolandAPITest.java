@@ -15,8 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest extends TestBase {
-
-    String city = "Vilnius";
     String login = "APIOLENA";
     String pass = "pU9N1Lu";
     int feeAmount = 0;
@@ -43,10 +41,10 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
     @Test(priority = 2)
     public void test_CustomerServices_v1_account_bankTransfer_plnInPoland(){
         accountBankTransferPlnInPolandRequest.setAccountId(accountId);
-        accountBankTransferPlnInPolandRequest.setAmount(1000);
-        accountBankTransferPlnInPolandRequest.setBeneficiaryAccount("EE617777000011780546");
-        accountBankTransferPlnInPolandRequest.setBeneficiaryType("COMPANY");
-        accountBankTransferPlnInPolandRequest.setName("OCORPTEST");
+        accountBankTransferPlnInPolandRequest.setAmount(800);
+        accountBankTransferPlnInPolandRequest.setBeneficiaryAccount("42109010560000000150296424");
+        accountBankTransferPlnInPolandRequest.setBeneficiaryType("INDIVIDUAL");
+        accountBankTransferPlnInPolandRequest.setName("Ltd Test");
         accountBankTransferPlnInPolandRequest.setCurrencyCode("PLN");
         accountBankTransferPlnInPolandRequest.setFeeAmount(feeAmount);
         accountBankTransferPlnInPolandRequest.setFeeCurrencyCode("EUR");
