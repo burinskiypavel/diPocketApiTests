@@ -20,9 +20,26 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
     int feeAmount = 0;
     String currencyCode = "GBP";
     int accountId = 112099;
+    String accountNoDomestic = null;
     Gson gson = new Gson();
     AccountBankTransferGbpInBritainRequest accountBankTransferGbpInBritainRequest = new AccountBankTransferGbpInBritainRequest();
     CalculateBankTransferRequest calculateBankTransferRequest = new CalculateBankTransferRequest();
+
+    @Test(priority = 0)
+    public void test_CustomerServices_v1_account_accountId_bankDetails(){
+        String response = given()
+                .log().uri().log().headers().log().body()
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .basePath("CustomerServices")
+                .pathParam("accountId", "118602")
+                .auth().basic(login, pass)
+                .get("/v1/account/{accountId}/bankDetails")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+
+        JsonPath jsonPath = new JsonPath(response);
+        accountNoDomestic = jsonPath.getString("accountNoDomestic");
+    }
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_account_calculateBankTransfer_gbpInBritain(){
@@ -79,7 +96,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
                         "    \"firstName\": \"Ltd\",\n" +
                         "    \"lastName\": \"Test\",\n" +
                         "    \"reference\": \"test\",\n" +
-                        "    \"requestId\": \"d1f108fe-df2e-46da-"+app.generateRandomString(15)+"\",\n" +
+                        "    \"requestId\": \"d1f108fe-df2e-46da-"+app.generateRandomString(15)+"\"\n" +
                         "}")
                 .post("/v1/account/bankTransfer/gbpInBritain")
                 .then().log().all()
