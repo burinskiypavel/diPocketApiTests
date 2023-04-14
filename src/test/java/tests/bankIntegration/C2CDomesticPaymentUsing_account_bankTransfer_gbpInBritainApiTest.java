@@ -25,7 +25,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
     AccountBankTransferGbpInBritainRequest accountBankTransferGbpInBritainRequest = new AccountBankTransferGbpInBritainRequest();
     CalculateBankTransferRequest calculateBankTransferRequest = new CalculateBankTransferRequest();
 
-    @Test(priority = 0)
+    @Test(priority = 1)
     public void test_CustomerServices_v1_account_accountId_bankDetails(){
         String response = given()
                 .log().uri().log().headers().log().body()
@@ -41,7 +41,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
         accountNoDomestic = jsonPath.getString("accountNoDomestic");
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void test_CustomerServices_v1_account_calculateBankTransfer_gbpInBritain(){
         calculateBankTransferRequest.setAccountId(accountId);
         calculateBankTransferRequest.setRequestId("d1f202fe-df2e-46da-94ba"+app.generateRandomString(12)+"");
@@ -55,27 +55,22 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
         feeAmount = jsonPath.getInt("feeAmount");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void test_CustomerServices_v1_account_bankTransfer_gbpInBritain(){
-//        accountBankTransferGbpInBritainRequest.setAccountId(accountId);
-//        accountBankTransferGbpInBritainRequest.setAmount(10);
-//        accountBankTransferGbpInBritainRequest.setZip(11111);
-//        accountBankTransferGbpInBritainRequest.setSortCode(04328l);
-//        accountBankTransferGbpInBritainRequest.setBeneficiaryAccount("EE897777000012127205");
-//        accountBankTransferGbpInBritainRequest.setBeneficiaryType("COMPANY");
-//        accountBankTransferGbpInBritainRequest.setCity("Vilnius");
-//        accountBankTransferGbpInBritainRequest.setCompanyName("OCORPTEST");
-//        accountBankTransferGbpInBritainRequest.setCountryCode("LT");
-//        accountBankTransferGbpInBritainRequest.setCurrencyCode("GBP");
-//        accountBankTransferGbpInBritainRequest.setFeeAmount(feeAmount);
-//        accountBankTransferGbpInBritainRequest.setFeeCurrencyCode("EUR");
-//        accountBankTransferGbpInBritainRequest.setFirstName("");
-//        accountBankTransferGbpInBritainRequest.setLastName("");
-//        accountBankTransferGbpInBritainRequest.setReference("test");
-//        accountBankTransferGbpInBritainRequest.setRequestId("d1f101fe-df2e-46da-"+app.generateRandomString(15));
-//        accountBankTransferGbpInBritainRequest.setStreetLine1("Upes 2");
-//        accountBankTransferGbpInBritainRequest.setStreetLine2("Upes 2");
-//        String json = gson.toJson(accountBankTransferGbpInBritainRequest);
+        accountBankTransferGbpInBritainRequest.setAccountId(accountId);
+        accountBankTransferGbpInBritainRequest.setAmount(200);
+        accountBankTransferGbpInBritainRequest.setSortCode("040328");
+        accountBankTransferGbpInBritainRequest.setBeneficiaryAccount("00539021");
+        accountBankTransferGbpInBritainRequest.setBeneficiaryType("INDIVIDUAL");
+        accountBankTransferGbpInBritainRequest.setCompanyName("DIPOCKET");
+        accountBankTransferGbpInBritainRequest.setCurrencyCode("GBP");
+        accountBankTransferGbpInBritainRequest.setFeeAmount(feeAmount);
+        accountBankTransferGbpInBritainRequest.setFeeCurrencyCode("EUR");
+        accountBankTransferGbpInBritainRequest.setFirstName("Ltd");
+        accountBankTransferGbpInBritainRequest.setLastName("Test");
+        accountBankTransferGbpInBritainRequest.setReference("test");
+        accountBankTransferGbpInBritainRequest.setRequestId("d1f101fe-df2e-46da-"+app.generateRandomString(15));
+        String json = gson.toJson(accountBankTransferGbpInBritainRequest);
 
         given()
                 .log().uri().log().headers().log().body()
@@ -83,27 +78,28 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
                 .basePath("CustomerServices")
                 .contentType("application/json")
                 .auth().basic(login, pass)
-                .body("{\n" +
-                        "    \"accountId\": "+accountId+",\n" +
-                        "    \"amount\": 200,\n" +
-                        "    \"sortCode\": \"040328\",\n" +
-                        "    \"beneficiaryAccount\": \"00539021\",\n" +
-                        "    \"beneficiaryType\": \"INDIVIDUAL\",\n" +
-                        "    \"companyName\": \"DIPOCKET\",\n" +
-                        "    \"currencyCode\": \"GBP\",\n" +
-                        "    \"feeAmount\": "+feeAmount+",\n" +
-                        "    \"feeCurrencyCode\": \"EUR\",\n" +
-                        "    \"firstName\": \"Ltd\",\n" +
-                        "    \"lastName\": \"Test\",\n" +
-                        "    \"reference\": \"test\",\n" +
-                        "    \"requestId\": \"d1f108fe-df2e-46da-"+app.generateRandomString(15)+"\"\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "    \"accountId\": "+accountId+",\n" +
+//                        "    \"amount\": 200,\n" +
+//                        "    \"sortCode\": \"040328\",\n" +
+//                        "    \"beneficiaryAccount\": \"00539021\",\n" +
+//                        "    \"beneficiaryType\": \"INDIVIDUAL\",\n" +
+//                        "    \"companyName\": \"DIPOCKET\",\n" +
+//                        "    \"currencyCode\": \"GBP\",\n" +
+//                        "    \"feeAmount\": "+feeAmount+",\n" +
+//                        "    \"feeCurrencyCode\": \"EUR\",\n" +
+//                        "    \"firstName\": \"Ltd\",\n" +
+//                        "    \"lastName\": \"Test\",\n" +
+//                        "    \"reference\": \"test\",\n" +
+//                        "    \"requestId\": \"d1f108fe-df2e-46da-"+app.generateRandomString(15)+"\"\n" +
+//                        "}")
                 .post("/v1/account/bankTransfer/gbpInBritain")
                 .then().log().all()
                 .statusCode(200);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void test_verifyStatusPTSFromPTS_OUT_TRAN() throws SQLException, ClassNotFoundException, InterruptedException {
         String actualPTSStatus = app.getDbHelper().getStatusPTSFromTestDB();
         assertThat(actualPTSStatus, equalTo("INPRCS"));

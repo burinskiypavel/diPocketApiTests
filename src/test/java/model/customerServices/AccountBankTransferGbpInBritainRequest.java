@@ -3,13 +3,10 @@ package model.customerServices;
 public class AccountBankTransferGbpInBritainRequest {
     private int accountId;
     private int amount;
-    private int zip;
-    private long sortCode;
+    private String sortCode;
     private String beneficiaryAccount;
     private String beneficiaryType;
-    private String city;
     private String companyName;
-    private String countryCode;
     private String currencyCode;
     private int feeAmount;
     private String feeCurrencyCode;
@@ -17,8 +14,6 @@ public class AccountBankTransferGbpInBritainRequest {
     private String lastName;
     private String reference;
     private String requestId;
-    private String streetLine1;
-    private String streetLine2;
 
     public int getAccountId() {
         return accountId;
@@ -36,19 +31,11 @@ public class AccountBankTransferGbpInBritainRequest {
         this.amount = amount;
     }
 
-    public int getZip() {
-        return zip;
-    }
-
-    public void setZip(int zip) {
-        this.zip = zip;
-    }
-
-    public long getSortCode() {
+    public String getSortCode() {
         return sortCode;
     }
 
-    public void setSortCode(long sortCode) {
+    public void setSortCode(String sortCode) {
         this.sortCode = sortCode;
     }
 
@@ -68,28 +55,12 @@ public class AccountBankTransferGbpInBritainRequest {
         this.beneficiaryType = beneficiaryType;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getCompanyName() {
         return companyName;
     }
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
     }
 
     public String getCurrencyCode() {
@@ -146,21 +117,5 @@ public class AccountBankTransferGbpInBritainRequest {
 
     public void setRequestId(String requestId) {
         this.requestId = requestId;
-    }
-
-    public String getStreetLine1() {
-        return streetLine1;
-    }
-
-    public void setStreetLine1(String streetLine1) {
-        this.streetLine1 = streetLine1;
-    }
-
-    public String getStreetLine2() {
-        return streetLine2;
-    }
-
-    public void setStreetLine2(String streetLine2) {
-        this.streetLine2 = streetLine2;
     }
 }
