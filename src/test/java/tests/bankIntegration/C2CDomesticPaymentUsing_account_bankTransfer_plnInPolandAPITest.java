@@ -20,9 +20,27 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
     int feeAmount = 0;
     String currencyCode = "PLN";
     int accountId = 116413;
+    String accountNoDomestic = null;
+    String beneficiaryAccount = "42109010560000000150296424";
     Gson gson = new Gson();
     AccountBankTransferPlnInPolandRequest accountBankTransferPlnInPolandRequest = new AccountBankTransferPlnInPolandRequest();
     CalculateBankTransferRequest calculateBankTransferRequest = new CalculateBankTransferRequest();
+
+    @Test(priority = 0)
+    public void test_CustomerServices_v1_account_accountId_bankDetails(){
+        String response = given()
+                .log().uri().log().headers().log().body()
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .basePath("CustomerServices")
+                .pathParam("accountId", "118602")
+                .auth().basic(login, pass)
+                .get("/v1/account/{accountId}/bankDetails")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+
+        JsonPath jsonPath = new JsonPath(response);
+        accountNoDomestic = jsonPath.getString("accountNoDomestic");
+    }
 
     @Test(priority = 1)
     public void test_CustomerServices_v1_account_calculateBankTransfer_plnInPoland(){
@@ -42,7 +60,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
     public void test_CustomerServices_v1_account_bankTransfer_plnInPoland(){
         accountBankTransferPlnInPolandRequest.setAccountId(accountId);
         accountBankTransferPlnInPolandRequest.setAmount(800);
-        accountBankTransferPlnInPolandRequest.setBeneficiaryAccount("42109010560000000150296424");
+        accountBankTransferPlnInPolandRequest.setBeneficiaryAccount(accountNoDomestic);
         accountBankTransferPlnInPolandRequest.setBeneficiaryType("INDIVIDUAL");
         accountBankTransferPlnInPolandRequest.setName("Ltd Test");
         accountBankTransferPlnInPolandRequest.setCurrencyCode("PLN");
