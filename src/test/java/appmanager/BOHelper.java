@@ -43,6 +43,23 @@ public class BOHelper extends HelperBase {
                 break;
             }
 
+            if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
+                given()
+                        .log().uri().log().headers().log().body()
+                        //.config(configTimeout)
+                        .baseUri("https://support.dipocket.site")
+                        .basePath("BOServices")
+                        .contentType("application/json")
+                        .pathParam("clientId", actualClientId)
+                        .header("bo-auth-token", sms)
+                        .queryParam("ticketId", ticketId)
+                        .cookie(cookie)
+                        .post("/v1/client/{clientId}/approveFDD")
+                        .then().log().all()
+                        .statusCode(200);
+                continue;
+            }
+
             if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
                 client_clientId_update.setId(Integer.parseInt(clientId));
                 client_clientId_update.setMainPhone(380685448615l);
