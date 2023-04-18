@@ -795,6 +795,9 @@ public class DBHelper extends HelperBase {
 
 
             while (vIban == null && count < 220 && srcid.equals(clientId) && row <= 60){
+                if(row == 60){
+                    break;
+                }
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
