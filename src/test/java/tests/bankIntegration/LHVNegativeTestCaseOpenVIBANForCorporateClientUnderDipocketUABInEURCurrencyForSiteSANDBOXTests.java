@@ -6,7 +6,6 @@ import com.cs.dipocketback.pojo.customer.CardActivateRequest;
 import com.cs.dipocketback.pojo.customer.CardCreateRequest;
 import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
 import com.google.gson.Gson;
-import com.sun.org.apache.regexp.internal.RE;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import model.bo.boOperations.CorpClientCreateRequest;
