@@ -811,6 +811,9 @@ public class DBHelper extends HelperBase {
                 }
                 count++;
             }
+            if(row == 60){
+                break;
+            }
 
             if(!srcid.equals(clientId)){
                 continue;
