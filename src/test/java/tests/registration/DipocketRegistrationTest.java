@@ -116,7 +116,7 @@ public class DipocketRegistrationTest extends TestBase {
         userRegistrationSendSMSCodeForPhoneRequest.setSmsNumber(1);
         String json = gson.toJson(userRegistrationSendSMSCodeForPhoneRequest);
 
-        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_sendSMSCodeForPhone(HelperBase.prop.getProperty("mobile.base.url"), langId, HelperBase.prop.getProperty("mobile.registration.phoneNumber"), json);
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_sendSMSCodeForPhone(HelperBase.prop.getProperty("mobile.base.url"), langId, HelperBase.prop.getProperty("mobile.registration.phoneNumber"), json, site);
 
 //        given()
 //                .spec(app.requestSpecDipocketRegistration)

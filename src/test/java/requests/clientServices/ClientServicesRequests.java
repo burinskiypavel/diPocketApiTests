@@ -129,11 +129,11 @@ public class ClientServicesRequests {
         return response;
     }
 
-    public void clientServices_v1_userRegistration_sendSMSCodeForPhone(String urlEnv, int langId, String phoneNumber, String json){
+    public void clientServices_v1_userRegistration_sendSMSCodeForPhone(String urlEnv, int langId, String phoneNumber, String json, String site){
         given()
                 .spec(requestSpecClientServices)
                 .baseUri(urlEnv)
-                .header("site", HelperBase.prop.getProperty("mobile.site"))
+                .header("site", site)
                 .header("deviceuuid", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
                 .queryParam("langID", langId)
                 .queryParam("phoneNum", phoneNumber)

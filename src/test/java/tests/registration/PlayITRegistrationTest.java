@@ -10,6 +10,8 @@ import com.cs.dipocketback.pojo.registration.AttachedCard;
 import com.cs.dipocketback.pojo.registration.RegSavepointData;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
+import model.clientServices.UserRegistrationClientImageRequest;
+import model.clientServices.UserRegistrationSendSMSCodeForPhoneRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -37,6 +39,8 @@ public class PlayITRegistrationTest extends TestBase {
     ClientAddress clientAddress = new ClientAddress();
     ClientAddress regAddress = new ClientAddress();
     RegSavepointData regSavepointData = new RegSavepointData();
+    UserRegistrationSendSMSCodeForPhoneRequest userRegistrationSendSMSCodeForPhoneRequest = new UserRegistrationSendSMSCodeForPhoneRequest();
+    UserRegistrationClientImageRequest userRegistrationClientImageRequest = new UserRegistrationClientImageRequest();
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
@@ -59,7 +63,7 @@ public class PlayITRegistrationTest extends TestBase {
 
         @Test(priority = 2)
         public void test_ClientServices_v1_references_languages(){
-            Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_languages(HelperBase.prop.getProperty("mobile.base.url"), Site.PLAYIT.toString());
+            Response response = app.getClientServicesRequestsHelper().clientServices_v1_references_languages(HelperBase.prop.getProperty("mobile.base.url"), site);
             response.then().body("languageList.name", hasItems("English", "Magyar"));
 //            given()
 //                    .spec(app.requestSpecPlayITRegistration)
@@ -104,18 +108,23 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 5)
     public void test_ClientServices_v1_userRegistration_sendSMSCodeForPhone(){
-        given()
-                .spec(app.requestSpecPlayITRegistration)
-                .queryParam("langID", langId)
-                .queryParam("phoneNum", app.playITRegistrationPhone)
-                .body("{\n" +
-                        "  \"smsNumber\" : 1\n" +
-                        "}")
-                .when()
-                .post("userRegistration/sendSMSCodeForPhone")
-                .then()
-                .log().all()
-                .statusCode(200);
+        userRegistrationSendSMSCodeForPhoneRequest.setSmsNumber(1);
+        String json = gson.toJson(userRegistrationSendSMSCodeForPhoneRequest);
+
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_sendSMSCodeForPhone(HelperBase.prop.getProperty("mobile.base.url"), langId, app.playITRegistrationPhone, json, site);
+
+//        given()
+//                .spec(app.requestSpecPlayITRegistration)
+//                .queryParam("langID", langId)
+//                .queryParam("phoneNum", app.playITRegistrationPhone)
+//                .body("{\n" +
+//                        "  \"smsNumber\" : 1\n" +
+//                        "}")
+//                .when()
+//                .post("userRegistration/sendSMSCodeForPhone")
+//                .then()
+//                .log().all()
+//                .statusCode(200);
     }
 
     @Test(priority = 6)
