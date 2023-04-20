@@ -19,9 +19,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
 public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBOXTest extends TestBase {
-    String  cboUserLogin = "PavelB_CBO";
-    String cboUserPass = "CGc22S0";
-    String username = "PAVELB_CBO";
     String legalClientId = null;
     String cookie = null;
     String sms = null;
@@ -62,29 +59,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 
         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_company_register_test(app.sandboxLogin, app.sandboxPass, json);
 
-//                .body("{ \n" +
-//                        "\n" +
-//                        "  \"requestId\" : \"47"+app.getBOHelper().generateRandomString(8)+"-dc36-462d-87f7-"+app.getBOHelper().generateRandomString(12)+"\", \n" +
-//                        "  \"langCode\" : \"en\", \n" +
-//                        "  \"companyName\" : \"LegalTest\", \n" +
-//                        "  \"rStreetLine1\" : \"155 Stehr Squares\", \n" +
-//                        "  \"rStreetLine2\" : \"4925 Cremin Branch\", \n" +
-//                        "  \"rCity\" : \""+city+"\", \n" +
-//                        "  \"rState\" : \"\", \n" +
-//                        "  \"rZip\" : \"660820\", \n" +
-//                        "  \"rCountryCode\" : \""+countryCode+"\", \n" +
-//                        "  \"mStreetLine1\" : \"393 Willis Ridges\", \n" +
-//                        "  \"mStreetLine2\" : \"1299 Marianne Junctions\", \n" +
-//                        "  \"mCity\" : \""+city+"\", \n" +
-//                        "  \"mState\" : \"\", \n" +
-//                        "  \"mZip\" : \"81101\", \n" +
-//                        "  \"mCountryCode\" : \""+countryCode+"\", \n" +
-//                        "  \"ddStatus\" : \""+ddStatus+"\", \n" +
-//                        "  \"currencyCode\" : \"EUR\", \n" +
-//                        "  \"type\" : \"LEGAL_ENTITY\" \n" +
-//                        "\n" +
-//                        "} ")
-
         JsonPath jsonPath = new JsonPath(response);
         legalClientId = jsonPath.getString("clientId");
         System.out.println("clientId : " + legalClientId);
@@ -95,7 +69,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
 
     @Test(priority = 2)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(cboUserLogin, cboUserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(app.cboUserLogin_test, app.cboUserPass_test, app.cboUsername_test);
         String message = app.getDbHelper().getBOLoginSMSCodeFromTestDB();
         sms = message.substring(13);
     }
@@ -122,26 +96,6 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
         String json = gson.toJson(representativeCreateRequest);
 
         app.getBoRequestsHelper().boServices_v1_representative_createScreened(cookie, sms, json);
-
-//                .body("{\n" +
-//                        "  \"corpClientId\" : "+ legalClientId +",\n" +
-//                        "  \"firstName\" : \""+firstName+"\",\n" +
-//                        "  \"lastName\" : \""+lastName+"\",\n" +
-//                        "  \"cardholderName\" : \"Pavel Burinskiy\",\n" +
-//                        "  \"birthDate\" : \"14.02.1992\",\n" +
-//                        "  \"phoneNumber\" : \"38068"+app.generateRandomNumber(7)+"\",\n" +
-//                        "  \"email\" : \"pavelburinskiy"+app.generateRandomNumber(7)+"@gmail.com\",\n" +
-//                        "  \"ddStatus\" : \""+ddStatus+"\",\n" +
-//                        "  \"currencyId\" : "+currencyId+",\n" +
-//                        "  \"langId\" : 1,\n" +
-//                        "  \"identifyCode\" : \"13124124124\",\n" +
-//                        "  \"citizenshipCountryId\" : "+countryId+",\n" +
-//                        "  \"residenceCountryId\" : "+countryId+",\n" +
-//                        "  \"streetLine1\" : \"Address\",\n" +
-//                        "  \"streetLine2\" : \"Address\",\n" +
-//                        "  \"city\" : \""+city+"\",\n" +
-//                        "  \"zip\" : \"12314124124124\"\n" +
-//                        "}")
     }
 
     @Test(priority = 4)

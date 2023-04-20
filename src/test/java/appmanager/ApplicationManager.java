@@ -136,6 +136,7 @@ public class ApplicationManager {
     public String boUserPass_test = null;
     public String cboUserLogin_test = null;
     public String cboUserPass_test = null;
+    public String cboUsername_test = "PAVELB_CBO";
     public String bankIntegrationPaymentsLogin = "APIOLENA";
     public String bankIntegrationPaymentPass = "pU9N1Lu";
 
