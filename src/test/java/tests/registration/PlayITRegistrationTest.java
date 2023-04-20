@@ -88,15 +88,18 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 4)
     public void test_ClientServices_v1_userRegistration_loadSavePointData2() {
-        given()
-                .spec(app.requestSpecPlayITRegistration)
-                .queryParam("devUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
-                .when()
-                .get("userRegistration/loadSavePointData2")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("isInvited", equalTo(false));
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_userRegistration_loadSavePointData2(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.registration.deviceuuid"), site);
+        response.then().body("isInvited", equalTo(false));
+
+//        given()
+//                .spec(app.requestSpecPlayITRegistration)
+//                .queryParam("devUUID", HelperBase.prop.getProperty("mobile.registration.deviceuuid"))
+//                .when()
+//                .get("userRegistration/loadSavePointData2")
+//                .then()
+//                .log().all()
+//                .statusCode(200)
+//                .body("isInvited", equalTo(false));
     }
 
     @Test(priority = 5)
