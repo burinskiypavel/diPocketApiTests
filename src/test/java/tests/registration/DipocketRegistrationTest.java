@@ -99,7 +99,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 4)
     public void test_ClientServices_v1_userRegistration_loadSavePointData2() {
-        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_userRegistration_loadSavePointData2(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.registration.deviceuuid"));
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_userRegistration_loadSavePointData2(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.registration.deviceuuid"), site);
         response.then().body("isInvited", equalTo(false));
 //        given()
 //                .spec(app.requestSpecDipocketRegistration)

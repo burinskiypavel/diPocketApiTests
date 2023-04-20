@@ -116,9 +116,10 @@ public class ClientServicesRequests {
                 return response;
     }
 
-    public Response сlientServices_v1_userRegistration_loadSavePointData2(String urlEnv, String devUUID) {
+    public Response сlientServices_v1_userRegistration_loadSavePointData2(String urlEnv, String devUUID, String site) {
         Response response = given()
                 .spec(requestSpecClientServices)
+                .header("site", site)
                 .baseUri(urlEnv)
                 .queryParam("devUUID", devUUID)
                 .when()
