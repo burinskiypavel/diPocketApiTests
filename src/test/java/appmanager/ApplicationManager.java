@@ -134,6 +134,8 @@ public class ApplicationManager {
     public String sandboxPass = null;
     public String boUserLogin_test = null;
     public String boUserPass_test = null;
+    public String bankIntegrationPaymentsLogin = "APIOLENA";
+    public String bankIntegrationPaymentPass = "pU9N1Lu";
 
     public void initStart() {
 //        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
