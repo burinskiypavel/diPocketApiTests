@@ -79,21 +79,6 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
                 .contentType("application/json")
                 .auth().basic(login, pass)
                 .body(json)
-//                .body("{\n" +
-//                        "    \"accountId\": "+accountId+",\n" +
-//                        "    \"amount\": 200,\n" +
-//                        "    \"sortCode\": \"040328\",\n" +
-//                        "    \"beneficiaryAccount\": \"00539021\",\n" +
-//                        "    \"beneficiaryType\": \"INDIVIDUAL\",\n" +
-//                        "    \"companyName\": \"DIPOCKET\",\n" +
-//                        "    \"currencyCode\": \"GBP\",\n" +
-//                        "    \"feeAmount\": "+feeAmount+",\n" +
-//                        "    \"feeCurrencyCode\": \"EUR\",\n" +
-//                        "    \"firstName\": \"Ltd\",\n" +
-//                        "    \"lastName\": \"Test\",\n" +
-//                        "    \"reference\": \"test\",\n" +
-//                        "    \"requestId\": \"d1f108fe-df2e-46da-"+app.generateRandomString(15)+"\"\n" +
-//                        "}")
                 .post("/v1/account/bankTransfer/gbpInBritain")
                 .then().log().all()
                 .statusCode(200);
