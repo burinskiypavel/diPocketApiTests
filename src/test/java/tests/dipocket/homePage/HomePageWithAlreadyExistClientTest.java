@@ -59,7 +59,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
                 .statusCode(200)
                 .body("clientFirstName", equalTo("Pavel"),
                         "clientLastName", equalTo("Burinsky"),
-                        "mainPhone",equalTo("380980316499"),
+                        "mainPhone",equalTo(phone),
                         "email", equalTo("testdipocket3@gmail.com"));
     }
 
