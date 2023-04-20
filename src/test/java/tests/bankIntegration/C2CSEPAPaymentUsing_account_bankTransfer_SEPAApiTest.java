@@ -14,8 +14,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest extends TestBase {
     String city = "Vilnius";
-    String login = "APIOLENA";
-    String pass = "pU9N1Lu";
     int feeAmount = 0;
     String currencyCode = "EUR";
     int accountId = 111231;
@@ -31,7 +29,7 @@ public class C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest extends TestBa
         calculateBankTransferRequest.setAmount(10);
         String json = gson.toJson(calculateBankTransferRequest);
 
-        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_SEPA_test(login, pass, json);
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_SEPA_test(app.bankIntegrationPaymentsLogin, app.bankIntegrationPaymentPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         feeAmount = jsonPath.getInt("feeAmount");
@@ -59,7 +57,7 @@ public class C2CSEPAPaymentUsing_account_bankTransfer_SEPAApiTest extends TestBa
         accountBankTransferRequest.setZip(11111);
         String json = gson.toJson(accountBankTransferRequest);
 
-        app.getCustomerServicesRequestsHelper().customerServices_v1_account_bankTransfer_SEPA_test(login, pass, json);
+        app.getCustomerServicesRequestsHelper().customerServices_v1_account_bankTransfer_SEPA_test(app.bankIntegrationPaymentsLogin, app.bankIntegrationPaymentPass, json);
     }
 
     @Test(priority = 3)

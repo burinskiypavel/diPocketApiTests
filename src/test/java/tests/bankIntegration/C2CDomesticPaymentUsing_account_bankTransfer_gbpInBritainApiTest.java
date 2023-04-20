@@ -15,8 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest extends TestBase {
-    String login = "APIOLENA";
-    String pass = "pU9N1Lu";
     int feeAmount = 0;
     String currencyCode = "GBP";
     int accountId = 112099;
@@ -32,7 +30,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
                 .baseUri(HelperBase.prop.getProperty("test.base.url"))
                 .basePath("CustomerServices")
                 .pathParam("accountId", "118602")
-                .auth().basic(login, pass)
+                .auth().basic(app.bankIntegrationPaymentsLogin, app.bankIntegrationPaymentPass)
                 .get("/v1/account/{accountId}/bankDetails")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -49,7 +47,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
         calculateBankTransferRequest.setAmount(10);
         String json = gson.toJson(calculateBankTransferRequest);
 
-        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_gbpInBritain(login, pass, json);
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_gbpInBritain(app.bankIntegrationPaymentsLogin, app.bankIntegrationPaymentPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         feeAmount = jsonPath.getInt("feeAmount");
@@ -77,7 +75,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_gbpInBritainApiTest ex
                 .baseUri(HelperBase.prop.getProperty("test.base.url"))
                 .basePath("CustomerServices")
                 .contentType("application/json")
-                .auth().basic(login, pass)
+                .auth().basic(app.bankIntegrationPaymentsLogin, app.bankIntegrationPaymentPass)
                 .body(json)
                 .post("/v1/account/bankTransfer/gbpInBritain")
                 .then().log().all()

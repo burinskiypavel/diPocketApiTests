@@ -15,8 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest extends TestBase {
-    String login = "APIOLENA";
-    String pass = "pU9N1Lu";
     int feeAmount = 0;
     String currencyCode = "PLN";
     int accountId = 116413;
@@ -33,7 +31,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
                 .baseUri(HelperBase.prop.getProperty("test.base.url"))
                 .basePath("CustomerServices")
                 .pathParam("accountId", "118602")
-                .auth().basic(login, pass)
+                .auth().basic(app.bankIntegrationPaymentsLogin, app.bankIntegrationPaymentPass)
                 .get("/v1/account/{accountId}/bankDetails")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -50,7 +48,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
         calculateBankTransferRequest.setAmount(10);
         String json = gson.toJson(calculateBankTransferRequest);
 
-        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_plnInPoland(login, pass, json);
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_account_calculateBankTransfer_plnInPoland(app.bankIntegrationPaymentsLogin, app.bankIntegrationPaymentPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         feeAmount = jsonPath.getInt("feeAmount");
@@ -70,7 +68,7 @@ public class C2CDomesticPaymentUsing_account_bankTransfer_plnInPolandAPITest ext
         accountBankTransferPlnInPolandRequest.setRequestId("d1f202fe-df2e"+app.generateRandomString(16));
         String json = gson.toJson(accountBankTransferPlnInPolandRequest);
 
-        app.getCustomerServicesRequestsHelper().customerServices_v1_account_bankTransfer_plnInPoland(login, pass, json);
+        app.getCustomerServicesRequestsHelper().customerServices_v1_account_bankTransfer_plnInPoland(app.bankIntegrationPaymentsLogin, app.bankIntegrationPaymentPass, json);
     }
 
     @Test(priority = 3)

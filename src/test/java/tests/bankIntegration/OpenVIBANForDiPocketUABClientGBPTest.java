@@ -108,41 +108,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         String json = gson.toJson(client_clientId_update);
 
         app.getBoRequestsHelper().boServices_v1_client_clientID_update_test(cookie, sms, clientId, json);
-
-//                .body("{\n" +
-//                        "  \"id\" : "+clientId+",\n" +
-//                        "  \"mainPhone\" : \"380685448615\",\n" +
-//                        "  \"firstName\" : \"Pavel\",\n" +
-//                        "  \"lastName\" : \"Burinsky\",\n" +
-//                        "  \"birthDate\" : \"04.09.1992\",\n" +
-//                        "  \"email\" : \"testdipocket@gmail.com\",\n" +
-//                        "  \"emailIsVerified\" : false,\n" +
-//                        "  \"stateId\" : 1,\n" +
-//                        "  \"stateName\" : \"Active\",\n" +
-//                        "  \"currencyId\" : 978,\n" +
-//                        "  \"currencyCode\" : \"PLN\",\n" +
-//                        "  \"langId\" : 1,\n" +
-//                        "  \"langCode\" : \"eng\",\n" +
-//                        "  \"langName\" : \"English\",\n" +
-//                        "  \"photoIdTypeId\" : 1,\n" +
-//                        "  \"photoIdTypeName\" : \"Passport\",\n" +
-//                        "  \"photoIdNo\" : \"234234324324\",\n" +
-//                        "  \"photoIdCountryId\" : "+countryId+",\n" +
-//                        "  \"photoIdCountryName\" : \"Poland\",\n" +
-//                        "  \"gender\" : \"M\",\n" +
-//                        "  \"ddStatus\" : \"PSDD\",\n" +
-//                        "  \"cardHolderName\" : \"Pavel Burinsky\",\n" +
-//                        "  \"identifyCode\" : \"13124244234\",\n" +
-//                        "  \"clientType\" : \"I\",\n" +
-//                        "  \"site\" : \"DIPOCKET\",\n" +
-//                        "  \"registeredAddrAsMail\" : true,\n" +
-//                        "  \"residenceCountryId\" : "+countryId+",\n" +
-//                        "  \"feeTariffPlanId\" : 1,\n" +
-//                        "  \"feeTariffPlanName\" : \"EUR - standard\",\n" +
-//                        "  \"age\" : 30,\n" +
-//                        "  \"migrated\" : false,\n" +
-//                        "  \"skippedReg\" : false\n" +
-//                        "}")
     }
 
     @Test(priority = 5)
@@ -236,32 +201,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 
         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.sandboxLogin, app.sandboxPass, json);
 
-//                .body("{\n" +
-//                        "  \"requestId\" : \"d1f202fe-df2e-46da-94ba-"+app.generateRandomString(12)+"\",\n" +
-//                        "  \"langCode\" : \"en\",\n" +
-//                        "  \"firstName\" : \"QA\",\n" +
-//                        "  \"lastName\" : \"Test\",\n" +
-//                        "  \"cardHolderName\" : \"cardHolderName\",\n" +
-//                        "  \"email\" : \"testqa"+app.generateRandomString(5)+"@gmail.com\",\n" +
-//                        "  \"mainPhone\" : "+app.generateRandomNumber(12)+",\n" +
-//                        "  \"dob\" : \"1990-08-31\",\n" +
-//                        "  \"ddStatus\" : \"FDD\",\n" +
-//                        "  \"currencyCode\" : \""+ currencyCodeGBP +"\",\n" +
-//                        "  \"rStreetLine1\" : \"StreetLine1\",\n" +
-//                        "  \"rStreetLine2\" : \"StreetLine2\",\n" +
-//                        "  \"rCity\" : \"City\",\n" +
-//                        "  \"rState\" : \"State\",\n" +
-//                        "  \"rZip\" : \"Zip\",\n" +
-//                        "  \"rCountryCode\" : \""+countryCode+"\",\n" +
-//                        "  \"mStreetLine1\" : \"StreetLine1\",\n" +
-//                        "  \"mStreetLine2\" : \"StreetLine2\",\n" +
-//                        "  \"mCity\" : \"City\",\n" +
-//                        "  \"mState\" : \"State\",\n" +
-//                        "  \"mZip\" : \"Zip\",\n" +
-//                        "  \"mCountryCode\" : \""+countryCode+"\",\n" +
-//                        "  \"citizenship\" : \""+countryCode+"\"\n" +
-//                        "}")
-
         JsonPath jsonPath = new JsonPath(response);
         clientIdSandbox = jsonPath.getInt("clientId");
     }
@@ -280,17 +219,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
 
         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_card_create_test(app.sandboxLogin, app.sandboxPass, json);
 
-//                .body("{\n" +
-//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-//                        "    \"program\":  \"Sandbox\",\n" +
-//                        "    \"currencyCode\":  \""+ currencyCodeGBP +"\",\n" +
-//                        "    \"cardType\":  \"PLASTIC\",\n" +
-//                        "    \"accFeeTariffPlanId\":  \"2000\",\n" +
-//                        "    \"ePin\": \"1111\",\n" +
-//                        "    \"accountId\": \"\"\n" +
-//                        "}")
-
         JsonPath jsonPath = new JsonPath(response);
         token = jsonPath.getString("token");
     }
@@ -303,13 +231,6 @@ public class OpenVIBANForDiPocketUABClientGBPTest extends TestBase {
         String json = gson.toJson(cardActivateRequest);
 
         app.getCustomerServicesRequestsHelper().customerServices_v1_card_activate_test(app.sandboxLogin, app.sandboxPass, json);
-
-//                .body("{\n" +
-//                        "    \"requestId\":  \"fea3af96-50b5-48c2-9456-"+app.generateRandomString(12)+"\",\n" +
-//                        "    \"clientId\": \""+clientIdSandbox+"\",\n" +
-//                        "    \"token\":  \""+token+"\"\n" +
-//                        "}")
-
     }
 
     @Test(priority = 17)
