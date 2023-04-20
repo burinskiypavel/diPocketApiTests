@@ -134,6 +134,8 @@ public class ApplicationManager {
     public String sandboxPass = null;
     public String boUserLogin_test = null;
     public String boUserPass_test = null;
+    public String cboUserLogin_test = null;
+    public String cboUserPass_test = null;
     public String bankIntegrationPaymentsLogin = "APIOLENA";
     public String bankIntegrationPaymentPass = "pU9N1Lu";
 
@@ -185,6 +187,8 @@ public class ApplicationManager {
         sandboxPass = HelperBase.prop.getProperty("test.sandbox.pass");
         boUserLogin_test = HelperBase.prop.getProperty("test.bo.userlogin");
         boUserPass_test = HelperBase.prop.getProperty("test.bo.userpass");
+        cboUserLogin_test = HelperBase.prop.getProperty("test.cbo.userlogin");
+        cboUserPass_test = HelperBase.prop.getProperty("test.cbo.userpass");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()

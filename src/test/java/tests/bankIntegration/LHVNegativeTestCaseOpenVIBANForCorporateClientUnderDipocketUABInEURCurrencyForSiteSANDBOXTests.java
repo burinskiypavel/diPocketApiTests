@@ -14,13 +14,10 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 
 
 public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEURCurrencyForSiteSANDBOXTests extends TestBase {
-    String  cboUserLogin = "PavelB_CBO";
-    String cboUserPass = "CGc22S0";
     String username = "PAVELB_CBO";
     String cookie = null;
     String sms = null;
@@ -28,12 +25,9 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     int currencyId = 978;
     int countryId = 440;
     int lastVIbanIdBeforeTest = 0;
-    int vIbanIdAfterCorpClientCreation = 0;
     String firstName = "QA";
     String lastName = "Test";
     int corpClientId = 0;
-    String ddStatus = "FDD";
-    String city = "Vilnius";
     int individualClientId = 55669;
     int clientIdSandbox = 0;
     String currencyCodeEUR = "EUR";
@@ -47,14 +41,9 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     CorpClientCreateRequest corpClientCreateRequest = new CorpClientCreateRequest();
     RepresentativeLinkRequest representativeLinkRequest = new RepresentativeLinkRequest();
 
-    @Test(priority = 0, enabled = false)
-    public void test_getIdOfLastVIbanFromTestDB() throws SQLException, ClassNotFoundException {
-         lastVIbanIdBeforeTest = app.getDbHelper().getLastVIbanIdFromLHV_EE_VIBAN_REQUESTFromTestDB();
-    }
-
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(cboUserLogin, cboUserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(app.cboUserLogin_test, app.cboUserPass_test, username);
     }
 
     @Test(priority = 2)
@@ -214,11 +203,8 @@ public class LHVNegativeTestCaseOpenVIBANForCorporateClientUnderDipocketUABInEUR
     }
 
     @Test(priority = 10)
-    public void test_verifyVirtualIBANCreation() throws SQLException, ClassNotFoundException, InterruptedException {
+    public void test_verifyVirtualIBANCreation() throws SQLException, ClassNotFoundException {
         //corpClientId = app.getDbHelper().getClientIdFromClientFromTestDB("C", "Predict");
         app.getDbHelper().isRowWithSRCIDPresentInTheTableLHV_EE_VIBAN_REQUESTFromTestDB(corpClientId);
-
-        //vIbanIdAfterCorpClientCreation = app.getDbHelper().getLastVIbanIdFromLHV_EE_VIBAN_REQUESTFromTestDB();
-        //assertThat(lastVIbanIdBeforeTest,equalTo(vIbanIdAfterCorpClientCreation));
     }
 }
