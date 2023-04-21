@@ -42,6 +42,13 @@ public class UIBOUserHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'User role added successfully')]"));
     }
 
+    public void pressResetPassword() {
+        //click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Reset password']"));
+        click(boUserHomePage.resetPasswordBtn);
+        waitFor(By.cssSelector("div[role='dialog']"));
+        waitFor(By.xpath("//*[contains(text(), 'Are you sure want to reset password and send new one?')]"));
+    }
+
     public void selectRoleFromDropDown(final String name) {
         click(By.cssSelector("p-dropdown[placeholder='Role']"));
         waitFor(By.cssSelector("li[aria-label='" + name + "']"));

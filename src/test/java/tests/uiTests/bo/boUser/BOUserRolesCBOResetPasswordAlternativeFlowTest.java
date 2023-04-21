@@ -14,9 +14,7 @@ public class BOUserRolesCBOResetPasswordAlternativeFlowTest extends UITestBase {
         app.getUiboHelper().gotoBOUsersPage();
         app.getUiboUserHelper().gotoAllUsersTab();
         app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
-        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Reset password']"));
-        app.getUiboHelper().waitFor(By.cssSelector("div[role='dialog']"));
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Are you sure want to reset password and send new one?')]"));
+        app.getUiboUserHelper().pressResetPassword();
         app.getUiboHelper().closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
         app.getUiboHelper().waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
 
