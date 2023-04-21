@@ -130,15 +130,17 @@ public class PlayITRegistrationTest extends TestBase {
     @Test(priority = 6)
     public void test_ClientServices_v1_references_verifyPhone() throws SQLException, ClassNotFoundException {
         smsCode = app.getDbHelper().getSMSCodeFromDB(app.playITRegistrationPhone, site, HelperBase.prop.getProperty("db.url"));
-        given()
-                .spec(app.requestSpecPlayITRegistration)
-                .queryParam("phone", app.playITRegistrationPhone)
-                .when()
-                .get("references/verifyPhone")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("value", equalTo(true));
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_verifyPhone(HelperBase.prop.getProperty("mobile.base.url"), app.playITRegistrationPhone, site);
+        response.then().body("value", equalTo(true));
+//        given()
+//                .spec(app.requestSpecPlayITRegistration)
+//                .queryParam("phone", app.playITRegistrationPhone)
+//                .when()
+//                .get("references/verifyPhone")
+//                .then()
+//                .log().all()
+//                .statusCode(200)
+//                .body("value", equalTo(true));
     }
 
     @Test(priority = 7)

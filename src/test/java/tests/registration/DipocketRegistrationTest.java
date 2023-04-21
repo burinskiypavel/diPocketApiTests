@@ -156,7 +156,7 @@ public class DipocketRegistrationTest extends TestBase {
 
         smsCode = app.getDbHelper().getSMSCodeFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site, HelperBase.prop.getProperty("db.url"));
 
-        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_verifyPhone(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.registration.phoneNumber"));
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_verifyPhone(HelperBase.prop.getProperty("mobile.base.url"), HelperBase.prop.getProperty("mobile.registration.phoneNumber"), site);
         response.then().body("value", equalTo(true));
 //        given()
 //                .spec(app.requestSpecDipocketRegistration)

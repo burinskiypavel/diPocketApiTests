@@ -144,10 +144,11 @@ public class ClientServicesRequests {
                 .statusCode(200);
     }
 
-    public Response сlientServices_v1_references_verifyPhone(String urlEnv, String phoneNumber)  {
+    public Response сlientServices_v1_references_verifyPhone(String urlEnv, String phoneNumber, String site)  {
         Response response = given()
                 .spec(requestSpecClientServices)
                 .baseUri(urlEnv)
+                .header("site", site)
                 .queryParam("phone", phoneNumber)
                 .when()
                 .get("references/verifyPhone");
