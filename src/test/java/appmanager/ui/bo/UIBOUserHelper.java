@@ -5,8 +5,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import padeObjects.bo.boUsers.AddNewRolePage;
+import padeObjects.bo.boUsers.DeleteRolePage;
 
 public class UIBOUserHelper extends UIHelperBase {
+    AddNewRolePage addNewRolePage = new AddNewRolePage(driver);
+    DeleteRolePage deleteRolePage = new DeleteRolePage(driver);
 
     public UIBOUserHelper(WebDriver driver) {
         super(driver);
@@ -18,17 +22,22 @@ public class UIBOUserHelper extends UIHelperBase {
 
     public void deleteRole() {
         click(By.cssSelector("p-button[label='Delete']"));
-        click(By.cssSelector("button[type='Submit']"));
+        //click(By.cssSelector("button[type='Submit']"));
+        click(deleteRolePage.submitBtn);
         waitFor(By.xpath("//div[contains(text(), 'User role removed successfully')]"));
     }
 
     public void addRole(String roleID, String roleName) throws InterruptedException {
         click(By.cssSelector("p-button[label='+ Add']"));
         waitForSeveralItems(new String[]{"Role ID:", "Role name:", "Add Role"});
-        type(By.cssSelector("input[id*=input_roleId]"), roleID);
-        type(By.cssSelector("input[id*=input_roleName]"), roleName);
+        //type(By.cssSelector("input[id*=input_roleId]"), roleID);
+        type(addNewRolePage.roleIDInput, roleID);
+        //type(By.cssSelector("input[id*=input_roleName]"), roleName);
+        type(addNewRolePage.roleNameInput, roleName);
         Thread.sleep(500);
-        click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
+        //click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
+        click(addNewRolePage.confirmBtn);
+        waitFor(By.xpath("//*[contains(text(), 'User role added successfully')]"));
     }
 
     public void selectRoleFromDropDown(final String name) {
