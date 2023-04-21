@@ -6,11 +6,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import padeObjects.bo.boUsers.AddNewRolePage;
+import padeObjects.bo.boUsers.BOUserHomePage;
 import padeObjects.bo.boUsers.DeleteRolePage;
 
 public class UIBOUserHelper extends UIHelperBase {
     AddNewRolePage addNewRolePage = new AddNewRolePage(driver);
     DeleteRolePage deleteRolePage = new DeleteRolePage(driver);
+    BOUserHomePage boUserHomePage = new BOUserHomePage(driver);
 
     public UIBOUserHelper(WebDriver driver) {
         super(driver);
@@ -97,20 +99,22 @@ public class UIBOUserHelper extends UIHelperBase {
     }
 
     public void unblockUser() {
-        click(By.cssSelector("app-button[ng-reflect-label='Unblock user']"));
-        click(By.cssSelector("app-button[ng-reflect-label='Unblock']"));
+        //click(By.cssSelector("p-button[ng-reflect-label='Unblock user']"));
+        click(boUserHomePage.unblockUserBtn);
+        click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//*[contains(text(), 'User unblocked successfully')]"));
     }
 
     public void blockUser(String blockReason) throws InterruptedException {
-        click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Block user']"));
+        //click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Block user']"));
+        click(boUserHomePage.blockUserBtn);
         waitFor(By.cssSelector("div[role='dialog']"));
         waitFor(By.xpath("//*[contains(text(), 'Are you sure want to block user')]"));
         type(By.cssSelector("div[role='dialog'] input[type='text']"), blockReason);
         Thread.sleep(1000);
-        click(By.cssSelector("div[role='dialog'] p-button[ng-reflect-label='Block user']"));
+        click(By.cssSelector("div[role='dialog'] p-button[ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
-        waitFor(By.cssSelector("td[ng-reflect-text='Blocked']"));
+        waitFor(By.cssSelector("td span[ng-reflect-text='Blocked']"));
     }
 }

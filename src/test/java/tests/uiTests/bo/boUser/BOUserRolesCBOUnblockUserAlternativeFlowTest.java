@@ -4,6 +4,7 @@ import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import padeObjects.bo.boUsers.BOUserHomePage;
 
 public class BOUserRolesCBOUnblockUserAlternativeFlowTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
@@ -14,7 +15,7 @@ public class BOUserRolesCBOUnblockUserAlternativeFlowTest extends UITestBase {
         app.getUiboHelper().gotoBOUsersPage();
         app.getUiboUserHelper().gotoAllUsersTab();
         app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
-        if(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Unblock user']"))){
+        if(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Unblock user']"))){
             app.getUiboUserHelper().unblockUser();
             app.getUiboUserHelper().selectBOUser("PAVELB");
         }
@@ -26,10 +27,10 @@ public class BOUserRolesCBOUnblockUserAlternativeFlowTest extends UITestBase {
         app.getUiboUserHelper().blockUser("test");
 
         app.getUiboUserHelper().selectBOUser("PAVELB");
-        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Unblock user']")));
-        softAssert.assertFalse(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Block user']")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Unblock user']")));
+        softAssert.assertFalse(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Block user']")));
 
-        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Unblock user']"));
+        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Unblock user']"));
         app.getUiboHelper().waitFor(By.cssSelector("div[role='dialog']"));
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Are you sure want to unblock user')]"));
 
@@ -37,7 +38,7 @@ public class BOUserRolesCBOUnblockUserAlternativeFlowTest extends UITestBase {
         app.getUiboHelper().waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
         softAssert.assertFalse(app.getUiboHelper().isElementPresent(By.cssSelector("div[role='dialog']")));
 
-        if(app.getUiboHelper().isButtonEnabled3(By.cssSelector("app-button[ng-reflect-label='Unblock user']"))){
+        if(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Unblock user']"))){
             app.getUiboUserHelper().unblockUser();
         }
         softAssert.assertAll();
