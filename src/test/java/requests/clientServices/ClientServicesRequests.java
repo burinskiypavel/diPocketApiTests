@@ -157,10 +157,11 @@ public class ClientServicesRequests {
                 return response;
     }
 
-    public Response сlientServices_v1_references_topCountries(String urlEnv, int langId) {
+    public Response сlientServices_v1_references_topCountries(String urlEnv, int langId, String site) {
         Response res = given()
                 .spec(requestSpecClientServices)
                 .baseUri(urlEnv)
+                .header("site", site)
                 .queryParam("langID", langId)
                 .when()
                 .get("references/topCountries");

@@ -170,7 +170,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 7)
     public void test_ClientServices_v1_references_topCountries() {
-        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_topCountries(HelperBase.prop.getProperty("mobile.base.url"), langId);
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_topCountries(HelperBase.prop.getProperty("mobile.base.url"), langId, site);
         response.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Италия", "Австрия", "Украина", "Бельгия", "Болгария", "Венгрия"));
 //        Response res = given()
 //                .spec(app.requestSpecDipocketRegistration)

@@ -145,15 +145,17 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 7)
     public void test_ClientServices_v1_references_topCountries() {
-        Response res = given()
-                .spec(app.requestSpecPlayITRegistration)
-                .queryParam("langID", langId)
-                .when()
-                .get("references/topCountries");
-        res.then().log().all();
-        int statusCode = res.getStatusCode();
-        assertEquals(statusCode, 200);
-        res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Украина", "Финляндия"));
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_topCountries(HelperBase.prop.getProperty("mobile.base.url"), langId, site);
+        response.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Украина", "Финляндия"));
+//        Response res = given()
+//                .spec(app.requestSpecPlayITRegistration)
+//                .queryParam("langID", langId)
+//                .when()
+//                .get("references/topCountries");
+//        res.then().log().all();
+//        int statusCode = res.getStatusCode();
+//        assertEquals(statusCode, 200);
+//        res.then().body("topCountries.name", hasItems("Польша", "Великобритания", "Украина", "Финляндия"));
     }
 
     @Test(priority = 8)
