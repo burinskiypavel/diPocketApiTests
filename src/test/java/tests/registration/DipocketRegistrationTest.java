@@ -202,7 +202,7 @@ public class DipocketRegistrationTest extends TestBase {
         regSavepointData.setIsSkipped(false);
         String json = gson.toJson(regSavepointData);
 
-        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json);
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json, site);
 
 //        given()
 //                .spec(app.requestSpecDipocketRegistration)
@@ -284,7 +284,7 @@ public class DipocketRegistrationTest extends TestBase {
         regSavepointData2.setIsSkipped(false);
         String json = gson.toJson(regSavepointData2);
 
-        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json);
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json, site);
 
 
 //        given()
@@ -369,7 +369,7 @@ public class DipocketRegistrationTest extends TestBase {
         regSavepointData2.setStepNo(3);
         String json = gson.toJson(regSavepointData2);
 
-        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json);
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json, site);
 
 //        given()
 //                .spec(app.requestSpecDipocketRegistration)
@@ -470,7 +470,7 @@ public class DipocketRegistrationTest extends TestBase {
         regSavepointData2.setStepNo(4);
         String json = gson.toJson(regSavepointData2);
 
-        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json);
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json, site);
 
 //        given()
 //                .spec(app.requestSpecDipocketRegistration)

@@ -171,10 +171,11 @@ public class ClientServicesRequests {
         return res;
     }
 
-    public void clientServices_v1_userRegistration_registrationSavePoint2(String urlEnv, String json) {
+    public void clientServices_v1_userRegistration_registrationSavePoint2(String urlEnv, String json, String site) {
         given()
                 .spec(requestSpecClientServices)
                 .baseUri(urlEnv)
+                .header("site", site)
                 .body(json)
                 .when()
                 .put("userRegistration/registrationSavePoint2")

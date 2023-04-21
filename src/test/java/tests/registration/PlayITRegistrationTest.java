@@ -175,12 +175,13 @@ public class PlayITRegistrationTest extends TestBase {
         regSavepointData.setSmsCode(smsCode);
         regSavepointData.setIsSkipped(false);
         String json = gson.toJson(regSavepointData);
-        System.out.println(json);
 
-        given()
-                .spec(app.requestSpecPlayITRegistration)
-                .contentType("application/json")
-                .body(json)
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_registrationSavePoint2(HelperBase.prop.getProperty("mobile.base.url"), json, site);
+
+//        given()
+//                .spec(app.requestSpecPlayITRegistration)
+//                .contentType("application/json")
+//                .body(json)
 //                .body("{\n" +
 //                        "  \"deviceUUID\" : \""+ HelperBase.prop.getProperty("mobile.registration.deviceuuid")+"\",\n" +
 //                        "  \"langId\" : 4,\n" +
@@ -201,11 +202,11 @@ public class PlayITRegistrationTest extends TestBase {
 //                        "  },\n" +
 //                        "  \"attachedCardIds\" : [ ]\n" +
 //                        "}")
-                .when()
-                .put("userRegistration/registrationSavePoint2")
-                .then()
-                .log().all()
-                .statusCode(200);
+//                .when()
+//                .put("userRegistration/registrationSavePoint2")
+//                .then()
+//                .log().all()
+//                .statusCode(200);
     }
 
     @Test(priority = 9)
