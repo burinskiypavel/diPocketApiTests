@@ -62,7 +62,7 @@ public class UIBOUserHelper extends UIHelperBase {
     }
 
     public void gotoAllUsersTab() {
-        click(By.id("p-tabpanel-1-label"));
+        click(By.xpath("//a[@role='tab'] //span[contains(text(), 'All users')]"));
     }
 
     public void searchAndSelectBOUser(String tabPanel, String filter, String text) throws InterruptedException {
@@ -71,12 +71,12 @@ public class UIBOUserHelper extends UIHelperBase {
     }
 
     public void searchBOUser(String tabPanel, String filter, String text) {
-        type(By.cssSelector("p-tabpanel[header='" + tabPanel + "'] p-columnfilter[field='" + filter + "'] input[type='text']"), text);
+        type(By.cssSelector("p-tabpanel[header='" + tabPanel + "'] p-columnfilter[ng-reflect-field='" + filter + "'] input[type='text']"), text);
         pressKeys(Keys.ENTER);
     }
 
     public void selectBOUser(String text) throws InterruptedException {
-        click(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='" + text + "']"));
+        click(By.cssSelector("p-tabpanel[header='All users'] td span[ng-reflect-text='" + text + "']"));
         Thread.sleep(500);
     }
 
