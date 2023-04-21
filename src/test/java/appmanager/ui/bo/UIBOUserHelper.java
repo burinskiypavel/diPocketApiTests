@@ -99,9 +99,10 @@ public class UIBOUserHelper extends UIHelperBase {
 
     public void editUser(String firsname) throws InterruptedException {
         Thread.sleep(700);
-        type(By.cssSelector("app-input[ng-reflect-name='firstName'] input[type='text']"), firsname);
+        type(By.cssSelector("input[id*='input_firstName']"), firsname);
         Thread.sleep(1500);
-        click(By.cssSelector("p-button[ng-reflect-label='Edit user']"));
+        moveToElement(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
+        click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//*[contains(text(), 'User updated successfully')]"));
     }
 

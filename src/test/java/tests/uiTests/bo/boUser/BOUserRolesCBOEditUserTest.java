@@ -17,16 +17,16 @@ public class BOUserRolesCBOEditUserTest extends UITestBase {
         app.getUiboHelper().gotoBOUsersPage();
         app.getUiboUserHelper().gotoAllUsersTab();
         app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
-        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Edit']"));
-        app.getUiboHelper().waitForSeveralItems(new String[]{"Role:", "Site:", "Firstname:",
-                "Lastname:", "Phone:", "Email:", "Login (Username):",
-                "Portal client(optional):", "Portal clients for management (optional):", "Upload Photo:"});
+        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Edit']"));
+        app.getUiboHelper().waitForSeveralItems(new String[]{"Role:", "Site:", "First name:",
+                "Last name:", "Phone:", "Email:", "Login (Username):",
+                "Portal client:", "Portal clients for management:", "Upload Photo:"});
         softAssert.assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("span.p-fileupload-choose span.p-button-label")));
-        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Edit user")));
+        softAssert.assertTrue(app.getUiboHelper().isButtonEnabled(By.cssSelector("p-button[ng-reflect-label='Confirm")));
         app.getUiboUserHelper().editUser("Pavel" + random);
-        app.getUiboHelper().waitFor(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']"));
+        app.getUiboHelper().waitFor(By.cssSelector("p-tabpanel[header='All users'] td span[ng-reflect-text='Pavel" + random+"']"));
 
-        softAssert.assertTrue(app.getUiboHelper().isElementPresent(By.cssSelector("p-tabpanel[header='All users'] td[ng-reflect-text='Pavel" + random+"']")));
+        softAssert.assertTrue(app.getUiboHelper().isElementPresent(By.cssSelector("p-tabpanel[header='All users'] td span[ng-reflect-text='Pavel" + random+"']")));
         softAssert.assertAll();
     }
 }
