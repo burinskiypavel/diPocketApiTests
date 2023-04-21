@@ -14,7 +14,7 @@ public class BOUserRolesCBOBlockUserAlternativeFlowTest extends UITestBase {
         app.getUiboHelper().gotoBOUsersPage();
         app.getUiboUserHelper().gotoAllUsersTab();
         app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
-        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap app-button[ng-reflect-label='Block user']"));
+        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Block user']"));
 
         app.getUiboHelper().waitFor(By.cssSelector("div[role='dialog']"));
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Are you sure want to block user')]"));
