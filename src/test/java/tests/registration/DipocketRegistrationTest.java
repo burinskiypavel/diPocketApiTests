@@ -236,7 +236,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 9)
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(HelperBase.prop.getProperty("mobile.base.url"), langId, HelperBase.prop.getProperty("mobile.registration.phoneNumber"), smsCode);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(HelperBase.prop.getProperty("mobile.base.url"), langId, HelperBase.prop.getProperty("mobile.registration.phoneNumber"), smsCode, site);
         response.then().body("isInvited", equalTo(false),
                 "smsCode", equalTo(smsCode));
 //        given()

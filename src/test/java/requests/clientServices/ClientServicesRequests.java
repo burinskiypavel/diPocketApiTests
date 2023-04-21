@@ -183,10 +183,11 @@ public class ClientServicesRequests {
                 .statusCode(200);
     }
 
-    public Response clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(String urlEnv, int langId, String phoneNumber, String smsCode) {
+    public Response clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(String urlEnv, int langId, String phoneNumber, String smsCode, String site) {
         Response response = given()
                 .spec(requestSpecClientServices)
                 .baseUri(urlEnv)
+                .header("site", site)
                 .queryParam("langID", langId)
                 .queryParam("phoneNum", phoneNumber)
                 .queryParam("code", smsCode)

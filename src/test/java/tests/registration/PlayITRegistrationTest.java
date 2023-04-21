@@ -211,18 +211,21 @@ public class PlayITRegistrationTest extends TestBase {
 
     @Test(priority = 9)
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
-        given()
-                .spec(app.requestSpecPlayITRegistration)
-                .queryParam("langID", langId)
-                .queryParam("phoneNum", app.playITRegistrationPhone)
-                .queryParam("code", smsCode)
-                .when()
-                .get("userRegistration/checkPhoneAndLoadSavePoint")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("isInvited", equalTo(false),
-                        "smsCode", equalTo(smsCode));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(HelperBase.prop.getProperty("mobile.base.url"), langId, app.playITRegistrationPhone, smsCode, site);
+        response.then().body("isInvited", equalTo(false),
+                "smsCode", equalTo(smsCode));
+//        given()
+//                .spec(app.requestSpecPlayITRegistration)
+//                .queryParam("langID", langId)
+//                .queryParam("phoneNum", app.playITRegistrationPhone)
+//                .queryParam("code", smsCode)
+//                .when()
+//                .get("userRegistration/checkPhoneAndLoadSavePoint")
+//                .then()
+//                .log().all()
+//                .statusCode(200)
+//                .body("isInvited", equalTo(false),
+//                        "smsCode", equalTo(smsCode));
     }
 
     @Test(priority = 10)
