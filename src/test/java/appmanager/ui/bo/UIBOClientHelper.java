@@ -5,9 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import padeObjects.bo.boClient.BlockClientPage;
-import padeObjects.bo.boClient.ClientPage;
-import padeObjects.bo.boClient.UnblockClientPage;
+import padeObjects.bo.boClient.*;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -16,6 +14,8 @@ public class UIBOClientHelper extends UIHelperBase {
     ClientPage clientPage = new ClientPage(driver);
     UnblockClientPage unblockClientPage = new UnblockClientPage(driver);
     BlockClientPage blockClientPage = new BlockClientPage(driver);
+    BanClientPage banClientPage = new BanClientPage(driver);
+    UnbanClientPage unbanClientPage = new UnbanClientPage(driver);
 
     public UIBOClientHelper(WebDriver driver) {
         super(driver);
@@ -62,26 +62,34 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void unbanClient(String reason) {
-        click(By.xpath("//p-button[@ng-reflect-label='Unban client']"));
-        type(By.cssSelector("input[id*='input_unblockOrUnbanReason']"), reason);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Unban client']"));
+        click(clientPage.unbanClientBtn);
+        //type(By.cssSelector("input[id*='input_unblockOrUnbanReason']"), reason);
+        type(unbanClientPage.unbanReasonInput, reason);
+        //click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        click(unbanClientPage.confirmBtn);
         waitFor(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
         waitFor(By.xpath("//app-client-info //span[contains(text(), 'Active')]"));
     }
 
     public void banClient(String reason) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Ban client']"));
-        type(By.cssSelector("input[id*=blockOrBanReason]"), reason);
+        //click(By.xpath("//p-button[@ng-reflect-label='Ban client']"));
+        click(clientPage.banClientBtn);
+        //type(By.cssSelector("input[id*=blockOrBanReason]"), reason);
+        type(banClientPage.banReasonInput, reason);
         Thread.sleep(1500);
-        clickCheckbox(By.cssSelector("p-checkbox[id*='blockClientDevice']"));
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        //clickCheckbox(By.cssSelector("p-checkbox[id*='blockClientDevice']"));
+        click(banClientPage.blockClientDeviceCheckbox);
+        //click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        click(banClientPage.confirmBtn);
         waitFor(By.xpath("//div[contains(text(), 'Client was ban successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
     }
 
     public void banClientWithoutBlockingClientDevice(String reason) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Ban client']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Ban client']"));
+        click(clientPage.banClientBtn);
         type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
         Thread.sleep(1500);
         click(By.xpath("//app-button[@ng-reflect-label='Ban']"));
