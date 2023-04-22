@@ -139,10 +139,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().search("id", clientId, forgotPhone);
         app.getUiboClientHelper().goToClientPage(forgotPhone);
 
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
-        app.getUiboHelper().click(By.xpath("//label[contains(text(), 'Change secret answer:')]"));
-        app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
-        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+        app.getUiboClientHelper().changeCredetialsChangeSecretAnswer();
     }
 
     @Test(priority = 8)
@@ -152,7 +149,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId);
 
-        if(app.getUiboHelper().isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
+        if(app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='38098316499']"))){
             app.getUiboClientHelper().goToClientPage("38098316499");
             app.getUiboClientHelper().changeCredentialsChagePhoneNumber(forgotPhone);
             app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
@@ -168,7 +165,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().navigateBack();
         app.getUiboHelper().search("id", clientId);
 
-        if(app.getUiboHelper().isElementPresent(By.cssSelector("td[ng-reflect-text='38098316499']"))){
+        if(app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='38098316499']"))){
             app.getUiboClientHelper().goToClientPage("38098316499");
             app.getUiboClientHelper().changeCredentialsChagePhoneNumber(forgotPhone);
             app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));

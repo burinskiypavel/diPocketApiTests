@@ -108,6 +108,16 @@ public class UIBOClientHelper extends UIHelperBase {
         waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
+    public void changeCredetialsChangeSecretAnswer() {
+        //click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
+        click(clientPage.changeCredentialsBtn);
+        //click(By.xpath("//label[contains(text(), 'Change secret answer:')]"));
+        click(changeCredentialsPage.changeSecretAnswerCheckbox);
+        //click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
+        click(changeCredentialsPage.confirmBtn);
+        waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
+    }
+
     public void changeCredentialsChagePhoneNumber(String newPhone) throws InterruptedException {
         click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
         click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
