@@ -25,7 +25,7 @@ public class ClientPage {
     @FindBy(xpath = "//p-button[@ng-reflect-label='Block client']")
     public WebElement blockClientBtn;
 
-    @FindBy(xpath = "//p-button[@ng-reflect-label='Change credentials'")
+    @FindBy(xpath = "//p-button[@ng-reflect-label='Change credentials']")
     public WebElement changeCredentialsBtn;
 
     @FindBy(xpath = "//p-button[@ng-reflect-label='Forget client']")

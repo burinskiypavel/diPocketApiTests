@@ -318,7 +318,7 @@ public class UIBOHelper extends UIHelperBase {
     public void search(String by, String value) {
         waitFor(By.cssSelector("input[id*='_input_"+by+"_']"));
         type(By.cssSelector("input[id*='_input_"+by+"_']"), value);
-        waitFor(By.cssSelector("td[ng-reflect-text='"+value+"']"));
+        waitFor(By.cssSelector("td span[ng-reflect-text='"+value+"']"));
     }
 
 //    public void updateLimits(String lowLimit, String highLimit) throws InterruptedException {

@@ -16,6 +16,7 @@ public class UIBOClientHelper extends UIHelperBase {
     BlockClientPage blockClientPage = new BlockClientPage(driver);
     BanClientPage banClientPage = new BanClientPage(driver);
     UnbanClientPage unbanClientPage = new UnbanClientPage(driver);
+    ChangeCredentialsPage changeCredentialsPage = new ChangeCredentialsPage(driver);
 
     public UIBOClientHelper(WebDriver driver) {
         super(driver);
@@ -95,6 +96,16 @@ public class UIBOClientHelper extends UIHelperBase {
         click(By.xpath("//app-button[@ng-reflect-label='Ban']"));
         waitFor(By.xpath("//div[contains(text(), 'User was ban successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
+    }
+
+    public void changeCredentialsChangePassword() {
+        //click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
+        click(clientPage.changeCredentialsBtn);
+        //click(By.xpath("//label[contains(text(), 'Change password:')]"));
+        click(changeCredentialsPage.changePasswordCheckbox);
+        //click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
+        click(changeCredentialsPage.confirmBtn);
+        waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
     public void changeCredentialsChagePhoneNumber(String newPhone) throws InterruptedException {
