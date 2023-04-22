@@ -17,6 +17,7 @@ public class UIBOClientHelper extends UIHelperBase {
     BanClientPage banClientPage = new BanClientPage(driver);
     UnbanClientPage unbanClientPage = new UnbanClientPage(driver);
     ChangeCredentialsPage changeCredentialsPage = new ChangeCredentialsPage(driver);
+    ForgetClientPage forgetClientPage = new ForgetClientPage(driver);
 
     public UIBOClientHelper(WebDriver driver) {
         super(driver);
@@ -133,10 +134,13 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void forgetClient(String reason) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Forget client']"));
-        type(By.cssSelector("input[id*='input_reason']"), reason);
+        //click(By.xpath("//p-button[@ng-reflect-label='Forget client']"));
+        click(clientPage.forgetClientBtn);
+        //type(By.cssSelector("input[id*='input_reason']"), reason);
+        type(forgetClientPage.reasonInput, reason);
         Thread.sleep(700);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        click(forgetClientPage.confirmBtn);
         waitFor(By.xpath("//div[contains(text(), 'Client was forget successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Forgotten')]"));
     }
