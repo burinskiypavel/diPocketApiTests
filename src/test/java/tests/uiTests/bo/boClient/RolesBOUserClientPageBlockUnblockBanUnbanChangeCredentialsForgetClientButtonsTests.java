@@ -102,7 +102,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Ban client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Ban client']"))){
             app.getUiboClientHelper().banClient("test");
         }
 

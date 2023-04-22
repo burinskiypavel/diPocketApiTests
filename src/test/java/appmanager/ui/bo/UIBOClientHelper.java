@@ -54,7 +54,7 @@ public class UIBOClientHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
-        waitFor(By.xpath("//span[contains(text(), 'Active')]"));
+        waitFor(By.xpath("//app-client-info //span[contains(text(), 'Active')]"));
     }
 
     public void banClient(String reason) throws InterruptedException {
