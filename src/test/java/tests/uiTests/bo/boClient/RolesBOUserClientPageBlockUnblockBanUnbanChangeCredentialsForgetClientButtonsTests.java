@@ -31,7 +31,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
         assertEquals(actualState, "State: Blocked");
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unblock client']"))){
             app.getUiboClientHelper().unblockClient("test");
         }
     }
@@ -43,7 +43,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Block client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Block client']"))){
             app.getUiboClientHelper().blockClient("test");
         }
 
@@ -81,7 +81,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unban client']"))){
             app.getUiboClientHelper().unbanClient("test");
         }
 
@@ -90,7 +90,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
         assertEquals(actualState, "State: Banned");
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unban client']"))){
             app.getUiboClientHelper().unbanClient("test");
         }
     }
@@ -129,7 +129,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
         app.getUiboClientHelper().goToClientPage(forgotPhone);
 
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
         app.getUiboHelper().click(By.xpath("//label[contains(text(), 'Change password:')]"));
         app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
@@ -143,7 +143,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().search("id", clientId, forgotPhone);
         app.getUiboClientHelper().goToClientPage(forgotPhone);
 
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
         app.getUiboHelper().click(By.xpath("//label[contains(text(), 'Change secret answer:')]"));
         app.getUiboHelper().click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
         app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
@@ -189,7 +189,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().search("id", clientId);
         app.getUiboClientHelper().goToClientPage(forgotPhone);
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unblock client']"))){
             app.getUiboClientHelper().unblockClient("test");
         }
 

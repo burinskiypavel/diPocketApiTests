@@ -5,11 +5,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import padeObjects.bo.boClient.BlockClientPage;
+import padeObjects.bo.boClient.ClientPage;
+import padeObjects.bo.boClient.UnblockClientPage;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class UIBOClientHelper extends UIHelperBase {
+    ClientPage clientPage = new ClientPage(driver);
+    UnblockClientPage unblockClientPage = new UnblockClientPage(driver);
+    BlockClientPage blockClientPage = new BlockClientPage(driver);
 
     public UIBOClientHelper(WebDriver driver) {
         super(driver);
@@ -26,9 +32,12 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void unblockClient(String reason) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Unblock client']"));
-        type(By.cssSelector("input[id*=input_unblockOrUnbanReason]"), reason);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Unblock client']"));
+        click(clientPage.unblockClientBtn);
+        //type(By.cssSelector("input[id*=input_unblockOrUnbanReason]"), reason);
+        type(unblockClientPage.unblockReasonInput, reason);
+        //click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        click(unblockClientPage.confirmBtn);
         Thread.sleep(2000);
         waitFor(By.xpath("//*[contains(text(), 'Client was unblocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Client was unblocked successfully')]"));
@@ -37,11 +46,15 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void blockClient(String reason) throws InterruptedException {
-        waitFor(By.xpath("//p-button[@ng-reflect-label='Block client']"));
-        click(By.xpath("//p-button[@ng-reflect-label='Block client']"));
-        type(By.cssSelector("input[id*=input_blockOrBanReason]"), reason);
+        //waitFor(By.xpath("//p-button[@ng-reflect-label='Block client']"));
+        waitFor(clientPage.blockClientBtn);
+        //click(By.xpath("//p-button[@ng-reflect-label='Block client']"));
+        click(clientPage.blockClientBtn);
+        //type(By.cssSelector("input[id*=input_blockOrBanReason]"), reason);
+        type(blockClientPage.blockReasonInput, reason);
         Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Block']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Block']"));
+        click(blockClientPage.blockBtn);
         Thread.sleep(2000);
         //waitFor(By.xpath("//p-toast //div[contains(text(), 'Client was blocked successfully')]"));
         waitFor(By.xpath("//*[contains(text(), 'Client was blocked successfully')]"));
@@ -77,7 +90,7 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void changeCredentialsChagePhoneNumber(String newPhone) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Change credentials']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
         click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
         waitForInvisibilityOfElement(By.cssSelector("input[placeholder='New phone'][disabled]"));
         type(By.cssSelector("p-inputnumber[id*='input-number_mainPhone'] input"), newPhone);
@@ -86,7 +99,7 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void forgetClient(String reason) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Forget client']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Forget client']"));
         type(By.cssSelector("input[id*='input_reason']"), reason);
         Thread.sleep(700);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
