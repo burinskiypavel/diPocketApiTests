@@ -16,7 +16,7 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void goToClientPage(String phone) {
-        click(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
+        click(By.cssSelector("td span[ng-reflect-text='"+phone+"']"));
         waitFor(By.cssSelector("p.user-name"));
     }
 
@@ -25,26 +25,31 @@ public class UIBOClientHelper extends UIHelperBase {
         waitFor(By.cssSelector("app-corp-client-info"));
     }
 
-    public void unblockClient(String reason) {
-        click(By.xpath("//app-button[@ng-reflect-label='Unblock client']"));
+    public void unblockClient(String reason) throws InterruptedException {
+        click(By.xpath("//p-button[@ng-reflect-label='Unblock client']"));
         type(By.cssSelector("input[id*=input_unblockOrUnbanReason]"), reason);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-        waitForInvisibilityOfElement(By.xpath("//div[contains(text(), 'Client was unblocked successfully')]"));
-        waitFor(By.xpath("//app-button[@ng-reflect-label='Block client']"));
+        Thread.sleep(2000);
+        waitFor(By.xpath("//*[contains(text(), 'Client was unblocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Client was unblocked successfully')]"));
+        waitFor(By.xpath("//p-button[@ng-reflect-label='Block client']"));
         waitFor(By.xpath("//span[contains(text(), 'Active')]"));
     }
 
     public void blockClient(String reason) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Block client']"));
+        waitFor(By.xpath("//p-button[@ng-reflect-label='Block client']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Block client']"));
         type(By.cssSelector("input[id*=input_blockOrBanReason]"), reason);
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Block']"));
-        waitFor(By.xpath("//div[contains(text(), 'Client was blocked successfully')]"));
+        Thread.sleep(2000);
+        //waitFor(By.xpath("//p-toast //div[contains(text(), 'Client was blocked successfully')]"));
+        waitFor(By.xpath("//*[contains(text(), 'Client was blocked successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Blocked')]"));
     }
 
     public void unbanClient(String reason) {
-        click(By.xpath("//app-button[@ng-reflect-label='Unban client']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Unban client']"));
         type(By.cssSelector("input[id*='input_unblockOrUnbanReason']"), reason);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         waitFor(By.xpath("//div[contains(text(), 'Client was unbaned successfully')]"));
@@ -53,7 +58,7 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void banClient(String reason) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Ban client']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Ban client']"));
         type(By.cssSelector("input[id*=blockOrBanReason]"), reason);
         Thread.sleep(1500);
         clickCheckbox(By.cssSelector("p-checkbox[id*='blockClientDevice']"));
@@ -63,7 +68,7 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void banClientWithoutBlockingClientDevice(String reason) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Ban client']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Ban client']"));
         type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
         Thread.sleep(1500);
         click(By.xpath("//app-button[@ng-reflect-label='Ban']"));

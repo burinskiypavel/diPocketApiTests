@@ -22,7 +22,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unblock client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unblock client']"))){
             app.getUiboClientHelper().unblockClient("test");
         }
 
@@ -60,7 +60,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unban client']"))){
             app.getUiboClientHelper().unbanClient("test");
         }
 
@@ -69,7 +69,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
 
         assertEquals(actualState, "State: Banned");
 
-        if(app.getUiboHelper().isElementPresent(By.xpath("//app-button[@ng-reflect-label='Unban client']"))){
+        if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unban client']"))){
             app.getUiboClientHelper().unbanClient("test");
         }
     }

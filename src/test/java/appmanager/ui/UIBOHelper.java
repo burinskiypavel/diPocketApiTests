@@ -310,14 +310,14 @@ public class UIBOHelper extends UIHelperBase {
 //    }
 
     public void search(String by, String value, String phone) {
-        waitFor(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"));
-        type(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"), value);
-        waitFor(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
+        waitFor(By.cssSelector("input[id*='_input_"+by+"_']"));
+        type(By.cssSelector("input[id*='_input_"+by+"_']"), value);
+        waitFor(By.cssSelector("td span[ng-reflect-text='"+phone+"']"));
     }
 
     public void search(String by, String value) {
-        waitFor(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"));
-        type(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"), value);
+        waitFor(By.cssSelector("input[id*='_input_"+by+"_']"));
+        type(By.cssSelector("input[id*='_input_"+by+"_']"), value);
         waitFor(By.cssSelector("td[ng-reflect-text='"+value+"']"));
     }
 
