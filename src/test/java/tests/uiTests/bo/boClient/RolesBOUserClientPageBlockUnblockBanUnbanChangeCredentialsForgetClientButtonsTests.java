@@ -116,17 +116,14 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
     @Test(priority = 6)
     public void testRolesBOUserClientPageChangeCredentialsButtonChangePIN() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
+        String phone = app.getDbHelper().getClientPhoneFromDB(clientId, Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
+        if(phone.equals(newPhone)){
+            app.getDbHelper().updateClientPhoneFromDB(forgotPhone, clientId, HelperBase.prop.getProperty("db.url"));
+        }
+
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId);
-
-        if(app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='38098316499']"))){
-            app.getUiboClientHelper().goToClientPage("38098316499");
-            app.getUiboClientHelper().changeCredentialsChagePhoneNumber(forgotPhone);
-            app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
-            app.getUiboHelper().navigateBack();
-            app.getUiboHelper().search("id", clientId);
-        }
 
         app.getUiboClientHelper().goToClientPage(forgotPhone);
         app.getUiboClientHelper().changeCredentialsChangePassword();
