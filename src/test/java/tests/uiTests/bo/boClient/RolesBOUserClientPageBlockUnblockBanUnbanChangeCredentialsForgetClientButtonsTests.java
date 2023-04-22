@@ -14,6 +14,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
     String phone = "380980316499"; //380634413376
     String clientId = "34138";// 33217
     String forgotPhone = "380685448615";
+    String newPhone = "38098316499";
 
     @Test(priority = 1)
     public void testRolesBOUserClientPageBlockClientButton() throws InterruptedException {
@@ -145,32 +146,21 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
     @Test(priority = 8)
     public void testRolesBOUserClientPageChangeCredentialsButtonChangePhoneNumber() throws InterruptedException, SQLException, ClassNotFoundException {
         String clientId = app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
+        String phone = app.getDbHelper().getClientPhoneFromDB(clientId, Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
+        if(phone.equals(newPhone)){
+            app.getDbHelper().updateClientPhoneFromDB(forgotPhone, clientId, HelperBase.prop.getProperty("db.url"));
+        }
+
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", clientId);
 
-        if(app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='38098316499']"))){
-            app.getUiboClientHelper().goToClientPage("38098316499");
-            app.getUiboClientHelper().changeCredentialsChagePhoneNumber(forgotPhone);
-            app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
-            app.getUiboHelper().navigateBack();
-            app.getUiboHelper().search("id", clientId);
-        }
-
         app.getUiboClientHelper().goToClientPage(forgotPhone);
-        app.getUiboClientHelper().changeCredentialsChagePhoneNumber("38098316499");
+        app.getUiboClientHelper().changeCredentialsChagePhoneNumber(newPhone);
 
-        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
-
-        app.getUiboHelper().navigateBack();
-        app.getUiboHelper().search("id", clientId);
-
-        if(app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='38098316499']"))){
-            app.getUiboClientHelper().goToClientPage("38098316499");
-            app.getUiboClientHelper().changeCredentialsChagePhoneNumber(forgotPhone);
-            app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
-            app.getUiboHelper().navigateBack();
-            app.getUiboHelper().search("id", clientId);
+        phone = app.getDbHelper().getClientPhoneFromDB(clientId, Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
+        if(phone.equals(newPhone)){
+            app.getDbHelper().updateClientPhoneFromDB(forgotPhone, clientId, HelperBase.prop.getProperty("db.url"));
         }
     }
 

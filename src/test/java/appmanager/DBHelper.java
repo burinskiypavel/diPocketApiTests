@@ -308,6 +308,28 @@ public class DBHelper extends HelperBase {
         return id;
     }
 
+    public String getClientPhoneFromDB(String id, String site, String envUrl) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+envUrl+"";
+        String username = prop.getProperty("db.username");
+        String password = prop.getProperty("db.password");
+        String query = "select * from Client Where ID = '"+id+ "' and Site = '" + site + "'";
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection(dbUrl, username, password);
+
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String phone = null;
+        while (rs.next()){
+            phone = rs.getString(5);
+            System. out.println("phone: " + phone);
+            break;
+        }
+        con.close();
+        return phone;
+    }
+
     public int getClientIdFromDB2(String email, String site) throws ClassNotFoundException, SQLException {
         String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
         String username = prop.getProperty("db.username");
@@ -696,8 +718,8 @@ public class DBHelper extends HelperBase {
         return LimitPlanName;
     }
 
-    public void updateClientPhoneFromDB(String phone, String id) throws ClassNotFoundException, SQLException {
-        String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.url")+"";
+    public void updateClientPhoneFromDB(String phone, String id, String envUrl) throws ClassNotFoundException, SQLException {
+        String dbUrl = "jdbc:oracle:thin:@"+envUrl+"";
         String username = prop.getProperty("db.username");
         String password = prop.getProperty("db.password");
         String query = "update client set MAINPHONE = '"+phone+"' where ID = '"+id+"'";

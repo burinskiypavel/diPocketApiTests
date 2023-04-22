@@ -119,12 +119,17 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void changeCredentialsChagePhoneNumber(String newPhone) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
-        click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Change credentials']"));
+        click(clientPage.changeCredentialsBtn);
+        //click(By.xpath("//label[contains(text(), 'Change phone number:')]"));
+        click(changeCredentialsPage.changePhoneNumberCheckbox);
         waitForInvisibilityOfElement(By.cssSelector("input[placeholder='New phone'][disabled]"));
-        type(By.cssSelector("p-inputnumber[id*='input-number_mainPhone'] input"), newPhone);
+        //type(By.cssSelector("p-inputnumber[id*='input-number_mainPhone'] input"), newPhone);
+        type(changeCredentialsPage.newPhoneInput, newPhone);
         Thread.sleep(1500);
-        click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
+        //click(By.cssSelector("p-button[ng-reflect-label='Confirm']"));
+        click(changeCredentialsPage.confirmBtn);
+        waitFor(By.xpath("//div[contains(text(), 'Credentials was changed successfully')]"));
     }
 
     public void forgetClient(String reason) throws InterruptedException {

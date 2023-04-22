@@ -20,8 +20,12 @@ public class ChangeCredentialsPage {
     public WebElement changeSecretAnswerCheckbox;
 
     @FindBy(css = "p-checkbox[id*='checkbox_changeMainPhone']")
-    public WebElement changeMainPhoneCheckbox;
+    public WebElement changePhoneNumberCheckbox;
 
     @FindBy(xpath = "//p-button[@ng-reflect-label='Confirm']")
     public WebElement confirmBtn;
+
+    @FindBy(css = "p-inputnumber[id*='input-number_mainPhone'] input")
+    public WebElement newPhoneInput;
+
 }
