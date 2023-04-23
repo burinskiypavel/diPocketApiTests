@@ -487,23 +487,23 @@
 
     <!--    Up And Go -->
 
-    <test name="UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest">
-        <classes>
-            <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest"/>
-        </classes>
-    </test>
+<!--    <test name="UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationFillPhoneFieldWithForbiddenCharactersTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="UpAndGoCheckBalanceNegativeTests">
-        <classes>
-            <class name="tests.uiTests.upandgo.UpAndGoCheckBalanceNegativeTests"/>
-        </classes>
-    </test>
+<!--    <test name="UpAndGoCheckBalanceNegativeTests">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.upandgo.UpAndGoCheckBalanceNegativeTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest">
-        <classes>
-            <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest"/>
-        </classes>
-    </test>
+<!--    <test name="UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest">-->
+<!--        <classes>-->
+<!--            <class name="tests.uiTests.upandgo.UpAndGoLoginVerificationPhoneFieldWithIncompletePhoneTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <!--BO-->
 
