@@ -18,46 +18,14 @@ public class RolesBOUserClientPageTest extends UITestBase {
         softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
         softAssert.assertTrue(app.getUiboHelper().isDefault2(By.id("p-tabpanel-0-label")));
 
-        softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
-                "//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='email']", "//app-input[@ng-reflect-name='mainPhone']",
-                "//app-input[@ng-reflect-name='firstName']", "//app-input[@ng-reflect-name='lastName']", "//p-calendar //input[@type='text']",
-        "//app-input[@ng-reflect-name='mailingAddress']", "//app-input[@ng-reflect-name='companyName']"}));
+        softAssert = app.getUiboClientHelper().verifySearchFields();
 
-        app.getUiboHelper().type(By.cssSelector("input[id*='input_id']"), clientId);
-        app.getUiboHelper().waitFor(By.cssSelector("td span[ng-reflect-text='380634413376']"));
+        app.getUiboHelper().search("id", clientId, phone);
 
-        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='380634413376']")));
-        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='vikarez20@gmail.com']")));
+        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='"+phone+"']")), "phone");
+        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='vikarez20@gmail.com']")), "email");
 
-        app.getUiboHelper().click(By.cssSelector("td span[ng-reflect-text='380634413376']"));
-        app.getUiboHelper().waitFor(By.cssSelector("p.user-name"));
-
-
-
-
-//        String actualUsername = app.getUiboHelper().getText(By.cssSelector("p.user-name"));
-//        String actualEmail = app.getUiboHelper().getText(By.cssSelector("p.email"));
-//
-//
-//        String actualState = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'State:')]"));
-//        String actualSite = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Site:')]"));
-//
-//        String actualRisk = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Risk')]"));
-//        String actualRegistryAdd = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Registry add:')]"));
-//        String actualMailingAdd = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Mailing add:')]"));
-//
-//        softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
-//                "//*[contains(text(), '06.10.1976')]", "//*[contains(text(), '380634413376')]", "//*[contains(text(), '33217')]",
-//                "//*[contains(text(), 'FDD')]", "//*[contains(text(), 'EUR - standart')]", "//*[contains(text(), 'EUR')]",
-//                "//*[contains(text(), 'Ukrainian')]",}));
-//
-//        softAssert.assertEquals(actualUsername, "Nona Qwerty");
-//        softAssert.assertEquals(actualEmail, "vikarez20@gmail.com (verified)");
-//        softAssert.assertEquals(actualState, "State: Active");
-//        softAssert.assertEquals(actualSite, "Site: DIPOCKET");
-//        softAssert.assertEquals(actualRisk, "Risk: 3");
-//        softAssert.assertEquals(actualRegistryAdd, "Registry add: Address44, City, UA");
-//        softAssert.assertEquals(actualMailingAdd, "Mailing add: Address, City, AT");
+        app.getUiboClientHelper().goToClientPage(phone);
 
         softAssert.assertAll();
     }

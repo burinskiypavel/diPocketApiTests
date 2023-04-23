@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.asserts.SoftAssert;
 import padeObjects.bo.boClient.*;
 
 import static org.testng.Assert.assertFalse;
@@ -18,6 +19,7 @@ public class UIBOClientHelper extends UIHelperBase {
     UnbanClientPage unbanClientPage = new UnbanClientPage(driver);
     ChangeCredentialsPage changeCredentialsPage = new ChangeCredentialsPage(driver);
     ForgetClientPage forgetClientPage = new ForgetClientPage(driver);
+    SoftAssert softAssert = new SoftAssert();
 
     public UIBOClientHelper(WebDriver driver) {
         super(driver);
@@ -405,5 +407,13 @@ public class UIBOClientHelper extends UIHelperBase {
     public void setClientPageFilter_messageTab(final String filter, String text) {
         type(By.cssSelector("div[id='p-tabpanel-2'] p-columnfilter[ng-reflect-field='" + filter + "'] input[type='text']"), text);
         pressKeys(Keys.ENTER);
+    }
+
+    public SoftAssert verifySearchFields() {
+        softAssert.assertFalse(!areElementsPresent(new String[]{
+                "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_id')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_email')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_mainPhone')]",
+                "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_firstName2')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_lastName')]", "//p-calendar //input[@type='text']",
+                "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_mailingAddress')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_companyName2')]"}), "Search Fields failed");
+        return softAssert;
     }
 }
