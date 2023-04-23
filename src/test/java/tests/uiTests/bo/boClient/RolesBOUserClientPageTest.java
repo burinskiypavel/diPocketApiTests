@@ -5,6 +5,10 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+
 public class RolesBOUserClientPageTest extends UITestBase {
     SoftAssert softAssert = new SoftAssert();
     String clientId = "33217";
@@ -30,29 +34,11 @@ public class RolesBOUserClientPageTest extends UITestBase {
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
 
-        String actualUsername = app.getUiboHelper().getText(By.cssSelector("p.user-name"));
-        String actualEmail = app.getUiboHelper().getText(By.cssSelector("p.email"));
+        app.getUiboHelper().waitFor(By.xpath("//app-client-info"));
+        List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-client-info //p"));
+        List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boClient/verifyClientInfoOnClientPage.txt");
 
-        String actualState = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'State:')]"));
-        String actualSite = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Site:')]"));
-
-        String actualRisk = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Risk')]"));
-        String actualRegistryAdd = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Registry add:')]"));
-        String actualMailingAdd = app.getUiboHelper().getText(By.xpath("//*[contains(text(), 'Mailing add:')]"));
-
-        softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
-                "//*[contains(text(), '06.10.1976')]", "//*[contains(text(), '380634413376')]", "//*[contains(text(), '33217')]",
-                "//*[contains(text(), 'FDD')]", "//*[contains(text(), 'EUR - standart')]", "//*[contains(text(), 'EUR')]",
-                "//*[contains(text(), 'Ukrainian')]",}));
-
-        softAssert.assertEquals(actualUsername, "Nona Qwerty");
-        softAssert.assertEquals(actualEmail, "vikarez20@gmail.com (verified)");
-        softAssert.assertEquals(actualState, "State: Active");
-        softAssert.assertEquals(actualSite, "Site: DIPOCKET");
-        softAssert.assertEquals(actualRisk, "Risk: 3");
-        softAssert.assertEquals(actualRegistryAdd, "Registry add: Address44, City, UA");
-        softAssert.assertEquals(actualMailingAdd, "Mailing add: Address, City, AT");
-        softAssert.assertAll();
+        assertEquals(actualElementsText, expectedElementsText);
     }
 
     @Test
