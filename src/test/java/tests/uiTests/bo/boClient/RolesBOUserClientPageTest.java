@@ -14,19 +14,12 @@ public class RolesBOUserClientPageTest extends UITestBase {
     public void testRolesBOUserClientPage() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
-        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Client')]")));
-        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Card')]")));
+        app.getUiboClientHelper().virifyTabsOnSerchPage();
         softAssert.assertTrue(app.getUiboHelper().isDefault2(By.id("p-tabpanel-0-label")));
-
         softAssert = app.getUiboClientHelper().verifySearchFields();
-
         app.getUiboHelper().search("id", clientId, phone);
-
-        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='"+phone+"']")), "phone");
-        softAssert.assertFalse(!app.getUiboHelper().isElementPresent(By.cssSelector("td span[ng-reflect-text='vikarez20@gmail.com']")), "email");
-
+        softAssert = app.getUiboClientHelper().verifyClientSearchResult(phone, "vikarez20@gmail.com");
         app.getUiboClientHelper().goToClientPage(phone);
-
         softAssert.assertAll();
     }
 
@@ -69,15 +62,8 @@ public class RolesBOUserClientPageTest extends UITestBase {
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
 
-        softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
-                "//a[@role='tab'] //span[contains(text(), 'Tiles')]", "//a[@role='tab'] //span[contains(text(), 'Messages')]", "//a[@role='tab'] //span[contains(text(), 'Client iban')]",
-                "//a[@role='tab'] //span[contains(text(), 'Payee')]", "//a[@role='tab'] //span[contains(text(), 'Selfie')]", "//a[@role='tab'] //span[contains(text(), 'Docs')]",
-                "//a[@role='tab'] //span[contains(text(), 'Accounts')]", "//a[@role='tab'] //span[contains(text(), '3rd party cards')]", "//a[@role='tab'] //span[contains(text(), 'Transaction')]",
-                "//a[@role='tab'] //span[contains(text(), 'Tickets')]", "//a[@role='tab'] //span[contains(text(), 'Supervisor requests')]"}), "Tabs incorrect");
-
-        softAssert.assertFalse(!app.getUiboHelper().areButtonsPresent(new String[]{"//p-button[@ng-reflect-label='Search']", "//p-button[@ng-reflect-label='Block client']", "//p-button[@ng-reflect-label='Ban client']",
-                "//p-button[@ng-reflect-label='Forget client']", "//p-button[@ng-reflect-label='Change credentials']", "//p-button[@ng-reflect-label='Send statements']",
-                "//p-button[@ng-reflect-label='Upload docs']", "//p-button[@ng-reflect-label='Upload selfies']", "//p-button[@ng-reflect-label='Transfer back']"}), "Buttons incorrect");
+        softAssert = app.getUiboClientHelper().verifyTabs();
+        softAssert = app.getUiboClientHelper().virifyButtons();
         softAssert.assertAll();
     }
 }

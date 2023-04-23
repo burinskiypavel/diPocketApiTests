@@ -412,8 +412,36 @@ public class UIBOClientHelper extends UIHelperBase {
     public SoftAssert verifySearchFields() {
         softAssert.assertFalse(!areElementsPresent(new String[]{
                 "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_id')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_email')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_mainPhone')]",
-                "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_firstName2')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_lastName')]", "//p-calendar //input[@type='text']",
-                "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_mailingAddress')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_companyName2')]"}), "Search Fields failed");
+                "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_firstName')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_lastName')]", "//p-calendar //input[@type='text']",
+                "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_mailingAddress')]", "//p-tabpanel[@header='Client'] //input[contains(@id, 'input_companyName')]"}), "Search Fields failed");
+        return softAssert;
+    }
+
+    public SoftAssert virifyTabsOnSerchPage() {
+        softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Client')]")), "Client tab");
+        softAssert.assertFalse(!isElementPresent(By.xpath("//span[contains(text(), 'Card')]")), "Card tab");
+        return softAssert;
+    }
+
+    public SoftAssert verifyClientSearchResult(String phone, String email) {
+        softAssert.assertFalse(!isElementPresent(By.cssSelector("td span[ng-reflect-text='"+ phone +"']")), "phone");
+        softAssert.assertFalse(!isElementPresent(By.cssSelector("td span[ng-reflect-text='" + email + "']")), "email");
+        return softAssert;
+    }
+
+    public SoftAssert virifyButtons() {
+        softAssert.assertFalse(!areButtonsPresent(new String[]{"//p-button[@ng-reflect-label='Search']", "//p-button[@ng-reflect-label='Block client']", "//p-button[@ng-reflect-label='Ban client']",
+                "//p-button[@ng-reflect-label='Forget client']", "//p-button[@ng-reflect-label='Change credentials']", "//p-button[@ng-reflect-label='Send statements']",
+                "//p-button[@ng-reflect-label='Upload docs']", "//p-button[@ng-reflect-label='Upload selfies']", "//p-button[@ng-reflect-label='Transfer back']"}), "Buttons incorrect");
+        return softAssert;
+    }
+
+    public SoftAssert verifyTabs() {
+        softAssert.assertFalse(!areElementsPresent(new String[]{
+                "//a[@role='tab'] //span[contains(text(), 'Tiles')]", "//a[@role='tab'] //span[contains(text(), 'Messages')]", "//a[@role='tab'] //span[contains(text(), 'Client iban')]",
+                "//a[@role='tab'] //span[contains(text(), 'Payee')]", "//a[@role='tab'] //span[contains(text(), 'Selfie')]", "//a[@role='tab'] //span[contains(text(), 'Docs')]",
+                "//a[@role='tab'] //span[contains(text(), 'Accounts')]", "//a[@role='tab'] //span[contains(text(), '3rd party cards')]", "//a[@role='tab'] //span[contains(text(), 'Transaction')]",
+                "//a[@role='tab'] //span[contains(text(), 'Tickets')]", "//a[@role='tab'] //span[contains(text(), 'Supervisor requests')]"}), "Tabs incorrect");
         return softAssert;
     }
 }
