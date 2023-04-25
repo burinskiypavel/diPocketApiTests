@@ -18,6 +18,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
     TakeTicketPage takeTicketPage = new TakeTicketPage(driver);
     ClientSearchPage clientSearchPage = new ClientSearchPage(driver);
+    BOHomePage boHomePage = new BOHomePage(driver);
 
 
     public UIBOTicketHelper(WebDriver driver) {
@@ -26,9 +27,9 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public void gotoTakeTicket() throws InterruptedException {
         click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
-        //BOHomePage boHomePage = new BOHomePage(driver);
         //boHomePage.gotoTakeTicket();
-        waitFor(By.id("takeTicketContent"));
+        click(boHomePage.take_ticket);
+        waitFor(By.cssSelector("app-take-ticket"));
     }
 
     public void gotoTakeTicketWithReg() throws InterruptedException, SQLException, ClassNotFoundException {

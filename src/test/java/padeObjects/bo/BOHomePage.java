@@ -14,10 +14,10 @@ public class BOHomePage {
     }
 
     @FindBy(css = "div[ng-reflect-router-link='take_ticket']")
-    WebElement take_ticket;
+    public WebElement take_ticket;
 
     @FindBy(css = "div[ng-reflect-router-link='search']")
-    WebElement search;
+    public WebElement search;
 
     public void gotoTakeTicket(){
         take_ticket.click();
