@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
+import padeObjects.bo.search.ClientSearchPage;
 import padeObjects.bo.boTicket.TakeTicketEditDataPage;
 import padeObjects.bo.boTicket.TakeTicketPage;
 
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 public class UIBOTicketHelper extends UIHelperBase {
     TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
     TakeTicketPage takeTicketPage = new TakeTicketPage(driver);
+    ClientSearchPage clientSearchPage = new ClientSearchPage(driver);
 
 
     public UIBOTicketHelper(WebDriver driver) {
@@ -225,20 +227,20 @@ public class UIBOTicketHelper extends UIHelperBase {
         goToClientPage("380685448615");
 
         click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
+        selectFromDropDown(By.xpath("//p-dropdown[contains(@id, 'typeId')]"), "PhotoID");
         File file = new File("files/bo/images/self.jpg");
         uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
         Thread.sleep(1000);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
 
         click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Proof of address");
+        selectFromDropDown(By.xpath("//p-dropdown[contains(@id, 'typeId')]"), "Proof of address");
         uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
         Thread.sleep(1000);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
 
         click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID Back");
+        selectFromDropDown(By.xpath("//p-dropdown[contains(@id, 'typeId')]"), "PhotoID Back");
         uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
         Thread.sleep(1000);
         click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
@@ -294,13 +296,13 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void search(String by, String value) {
-        waitFor(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"));
-        type(By.cssSelector("app-input-number[ng-reflect-name='" + by + "'] input.p-inputnumber-input"), value);
-        waitFor(By.cssSelector("td[ng-reflect-text='"+value+"']"));
+        waitFor(By.cssSelector("input[id*='_input_"+by+"_']"));
+        type(By.cssSelector("input[id*='_input_"+by+"_']"), value);
+        waitFor(By.cssSelector("td span[ng-reflect-text='"+value+"']"));
     }
 
     public void goToClientPage(String phone) {
-        click(By.cssSelector("td[ng-reflect-text='"+phone+"']"));
+        click(By.cssSelector("td span[ng-reflect-text='"+phone+"']"));
         waitFor(By.cssSelector("p.user-name"));
     }
 
