@@ -99,7 +99,6 @@ public class CofTests extends APIUITestBase {
                 .header("cliSessionId", cliSessionId)
                 .pathParam("notifyId", notifyId)
                 .header("site", site)
-                .body("")
                 .post("https://http.dipocket.site/ClientServices/v1/aspsp/{notifyId}/approve")
                 .then().log().all()
                 .statusCode(200);
