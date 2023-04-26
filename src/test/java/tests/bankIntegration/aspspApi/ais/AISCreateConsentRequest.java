@@ -107,25 +107,15 @@ public class AISCreateConsentRequest  extends TestBase {
     public void test_AISCreateConsentRequest() throws KeyStoreException, IOException, NoSuchAlgorithmException, KeyManagementException, CertificateException {
         RestAssuredConfig sslConfig = RestAssuredConfig.config().sslConfig(
                 SSLConfig.sslConfig()
-                        .trustStore("files/certs/truststore5", "123456").trustStoreType("JKS")
-                        .keyStore("files/certs/client_.p12", "123456").keystoreType("PKCS12")
-                       // .relaxedHTTPSValidation()
+                        .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
+                        .keyStore("files/certs/client_created.p12", "123456").keystoreType("PKCS12")
+                        .allowAllHostnames()
         );
 
         RestAssuredConfig sslConfig2 = RestAssured.config().sslConfig(
                 new SSLConfig()
                         .trustStore("files/certs/trustStore.p12", "123456")
                         .keyStore("files/certs/client_.p12", "123456"));
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -160,14 +150,6 @@ public class AISCreateConsentRequest  extends TestBase {
 
 
 
-
-
-
-
-
-
-
-
 //        KeyStore keyStore = null;
 //        SSLConfig config = null;
 //
@@ -195,7 +177,7 @@ public class AISCreateConsentRequest  extends TestBase {
                 //.relaxedHTTPSValidation()
                 .log().uri().log().headers().log().body()
                 .contentType("application/json")
-                .config(sslConfig2)
+                .config(sslConfig)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
