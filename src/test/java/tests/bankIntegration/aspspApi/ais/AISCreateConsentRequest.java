@@ -5,6 +5,11 @@ import io.restassured.RestAssured;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.config.SSLConfig;
 import io.restassured.http.ContentType;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
 import org.openqa.selenium.Beta;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -21,8 +26,15 @@ import static io.restassured.RestAssured.given;
 
 public class AISCreateConsentRequest  extends TestBase {
 
-//    @BeforeTest
-//    public void setUp(){
+    @BeforeTest
+    public void setUp(){
+        javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier( new javax.net.ssl.HostnameVerifier() {
+            public boolean verify(String hostname, javax.net.ssl.SSLSession sslSession) {
+                if (hostname.equals("https://client.badssl.com")) {
+                    return true; }
+                return false; }
+        } );
+
 //        RestAssured.config = RestAssured.config().sslConfig(
 //                SSLConfig.sslConfig().with()
 //                        .trustStore("truststore", "abcd@1234")
@@ -30,7 +42,7 @@ public class AISCreateConsentRequest  extends TestBase {
 //                        .keyStore("badssl.com-client.p12", "badssl.com")
 //                        .keystoreType("PKCS12")
 //        );
-//    }
+    }
 
     @Test(priority = 0)
     public void websiteBadSSLTest(){
@@ -38,17 +50,54 @@ public class AISCreateConsentRequest  extends TestBase {
 //                .trustStore("badssl.com-client.p12", "badssl.com").trustStoreType("JKS")
 //                .keyStore("badssl.com-client.p12", "badssl.com").keystoreType("PKCS12"));
 
+        System.setProperty("com.sun.net.ssl.checkRevocation", "false");
 
         RestAssuredConfig sslConfig = RestAssuredConfig.config().sslConfig(
                 SSLConfig.sslConfig()
                         .trustStore("files/certs/truststoreRootX1", "123456").trustStoreType("JKS")
                         .keyStore("files/certs/badssl.com-client.p12", "badssl.com").keystoreType("PKCS12"));
+        SSLFix.execute();
 
         given()
                 .contentType(ContentType.HTML)
                 .config(sslConfig)
                 .when()
                 .get("https://client.badssl.com")
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
+
+    @Test(priority = 3)
+    public void cofGetConsentStatusTest(){
+        //String certificatesTrustStorePath = "<JAVA HOME>/lib/security/cacerts";
+        //System.setProperty("javax.net.ssl.trustStore", certificatesTrustStorePath);
+
+        RestAssuredConfig sslConfig = RestAssuredConfig.config().sslConfig(
+                SSLConfig.sslConfig()
+                        .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
+                        .keyStore("files/certs/client_created.p12", "123456").keystoreType("PKCS12")
+                        .allowAllHostnames()
+        );
+
+
+        RestAssuredConfig sslConfig2 = RestAssuredConfig.config().sslConfig(
+                SSLConfig.sslConfig()
+                        .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
+                        .keyStore("files/certs/client_.p12", "123456").keystoreType("PKCS12"));
+
+
+        //System.setProperty("com.sun.net.ssl.checkRevocation", "false");
+
+
+
+        given()
+                .contentType(ContentType.HTML)
+                .config(sslConfig)
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("TPP-Redirect-URI", "http://www.google.com")
+                .when()
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds/0e0dbc12-9c47-4f54-a06a-fcd8a750b19c/status")
                 .then()
                 .log().all()
                 .statusCode(200);
@@ -150,7 +199,6 @@ public class AISCreateConsentRequest  extends TestBase {
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
-                //.auth().basic(login, pass)
                 .body("{\n" +
                         "    \"access\": {\n" +
                         "        \"balances\": [ \n" +
@@ -173,20 +221,20 @@ public class AISCreateConsentRequest  extends TestBase {
     public void cof(){
         RestAssuredConfig sslConfig = RestAssuredConfig.config().sslConfig(
                 SSLConfig.sslConfig()
-                        .trustStore("truststore5", "123456").trustStoreType("JKS")
-                        .keyStore("client_.p12", "123456").keystoreType("PKCS12")
-                // .relaxedHTTPSValidation()
+                        .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
+                        .keyStore("files/certs/client_created.p12", "123456").keystoreType("PKCS12")
+                        .allowAllHostnames()
         );
 
+
         given()
-                //.auth().certificate("", "")
-                .relaxedHTTPSValidation()
+                //.relaxedHTTPSValidation()
                 .log().uri().log().headers().log().body()
-                //.contentType("application/json")
                 .config(sslConfig)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi/")
+                .contentType("application/json")
                 .body("{\n" +
                         "    \"account\": {\n" +
                         "        \"iban\": \"EE657777000012110759\"\n" +
@@ -194,5 +242,6 @@ public class AISCreateConsentRequest  extends TestBase {
                         "}")
                 .post("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/")
                 .then().log().all()
-                .statusCode(200);    }
+                .statusCode(200);
+    }
 }

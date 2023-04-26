@@ -41,8 +41,8 @@ public class Jvt_me  {
             throws UnrecoverableKeyException, NoSuchAlgorithmException, KeyStoreException,
             KeyManagementException {
         clientCertSpecification(
-                "files/certs/badssl.com-client.p12",
-                "badssl.com",
+                "files/certs/badssl_client_created.p12",
+                "123456",
                 "files/certs/truststore3",
                 "123456")
                 .log()
@@ -59,9 +59,9 @@ public class Jvt_me  {
             throws UnrecoverableKeyException, NoSuchAlgorithmException, KeyStoreException,
             KeyManagementException {
         clientCertSpecification(
-                "files/certs/clientKeystore.p12",
+                "files/certs/client_created.p12",
                 "123456",
-                "files/certs/truststore5",
+                "files/certs/truststoreSandboxCompany.jks",
                 "123456")
                 .log().all()
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
