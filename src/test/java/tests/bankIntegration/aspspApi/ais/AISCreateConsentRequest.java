@@ -222,7 +222,7 @@ public class AISCreateConsentRequest  extends TestBase {
                         "        \"iban\": \"EE657777000012110759\"\n" +
                         "    }\n" +
                         "}")
-                .post("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/")
+                .post("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds")
                 .then().log().all()
                 .statusCode(200);
     }
