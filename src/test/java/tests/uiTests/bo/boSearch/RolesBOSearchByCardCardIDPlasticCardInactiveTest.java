@@ -217,14 +217,8 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardIdForResendPin);
         app.getUiboHelper().gotoCardDetailsPage(cardIdForResendPin);
-
         app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
-
-        app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Reset ePin')]"));
-        app.getUiboHelper().click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Reset ePin')]"));
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Reset']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Card ePin has been successfully reset')]"));
+        app.getUiboCardHelper().resetEpin();
     }
 
     @Test

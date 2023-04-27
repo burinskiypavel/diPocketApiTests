@@ -561,12 +561,12 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void searchByCard(String filter, String value) {
-        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='"+filter+"'] //input"), value);
+        type(By.xpath("//app-search-cards //input[contains(@id, 'input_"+filter+"')]"), value);
     }
 
     public void gotoCardDetailsPage(String cardId) {
-        waitFor(By.xpath("//td[@ng-reflect-text='" + cardId + "']"));
-        click(By.xpath("//td[@ng-reflect-text='" + cardId + "']"));
+        waitFor(By.xpath("//td //span[@ng-reflect-text='" + cardId + "']"));
+        click(By.xpath("//td //span[@ng-reflect-text='" + cardId + "']"));
         waitFor(By.xpath("//a[@role='tab'] //span[contains(text(), 'Transactions')]"));
     }
 

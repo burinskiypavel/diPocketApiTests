@@ -43,6 +43,7 @@ public class ApplicationManagerUI {
     public UIBOUserHelper uiboUserHelper;
     public UIBOClientHelper uiboClientHelper;
     public UIBOSearchHelper uiboSearchHelper;
+    public UIBOCardHelper uiboCardHelper;
     public UIUpAndGoHelper uiUpAndGoHelper;
     public UITelenorHelper uiTelenorHelper;
     public String pan = null;
@@ -143,6 +144,7 @@ public class ApplicationManagerUI {
         uiboUserHelper = new UIBOUserHelper(driver);
         uiboClientHelper = new UIBOClientHelper(driver);
         uiboSearchHelper = new UIBOSearchHelper(driver);
+        uiboCardHelper = new UIBOCardHelper(driver);
         uiUpAndGoHelper = new UIUpAndGoHelper(driver);
         uiTelenorHelper = new UITelenorHelper(driver);
         configTimeout = RestAssured.config()
@@ -344,4 +346,6 @@ public class ApplicationManagerUI {
     public UIBOClientHelper getUiboClientHelper() { return uiboClientHelper; }
 
     public UIBOSearchHelper getUiboSearchHelper() { return uiboSearchHelper; }
+
+    public UIBOCardHelper getUiboCardHelper() { return uiboCardHelper; }
 }
