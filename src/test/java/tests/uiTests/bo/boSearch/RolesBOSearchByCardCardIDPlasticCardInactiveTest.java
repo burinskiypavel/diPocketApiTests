@@ -5,6 +5,7 @@ import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import padeObjects.bo.boCard.CardDetailsPage;
 
 import java.util.List;
 
@@ -59,15 +60,12 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
+        app.getUiboCardHelper().clickOperations();
+        app.getUiboCardHelper().clickAccountsLimits();
+        List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-account-limits //table //tr"));
+        List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boCard/searchByCardCardIDAccountLimits.txt");
 
-        app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
-        app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Account limits')]"));
-        app.getUiboHelper().click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Account limits')]"));
-        app.getUiboHelper().waitFor(By.xpath("//table //th[contains(text(), 'Name')]"));
-
-        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//table //th[contains(text(), 'Name')]", "//table //th[contains(text(), 'Type')]",
-                "//table //th[contains(text(), 'Currency')]", "//table //th[contains(text(), 'Max amount')]", "//table //th[contains(text(), 'Limit amount')]"}), "Account limits has incorrect headers ");
-        softAssert.assertAll();
+        assertEquals(actualElementsText, expectedElementsText);
     }
 
     @Test
@@ -295,10 +293,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Show client info']"));
-        app.getUiboHelper().waitForElementToBeClickable(By.xpath("//app-client-details //p"));
-        app.getUiboHelper().waitFor(By.xpath("//app-client-button-block"));
-        Thread.sleep(700);
+        app.getUiboCardHelper().pressShowClientInfo();
         List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-client-details //p"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boSearch/ShowClientInfo.txt");
 
