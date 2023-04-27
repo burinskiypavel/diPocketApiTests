@@ -79,7 +79,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock account')]"))){
-            app.getUiboHelper().unblockAccountFromSearchByCard();
+            app.getUiboCardHelper().unblockAccountFromSearchByCard();
             app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
             app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
@@ -110,7 +110,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
         }
 
-        app.getUiboHelper().unblockAccountFromSearchByCard();
+        app.getUiboCardHelper().unblockAccountFromSearchByCard();
         app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block account')]")));

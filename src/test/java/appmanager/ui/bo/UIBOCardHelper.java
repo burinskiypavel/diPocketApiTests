@@ -39,4 +39,12 @@ public class UIBOCardHelper extends UIHelperBase {
         click(By.xpath("//app-button[@ng-reflect-label='Back to search']"));
         waitFor(By.id("searchContent"));
     }
+
+    public void unblockAccountFromSearchByCard() {
+        waitForElementToBeClickable(By.xpath("//span[contains(text(), 'Unblock account')"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock account')"));
+        click(By.xpath("//app-button[@label='Unblock']"));
+        waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+    }
 }
