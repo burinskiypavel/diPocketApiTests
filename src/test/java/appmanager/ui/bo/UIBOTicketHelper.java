@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
+import padeObjects.bo.boClient.ClientPage;
+import padeObjects.bo.boClient.UploadDocPage;
 import padeObjects.bo.search.ClientSearchPage;
 import padeObjects.bo.boTicket.TakeTicketEditDataPage;
 import padeObjects.bo.boTicket.TakeTicketPage;
@@ -19,6 +21,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     TakeTicketPage takeTicketPage = new TakeTicketPage(driver);
     ClientSearchPage clientSearchPage = new ClientSearchPage(driver);
     BOHomePage boHomePage = new BOHomePage(driver);
+    ClientPage clientPage = new ClientPage(driver);
+    UploadDocPage uploadDocPage = new UploadDocPage(driver);
 
 
     public UIBOTicketHelper(WebDriver driver) {
@@ -235,12 +239,15 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     private void uploadDoc(String typeId, String pathToFile) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//p-dropdown[contains(@id, 'typeId')]"), typeId);
+        //click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        click(clientPage.uploadDocsBtn);
+        //selectFromDropDown(By.xpath("//p-dropdown[contains(@id, 'typeId')]"), typeId);
+        selectFromDropDown(uploadDocPage.typeIdDropDown, typeId);
         File file = new File(pathToFile);
         uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
         Thread.sleep(1000);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        click(uploadDocPage.confirmBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
     }
@@ -254,30 +261,10 @@ public class UIBOTicketHelper extends UIHelperBase {
         search("id", id);
         goToClientPage("380685448615");
 
-        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID");
-        File file = new File("files/bo/images/self.jpg");
-        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
-        Thread.sleep(1000);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Proof of address");
-        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
-        Thread.sleep(1000);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "PhotoID Back");
-        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
-        Thread.sleep(1000);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-
-        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), "Second ID");
-        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
-        Thread.sleep(1000);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        uploadDoc("PhotoID", "files/bo/images/self.jpg");
+        uploadDoc("Proof of address", "files/bo/images/self.jpg");
+        uploadDoc("PhotoID Back", "files/bo/images/self.jpg");
+        uploadDoc("Second ID", "files/bo/images/self.jpg");
 
         click(By.xpath("//p-button[@ng-reflect-label='Home']"));
         waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
@@ -362,16 +349,9 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public void uploadDoc(String ticketId, String phone, String doc, String path) throws InterruptedException {
         gotoSearchPage();
-
         search("id", ticketId);
         goToClientPage(phone);
-
-        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), doc);
-        File file = new File(path);
-        uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
-        Thread.sleep(1000);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        uploadDoc(doc, path);
     }
 
     public void gotoClientPageAndUpdateSelfies(String clientId, String phone, String path) throws InterruptedException {

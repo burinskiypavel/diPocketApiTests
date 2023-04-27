@@ -31,4 +31,12 @@ public class ClientPage {
     @FindBy(xpath = "//p-button[@ng-reflect-label='Forget client']")
     public WebElement forgetClientBtn;
 
+    @FindBy(xpath = "//p-button[@ng-reflect-label='Upload docs']")
+    public WebElement uploadDocsBtn;
+
+    @FindBy(xpath = "//p-button[@ng-reflect-label='Upload selfies']")
+    public WebElement uploadSelfiesBtn;
+
+    @FindBy(xpath = "//p-button[@ng-reflect-label='Send statements']")
+    public WebElement sendStatementsBtn;
 }

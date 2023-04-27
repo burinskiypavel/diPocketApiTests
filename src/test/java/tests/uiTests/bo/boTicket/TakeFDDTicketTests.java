@@ -410,8 +410,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
         app.getUiboTicketHelper().uploadDoc(clientId, "380685448615", document, "files/bo/images/self.jpg");
 
-        app.getUiboTicketHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
-        app.getUiboTicketHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+        app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "11111111111", "123456789", "Poland");
