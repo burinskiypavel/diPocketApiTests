@@ -34,4 +34,9 @@ public class UIBOCardHelper extends UIHelperBase {
         click(By.xpath("//app-button[@label='Operations']"));
         waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Account limits')]"));
     }
+
+    public void clickBackToSearch() {
+        click(By.xpath("//app-button[@ng-reflect-label='Back to search']"));
+        waitFor(By.id("searchContent"));
+    }
 }

@@ -307,9 +307,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
-        app.getUiboHelper().click(By.xpath("//app-button[@ng-reflect-label='Back to search']"));
-        app.getUiboHelper().waitFor(By.id("searchContent"));
-
+        app.getUiboCardHelper().clickBackToSearch();
         List<String> actualElementsText = app.getUiboHelper().getActualText(By.cssSelector("#searchContent label"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boSearch/backToSearch.txt");
 
