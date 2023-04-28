@@ -105,7 +105,7 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 3)
-    public void test_COFGetConsentStatus(){
+    public void test_GetConsentStatus(){
         given()
                 .log().uri().log().headers().log().body()
                 .config(sslConfig)
@@ -116,5 +116,19 @@ public class CofTests extends APIUITestBase {
                 .then().log().all()
                 .statusCode(200)
                 .body("consentStatus", equalTo("received"));
+    }
+    @Test(priority = 4)
+    public void test_GetConsentRequest(){
+        given()
+                .log().uri().log().headers().log().body()
+                .config(sslConfig)
+                .header("X-Request-ID", "b3500b4a-ca36-4917-9d94-f60a1731c4ca")
+                .header("TPP-Redirect-URI", "http://www.google.com")
+                .pathParam("confirmation-of-funds", consentId)
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}")
+                .then().log().all()
+                .statusCode(200)
+                .body("account.iban", equalTo("EE657777000012110759"),
+                        "consentStatus", equalTo("received"));
     }
 }
