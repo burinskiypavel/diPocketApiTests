@@ -20,6 +20,7 @@ public class CofTests extends APIUITestBase {
     public int notifyId = 0;
     public String phone = "380980316499";
     public String pass = "reset246740";
+    public String iban = "EE657777000012110759";
     public String site = Site.DIPOCKET.toString();
 
     RestAssuredConfig sslConfig = RestAssuredConfig.config().sslConfig(
@@ -40,7 +41,7 @@ public class CofTests extends APIUITestBase {
                 .contentType("application/json")
                 .body("{\n" +
                         "    \"account\": {\n" +
-                        "        \"iban\": \"EE657777000012110759\"\n" +
+                        "        \"iban\": \""+iban+"\"\n" +
                         "    }\n" +
                         "}")
                 .post("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds")
@@ -128,7 +129,7 @@ public class CofTests extends APIUITestBase {
                 .get("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}")
                 .then().log().all()
                 .statusCode(200)
-                .body("account.iban", equalTo("EE657777000012110759"),
+                .body("account.iban", equalTo(iban),
                         "consentStatus", equalTo("received"));
     }
 }
