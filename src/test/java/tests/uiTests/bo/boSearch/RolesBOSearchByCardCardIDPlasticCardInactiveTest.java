@@ -29,7 +29,7 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
 
-        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//a[@role='tab'] //span[contains(text(), 'Card')]", "//a[@role='tab'] //span[contains(text(), 'Client')]",
+        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//a[@role='tab'] //span[contains(text(), 'Info')]", "//a[@role='tab'] //span[contains(text(), 'Client')]",
                 "//a[@role='tab'] //span[contains(text(), 'Transactions')]"}), "Incorrect tabs");
         softAssert.assertTrue(app.getUiboHelper().areButtonsPresent(new String[]{"//app-button[@ng-reflect-label='Back to search']",
                 "//app-button[@ng-reflect-label='Show client info']", "//app-button[@ng-reflect-label='Operations']"}), "Incorrect buttons");
@@ -243,17 +243,9 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardIdForResendPin);
         app.getUiboHelper().gotoCardDetailsPage(cardIdForResendPin);
-
-        app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
-
-        app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Resend PIN')]"));
-        app.getUiboHelper().click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Resend PIN')]"));
-        app.getUiboHelper().waitFor(By.xpath("//p-button[@ng-reflect-label='Proceed']"));
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Proceed']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'PIN was successfully resent')]"));
+        app.getUiboCardHelper().clickOperations();
+        app.getUiboCardHelper().resendPIN();
     }
-
     @Test
     public void testRolesBOSearchByCardCardIDTransactionsTAB() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);

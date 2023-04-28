@@ -47,4 +47,12 @@ public class UIBOCardHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
     }
+
+    public void resendPIN() {
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Resend PIN')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Resend PIN')]"));
+        waitFor(By.xpath("//p-button[@ng-reflect-label='Proceed']"));
+        click(By.xpath("//p-button[@ng-reflect-label='Proceed']"));
+        waitFor(By.xpath("//*[contains(text(), 'PIN was successfully resent')]"));
+    }
 }
