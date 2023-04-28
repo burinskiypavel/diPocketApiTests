@@ -12,11 +12,14 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CofTests extends APIUITestBase {
     public String consentId = null;
     public String href = null;
+    public String uiTransactionCode = null;
+    public String apiTransactionCode = null;
     public int notifyId = 0;
     public String phone = "380980316499";
     public String pass = "reset246740";
@@ -31,7 +34,7 @@ public class CofTests extends APIUITestBase {
     );
 
     @Test(priority = 1)
-    public void test_COFCreateConsentRequest() {
+    public void test_cofCreateConsentRequest() {
         String response = given()
                 .log().uri().log().headers().log().body()
                 .config(sslConfig)
@@ -58,6 +61,7 @@ public class CofTests extends APIUITestBase {
         appUi.driver.findElement(By.id("password")).sendKeys(pass);
         appUi.driver.findElement(By.xpath("//button[@data-dip-action='login']")).click();
         appUi.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Please go to DiPocket Mobile Application to confirm your authorization attempt')]"));
+        uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
     }
 
         @Test(priority = 2)
@@ -76,7 +80,7 @@ public class CofTests extends APIUITestBase {
         JsonPath jsonPath2 = new JsonPath(response2);
         notifyId = jsonPath2.getInt("notificationList[0].notifyId");
 
-        given()
+            String response4 = given()
                 .log().uri().log().headers().log().body()
                 .auth().preemptive().basic(phone, pass)
                 .contentType("application/json")
@@ -91,7 +95,10 @@ public class CofTests extends APIUITestBase {
                 .then().log().all()
                 .statusCode(200)
                 .body("notifyTypeName", equalTo("ASPSP Authorization"),
-                        "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage"));
+                        "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
+
+            JsonPath jsonPath3 = new JsonPath(response4);
+            apiTransactionCode = jsonPath3.getString("dtails");
 
         given()
                 .log().uri().log().headers().log().body()
@@ -103,10 +110,12 @@ public class CofTests extends APIUITestBase {
                 .post("https://http.dipocket.site/ClientServices/v1/aspsp/{notifyId}/approve")
                 .then().log().all()
                 .statusCode(200);
+
+            assertThat(uiTransactionCode, equalTo(apiTransactionCode));
     }
 
     @Test(priority = 3)
-    public void test_GetConsentStatus() throws InterruptedException {
+    public void test_getConsentStatus() throws InterruptedException {
         appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
 
@@ -123,7 +132,7 @@ public class CofTests extends APIUITestBase {
                 .body("consentStatus", equalTo("valid"));
     }
     @Test(priority = 4)
-    public void test_GetConsentRequest(){
+    public void test_getConsentRequest(){
         given()
                 .log().uri().log().headers().log().body()
                 .config(sslConfig)
@@ -138,7 +147,7 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 5)
-    public void test_ConfirmationOfFundsRequest(){
+    public void test_confirmationOfFundsRequest(){
         given()
                 .log().uri().log().headers().log().body()
                 .config(sslConfig)
