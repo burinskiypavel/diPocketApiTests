@@ -20,7 +20,7 @@ public class CofTests extends APIUITestBase {
     public int notifyId = 0;
     public String phone = "380980316499";
     public String pass = "reset246740";
-    public String iban = "EE657777000012110759";
+    public String iban = "PL42109010560000000150296424";
     public String site = Site.DIPOCKET.toString();
 
     RestAssuredConfig sslConfig = RestAssuredConfig.config().sslConfig(
@@ -106,7 +106,11 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 3)
-    public void test_GetConsentStatus(){
+    public void test_GetConsentStatus() throws InterruptedException {
+        appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
+        appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
+
+        Thread.sleep(4000);
         given()
                 .log().uri().log().headers().log().body()
                 .config(sslConfig)
@@ -116,7 +120,7 @@ public class CofTests extends APIUITestBase {
                 .get("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}/status")
                 .then().log().all()
                 .statusCode(200)
-                .body("consentStatus", equalTo("received"));
+                .body("consentStatus", equalTo("valid"));
     }
     @Test(priority = 4)
     public void test_GetConsentRequest(){
@@ -130,6 +134,28 @@ public class CofTests extends APIUITestBase {
                 .then().log().all()
                 .statusCode(200)
                 .body("account.iban", equalTo(iban),
-                        "consentStatus", equalTo("received"));
+                        "consentStatus", equalTo("valid"));
+    }
+
+    @Test(priority = 5)
+    public void test_ConfirmationOfFundsRequest(){
+        given()
+                .log().uri().log().headers().log().body()
+                .config(sslConfig)
+                .contentType("application/json")
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .body("{\n" +
+                        "    \"account\": { \n" +
+                        "        \"iban\": \""+iban+"\"\n" +
+                        "        },\n" +
+                        "    \"instructedAmount\": {\n" +
+                        "        \"amount\":\"10.11\", \n" +
+                        "        \"currency\":\"EUR\"\n" +
+                        "        }\n" +
+                        "}")
+                .post("https://openbanking.dipocket.site:3443/654321/bg/v1/funds-confirmations")
+                .then().log().all()
+                .statusCode(200);
     }
 }
