@@ -31,6 +31,12 @@ public class CardDetailsPage {
     @FindBy(xpath = "//a[@role='tab'] //span[contains(text(), 'Transactions')]")
     public WebElement transactionsTab;
 
+    @FindBy(xpath = "//a[@role='menuitem'] //span[contains(text(), 'Overdraft limit')]")
+    public WebElement overdraftLimitMenuitem;
+
+    @FindBy(xpath = "//a[@role='menuitem'] //span[contains(text(), 'Resend PIN')]")
+    public WebElement ResendPINMenuitem;
+
     public void clickShowClientInfoButton(){
         showClientInfoBtn.click();
     }

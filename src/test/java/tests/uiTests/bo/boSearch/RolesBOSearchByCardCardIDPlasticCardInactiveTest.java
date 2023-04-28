@@ -5,7 +5,6 @@ import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import padeObjects.bo.boCard.CardDetailsPage;
 
 import java.util.List;
 
@@ -123,15 +122,8 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
-
-        app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
-        app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
-        app.getUiboHelper().click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Overdraft limit')]"));
-        app.getUiboHelper().type(By.xpath("//p-inputnumber[@id='formly_3_input-number_lowLimit_0'] //input"), "100");
-        app.getUiboHelper().type(By.xpath("//p-inputnumber[@id='formly_3_input-number_highLimit_1'] //input"), "150");
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Save']"));
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Account limits was changed successfully')]"));
+        app.getUiboCardHelper().clickOperations();
+        app.getUiboCardHelper().overdraftLimit("100", "150");
     }
 
     @Test
