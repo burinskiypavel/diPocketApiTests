@@ -40,6 +40,9 @@ public class CardDetailsPage {
     @FindBy(xpath = "//a[@role='menuitem'] //span[contains(text(), 'Reset ePin')]")
     public WebElement resetEPinMenuitem;
 
+    @FindBy(xpath = "//ul[@role='menu'] //span[contains(text(), 'Unblock account')]")
+    public WebElement unblockAccountMenuitem;
+
     public void clickShowClientInfoButton(){
         showClientInfoBtn.click();
     }

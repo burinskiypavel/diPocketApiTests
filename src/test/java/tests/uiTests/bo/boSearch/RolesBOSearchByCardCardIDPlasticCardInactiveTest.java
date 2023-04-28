@@ -74,19 +74,18 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
-
-        app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
+        app.getUiboCardHelper().clickOperations();
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock account')]"))){
-            app.getUiboCardHelper().unblockAccountFromSearchByCard();
-            app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
+            app.getUiboCardHelper().unblockAccount();
+            app.getUiboCardHelper().clickOperations();
             app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
         }
 
-        app.getUiboHelper().blockAccountFromSearchByCard();
-        app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
+        app.getUiboCardHelper().blockAccount();
+        app.getUiboCardHelper().clickOperations();
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock account')]")));
     }
@@ -98,19 +97,18 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
-
-        app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
+        app.getUiboCardHelper().clickOperations();
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block account')]"))){
-            app.getUiboHelper().blockAccountFromSearchByCard();
-            app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
+            app.getUiboCardHelper().blockAccount();
+            app.getUiboCardHelper().clickOperations();
             app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock account')]"));
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));
         }
 
-        app.getUiboCardHelper().unblockAccountFromSearchByCard();
-        app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
+        app.getUiboCardHelper().unblockAccount();
+        app.getUiboCardHelper().clickOperations();
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Block account')]")));
     }
@@ -133,12 +131,11 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
-
-        app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
+        app.getUiboCardHelper().clickOperations();
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//a[@tabindex='0'] //span[contains(text(), 'Unblock card')]"))){
-            app.getUiboHelper().unblockCardFromSearchByCard();
-            app.getUiboHelper().click(By.xpath("//app-button[@label='Operations']"));
+            app.getUiboCardHelper().unblockCard();
+            app.getUiboCardHelper().clickOperations();
             app.getUiboHelper().waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Account limits')]"));
             app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Overdraft limit')]"));

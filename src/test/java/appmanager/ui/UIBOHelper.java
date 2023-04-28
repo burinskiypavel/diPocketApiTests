@@ -570,13 +570,13 @@ public class UIBOHelper extends UIHelperBase {
         waitFor(By.xpath("//a[@role='tab'] //span[contains(text(), 'Transactions')]"));
     }
 
-    public void blockAccountFromSearchByCard() {
-        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
-        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
-        click(By.xpath("//p-button[@label='Block']"));
-        waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
-    }
+//    public void blockAccountFromSearchByCard() {
+//        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
+//        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
+//        click(By.xpath("//p-button[@label='Block']"));
+//        waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+//        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+//    }
 
 //    public void unblockAccountFromSearchByCard() {
 //        waitForElementToBeClickable(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock account')"));
@@ -586,13 +586,13 @@ public class UIBOHelper extends UIHelperBase {
 //        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
 //    }
 
-    public void unblockCardFromSearchByCard() {
-        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock card')]"));
-        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock card')]"));
-        click(By.xpath("//app-button[@label='Unblock']"));
-        waitFor(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
-    }
+//    public void unblockCardFromSearchByCard() {
+//        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock card')]"));
+//        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock card')]"));
+//        click(By.xpath("//app-button[@label='Unblock']"));
+//        waitFor(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
+//        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
+//    }
 
     public void blockCardFromSearchByCard() throws InterruptedException {
         waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block card')]"));

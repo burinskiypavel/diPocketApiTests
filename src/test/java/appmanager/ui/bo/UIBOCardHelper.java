@@ -44,16 +44,35 @@ public class UIBOCardHelper extends UIHelperBase {
     }
 
     public void clickBackToSearch() {
-        click(By.xpath("//app-button[@ng-reflect-label='Back to search']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Back to search']"));
+        click(cardDetailsPage.backToSearchBtn);
         waitFor(By.id("searchContent"));
     }
 
-    public void unblockAccountFromSearchByCard() {
-        waitForElementToBeClickable(By.xpath("//span[contains(text(), 'Unblock account')"));
-        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock account')"));
+    public void blockAccount() {
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Block account')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Block account')]"));
+        click(By.xpath("//p-button[@label='Block']"));
+        waitFor(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was blocked successfully')]"));
+    }
+
+    public void unblockAccount() {
+        //waitForElementToBeClickable(By.xpath("//ul[@role='menu'] //span[contains(text(), 'Unblock account')]"));
+        waitForElementToBeClickable(cardDetailsPage.unblockAccountMenuitem);
+        //click(By.xpath("//ul[@role='menu'] //span[contains(text(), 'Unblock account')]"));
+        click(cardDetailsPage.unblockAccountMenuitem);
         click(By.xpath("//app-button[@label='Unblock']"));
         waitFor(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Account was unblocked successfully')]"));
+    }
+
+    public void unblockCard() {
+        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Unblock card')]"));
+        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Unblock card')]"));
+        click(By.xpath("//app-button[@label='Unblock']"));
+        waitFor(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
+        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Card was unblocked successfully')]"));
     }
 
     public void resendPIN() {
