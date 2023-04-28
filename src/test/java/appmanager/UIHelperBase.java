@@ -95,9 +95,14 @@ public class UIHelperBase {
         actions.contextClick(element).perform();
     }
 
-        public void waitForElementToBeClickable(By locator){
+    public void waitForElementToBeClickable(By locator){
         wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public void waitForElementToBeClickable(WebElement element){
+        wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public String getTextFromPopUp2(By locator) {
@@ -216,7 +221,6 @@ public class UIHelperBase {
 
     public List<String> getActualTextFirstElements(By locator, int index) {
         List<String> actualElementsText = new ArrayList<>();
-
         List<WebElement> elements = driver.findElements(locator);
 
         int count = 0;
@@ -228,6 +232,33 @@ public class UIHelperBase {
             }
             else {
                 actualElementsText.add(text);
+                actualElementsText.add("\r\n");
+            }
+            if(count == index){
+                break;
+            }
+            count++;
+        }
+
+        System.out.println(actualElementsText);
+        return actualElementsText;
+    }
+
+    public List<String> getActualTextFirstElementsReplaceLineSeparator(By locator, int index) {
+        List<String> actualElementsText = new ArrayList<>();
+        List<WebElement> elements = driver.findElements(locator);
+
+        int count = 0;
+        String replacedText = null;
+        for(WebElement element : elements){
+            String text = element.getText();
+
+            if(text.equals("")){
+
+            }
+            else {
+                replacedText = text.replaceAll("\\n", " ");
+                actualElementsText.add(replacedText);
                 actualElementsText.add("\r\n");
             }
             if(count == index){

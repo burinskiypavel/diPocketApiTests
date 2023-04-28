@@ -654,9 +654,9 @@ public class UIBOHelper extends UIHelperBase {
         click(By.id("p-tabpanel-3-label"));
     }
 
-    public void goToTransactionsTab() {
-        click(By.id("p-tabpanel-4-label"));
-    }
+//    public void goToTransactionsTab() {
+//        click(By.id("p-tabpanel-4-label"));
+//    }
 
     public void pressOperationsSelectValueFromOperation(String item) throws InterruptedException {
         click(By.xpath("//app-button[@label='Operations']"));

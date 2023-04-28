@@ -37,6 +37,9 @@ public class CardDetailsPage {
     @FindBy(xpath = "//a[@role='menuitem'] //span[contains(text(), 'Resend PIN')]")
     public WebElement ResendPINMenuitem;
 
+    @FindBy(xpath = "//a[@role='menuitem'] //span[contains(text(), 'Reset ePin')]")
+    public WebElement resetEPinMenuitem;
+
     public void clickShowClientInfoButton(){
         showClientInfoBtn.click();
     }

@@ -245,12 +245,11 @@ public class RolesBOSearchByCardCardIDPlasticCardInactiveTest extends UITestBase
         app.getUiboHelper().gotoCardSearchTab();
         app.getUiboHelper().searchByCard("id", cardId);
         app.getUiboHelper().gotoCardDetailsPage(cardId);
-        app.getUiboHelper().goToTransactionsTab();
-        app.getUiboHelper().selectFromDropDown("value", "All");
-        app.getUiboHelper().click(By.xpath("//p-button[@ng-reflect-label='Search']"));
-        app.getUiboHelper().waitFor(By.xpath("//td[@ng-reflect-text='629314']"));
-        List<String> actualElementsText = app.getUiboHelper().getActualTextFirstElements(By.xpath("//table //tbody //tr"), 34);
-        List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boSearch/TransactionTabData.txt");
+        app.getUiboCardHelper().goToTransactionsTab();
+        app.getUiboCardHelper().searchByTime("All");
+        app.getUiboHelper().waitFor(By.xpath("//td //span[@ng-reflect-text='629314']"));
+        List<String> actualElementsText = app.getUiboHelper().getActualTextFirstElementsReplaceLineSeparator(By.xpath("//table //tbody //tr"), 34);
+        List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boCard/transactionTabData.txt");
 
         assertThat(actualElementsText, equalTo(expectedElementsText));
     }

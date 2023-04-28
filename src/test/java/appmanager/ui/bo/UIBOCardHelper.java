@@ -15,8 +15,10 @@ public class UIBOCardHelper extends UIHelperBase {
     }
 
     public void resetEpin() {
-        waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Reset ePin')]"));
-        click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Reset ePin')]"));
+        //waitForElementToBeClickable(By.xpath("//*[contains(text(), 'Reset ePin')]"));
+        waitForElementToBeClickable(cardDetailsPage.resetEPinMenuitem);
+        //click(By.xpath("//a[@role='menuitem'] //span[contains(text(), 'Reset ePin')]"));
+        click(cardDetailsPage.resetEPinMenuitem);
         click(By.xpath("//p-button[@ng-reflect-label='Proceed']"));
         waitFor(By.xpath("//*[contains(text(), 'Card ePin has been successfully reset')]"));
     }
@@ -72,5 +74,15 @@ public class UIBOCardHelper extends UIHelperBase {
         type(overdraftLimitPage.highLimitInput, highLimit);
         click(overdraftLimitPage.saveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Account limits was changed successfully')]"));
+    }
+
+    public void goToTransactionsTab() {
+        click(cardDetailsPage.transactionsTab);
+        waitFor(By.xpath("//p-button[@ng-reflect-label='Search']"));
+    }
+
+    public void searchByTime(String dropdownItem) {
+        selectFromDropDown("value", dropdownItem);
+        click(By.xpath("//p-button[@ng-reflect-label='Search']"));
     }
 }
