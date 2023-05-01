@@ -25,7 +25,8 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
         app.getUiboClientHelper().goToAccountsTab();
-        app.getUiboHelper().performContextClick(By.cssSelector("td span[ng-reflect-text='"+accountName+"']"));
+        app.getUiboClientHelper().selectAccountFromAccountTableAndPerformContextClick(accountName);
+
 
         if(!app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
             app.getUiboClientHelper().unblockAccount();
@@ -49,7 +50,8 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
         app.getUiboClientHelper().goToAccountsTab();
-        app.getUiboHelper().performContextClick(By.cssSelector("td span[ng-reflect-text='"+accountName+"']"));
+        app.getUiboClientHelper().selectAccountFromAccountTableAndPerformContextClick(accountName);
+
 
         if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
             app.getUiboClientHelper().blockAccount();
@@ -73,10 +75,8 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
         app.getUiboClientHelper().goToAccountsTab();
-        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
-
-        app.getUiboHelper().click(By.xpath("//span[contains(text(), 'Overdraft limit')]"));
-        app.getUiboClientHelper().updateLimits(randomLimit, randomLimit);
+        app.getUiboClientHelper().selectAccountFromAccountTableAndPerformContextClick(accountName);
+        app.getUiboClientHelper().overdraftLimitUpdateAccountLimits(randomLimit, randomLimit);
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'Account limits was changed successfull')]")));
     }
@@ -88,17 +88,12 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().search("id", clientId2, phone2);
         app.getUiboClientHelper().goToClientPage(phone2);
         app.getUiboClientHelper().goToAccountsTab();
-        app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName2+"']"));
+        app.getUiboClientHelper().selectAccountNameFromAccountTableAndWaitCardPresentInCardTable("Auto PLN test", "Plastic");
 
-        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='Plastic']"));
-
-        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-accounts-table-card p-columnfilter[field='id'] input[type='text']"), "188989", "id", By.cssSelector("td[ng-reflect-text='188989']"));
-
-        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-accounts-table-card p-columnfilter[field='publicToken'] input[type='text']"), "893529504", "id", By.cssSelector("td[ng-reflect-text='893529504']"));
-
-        app.getUiboClientHelper().setClientPageFilter(By.cssSelector("app-accounts-table-card p-columnfilter[ng-reflect-field='dipToken'] input[type='text']"), "32842383");
-        assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='32842383']")));
-        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='186406']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.xpath("//app-table[2] //p-columnfilter[@ng-reflect-field='id'] //input"), "188975", "id", By.cssSelector("td span[ng-reflect-text='188975']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.xpath("//app-table[2] //p-columnfilter[@ng-reflect-field='publicToken'] //input"), "668789330", "publicToken", By.cssSelector("td span[ng-reflect-text='668789330']"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.xpath("//app-table[2] //p-columnfilter[@ng-reflect-field='dipToken'] //input"), "94890352", "dipToken", By.cssSelector("td span[ng-reflect-text='94890352']"));
+        app.getUiboClientHelper().selectCardFromCardTablePerformContextClick("186377");
 
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//span[contains(text(), 'Block card')]", "//span[contains(text(), 'Unblock card')]",
         "//span[contains(text(), 'Get QR')]", "//span[contains(text(), 'Card limits')]", "//span[contains(text(), 'Reset pin counter')]",

@@ -275,7 +275,8 @@ public class UIBOClientHelper extends UIHelperBase {
         return actualPopupText;
     }
 
-    public void updateLimits(String lowLimit, String highLimit) throws InterruptedException {
+    public void overdraftLimitUpdateAccountLimits(String lowLimit, String highLimit) throws InterruptedException {
+        click(By.xpath("//span[contains(text(), 'Overdraft limit')]"));
         type(By.cssSelector("p-inputnumber#formly_3_input-number_lowLimit_0 input"), lowLimit);
         type(By.cssSelector("p-inputnumber#formly_3_input-number_highLimit_1 input"), highLimit);
         Thread.sleep(1000);
@@ -449,5 +450,22 @@ public class UIBOClientHelper extends UIHelperBase {
                 "//a[@role='tab'] //span[contains(text(), 'Accounts')]", "//a[@role='tab'] //span[contains(text(), '3rd party cards')]", "//a[@role='tab'] //span[contains(text(), 'Transaction')]",
                 "//a[@role='tab'] //span[contains(text(), 'Tickets')]", "//a[@role='tab'] //span[contains(text(), 'Supervisor requests')]"}), "Tabs incorrect");
         return softAssert;
+    }
+
+    public void selectAccountFromAccountTableAndPerformContextClick(String accountName) {
+        performContextClick(By.cssSelector("td span[ng-reflect-text='"+accountName+"']"));
+    }
+
+    public void selectAccountNameFromTable(String accountName){
+        click(By.cssSelector("td span[ng-reflect-text='"+accountName+"']"));
+    }
+
+    public void selectCardFromCardTablePerformContextClick(String card) {
+        performContextClick(By.cssSelector("td span[ng-reflect-text='"+card+"']"));
+    }
+
+    public void selectAccountNameFromAccountTableAndWaitCardPresentInCardTable(String accountName, String card) {
+        selectAccountNameFromTable(accountName);
+        waitFor(By.cssSelector("td span[ng-reflect-text='"+card+"']"));
     }
 }
