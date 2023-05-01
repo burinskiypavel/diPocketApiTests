@@ -130,7 +130,6 @@ public class CofTests extends APIUITestBase {
         appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
 
-        Thread.sleep(4000);
         given()
                 .log().uri().log().headers().log().body()
                 .config(sslConfig)
@@ -171,7 +170,7 @@ public class CofTests extends APIUITestBase {
                         "        },\n" +
                         "    \"instructedAmount\": {\n" +
                         "        \"amount\":\"10.11\", \n" +
-                        "        \"currency\":\"EUR\"\n" +
+                        "        \"currency\":\"PLN\"\n" +
                         "        }\n" +
                         "}")
                 .post("https://openbanking.dipocket.site:3443/654321/bg/v1/funds-confirmations")
