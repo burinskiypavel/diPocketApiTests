@@ -548,7 +548,7 @@ public class UIHelperBase {
     }
 
     public String getNextElementFromTheTable(String cardId, int element) {
-        String actualState = driver.findElement(By.xpath("//td[text() = '"+cardId+"']/following-sibling::td["+element+"]")).getText();
+        String actualState = driver.findElement(By.xpath("//td //span[text() = '"+cardId+"']/following-sibling::td["+element+"]")).getText();
         return actualState;
     }
 

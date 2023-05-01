@@ -468,4 +468,9 @@ public class UIBOClientHelper extends UIHelperBase {
         selectAccountNameFromTable(accountName);
         waitFor(By.cssSelector("td span[ng-reflect-text='"+card+"']"));
     }
+
+    public void clickCardLimits() {
+        click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
+        waitFor(By.xpath("//span[contains(text(), 'Card id:')]"));
+    }
 }
