@@ -178,13 +178,9 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
         app.getUiboClientHelper().goToAccountsTab();
-        app.getUiboHelper().click(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
-        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+cardId+"']"));
-        app.getUiboHelper().click(By.xpath("//li //span[contains(text(), 'Reset contactless counter')]"));
-        String actualPopupText = app.getUiboHelper().getTextFromPopUp2(By.cssSelector("app-reset-contactless-counter-modal p"));
-        app.getUiboHelper().click(By.cssSelector("app-button[label='Reset']"));
-        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'Contactless counter was successfully reset')]"));
+        app.getUiboClientHelper().selectAccountNameFromAccountTableAndWaitCardPresentInCardTable(accountName, cardId);
+        app.getUiboClientHelper().selectCardFromCardTablePerformContextClick(cardId);
+        String actualPopupText = app.getUiboClientHelper().resetContactlessCounter();
 
         assertEquals(actualPopupText, "Are you sure you want to reset contactless counter for card "+cardId+"?");
     }

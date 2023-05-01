@@ -473,4 +473,13 @@ public class UIBOClientHelper extends UIHelperBase {
         click(By.xpath("//li //span[contains(text(), 'Card limits')]"));
         waitFor(By.xpath("//span[contains(text(), 'Card id:')]"));
     }
+
+    public String resetContactlessCounter() {
+        waitFor(By.xpath("//li //span[contains(text(), 'Reset contactless counter')]"));
+        click(By.xpath("//li //span[contains(text(), 'Reset contactless counter')]"));
+        String actualPopupText = getTextFromPopUp2(By.cssSelector("app-reset-contactless-counter p"));
+        click(By.cssSelector("p-button[label='Confirm']"));
+        waitFor(By.xpath("//div[contains(text(), 'Contactless counter was successfully reset')]"));
+        return actualPopupText;
+    }
 }
