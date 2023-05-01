@@ -248,7 +248,7 @@ public class UIBOClientHelper extends UIHelperBase {
         Thread.sleep(1500);
     }
 
-    public String blockAccount() {
+    public String blockAccountGetPopupText() {
         waitFor(By.xpath("//span[contains(text(), 'Block account')]"));
         click(By.xpath("//span[contains(text(), 'Block account')]"));
         waitFor(By.cssSelector("p-button[label='Block']"));
@@ -258,9 +258,11 @@ public class UIBOClientHelper extends UIHelperBase {
         return actualPopupText;
     }
 
-    public void boClientPageBlockAccount() throws InterruptedException {
+    public void blockAccount() throws InterruptedException {
+        waitFor(By.xpath("//span[contains(text(), 'Block account')]"));
         click(By.xpath("//span[contains(text(), 'Block account')]"));
-        click(By.cssSelector("app-button[label='Block']"));
+        waitFor(By.cssSelector("p-button[label='Block']"));
+        click(By.cssSelector("p-button[label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Account was blocked successfully')]"));
         Thread.sleep(1500);
     }

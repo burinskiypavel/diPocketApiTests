@@ -32,7 +32,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
             app.getUiboHelper().moveToElementAndPerformContextClick(accountName);
         }
 
-        String actualPopupText = app.getUiboClientHelper().blockAccount();
+        String actualPopupText = app.getUiboClientHelper().blockAccountGetPopupText();
 
         assertEquals(actualPopupText, "Are you sure want to block account with name: "+accountName+"?");
 
@@ -49,10 +49,10 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboHelper().search("id", clientId, phone);
         app.getUiboClientHelper().goToClientPage(phone);
         app.getUiboClientHelper().goToAccountsTab();
-        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='"+accountName+"']"));
+        app.getUiboHelper().performContextClick(By.cssSelector("td span[ng-reflect-text='"+accountName+"']"));
 
         if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
-            app.getUiboClientHelper().boClientPageBlockAccount();
+            app.getUiboClientHelper().blockAccount();
             app.getUiboHelper().moveToElementAndPerformContextClick(accountName);
         }
 
@@ -60,8 +60,8 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
         assertEquals(actualPopupText, "Are you sure want to unblock account with name: "+accountName+"?");
 
-        app.getUiboHelper().moveToElement(By.xpath("//td[text() = '"+accountName+"']"));
-        String actualState = app.getUiboHelper().getText(By.xpath("//app-accounts-table //tbody //tr[1] //td[2]"));
+        app.getUiboHelper().moveToElement(By.cssSelector("td span[ng-reflect-text='"+accountName+"']"));
+        String actualState = app.getUiboHelper().getText(By.xpath("//p-tabpanel[@header='Accounts'] //app-table //tbody //tr[1] //td[2]]"));
 
         assertEquals(actualState, "Active");
     }
