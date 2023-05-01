@@ -55,6 +55,17 @@ public class CofTests extends APIUITestBase {
         consentId = jsonPath.getString("consentId");
         href = jsonPath.getString("_links.scaRedirect.href");
 
+//        appUi.driver.navigate().to(href);
+//        appUi.getUiboHelper().waitFor(By.id("phone-number"));
+//        appUi.driver.findElement(By.id("phone-number")).sendKeys(phone);
+//        appUi.driver.findElement(By.id("password")).sendKeys(pass);
+//        appUi.driver.findElement(By.xpath("//button[@data-dip-action='login']")).click();
+//        appUi.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Please go to DiPocket Mobile Application to confirm your authorization attempt')]"));
+//        uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
+    }
+
+    @Test(priority = 2)
+    public void test_webConfirmaton(){
         appUi.driver.navigate().to(href);
         appUi.getUiboHelper().waitFor(By.id("phone-number"));
         appUi.driver.findElement(By.id("phone-number")).sendKeys(phone);
@@ -64,9 +75,9 @@ public class CofTests extends APIUITestBase {
         uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
     }
 
-        @Test(priority = 2)
+        @Test(priority = 3)
         public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
-        String cliSessionId = appUi.getLogin_registrationHelper().loginDipocket_test(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
         String response2 = given()
                 .log().uri().log().headers().log().body()
                 .auth().preemptive().basic(phone, pass)
@@ -114,7 +125,7 @@ public class CofTests extends APIUITestBase {
             assertThat(uiTransactionCode, equalTo(apiTransactionCode));
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void test_getConsentStatus() throws InterruptedException {
         appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
@@ -131,7 +142,7 @@ public class CofTests extends APIUITestBase {
                 .statusCode(200)
                 .body("consentStatus", equalTo("valid"));
     }
-    @Test(priority = 4)
+    @Test(priority = 5)
     public void test_getConsentRequest(){
         given()
                 .log().uri().log().headers().log().body()
@@ -146,7 +157,7 @@ public class CofTests extends APIUITestBase {
                         "consentStatus", equalTo("valid"));
     }
 
-    @Test(priority = 5)
+    @Test(priority = 6)
     public void test_confirmationOfFundsRequest(){
         given()
                 .log().uri().log().headers().log().body()
