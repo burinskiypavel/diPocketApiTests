@@ -240,14 +240,18 @@ public class UIBOClientHelper extends UIHelperBase {
     }
 
     public void unblockAccount() throws InterruptedException {
+        waitFor(By.xpath("//span[contains(text(), 'Unblock account')]"));
         click(By.xpath("//span[contains(text(), 'Unblock account')]"));
+        waitFor(By.cssSelector("app-button[label='Unblock']"));
         click(By.cssSelector("app-button[label='Unblock']"));
         waitFor(By.xpath("//div[contains(text(), 'Account was unblocked successfully')]"));
         Thread.sleep(1500);
     }
 
     public String blockAccount() {
+        waitFor(By.xpath("//span[contains(text(), 'Block account')]"));
         click(By.xpath("//span[contains(text(), 'Block account')]"));
+        waitFor(By.cssSelector("p-button[label='Block']"));
         String actualPopupText = getTextFromPopUp2(By.cssSelector("app-block-account p"));
         click(By.cssSelector("p-button[label='Block']"));
         waitFor(By.xpath("//div[contains(text(), 'Account was blocked successfully')]"));

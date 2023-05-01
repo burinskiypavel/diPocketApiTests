@@ -241,9 +241,9 @@ public class UIBOHelper extends UIHelperBase {
 //    }
 
     public void moveToElementAndPerformContextClick(String accountName) throws InterruptedException {
-        moveToElement(By.cssSelector("td[ng-reflect-text='" + accountName + "']"));
+        moveToElement(By.cssSelector("td span[ng-reflect-text='" + accountName + "']"));
         Thread.sleep(1500);
-        performContextClick(By.cssSelector("td[ng-reflect-text='" + accountName + "']"));
+        performContextClick(By.cssSelector("td span[ng-reflect-text='" + accountName + "']"));
         waitForElementToBeClickable(By.xpath("//span[contains(text(), 'Block account')]"));
         //Thread.sleep(1000);
     }
