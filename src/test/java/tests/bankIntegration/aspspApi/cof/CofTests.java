@@ -26,18 +26,18 @@ public class CofTests extends APIUITestBase {
     public String iban = "PL42109010560000000150296424";
     public String site = Site.DIPOCKET.toString();
 
-    RestAssuredConfig sslConfig = RestAssuredConfig.config().sslConfig(
-            SSLConfig.sslConfig()
-                    .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
-                    .keyStore("files/certs/client_created.p12", "123456").keystoreType("PKCS12")
-                    .allowAllHostnames()
-    );
+//    RestAssuredConfig sslConfig = RestAssuredConfig.config().sslConfig(
+//            SSLConfig.sslConfig()
+//                    .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
+//                    .keyStore("files/certs/client_created.p12", "123456").keystoreType("PKCS12")
+//                    .allowAllHostnames()
+//    );
 
     @Test(priority = 1)
     public void test_cofCreateConsentRequest() {
         String response = given()
                 .log().uri().log().headers().log().body()
-                .config(sslConfig)
+                .config(app.aspspSslConfig)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi/")
@@ -54,14 +54,6 @@ public class CofTests extends APIUITestBase {
         JsonPath jsonPath = new JsonPath(response);
         consentId = jsonPath.getString("consentId");
         href = jsonPath.getString("_links.scaRedirect.href");
-
-//        appUi.driver.navigate().to(href);
-//        appUi.getUiboHelper().waitFor(By.id("phone-number"));
-//        appUi.driver.findElement(By.id("phone-number")).sendKeys(phone);
-//        appUi.driver.findElement(By.id("password")).sendKeys(pass);
-//        appUi.driver.findElement(By.xpath("//button[@data-dip-action='login']")).click();
-//        appUi.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Please go to DiPocket Mobile Application to confirm your authorization attempt')]"));
-//        uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
     }
 
     @Test(priority = 2)
@@ -132,7 +124,7 @@ public class CofTests extends APIUITestBase {
 
         given()
                 .log().uri().log().headers().log().body()
-                .config(sslConfig)
+                .config(app.aspspSslConfig)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
@@ -145,7 +137,7 @@ public class CofTests extends APIUITestBase {
     public void test_getConsentRequest(){
         given()
                 .log().uri().log().headers().log().body()
-                .config(sslConfig)
+                .config(app.aspspSslConfig)
                 .header("X-Request-ID", "b3500b4a-ca36-4917-9d94-f60a1731c4ca")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
@@ -160,7 +152,7 @@ public class CofTests extends APIUITestBase {
     public void test_confirmationOfFundsRequest(){
         given()
                 .log().uri().log().headers().log().body()
-                .config(sslConfig)
+                .config(app.aspspSslConfig)
                 .contentType("application/json")
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)

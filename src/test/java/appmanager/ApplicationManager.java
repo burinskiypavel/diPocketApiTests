@@ -6,6 +6,7 @@ import appmanager.ui.UIUpAndGoHelper;
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
+import io.restassured.config.SSLConfig;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
@@ -302,6 +303,13 @@ public class ApplicationManager {
     public void init() {
         RestAssured.useRelaxedHTTPSValidation();
     }
+
+    public RestAssuredConfig aspspSslConfig = RestAssuredConfig.config().sslConfig(
+            SSLConfig.sslConfig()
+                    .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
+                    .keyStore("files/certs/client_created.p12", "123456").keystoreType("PKCS12")
+                    .allowAllHostnames()
+    );
 
     public void closeDriver() {
         driver.quit();
