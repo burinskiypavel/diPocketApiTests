@@ -18,6 +18,9 @@ public class TakeTicketPage {
     @FindBy(xpath = "//app-button[@ng-reflect-label='Approve']")
     public WebElement approveBtn;
 
+    @FindBy(xpath = "//app-button[@ng-reflect-label='Reject']")
+    public WebElement rejectBtn;
+
     @FindBy(xpath = "//app-button[@ng-reflect-label='Escalate to CBO']")
     public WebElement escalateToCBOBtn;
 

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
 import padeObjects.bo.boClient.ClientPage;
 import padeObjects.bo.boClient.UploadDocPage;
+import padeObjects.bo.boTicket.RejectTicketPage;
 import padeObjects.bo.search.ClientSearchPage;
 import padeObjects.bo.boTicket.TakeTicketEditDataPage;
 import padeObjects.bo.boTicket.TakeTicketPage;
@@ -23,7 +24,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     BOHomePage boHomePage = new BOHomePage(driver);
     ClientPage clientPage = new ClientPage(driver);
     UploadDocPage uploadDocPage = new UploadDocPage(driver);
-
+    RejectTicketPage rejectTicketPage = new RejectTicketPage(driver);
 
     public UIBOTicketHelper(WebDriver driver) {
         super(driver);
@@ -374,28 +375,31 @@ public class UIBOTicketHelper extends UIHelperBase {
         search("id", clientId);
         goToClientPage(phone);
 
-        click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), docItem);
-        File file = new File(path);
-
-        uploadFile(By.cssSelector("input[type='file']"), file.getAbsolutePath());
-        Thread.sleep(700);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
-        waitFor(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
+        uploadDoc(docItem, path);
+        //click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        //selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), docItem);
+        //File file = new File(path);
+        //uploadFile(By.cssSelector("input[type='file']"), file.getAbsolutePath());
+        //Thread.sleep(700);
+        //click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        //waitFor(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
     }
 
     public void rejectTicketSuccessfully(String reason, String message) throws InterruptedException {
-        click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
-        type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), reason);
+        //click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
+        click(takeTicketPage.rejectBtn);
+        //type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), reason);
+        type(rejectTicketPage.reasonInput, reason);
         Thread.sleep(700);
-        click(By.xpath("//app-reject-modal //p-button[@ng-reflect-label='Reject']"));
+        //click(By.xpath("//app-reject-modal //p-button[@ng-reflect-label='Reject']"));
+        click(rejectTicketPage.rejectBtn);
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
     }
 
     public void verifyUserChangedHisMindAboutRejectionOfSelfieDocChangeTicket() {
-        click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
-        closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
+        click(takeTicketPage.rejectBtn);
+        closePopUp(By.cssSelector("timesicon[ng-reflect-style-class='p-dialog-header-close-icon']"));
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
     }
 
