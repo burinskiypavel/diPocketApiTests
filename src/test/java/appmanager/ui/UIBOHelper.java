@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import padeObjects.bo.BasePopupPage;
 import padeObjects.bo.CBOHomePage;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import static org.testng.Assert.assertTrue;
 public class UIBOHelper extends UIHelperBase {
     //public WebDriver driver;
     //public WebDriverWait wait;
+    CBOHomePage cboHomePage = new CBOHomePage(driver);
 
     public UIBOHelper(WebDriver driver) {
         super(driver);
@@ -55,8 +57,6 @@ public class UIBOHelper extends UIHelperBase {
     }
 
     public void gotoBOUsersPage() {
-        //click(By.xpath("//p[contains(text(), 'BO Users')]"));
-        CBOHomePage cboHomePage = new CBOHomePage(driver);
         cboHomePage.gotoBOUsers();
         waitFor(By.xpath("//span[contains(text(), 'Active users')]"));
     }

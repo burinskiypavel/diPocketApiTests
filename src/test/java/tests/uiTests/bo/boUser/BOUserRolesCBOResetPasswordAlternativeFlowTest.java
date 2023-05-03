@@ -1,10 +1,7 @@
 package tests.uiTests.bo.boUser;
 
 import base.UITestBase;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertFalse;
 
 public class BOUserRolesCBOResetPasswordAlternativeFlowTest extends UITestBase {
 
@@ -15,9 +12,6 @@ public class BOUserRolesCBOResetPasswordAlternativeFlowTest extends UITestBase {
         app.getUiboUserHelper().gotoAllUsersTab();
         app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
         app.getUiboUserHelper().pressResetPassword();
-        app.getUiboHelper().closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
-        app.getUiboHelper().waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
-
-        assertFalse(app.getUiboHelper().isElementPresent(By.cssSelector("div[role='dialog']")));
+        app.getUiboUserHelper().closePopUpandVirifyPopUpClosing();
     }
 }

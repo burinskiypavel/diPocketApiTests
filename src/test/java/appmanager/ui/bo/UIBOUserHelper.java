@@ -9,6 +9,8 @@ import padeObjects.bo.boUsers.AddNewRolePage;
 import padeObjects.bo.boUsers.BOUserHomePage;
 import padeObjects.bo.boUsers.DeleteRolePage;
 
+import static org.testng.Assert.assertFalse;
+
 public class UIBOUserHelper extends UIHelperBase {
     AddNewRolePage addNewRolePage = new AddNewRolePage(driver);
     DeleteRolePage deleteRolePage = new DeleteRolePage(driver);
@@ -124,5 +126,15 @@ public class UIBOUserHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'User blocked successfully')]"));
         waitFor(By.cssSelector("td span[ng-reflect-text='Blocked']"));
+    }
+
+    public void closePopUpandVirifyPopUpClosing() {
+        closePopUp();
+        verifyPopupClosing();
+    }
+
+    public void verifyPopupClosing() {
+        waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
+        assertFalse(isElementPresent(By.cssSelector("div[role='dialog']")));
     }
 }
