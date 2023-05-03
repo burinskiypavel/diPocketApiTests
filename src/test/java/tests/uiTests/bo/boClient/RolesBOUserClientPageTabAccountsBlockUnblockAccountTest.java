@@ -38,7 +38,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         assertEquals(actualPopupText, "Are you sure want to block account with name: "+accountName+"?");
 
         app.getUiboHelper().moveToElement(By.cssSelector("td span[ng-reflect-text='"+accountName+"']"));
-        String actualState = app.getUiboHelper().getText(By.xpath("//p-tabpanel[@header='Accounts'] //app-table //tbody //tr[1] //td[2]]"));
+        String actualState = app.getUiboHelper().getText(By.xpath("//p-tabpanel[@header='Accounts'] //tbody //tr[1] //td[2]"));
 
         assertEquals(actualState, "Active(Blocked)");
     }
