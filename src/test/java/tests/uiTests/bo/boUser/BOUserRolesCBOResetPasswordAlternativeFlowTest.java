@@ -12,6 +12,6 @@ public class BOUserRolesCBOResetPasswordAlternativeFlowTest extends UITestBase {
         app.getUiboUserHelper().gotoAllUsersTab();
         app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
         app.getUiboUserHelper().pressResetPassword();
-        app.getUiboUserHelper().closePopUpandVirifyPopUpClosing();
+        app.getUiboUserHelper().closePopUpAndVirifyPopUpClosing();
     }
 }

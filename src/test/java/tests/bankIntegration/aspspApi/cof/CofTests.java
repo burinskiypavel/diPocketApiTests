@@ -51,11 +51,6 @@ public class CofTests extends APIUITestBase {
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi/")
                 .contentType("application/json")
                 .body(json)
-//                .body("{\n" +
-//                        "    \"account\": {\n" +
-//                        "        \"iban\": \""+iban+"\"\n" +
-//                        "    }\n" +
-//                        "}")
                 .post("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -104,11 +99,6 @@ public class CofTests extends APIUITestBase {
                 .header("cliSessionId", cliSessionId)
                 .header("site", site)
                     .body(json)
-//                .body("{\n" +
-//                        "  \"typeId\" : 55,\n" +
-//                        "  \"notifyId\" : "+notifyId+",\n" +
-//                        "  \"detailsRef\" : \"\"\n" +
-//                        "}")
                 .post("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyDetails3")
                 .then().log().all()
                 .statusCode(200)
@@ -179,15 +169,6 @@ public class CofTests extends APIUITestBase {
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)
                 .body(json)
-//                .body("{\n" +
-//                        "    \"account\": { \n" +
-//                        "        \"iban\": \""+iban+"\"\n" +
-//                        "        },\n" +
-//                        "    \"instructedAmount\": {\n" +
-//                        "        \"amount\":\"10.11\", \n" +
-//                        "        \"currency\":\"PLN\"\n" +
-//                        "        }\n" +
-//                        "}")
                 .post("https://openbanking.dipocket.site:3443/654321/bg/v1/funds-confirmations")
                 .then().log().all()
                 .statusCode(200)

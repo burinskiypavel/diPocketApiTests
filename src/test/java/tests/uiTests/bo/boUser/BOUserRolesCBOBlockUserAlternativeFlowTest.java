@@ -1,10 +1,7 @@
 package tests.uiTests.bo.boUser;
 
 import base.UITestBase;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertFalse;
 
 public class BOUserRolesCBOBlockUserAlternativeFlowTest extends UITestBase {
 
@@ -14,13 +11,7 @@ public class BOUserRolesCBOBlockUserAlternativeFlowTest extends UITestBase {
         app.getUiboHelper().gotoBOUsersPage();
         app.getUiboUserHelper().gotoAllUsersTab();
         app.getUiboUserHelper().searchAndSelectBOUser("All users", "username", "PAVELB");
-        app.getUiboHelper().click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Block user']"));
-
-        app.getUiboHelper().waitFor(By.cssSelector("div[role='dialog']"));
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Are you sure want to block user')]"));
-        app.getUiboHelper().closePopUp(By.cssSelector("span.p-dialog-header-close-icon"));
-        app.getUiboHelper().waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
-
-        assertFalse(app.getUiboHelper().isElementPresent(By.cssSelector("div[role='dialog']")));
+        app.getUiboUserHelper().pressBlockUser();
+        app.getUiboUserHelper().closePopUpAndVirifyPopUpClosing();
     }
 }

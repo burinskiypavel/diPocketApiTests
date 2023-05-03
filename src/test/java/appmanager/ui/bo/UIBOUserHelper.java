@@ -51,6 +51,13 @@ public class UIBOUserHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Are you sure want to reset password and send new one?')]"));
     }
 
+    public void pressBlockUser() {
+        click(boUserHomePage.blockUserBtn);
+        //click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Block user']"));
+        waitFor(By.cssSelector("div[role='dialog']"));
+        waitFor(By.xpath("//*[contains(text(), 'Are you sure want to block user')]"));
+    }
+
     public void selectRoleFromDropDown(final String name) {
         click(By.cssSelector("p-dropdown[placeholder='Role']"));
         waitFor(By.cssSelector("li[aria-label='" + name + "']"));
@@ -128,7 +135,7 @@ public class UIBOUserHelper extends UIHelperBase {
         waitFor(By.cssSelector("td span[ng-reflect-text='Blocked']"));
     }
 
-    public void closePopUpandVirifyPopUpClosing() {
+    public void closePopUpAndVirifyPopUpClosing() {
         closePopUp();
         verifyPopupClosing();
     }
