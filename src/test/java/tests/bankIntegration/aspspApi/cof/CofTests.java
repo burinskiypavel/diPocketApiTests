@@ -133,7 +133,7 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 4)
-    public void test_getConsentStatus() {
+    public void test_getConsentStatus_ShowConsentStatus() {
         appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
 
@@ -149,7 +149,7 @@ public class CofTests extends APIUITestBase {
                 .body("consentStatus", equalTo("valid"));
     }
     @Test(priority = 5)
-    public void test_getConsentRequest(){
+    public void test_getConsentRequest_ShowConsentInformation(){
         given()
                 .log().uri().log().headers().log().body()
                 .config(app.aspspSslConfig)
@@ -164,7 +164,7 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 6)
-    public void test_confirmationOfFundsRequest(){
+    public void test_confirmationOfFundsRequest_AvailableFunds(){
         account.setIban(iban);
         instructedAmount.setAmount("10.11");
         instructedAmount.setCurrency("PLN");
@@ -190,6 +190,7 @@ public class CofTests extends APIUITestBase {
 //                        "}")
                 .post("https://openbanking.dipocket.site:3443/654321/bg/v1/funds-confirmations")
                 .then().log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body("fundsAvailable", equalTo(true));
     }
 }
