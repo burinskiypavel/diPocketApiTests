@@ -133,7 +133,7 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 4)
-    public void test_getConsentStatus_ShowConsentStatus() {
+    public void test_getConsentStatus_showConsentStatus() {
         appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
 
@@ -149,7 +149,7 @@ public class CofTests extends APIUITestBase {
                 .body("consentStatus", equalTo("valid"));
     }
     @Test(priority = 5)
-    public void test_getConsentRequest_ShowConsentInformation(){
+    public void test_getConsentRequest_showConsentInformation(){
         given()
                 .log().uri().log().headers().log().body()
                 .config(app.aspspSslConfig)
@@ -164,7 +164,7 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 6)
-    public void test_confirmationOfFundsRequest_AvailableFunds(){
+    public void test_confirmationOfFundsRequest_availableFunds(){
         account.setIban(iban);
         instructedAmount.setAmount("10.11");
         instructedAmount.setCurrency("PLN");
