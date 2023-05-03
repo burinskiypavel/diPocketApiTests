@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.asserts.SoftAssert;
 import padeObjects.bo.boUsers.AddNewRolePage;
 import padeObjects.bo.boUsers.BOUserHomePage;
 import padeObjects.bo.boUsers.DeleteRolePage;
@@ -12,6 +13,7 @@ import padeObjects.bo.boUsers.DeleteRolePage;
 import static org.testng.Assert.assertFalse;
 
 public class UIBOUserHelper extends UIHelperBase {
+    SoftAssert softAssert = new SoftAssert();
     AddNewRolePage addNewRolePage = new AddNewRolePage(driver);
     DeleteRolePage deleteRolePage = new DeleteRolePage(driver);
     BOUserHomePage boUserHomePage = new BOUserHomePage(driver);
@@ -122,6 +124,13 @@ public class UIBOUserHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'User unblocked successfully')]"));
     }
 
+    public void pressUnblockUser() {
+        //click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Unblock user']"));
+        click(boUserHomePage.unblockUserBtn);
+        waitFor(By.cssSelector("div[role='dialog']"));
+        waitFor(By.xpath("//*[contains(text(), 'Are you sure want to unblock user')]"));
+    }
+
     public void blockUser(String blockReason) throws InterruptedException {
         //click(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Block user']"));
         click(boUserHomePage.blockUserBtn);
@@ -143,5 +152,25 @@ public class UIBOUserHelper extends UIHelperBase {
     public void verifyPopupClosing() {
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
         assertFalse(isElementPresent(By.cssSelector("div[role='dialog']")));
+    }
+
+    public void restoreBackUnblockUserIfUserIsBlocked(String boUser) throws InterruptedException {
+        if(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Unblock user']"))){
+            unblockUser();
+            selectBOUser(boUser);
+        }
+    }
+
+    public SoftAssert verifyButtonsAreEnabled(boolean edit, boolean resetPassword, boolean blockUser) {
+        if(edit){
+            softAssert.assertTrue(isButtonEnabled2(By.cssSelector("p-button[ng-reflect-label='Edit']")), "Edit btn");
+        }
+        if(resetPassword){
+            softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Reset password2']")), "Reset password btn");
+        }
+        if(blockUser){
+            softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Block user2']")), "Block user  btn");
+        }
+        return softAssert;
     }
 }

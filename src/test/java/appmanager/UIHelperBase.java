@@ -395,6 +395,38 @@ public class UIHelperBase {
         return driver.findElement(locator).isEnabled();
     }
 
+    public boolean isButtonEnabled2(By locator) {
+        boolean enabled = false;
+        WebElement element = driver.findElements(locator).get(1);
+        boolean disabled = Boolean.parseBoolean(element.getAttribute("ng-reflect-disabled"));
+        System.out.println(disabled);
+
+        if(disabled){
+            return false;
+        } else if (disabled == false){
+            enabled  = true;
+        }
+
+        return enabled;
+    }
+
+    public boolean isButtonEnabled3(By locator) {
+        boolean enabled = false;
+        if(isElementPresent(locator)){
+            WebElement element = driver.findElement(locator);
+            boolean disabled = Boolean.parseBoolean(element.getAttribute("ng-reflect-disabled"));
+            System.out.println(disabled);
+
+            if(disabled){
+                return false;
+            } else if (disabled == false){
+                enabled  = true;
+            }
+        }
+
+        return enabled;
+    }
+
     public boolean isPopUpClosed(){
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")));
         if(driver.findElements(By.cssSelector("div[id='dpwa-alert'][aria-hidden='true']")).size() == 1){

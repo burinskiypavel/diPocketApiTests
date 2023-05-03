@@ -194,14 +194,16 @@ public class UIBOHelper extends UIHelperBase {
 
     public boolean isButtonEnabled3(By locator) {
         boolean enabled = false;
-        WebElement element = driver.findElement(locator);
-        boolean disabled = Boolean.parseBoolean(element.getAttribute("ng-reflect-disabled"));
-        System.out.println(disabled);
+        if(isElementPresent(locator)){
+            WebElement element = driver.findElement(locator);
+            boolean disabled = Boolean.parseBoolean(element.getAttribute("ng-reflect-disabled"));
+            System.out.println(disabled);
 
-        if(disabled){
-            return false;
-        } else if (disabled == false){
-            enabled  = true;
+            if(disabled){
+                return false;
+            } else if (disabled == false){
+                enabled  = true;
+            }
         }
 
         return enabled;
