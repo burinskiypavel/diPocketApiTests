@@ -482,4 +482,9 @@ public class UIBOClientHelper extends UIHelperBase {
         waitFor(By.xpath("//div[contains(text(), 'Contactless counter was successfully reset')]"));
         return actualPopupText;
     }
+
+    public String getStateFromCardTable(By locator){
+        String actualState = driver.findElement(locator).getText();
+        return actualState;
+    }
 }

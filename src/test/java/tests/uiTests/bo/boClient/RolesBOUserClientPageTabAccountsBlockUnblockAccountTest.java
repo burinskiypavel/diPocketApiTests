@@ -52,7 +52,6 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboClientHelper().goToAccountsTab();
         app.getUiboClientHelper().selectAccountFromAccountTableAndPerformContextClick(accountName);
 
-
         if(app.getUiboHelper().isElementPresent(By.cssSelector("li[data-ik='2'] a[tabindex='0']"))){
             app.getUiboClientHelper().blockAccount();
             app.getUiboHelper().moveToElementAndPerformContextClick(accountName);
@@ -63,7 +62,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         assertEquals(actualPopupText, "Are you sure want to unblock account with name: "+accountName+"?");
 
         app.getUiboHelper().moveToElement(By.cssSelector("td span[ng-reflect-text='"+accountName+"']"));
-        String actualState = app.getUiboHelper().getText(By.xpath("//p-tabpanel[@header='Accounts'] //app-table //tbody //tr[1] //td[2]]"));
+        String actualState = app.getUiboHelper().getText(By.xpath("//p-tabpanel[@header='Accounts'] //tbody //tr[1] //td[2]"));
 
         assertEquals(actualState, "Active");
     }
@@ -120,7 +119,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
         app.getUiboClientHelper().blockCard();
 
         app.getUiboHelper().moveToElement(By.cssSelector("td span[ng-reflect-text='"+cardId+"']"));
-        String actualState = app.getUiboHelper().getNextElementFromTheTable(cardId, 3);
+        String actualState = app.getUiboClientHelper().getStateFromCardTable(By.xpath("//app-accounts //app-table[2] //tbody/tr[1]/td[4]"));
 
         assertEquals(actualState, "Blocked");
     }
@@ -143,7 +142,7 @@ public class RolesBOUserClientPageTabAccountsBlockUnblockAccountTest extends UIT
 
         app.getUiboClientHelper().unblockCard();
         app.getUiboHelper().moveToElement(By.cssSelector("td span[ng-reflect-text='"+cardId+"']"));
-        String actualState = app.getUiboHelper().getNextElementFromTheTable(cardId, 3);
+        String actualState = app.getUiboClientHelper().getStateFromCardTable(By.xpath("//app-accounts //app-table[2] //tbody/tr[1]/td[4]"));
 
         assertEquals(actualState, "Active");
     }
