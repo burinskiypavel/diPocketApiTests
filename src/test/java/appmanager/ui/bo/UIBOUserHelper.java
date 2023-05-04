@@ -166,10 +166,10 @@ public class UIBOUserHelper extends UIHelperBase {
             softAssert.assertTrue(isButtonEnabled2(By.cssSelector("p-button[ng-reflect-label='Edit']")), "Edit btn");
         }
         if(resetPassword){
-            softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Reset password2']")), "Reset password btn");
+            softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Reset password']")), "Reset password btn");
         }
         if(blockUser){
-            softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Block user2']")), "Block user  btn");
+            softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Block user']")), "Block user  btn");
         }
         return softAssert;
     }
