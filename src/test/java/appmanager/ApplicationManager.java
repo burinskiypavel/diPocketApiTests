@@ -11,6 +11,7 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import requests.aspsp.ConsentsRequests;
 import requests.bo.BORequests;
 import requests.bo.ClientProfileRequests;
 import requests.clientServices.ClientServicesRequests;
@@ -39,6 +40,7 @@ public class ApplicationManager {
     private BankIntegrationHelper bankIntegrationHelper = new BankIntegrationHelper();
     private JsonHelper jsonHelper = new JsonHelper();
     private BORequests boRequestsHelper = new BORequests();
+    private ConsentsRequests consentsRequestsHelper = new ConsentsRequests();
     private ClientServicesRequests clientServicesRequestsHelper = new ClientServicesRequests();
     private CustomerServicesRequests customerServicesRequestsHelper = new CustomerServicesRequests();
     private ClientProfileRequests clientProfileRequestsHelper = new ClientProfileRequests();
@@ -368,6 +370,7 @@ public class ApplicationManager {
     public JsonHelper getJsonHelper() { return jsonHelper; }
 
     public BORequests getBoRequestsHelper() { return boRequestsHelper; }
+    public ConsentsRequests getConsentsRequestsHelper() { return consentsRequestsHelper; }
     public ClientServicesRequests getClientServicesRequestsHelper() { return clientServicesRequestsHelper; }
 
     public CustomerServicesRequests getCustomerServicesRequestsHelper() { return customerServicesRequestsHelper; }
