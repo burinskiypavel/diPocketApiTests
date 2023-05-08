@@ -45,7 +45,7 @@ public class CofTests extends APIUITestBase {
 
         String response = given()
                 .log().uri().log().headers().log().body()
-                .config(app.aspspSslConfig)
+                .config(app.getSSLCertHelper().aspspSslConfig)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi/")
@@ -129,7 +129,7 @@ public class CofTests extends APIUITestBase {
 
         given()
                 .log().uri().log().headers().log().body()
-                .config(app.aspspSslConfig)
+                .config(app.getSSLCertHelper().aspspSslConfig)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
@@ -142,7 +142,7 @@ public class CofTests extends APIUITestBase {
     public void test_getConsentRequest_showConsentInformation(){
         given()
                 .log().uri().log().headers().log().body()
-                .config(app.aspspSslConfig)
+                .config(app.getSSLCertHelper().aspspSslConfig)
                 .header("X-Request-ID", "b3500b4a-ca36-4917-9d94-f60a1731c4ca")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
@@ -164,7 +164,7 @@ public class CofTests extends APIUITestBase {
 
         given()
                 .log().uri().log().headers().log().body()
-                .config(app.aspspSslConfig)
+                .config(app.getSSLCertHelper().aspspSslConfig)
                 .contentType("application/json")
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)

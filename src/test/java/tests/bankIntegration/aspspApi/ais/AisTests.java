@@ -143,7 +143,7 @@ public class AisTests extends APIUITestBase {
 
         given()
                 .log().uri().log().headers().log().body()
-                .config(app.aspspSslConfig)
+                .config(app.getSSLCertHelper().aspspSslConfig)
                 .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
@@ -157,7 +157,7 @@ public class AisTests extends APIUITestBase {
     public void test_AISGetConsentRequest_showConsentInformation(){
         given()
                 .log().uri().log().headers().log().body()
-                .config(app.aspspSslConfig)
+                .config(app.getSSLCertHelper().aspspSslConfig)
                 .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)

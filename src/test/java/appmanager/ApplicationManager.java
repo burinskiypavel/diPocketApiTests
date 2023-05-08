@@ -37,6 +37,7 @@ public class ApplicationManager {
     private Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
     private AttachmentHelper attachmentHelper = new AttachmentHelper();
     private BOHelper boHelper = new BOHelper();
+    private SSLCertHelper sslCertHelper = new SSLCertHelper();
     private BankIntegrationHelper bankIntegrationHelper = new BankIntegrationHelper();
     private JsonHelper jsonHelper = new JsonHelper();
     private BORequests boRequestsHelper = new BORequests();
@@ -306,12 +307,12 @@ public class ApplicationManager {
         RestAssured.useRelaxedHTTPSValidation();
     }
 
-    public RestAssuredConfig aspspSslConfig = RestAssuredConfig.config().sslConfig(
-            SSLConfig.sslConfig()
-                    .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
-                    .keyStore("files/certs/client_created.p12", "123456").keystoreType("PKCS12")
-                    .allowAllHostnames()
-    );
+//    public RestAssuredConfig aspspSslConfig = RestAssuredConfig.config().sslConfig(
+//            SSLConfig.sslConfig()
+//                    .trustStore("files/certs/truststoreSandboxCompany.jks", "123456").trustStoreType("JKS")
+//                    .keyStore("files/certs/client_created.p12", "123456").keystoreType("PKCS12")
+//                    .allowAllHostnames()
+//    );
 
     public void closeDriver() {
         driver.quit();
@@ -364,6 +365,9 @@ public class ApplicationManager {
     }
 
     public BOHelper getBOHelper() { return boHelper; }
+    public SSLCertHelper getSSLCertHelper() {
+        return sslCertHelper;
+    }
 
     public BankIntegrationHelper getBankIntegrationHelper() { return bankIntegrationHelper; }
 
