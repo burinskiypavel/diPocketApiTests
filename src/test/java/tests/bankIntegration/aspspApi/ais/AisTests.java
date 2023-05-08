@@ -3,7 +3,6 @@ package tests.bankIntegration.aspspApi.ais;
 import base.APIUITestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import model.aspsp.*;
 import model.clientServices.DashBoardNotifyDetails3Request;
@@ -27,8 +26,8 @@ public class AisTests extends APIUITestBase {
     public String pass = "reset246740";
     public String iban = "PL42109010560000000150296424";
     public String validUntil = "2023-06-17";
-    String [] balances = new String[0];
-    String [] transactions = new String[0];
+    String[] balances = new String[0];
+    String[] transactions = new String[0];
     public String site = Site.DIPOCKET.toString();
     Gson gson = new Gson();
     CreateConsentRequest createConsentRequest = new CreateConsentRequest();
@@ -58,7 +57,7 @@ public class AisTests extends APIUITestBase {
     }
 
     @Test(priority = 2)
-    public void test_webConfirmaton(){
+    public void test_webConfirmaton() {
         appUi.driver.navigate().to(href);
         appUi.getUiboHelper().waitFor(By.id("phone-number"));
         appUi.driver.findElement(By.id("phone-number")).sendKeys(phone);
@@ -68,8 +67,8 @@ public class AisTests extends APIUITestBase {
         uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
     }
 
-        @Test(priority = 3)
-        public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
+    @Test(priority = 3)
+    public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
         String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
         Response response = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyList2(prop.getProperty("mobile.test.base.url"), phone, pass, cliSessionId);
 //        String response2 = given()
@@ -78,11 +77,11 @@ public class AisTests extends APIUITestBase {
 //                .header("site", site)
 //                .header("cliSessionId", cliSessionId)
 //                .get("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyList2")
-            String responseString = response.then().log().all()
+        String responseString = response.then().log().all()
                 .statusCode(200)
                 .body("notificationList[0].notifyTypeName", equalTo("ASPSP Authorization")).extract().response().asString();
 
-            notifyId = app.getResponseValidationHelper().getIntFromResponseJsonPath(responseString, "notificationList[0].notifyId");
+        notifyId = app.getResponseValidationHelper().getIntFromResponseJsonPath(responseString, "notificationList[0].notifyId");
         //JsonPath jsonPath2 = new JsonPath(responseString);
         //notifyId = jsonPath2.getInt("notificationList[0].notifyId");
 
@@ -91,22 +90,22 @@ public class AisTests extends APIUITestBase {
         dashBoardNotifyDetails3Request.setDetailsRef("");
         String json = gson.toJson(dashBoardNotifyDetails3Request);
 
-            String response4 = given()
+        String response4 = given()
                 .log().uri().log().headers().log().body()
                 .auth().preemptive().basic(phone, pass)
                 .contentType("application/json")
                 .header("cliSessionId", cliSessionId)
                 .header("site", site)
-                    .body(json)
+                .body(json)
                 .post("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyDetails3")
                 .then().log().all()
                 .statusCode(200)
                 .body("notifyTypeName", equalTo("ASPSP Authorization"),
                         "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
 
-            //JsonPath jsonPath3 = new JsonPath(response4);
-            //apiTransactionCode = jsonPath3.getString("dtails");
-            apiTransactionCode = app.getResponseValidationHelper().getStringFromResponseJsonPath(response4, "dtails");
+        //JsonPath jsonPath3 = new JsonPath(response4);
+        //apiTransactionCode = jsonPath3.getString("dtails");
+        apiTransactionCode = app.getResponseValidationHelper().getStringFromResponseJsonPath(response4, "dtails");
 
         given()
                 .log().uri().log().headers().log().body()
@@ -143,7 +142,7 @@ public class AisTests extends APIUITestBase {
     }
 
     @Test(priority = 5)
-    public void test_AISGetConsentRequest_showConsentInformation(){
+    public void test_AISGetConsentRequest_showConsentInformation() {
         given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
