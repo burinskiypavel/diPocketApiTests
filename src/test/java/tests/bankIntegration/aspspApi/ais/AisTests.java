@@ -26,7 +26,7 @@ public class AisTests extends APIUITestBase {
     public String phone = "380980316499";
     public String pass = "reset246740";
     public String iban = "PL42109010560000000150296424";
-    public String validUntil = "2023-05-17";
+    public String validUntil = "2023-06-17";
     String [] balances = new String[0];
     String [] transactions = new String[0];
     public String site = Site.DIPOCKET.toString();
@@ -82,8 +82,9 @@ public class AisTests extends APIUITestBase {
                 .statusCode(200)
                 .body("notificationList[0].notifyTypeName", equalTo("ASPSP Authorization")).extract().response().asString();
 
-        JsonPath jsonPath2 = new JsonPath(responseString);
-        notifyId = jsonPath2.getInt("notificationList[0].notifyId");
+            notifyId = app.getResponseValidationHelper().getIntFromResponseJsonPath(responseString, "notificationList[0].notifyId");
+        //JsonPath jsonPath2 = new JsonPath(responseString);
+        //notifyId = jsonPath2.getInt("notificationList[0].notifyId");
 
         dashBoardNotifyDetails3Request.setTypeId(55);
         dashBoardNotifyDetails3Request.setNotifyId(notifyId);
@@ -103,8 +104,9 @@ public class AisTests extends APIUITestBase {
                 .body("notifyTypeName", equalTo("ASPSP Authorization"),
                         "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
 
-            JsonPath jsonPath3 = new JsonPath(response4);
-            apiTransactionCode = jsonPath3.getString("dtails");
+            //JsonPath jsonPath3 = new JsonPath(response4);
+            //apiTransactionCode = jsonPath3.getString("dtails");
+            apiTransactionCode = app.getResponseValidationHelper().getStringFromResponseJsonPath(response4, "dtails");
 
         given()
                 .log().uri().log().headers().log().body()
