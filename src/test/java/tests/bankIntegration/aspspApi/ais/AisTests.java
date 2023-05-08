@@ -40,33 +40,31 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 1)
     public void test_AISCreateConsentRequest() {
-        //account.setIban(iban);
-        //createConsentRequest.setAccount(account);
-        //String json = gson.toJson(createConsentRequest);
+        String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents();
 
-        String response = given()
-                .log().uri().log().headers().log().body()
-                .config(app.aspspSslConfig)
-                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
-                .header("TPP-Redirect-URI", "https://www.google.com")
-                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
-                .contentType("application/json")
-                .body("{\n" +
-                        "    \"access\": {\n" +
-                        "        \"balances\": [ \n" +
-                        "            \n" +
-                        "        ],\n" +
-                        "        \"transactions\": [\n" +
-                        "            \n" +
-                        "        ]\n" +
-                        "    },\n" +
-                        "    \"recurringIndicator\": true,\n" +
-                        "    \"validUntil\": \""+validUntil+"\"\n" +
-                        "   \n" +
-                        "}")
-                .post("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/")
-                .then().log().all()
-                .statusCode(200).extract().response().asString();
+//        String response = given()
+//                .log().uri().log().headers().log().body()
+//                .config(app.aspspSslConfig)
+//                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+//                .header("TPP-Redirect-URI", "https://www.google.com")
+//                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
+//                .contentType("application/json")
+//                .body("{\n" +
+//                        "    \"access\": {\n" +
+//                        "        \"balances\": [ \n" +
+//                        "            \n" +
+//                        "        ],\n" +
+//                        "        \"transactions\": [\n" +
+//                        "            \n" +
+//                        "        ]\n" +
+//                        "    },\n" +
+//                        "    \"recurringIndicator\": true,\n" +
+//                        "    \"validUntil\": \""+validUntil+"\"\n" +
+//                        "   \n" +
+//                        "}")
+//                .post("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/")
+//                .then().log().all()
+//                .statusCode(200).extract().response().asString();
 
         JsonPath jsonPath = new JsonPath(response);
         consentId = jsonPath.getString("consentId");
