@@ -61,7 +61,7 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 2)
-    public void test_webConfirmaton(){
+    public void test_webConfirmaton() {
         appUi.driver.navigate().to(href);
         appUi.getUiboHelper().waitFor(By.id("phone-number"));
         appUi.driver.findElement(By.id("phone-number")).sendKeys(phone);
@@ -71,8 +71,8 @@ public class CofTests extends APIUITestBase {
         uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
     }
 
-        @Test(priority = 3)
-        public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
+    @Test(priority = 3)
+    public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
         String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
         String response2 = given()
                 .log().uri().log().headers().log().body()
@@ -92,21 +92,21 @@ public class CofTests extends APIUITestBase {
         dashBoardNotifyDetails3Request.setDetailsRef("");
         String json = gson.toJson(dashBoardNotifyDetails3Request);
 
-            String response4 = given()
+        String response4 = given()
                 .log().uri().log().headers().log().body()
                 .auth().preemptive().basic(phone, pass)
                 .contentType("application/json")
                 .header("cliSessionId", cliSessionId)
                 .header("site", site)
-                    .body(json)
+                .body(json)
                 .post("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyDetails3")
                 .then().log().all()
                 .statusCode(200)
                 .body("notifyTypeName", equalTo("ASPSP Authorization"),
                         "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
 
-            JsonPath jsonPath3 = new JsonPath(response4);
-            apiTransactionCode = jsonPath3.getString("dtails");
+        JsonPath jsonPath3 = new JsonPath(response4);
+        apiTransactionCode = jsonPath3.getString("dtails");
 
         given()
                 .log().uri().log().headers().log().body()
@@ -119,7 +119,7 @@ public class CofTests extends APIUITestBase {
                 .then().log().all()
                 .statusCode(200);
 
-            assertThat(uiTransactionCode, equalTo(apiTransactionCode));
+        assertThat(uiTransactionCode, equalTo(apiTransactionCode));
     }
 
     @Test(priority = 4)
@@ -138,8 +138,9 @@ public class CofTests extends APIUITestBase {
                 .statusCode(200)
                 .body("consentStatus", equalTo("valid"));
     }
+
     @Test(priority = 5)
-    public void test_getConsentRequest_showConsentInformation(){
+    public void test_getConsentRequest_showConsentInformation() {
         given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
@@ -154,7 +155,7 @@ public class CofTests extends APIUITestBase {
     }
 
     @Test(priority = 6)
-    public void test_confirmationOfFundsRequest_availableFunds(){
+    public void test_confirmationOfFundsRequest_availableFunds() {
         account.setIban(iban);
         instructedAmount.setAmount("10.11");
         instructedAmount.setCurrency("PLN");
