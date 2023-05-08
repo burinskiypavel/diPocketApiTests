@@ -244,4 +244,14 @@ public class ClientServicesRequests {
                 .statusCode(200);
         return response;
     }
+
+    public Response clientServices_v1_dashBoard_notifyList2(String urlEnv, String phone, String pass, String cliSessionId){
+        Response response = given()
+                .spec(requestSpecDipocketHomePage)
+                .baseUri(urlEnv)
+                .auth().preemptive().basic(phone, pass)
+                .header("clisessionid", cliSessionId)
+                .get("dashBoard/notifyList2");
+        return response;
+    }
 }

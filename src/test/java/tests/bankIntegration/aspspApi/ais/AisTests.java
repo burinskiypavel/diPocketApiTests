@@ -5,6 +5,7 @@ import base.APIUITestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import model.aspsp.*;
 import model.clientServices.DashBoardNotifyDetails3Request;
 import org.openqa.selenium.By;
@@ -12,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -43,36 +45,11 @@ public class AisTests extends APIUITestBase {
     public void test_AISCreateConsentRequest() {
         access.setBalances(balances);
         access.setTransactions(transactions);
-
         v1ConsentsRequest.setAccess(access);
         v1ConsentsRequest.setRecurringIndicator(true);
         v1ConsentsRequest.setValidUntil(validUntil);
         String json = gson.toJson(v1ConsentsRequest);
         String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json);
-
-//        String response = given()
-//                .log().uri().log().headers().log().body()
-//                .config(app.aspspSslConfig)
-//                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
-//                .header("TPP-Redirect-URI", "https://www.google.com")
-//                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
-//                .contentType("application/json")
-//                .body("{\n" +
-//                        "    \"access\": {\n" +
-//                        "        \"balances\": [ \n" +
-//                        "            \n" +
-//                        "        ],\n" +
-//                        "        \"transactions\": [\n" +
-//                        "            \n" +
-//                        "        ]\n" +
-//                        "    },\n" +
-//                        "    \"recurringIndicator\": true,\n" +
-//                        "    \"validUntil\": \""+validUntil+"\"\n" +
-//                        "   \n" +
-//                        "}")
-//                .post("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/")
-//                .then().log().all()
-//                .statusCode(200).extract().response().asString();
 
         JsonPath jsonPath = new JsonPath(response);
         consentId = jsonPath.getString("consentId");
@@ -92,18 +69,19 @@ public class AisTests extends APIUITestBase {
 
         @Test(priority = 3)
         public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
-        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
-        String response2 = given()
-                .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
-                .header("site", site)
-                .header("cliSessionId", cliSessionId)
-                .get("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyList2")
-                .then().log().all()
+        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyList2(prop.getProperty("mobile.test.base.url"), phone, pass, cliSessionId);
+//        String response2 = given()
+//                .log().uri().log().headers().log().body()
+//                .auth().preemptive().basic(phone, pass)
+//                .header("site", site)
+//                .header("cliSessionId", cliSessionId)
+//                .get("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyList2")
+            String responseString = response.then().log().all()
                 .statusCode(200)
                 .body("notificationList[0].notifyTypeName", equalTo("ASPSP Authorization")).extract().response().asString();
 
-        JsonPath jsonPath2 = new JsonPath(response2);
+        JsonPath jsonPath2 = new JsonPath(responseString);
         notifyId = jsonPath2.getInt("notificationList[0].notifyId");
 
         dashBoardNotifyDetails3Request.setTypeId(55);
