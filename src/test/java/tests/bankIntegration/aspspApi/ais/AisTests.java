@@ -5,10 +5,7 @@ import base.APIUITestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
-import model.aspsp.Account;
-import model.aspsp.ConfirmationOfFundsRequest;
-import model.aspsp.CreateConsentRequest;
-import model.aspsp.InstructedAmount;
+import model.aspsp.*;
 import model.clientServices.DashBoardNotifyDetails3Request;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -28,7 +25,9 @@ public class AisTests extends APIUITestBase {
     public String phone = "380980316499";
     public String pass = "reset246740";
     public String iban = "PL42109010560000000150296424";
-    public String validUntil = "2023-09-17";
+    public String validUntil = "2023-05-17";
+    String [] balances = new String[0];
+    String [] transactions = new String[0];
     public String site = Site.DIPOCKET.toString();
     Gson gson = new Gson();
     CreateConsentRequest createConsentRequest = new CreateConsentRequest();
@@ -36,11 +35,20 @@ public class AisTests extends APIUITestBase {
     DashBoardNotifyDetails3Request dashBoardNotifyDetails3Request = new DashBoardNotifyDetails3Request();
     ConfirmationOfFundsRequest confirmationOfFundsRequest = new ConfirmationOfFundsRequest();
     InstructedAmount instructedAmount = new InstructedAmount();
+    Access access = new Access();
+    V1ConsentsRequest v1ConsentsRequest = new V1ConsentsRequest();
 
 
     @Test(priority = 1)
     public void test_AISCreateConsentRequest() {
-        String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents();
+        access.setBalances(balances);
+        access.setTransactions(transactions);
+
+        v1ConsentsRequest.setAccess(access);
+        v1ConsentsRequest.setRecurringIndicator(true);
+        v1ConsentsRequest.setValidUntil(validUntil);
+        String json = gson.toJson(v1ConsentsRequest);
+        String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json);
 
 //        String response = given()
 //                .log().uri().log().headers().log().body()
@@ -133,7 +141,7 @@ public class AisTests extends APIUITestBase {
         appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
 
-            assertThat(uiTransactionCode, equalTo(apiTransactionCode));
+        assertThat(uiTransactionCode, equalTo(apiTransactionCode));
     }
 
     @Test(priority = 4)

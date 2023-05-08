@@ -1,9 +1,7 @@
 package requests.aspsp;
 
-import appmanager.ApplicationManager;
 import appmanager.HelperBase;
 import appmanager.SSLCertHelper;
-import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
@@ -40,7 +38,7 @@ public class ConsentsRequests {
                 .statusCode(200);
     }
 
-    public String partnerId_bg_v1_consents() {
+    public String partnerId_bg_v1_consents(String json) {
         String response = given()
                 .log().uri().log().headers().log().body()
                 .config(sslCertHelper.aspspSslConfig)
@@ -49,18 +47,19 @@ public class ConsentsRequests {
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
                 .contentType("application/json")
-                .body("{\n" +
-                        "    \"access\": {\n" +
-                        "        \"balances\": [\n" +
-                        "            \n" +
-                        "        ],\n" +
-                        "        \"transactions\": [\n" +
-                        "            \n" +
-                        "        ]\n" +
-                        "    },\n" +
-                        "    \"recurringIndicator\": true,\n" +
-                        "    \"validUntil\": \"2023-05-17\"\n" +
-                        "}")
+                .body(json)
+//                .body("{\n" +
+//                        "    \"access\": {\n" +
+//                        "        \"balances\": [\n" +
+//                        "            \n" +
+//                        "        ],\n" +
+//                        "        \"transactions\": [\n" +
+//                        "            \n" +
+//                        "        ]\n" +
+//                        "    },\n" +
+//                        "    \"recurringIndicator\": true,\n" +
+//                        "    \"validUntil\": \"2023-05-17\"\n" +
+//                        "}")
                 .post("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
