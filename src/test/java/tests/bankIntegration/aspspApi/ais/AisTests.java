@@ -28,7 +28,7 @@ public class AisTests extends APIUITestBase {
     public String phone = "380980316499";
     public String pass = "reset246740";
     public String iban = "PL42109010560000000150296424";
-    public String validUntil = "2023-05-17";
+    public String validUntil = "2023-09-17";
     public String site = Site.DIPOCKET.toString();
     Gson gson = new Gson();
     CreateConsentRequest createConsentRequest = new CreateConsentRequest();
