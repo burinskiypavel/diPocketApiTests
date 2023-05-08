@@ -1,6 +1,5 @@
 package tests.bankIntegration.aspspApi.ais;
 
-import appmanager.HelperBase;
 import base.APIUITestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
@@ -51,9 +50,11 @@ public class AisTests extends APIUITestBase {
         String json = gson.toJson(v1ConsentsRequest);
         String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json);
 
-        JsonPath jsonPath = new JsonPath(response);
-        consentId = jsonPath.getString("consentId");
-        href = jsonPath.getString("_links.scaRedirect.href");
+        //JsonPath jsonPath = new JsonPath(response);
+        //consentId = jsonPath.getString("consentId");
+        //href = jsonPath.getString("_links.scaRedirect.href");
+        consentId = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "consentId");
+        href = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "_links.scaRedirect.href");
     }
 
     @Test(priority = 2)
