@@ -252,6 +252,24 @@ public class ClientServicesRequests {
                 .auth().preemptive().basic(phone, pass)
                 .header("clisessionid", cliSessionId)
                 .get("dashBoard/notifyList2");
+
+        response.then().log().all()
+                .statusCode(200);
         return response;
+    }
+
+    public Response clientServices_v1_dashBoard_notifyDetails3(String urlEnv, String json, String phone, String pass, String cliSessionId){
+        Response response = given()
+                .spec(requestSpecDipocketHomePage)
+                .baseUri(urlEnv)
+                .auth().preemptive().basic(phone, pass)
+                .contentType("application/json")
+                .body(json)
+                .header("clisessionid", cliSessionId)
+                .post("dashBoard/notifyDetails3");
+
+        response.then().log().all()
+                .statusCode(200);
+                return response;
     }
 }

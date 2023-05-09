@@ -77,9 +77,7 @@ public class AisTests extends APIUITestBase {
 //                .header("site", site)
 //                .header("cliSessionId", cliSessionId)
 //                .get("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyList2")
-        String responseString = response.then().log().all()
-                .statusCode(200)
-                .body("notificationList[0].notifyTypeName", equalTo("ASPSP Authorization")).extract().response().asString();
+        String responseString = response.then().body("notificationList[0].notifyTypeName", equalTo("ASPSP Authorization")).extract().response().asString();
 
         notifyId = app.getResponseValidationHelper().getIntFromResponseJsonPath(responseString, "notificationList[0].notifyId");
         //JsonPath jsonPath2 = new JsonPath(responseString);
@@ -90,22 +88,23 @@ public class AisTests extends APIUITestBase {
         dashBoardNotifyDetails3Request.setDetailsRef("");
         String json = gson.toJson(dashBoardNotifyDetails3Request);
 
-        String response4 = given()
-                .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
-                .contentType("application/json")
-                .header("cliSessionId", cliSessionId)
-                .header("site", site)
-                .body(json)
-                .post("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyDetails3")
-                .then().log().all()
-                .statusCode(200)
-                .body("notifyTypeName", equalTo("ASPSP Authorization"),
+//        String response4 = given()
+//                .log().uri().log().headers().log().body()
+//                .auth().preemptive().basic(phone, pass)
+//                .contentType("application/json")
+//                .header("cliSessionId", cliSessionId)
+//                .header("site", site)
+//                .body(json)
+//                .post("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyDetails3")
+//                .then().log().all()
+//                .statusCode(200)
+        Response response2 = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyDetails3(prop.getProperty("mobile.test.base.url"),  json, phone, pass, cliSessionId);
+        String responseStringNotifyDetails3 = response2.then().body("notifyTypeName", equalTo("ASPSP Authorization"),
                         "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
 
         //JsonPath jsonPath3 = new JsonPath(response4);
         //apiTransactionCode = jsonPath3.getString("dtails");
-        apiTransactionCode = app.getResponseValidationHelper().getStringFromResponseJsonPath(response4, "dtails");
+        apiTransactionCode = app.getResponseValidationHelper().getStringFromResponseJsonPath(responseStringNotifyDetails3, "dtails");
 
         given()
                 .log().uri().log().headers().log().body()
