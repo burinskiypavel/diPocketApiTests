@@ -125,31 +125,38 @@ public class AisTests extends APIUITestBase {
         //appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         //appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
 
-        given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
-                .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
-                .header("TPP-Redirect-URI", "http://www.google.com")
-                .pathParam("confirmation-of-funds", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/{confirmation-of-funds}/status")
-                .then().log().all()
-                .statusCode(200)
-                .body("consentStatus", equalTo("valid"));
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents_confirmationOfFunds_status(consentId);
+        response.then().body("consentStatus", equalTo("valid"));
+//        given()
+//                .log().uri().log().headers().log().body()
+//                .config(app.getSSLCertHelper().aspspSslConfig)
+//                .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
+//                .header("TPP-Redirect-URI", "http://www.google.com")
+//                .pathParam("confirmation-of-funds", consentId)
+//                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/{confirmation-of-funds}/status")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("consentStatus", equalTo("valid"));
     }
 
     @Test(priority = 5)
     public void test_AISGetConsentRequest_showConsentInformation() {
-        given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
-                .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
-                .header("TPP-Redirect-URI", "http://www.google.com")
-                .pathParam("confirmation-of-funds", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/{confirmation-of-funds}")
-                .then().log().all()
-                .statusCode(200)
-                .body("validUntil", equalTo(validUntil),
-                        "consentStatus", equalTo("valid"),
-                        "recurringIndicator", equalTo(true));
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents_confirmationOfFunds(consentId);
+        response.then().body("validUntil", equalTo(validUntil),
+                "consentStatus", equalTo("valid"),
+                "recurringIndicator", equalTo(true));
+
+//        given()
+//                .log().uri().log().headers().log().body()
+//                .config(app.getSSLCertHelper().aspspSslConfig)
+//                .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
+//                .header("TPP-Redirect-URI", "http://www.google.com")
+//                .pathParam("confirmation-of-funds", consentId)
+//                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/{confirmation-of-funds}")
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("validUntil", equalTo(validUntil),
+//                        "consentStatus", equalTo("valid"),
+//                        "recurringIndicator", equalTo(true));
     }
 }

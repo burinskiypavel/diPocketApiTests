@@ -2,14 +2,15 @@ package requests.aspsp;
 
 import appmanager.HelperBase;
 import appmanager.SSLCertHelper;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class ConsentsRequests {
     SSLCertHelper sslCertHelper = new SSLCertHelper();
-
-    //protected final ApplicationManager app = new ApplicationManager();
 
     public RequestSpecification requestSpecConsents = given()
             .log().uri().log().headers().log().body()
@@ -19,24 +20,8 @@ public class ConsentsRequests {
 
     public RequestSpecification requestSpecConsentsTest = given()
             .log().uri().log().headers().log().body()
-            .basePath("BOServices")
+            //.basePath("")
             .contentType("application/json");
-
-    public void clientServices_v1_clientProfile_changeCardholderName(String cliSessionId, String phone, String pass, String newCardHolderName){
-        given()
-                //.spec(requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .baseUri(HelperBase.prop.getProperty("mobile.base.url"))
-                .header("clisessionid", ""+cliSessionId+"")
-                .header("content-type", "application/json")
-                .body("{\n" +
-                        "  \"value\" : \""+newCardHolderName+"\"\n" +
-                        "}")
-                .when()
-                .post("clientProfile/changeCardholderName")
-                .then().log().all()
-                .statusCode(200);
-    }
 
     public String partnerId_bg_v1_consents(String json) {
         String response = given()
@@ -64,5 +49,31 @@ public class ConsentsRequests {
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
         return response;
+    }
+
+    public Response partnerId_bg_v1_consents_confirmationOfFunds_status(String consentId) {
+        Response response = given()
+                .log().uri().log().headers().log().body()
+                .config(sslCertHelper.aspspSslConfig)
+                .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
+                .header("TPP-Redirect-URI", "http://www.google.com")
+                .pathParam("confirmation-of-funds", consentId)
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/{confirmation-of-funds}/status");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
+    }
+
+    public Response partnerId_bg_v1_consents_confirmationOfFunds(String consentId) {
+        Response response = given()
+                .log().uri().log().headers().log().body()
+                .config(sslCertHelper.aspspSslConfig)
+                .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
+                .header("TPP-Redirect-URI", "http://www.google.com")
+                .pathParam("confirmation-of-funds", consentId)
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/{confirmation-of-funds}");
+        response.then().log().all()
+                .statusCode(200);
+                return response;
     }
 }
