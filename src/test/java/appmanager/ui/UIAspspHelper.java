@@ -19,4 +19,9 @@ public class UIAspspHelper extends UIHelperBase {
         uiTransactionCode = driver.findElement(By.id("transaction-code")).getText();
         return uiTransactionCode;
     }
+
+    public void pressConsent(){
+        waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
+        findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
+    }
 }

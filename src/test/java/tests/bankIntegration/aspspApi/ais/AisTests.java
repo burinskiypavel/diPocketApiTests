@@ -79,8 +79,9 @@ public class AisTests extends APIUITestBase {
 
         app.getClientServicesRequestsHelper().clientServices_v1_aspsp_notifyId_approve(prop.getProperty("mobile.test.base.url"), notifyId, phone, pass, cliSessionId);
 
-        appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
-        appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
+        //appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
+        //appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
+        appUi.getUiAspspHelper().pressConsent();
 
         assertThat(uiTransactionCode, equalTo(apiTransactionCode));
     }
