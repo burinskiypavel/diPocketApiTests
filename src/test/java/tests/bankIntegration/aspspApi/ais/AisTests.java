@@ -26,6 +26,7 @@ public class AisTests extends APIUITestBase {
     public String pass = "reset246740";
     public String iban = "PL42109010560000000150296424";
     public String validUntil = "2023-06-17";
+    int resourceId = 0;
     String[] balances = new String[0];
     String[] transactions = new String[0];
     public String site = Site.DIPOCKET.toString();
@@ -90,5 +91,25 @@ public class AisTests extends APIUITestBase {
         response.then().body("validUntil", equalTo(validUntil),
                 "consentStatus", equalTo("valid"),
                 "recurringIndicator", equalTo(true));
+    }
+
+    @Test(priority = 6)
+    public void test_AISReadAccountsList() {
+        Response response = given()
+                .log().uri().log().headers().log().body()
+                .config(app.getSSLCertHelper().aspspSslConfig)
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts");
+
+        String resString = response.then().log().all()
+                .statusCode(200)
+                .body("accounts[0].iban", equalTo(iban),
+                        "accounts[0].currency", equalTo("PLN"),
+                        "accounts[0].ownerName", equalTo("Pavel Burinsky"),
+                        "accounts[0].cashAccountType", equalTo("CACC"),
+                        "accounts[0].status", equalTo("enabled")).extract().response().asString();
+
+        resourceId = app.getResponseValidationHelper().getIntFromResponseJsonPath(resString, "accounts[0].resourceId");
     }
 }
