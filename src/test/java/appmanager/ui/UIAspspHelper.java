@@ -3,6 +3,7 @@ package appmanager.ui;
 import appmanager.UIHelperBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class UIAspspHelper extends UIHelperBase {
     String uiTransactionCode = null;
@@ -23,5 +24,11 @@ public class UIAspspHelper extends UIHelperBase {
     public void pressConsent(){
         waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
+        wait.until(ExpectedConditions.titleIs("Google"));
+    }
+
+    public void selectAccount(String iban){
+        waitFor(By.xpath("//span[contains(text(), '"+iban+"')]"));
+        findElement(By.xpath("//span[contains(text(), '"+iban+"')]")).click();
     }
 }

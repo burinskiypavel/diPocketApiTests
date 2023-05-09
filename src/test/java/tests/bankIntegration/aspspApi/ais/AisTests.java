@@ -37,8 +37,8 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 1)
     public void test_AISCreateConsentRequest() {
-        access.setBalances(balances);
-        access.setTransactions(transactions);
+        //access.setBalances(balances);
+        //access.setTransactions(transactions);
         v1ConsentsRequest.setAccess(access);
         v1ConsentsRequest.setRecurringIndicator(true);
         v1ConsentsRequest.setValidUntil(validUntil);
@@ -72,6 +72,7 @@ public class AisTests extends APIUITestBase {
 
         app.getClientServicesRequestsHelper().clientServices_v1_aspsp_notifyId_approve(prop.getProperty("mobile.test.base.url"), notifyId, phone, pass, cliSessionId);
 
+        appUi.getUiAspspHelper().selectAccount(iban);
         appUi.getUiAspspHelper().pressConsent();
 
         assertThat(uiTransactionCode, equalTo(apiTransactionCode));
