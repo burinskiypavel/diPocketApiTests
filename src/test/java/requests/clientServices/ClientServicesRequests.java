@@ -272,4 +272,17 @@ public class ClientServicesRequests {
                 .statusCode(200);
                 return response;
     }
+
+    public void clientServices_v1_aspsp_notifyId_approve(String urlEnv, int notifyId, String phone, String pass, String cliSessionId){
+        given()
+                .spec(requestSpecDipocketHomePage)
+                .baseUri(urlEnv)
+                .auth().preemptive().basic(phone, pass)
+                .contentType("application/json")
+                .pathParam("notifyId", notifyId)
+                .header("clisessionid", cliSessionId)
+                .post("aspsp/{notifyId}/approve")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

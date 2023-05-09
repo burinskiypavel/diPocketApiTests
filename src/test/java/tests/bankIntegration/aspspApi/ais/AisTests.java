@@ -30,11 +30,7 @@ public class AisTests extends APIUITestBase {
     String[] transactions = new String[0];
     public String site = Site.DIPOCKET.toString();
     Gson gson = new Gson();
-    CreateConsentRequest createConsentRequest = new CreateConsentRequest();
-    Account account = new Account();
     DashBoardNotifyDetails3Request dashBoardNotifyDetails3Request = new DashBoardNotifyDetails3Request();
-    ConfirmationOfFundsRequest confirmationOfFundsRequest = new ConfirmationOfFundsRequest();
-    InstructedAmount instructedAmount = new InstructedAmount();
     Access access = new Access();
     V1ConsentsRequest v1ConsentsRequest = new V1ConsentsRequest();
 
@@ -98,7 +94,7 @@ public class AisTests extends APIUITestBase {
 //                .post("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyDetails3")
 //                .then().log().all()
 //                .statusCode(200)
-        Response response2 = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyDetails3(prop.getProperty("mobile.test.base.url"),  json, phone, pass, cliSessionId);
+        Response response2 = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyDetails3(prop.getProperty("mobile.test.base.url"), json, phone, pass, cliSessionId);
         String responseStringNotifyDetails3 = response2.then().body("notifyTypeName", equalTo("ASPSP Authorization"),
                         "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
 
@@ -106,16 +102,17 @@ public class AisTests extends APIUITestBase {
         //apiTransactionCode = jsonPath3.getString("dtails");
         apiTransactionCode = app.getResponseValidationHelper().getStringFromResponseJsonPath(responseStringNotifyDetails3, "dtails");
 
-        given()
-                .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
-                .contentType("application/json")
-                .header("cliSessionId", cliSessionId)
-                .pathParam("notifyId", notifyId)
-                .header("site", site)
-                .post("https://http.dipocket.site/ClientServices/v1/aspsp/{notifyId}/approve")
-                .then().log().all()
-                .statusCode(200);
+//        given()
+//                .log().uri().log().headers().log().body()
+//                .auth().preemptive().basic(phone, pass)
+//                .contentType("application/json")
+//                .header("cliSessionId", cliSessionId)
+//                .pathParam("notifyId", notifyId)
+//                .header("site", site)
+//                .post("https://http.dipocket.site/ClientServices/v1/aspsp/{notifyId}/approve")
+//                .then().log().all()
+//                .statusCode(200);
+        app.getClientServicesRequestsHelper().clientServices_v1_aspsp_notifyId_approve(prop.getProperty("mobile.test.base.url"), notifyId, phone, pass, cliSessionId);
 
         appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
