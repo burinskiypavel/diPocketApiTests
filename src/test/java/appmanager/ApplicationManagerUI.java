@@ -1,5 +1,6 @@
 package appmanager;
 
+import appmanager.ui.UIAspspHelper;
 import appmanager.ui.UIBOHelper;
 import appmanager.ui.UITelenorHelper;
 import appmanager.ui.UIUpAndGoHelper;
@@ -46,6 +47,7 @@ public class ApplicationManagerUI {
     public UIBOCardHelper uiboCardHelper;
     public UIUpAndGoHelper uiUpAndGoHelper;
     public UITelenorHelper uiTelenorHelper;
+    public UIAspspHelper uiAspspHelper;
     public String pan = null;
     public String TDSBaseUrl = null;
     public String telenorSite = null;
@@ -147,6 +149,8 @@ public class ApplicationManagerUI {
         uiboCardHelper = new UIBOCardHelper(driver);
         uiUpAndGoHelper = new UIUpAndGoHelper(driver);
         uiTelenorHelper = new UITelenorHelper(driver);
+        uiAspspHelper = new UIAspspHelper(driver);
+
         configTimeout = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
                         .setParam("http.socket.timeout", 50000)
@@ -336,6 +340,8 @@ public class ApplicationManagerUI {
     public UIUpAndGoHelper getUiUpAndGoHelper() { return uiUpAndGoHelper; }
 
     public UITelenorHelper getUiTelenorHelper() { return uiTelenorHelper; }
+
+    public UIAspspHelper getUiAspspHelper() { return uiAspspHelper; }
 
     public UIBOOperationsHelper getUiboOperationsHelper() { return uiboOperationsHelper; }
 
