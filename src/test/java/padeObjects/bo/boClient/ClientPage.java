@@ -39,4 +39,7 @@ public class ClientPage {
 
     @FindBy(xpath = "//p-button[@ng-reflect-label='Send statements']")
     public WebElement sendStatementsBtn;
+
+    @FindBy(css = "timesicon[ng-reflect-style-class='p-dropdown-clear-icon'] svg")
+    public WebElement clearDropDownFilterBtn;
 }
