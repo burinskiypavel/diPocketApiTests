@@ -26,7 +26,7 @@ public class AisTests extends APIUITestBase {
     public String pass = "reset246740";
     public String iban = "PL42109010560000000150296424";
     public String validUntil = "2023-06-17";
-    int resourceId = 0;
+    String resourceId = null;
     String[] balances = new String[0];
     String[] transactions = new String[0];
     String currency = "PLN";
@@ -114,7 +114,7 @@ public class AisTests extends APIUITestBase {
                         "accounts[0].cashAccountType", equalTo(cashAccountType),
                         "accounts[0].status", equalTo(status)).extract().response().asString();
 
-        resourceId = app.getResponseValidationHelper().getIntFromResponseJsonPath(resString, "accounts[0].resourceId");
+        resourceId = app.getResponseValidationHelper().getStringFromResponseJsonPath(resString, "accounts[0].resourceId");
     }
 
     @Test(priority = 7)
