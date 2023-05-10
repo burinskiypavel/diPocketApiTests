@@ -136,4 +136,24 @@ public class AisTests extends APIUITestBase {
                         "account.cashAccountType", equalTo(cashAccountType),
                         "account.status", equalTo(status));
     }
+
+    @Test(priority = 8)
+    public void test_AISReadAccountBalances(){
+        given()
+                .log().uri().log().headers().log().body()
+                .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("user", resourceId)
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{user}/balances")
+                .then()
+                .log().all()
+                .statusCode(200);
+//                .body("account.resourceId", equalTo(resourceId),
+//                        "account.iban", equalTo(iban),
+//                        "account.currency", equalTo(currency),
+//                        "account.ownerName", equalTo(ownerName),
+//                        "account.cashAccountType", equalTo(cashAccountType),
+//                        "account.status", equalTo(status));
+    }
 }
