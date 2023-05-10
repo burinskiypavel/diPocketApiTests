@@ -56,7 +56,9 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public void delayTicketForSeveralMinutes() throws InterruptedException {
         click(takeTicketPage.postponeBtn);
+        waitFor(postponePage.calendarBtn);
         click(postponePage.calendarBtn);
+        waitFor(postponePage.chevronUpBtn);
         click(postponePage.chevronUpBtn);
         click(postponePage.chevronUpBtn);
         click(postponePage.chevronUpBtn);
