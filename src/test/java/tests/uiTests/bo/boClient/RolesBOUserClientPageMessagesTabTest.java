@@ -26,11 +26,11 @@ public class RolesBOUserClientPageMessagesTabTest extends UITestBase {
 
         app.getUiboHelper().waitFor(By.xpath("//td //span[@ng-reflect-text='P']"));
         //app.getUiboClientHelper().setDropDownClientPageFilter("channel", "S");
-        app.getUiboClientHelper().setDropDownClientPageFilter_messageTab("'S'");
+        app.getUiboClientHelper().setDropDownClientPageFilter_messageTab("S");
 
-        softAssert.assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'S')]")), "Incorrect channel filter");
+        softAssert.assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td //span[contains(text(), 'S')]")), "Incorrect channel filter");
         //softAssert.assertFalse(app.getUiboHelper().areElementsPresentAfterSorting(By.xpath("//td[contains(text(), 'P')]")), "Incorrect channel filter");
-        app.getUiboClientHelper().clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        app.getUiboClientHelper().clearFilter(By.cssSelector("timesicon[ng-reflect-style-class='p-dropdown-clear-icon'] svg"));
 
         //app.getUiboClientHelper().setClientPageFilter("message", "Password change code: 839429 (#3)");
         app.getUiboClientHelper().setClientPageFilter_messageTab("message", "Password change code: 839429 (#3)");

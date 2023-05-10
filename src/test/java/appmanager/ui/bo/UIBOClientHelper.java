@@ -407,8 +407,9 @@ public class UIBOClientHelper extends UIHelperBase {
 
     public void setDropDownClientPageFilter_messageTab(final String text) {
         click(By.xpath("//p-dropdown"));
+        waitFor(By.cssSelector("li[aria-label=" + text + "]"));
         click(By.cssSelector("li[aria-label=" + text + "]"));
-        waitFor(By.cssSelector("i.p-dropdown-clear-icon"));
+        waitFor(By.cssSelector("timesicon[ng-reflect-style-class='p-dropdown-clear-icon'] svg"));
     }
 
     public void setClientPageFilter_messageTab(final String filter, String text) {
