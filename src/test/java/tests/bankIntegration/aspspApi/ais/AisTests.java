@@ -29,6 +29,10 @@ public class AisTests extends APIUITestBase {
     int resourceId = 0;
     String[] balances = new String[0];
     String[] transactions = new String[0];
+    String currency = "PLN";
+    String ownerName = "Pavel Burinsky";
+    String cashAccountType = "CACC";
+    String status = "enabled";
     public String site = Site.DIPOCKET.toString();
     Gson gson = new Gson();
     DashBoardNotifyDetails3Request dashBoardNotifyDetails3Request = new DashBoardNotifyDetails3Request();
@@ -105,10 +109,10 @@ public class AisTests extends APIUITestBase {
         String resString = response.then().log().all()
                 .statusCode(200)
                 .body("accounts[0].iban", equalTo(iban),
-                        "accounts[0].currency", equalTo("PLN"),
-                        "accounts[0].ownerName", equalTo("Pavel Burinsky"),
-                        "accounts[0].cashAccountType", equalTo("CACC"),
-                        "accounts[0].status", equalTo("enabled")).extract().response().asString();
+                        "accounts[0].currency", equalTo(currency),
+                        "accounts[0].ownerName", equalTo(ownerName),
+                        "accounts[0].cashAccountType", equalTo(cashAccountType),
+                        "accounts[0].status", equalTo(status)).extract().response().asString();
 
         resourceId = app.getResponseValidationHelper().getIntFromResponseJsonPath(resString, "accounts[0].resourceId");
     }
@@ -124,6 +128,12 @@ public class AisTests extends APIUITestBase {
                 .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{user}")
                 .then()
                 .log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body("resourceId", equalTo(resourceId),
+                        "accounts.iban", equalTo(iban),
+                        "accounts.currency", equalTo(currency),
+                        "accounts.ownerName", equalTo(ownerName),
+                        "accounts.cashAccountType", equalTo(cashAccountType),
+                        "accounts.status", equalTo(status)).extract().response().asString();;
     }
 }
