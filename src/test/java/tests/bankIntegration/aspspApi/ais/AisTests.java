@@ -129,11 +129,11 @@ public class AisTests extends APIUITestBase {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("resourceId", equalTo(resourceId),
-                        "accounts.iban", equalTo(iban),
-                        "accounts.currency", equalTo(currency),
-                        "accounts.ownerName", equalTo(ownerName),
-                        "accounts.cashAccountType", equalTo(cashAccountType),
-                        "accounts.status", equalTo(status)).extract().response().asString();;
+                .body("account.resourceId", equalTo(resourceId),
+                        "account.iban", equalTo(iban),
+                        "account.currency", equalTo(currency),
+                        "account.ownerName", equalTo(ownerName),
+                        "account.cashAccountType", equalTo(cashAccountType),
+                        "account.status", equalTo(status));
     }
 }
