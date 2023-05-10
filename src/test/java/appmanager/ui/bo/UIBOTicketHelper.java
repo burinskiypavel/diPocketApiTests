@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
 import padeObjects.bo.boClient.ClientPage;
 import padeObjects.bo.boClient.UploadDocPage;
+import padeObjects.bo.boTicket.PostponePage;
 import padeObjects.bo.boTicket.RejectTicketPage;
 import padeObjects.bo.search.ClientSearchPage;
 import padeObjects.bo.boTicket.TakeTicketEditDataPage;
@@ -25,6 +26,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     ClientPage clientPage = new ClientPage(driver);
     UploadDocPage uploadDocPage = new UploadDocPage(driver);
     RejectTicketPage rejectTicketPage = new RejectTicketPage(driver);
+    PostponePage postponePage = new PostponePage(driver);
 
     public UIBOTicketHelper(WebDriver driver) {
         super(driver);
@@ -53,14 +55,13 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void delayTicketForSeveralMinutes() throws InterruptedException {
-        //click(By.xpath("//app-button[@ng-reflect-label='Postpone']"));
         click(takeTicketPage.postponeBtn);
-        click(By.xpath("//button[@ng-reflect-icon='pi pi-calendar']"));
-        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
-        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
-        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
-        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
-        click(By.cssSelector("div.p-minute-picker span.pi-chevron-up"));
+        click(postponePage.calendarBtn);
+        click(postponePage.chevronUpBtn);
+        click(postponePage.chevronUpBtn);
+        click(postponePage.chevronUpBtn);
+        click(postponePage.chevronUpBtn);
+        click(postponePage.chevronUpBtn);
         pressKeys(Keys.ENTER);
         Thread.sleep(1000);
 
