@@ -55,6 +55,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void delayTicketForSeveralMinutes() throws InterruptedException {
+        waitFor(takeTicketPage.postponeBtn);
         click(takeTicketPage.postponeBtn);
         waitFor(postponePage.calendarBtn);
         click(postponePage.calendarBtn);
@@ -281,6 +282,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void gotoSearchPage() {
+        waitFor(By.cssSelector("div[ng-reflect-router-link='search']"));
         click(By.cssSelector("div[ng-reflect-router-link='search']"));
         waitFor(By.xpath("//*[contains(text(), 'Card')]"));
     }
@@ -291,8 +293,9 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.cssSelector("td span[ng-reflect-text='"+value+"']"));
     }
 
-    public void goToClientPage(String phone) {
-        click(By.cssSelector("td span[ng-reflect-text='"+phone+"']"));
+    public void goToClientPage(String item) {
+        waitFor(By.cssSelector("td span[ng-reflect-text='"+item+"']"));
+        click(By.cssSelector("td span[ng-reflect-text='"+item+"']"));
         waitFor(By.cssSelector("p.user-name"));
     }
 
@@ -337,6 +340,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void rescanRequestSuccessfully(boolean id, boolean proofOfAddress, boolean backOfId, boolean secondId) throws InterruptedException {
+        waitFor(takeTicketPage.rescanRequestBtn);
         click(takeTicketPage.rescanRequestBtn);
         if(id) {
             click(By.cssSelector("p-checkbox[ng-reflect-input-id='Id'"));
@@ -377,10 +381,10 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Selfies were uploaded successfully')]"));
     }
 
-    public void gotoClientPageAndUpdateDocs(String clientId, String phone, String path, String docItem) throws InterruptedException {
+    public void gotoClientPageAndUpdateDocs(String clientId, String path, String docItem) throws InterruptedException {
         gotoSearchPage();
         search("id", clientId);
-        goToClientPage(phone);
+        goToClientPage(clientId);
 
         uploadDoc(docItem, path);
         //click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));

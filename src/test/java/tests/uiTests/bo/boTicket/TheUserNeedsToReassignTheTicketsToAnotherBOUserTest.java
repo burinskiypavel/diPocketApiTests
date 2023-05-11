@@ -141,7 +141,7 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
     public void testTheUserNeedsToReassignPhotoIDChangeTicketToAnotherBOUser_TheUserChangedHisMindAboutReassignPhotoIDChangeTicketToAnotherBOUser(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
 
-        app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId2, phone2, "files/bo/images/self.jpg", doc);
+        app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId2,"files/bo/images/self.jpg", doc);
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 

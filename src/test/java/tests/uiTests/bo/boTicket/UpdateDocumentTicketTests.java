@@ -15,7 +15,8 @@ import static appmanager.HelperBase.prop;
 
 public class UpdateDocumentTicketTests extends UITestBase {
     String clientId = null;
-    String clientId2 = app.homePageLoginId;
+    //String clientId2 = app.homePageLoginId;
+    String clientId2 = "46967";
     String phone2 = "380980316499";
 
     String actualTicketType = null;
@@ -40,21 +41,22 @@ public class UpdateDocumentTicketTests extends UITestBase {
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
             app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"),"dev");
             app.getUiboTicketHelper().gotoTakeTicket();
-            clientId = app.getUiboTicketHelper().initFDDTicketDisplainWithSecondID("380685448615", "M");
+            clientId = app.getUiboTicketHelper().initFDDTicketDisplainWithSecondID(prop.getProperty("mobile.registration.phoneNumber"), "M");
         }
 
         actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
         for(int i = 0; i < 12; i++) {
             actualTicketType = app.getUiboTicketHelper().getActualTicketType();
-            state = app.getUiboHelper().getText(By.xpath("//p[contains(text(), 'State:')]"));
+            //state = app.getUiboHelper().getText(By.xpath("//p[contains(text(), 'State:')]"));
+            state = app.getUiboTicketHelper().getActualTicketState();
             if(actualTicketType.equals("Update document")){
                 app.getUiboTicketHelper().approveTicketSuccessfullyDocsChange();
                 app.getUiboTicketHelper().gotoTakeTicketWithReg();
                 //break;
             }
 
-            if(actualTicketType.equals("SDD - check client's data") && state.equals("State: Blocked")){
+            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
                 app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
                 app.getUiboTicketHelper().approveTicketSuccessfully();
                 app.getUiboTicketHelper().gotoTakeTicketWithReg();
@@ -62,7 +64,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
                 if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
                     app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                     app.getUiboTicketHelper().gotoTakeTicket();
-                    clientId = app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");
+                    clientId = app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
                 }
                 continue;
             }
@@ -75,7 +77,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
                 app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
-                clientId = app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");
+                clientId = app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
             }
         }
 
@@ -85,7 +87,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
         }
 
         app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Take Ticket')]"));
-        app.getUiboTicketHelper().uploadDoc(clientId, "380685448615", document, "files/bo/images/doc.jpg");
+        app.getUiboTicketHelper().uploadDoc(clientId, prop.getProperty("mobile.registration.phoneNumber"), document, "files/bo/images/doc.jpg");
 
         app.getUiboTicketHelper().click(By.xpath("//p-button[@ng-reflect-label='Home']"));
         app.getUiboTicketHelper().waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
@@ -107,7 +109,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
             app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
-            clientId = app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");
+            clientId = app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
         }
 
         app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
@@ -117,7 +119,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "11111111111", "123456789", "Poland");
             app.getUiboTicketHelper().approveTicketSuccessfully();
 
-            app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId, "380685448615", "files/bo/images/self.jpg", doc);
+            app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId,"files/bo/images/self.jpg", doc);
             app.getUiboHelper().gotoHomePageWithBOUser();
             app.getUiboTicketHelper().gotoTakeTicketWithReg();
         }
@@ -134,7 +136,7 @@ public class UpdateDocumentTicketTests extends UITestBase {
     public void testRejectionOfDocsChangeTicket_TheUserChangedHisMindAboutRejectionOfDocsChangeTicket_withAlreadyExistClient(String doc) throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
 
-        app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId2, phone2, "files/bo/images/doc.jpg", doc);
+        app.getUiboTicketHelper().gotoClientPageAndUpdateDocs(clientId2,"files/bo/images/doc.jpg", doc);
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
