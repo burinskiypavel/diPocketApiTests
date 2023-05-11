@@ -11,7 +11,8 @@ import static appmanager.HelperBase.prop;
 
 public class SelfieChangeTicketTests extends UITestBase {
     String clientId = null;
-    String clientId2 = app.homePageLoginId;
+    //String clientId2 = app.homePageLoginId;
+    String clientId2 = "30457";
     String phone2 = "380980316499";
     String actualTicketType = null;
 
@@ -23,7 +24,7 @@ public class SelfieChangeTicketTests extends UITestBase {
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
             app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
-            clientId = app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");
+            clientId = app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
         }
 
         app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");

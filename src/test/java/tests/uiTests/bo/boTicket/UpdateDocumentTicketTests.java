@@ -16,7 +16,7 @@ import static appmanager.HelperBase.prop;
 public class UpdateDocumentTicketTests extends UITestBase {
     String clientId = null;
     //String clientId2 = app.homePageLoginId;
-    String clientId2 = "46967";
+    String clientId2 = "30457";
     String phone2 = "380980316499";
 
     String actualTicketType = null;
