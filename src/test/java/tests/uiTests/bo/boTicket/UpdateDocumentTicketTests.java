@@ -38,10 +38,9 @@ public class UpdateDocumentTicketTests extends UITestBase {
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
-            //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
             app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"),"dev");
             app.getUiboTicketHelper().gotoTakeTicket();
-            clientId = app.getUiboTicketHelper().initFDDTicketDisplainWithSecondID();
+            clientId = app.getUiboTicketHelper().initFDDTicketDisplainWithSecondID("380685448615", "M");
         }
 
         actualTicketType = app.getUiboTicketHelper().getActualTicketType();
@@ -61,7 +60,6 @@ public class UpdateDocumentTicketTests extends UITestBase {
                 app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
                 if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                    //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
                     app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                     app.getUiboTicketHelper().gotoTakeTicket();
                     clientId = app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");
@@ -75,7 +73,6 @@ public class UpdateDocumentTicketTests extends UITestBase {
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
                 app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
                 clientId = app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");
@@ -108,7 +105,6 @@ public class UpdateDocumentTicketTests extends UITestBase {
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
-            //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
             app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
             clientId = app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");

@@ -126,6 +126,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public void editAndSaveSDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
         //click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        waitFor(takeTicketPage.editBtn);
         click(takeTicketPage.editBtn);
 
         if(!gender.equals("")){
@@ -156,6 +157,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public void editAndSaveFDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
         //click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
+        waitFor(takeTicketPage.editBtn);
         click(takeTicketPage.editBtn);
         waitFor(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"));
         if(!gender.equals("")){
@@ -258,14 +260,14 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
     }
 
-    public String initFDDTicketDisplainWithSecondID() throws InterruptedException, SQLException, ClassNotFoundException {
-        waitFor(By.xpath("//*[contains(text(), 'ID:')] //span"));
-        String id = getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
-        editAndSaveSDDTicket("M", "", "", "", "");
+    public String initFDDTicketDisplainWithSecondID(String phone, String gender) throws InterruptedException, SQLException, ClassNotFoundException {
+        waitFor(takeTicketPage.idField);
+        String id = getActualTicketId();
+        editAndSaveSDDTicket(gender, "", "", "", "");
         approveTicketSuccessfully();
         gotoSearchPage();
         search("id", id);
-        goToClientPage("380685448615");
+        goToClientPage(phone);
 
         uploadDoc("PhotoID", "files/bo/images/self.jpg");
         uploadDoc("Proof of address", "files/bo/images/self.jpg");
