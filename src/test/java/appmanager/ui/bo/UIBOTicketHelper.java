@@ -33,7 +33,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void gotoTakeTicket() throws InterruptedException {
-        click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+        //click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         //boHomePage.gotoTakeTicket();
         click(boHomePage.take_ticket);
         waitFor(By.cssSelector("app-take-ticket"));
