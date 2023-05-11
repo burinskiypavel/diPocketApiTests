@@ -9,11 +9,9 @@ import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
 import padeObjects.bo.boClient.ClientPage;
 import padeObjects.bo.boClient.UploadDocPage;
-import padeObjects.bo.boTicket.PostponePage;
-import padeObjects.bo.boTicket.RejectTicketPage;
+import padeObjects.bo.boClient.UploadSelfiesPage;
+import padeObjects.bo.boTicket.*;
 import padeObjects.bo.search.ClientSearchPage;
-import padeObjects.bo.boTicket.TakeTicketEditDataPage;
-import padeObjects.bo.boTicket.TakeTicketPage;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -27,6 +25,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     UploadDocPage uploadDocPage = new UploadDocPage(driver);
     RejectTicketPage rejectTicketPage = new RejectTicketPage(driver);
     PostponePage postponePage = new PostponePage(driver);
+    ReassignPage reassignPage = new ReassignPage(driver);
+    UploadSelfiesPage uploadSelfiesPage = new UploadSelfiesPage(driver);
 
     public UIBOTicketHelper(WebDriver driver) {
         super(driver);
@@ -366,18 +366,19 @@ public class UIBOTicketHelper extends UIHelperBase {
         uploadDoc(doc, path);
     }
 
-    public void gotoClientPageAndUpdateSelfies(String clientId, String phone, String path) throws InterruptedException {
+    public void gotoClientPageAndUpdateSelfies(String clientId, String path) throws InterruptedException {
         gotoSearchPage();
         search("id", clientId);
-        goToClientPage(phone);
+        goToClientPage(clientId);
 
-        click(By.xpath("//p-button[@ng-reflect-label='Upload selfies']"));
+        waitFor(clientPage.uploadSelfiesBtn);
+        click(clientPage.uploadSelfiesBtn);
         File file = new File(path);
 
-        uploadFile(By.cssSelector("app-upload-file-with-preview[ng-reflect-name='base64Selfie1'] input[type='file']"), file.getAbsolutePath());
-        uploadFile(By.cssSelector("app-upload-file-with-preview[ng-reflect-name='base64Selfie2'] input[type='file']"), file.getAbsolutePath());
+        uploadFile(uploadSelfiesPage.selfie1, file.getAbsolutePath());
+        uploadFile(uploadSelfiesPage.selfie2, file.getAbsolutePath());
         Thread.sleep(1300);
-        click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
+        click(uploadSelfiesPage.confirmBtn);
         waitFor(By.xpath("//*[contains(text(), 'Selfies were uploaded successfully')]"));
     }
 
@@ -422,7 +423,9 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void askForSuccessfullySDD(boolean id, boolean proofOfAddress, boolean backOfId, boolean residencePermit) {
-        click(By.xpath("//app-button[@ng-reflect-label='Ask for']"));
+        //click(By.xpath("//app-button[@ng-reflect-label='Ask for']"));
+        waitFor(takeTicketPage.askForBtn);
+        click(takeTicketPage.askForBtn);
         if(id){
             clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Id']"));
         }
@@ -444,19 +447,26 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public void reassignTicketSuccessfully(String username, String reason) throws InterruptedException {
         //click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
+        waitFor(takeTicketPage.reassignBtn);
         click(takeTicketPage.reassignBtn);
-        waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), username);
-        type(By.cssSelector("app-input[ng-reflect-name='reason'] input"), reason);
+        //waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        waitFor(reassignPage.reassignBtn);
+        //selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), username);
+        selectFromDropDown(reassignPage.usernameDropDown, username);
+        //type(By.cssSelector("app-input[ng-reflect-name='reason'] input"), reason);
+        type(reassignPage.reassignrReasonInput, reason);
         Thread.sleep(700);
-        click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        //click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        click(reassignPage.reassignBtn);
         waitFor(By.xpath("//*[contains(text(), 'Ticket reassigned successfully')]"));
     }
 
     public void verifyTheUserChangedHisMindAboutReassignTheTicketToAnotherBOUser() {
         //click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
+        waitFor(takeTicketPage.reassignBtn);
         click(takeTicketPage.reassignBtn);
-        waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        //waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
+        waitFor(reassignPage.reassignBtn);
         closePopUp(By.cssSelector("button.p-dialog-header-icon"));
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
     }

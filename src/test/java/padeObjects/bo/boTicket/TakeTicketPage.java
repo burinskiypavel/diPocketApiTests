@@ -27,6 +27,9 @@ public class TakeTicketPage {
     @FindBy(xpath = "//app-button[@ng-reflect-label='Reassign']")
     public WebElement reassignBtn;
 
+    @FindBy(xpath = "//app-button[@ng-reflect-label='Ask for']")
+    public WebElement askForBtn;
+
     @FindBy(xpath = "//app-button[@ng-reflect-label='Postpone']")
     public WebElement postponeBtn;
 

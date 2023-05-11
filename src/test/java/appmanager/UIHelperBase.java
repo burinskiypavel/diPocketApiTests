@@ -327,6 +327,11 @@ public class UIHelperBase {
         fileInput.sendKeys(path);
     }
 
+    public void uploadFile(WebElement element, String path) {
+        WebElement fileInput = element;
+        fileInput.sendKeys(path);
+    }
+
     public void performContextClickFromTable(String text) {
         WebElement element = driver.findElement(By.cssSelector("td[ng-reflect-text='"+text+"']"));
         Actions actions = new Actions(driver);

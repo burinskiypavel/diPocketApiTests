@@ -1,7 +1,5 @@
 package tests.uiTests.bo.boTicket;
 
-import appmanager.HelperBase;
-import appmanager.Login_RegistrationHelper;
 import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -16,9 +14,12 @@ import java.util.List;
 import static appmanager.HelperBase.prop;
 
 public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestBase {
-    String clientId2 = app.homePageLoginId;
+    //String clientId2 = app.homePageLoginId;
+    String clientId2 = "30457";
     String phone2 = "380980316499";
     String actualTicketType = null;
+    String state = null;
+    String clientId = null;
 
     @DataProvider
     public Iterator<Object[]> docs(){
@@ -40,12 +41,24 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
-        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
-
-        for(int i = 0; i < 12; i++) {
+        for(int i = 0; i < 15; i++) {
             actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            state = app.getUiboTicketHelper().getActualTicketState();
             if(actualTicketType.contains("SDD - check client")){
                 break;
+            }
+
+            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+                app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
+                app.getUiboTicketHelper().approveTicketSuccessfully();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+                if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                    app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                    app.getUiboTicketHelper().gotoTakeTicket();
+                    clientId = app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+                }
+                continue;
             }
 
             if (!actualTicketType.contains("SDD - check client")) {
@@ -73,10 +86,8 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
             app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
-            app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");
+            app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
         }
-
-        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
 
         for(int i = 0; i < 12; i++) {
             actualTicketType = app.getUiboTicketHelper().getActualTicketType();
@@ -105,16 +116,28 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
     public void testTheUserNeedsToReassignTheSelfieChangeTicketToAnotherBOUser_TheUserChangedHisMindAboutReassignTheSelfieChangeTicketToAnotherBOUser() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
 
-        app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId2, phone2, "files/bo/images/self.jpg");
+        app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId2,"files/bo/images/self.jpg");
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
-
         for(int i = 0; i < 12; i++) {
             actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            state = app.getUiboTicketHelper().getActualTicketState();
             if(actualTicketType.equals("Update Selfie")){
                 break;
+            }
+
+            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+                app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
+                app.getUiboTicketHelper().approveTicketSuccessfully();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+                if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                    app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                    app.getUiboTicketHelper().gotoTakeTicket();
+                    clientId = app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+                }
+                continue;
             }
 
             if (!actualTicketType.equals("Update Selfie")) {
@@ -145,12 +168,24 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
-
         for(int i = 0; i < 12; i++) {
             actualTicketType = app.getUiboTicketHelper().getActualTicketType();
+            state = app.getUiboTicketHelper().getActualTicketState();
             if(actualTicketType.equals("Update document")){
                 break;
+            }
+
+            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+                app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
+                app.getUiboTicketHelper().approveTicketSuccessfully();
+                app.getUiboTicketHelper().gotoTakeTicketWithReg();
+
+                if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
+                    app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                    app.getUiboTicketHelper().gotoTakeTicket();
+                    clientId = app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+                }
+                continue;
             }
 
             if (!actualTicketType.equals("Update document")) {

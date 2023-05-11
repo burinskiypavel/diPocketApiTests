@@ -33,7 +33,7 @@ public class SelfieChangeTicketTests extends UITestBase {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "11111111111", "123456789", "Poland");
             app.getUiboTicketHelper().approveTicketSuccessfully();
 
-            app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId, "380685448615", "files/bo/images/self.jpg");
+            app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId,"files/bo/images/self.jpg");
             app.getUiboHelper().gotoHomePageWithBOUser();
             app.getUiboTicketHelper().gotoTakeTicketWithReg();
         }
@@ -63,7 +63,7 @@ public class SelfieChangeTicketTests extends UITestBase {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "11111111111", "123456789", "Poland");
             app.getUiboTicketHelper().approveTicketSuccessfully();
 
-            app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId, "380685448615", "files/bo/images/self.jpg");
+            app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId, "files/bo/images/self.jpg");
             app.getUiboHelper().gotoHomePageWithBOUser();
             app.getUiboTicketHelper().gotoTakeTicketWithReg();
         }
@@ -80,7 +80,7 @@ public class SelfieChangeTicketTests extends UITestBase {
     public void testApprovingOfSelfieChangeTicket_withAlreadyExistClient() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
 
-        app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId2, phone2, "files/bo/images/self.jpg");
+        app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId2,"files/bo/images/self.jpg");
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
@@ -115,7 +115,7 @@ public class SelfieChangeTicketTests extends UITestBase {
     public void testRejectionOfSelfieChangeTicket_TheUserChangedHisMindAboutRejectionOfSelfieChangeTicket_withAlreadyExistClient() throws InterruptedException, SQLException, ClassNotFoundException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
 
-        app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId2, phone2, "files/bo/images/self.jpg");
+        app.getUiboTicketHelper().gotoClientPageAndUpdateSelfies(clientId2,"files/bo/images/self.jpg");
         app.getUiboHelper().gotoHomePageWithBOUser();
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
