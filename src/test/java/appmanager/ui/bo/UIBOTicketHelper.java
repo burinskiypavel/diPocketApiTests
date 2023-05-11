@@ -43,7 +43,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         //click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         boHomePage.gotoTakeTicket();
-
+        Thread.sleep(500);
         int count = 0;
         while(areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]"}) && count < 10){
             click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
