@@ -343,6 +343,10 @@ public class UIHelperBase {
         return driver.findElement(locator).getText();
     }
 
+    public String getText(WebElement element) {
+        return element.getText();
+    }
+
     public List<String> getActualText2(By locator) {
         List<String> actualElementsText = new ArrayList<>();
 

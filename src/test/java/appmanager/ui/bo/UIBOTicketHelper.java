@@ -225,14 +225,15 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Ticket escalated successfully')]"));
     }
 
-    public String initFDDTicketDisplain() throws InterruptedException, SQLException, ClassNotFoundException {
-        waitFor(By.xpath("//*[contains(text(), 'ID:')] //span"));
-        String id = getText(By.xpath("//*[contains(text(), 'ID:')] //span"));
-        editAndSaveSDDTicket("M", "", "", "", "");
+    public String initFDDTicketDisplain(String phone, String gender) throws InterruptedException, SQLException, ClassNotFoundException {
+        waitFor(takeTicketPage.idField);
+        //String id = getText(By.xpath("//div[@class='info'][2] //p[1] //span[2]"));
+        String id = getActualTicketId();
+        editAndSaveSDDTicket(gender, "", "", "", "");
         approveTicketSuccessfully();
         gotoSearchPage();
         search("id", id);
-        goToClientPage("380685448615");
+        goToClientPage(phone);
         uploadDoc("PhotoID", "files/bo/images/self.jpg");
         uploadDoc("Proof of address", "files/bo/images/self.jpg");
         uploadDoc("PhotoID Back", "files/bo/images/self.jpg");
@@ -244,6 +245,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     private void uploadDoc(String typeId, String pathToFile) throws InterruptedException {
         //click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
+        waitFor(clientPage.uploadDocsBtn);
         click(clientPage.uploadDocsBtn);
         //selectFromDropDown(By.xpath("//p-dropdown[contains(@id, 'typeId')]"), typeId);
         selectFromDropDown(uploadDocPage.typeIdDropDown, typeId);
@@ -301,7 +303,7 @@ public class UIBOTicketHelper extends UIHelperBase {
                 Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
                 login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, login_registrationHelper.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
                 gotoTakeTicket();
-                initFDDTicketDisplain();
+                initFDDTicketDisplain("380685448615", "M");
             }
         }
     }
@@ -455,6 +457,14 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public String getActualTicketType() {
         return getText(By.cssSelector("div.mb-3 h3.title"));
+    }
+
+    public String getActualTicketState() {
+        return getText(takeTicketPage.stateField);
+    }
+
+    public String getActualTicketId(){
+        return getText(takeTicketPage.idField);
     }
 
     public void verifyTheUserChangedHisMindAboutEscalateToCBO() {

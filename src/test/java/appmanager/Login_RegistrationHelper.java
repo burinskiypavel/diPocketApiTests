@@ -351,7 +351,7 @@ public class Login_RegistrationHelper extends HelperBase {
         int countryId = countryId1;
         int currencyId = currencyId1;
         String site = "DIPOCKET";
-        int langId = 4;
+        int langId = 1;
 
         Gson gson = new Gson();
         ClientAddress clientAddress = new ClientAddress();

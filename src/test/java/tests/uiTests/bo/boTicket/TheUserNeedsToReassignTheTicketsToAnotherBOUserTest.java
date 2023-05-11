@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static appmanager.HelperBase.prop;
+
 public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestBase {
     String clientId2 = app.homePageLoginId;
     String phone2 = "380980316499";
@@ -34,8 +36,8 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
-            Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-            login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+            //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -53,13 +55,11 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+                //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
-        //app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
-        //app.getUiboTicketHelper().skipFDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'SDD - check client')]"))) {
             app.getUiboTicketHelper().verifyTheUserChangedHisMindAboutReassignTheTicketToAnotherBOUser();
@@ -73,10 +73,10 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
-            Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-            login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+            //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
-            app.getUiboTicketHelper().initFDDTicketDisplain();
+            app.getUiboTicketHelper().initFDDTicketDisplain("380685448615", "M");
         }
 
         actualTicketType = app.getUiboTicketHelper().getActualTicketType();
@@ -93,13 +93,11 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+                //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
-        //app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
-        //app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().verifyTheUserChangedHisMindAboutReassignTheTicketToAnotherBOUser();
@@ -129,13 +127,11 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+                //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
-        //app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
-        //app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update Selfie')]"))) {
             app.getUiboTicketHelper().verifyTheUserChangedHisMindAboutReassignTheTicketToAnotherBOUser();
@@ -168,14 +164,11 @@ public class TheUserNeedsToReassignTheTicketsToAnotherBOUserTest extends UITestB
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+                //Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
-
-        //app.getUiboTicketHelper().skipVideoCall(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
-        //app.getUiboTicketHelper().skipSDDCheckClient();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'Update document')]"))) {
             app.getUiboTicketHelper().verifyTheUserChangedHisMindAboutReassignTheTicketToAnotherBOUser();
