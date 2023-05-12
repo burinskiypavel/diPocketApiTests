@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class AisTests extends APIUITestBase {
     public String consentId = null;
@@ -30,6 +30,7 @@ public class AisTests extends APIUITestBase {
     String[] balances = new String[0];
     String[] transactions = new String[0];
     String currency = "PLN";
+    String amount = "590.00";
     String ownerName = "Pavel Burinsky";
     String cashAccountType = "CACC";
     String status = "enabled";
@@ -148,12 +149,12 @@ public class AisTests extends APIUITestBase {
                 .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{user}/balances")
                 .then()
                 .log().all()
-                .statusCode(200);
-//                .body("account.resourceId", equalTo(resourceId),
-//                        "account.iban", equalTo(iban),
-//                        "account.currency", equalTo(currency),
-//                        "account.ownerName", equalTo(ownerName),
-//                        "account.cashAccountType", equalTo(cashAccountType),
-//                        "account.status", equalTo(status));
+                .statusCode(200)
+                .body("account.iban", equalTo(iban),
+                        "balances.balanceAmount[0].currency", equalTo(currency),
+                        "balances.balanceAmount[0].amount", equalTo(amount),
+                        "balances.balanceType", hasItems("interimAvailable", "interimBooked"),
+                        "balances.balanceAmount[1].currency", equalTo(currency),
+                        "balances.balanceAmount[1].amount", equalTo(amount));
     }
 }
