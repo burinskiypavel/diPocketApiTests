@@ -12,7 +12,6 @@ import java.text.ParseException;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.Matchers.hasEntry;
 import static org.testng.Assert.assertEquals;
 
 public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests extends TestBase {
@@ -29,6 +28,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     String actualTypeName = null;
     String tomorrow = null;
     String email = "testdipocket002@gmail.com";
+    String accountId = "95901";
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
@@ -54,26 +54,27 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     }
 
     @Test(priority = 3)
-    public void test_ClientServices_v1_tile_getMainScreenMessages(){
+    public void test_ClientServices_v1_tile_getMainScreenMessages() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .header("clisessionid", cliSessionId)
                 .when()
                 .get("tile/getMainScreenMessages")
                 .then().log().all()
                 .statusCode(200)
-                .body("communicationTileList.shortName", hasItems("Пополнить"));
+                .body("communicationTileList.shortName", hasItems("Top up"));
     }
 
     @Test(priority = 4)
-    public void test_ClientServices_v1_accounts_95901_accountHistoryList(){
+    public void test_ClientServices_v1_accounts_accountId_accountHistoryList() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .pathParam("accountId", accountId)
+                .header("clisessionid", cliSessionId)
                 .when()
-                .get("accounts/95901/accountHistoryList")
+                .get("accounts/{accountId}/accountHistoryList")
                 .then().log().all()
                 .statusCode(200);
 //                .body("accountHistoryList.typeName", hasItems("DiP перевод"),
@@ -83,27 +84,27 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     }
 
     @Test(priority = 5)
-    public void test_ClientServices_v1_clientProfile_imageStatus(){
+    public void test_ClientServices_v1_clientProfile_imageStatus() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/imageStatus")
                 .then().log().all()
                 .statusCode(200)
-                .body("images.typeId", hasItems(1,4),
+                .body("images.typeId", hasItems(1, 4),
                         "images.stateID", hasItems(0),
                         "images.imageType", hasItems("SELFIE", "SELFIE2"),
                         "images.imageState", hasItems("NEW"));
     }
 
     @Test(priority = 6)
-    public void test_ClientServices_v1_clientProfile_clientSmallImageByType(){
+    public void test_ClientServices_v1_clientProfile_clientSmallImageByType() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .header("clisessionid", cliSessionId)
                 .queryParam("imageTypeId", 1)
                 .when()
                 .get("clientProfile/clientSmallImageByType")
@@ -116,27 +117,25 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     }
 
     @Test(priority = 7)
-    public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
+    public void test_ClientServices_v1_ClientProfile_ClientInfo2() {
         String response = given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientInfo2")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
-        JsonPath js = new JsonPath(response);
-        actualCardHolderName = js.getString("cardholderName");
+        actualCardHolderName = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "cardholderName");
     }
 
     @Test(priority = 8)
-    public void test_ClientServices_v1_clientProfile_changeCardholderName(){
-        if(actualCardHolderName.equals("Pavel Burinsk")){
+    public void test_ClientServices_v1_clientProfile_changeCardholderName() {
+        if (actualCardHolderName.equals("Pavel Burinsk")) {
             newCardHolderName = "Pavel Burinsky";
             oldCardHolderName = "Pavel Burinsk";
-        }
-        else {
+        } else {
             newCardHolderName = "Pavel Burinsk";
             oldCardHolderName = "Pavel Burinsky";
         }
@@ -152,7 +151,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_take() {
         int count = 0;
-        for(int i = 0; i < 27; i++) {
+        for (int i = 0; i < 27; i++) {
             count++;
             Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
             String response = res.then().extract().response().asString();
@@ -161,11 +160,11 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
             ticketId = js.getInt("id");
             actualTypeName = js.getString("typeName");
 
-            if(actualTypeName.equals("Cardholder name change")){
+            if (actualTypeName.equals("Cardholder name change")) {
                 break;
             }
 
-            if(!actualTypeName.equals("Cardholder name change")){
+            if (!actualTypeName.equals("Cardholder name change")) {
                 app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, tomorrow);
             }
 
@@ -186,10 +185,10 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_BOServices_v1_clientImage_clientId_selfie() {
         given()
                 .spec(app.requestSpecBO)
-                .pathParam("key", clientId)
+                .pathParam("clientId", clientId)
                 .cookie(cookie)
                 .when()
-                .get("/v1/clientImage/{key}/selfie")
+                .get("/v1/clientImage/{clientId}/selfie")
                 .then().log().all()
                 .statusCode(200)
                 .body("clientId", hasItems(clientId),
@@ -201,11 +200,11 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_BOServices_v1_clientImage_clientId_image() {
         given()
                 .spec(app.requestSpecBO)
-                .pathParam("key", clientId)
+                .pathParam("clientId", clientId)
                 .cookie(cookie)
                 .queryParam("typeId", 2)
                 .when()
-                .get("/v1/clientImage/{key}/image")
+                .get("/v1/clientImage/{clientId}/image")
                 .then().log().all()
                 .statusCode(200);
     }
@@ -214,36 +213,36 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_BOServices_v1_ticket_history_clientId() {
         Response res = given()
                 .spec(app.requestSpecBO)
-                .pathParam("key", clientId)
+                .pathParam("clientId", clientId)
                 .cookie(cookie)
                 .when()
-                .get("/v1/ticket/history/{key}");
+                .get("/v1/ticket/history/{clientId}");
 
-                res.then().log().all()
+        res.then().log().all()
                 .statusCode(200)
                 .body("ticketId", hasItems(ticketId),
                         "typeName", hasItems("Cardholder name change"));
 
-                //List<String> typeNameValues = res.then().extract().jsonPath().getList("ticketsHistoryList.typeName");
-                //Assert.assertTrue(typeNameValues.contains("Cardholder name change"));
+        //List<String> typeNameValues = res.then().extract().jsonPath().getList("ticketsHistoryList.typeName");
+        //Assert.assertTrue(typeNameValues.contains("Cardholder name change"));
 
-                        //"ticketsHistoryList[1].typeName", hasItems("Cardholder name change"),
-                        //"ticketsHistoryList", hasItems(hasEntry("typeName", "Cardholder name change")),
-                        //"ticketsHistoryList[].username", hasItems("PAVELB_AUTO_BO"),
-                        //"ticketsHistoryList.changeDate", hasItems("2021-01-13T12:47:11.044646Z"),
-                        //"ticketsHistoryList.created", hasItems("2020-12-04T10:13:47.321483Z"),
-                        //"ticketsHistoryList.msg", hasItems("Ticket closed. Reason: Client banned."),
-                        //"ticketsHistoryList.clientId", hasItems(clientId));
+        //"ticketsHistoryList[1].typeName", hasItems("Cardholder name change"),
+        //"ticketsHistoryList", hasItems(hasEntry("typeName", "Cardholder name change")),
+        //"ticketsHistoryList[].username", hasItems("PAVELB_AUTO_BO"),
+        //"ticketsHistoryList.changeDate", hasItems("2021-01-13T12:47:11.044646Z"),
+        //"ticketsHistoryList.created", hasItems("2020-12-04T10:13:47.321483Z"),
+        //"ticketsHistoryList.msg", hasItems("Ticket closed. Reason: Client banned."),
+        //"ticketsHistoryList.clientId", hasItems(clientId));
     }
 
     @Test(priority = 14)
     public void test_BOServices_v1_client_clientId_address() {
         given()
                 .spec(app.requestSpecBO)
-                .pathParam("key", clientId)
+                .pathParam("clientId", clientId)
                 .cookie(cookie)
                 .when()
-                .get("/v1/client/{key}/address")
+                .get("/v1/client/{clientId}/address")
                 .then().log().all()
                 .statusCode(200)
                 .body("clientId", hasItems(clientId),
@@ -258,10 +257,10 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_BOServices_v1_client_clientId() {
         given()
                 .spec(app.requestSpecBO)
-                .pathParam("key", clientId)
+                .pathParam("clientId", clientId)
                 .cookie(cookie)
                 .when()
-                .get("/v1/client/{key}")
+                .get("/v1/client/{clientId}")
                 .then().log().all()
                 .statusCode(200)
                 .body("id", equalTo(clientId),
@@ -278,9 +277,9 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
         String response = given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .pathParam("key", ticketId)
+                .pathParam("ticketId", ticketId)
                 .when()
-                .get("/v1/ticket/{key}/isTicketOwner")
+                .get("/v1/ticket/{ticketId}/isTicketOwner")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -292,9 +291,9 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .pathParam("key", clientId)
+                .pathParam("clientId", clientId)
                 .when()
-                .get("/v1/client/{key}/prevCardholderName")
+                .get("/v1/client/{clientId}/prevCardholderName")
                 .then().log().all()
                 .statusCode(200)
                 .body("clientId", hasItems(clientId),
@@ -310,21 +309,21 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                 .header("content-type", "application/json")
                 .body("{\n" +
                         "  \"reason\": \"test\",\n" +
-                        "  \"ticketId\": "+ticketId+"\n" +
+                        "  \"ticketId\": " + ticketId + "\n" +
                         "}")
                 .when()
-                .post( "/v1/client/{clientId}/cardholder/approve")
+                .post("/v1/client/{clientId}/cardholder/approve")
                 .then().log().all()
                 .statusCode(200);
 
     }
 
     @Test(priority = 19)
-    public void test_ClientServices_v1_ClientProfile_ClientInfo2_(){
+    public void test_ClientServices_v1_ClientProfile_ClientInfo2_() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientInfo2")
                 .then().log().all()
