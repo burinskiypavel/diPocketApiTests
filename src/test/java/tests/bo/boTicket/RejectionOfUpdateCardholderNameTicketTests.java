@@ -33,34 +33,32 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
         app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
         tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, HelperBase.prop.getProperty("mobile.registration.email"),"dev");
+        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, HelperBase.prop.getProperty("mobile.registration.email"), "dev");
         clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString()));
         app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
         cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 7)
-    public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
+    public void test_ClientServices_v1_ClientProfile_ClientInfo2() {
         String response = given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientInfo2")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
-        JsonPath js = new JsonPath(response);
-        actualCardHolderName = js.getString("cardholderName");
+        actualCardHolderName = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "cardholderName");
     }
 
     @Test(priority = 8)
-    public void test_ClientServices_v1_clientProfile_changeCardholderName(){
-        if(actualCardHolderName.equals("Pavel Burinsk")){
+    public void test_ClientServices_v1_clientProfile_changeCardholderName() {
+        if (actualCardHolderName.equals("Pavel Burinsk")) {
             newCardHolderName = "Pavel Burinsky";
             oldCardHolderName = "Pavel Burinsk";
-        }
-        else {
+        } else {
             newCardHolderName = "Pavel Burinsk";
             oldCardHolderName = "Pavel Burinsky";
         }
@@ -75,7 +73,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
 
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_take() {
-        for(int i = 0; i < 12; i++) {
+        for (int i = 0; i < 12; i++) {
             Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
             String response = res.then().extract().response().asString();
 
@@ -83,11 +81,11 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
             ticketId = js.getInt("id");
             actualTypeName = js.getString("typeName");
 
-            if(actualTypeName.equals("Cardholder name change")){
+            if (actualTypeName.equals("Cardholder name change")) {
                 break;
             }
 
-            if(!actualTypeName.equals("Cardholder name change")){
+            if (!actualTypeName.equals("Cardholder name change")) {
                 app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, tomorrow);
             }
 
@@ -107,9 +105,9 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
         String response = given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .pathParam("key", ticketId)
+                .pathParam("ticketId", ticketId)
                 .when()
-                .get("/v1/ticket/{key}/isTicketOwner")
+                .get("/v1/ticket/{ticketId}/isTicketOwner")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -121,9 +119,9 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
-                .pathParam("key", clientId)
+                .pathParam("clientId", clientId)
                 .when()
-                .get("/v1/client/{key}/prevCardholderName")
+                .get("/v1/client/{clientId}/prevCardholderName")
                 .then().log().all()
                 .statusCode(200)
                 .body("clientId", hasItems(clientId),
@@ -139,21 +137,21 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
                 .header("content-type", "application/json")
                 .body("{\n" +
                         "  \"reason\": \"test\",\n" +
-                        "  \"ticketId\": "+ticketId+"\n" +
+                        "  \"ticketId\": " + ticketId + "\n" +
                         "}")
                 .when()
-                .post( "/v1/client/{clientId}/cardholder/reject")
+                .post("/v1/client/{clientId}/cardholder/reject")
                 .then().log().all()
                 .statusCode(200);
 
     }
 
     @Test(priority = 19)
-    public void test_ClientServices_v1_ClientProfile_ClientInfo2_(){
+    public void test_ClientServices_v1_ClientProfile_ClientInfo2_() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
                 .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientInfo2")
                 .then().log().all()
