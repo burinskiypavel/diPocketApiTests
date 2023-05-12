@@ -157,4 +157,36 @@ public class AisTests extends APIUITestBase {
                         "balances.balanceAmount[1].currency", equalTo(currency),
                         "balances.balanceAmount[1].amount", equalTo(amount));
     }
+
+    @Test(priority = 9)
+    public void test_AISReadAccountTransactionsList(){
+        given()
+                .log().uri().log().headers().log().body()
+                .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("user", resourceId)
+                .pathParam("dateFrom", "2019-11-26")
+                .pathParam("dateTo", "2023-05-12")
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{user}/transactions?dateFrom={dateFrom}&dateTo={dateTo}")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("account.iban", equalTo(iban));
+    }
+
+    @Test(priority = 10)
+    public void test_AISReadAccountTransactionDetailedInfo(){
+        given()
+                .log().uri().log().headers().log().body()
+                .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("accountId", resourceId)
+                //.pathParam("transactionId", "29818;11;187652")
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{accountId}/transactions/29818;11;187652")
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
 }
