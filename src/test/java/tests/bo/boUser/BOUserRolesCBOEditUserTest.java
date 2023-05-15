@@ -33,9 +33,9 @@ public class BOUserRolesCBOEditUserTest extends TestBase {
                 .get( "/v1/user/all")
                 .then().log().all()
                 .statusCode(200)
-                .body("username", hasItem("A.VAIVARS"),
-                        "phone", hasItem("37125680800"),
-                        "email", hasItem("arnis.vaivars@twino.eu"));
+                .body("username", hasItem("S.TEUMA"),
+                        "phone", hasItem("35699806131"),
+                        "email", hasItem("teumas@centralbankmalta.org"));
     }
 
     @Test(priority = 4)
