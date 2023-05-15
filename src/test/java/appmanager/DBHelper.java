@@ -1055,7 +1055,7 @@ public class DBHelper extends HelperBase {
             vIban = rs.getString(3);
 
 
-            while (!statusRequest.equals("D") && count < 220 || srcid.equals(clientId)){
+            while (!statusRequest.equals("D") && count < 220 && srcid.equals(clientId)){
                 Thread.sleep(6000);
                 rs= stmt.executeQuery(query);
                 rs.next();
