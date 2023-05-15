@@ -177,6 +177,44 @@ public class BOHelper extends HelperBase {
         return ticketId;
     }
 
+    public int takeSelfieChangeTicket_dev(String cookie, String date) {
+        for(int i = 0; i < 25; i++) {
+            Response res = boRequests.boServices_v1_ticket_take(cookie);
+            String response = res.then().extract().response().asString();
+
+            JsonPath js = new JsonPath(response);
+            ticketId = js.getInt("id");
+            actualTypeName = js.getString("typeName");
+            actualClientId = js.getString("clientId");
+            clientStateName = js.getString("clientStateName");
+
+            if(actualTypeName.equals("Selfie change") && clientStateName.equals("Active")){
+                break;
+            }
+
+            approveFDDBlockedTickets_dev(cookie, actualClientId, ticketId);
+            updateAndApproveSDDBlockedTicket_dev(cookie, actualClientId, ticketId);
+
+            if(!actualTypeName.equals("Selfie change")){
+                boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
+            }
+
+            if(actualTypeName.equals("Selfie change") && clientStateName.equals("Blocked")){
+                boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
+            }
+
+            Response res2 = boRequests.boServices_v1_ticket_take(cookie);
+            String response2 = res2.then().extract().response().asString();
+
+            JsonPath js2 = new JsonPath(response2);
+            ticketId = js2.getInt("id");
+            actualTypeName = js2.getString("typeName");
+        }
+
+        assertEquals(actualTypeName, "Selfie change");
+        return ticketId;
+    }
+
     public void approveFDDBlockedTickets_dev(String cookie, String actualClientId, int ticketId) {
         if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
             given()
