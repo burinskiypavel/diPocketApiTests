@@ -1076,4 +1076,17 @@ public class BORequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void boServices_v1_supervisor_approve(String cookie, String json) {
+        given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .contentType("application/json")
+                .body(json)
+                .when()
+                .post("/v1/supervisor/approve")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
