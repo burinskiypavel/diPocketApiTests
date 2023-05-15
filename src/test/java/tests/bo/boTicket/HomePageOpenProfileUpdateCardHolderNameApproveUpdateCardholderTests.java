@@ -3,8 +3,9 @@ package tests.bo.boTicket;
 import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
-import io.restassured.path.json.JsonPath;
+import com.google.gson.Gson;
 import io.restassured.response.Response;
+import model.bo.boServices.Client_clientId_update;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -29,6 +30,8 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     String tomorrow = null;
     String email = "testdipocket002@gmail.com";
     String accountId = "95901";
+    int currencyId = 978;
+    int countryId = 826;
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
@@ -150,35 +153,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_take() {
-        int count = 0;
-        for (int i = 0; i < 27; i++) {
-            count++;
-            Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-            String response = res.then().extract().response().asString();
-
-            JsonPath js = new JsonPath(response);
-            ticketId = js.getInt("id");
-            actualTypeName = js.getString("typeName");
-
-            if (actualTypeName.equals("Cardholder name change")) {
-                break;
-            }
-
-            if (!actualTypeName.equals("Cardholder name change")) {
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, tomorrow);
-            }
-
-            Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-            String response2 = res2.then().extract().response().asString();
-
-            JsonPath js2 = new JsonPath(response2);
-            ticketId = js2.getInt("id");
-            actualTypeName = js2.getString("typeName");
-        }
-
-        System.out.println("count: " + count);
-
-        assertEquals(actualTypeName, "Cardholder name change");
+        ticketId = app.getBOHelper().takeCardholderNameChangeTicket_dev(cookie, tomorrow);
     }
 
     @Test(priority = 11)
