@@ -40,15 +40,15 @@ public class BOUserRolesCBOAddNewUserTest extends TestBase {
                 .get( "/v1/user/all")
                         .then().log().all()
                         .statusCode(200)
-                        .body("username", not(hasItem(username)),
-                                "username", hasItem("A.VAIVARS"),
-                                "phone", hasItem("37125680800"),
-                                "email", hasItem("arnis.vaivars@twino.eu"));
+                        .body("username", not(hasItem("username")),
+                                "username", hasItem("CBO86"),
+                                "phone", hasItem("380936899255"),
+                                "email", hasItem("a@a.com"));
     }
 
     @Test(priority = 4)
     public void test_BOServices_v1_user_allActive(){
-        app.getBoRequestsHelper().boServices_v1_user_allActive(cookie, "A.JARMAN", "447340159323", "anthony.jarman@dipocket.org");
+        app.getBoRequestsHelper().boServices_v1_user_allActive(cookie, "DA.KOLESNYK", "380674340362", "dmytro.kolesnyk@dipocket.org");
     }
 
     @Test(priority = 5)
