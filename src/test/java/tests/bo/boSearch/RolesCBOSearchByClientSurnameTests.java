@@ -26,6 +26,6 @@ public class RolesCBOSearchByClientSurnameTests extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_client_search(){
-        app.getBoRequestsHelper().boServices_v1_client_search(cookie, "lastName",  lastName, "Vika", "Reznik", phone2, "vikarezznik60@gmail.com", Site.PLAYIT.toString());
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, "lastName",  lastName, "VikA", "Reznik", phone2, "viktoriiarieznik@gmail.com", Site.PLAYIT.toString());
     }
 }
