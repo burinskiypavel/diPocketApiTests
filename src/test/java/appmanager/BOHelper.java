@@ -294,6 +294,123 @@ public class BOHelper extends HelperBase {
         return  ticketId;
     }
 
+    public int takeSupervisionTicket_dev(String cookie, String date, int supervisorId, String childId) {
+        for(int i = 0; i < 25; i++) {
+            Response res = boRequests.boServices_v1_ticket_take(cookie);
+            String response = res.then().extract().response().asString();
+
+            JsonPath js = new JsonPath(response);
+            ticketId = js.getInt("id");
+            actualTypeName = js.getString("typeName");
+            actualClientId = js.getString("clientId");
+            clientStateName = js.getString("clientStateName");
+
+            if(actualTypeName.equals("Supervision") && clientStateName.equals("Active")){
+                break;
+            }
+
+            if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
+                given()
+                        .log().uri().log().headers().log().body()
+                        //.config(configTimeout)
+                        .baseUri("https://support.dipocket.dev")
+                        .basePath("BOServices")
+                        .contentType("application/json")
+                        .pathParam("clientId", actualClientId)
+                        .header("bo-auth-token", 123456)
+                        .queryParam("ticketId", ticketId)
+                        .cookie(cookie)
+                        .post("/v1/client/{clientId}/approveFDD")
+                        .then().log().all()
+                        .statusCode(200);
+                continue;
+            }
+
+            if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
+                //client_clientId_update.setId(Integer.parseInt(String.valueOf(clientId)));
+                //client_clientId_update.setMainPhone(380685448615l);
+                //client_clientId_update.setFirstName("Pavel");
+                //client_clientId_update.setLastName("Burinsky");
+                //client_clientId_update.setBirthDate("04.09.1992");
+                //client_clientId_update.setEmailIsVerified(false);
+                client_clientId_update.setStateId(1);
+                client_clientId_update.setStateName("Active");
+                client_clientId_update.setCurrencyId(currencyId);
+                client_clientId_update.setCurrencyCode("PLN");
+                client_clientId_update.setLangId(1);
+                client_clientId_update.setLangCode("eng");
+                client_clientId_update.setLangName("English");
+                client_clientId_update.setPhotoIdTypeId(1);
+                client_clientId_update.setPhotoIdTypeName("Passport");
+                client_clientId_update.setPhotoIdNo(234234324324l);
+                client_clientId_update.setPhotoIdCountryId(countryId);
+                client_clientId_update.setPhotoIdCountryName("Poland");
+                client_clientId_update.setGender("M");
+                client_clientId_update.setDdStatus("PSDD");
+                client_clientId_update.setCardHolderName("Pavel Burinsky");
+                client_clientId_update.setIdentifyCode(13124244234l);
+                client_clientId_update.setClientType("I");
+                client_clientId_update.setSite(Site.DIPOCKET.toString());
+                client_clientId_update.setRegisteredAddrAsMail(true);
+                client_clientId_update.setResidenceCountryId(countryId);
+                client_clientId_update.setFeeTariffPlanId(1);
+                client_clientId_update.setFeeTariffPlanName("EUR - standard");
+                //client_clientId_update.setAge(30);
+                client_clientId_update.setMigrated(false);
+                client_clientId_update.setSkippedReg(false);
+                String json = gson.toJson(client_clientId_update);
+
+                given()
+                        .log().uri().log().headers().log().body()
+                        //.config(configTimeout)
+                        .baseUri("https://support.dipocket.dev")
+                        .basePath("BOServices")
+                        .contentType("application/json")
+                        .pathParam("clientId", actualClientId)
+                        .header("bo-auth-token", 123456)
+                        .cookie(cookie)
+                        .when()
+                        .body(json)
+                        .post("/v1/client/{clientId}/update")
+                        .then().log().all()
+                        .statusCode(200);
+
+                given()
+                        .log().uri().log().headers().log().body()
+                        //.config(configTimeout)
+                        .baseUri("https://support.dipocket.dev")
+                        .basePath("BOServices")
+                        .contentType("application/json")
+                        .pathParam("clientId", actualClientId)
+                        .header("bo-auth-token", 123456)
+                        .queryParam("ticketId", ticketId)
+                        .cookie(cookie)
+                        .post("/v1/client/{clientId}/approveSDD")
+                        .then().log().all()
+                        .statusCode(200);
+                continue;
+            }
+
+            if(!actualTypeName.equals("Supervision")){
+                boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
+            }
+
+            if(actualTypeName.equals("Supervision") && clientStateName.equals("Blocked")){
+                boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
+            }
+
+            Response res2 = boRequests.boServices_v1_ticket_take(cookie);
+            String response2 = res2.then().extract().response().asString();
+
+            JsonPath js2 = new JsonPath(response2);
+            ticketId = js2.getInt("id");
+            actualTypeName = js2.getString("typeName");
+        }
+
+        assertEquals(actualTypeName, "Supervision");
+        return ticketId;
+    }
+
     public void checkUserRolesId(User_roles[] user_roles, String id) {
         for(int i = 0; i < user_roles.length; i++){
             int length = user_roles.length-1;
