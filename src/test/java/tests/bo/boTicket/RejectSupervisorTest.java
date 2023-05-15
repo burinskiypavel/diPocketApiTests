@@ -90,7 +90,7 @@ public class RejectSupervisorTest extends TestBase {
 
     @Test(priority = 8)
     public void test_BOServices_v1_ticket_take() {
-        ticketId = app.getBOHelper().takeSupervisionTicket_dev(cookie, tomorrow, supervisorId, childId);
+        ticketId = app.getBOHelper().takeSupervisionTicket_dev(cookie, tomorrow);
     }
 
     @Test(priority = 9)

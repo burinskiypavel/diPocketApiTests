@@ -294,7 +294,7 @@ public class BOHelper extends HelperBase {
         return  ticketId;
     }
 
-    public int takeSupervisionTicket_dev(String cookie, String date, int supervisorId, String childId) {
+    public int takeSupervisionTicket_dev(String cookie, String date) {
         for(int i = 0; i < 25; i++) {
             Response res = boRequests.boServices_v1_ticket_take(cookie);
             String response = res.then().extract().response().asString();
