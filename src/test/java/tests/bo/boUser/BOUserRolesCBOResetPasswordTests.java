@@ -25,7 +25,7 @@ public class BOUserRolesCBOResetPasswordTests extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_user_all(){
-        app.getBoRequestsHelper().boServices_v1_user_all(cookie, "A.VAIVARS", "Arnis", "37125680800", "arnis.vaivars@twino.eu");
+        app.getBoRequestsHelper().boServices_v1_user_all(cookie, "STOYCHEVA.V", "Vanya", "359889504662", "vanya.stoycheva@sodexo.com");
     }
 
     @Test(priority = 4)
