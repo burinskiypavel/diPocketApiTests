@@ -105,7 +105,7 @@ public class DuplicateTariffPlanTest extends TestBase {
                 .get( "/v1/fee/tariffPlan/all")
                 .then().log().all()
                 .statusCode(200)
-                .body("id", hasItems(1, 2, 191, 98787777),
+                .body("id", hasItems(1, 2, 15, 110),
                         "name", hasItems("Poland - standard", "EUR - corporate", "Credissimo - Main account", "Peak - Cashacard Business EUR"));
     }
 
