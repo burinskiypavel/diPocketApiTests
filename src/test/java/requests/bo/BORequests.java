@@ -1063,4 +1063,17 @@ public class BORequests {
         response.then().log().all().statusCode(200);
         return response;
     }
+
+    public void boServices_v1_supervisor_reject(String cookie, String json) {
+        given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .cookie(cookie)
+                .contentType("application/json")
+                .body(json)
+                .when()
+                .post("/v1/supervisor/reject")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

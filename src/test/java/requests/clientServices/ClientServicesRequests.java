@@ -285,4 +285,18 @@ public class ClientServicesRequests {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    public void clientServices_v1_supervision_inviteSupervisor(String urlEnv, String phone, String pass, String cliSessionId, String body){
+        given()
+                .spec(requestSpecDipocketHomePage)
+                .baseUri(urlEnv)
+                .auth().preemptive().basic(phone, pass)
+                .contentType("application/json")
+                .header("clisessionid", cliSessionId)
+                .body(body)
+                .when()
+                .post("supervision/inviteSupervisor")
+                .then().log().all()
+                .statusCode(200);
+    }
 }

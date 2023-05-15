@@ -94,7 +94,7 @@ public class ApproveSupervisorTest extends TestBase {
     }
 
     @Test(priority = 9)
-    public void test_ClientServices_v1_supervisor_approve() {
+    public void test_BOServices_v1_supervisor_approve() {
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
