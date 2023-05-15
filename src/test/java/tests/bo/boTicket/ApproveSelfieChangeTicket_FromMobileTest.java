@@ -1,6 +1,5 @@
 package tests.bo.boTicket;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import com.google.gson.Gson;
 import io.restassured.path.json.JsonPath;
