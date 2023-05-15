@@ -3,8 +3,6 @@ package tests.bo.boTicket;
 import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -73,34 +71,10 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
 
     @Test(priority = 10)
     public void test_BOServices_v1_ticket_take() {
-        for (int i = 0; i < 12; i++) {
-            Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-            String response = res.then().extract().response().asString();
-
-            JsonPath js = new JsonPath(response);
-            ticketId = js.getInt("id");
-            actualTypeName = js.getString("typeName");
-
-            if (actualTypeName.equals("Cardholder name change")) {
-                break;
-            }
-
-            if (!actualTypeName.equals("Cardholder name change")) {
-                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, tomorrow);
-            }
-
-            Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-            String response2 = res2.then().extract().response().asString();
-
-            JsonPath js2 = new JsonPath(response2);
-            ticketId = js2.getInt("id");
-            actualTypeName = js2.getString("typeName");
-        }
-
-        assertEquals(actualTypeName, "Cardholder name change");
+        ticketId = app.getBOHelper().takeCardholderNameChangeTicket_dev(cookie, tomorrow);
     }
 
-    @Test(priority = 16)
+    @Test(priority = 11)
     public void test_BOServices_v1_ticket_ticketId_isTicketOwner() {
         String response = given()
                 .spec(app.requestSpecBO)
@@ -114,7 +88,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
         assertEquals(response, "true");
     }
 
-    @Test(priority = 17)
+    @Test(priority = 12)
     public void test_BOServices_v1_client_clientId_prevCardholderName() {
         given()
                 .spec(app.requestSpecBO)
@@ -128,7 +102,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
                         "cardholderName", hasItems(oldCardHolderName));
     }
 
-    @Test(priority = 18)
+    @Test(priority = 13)
     public void test_BOServices_v1_client_clientId_cardholder_reject() {
         given()
                 .spec(app.requestSpecBO)
@@ -146,7 +120,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
 
     }
 
-    @Test(priority = 19)
+    @Test(priority = 14)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2_() {
         given()
                 .spec(app.requestSpecDipocketHomePage)

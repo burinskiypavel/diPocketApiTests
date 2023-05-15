@@ -191,7 +191,7 @@ public class BOHelper extends HelperBase {
             actualClientId = js.getString("clientId");
             clientStateName = js.getString("clientStateName");
 
-            if (actualTypeName.equals("Cardholder name change")) {
+            if (actualTypeName.equals("Cardholder name change") && clientStateName.equals("Active")) {
                 break;
             }
 
@@ -278,6 +278,10 @@ public class BOHelper extends HelperBase {
             }
 
             if (!actualTypeName.equals("Cardholder name change")) {
+                boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
+            }
+
+            if(actualTypeName.equals("Supervision") && clientStateName.equals("Blocked")){
                 boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
             }
 
