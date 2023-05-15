@@ -72,15 +72,15 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .get( "/v1/user/allActive")
                         .then().log().all()
                         .statusCode(200)
-                        .body("firstName", hasItem("Anthony"),
-                                "lastName", hasItem("Jarman"),
-                                "roleId", hasItem("PORTAL"),
+                        .body("firstName", hasItem("Pavel"),
+                                "lastName", hasItem("Burinskiy"),
+                                "roleId", hasItem("CBO"),
                                 "stateId", hasItem(10),
                                 "stateName", hasItem("Active"),
-                                "username", hasItem("A.JARMAN"),
-                                "phone", hasItem("447340159323"),
-                                "email", hasItem("anthony.jarman@dipocket.org"),
-                                "site", hasItem(Site.DIPOCKET.toString()));
+                                "username", hasItem("PAVELB1"),
+                                "phone", hasItem("380685448612"),
+                                "email", hasItem("sdafsdjflstalnd@gmail.com"),
+                                "site", hasItem(Site.SODEXO.toString()));
     }
 
     @Test(priority = 6)
@@ -110,16 +110,15 @@ public class BOUserRolesCBOBlockUserTest extends TestBase {
                 .get( "/v1/user/all")
                         .then().log().all()
                         .statusCode(200)
-                        .body("firstName", hasItem("Agnieszka"),
-                                "lastName", hasItem("Szewczyk"),
-                                "roleId", hasItem("PORTAL"),
+                        .body("firstName", hasItem("Anna"),
+                                "lastName", hasItem("Karpiliova"),
+                                "roleId", hasItem("APIUSER"),
                                 "stateId", hasItem(10),
                                 "stateName", hasItem("Active"),
-                                "username", hasItem("A.SZEWCZYK"),
-                                "phone", hasItem("48663647283"),
-                                "corpClientId", hasItem(28518),
-                                "email", hasItem("Agnieszka.Szewczyk@sodexo.com"),
-                                "site", hasItem(Site.DIPOCKET.toString()));
+                                "username", hasItem("ANNASODEXOTEST"),
+                                "phone", hasItem("380935966093"),
+                                "email", hasItem("work.annak@gmail.com"),
+                                "site", hasItem(Site.SODEXO.toString()));
     }
 
     @Test(priority = 8)
