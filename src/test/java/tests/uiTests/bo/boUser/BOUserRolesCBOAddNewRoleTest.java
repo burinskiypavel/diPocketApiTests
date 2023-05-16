@@ -28,10 +28,7 @@ public class BOUserRolesCBOAddNewRoleTest extends UITestBase {
         app.getUiboUserHelper().gotoRolesTab();
         app.getUiboUserHelper().addRole(roleID, "testqa2");
         app.getUiboUserHelper().selectRoleFromDropDown(roleID);
-
-        app.getUiboHelper().clickCheckbox(By.cssSelector("div[role='checkbox']"));
-        app.getUiboHelper().click(By.cssSelector("p-button[label='Update']"));
-        app.getUiboHelper().waitFor(By.xpath("//div[contains(text(), 'User role changed successfully')]"));
+        app.getUiboUserHelper().selectCodeBOCheckboxAndPressUpdate();
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//div[contains(text(), 'User role changed successfully')]")));
         app.getUiboUserHelper().deleteRole();

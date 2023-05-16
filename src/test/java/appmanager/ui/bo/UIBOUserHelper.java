@@ -64,7 +64,7 @@ public class UIBOUserHelper extends UIHelperBase {
         click(By.cssSelector("p-dropdown[placeholder='Role']"));
         waitFor(By.cssSelector("li[aria-label='" + name + "']"));
         click(By.cssSelector("li[aria-label='" + name + "']"));
-        waitFor(By.cssSelector("div[role='checkbox']"));
+        waitFor(By.cssSelector("p-checkbox"));
     }
 
     public void selectFromSelectAddNewUserPage(String select, String text) {
@@ -172,5 +172,11 @@ public class UIBOUserHelper extends UIHelperBase {
             softAssert.assertTrue(isButtonEnabled3(By.cssSelector("p-button[ng-reflect-label='Block user']")), "Block user  btn");
         }
         return softAssert;
+    }
+
+    public void selectCodeBOCheckboxAndPressUpdate() {
+        clickCheckbox(By.cssSelector("p-checkbox"));
+        click(By.cssSelector("p-button[label='Update']"));
+        waitFor(By.xpath("//div[contains(text(), 'User role changed successfully')]"));
     }
 }
