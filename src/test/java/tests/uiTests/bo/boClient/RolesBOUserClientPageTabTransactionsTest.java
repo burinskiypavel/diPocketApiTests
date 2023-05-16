@@ -35,8 +35,8 @@ public class RolesBOUserClientPageTabTransactionsTest extends UITestBase {
         app.getUiboClientHelper().goToTransactionTab();
         app.getUiboClientHelper().searchByTransactionTab("All");
 
-        app.getUiboHelper().waitFor(By.cssSelector("td[ng-reflect-text='629314']"));
-        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='629314']"));
+        app.getUiboHelper().waitFor(By.cssSelector("td span[ng-reflect-text='629314']"));
+        app.getUiboHelper().performContextClick(By.cssSelector("td span[ng-reflect-text='629314']"));
 
         app.getUiboHelper().waitFor(By.xpath("//li //span[contains(text(), 'Details')]"));
         app.getUiboHelper().click(By.xpath("//li //span[contains(text(), 'Details')]"));
