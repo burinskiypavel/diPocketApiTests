@@ -39,13 +39,12 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.cssSelector("app-take-ticket"));
     }
 
-    public void gotoTakeTicketWithReg() throws InterruptedException, SQLException, ClassNotFoundException {
-        //click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
+    public void gotoTakeTicketWithReg() throws InterruptedException {
         waitFor(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
         boHomePage.gotoTakeTicket();
         Thread.sleep(500);
         int count = 0;
-        while(areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]"}) && count < 10){
+        while(areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]"}) && count < 2){
             click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
             Thread.sleep(4000);
             count++;
@@ -65,6 +64,8 @@ public class UIBOTicketHelper extends UIHelperBase {
         click(postponePage.chevronUpBtn);
         click(postponePage.chevronUpBtn);
         click(postponePage.chevronUpBtn);
+        click(postponePage.chevronUpBtn);
+        Thread.sleep(1000);
         pressKeys(Keys.ENTER);
         Thread.sleep(1000);
 
