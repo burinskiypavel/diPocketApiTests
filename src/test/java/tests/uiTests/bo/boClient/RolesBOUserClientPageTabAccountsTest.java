@@ -19,14 +19,11 @@ public class RolesBOUserClientPageTabAccountsTest extends UITestBase {
         app.getUiboClientHelper().goToClientPage(phone);
         app.getUiboClientHelper().goToAccountsTab();
 
-        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-accounts-tab p-columnfilter[field='accountName'] input[type='text']"), "Bbh", "accountName", By.cssSelector("td[ng-reflect-text='Bbh']"));
-        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("app-accounts-tab p-columnfilter[ng-reflect-field='stateName'] "), "Active");
-        app.getUiboClientHelper().setDropDownClientPageFilter(By.cssSelector("app-accounts-tab p-columnfilter[ng-reflect-field='ccyCode']"), "EUR");
-        assertTrue(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='EUR']")));
-        assertFalse(app.getUiboHelper().areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='GBR']")));
-        app.getUiboClientHelper().clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-accounts p-columnfilter[ng-reflect-field='accountName'] input"), "Bbh", "accountName", By.cssSelector("td span[ng-reflect-text='Bbh']"));
+        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='accStateNameExt']"), "Active");
+        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("p-columnfilter[ng-reflect-field='ccyCode']"), "EUR", "GBR");
 
-        app.getUiboHelper().performContextClick(By.cssSelector("td[ng-reflect-text='Bbh']"));
+        app.getUiboHelper().performContextClick(By.cssSelector("td span[ng-reflect-text='Bbh']"));
         assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//span[contains(text(), 'Block account')]", "//span[contains(text(), 'Account limits')]", "//span[contains(text(), 'Overdraft limit')]"}));
     }
 }

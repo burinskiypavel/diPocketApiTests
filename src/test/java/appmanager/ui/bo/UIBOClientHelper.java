@@ -330,14 +330,16 @@ public class UIBOClientHelper extends UIHelperBase {
         waitForSeveralItems(new String[]{text});
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+text+"']")));
         assertFalse(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+mustNotBe+"']")));
-        clearFilter(By.cssSelector("timesicon[ng-reflect-style-class='p-dropdown-clear-icon'] svg"));
+        //clearFilter(By.cssSelector("timesicon[ng-reflect-style-class='p-dropdown-clear-icon'] svg"));
+        clearFilter(clientPage.clearDropDownFilterBtn);
     }
 
     public void verifyDropDownClientPageFilter(By locator, String text) {
         setDropDownClientPageFilter(locator, text);
         waitForSeveralItems(new String[]{text});
-        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td[ng-reflect-text='"+text+"']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        assertTrue(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+text+"']")));
+        //clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        clearFilter(clientPage.clearDropDownFilterBtn);
     }
 
     public void verifyClientPageFilterWithCollection(String filter, String text, int index) {
@@ -357,6 +359,14 @@ public class UIBOClientHelper extends UIHelperBase {
 
     public void clearFilter(By locator) {
         click(locator);
+    }
+
+    public void clearFilterDropDownFilter() {
+        clientPage.clearDropDownFilterBtn.click();
+    }
+
+    public void clearFilter(WebElement element) {
+        element.click();
     }
 
     public void rejectSupervisor() throws InterruptedException {
