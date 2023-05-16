@@ -172,9 +172,9 @@ public class UIHelperBase {
 
     public void deleteTextFromTextarea(By locator) {
         WebElement element = driver.findElement(locator);
-        //element.sendKeys(Keys.CONTROL + "a");
-        element.clear();
+        element.sendKeys(Keys.CONTROL + "a");
         element.sendKeys(Keys.DELETE);
+        element.clear();
     }
 
     public void deleteText(WebElement id) {

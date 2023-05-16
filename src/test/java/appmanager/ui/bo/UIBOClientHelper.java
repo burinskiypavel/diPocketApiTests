@@ -330,7 +330,7 @@ public class UIBOClientHelper extends UIHelperBase {
         waitForSeveralItems(new String[]{text});
         assertTrue(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+text+"']")));
         assertFalse(areElementsPresentAfterSorting(By.cssSelector("td span[ng-reflect-text='"+mustNotBe+"']")));
-        clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        clearFilter(By.cssSelector("timesicon[ng-reflect-style-class='p-dropdown-clear-icon'] svg"));
     }
 
     public void verifyDropDownClientPageFilter(By locator, String text) {
@@ -352,7 +352,7 @@ public class UIBOClientHelper extends UIHelperBase {
     public void setDropDownClientPageFilter(By locator, String value) {
         click(locator);
         click(By.cssSelector("p-dropdownitem[ng-reflect-label='" + value + "']"));
-        waitFor(By.cssSelector("i.p-dropdown-clear-icon"));
+        waitFor(By.cssSelector("timesicon[ng-reflect-style-class='p-dropdown-clear-icon']"));
     }
 
     public void clearFilter(By locator) {

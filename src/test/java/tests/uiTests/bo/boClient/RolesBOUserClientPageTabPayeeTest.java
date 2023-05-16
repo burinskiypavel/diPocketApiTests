@@ -20,12 +20,12 @@ public class RolesBOUserClientPageTabPayeeTest extends UITestBase {
         app.getUiboClientHelper().goToPayeeTab();
 
         app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='nickName'] input[type='text']"), "Txcy", "Den", "nickName");
-        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='paymentTypeName']"), "PLN in Poland", "Other payments");
+        app.getUiboClientHelper().verifyDropDownClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='paymentTypeName']"), "Other payments", "PLN in Poland");
 
         app.getUiboClientHelper().setDropDownClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='currencyCode']"), "GBP");
         String actualCurrencyCode = app.getUiboHelper().getAttributeText(By.xpath("//app-payee //table/tbody/tr[1]/td[3] //span"));
         assertEquals(actualCurrencyCode, "GBP");
-        app.getUiboClientHelper().clearFilter(By.cssSelector("i.p-dropdown-clear-icon"));
+        app.getUiboClientHelper().clearFilter(By.cssSelector("timesicon[ng-reflect-style-class='p-dropdown-clear-icon'] svg"));
 
         app.getUiboClientHelper().verifyClientPageFilter(By.cssSelector("app-payee p-columnfilter[ng-reflect-field='bankId'] input[type='text']"), "WBKPPLPP", "VHHFRGUF", "bankId");
 
