@@ -46,7 +46,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         int count = 0;
         while(areElementsPresent(new String[]{"//*[contains(text(), 'Take Ticket')]"}) && count < 2){
             click(By.cssSelector("div[ng-reflect-router-link='take_ticket']"));
-            Thread.sleep(4000);
+            Thread.sleep(3000);
             count++;
         }
         Thread.sleep(2000);
