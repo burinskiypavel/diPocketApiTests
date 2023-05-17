@@ -68,6 +68,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(postponePage.chevronUpMounthBtn);
         click(postponePage.chevronUpMounthBtn);
         click(By.xpath("//td //*[contains(text(), '22')]"));
+        Thread.sleep(1500);
         click(postponePage.postponeBtn);
         //click(postponePage.chevronUpHourBtn);
         //Thread.sleep(1000);
