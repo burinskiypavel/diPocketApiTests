@@ -160,7 +160,7 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 9)
     public void test_AISReadAccountTransactionsList(){
-        String response = given()
+        Response response = given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
                 .pathParam("accountId", resourceId)
@@ -168,13 +168,22 @@ public class AisTests extends APIUITestBase {
                 .pathParam("dateTo", "2023-05-12")
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{accountId}/transactions?dateFrom={dateFrom}&dateTo={dateTo}")
-                .then()
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{accountId}/transactions?dateFrom={dateFrom}&dateTo={dateTo}");
+        String sRes = response.then()
                 .log().all()
                 .statusCode(200)
-                .body("account.iban", equalTo(iban)).extract().response().asString();
+                .extract().response().asString();
+        transactionId = app.getResponseValidationHelper().getStringFromResponseJsonPath(sRes, "transactions.booked.transactionId[0]");
 
-        transactionId = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "transactions.booked.transactionId[0]");
+        response.then().body("account.iban", equalTo(iban),
+                "transactions.booked.transactionId", hasItems("29818;11;187652", "29818;11;187651"),
+                "transactions.booked.entryReference", hasItems("487171", "487170"),
+                "transactions.booked.creditorName", hasItems("-29791"),
+                "transactions.booked.debtorName", hasItems("380661470959"),
+                "transactions.booked.transactionAmount.currency", hasItems(currency),
+                "transactions.booked.transactionAmount.amount", hasItems("-10.00", "600.00"),
+                "transactions.booked.valueDate", hasItems("2020-12-04", "2020-12-04"),
+                "transactions.booked.proprietaryBankTransactionCode", hasItems("DiP transfer"));
     }
 
     @Test(priority = 10)
@@ -183,12 +192,17 @@ public class AisTests extends APIUITestBase {
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
                 .pathParam("accountId", resourceId)
-                //.pathParam("transactionId", "29818;11;187652")
+                .pathParam("transactionId", transactionId)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{accountId}/transactions/29818;11;187652")
+                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{accountId}/transactions/{transactionId}")
                 .then()
                 .log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body("transactionsDetails.transactionId", equalTo(transactionId),
+                        "transactionsDetails.creditorName", equalTo("-29791"),
+                        "transactionsDetails.transactionAmount.currency", equalTo(currency),
+                        "transactionsDetails.transactionAmount.amount", equalTo("-10.00"),
+                        "transactionsDetails.valueDate", equalTo("2020-12-04"));
     }
 }
