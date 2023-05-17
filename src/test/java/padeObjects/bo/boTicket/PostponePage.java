@@ -17,5 +17,8 @@ public class PostponePage {
     public WebElement calendarBtn;
 
     @FindBy(css = "div.p-minute-picker chevronupicon")
-    public WebElement chevronUpBtn;
+    public WebElement chevronUpMinuteBtn;
+
+    @FindBy(css = "div.p-hour-picker chevronupicon")
+    public WebElement chevronUpHourBtn;
 }
