@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import io.restassured.response.Response;
 import model.aspsp.*;
 import model.clientServices.DashBoardNotifyDetails3Request;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -29,6 +28,7 @@ public class AisTests extends APIUITestBase {
     String resourceId = null;
     String[] balances = new String[0];
     String[] transactions = new String[0];
+    String transactionId = null;
     String currency = "PLN";
     String amount = "590.00";
     String ownerName = "Pavel Burinsky";
@@ -160,7 +160,7 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 9)
     public void test_AISReadAccountTransactionsList(){
-        given()
+        String response = given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
                 .pathParam("accountId", resourceId)
@@ -172,7 +172,9 @@ public class AisTests extends APIUITestBase {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("account.iban", equalTo(iban));
+                .body("account.iban", equalTo(iban)).extract().response().asString();
+
+        transactionId = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "transactions.booked.transactionId[0]");
     }
 
     @Test(priority = 10)
