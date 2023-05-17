@@ -65,11 +65,14 @@ public class UIBOTicketHelper extends UIHelperBase {
 //        click(postponePage.chevronUpMinuteBtn);
 //        click(postponePage.chevronUpMinuteBtn);
 //        click(postponePage.chevronUpMinuteBtn);
-        waitFor(postponePage.chevronUpHourBtn);
-        click(postponePage.chevronUpHourBtn);
-        Thread.sleep(1000);
-        pressKeys(Keys.ENTER);
-        Thread.sleep(1000);
+        waitFor(postponePage.chevronUpMounthBtn);
+        click(postponePage.chevronUpMounthBtn);
+        click(By.xpath("//td //*[contains(text(), '22')]"));
+        click(postponePage.postponeBtn);
+        //click(postponePage.chevronUpHourBtn);
+        //Thread.sleep(1000);
+        //pressKeys(Keys.ENTER);
+        //Thread.sleep(1000);
 
         if(isElementPresent(By.xpath("//div[contains(text(), 'Ticket was successfully delayed')]"))){
 

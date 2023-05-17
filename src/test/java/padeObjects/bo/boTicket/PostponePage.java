@@ -16,9 +16,15 @@ public class PostponePage {
     @FindBy(xpath = "//button[@type='button'] //calendaricon")
     public WebElement calendarBtn;
 
+    @FindBy(xpath = "//div[@role='dialog'] //p-button[@ng-reflect-label='Postpone']")
+    public WebElement postponeBtn;
+
     @FindBy(css = "div.p-minute-picker chevronupicon")
     public WebElement chevronUpMinuteBtn;
 
     @FindBy(css = "div.p-hour-picker chevronupicon")
     public WebElement chevronUpHourBtn;
+
+    @FindBy(css = "div.p-datepicker-header chevronrighticon")
+    public WebElement chevronUpMounthBtn;
 }
