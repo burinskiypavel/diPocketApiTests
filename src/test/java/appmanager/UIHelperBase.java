@@ -187,6 +187,10 @@ public class UIHelperBase {
         driver.findElement(locator).click();
     }
 
+    public void clickCheckbox(WebElement element) {
+        element.click();
+    }
+
     public String getText(By by, int index) {
         WebElement state = driver.findElements(by).get(index);
         return state.getText();

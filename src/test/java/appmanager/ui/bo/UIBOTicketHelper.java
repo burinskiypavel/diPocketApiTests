@@ -4,7 +4,6 @@ import appmanager.HelperBase;
 import appmanager.Login_RegistrationHelper;
 import appmanager.UIHelperBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import padeObjects.bo.BOHomePage;
 import padeObjects.bo.boClient.ClientPage;
@@ -21,6 +20,7 @@ import static appmanager.HelperBase.prop;
 public class UIBOTicketHelper extends UIHelperBase {
     String actualTicketType = null;
     String state = null;
+    String clientId = null;
     String ddState = null;
     TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
     TakeTicketPage takeTicketPage = new TakeTicketPage(driver);
@@ -32,6 +32,8 @@ public class UIBOTicketHelper extends UIHelperBase {
     PostponePage postponePage = new PostponePage(driver);
     ReassignPage reassignPage = new ReassignPage(driver);
     UploadSelfiesPage uploadSelfiesPage = new UploadSelfiesPage(driver);
+    RescanRequestPage rescanRequestPage = new RescanRequestPage(driver);
+    AskForPage askForPage = new AskForPage(driver);
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
 
     public UIBOTicketHelper(WebDriver driver) {
@@ -142,7 +144,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         //click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
         waitFor(takeTicketPage.editBtn);
         click(takeTicketPage.editBtn);
-
+        waitFor(takeTicketEditDataPage.saveBtn);
         if(!gender.equals("")){
             //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
             selectFromDropDown(takeTicketEditDataPage.genderDropDown, gender);
@@ -204,21 +206,21 @@ public class UIBOTicketHelper extends UIHelperBase {
         //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Ticket was approved successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket was approved successfully')]"));
+        //waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket was approved successfully')]"));
     }
 
     public void approveTicketSuccessfully() {
         //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
+        //waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
     }
 
     public void approveTicketSuccessfullyDocsChange() {
         //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs was approved successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs was approved successfully')]"));
+        //waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs was approved successfully')]"));
     }
 
     public void unsuccessfulApprove(final String message) {
@@ -261,7 +263,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     private void uploadDoc(String typeId, String pathToFile) throws InterruptedException {
         //click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
-        waitFor(clientPage.uploadDocsBtn);
+        waitForElementToBeClickable(clientPage.uploadDocsBtn);
         click(clientPage.uploadDocsBtn);
         //selectFromDropDown(By.xpath("//p-dropdown[contains(@id, 'typeId')]"), typeId);
         selectFromDropDown(uploadDocPage.typeIdDropDown, typeId);
@@ -271,7 +273,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         //click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         click(uploadDocPage.confirmBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
-        waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
+        //waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
     }
 
     public String initFDDTicketDisplainWithSecondID(String phone, String gender) throws InterruptedException, SQLException, ClassNotFoundException {
@@ -355,20 +357,27 @@ public class UIBOTicketHelper extends UIHelperBase {
     public void rescanRequestSuccessfully(boolean id, boolean proofOfAddress, boolean backOfId, boolean secondId) throws InterruptedException {
         waitFor(takeTicketPage.rescanRequestBtn);
         click(takeTicketPage.rescanRequestBtn);
+        waitFor(rescanRequestPage.idCheckbox);
+        waitFor(rescanRequestPage.sendBtn);
         if(id) {
-            click(By.cssSelector("p-checkbox[ng-reflect-input-id='Id'"));
+            //click(By.cssSelector("p-checkbox[ng-reflect-input-id='Id'"));
+            click(rescanRequestPage.idCheckbox);
         }
         if(proofOfAddress){
-            click(By.cssSelector("p-checkbox[ng-reflect-input-id='Proof of address'"));
+            //click(By.cssSelector("p-checkbox[ng-reflect-input-id='Proof of address'"));
+            click(rescanRequestPage.proofOfAddressCheckbox);
         }
         if(backOfId){
-            click(By.cssSelector("p-checkbox[ng-reflect-input-id='Back of id'"));
+            //click(By.cssSelector("p-checkbox[ng-reflect-input-id='Back of id'"));
+            click(rescanRequestPage.backOfIdCheckbox);
         }
         if(secondId){
-            click(By.cssSelector("p-checkbox[ng-reflect-input-id='Proof of change in name'"));
+            //click(By.cssSelector("p-checkbox[ng-reflect-input-id='Proof of change in name'"));
+            click(rescanRequestPage.proofOfChangeInNameCheckbox);
         }
         Thread.sleep(700);
-        click(By.xpath("//app-button[@label='Send']"));
+        //click(By.xpath("//app-button[@label='Send']"));
+        click(rescanRequestPage.sendBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
     }
 
@@ -439,22 +448,27 @@ public class UIBOTicketHelper extends UIHelperBase {
         //click(By.xpath("//app-button[@ng-reflect-label='Ask for']"));
         waitFor(takeTicketPage.askForBtn);
         click(takeTicketPage.askForBtn);
+        waitFor(askForPage.idCheckbox);
         if(id){
-            clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Id']"));
+            //clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Id']"));
+            clickCheckbox(askForPage.idCheckbox);
         }
         if(proofOfAddress){
-            clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Proof of address']"));
+            //clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Proof of address']"));
+            clickCheckbox(askForPage.proofOfAddressCheckbox);
         }
         if(backOfId){
-            clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Back of id']"));
+            //clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Back of id']"));
+            clickCheckbox(askForPage.backOfIdCheckbox);
         }
         if(residencePermit){
-            clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Residence permit']"));
+            //clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Residence permit']"));
+            clickCheckbox(askForPage.residencePermitCheckbox);
         }
 
         type(By.id("11"), "test");
-        click(By.xpath("//app-button[@label='Send']"));
-
+        //click(By.xpath("//app-button[@label='Send']"));
+        click(askForPage.sendBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
     }
 
@@ -516,15 +530,12 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Assign to is required ')]"));
     }
 
-    public String takeFDDTicket() throws InterruptedException, SQLException, ClassNotFoundException {
-
+    public String takeFDDTicket(int countryId, int currencyId, String terms1, String terms2) throws InterruptedException, SQLException, ClassNotFoundException {
         if (findElements(By.id("takeTicketContent")).size() == 0) {
-            login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
             gotoTakeTicket();
             initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
         }
-
-        actualTicketType = getActualTicketType();
 
         for(int i = 0; i < 15; i++) {
             actualTicketType = getActualTicketType();
@@ -539,7 +550,7 @@ public class UIBOTicketHelper extends UIHelperBase {
                 gotoTakeTicketWithReg();
 
                 if(findElements(By.id("takeTicketContent")).size() == 0){
-                    login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                    login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                     gotoTakeTicket();
                     initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
                 }
@@ -551,7 +562,7 @@ public class UIBOTicketHelper extends UIHelperBase {
                 gotoTakeTicketWithReg();
 
                 if(findElements(By.id("takeTicketContent")).size() == 0){
-                    login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                    login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                     gotoTakeTicket();
                     initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
                 }
@@ -563,11 +574,51 @@ public class UIBOTicketHelper extends UIHelperBase {
             }
 
             if(findElements(By.id("takeTicketContent")).size() == 0){
-                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
                 gotoTakeTicket();
                 initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
             }
         }
         return actualTicketType;
+    }
+
+    public String takeFDDTicketForRescanRequesteAndUploadDocs() throws InterruptedException, SQLException, ClassNotFoundException {
+        if (findElements(By.id("takeTicketContent")).size() == 0) {
+            login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            gotoTakeTicket();
+            clientId = initFDDTicketDisplainWithSecondID(prop.getProperty("mobile.registration.phoneNumber"), "M");
+        }
+
+        for(int i = 0; i < 12; i++) {
+            actualTicketType = getActualTicketType();
+            state = getActualTicketState();
+            if(actualTicketType.equals("FDD - check client's data")){
+                break;
+            }
+
+            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+                editAndSaveSDDTicket("M", "", "", "", "");
+                approveTicketSuccessfully();
+                gotoTakeTicketWithReg();
+
+                if(findElements(By.id("takeTicketContent")).size() == 0){
+                    login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                    gotoTakeTicket();
+                    clientId = initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+                }
+            }
+
+            if (!actualTicketType.equals("FDD - check client's data")) {
+                delayTicketForSeveralMinutes();
+                gotoTakeTicketWithReg();
+            }
+
+            if(findElements(By.id("takeTicketContent")).size() == 0){
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                gotoTakeTicket();
+                clientId = initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+            }
+        }
+        return clientId;
     }
 }
