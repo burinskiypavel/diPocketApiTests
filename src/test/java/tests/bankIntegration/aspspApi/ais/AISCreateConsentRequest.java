@@ -36,7 +36,7 @@ public class AISCreateConsentRequest  extends TestBase {
                 SSLConfig.sslConfig()
                         .trustStore("files/certs/truststoreRootX1", "123456").trustStoreType("JKS")
                         .keyStore("files/certs/badssl.com-client.p12", "badssl.com").keystoreType("PKCS12"));
-        SSLFix.execute();
+        //SSLFix.execute();
 
         given()
                 .contentType(ContentType.HTML)
