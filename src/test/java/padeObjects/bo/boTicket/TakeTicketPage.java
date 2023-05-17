@@ -42,6 +42,9 @@ public class TakeTicketPage {
     @FindBy(xpath = "//div[@class='info'][2] //p[3]")
     public WebElement stateField;
 
+    @FindBy(xpath = "//div[@class='info'][2] //p[2]")
+    public WebElement ddField;
+
 
     public void clickOnApproveButton(){
         approveBtn.click();

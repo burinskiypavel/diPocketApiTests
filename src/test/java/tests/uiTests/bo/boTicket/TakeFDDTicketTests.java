@@ -17,6 +17,7 @@ import static org.testng.Assert.assertTrue;
 public class TakeFDDTicketTests extends UITestBase {
     String actualTicketType = null;
     String state = null;
+    String ddState = null;
     int unitedKingdomCountryId = 826;
 
     @DataProvider
@@ -34,45 +35,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
-            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
-            app.getUiboTicketHelper().gotoTakeTicket();
-            app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
-        }
-
-        actualTicketType = app.getUiboTicketHelper().getActualTicketType();
-
-        for(int i = 0; i < 15; i++) {
-            actualTicketType = app.getUiboTicketHelper().getActualTicketType();
-            state = app.getUiboTicketHelper().getActualTicketState();
-            if(actualTicketType.equals("FDD - check client's data")){
-                break;
-            }
-
-            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
-                app.getUiboTicketHelper().editAndSaveSDDTicket("M", "", "", "", "");
-                app.getUiboTicketHelper().approveTicketSuccessfully();
-                app.getUiboTicketHelper().gotoTakeTicketWithReg();
-
-                if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                    app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
-                    app.getUiboTicketHelper().gotoTakeTicket();
-                    app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
-                }
-                continue;
-            }
-
-            if (!actualTicketType.equals("FDD - check client's data")) {
-                app.getUiboTicketHelper().delayTicketForSeveralMinutes();
-                app.getUiboTicketHelper().gotoTakeTicketWithReg();
-            }
-
-            if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
-                app.getUiboTicketHelper().gotoTakeTicket();
-                app.getUiboTicketHelper().initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
-            }
-        }
+        String actualTicketType = app.getUiboTicketHelper().takeFDDTicket();
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "CGH164279", "34999285098", "Poland");

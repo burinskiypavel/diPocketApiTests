@@ -1,5 +1,6 @@
 package appmanager;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -617,5 +618,15 @@ public class UIHelperBase {
 
     public void verifyAmountOfButtonsOnThePage(By locator, int expectedAmount) {
         verifyAmountOfTheSameElements(locator, expectedAmount);
+    }
+
+    public String generateRandomString(int amount){
+        String randomString =  RandomStringUtils.random(amount, true, true);
+        return randomString;
+    }
+
+    public String generateRandomNumber(int amount){
+        String randomNumber =  RandomStringUtils.random(amount, false, true);
+        return randomNumber;
     }
 }

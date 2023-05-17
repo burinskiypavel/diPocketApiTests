@@ -16,7 +16,12 @@ import padeObjects.bo.search.ClientSearchPage;
 import java.io.File;
 import java.sql.SQLException;
 
+import static appmanager.HelperBase.prop;
+
 public class UIBOTicketHelper extends UIHelperBase {
+    String actualTicketType = null;
+    String state = null;
+    String ddState = null;
     TakeTicketEditDataPage takeTicketEditDataPage = new TakeTicketEditDataPage(driver);
     TakeTicketPage takeTicketPage = new TakeTicketPage(driver);
     ClientSearchPage clientSearchPage = new ClientSearchPage(driver);
@@ -27,6 +32,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     PostponePage postponePage = new PostponePage(driver);
     ReassignPage reassignPage = new ReassignPage(driver);
     UploadSelfiesPage uploadSelfiesPage = new UploadSelfiesPage(driver);
+    Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
 
     public UIBOTicketHelper(WebDriver driver) {
         super(driver);
@@ -486,6 +492,10 @@ public class UIBOTicketHelper extends UIHelperBase {
         return getText(takeTicketPage.stateField);
     }
 
+    public String getActualTicketDDState() {
+        return getText(takeTicketPage.ddField);
+    }
+
     public String getActualTicketId(){
         return getText(takeTicketPage.idField);
     }
@@ -504,5 +514,60 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         waitFor(By.xpath("//*[contains(text(), 'Assign to is required ')]"));
+    }
+
+    public String takeFDDTicket() throws InterruptedException, SQLException, ClassNotFoundException {
+
+        if (findElements(By.id("takeTicketContent")).size() == 0) {
+            login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            gotoTakeTicket();
+            initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+        }
+
+        actualTicketType = getActualTicketType();
+
+        for(int i = 0; i < 15; i++) {
+            actualTicketType = getActualTicketType();
+            state = getActualTicketState();
+            ddState = getActualTicketDDState();
+            if(actualTicketType.equals("FDD - check client's data")){
+                break;
+            }
+
+            if(ddState.equals("DD:  SFDD")){
+                reassignTicketSuccessfully("AUTO", "test");
+                gotoTakeTicketWithReg();
+
+                if(findElements(By.id("takeTicketContent")).size() == 0){
+                    login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                    gotoTakeTicket();
+                    initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+                }
+            }
+
+            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+                editAndSaveSDDTicket("M", "", "", "", "");
+                approveTicketSuccessfully();
+                gotoTakeTicketWithReg();
+
+                if(findElements(By.id("takeTicketContent")).size() == 0){
+                    login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                    gotoTakeTicket();
+                    initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+                }
+            }
+
+            if (!actualTicketType.equals("FDD - check client's data")) {
+                delayTicketForSeveralMinutes();
+                gotoTakeTicketWithReg();
+            }
+
+            if(findElements(By.id("takeTicketContent")).size() == 0){
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                gotoTakeTicket();
+                initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+            }
+        }
+        return actualTicketType;
     }
 }
