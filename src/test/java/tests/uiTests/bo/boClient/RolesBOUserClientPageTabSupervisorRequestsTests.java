@@ -4,6 +4,8 @@ import base.UITestBase;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -51,8 +53,7 @@ public class RolesBOUserClientPageTabSupervisorRequestsTests extends UITestBase 
         }
 
         String actualPopupText = app.getUiboClientHelper().approveSupervisorAndGetTextFromPopUp();
-
-        assertEquals(actualPopupText, "Are you sure want to approve supervision request #"+requestId+"");
+        assertThat(actualPopupText, equalTo("Are you sure want to approve supervision request #"+requestId+""));
     }
 
     @Test
@@ -70,8 +71,7 @@ public class RolesBOUserClientPageTabSupervisorRequestsTests extends UITestBase 
         }
 
         String actualPopupText = app.getUiboClientHelper().rejectSupervisorAndGetTextFromPopUp();
-
-        assertEquals(actualPopupText, "Are you sure want to reject supervision request #"+requestId+"");
+        assertThat(actualPopupText, equalTo("Are you sure want to reject supervision request #"+requestId+""));
     }
 
     @Test(enabled = false)

@@ -338,7 +338,7 @@ public class UIHelperBase {
     }
 
     public void performContextClickFromTable(String text) {
-        WebElement element = driver.findElement(By.cssSelector("td[ng-reflect-text='"+text+"']"));
+        WebElement element = driver.findElement(By.cssSelector("td span[ng-reflect-text='"+text+"']"));
         Actions actions = new Actions(driver);
         actions.contextClick(element).perform();
     }
