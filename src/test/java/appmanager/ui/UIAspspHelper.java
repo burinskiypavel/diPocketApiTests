@@ -21,6 +21,17 @@ public class UIAspspHelper extends UIHelperBase {
         return uiTransactionCode;
     }
 
+    public String everypayWebConfirmaton(String href, String phone, String pass) {
+        driver.navigate().to(href);
+        waitFor(By.cssSelector("input[id='phone_number']"));
+        driver.findElement(By.id("phone_number")).sendKeys(phone);
+        driver.findElement(By.id("key")).sendKeys(pass);
+        driver.findElement(By.xpath("//button[@id='dpwa-login']")).click();
+        waitFor(By.xpath("//*[contains(text(), 'Please go to DiPocket Mobile Application to confirm your authorization attempt')]"));
+        uiTransactionCode = driver.findElement(By.id("transaction-code")).getText();
+        return uiTransactionCode;
+    }
+
     public void pressConsent(){
         waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
         findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();

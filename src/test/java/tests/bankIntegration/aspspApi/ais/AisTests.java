@@ -49,7 +49,7 @@ public class AisTests extends APIUITestBase {
         v1ConsentsRequest.setRecurringIndicator(true);
         v1ConsentsRequest.setValidUntil(validUntil);
         String json = gson.toJson(v1ConsentsRequest);
-        String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json);
+        String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json, "654321");
 
         consentId = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "consentId");
         href = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "_links.scaRedirect.href");
