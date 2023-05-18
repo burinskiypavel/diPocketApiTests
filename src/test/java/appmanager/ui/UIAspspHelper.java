@@ -23,7 +23,7 @@ public class UIAspspHelper extends UIHelperBase {
 
     public String everypayWebConfirmaton(String href, String phone, String pass) {
         driver.navigate().to(href);
-        waitFor(By.cssSelector("input[id='phone_number']"));
+        waitFor(By.id("phone_number"));
         driver.findElement(By.id("phone_number")).sendKeys(phone);
         driver.findElement(By.id("key")).sendKeys(pass);
         driver.findElement(By.xpath("//button[@id='dpwa-login']")).click();
