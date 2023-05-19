@@ -1449,4 +1449,28 @@ public class DBHelper extends HelperBase {
         con.close();
         return emailisverified;
     }
+
+    public String getCodeFromVERIFYCODEFromTestDB(String srcidClientId) throws SQLException, ClassNotFoundException {
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
+
+        String query = "select * from VERIFYCODE where srcid = '"+srcidClientId+"'";
+
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String clientId = null;
+        int count = 0;
+        while (rs.next()){
+            clientId = rs.getString(2);
+            System. out.println("clientId : " + clientId);
+            break;
+        }
+        con.close();
+        return clientId;
+    }
 }

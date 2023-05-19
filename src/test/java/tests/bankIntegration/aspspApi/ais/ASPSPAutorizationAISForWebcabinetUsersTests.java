@@ -8,16 +8,20 @@ import model.aspsp.V1ConsentsRequest;
 import model.clientServices.DashBoardNotifyDetails3Request;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
+
 public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
-    public String consentId = null;
-    public String href = null;
-    public String uiTransactionCode = null;
-    public String apiTransactionCode = null;
-    public int notifyId = 0;
-    public String phone = "380980316499";
-    public String pass = "reset246740";
-    public String iban = "PL42109010560000000150296424";
-    public String validUntil = "2023-06-17";
+    String consentId = null;
+    String href = null;
+    String uiTransactionCode = null;
+    String apiTransactionCode = null;
+    int notifyId = 0;
+    String phone = "37064902199";
+    String pass = "123456A";
+    String clientId = "62008";
+
+    String iban = "EE517777000012207332";
+    String validUntil = "2023-06-17";
     String resourceId = null;
     String[] balances = new String[0];
     String[] transactions = new String[0];
@@ -49,7 +53,9 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     }
 
     @Test(priority = 2)
-    public void test_everypayWebConfirmaton() {
-        uiTransactionCode = appUi.getUiAspspHelper().everypayWebConfirmaton(href, phone, pass);
+    public void test_everypayWebConfirmaton() throws SQLException, ClassNotFoundException {
+        appUi.getUiAspspHelper().everypayWebConfirmaton(href, phone, pass, clientId);
+        appUi.getUiAspspHelper().selectAccount(iban);
+        appUi.getUiAspspHelper().pressConsent();
     }
 }
