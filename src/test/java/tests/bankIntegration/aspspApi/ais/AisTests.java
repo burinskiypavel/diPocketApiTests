@@ -33,6 +33,7 @@ public class AisTests extends APIUITestBase {
     String amount = "590.00";
     String ownerName = "Pavel Burinsky";
     String cashAccountType = "CACC";
+    String partnerId = "654321";
     String status = "enabled";
     public String site = Site.DIPOCKET.toString();
     Gson gson = new Gson();
@@ -49,7 +50,7 @@ public class AisTests extends APIUITestBase {
         v1ConsentsRequest.setRecurringIndicator(true);
         v1ConsentsRequest.setValidUntil(validUntil);
         String json = gson.toJson(v1ConsentsRequest);
-        String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json, "654321");
+        String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json, partnerId);
 
         consentId = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "consentId");
         href = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "_links.scaRedirect.href");
@@ -86,13 +87,13 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 4)
     public void test_AISGetConsentStatus_showConsentStatus() {
-        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents_confirmationOfFunds_status(consentId);
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents_confirmationOfFunds_status(consentId, partnerId);
         response.then().body("consentStatus", equalTo("valid"));
     }
 
     @Test(priority = 5)
     public void test_AISGetConsentRequest_showConsentInformation() {
-        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents_confirmationOfFunds(consentId);
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents_confirmationOfFunds(consentId, partnerId);
         response.then().body("validUntil", equalTo(validUntil),
                 "consentStatus", equalTo("valid"),
                 "recurringIndicator", equalTo(true));

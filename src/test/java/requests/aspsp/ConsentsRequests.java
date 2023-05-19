@@ -52,27 +52,27 @@ public class ConsentsRequests {
         return response;
     }
 
-    public Response partnerId_bg_v1_consents_confirmationOfFunds_status(String consentId) {
+    public Response partnerId_bg_v1_consents_confirmationOfFunds_status(String consentId, String partnerId) {
         Response response = given()
                 .log().uri().log().headers().log().body()
                 .config(sslCertHelper.aspspSslConfig)
                 .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/{confirmation-of-funds}/status");
+                .get("https://openbanking.dipocket.site:3443/" + partnerId + "/bg/v1/consents/{confirmation-of-funds}/status");
         response.then().log().all()
                 .statusCode(200);
         return response;
     }
 
-    public Response partnerId_bg_v1_consents_confirmationOfFunds(String consentId) {
+    public Response partnerId_bg_v1_consents_confirmationOfFunds(String consentId, String partnerId) {
         Response response = given()
                 .log().uri().log().headers().log().body()
                 .config(sslCertHelper.aspspSslConfig)
                 .header("X-Request-ID", "ea5f8624-a086-4e8f-9d7a-f6094b871615")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/consents/{confirmation-of-funds}");
+                .get("https://openbanking.dipocket.site:3443/" + partnerId + "/bg/v1/consents/{confirmation-of-funds}");
         response.then().log().all()
                 .statusCode(200);
                 return response;
