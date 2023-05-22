@@ -1,6 +1,7 @@
 package appmanager.ui.bo;
 
 import appmanager.UIHelperBase;
+import appmanager.ui.UIBOHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UIBOOperationsHelper extends UIHelperBase {
+    UIBOHelper uiboHelper = new UIBOHelper(driver);
+    UIBOClientHelper uiboClientHelper = new UIBOClientHelper(driver);
     ClientPage clientPage = new ClientPage(driver);
 
     public UIBOOperationsHelper(WebDriver driver) {
@@ -476,11 +479,21 @@ public class UIBOOperationsHelper extends UIHelperBase {
     public void createCorporateClientWithMessage(String message) {
         click(By.xpath("//app-create-corporate-client //p-button[@ng-reflect-label='Create']"));
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
-        //waitFor(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Search']"));
         waitFor(clientPage.searchBtn);
     }
 
     public void verifyInvisibilityOfTheFieldsOnFourthPageAfterSetNoAccount() {
         waitForInvisibilityOfElement(By.xpath("//app-input[@ng-reflect-name='accName'] //input"));
+    }
+
+    public void initDuplicateCorporateClient(String login, String pass, String id) throws InterruptedException {
+        uiboHelper.gotoBOSiteAndLoginWithCBOUserRole(login, pass);
+        uiboHelper.gotoSearchPage();
+        uiboHelper.search("id", id);
+        uiboClientHelper.goToClientPageCorpClient(By.xpath("//td //span[contains(text(), '"+id+"')]"));
+    }
+
+    public void pressCopyButton() {
+        uiboHelper.click(By.cssSelector("div.copy-button"));
     }
 }

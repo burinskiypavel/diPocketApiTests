@@ -13,15 +13,13 @@ public class DuplicateCorporateClientTests extends UITestBase {
 
     @Test
     public void testDuplicateCorporateClient() throws InterruptedException {
-        initDuplicateCorporateClient();
-
-        app.getUiboHelper().click(By.cssSelector("div.copy-button"));
+        app.getUiboOperationsHelper().initDuplicateCorporateClient(app.CBOuserLogin2, app.CBOuserPass2, id);
+        app.getUiboOperationsHelper().pressCopyButton();
 
         app.getUiboOperationsHelper().setCountryOfContract("United Kingdom");
         Thread.sleep(700);
         app.getUiboOperationsHelper().pressNext();
         app.getUiboOperationsHelper().waitFor(By.cssSelector("app-input[ng-reflect-name='city']"));
-
 
         app.getUiboOperationsHelper().pressNext();
         app.getUiboOperationsHelper().waitFor(By.cssSelector("app-input[ng-reflect-name='accName']"));
@@ -31,7 +29,6 @@ public class DuplicateCorporateClientTests extends UITestBase {
         app.getUiboOperationsHelper().setCountryOfContract("United Kingdom");
         Thread.sleep(700);
         app.getUiboHelper().clickWithJS(By.xpath("//p-button[@ng-reflect-label='Next']"));
-
 
         app.getUiboHelper().waitFor(By.xpath("//app-create-corporate-client //p-button[@ng-reflect-label='Create']"));
 
@@ -51,8 +48,8 @@ public class DuplicateCorporateClientTests extends UITestBase {
 
     @Test
     public void testDuplicationOfCorporateClientDataWithoutAccount() throws InterruptedException {
-        initDuplicateCorporateClient();
-        app.getUiboHelper().click(By.cssSelector("div.copy-button"));
+        app.getUiboOperationsHelper().initDuplicateCorporateClient(app.CBOuserLogin2, app.CBOuserPass2, id);
+        app.getUiboOperationsHelper().pressCopyButton();
 
         app.getUiboOperationsHelper().setCountryOfContract("United Kingdom");
         Thread.sleep(700);
@@ -74,12 +71,5 @@ public class DuplicateCorporateClientTests extends UITestBase {
         List<String> expectedClientDetails = app.getUiboHelper().getDateFromFile("files/bo/boOperations/duplicateCorporateClientClientWithoutAccountDitails.txt");
 
         assertEquals(actualClientDetails, expectedClientDetails, "client datails page");
-    }
-
-    public void initDuplicateCorporateClient() throws InterruptedException {
-        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
-        app.getUiboHelper().gotoSearchPage();
-        app.getUiboHelper().search("id", id);
-        app.getUiboClientHelper().goToClientPageCorpClient(By.xpath("//td //span[contains(text(), '"+id+"')]"));
     }
 }
