@@ -36,7 +36,7 @@ public class TakeTicketPage {
     @FindBy(xpath = "//app-button[@ng-reflect-label='Rescan request']")
     public WebElement rescanRequestBtn;
 
-    @FindBy(xpath = "//div[@class='info'][2] //p[1] //span[2]")
+    @FindBy(xpath = "//div[@class='info'][2] //p[1] //a")
     public WebElement idField;
 
     @FindBy(xpath = "//div[@class='info'][2] //p[3]")
