@@ -4,6 +4,7 @@ import appmanager.UIHelperBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import padeObjects.bo.boClient.ClientPage;
 import padeObjects.bo.boOperations.BOOperationsBankTransfersPage;
 import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientFirstPage;
 import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientForthPage;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UIBOOperationsHelper extends UIHelperBase {
+    ClientPage clientPage = new ClientPage(driver);
 
     public UIBOOperationsHelper(WebDriver driver) {
         super(driver);
@@ -471,10 +473,11 @@ public class UIBOOperationsHelper extends UIHelperBase {
         click(By.xpath("//p-radiobutton[@ng-reflect-label='No account']"));
     }
 
-    public void createCorporateClientWithMessage(final String message) {
+    public void createCorporateClientWithMessage(String message) {
         click(By.xpath("//app-create-corporate-client //p-button[@ng-reflect-label='Create']"));
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
-        waitFor(By.xpath("//app-client-button-block //span[contains(text(), 'Search')]"));
+        //waitFor(By.cssSelector("div.buttons-wrap p-button[ng-reflect-label='Search']"));
+        waitFor(clientPage.searchBtn);
     }
 
     public void verifyInvisibilityOfTheFieldsOnFourthPageAfterSetNoAccount() {

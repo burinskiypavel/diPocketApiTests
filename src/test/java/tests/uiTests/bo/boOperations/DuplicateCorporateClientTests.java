@@ -80,6 +80,6 @@ public class DuplicateCorporateClientTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
         app.getUiboHelper().gotoSearchPage();
         app.getUiboHelper().search("id", id);
-        app.getUiboClientHelper().goToClientPageCorpClient(By.xpath("//td //div[contains(text(), '"+id+"')]"));
+        app.getUiboClientHelper().goToClientPageCorpClient(By.xpath("//td //span[contains(text(), '"+id+"')]"));
     }
 }
