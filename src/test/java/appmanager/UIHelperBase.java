@@ -68,6 +68,16 @@ public class UIHelperBase {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitFor(By locator, int seconds){
+        wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void waitFor(WebElement element, int seconds){
+        wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public void waitForSeveralItems(String mas []){
         wait = new WebDriverWait(driver, 25);
         for(int i = 0; i < mas.length; i++){
@@ -102,8 +112,18 @@ public class UIHelperBase {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public void waitForElementToBeClickable(By locator, int seconds){
+        wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
     public void waitForElementToBeClickable(WebElement element){
         wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForElementToBeClickable(WebElement element, int seconds){
+        wait = new WebDriverWait(driver, seconds);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 

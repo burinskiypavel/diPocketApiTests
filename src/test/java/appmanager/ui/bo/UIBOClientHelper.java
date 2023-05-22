@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
+import padeObjects.bo.BasePopupPage;
 import padeObjects.bo.boClient.*;
 
 import static org.testng.Assert.assertFalse;
@@ -21,6 +22,8 @@ public class UIBOClientHelper extends UIHelperBase {
     ForgetClientPage forgetClientPage = new ForgetClientPage(driver);
     ApproveSupervisorPage approveSupervisorPage = new ApproveSupervisorPage(driver);
     RejectSupervisorPage rejectSupervisorPage = new RejectSupervisorPage(driver);
+    BasePopupPage basePopupPage = new BasePopupPage(driver);
+    SendStatemenstPage sendStatemenstPage = new SendStatemenstPage(driver);
     SoftAssert softAssert = new SoftAssert();
 
     public UIBOClientHelper(WebDriver driver) {
@@ -210,36 +213,54 @@ public class UIBOClientHelper extends UIHelperBase {
         click(By.xpath("//p-button[@ng-reflect-label='Save']"));
     }
 
-    public void sendAllStatemenstToDefaultEmail() {
-        click(By.xpath("//app-button[@ng-reflect-label='Send statements']"));
-        waitFor(By.id("formly_3_multi-select_statementRequestList_0"));
-        click(By.id("formly_3_multi-select_statementRequestList_0"));
-        click(By.cssSelector("div[role='checkbox']"));
-        click(By.cssSelector("span.p-multiselect-close-icon"));
-        click(By.cssSelector("p-button[label='Send']"));
-        waitFor(By.xpath("//div[contains(text(), 'Statements were sent successfully')]"));
+    public void sendAllStatemenstToDefaultEmail() throws InterruptedException {
+        //waitFor(By.xpath("//*[contains(text(), 'Handler dispatch failed; nested exception is java.lang.OutOfMemoryError: Java heap space')]"));
+        Thread.sleep(4000);
+        waitForElementToBeClickable(clientPage.sendStatementsBtn, 50);
+        waitForElementToBeClickable(clientPage.sendStatementsBtn);
+        click(clientPage.sendStatementsBtn);
+        waitFor(sendStatemenstPage.mounthAndYearDropDown);
+        click(sendStatemenstPage.mounthAndYearDropDown);
+        selectAll();
+        click(sendStatemenstPage.closeStatementDropDownBtn);
+        click(sendStatemenstPage.sendBtn);
+        waitFor(sendStatemenstPage.sendStatementsConfirmMessage);
     }
 
-    public void sendAllStatementsToEnteredEmail(String email) {
-        click(By.xpath("//app-button[@ng-reflect-label='Send statements']"));
-        waitFor(By.id("formly_3_multi-select_statementRequestList_0"));
-        click(By.id("formly_3_multi-select_statementRequestList_0"));
-        click(By.cssSelector("div[role='checkbox']"));
-        click(By.cssSelector("span.p-multiselect-close-icon"));
-        click(By.id("formly_3_checkbox_useClientEmail_1"));
-        type(By.id("formly_3_input_email_2"), email);
-        click(By.cssSelector("p-button[label='Send']"));
-        waitFor(By.xpath("//div[contains(text(), 'Statements were sent successfully')]"));
+    public void sendAllStatementsToEnteredEmail(String email) throws InterruptedException {
+        Thread.sleep(4000);
+        waitForElementToBeClickable(clientPage.sendStatementsBtn, 50);
+        waitForElementToBeClickable(clientPage.sendStatementsBtn, 50);
+        click(clientPage.sendStatementsBtn);
+        waitFor(sendStatemenstPage.mounthAndYearDropDown);
+        click(sendStatemenstPage.mounthAndYearDropDown);
+        selectAll();
+        click(sendStatemenstPage.closeStatementDropDownBtn);
+        click(sendStatemenstPage.sendToClientEmailCheckbox);
+        type(sendStatemenstPage.emailInput, email);
+        click(sendStatemenstPage.sendBtn);
+        waitFor(sendStatemenstPage.sendStatementsConfirmMessage);
     }
 
-    public void sendStatementForChosenPeriodAndDefaultEmail() {
-        click(By.xpath("//app-button[@ng-reflect-label='Send statements']"));
-        waitFor(By.id("formly_3_multi-select_statementRequestList_0"));
-        click(By.id("formly_3_multi-select_statementRequestList_0"));
+    public void sendStatementForChosenPeriodAndDefaultEmail() throws InterruptedException {
+        Thread.sleep(4000);
+        waitForElementToBeClickable(clientPage.sendStatementsBtn, 50);
+        waitForElementToBeClickable(clientPage.sendStatementsBtn, 50);
+        click(clientPage.sendStatementsBtn);
+        waitFor(sendStatemenstPage.mounthAndYearDropDown);
+        click(sendStatemenstPage.mounthAndYearDropDown);
+        selectFirstElement();
+        click(sendStatemenstPage.closeStatementDropDownBtn);
+        click(sendStatemenstPage.sendBtn);
+        waitFor(sendStatemenstPage.sendStatementsConfirmMessage);
+    }
+
+    public void selectFirstElement() {
         click(By.cssSelector("li[tabindex='0']"));
-        click(By.cssSelector("span.p-multiselect-close-icon"));
-        click(By.cssSelector("p-button[label='Send']"));
-        waitFor(By.xpath("//div[contains(text(), 'Statements were sent successfully')]"));
+    }
+
+    public void selectAll() {
+        click(By.cssSelector("div[role='checkbox']"));
     }
 
     public void unblockAccount() throws InterruptedException {
