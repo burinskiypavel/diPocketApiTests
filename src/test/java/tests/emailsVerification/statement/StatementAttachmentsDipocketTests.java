@@ -42,8 +42,8 @@ public class StatementAttachmentsDipocketTests extends TestBase {
                 .get("/dashBoard/customerStatementRequestList")
                 .then().log().all()
                 .statusCode(200)
-                .body("statementRequestList.month", hasItems("07", "06", "05", "04", "03", "02", "01"),
-                        "statementRequestList.year", hasItems("2021", "2020"));
+                .body("statementRequestList.month", hasItems("04", "03", "02", "01"),
+                        "statementRequestList.year", hasItems("2022", "2023"));
     }
 
     @Test(priority = 2)
