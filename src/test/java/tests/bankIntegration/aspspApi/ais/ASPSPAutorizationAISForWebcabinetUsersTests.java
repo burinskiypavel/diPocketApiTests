@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
 
 public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     String consentId = null;
@@ -32,7 +33,8 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     String[] transactions = new String[0];
     String transactionId = null;
     String currency = "EUR";
-    String amount = "590.00";
+    String amount = "911.00";
+    String amount2 = "926.00";
     String ownerName = "Vasya White";
     String cashAccountType = "CACC";
     String status = "enabled";
@@ -100,5 +102,26 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
                         "account.ownerName", equalTo(ownerName),
                         "account.cashAccountType", equalTo(cashAccountType),
                         "account.status", equalTo(status));
+    }
+
+    @Test(priority = 7)
+    public void test_AISReadAccountBalances(){
+        given()
+                .log().uri().log().headers().log().body()
+                .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
+                .pathParam("accountId", resourceId)
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/balances")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("account.iban", equalTo(iban),
+                        "balances.balanceAmount[0].currency", equalTo(currency),
+                        "balances.balanceAmount[0].amount", equalTo(amount),
+                        "balances.balanceType", hasItems("interimAvailable", "interimBooked"),
+                        "balances.balanceAmount[1].currency", equalTo(currency),
+                        "balances.balanceAmount[1].amount", equalTo(amount2));
     }
 }
