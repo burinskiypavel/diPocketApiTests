@@ -261,7 +261,7 @@ public class UIBOTicketHelper extends UIHelperBase {
         return id;
     }
 
-    private void uploadDoc(String typeId, String pathToFile) throws InterruptedException {
+    public void uploadDoc(String typeId, String pathToFile) throws InterruptedException {
         //click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
         waitForElementToBeClickable(clientPage.uploadDocsBtn);
         click(clientPage.uploadDocsBtn);
