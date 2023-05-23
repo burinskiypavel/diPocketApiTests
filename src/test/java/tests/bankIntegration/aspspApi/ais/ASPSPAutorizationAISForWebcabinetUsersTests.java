@@ -106,18 +106,19 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
 
     @Test(priority = 7)
     public void test_AISReadAccountBalances(){
-        given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
-                .pathParam("partnerId", partnerId)
-                .pathParam("accountId", resourceId)
-                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
-                .header("Consent-ID", consentId)
-                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/balances")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("account.iban", equalTo(iban),
+//        given()
+//                .log().uri().log().headers().log().body()
+//                .config(app.getSSLCertHelper().aspspSslConfig)
+//                .pathParam("partnerId", partnerId)
+//                .pathParam("accountId", resourceId)
+//                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+//                .header("Consent-ID", consentId)
+//                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/balances")
+//                .then()
+//                .log().all()
+//                .statusCode(200)
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_accounts_accountId_balances(consentId, partnerId, resourceId);
+        response.then().body("account.iban", equalTo(iban),
                         "balances.balanceAmount[0].currency", equalTo(currency),
                         "balances.balanceAmount[0].amount", equalTo(amount),
                         "balances.balanceType", hasItems("interimAvailable", "interimBooked"),

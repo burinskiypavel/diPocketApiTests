@@ -104,4 +104,18 @@ public class ConsentsRequests {
                 .statusCode(200);
         return response;
     }
+
+    public Response partnerId_bg_v1_accounts_accountId_balances(String consentId, String partnerId, String resourceId) {
+        Response response = given()
+                .log().uri().log().headers().log().body()
+                .config(sslCertHelper.aspspSslConfig)
+                .pathParam("partnerId", partnerId)
+                .pathParam("accountId", resourceId)
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/balances");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
+    }
 }
