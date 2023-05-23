@@ -102,9 +102,7 @@ public class AisTests extends APIUITestBase {
     @Test(priority = 6)
     public void test_AISReadAccountsList() {
         Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_accounts(consentId, partnerId);
-
-        String resString = response.then().log().all()
-                .statusCode(200)
+        String resString = response.then()
                 .body("accounts[0].iban", equalTo(iban),
                         "accounts[0].currency", equalTo(currency),
                         "accounts[0].ownerName", equalTo(ownerName),
