@@ -17,6 +17,8 @@ public class UIBOOperationsHelper extends UIHelperBase {
     ClientPage clientPage = new ClientPage(driver);
     LimitPlanPage limitPlanPage = new LimitPlanPage(driver);
     AddRowInLimitPlanPage addRowInLimitPlanPage = new AddRowInLimitPlanPage(driver);
+    DuplicateLimitPlanPage duplicateLimitPlanPage = new DuplicateLimitPlanPage(driver);
+    RenameLimitPlanPage renameLimitPlanPage = new RenameLimitPlanPage(driver);
 
     public UIBOOperationsHelper(WebDriver driver) {
         super(driver);
@@ -254,23 +256,21 @@ public class UIBOOperationsHelper extends UIHelperBase {
     }
 
     public void duplicateLimitPlanSuccessfully(String id, String name) throws InterruptedException {
-        //click(By.xpath("//p-button[@ng-reflect-label='Duplicate limit plan']"));
         waitFor(limitPlanPage.duplicateLimitPlanBtn);
         click(limitPlanPage.duplicateLimitPlanBtn);
-        type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
-        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
+        type(duplicateLimitPlanPage.idInput, id);
+        type(duplicateLimitPlanPage.nameInput, name);
         Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Duplicate']"));
-        waitFor(By.xpath("//*[contains(text(), 'Tariff limit duplicated successfully')]"));
+        click(duplicateLimitPlanPage.duplicateBtn);
+        waitFor(duplicateLimitPlanPage.successMessage);
     }
 
     public void renameLimitPlanSuccessfully(String name) {
-        //click(By.xpath("//p-button[@ng-reflect-label='Rename limit plan']"));
         waitFor(limitPlanPage.renameLimitPlanBtn);
         click(limitPlanPage.renameLimitPlanBtn);
-        type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
-        click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
-        waitFor(By.xpath("//*[contains(text(), 'Tariff limit renamed successfully')]"));
+        type(renameLimitPlanPage.nameInput, name);
+        click(renameLimitPlanPage.renameBtn);
+        waitFor(renameLimitPlanPage.successMessage);
     }
 
     public void deleteLimitPlanSuccessfully() throws InterruptedException {
