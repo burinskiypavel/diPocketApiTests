@@ -6,10 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import padeObjects.bo.boClient.ClientPage;
-import padeObjects.bo.boOperations.BOOperationsBankTransfersPage;
-import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientFirstPage;
-import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientForthPage;
-import padeObjects.bo.boOperations.BOOperationsCreateCorporateClientSecondPage;
+import padeObjects.bo.boOperations.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +15,8 @@ public class UIBOOperationsHelper extends UIHelperBase {
     UIBOHelper uiboHelper = new UIBOHelper(driver);
     UIBOClientHelper uiboClientHelper = new UIBOClientHelper(driver);
     ClientPage clientPage = new ClientPage(driver);
+    LimitPlanPage limitPlanPage = new LimitPlanPage(driver);
+    AddRowInLimitPlanPage addRowInLimitPlanPage = new AddRowInLimitPlanPage(driver);
 
     public UIBOOperationsHelper(WebDriver driver) {
         super(driver);
@@ -203,10 +202,6 @@ public class UIBOOperationsHelper extends UIHelperBase {
         pencil.click();
     }
 
-    public void pressPencilEditButton(By locator) {
-        driver.findElement(locator).click();
-    }
-
     public void editTariffPlanRow(String rule, String currency, String feePercent, String feeCurrency, String minFeeAmount, String maxFeeAmount, String flatFeeAmount) throws InterruptedException {
         selectFromDropDown(By.xpath("//app-fee-tariff-plan //tbody //td[2] //p-dropdown"), rule);
         selectFromDropDown(By.xpath("//app-fee-tariff-plan //tbody //td[4] //p-dropdown"), currency);
@@ -220,7 +215,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
     }
 
     public void deleteRow(int index) {
-        List<WebElement> elements = driver.findElements(By.xpath("//button[@ng-reflect-icon='pi pi-trash']"));
+        List<WebElement> elements = driver.findElements(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"));
         WebElement element = elements.get(index);
         element.click();
         waitFor(By.xpath("//*[contains(text(), 'Row deleted successfully')]"));
@@ -234,17 +229,20 @@ public class UIBOOperationsHelper extends UIHelperBase {
     }
 
     public void selectLimitPlan(String limitPlan) throws InterruptedException {
-        selectFromDropDown(By.xpath("//div[@class='dropdowns'] //p-dropdown[@optionlabel='name']"), limitPlan);
+        //selectFromDropDown(By.xpath("//div[@class='dropdowns'] //p-dropdown[@optionlabel='name']"), limitPlan);
+        waitFor(limitPlanPage.selectLimitPlanDropDown);
+        selectFromDropDown(limitPlanPage.selectLimitPlanDropDown, limitPlan);
     }
 
     public void addRowInLimitPlan(String limitAmount, String group, String type) throws InterruptedException {
-        click(By.xpath("//app-limit-plan-tab //p-button[@ng-reflect-label='+ Add row']"));
-        type(By.xpath("//app-input-number[@ng-reflect-name='limitAmount'] //input"), limitAmount);
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='tranGroupId']"), group);
-        selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='typeId']"), type);
+        waitFor(limitPlanPage.addRowButton);
+        click(limitPlanPage.addRowButton);
+        type(addRowInLimitPlanPage.limitAmountInput, limitAmount);
+        selectFromDropDown(addRowInLimitPlanPage.groupDropDown, group);
+        selectFromDropDown(addRowInLimitPlanPage.typeDropDown, type);
         Thread.sleep(1500);
-        click(By.xpath("//p-button[@ng-reflect-label='Add']"));
-        waitFor(By.xpath("//*[contains(text(), 'Limit plan has been successfully added')]"));
+        click(addRowInLimitPlanPage.addBtn);
+        waitFor(addRowInLimitPlanPage.successMessage);
     }
 
     public void editLimitPlanRow(String group, String type, String amount) throws InterruptedException {
@@ -252,36 +250,42 @@ public class UIBOOperationsHelper extends UIHelperBase {
         selectFromDropDown(By.xpath("//app-limit-plan-tab //tbody //td[3] //p-dropdown"), type);
         typeWithSeveralClear(By.xpath("//app-limit-plan-tab //tbody //td[4] //input"), amount);
         click(By.xpath("//button[@ng-reflect-icon='pi pi-check']"));
-
         waitFor(By.xpath("//*[contains(text(), 'Row added successfully')]"));
     }
 
-    public void pressXCancelButton(By locator) {
-        click(locator);
-    }
-
-    public void duplicateLimitPlan(String id, String name) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Duplicate limit plan']"));
+    public void duplicateLimitPlanSuccessfully(String id, String name) throws InterruptedException {
+        //click(By.xpath("//p-button[@ng-reflect-label='Duplicate limit plan']"));
+        waitFor(limitPlanPage.duplicateLimitPlanBtn);
+        click(limitPlanPage.duplicateLimitPlanBtn);
         type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
         type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Duplicate']"));
+        waitFor(By.xpath("//*[contains(text(), 'Tariff limit duplicated successfully')]"));
     }
 
-    public void renameLimitPlan(String name) {
-        click(By.xpath("//p-button[@ng-reflect-label='Rename limit plan']"));
+    public void renameLimitPlanSuccessfully(String name) {
+        //click(By.xpath("//p-button[@ng-reflect-label='Rename limit plan']"));
+        waitFor(limitPlanPage.renameLimitPlanBtn);
+        click(limitPlanPage.renameLimitPlanBtn);
         type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
         click(By.xpath("//p-button[@ng-reflect-label='Rename']"));
+        waitFor(By.xpath("//*[contains(text(), 'Tariff limit renamed successfully')]"));
     }
 
-    public void deleteLimitPlan() throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Delete limit plan']"));
+    public void deleteLimitPlanSuccessfully() throws InterruptedException {
+        //click(By.xpath("//p-button[@ng-reflect-label='Delete limit plan']"));
+        waitFor(limitPlanPage.deleteLimitPlanBtn);
+        click(limitPlanPage.deleteLimitPlanBtn);
         Thread.sleep(1500);
         click(By.xpath("//p-button[@ng-reflect-label='Delete']"));
+        waitFor(By.xpath("//*[contains(text(), 'Tariff limit deleted successfully')]"));
     }
 
     public void addLimitPlan(String id, String name) throws InterruptedException {
-        click(By.xpath("//p-button[@ng-reflect-label='Add limit plan']"));
+        //click(By.xpath("//p-button[@ng-reflect-label='Add limit plan']"));
+        waitFor(limitPlanPage.addLimitPlanBtn);
+        click(limitPlanPage.addLimitPlanBtn);
         type(By.xpath("//app-input-number[@ng-reflect-name='id'] //input"), id);
         type(By.xpath("//app-input[@ng-reflect-name='name'] //input"), name);
         Thread.sleep(1500);
@@ -495,5 +499,16 @@ public class UIBOOperationsHelper extends UIHelperBase {
 
     public void pressCopyButton() {
         uiboHelper.click(By.cssSelector("div.copy-button"));
+    }
+
+    public void pressPencilEditButtonForLimitPlanPage() {
+        waitFor(limitPlanPage.pencilEditButton);
+        click(limitPlanPage.pencilEditButton);
+    }
+
+    public void pressXCancelButtonForLimitPlanPage() {
+        //click(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-times']"));
+        waitFor(limitPlanPage.xCancelButtonForLimitPlan);
+        click(limitPlanPage.xCancelButtonForLimitPlan);
     }
 }

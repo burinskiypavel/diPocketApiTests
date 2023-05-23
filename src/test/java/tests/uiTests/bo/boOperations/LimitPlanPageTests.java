@@ -58,7 +58,7 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboOperationsHelper().gotoLimitPlanTab();
         app.getUiboOperationsHelper().addRowInLimitPlan("100", "Face to Face (Out)", "Max Daily");
 
-        app.getUiboOperationsHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
+        app.getUiboOperationsHelper().deleteRow(0);
     }
 
     @Test
@@ -82,11 +82,11 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboOperationsHelper().addRowInLimitPlan("150", "Face to Face (Out)", "Max Daily");
 
-        app.getUiboOperationsHelper().pressPencilEditButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-pencil']"));
+        app.getUiboOperationsHelper().pressPencilEditButtonForLimitPlanPage();
 
         app.getUiboOperationsHelper().editLimitPlanRow("All transactions (In)", "Max Monthly", "12");
 
-        app.getUiboOperationsHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
+        app.getUiboOperationsHelper().deleteRow(0);
     }
 
     @Test
@@ -94,9 +94,10 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoLimitPlanTab();
+        app.getUiboOperationsHelper().selectLimitPlan("Testing daily limits");
 
-        app.getUiboOperationsHelper().pressPencilEditButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-pencil']"));
-        app.getUiboOperationsHelper().pressXCancelButton(By.xpath("//app-limit-plan-tab //button[@icon='pi pi-times']"));
+        app.getUiboOperationsHelper().pressPencilEditButtonForLimitPlanPage();
+        app.getUiboOperationsHelper().pressXCancelButtonForLimitPlanPage();
 
         app.getUiboHelper().waitFor(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"));
     }
@@ -110,7 +111,7 @@ public class LimitPlanPageTests extends UITestBase {
 
         app.getUiboOperationsHelper().addRowInLimitPlan("170", "Face to Face (Out)", "Max Daily");
 
-        app.getUiboOperationsHelper().deleteRow(By.xpath("//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']"), 0);
+        app.getUiboOperationsHelper().deleteRow(0);
     }
 
     @Test
@@ -119,9 +120,7 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin, app.CBOuserPass);
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoLimitPlanTab();
-        app.getUiboOperationsHelper().duplicateLimitPlan(duplicateId, duplicateName);
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit duplicated successfully')]"));
+        app.getUiboOperationsHelper().duplicateLimitPlanSuccessfully(duplicateId, duplicateName);
     }
 
     @Test
@@ -144,9 +143,7 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboOperationsHelper().gotoOperations();
         app.getUiboOperationsHelper().gotoLimitPlanTab();
         app.getUiboOperationsHelper().selectLimitPlan(limitPlanName);
-        app.getUiboOperationsHelper().renameLimitPlan("Pavel_rename_AUTO_" + randomNumber);
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit renamed successfully')]"));
+        app.getUiboOperationsHelper().renameLimitPlanSuccessfully("Pavel_rename_AUTO_" + randomNumber);
     }
 
     @Test
@@ -170,9 +167,7 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboOperationsHelper().addLimitPlan(limitPlanIdForDeletion, limitPlanNameForDeletion);
         app.getUiboHelper().waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Tariff limit added successfully')]"));
         app.getUiboOperationsHelper().selectLimitPlan(limitPlanNameForDeletion);
-        app.getUiboOperationsHelper().deleteLimitPlan();
-
-        app.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Tariff limit deleted successfully')]"));
+        app.getUiboOperationsHelper().deleteLimitPlanSuccessfully();
     }
 
     @Test
