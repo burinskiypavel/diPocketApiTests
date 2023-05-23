@@ -114,17 +114,8 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 7)
     public void test_AISReadAccountInfo(){
-        given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
-                .pathParam("accountId", resourceId)
-                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
-                .header("Consent-ID", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts/{accountId}")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("account.resourceId", equalTo(resourceId),
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_accounts_accountId(consentId, partnerId, resourceId);
+        response.then().body("account.resourceId", equalTo(resourceId),
                         "account.iban", equalTo(iban),
                         "account.currency", equalTo(currency),
                         "account.ownerName", equalTo(ownerName),

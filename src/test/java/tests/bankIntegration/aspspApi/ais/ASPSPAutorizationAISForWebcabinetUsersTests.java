@@ -90,4 +90,15 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
 
         resourceId = app.getResponseValidationHelper().getStringFromResponseJsonPath(resString, "accounts[0].resourceId");
     }
+
+    @Test(priority = 6)
+    public void test_AISReadAccountInfo(){
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_accounts_accountId(consentId, partnerId, resourceId);
+        response.then().body("account.resourceId", equalTo(resourceId),
+                        "account.iban", equalTo(iban),
+                        "account.currency", equalTo(currency),
+                        "account.ownerName", equalTo(ownerName),
+                        "account.cashAccountType", equalTo(cashAccountType),
+                        "account.status", equalTo(status));
+    }
 }
