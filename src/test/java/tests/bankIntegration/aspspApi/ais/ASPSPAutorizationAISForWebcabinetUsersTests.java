@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
@@ -30,9 +31,9 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     String[] balances = new String[0];
     String[] transactions = new String[0];
     String transactionId = null;
-    String currency = "PLN";
+    String currency = "EUR";
     String amount = "590.00";
-    String ownerName = "Pavel Burinsky";
+    String ownerName = "Vasya White";
     String cashAccountType = "CACC";
     String status = "enabled";
     public String site = Site.DIPOCKET.toString();
@@ -75,5 +76,26 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
         response.then().body("validUntil", equalTo(validUntil),
                 "consentStatus", equalTo("valid"),
                 "recurringIndicator", equalTo(true));
+    }
+
+    @Test(priority = 5)
+    public void test_AISReadAccountsList() {
+        Response response = given()
+                .log().uri().log().headers().log().body()
+                .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts");
+
+        String resString = response.then().log().all()
+                .statusCode(200)
+                .body("accounts[0].iban", equalTo(iban),
+                        "accounts[0].currency", equalTo(currency),
+                        "accounts[0].ownerName", equalTo(ownerName),
+                        "accounts[0].cashAccountType", equalTo(cashAccountType),
+                        "accounts[0].status", equalTo(status)).extract().response().asString();
+
+        resourceId = app.getResponseValidationHelper().getStringFromResponseJsonPath(resString, "accounts[0].resourceId");
     }
 }

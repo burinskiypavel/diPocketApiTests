@@ -104,9 +104,10 @@ public class AisTests extends APIUITestBase {
         Response response = given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v1/accounts");
+                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts");
 
         String resString = response.then().log().all()
                 .statusCode(200)
