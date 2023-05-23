@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class RolesBOSearchByClientClientIDTest extends UITestBase {
+    String phone = "380634413376";
+    String id = "33217";
     SoftAssert softAssert = new SoftAssert();
 
     @Test
@@ -19,13 +21,13 @@ public class RolesBOSearchByClientClientIDTest extends UITestBase {
 
         softAssert.assertTrue(app.getUiboHelper().isTabActiveAndSelected(By.xpath("//a[@id='p-tabpanel-0-label'][@aria-selected='true']")), "Is tab Client active and selected");
 
-        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='email']", "//app-input[@ng-reflect-name='mainPhone']",
-                "//app-input[@ng-reflect-name='firstName']", "//app-input[@ng-reflect-name='lastName']", "//app-input[@ng-reflect-name='mailingAddress']",
-                "//app-calendar[@ng-reflect-name='birthDate']"}), "Are following options(fields) available");
+        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//app-search-clients //input[contains(@id, 'input_id')]", "//app-search-clients //input[contains(@id, 'input_email')]", "//app-search-clients //input[contains(@id, 'input_mainPhone')]",
+                "//app-search-clients //input[contains(@id, 'input_firstName')]", "//app-search-clients //input[contains(@id, 'input_lastName')]", "//app-search-clients //input[contains(@id, 'input_mailingAddress')]",
+                "//app-search-clients //input[contains(@id, 'icon')]"}), "Are following options(fields) available");
 
-        app.getUiboHelper().search("id", "33217");
+        app.getUiboHelper().search("id", id);
 
-        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//td[@ng-reflect-text='380634413376']", "//td[@ng-reflect-text='"+ Site.DIPOCKET.toString()+"']"}), "Are search results displays");
+        softAssert.assertTrue(app.getUiboHelper().areElementsPresent(new String[]{"//td //span[@ng-reflect-text='"+phone+"']", "//td //span[@ng-reflect-text='"+ Site.DIPOCKET.toString()+"']"}), "Are search results displays");
         softAssert.assertAll();
     }
 }
