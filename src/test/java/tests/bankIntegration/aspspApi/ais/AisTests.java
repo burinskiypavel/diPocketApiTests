@@ -24,6 +24,8 @@ public class AisTests extends APIUITestBase {
     public String phone = "380980316499";
     public String pass = "reset246740";
     public String iban = "PL42109010560000000150296424";
+    String dateFrom = "2019-11-26";
+    String dateTo = "2023-05-12";
     public String validUntil = "2023-06-17";
     String resourceId = null;
     String[] balances = new String[0];
@@ -136,20 +138,8 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 9)
     public void test_AISReadAccountTransactionsList(){
-        Response response = given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
-                .pathParam("partnerId", partnerId)
-                .pathParam("accountId", resourceId)
-                .pathParam("dateFrom", "2019-11-26")
-                .pathParam("dateTo", "2023-05-12")
-                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
-                .header("Consent-ID", consentId)
-                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/transactions?dateFrom={dateFrom}&dateTo={dateTo}");
-        String sRes = response.then()
-                .log().all()
-                .statusCode(200)
-                .extract().response().asString();
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_accounts_accountId_transactions_dateFrom_dateTo(consentId, partnerId, resourceId, dateFrom, dateTo);
+        String sRes = response.then().extract().response().asString();
         transactionId = app.getResponseValidationHelper().getStringFromResponseJsonPath(sRes, "transactions.booked.transactionId[0]");
 
         response.then().body("account.iban", equalTo(iban),

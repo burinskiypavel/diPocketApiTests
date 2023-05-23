@@ -21,6 +21,8 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     String uiTransactionCode = null;
     String apiTransactionCode = null;
     int notifyId = 0;
+    String dateFrom = "2019-11-26";
+    String dateTo = "2023-05-12";
     String phone = "37064902199";
     String partnerId = "122222";
     String pass = "123456A";
@@ -117,20 +119,8 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
 
     @Test(priority = 8)
     public void test_AISReadAccountTransactionsList(){
-        Response response = given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
-                .pathParam("partnerId", partnerId)
-                .pathParam("accountId", resourceId)
-                .pathParam("dateFrom", "2019-11-26")
-                .pathParam("dateTo", "2023-05-12")
-                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
-                .header("Consent-ID", consentId)
-                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/transactions?dateFrom={dateFrom}&dateTo={dateTo}");
-        String sRes = response.then()
-                .log().all()
-                .statusCode(200)
-                .extract().response().asString();
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_accounts_accountId_transactions_dateFrom_dateTo(consentId, partnerId, resourceId, dateFrom, dateTo);
+        String sRes = response.then().extract().response().asString();
         transactionId = app.getResponseValidationHelper().getStringFromResponseJsonPath(sRes, "transactions.booked.transactionId[0]");
 
         response.then().body("account.iban", equalTo(iban),

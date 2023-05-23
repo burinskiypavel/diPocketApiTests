@@ -1,13 +1,10 @@
 package requests.aspsp;
 
-import appmanager.HelperBase;
 import appmanager.SSLCertHelper;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
 public class ConsentsRequests {
     SSLCertHelper sslCertHelper = new SSLCertHelper();
@@ -114,6 +111,22 @@ public class ConsentsRequests {
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)
                 .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/balances");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
+    }
+
+    public Response partnerId_bg_v1_accounts_accountId_transactions_dateFrom_dateTo(String consentId, String partnerId, String resourceId, String dateFrom, String dateTo) {
+        Response response = given()
+                .log().uri().log().headers().log().body()
+                .config(sslCertHelper.aspspSslConfig)
+                .pathParam("partnerId", partnerId)
+                .pathParam("accountId", resourceId)
+                .pathParam("dateFrom", dateFrom)
+                .pathParam("dateTo", dateTo)
+                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
+                .header("Consent-ID", consentId)
+                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/transactions?dateFrom={dateFrom}&dateTo={dateTo}");
         response.then().log().all()
                 .statusCode(200);
         return response;
