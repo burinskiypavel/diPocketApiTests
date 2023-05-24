@@ -444,7 +444,7 @@ public class FestivalRegistrationTest extends TestBase {
 
     @Test(priority = 18)
     public void testEmailLink() throws InterruptedException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  "testdipocket@gmail.com", "password1<", "Festivals Payment Band Terms and Conditions - PLEASE DO NOT DISCARD");
         System.out.println("link_link " + link);
         given()
                 .when()

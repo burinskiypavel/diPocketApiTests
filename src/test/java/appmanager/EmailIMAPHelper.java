@@ -17,7 +17,7 @@ public class EmailIMAPHelper extends HelperBase {
     public static String appPass = "oangitprvdsqwrgh";
 
     public static String getLinkFromEmailAfterRegistration(String host, String user,
-                                                           String password) throws InterruptedException {
+                                                           String password, String expectedSubject) throws InterruptedException {
         String emailLink = null;
 
         try {
@@ -55,6 +55,14 @@ public class EmailIMAPHelper extends HelperBase {
                 System.out.println("Subject: " + message.getSubject());
                 System.out.println("Received Date: " + message.getReceivedDate());
                 System.out.println("From: " + message.getFrom()[0]);
+
+                if(!message.getSubject().equals(expectedSubject)){
+                    System.out.println("deleted");
+                    message.setFlag(Flags.Flag.DELETED, true);
+                    //emailFolder.close(true); //false
+                    //store.close();
+                    continue;
+                }
 
                 //System.out.println("Text: " + message.getContent().toString());
 
@@ -826,7 +834,7 @@ public class EmailIMAPHelper extends HelperBase {
         String username = "testdipocket@gmail.com";
         String password = "password1<";
 
-        String link = getLinkFromEmailAfterRegistration(host,  username, password);
+        String link = getLinkFromEmailAfterRegistration(host,  username, password, "Условия пользования приложением DiPocket - пожалуйста, сохраните это сообщение");
 
         System.out.println("test_test " + link);
 

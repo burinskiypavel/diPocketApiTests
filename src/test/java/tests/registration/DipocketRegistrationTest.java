@@ -622,7 +622,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 18)
     public void testEmailLink() throws InterruptedException {
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<", "Условия пользования приложением DiPocket - пожалуйста, сохраните это сообщение");
         System.out.println("link_link " + link);
         given().log().uri().log().headers().log().body()
                 .when()
@@ -642,7 +642,7 @@ public class DipocketRegistrationTest extends TestBase {
     @Test(priority = 20, enabled = false)
     public void testEmailLink_() throws InterruptedException {
         //String redirectedLink = "https://http.dipocket.dev/Mail/v1/view/eMailConfirmation/successful?site=DIPOCKET&langId=4&lang=ru";
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  HelperBase.prop.getProperty("mobile.registration.email"), "password1<", "Условия пользования приложением DiPocket - пожалуйста, сохраните это сообщение");
         System.out.println("link_link " + link);
         given()
                 .log().uri().log().headers().log().body()
