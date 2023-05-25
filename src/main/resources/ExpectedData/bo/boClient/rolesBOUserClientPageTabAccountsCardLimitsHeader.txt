@@ -1,0 +1,4 @@
+Card id: 186658
+Card type: 10
+Currency symbol: zł
+Annual max amount:0.00
