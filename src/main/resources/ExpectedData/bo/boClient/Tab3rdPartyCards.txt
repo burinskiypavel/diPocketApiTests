@@ -1,9 +1,0 @@
-Card name
-State
-CCY
-Cardholder name
-Registration date
-Card number
-Card type
-3DS Check
-AVS Check
