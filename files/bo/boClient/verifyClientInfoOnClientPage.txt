@@ -7,7 +7,7 @@ DD:  FDD
 State:  Active
 Site:  DIPOCKET
 Fee tariff plan:  EUR - standart
-ID Code:
+ID Code: 
 Citizenship:  Ukraine
 Contract:  United Kingdom
 Currency:  EUR
