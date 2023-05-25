@@ -38,7 +38,7 @@ public class RolesBOUserClientPageTest extends UITestBase {
         List<String> actualElementsText = app.getUiboHelper().getActualText(By.xpath("//app-client-info //p"));
         List<String> expectedElementsText = app.getUiboHelper().getDateFromFile("files/bo/boClient/verifyClientInfoOnClientPage.txt");
 
-        assertEquals(actualElementsText, expectedElementsText);
+        assertEquals(actualElementsText, expectedElementsText);//
     }
 
     @Test
