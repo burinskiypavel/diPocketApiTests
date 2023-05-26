@@ -642,7 +642,7 @@ public class DipocketRegistrationTest extends TestBase {
     @Test(priority = 20, enabled = false)
     public void testEmailLink_() throws InterruptedException {
         //String redirectedLink = "https://http.dipocket.dev/Mail/v1/view/eMailConfirmation/successful?site=DIPOCKET&langId=4&lang=ru";
-        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  prop.getProperty("mobile.registration.email"), "password1<", "Условия пользования приложением DiPocket - пожалуйста, сохраните это сообщение");
+        String link = EmailIMAPHelper.getLinkFromEmailAfterRegistration("pop.gmail.com",  prop.getProperty("mobile.registration.email"), "password1<", "DiPocket Terms and Conditions - PLEASE DO NOT DISCARD");
         System.out.println("link_link " + link);
         given()
                 .log().uri().log().headers().log().body()
