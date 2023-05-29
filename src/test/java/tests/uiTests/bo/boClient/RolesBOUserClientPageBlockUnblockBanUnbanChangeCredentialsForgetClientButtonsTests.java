@@ -30,14 +30,14 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboClientHelper().blockClient("test");
         String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
-        assertEquals(actualState, "State: Blocked");
+        assertEquals(actualState, "State:  Blocked");
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unblock client']"))){
             app.getUiboClientHelper().unblockClient("test");
         }
     }
 
-    @Test(priority = 2, enabled = false) // moved to api
+    @Test(priority = 2)
     public void testRolesBOUserClientPageUnblockClientButton() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
@@ -51,7 +51,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboClientHelper().unblockClient("test");
         String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
-        assertEquals(actualState, "State: Active");
+        assertEquals(actualState, "State:  Active");
     }
 
     @Test(priority = 3)
@@ -68,14 +68,14 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboClientHelper().banClient("test");
         String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
-        assertEquals(actualState, "State: Banned");
+        assertEquals(actualState, "State:  Banned");
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unban client']"))){
             app.getUiboClientHelper().unbanClient("test");
         }
     }
 
-    @Test(priority = 4, enabled = false) // moved to api
+    @Test(priority = 4)
     public void testRolesBOUserClientPageBanClientWithoutBlockingClientDevice() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
@@ -89,14 +89,14 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboClientHelper().banClientWithoutBlockingClientDevice("test");
         String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
-        assertEquals(actualState, "State: Banned");
+        assertEquals(actualState, "State:  Banned");
 
         if(app.getUiboHelper().isElementPresent(By.xpath("//p-button[@ng-reflect-label='Unban client']"))){
             app.getUiboClientHelper().unbanClient("test");
         }
     }
 
-    @Test(priority = 5) // moved to api
+    @Test(priority = 5)
     public void testRolesBOUserClientPageUnbanClientButton() throws InterruptedException {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboHelper().gotoSearchPage();
@@ -110,7 +110,7 @@ public class RolesBOUserClientPageBlockUnblockBanUnbanChangeCredentialsForgetCli
         app.getUiboClientHelper().unbanClient("test");
         String actualState = app.getUiboHelper().getText(By.cssSelector("p.ng-star-inserted"), 0);
 
-        assertEquals(actualState, "State: Active");
+        assertEquals(actualState, "State:  Active");
     }
 
     @Test(priority = 6)

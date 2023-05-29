@@ -99,10 +99,10 @@ public class UIBOClientHelper extends UIHelperBase {
     public void banClientWithoutBlockingClientDevice(String reason) throws InterruptedException {
         //click(By.xpath("//p-button[@ng-reflect-label='Ban client']"));
         click(clientPage.banClientBtn);
-        type(By.cssSelector("app-dynamic-form input[type='text']"), reason);
+        type(banClientPage.banReasonInput, reason);
         Thread.sleep(1500);
-        click(By.xpath("//app-button[@ng-reflect-label='Ban']"));
-        waitFor(By.xpath("//div[contains(text(), 'User was ban successfully')]"));
+        click(banClientPage.confirmBtn);
+        waitFor(By.xpath("//div[contains(text(), 'Client was ban successfully')]"));
         waitFor(By.xpath("//span[contains(text(), 'Banned')]"));
     }
 
