@@ -141,83 +141,65 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void editAndSaveSDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
-        //click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
         waitFor(takeTicketPage.editBtn);
         click(takeTicketPage.editBtn);
         waitFor(takeTicketEditDataPage.saveBtn);
         if(!gender.equals("")){
-            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
             selectFromDropDown(takeTicketEditDataPage.genderDropDown, gender);
         }
         if(!documentType.equals("")){
-            //selectFromDropDown(By.cssSelector("p-dropdown[id*='select_photoIdTypeId']"), documentType);
             selectFromDropDown(takeTicketEditDataPage.documentTypeDropDown, documentType);
         }
         if(!docSerialNumber.equals("")){
-            //type(By.cssSelector("input[id*='_input_photoIdNo_']"), docSerialNumber);
             type(takeTicketEditDataPage.docSerialNumber, docSerialNumber);
         }
         if(!pesel.equals("")){
-            //type(By.cssSelector("input[id*='_input_identifyCode_']"), pesel);
             type(takeTicketEditDataPage.pesel, pesel);
         }
         if(!docCountryOfIssue.equals("")){
-            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdCountryId_']"), docCountryOfIssue);
             selectFromDropDown(takeTicketEditDataPage.docCountryOfIssueDropDown, docCountryOfIssue);
         }
         Thread.sleep(1500);
-        //click(By.xpath("//p-button[@ng-reflect-label='Save']"));
         click(takeTicketEditDataPage.saveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
     }
 
     public void editAndSaveFDDTicket(String gender, String documentType, String docSerialNumber, String pesel, String docCountryOfIssue) throws InterruptedException {
-        //click(By.xpath("//app-button[@ng-reflect-label='Edit']"));
         waitFor(takeTicketPage.editBtn);
         click(takeTicketPage.editBtn);
         waitFor(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"));
         if(!gender.equals("")){
-            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_gender_']"), gender);
             selectFromDropDown(takeTicketEditDataPage.genderDropDown, gender);
         }
         if(!documentType.equals("")){
-            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdTypeId_']"), documentType);
             selectFromDropDown(takeTicketEditDataPage.documentTypeDropDown, documentType);
         }
         if(!docSerialNumber.equals("")){
-            //type(By.cssSelector("input[id*='_input_photoIdNo_']"), docSerialNumber);
             type(takeTicketEditDataPage.docSerialNumber, docSerialNumber);
         }
         if(!pesel.equals("")){
-            //type(By.cssSelector("input[id*='_input_identifyCode_']"), pesel);
             type(takeTicketEditDataPage.pesel, pesel);
         }
         if(!docCountryOfIssue.equals("")){
-            //selectFromDropDown(By.cssSelector("p-dropdown[id*='_select_photoIdCountryId_']"), docCountryOfIssue);
             selectFromDropDown(takeTicketEditDataPage.docCountryOfIssueDropDown, docCountryOfIssue);
         }
         Thread.sleep(1500);
-        //click(By.xpath("//p-button[@ng-reflect-label='Save']"));
         click(takeTicketEditDataPage.saveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Client data updated successfully')]"));
     }
 
     public void approveTicketSuccessfullyUpdateCardholder() {
-        //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Ticket was approved successfully')]"));
-        //waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket was approved successfully')]"));
     }
 
     public void approveTicketSuccessfully() {
-        //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
         //waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Ticket approved successfully')]"));
     }
 
     public void approveTicketSuccessfullyDocsChange() {
-        //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs was approved successfully')]"));
         //waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs was approved successfully')]"));
@@ -225,13 +207,11 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public void unsuccessfulApprove(final String message) {
         waitFor(By.xpath("//app-button[@ng-reflect-label='Approve']"));
-        //click(By.xpath("//app-button[@ng-reflect-label='Approve']"));
         click(takeTicketPage.approveBtn);
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
     }
 
     public void escalateToCBOSuccessfully(String assignTo, String reason) throws InterruptedException {
-        //click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
         click(takeTicketPage.escalateToCBOBtn);
         selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), assignTo);
         if(!reason.equals("")){
@@ -245,7 +225,6 @@ public class UIBOTicketHelper extends UIHelperBase {
 
     public String initFDDTicketDisplain(String phone, String gender) throws InterruptedException, SQLException, ClassNotFoundException {
         waitFor(takeTicketPage.idField);
-        //String id = getText(By.xpath("//div[@class='info'][2] //p[1] //span[2]"));
         String id = getActualTicketId();
         editAndSaveSDDTicket(gender, "", "", "", "");
         approveTicketSuccessfully();
@@ -262,15 +241,12 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void uploadDoc(String typeId, String pathToFile) throws InterruptedException {
-        //click(By.xpath("//p-button[@ng-reflect-label='Upload docs']"));
         waitForElementToBeClickable(clientPage.uploadDocsBtn);
         click(clientPage.uploadDocsBtn);
-        //selectFromDropDown(By.xpath("//p-dropdown[contains(@id, 'typeId')]"), typeId);
         selectFromDropDown(uploadDocPage.typeIdDropDown, typeId);
         File file = new File(pathToFile);
         uploadFile(By.xpath("//input[@type='file']"), file.getAbsolutePath());
         Thread.sleep(1000);
-        //click(By.xpath("//p-button[@ng-reflect-label='Confirm']"));
         click(uploadDocPage.confirmBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
         //waitForInvisibilityOfElement(By.xpath("//*[contains(text(), 'Docs were uploaded successfully')]"));
@@ -360,23 +336,18 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(rescanRequestPage.idCheckbox);
         waitFor(rescanRequestPage.sendBtn);
         if(id) {
-            //click(By.cssSelector("p-checkbox[ng-reflect-input-id='Id'"));
             click(rescanRequestPage.idCheckbox);
         }
         if(proofOfAddress){
-            //click(By.cssSelector("p-checkbox[ng-reflect-input-id='Proof of address'"));
             click(rescanRequestPage.proofOfAddressCheckbox);
         }
         if(backOfId){
-            //click(By.cssSelector("p-checkbox[ng-reflect-input-id='Back of id'"));
             click(rescanRequestPage.backOfIdCheckbox);
         }
         if(secondId){
-            //click(By.cssSelector("p-checkbox[ng-reflect-input-id='Proof of change in name'"));
             click(rescanRequestPage.proofOfChangeInNameCheckbox);
         }
         Thread.sleep(700);
-        //click(By.xpath("//app-button[@label='Send']"));
         click(rescanRequestPage.sendBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
     }
@@ -420,79 +391,61 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void rejectTicketSuccessfully(String reason, String message) throws InterruptedException {
-        //click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
         click(takeTicketPage.rejectBtn);
-        //type(By.xpath("//app-input[@ng-reflect-name='reason'] //input"), reason);
         type(rejectTicketPage.reasonInput, reason);
         Thread.sleep(700);
-        //click(By.xpath("//app-reject-modal //p-button[@ng-reflect-label='Reject']"));
         click(rejectTicketPage.rejectBtn);
         waitFor(By.xpath("//*[contains(text(), '" + message + "')]"));
     }
 
     public void verifyUserChangedHisMindAboutRejectionOfSelfieDocChangeTicket() {
-        //click(By.xpath("//app-button[@ng-reflect-label='Reject']"));
         click(takeTicketPage.rejectBtn);
         closePopUp(By.cssSelector("timesicon[ng-reflect-style-class='p-dialog-header-close-icon']"));
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
     }
 
     public void verifyUserChangedHisMindAboutRescanRequest() {
-        //click(By.xpath("//app-button[@ng-reflect-label='Rescan request']"));
         click(takeTicketPage.rescanRequestBtn);
         closePopUp(By.cssSelector("div.p-dialog-header-icons"));
         waitForInvisibilityOfElement(By.xpath("//div[@role='dialog']"));
     }
 
     public void askForSuccessfullySDD(boolean id, boolean proofOfAddress, boolean backOfId, boolean residencePermit) {
-        //click(By.xpath("//app-button[@ng-reflect-label='Ask for']"));
         waitFor(takeTicketPage.askForBtn);
         click(takeTicketPage.askForBtn);
         waitFor(askForPage.idCheckbox);
         if(id){
-            //clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Id']"));
             clickCheckbox(askForPage.idCheckbox);
         }
         if(proofOfAddress){
-            //clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Proof of address']"));
             clickCheckbox(askForPage.proofOfAddressCheckbox);
         }
         if(backOfId){
-            //clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Back of id']"));
             clickCheckbox(askForPage.backOfIdCheckbox);
         }
         if(residencePermit){
-            //clickCheckbox(By.xpath("//p-checkbox[@ng-reflect-input-id='Residence permit']"));
             clickCheckbox(askForPage.residencePermitCheckbox);
         }
 
         type(By.id("11"), "test");
-        //click(By.xpath("//app-button[@label='Send']"));
         click(askForPage.sendBtn);
         waitFor(By.xpath("//*[contains(text(), 'Docs asked successfully')]"));
     }
 
     public void reassignTicketSuccessfully(String username, String reason) throws InterruptedException {
-        //click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
         waitFor(takeTicketPage.reassignBtn);
         click(takeTicketPage.reassignBtn);
-        //waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         waitFor(reassignPage.reassignBtn);
-        //selectFromDropDown(By.xpath("//app-select-async[@ng-reflect-name='newUsername']"), username);
         selectFromDropDown(reassignPage.usernameDropDown, username);
-        //type(By.cssSelector("app-input[ng-reflect-name='reason'] input"), reason);
         type(reassignPage.reassignrReasonInput, reason);
         Thread.sleep(700);
-        //click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         click(reassignPage.reassignBtn);
         waitFor(By.xpath("//*[contains(text(), 'Ticket reassigned successfully')]"));
     }
 
     public void verifyTheUserChangedHisMindAboutReassignTheTicketToAnotherBOUser() {
-        //click(By.xpath("//app-button[@ng-reflect-label='Reassign']"));
         waitFor(takeTicketPage.reassignBtn);
         click(takeTicketPage.reassignBtn);
-        //waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         waitFor(reassignPage.reassignBtn);
         closePopUp(By.cssSelector("button.p-dialog-header-icon"));
         waitForInvisibilityOfElement(By.cssSelector("div[role='dialog']"));
@@ -515,7 +468,6 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void verifyTheUserChangedHisMindAboutEscalateToCBO() {
-        //click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
         click(takeTicketPage.escalateToCBOBtn);
         waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         closePopUp(By.cssSelector("div.p-dialog-header-icons"));
@@ -523,7 +475,6 @@ public class UIBOTicketHelper extends UIHelperBase {
     }
 
     public void verifyTheUserNeedsToEscalateToCBOTicketTriesToEscalateWithoutChoosingAssignTo() {
-        //click(By.xpath("//app-button[@ng-reflect-label='Escalate to CBO']"));
         click(takeTicketPage.escalateToCBOBtn);
         waitFor(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
         click(By.xpath("//app-reassign-modal //p-button[@ng-reflect-label='Reassign']"));
@@ -545,28 +496,9 @@ public class UIBOTicketHelper extends UIHelperBase {
                 break;
             }
 
-            if(ddState.equals("DD:  SFDD")){
-                reassignTicketSuccessfully("AUTO", "test");
-                gotoTakeTicketWithReg();
+            reasignSFDDTickets(countryId, currencyId, terms1, terms2);
 
-                if(findElements(By.id("takeTicketContent")).size() == 0){
-                    login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
-                    gotoTakeTicket();
-                    initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
-                }
-            }
-
-            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
-                editAndSaveSDDTicket("M", "", "", "", "");
-                approveTicketSuccessfully();
-                gotoTakeTicketWithReg();
-
-                if(findElements(By.id("takeTicketContent")).size() == 0){
-                    login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
-                    gotoTakeTicket();
-                    initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
-                }
-            }
+            approveBlockedSDDTickets2(countryId, currencyId, terms1, terms2);
 
             if (!actualTicketType.equals("FDD - check client's data")) {
                 delayTicketForSeveralMinutes();
@@ -596,17 +528,7 @@ public class UIBOTicketHelper extends UIHelperBase {
                 break;
             }
 
-            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
-                editAndSaveSDDTicket("M", "", "", "", "");
-                approveTicketSuccessfully();
-                gotoTakeTicketWithReg();
-
-                if(findElements(By.id("takeTicketContent")).size() == 0){
-                    login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
-                    gotoTakeTicket();
-                    clientId = initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
-                }
-            }
+            approveBlockedSDDTickets();
 
             if (!actualTicketType.equals("FDD - check client's data")) {
                 delayTicketForSeveralMinutes();
@@ -620,5 +542,46 @@ public class UIBOTicketHelper extends UIHelperBase {
             }
         }
         return clientId;
+    }
+
+    public void approveBlockedSDDTickets() throws InterruptedException, SQLException, ClassNotFoundException {
+        if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+            editAndSaveSDDTicket("M", "Passport", "11111111111", "123456789", "Poland");
+            approveTicketSuccessfully();
+            gotoTakeTicketWithReg();
+
+            if(findElements(By.id("takeTicketContent")).size() == 0){
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                gotoTakeTicket();
+                clientId = initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+            }
+        }
+    }
+
+    public void approveBlockedSDDTickets2(int countryId, int currencyId, String terms1, String terms2) throws InterruptedException, SQLException, ClassNotFoundException {
+        if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+            editAndSaveSDDTicket("M", "Passport", "11111111111", "123456789", String.valueOf(countryId));
+            approveTicketSuccessfully();
+            gotoTakeTicketWithReg();
+
+            if(findElements(By.id("takeTicketContent")).size() == 0){
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                gotoTakeTicket();
+                initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+            }
+        }
+    }
+
+    public void reasignSFDDTickets(int countryId, int currencyId, String terms1, String terms2) throws InterruptedException, SQLException, ClassNotFoundException {
+        if(ddState.equals("DD:  SFDD")){
+            reassignTicketSuccessfully("AUTO", "test");
+            gotoTakeTicketWithReg();
+
+            if(findElements(By.id("takeTicketContent")).size() == 0){
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                gotoTakeTicket();
+                initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+            }
+        }
     }
 }
