@@ -2,7 +2,9 @@ package tests.bo.boTicket;
 
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
+import com.google.gson.Gson;
 import io.restassured.response.Response;
+import model.bo.boServices.CardholderApproveRejectRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -30,6 +32,8 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     String accountId = "95901";
     int currencyId = 978;
     int countryId = 826;
+    Gson gson = new Gson();
+    CardholderApproveRejectRequest cardholderApproveRequest = new CardholderApproveRejectRequest();
 
     @Test(priority = 1)
     public void test_registration() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
@@ -275,15 +279,16 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
 
     @Test(priority = 18)
     public void test_BOServices_v1_client_clientId_cardholder_approve() {
+        cardholderApproveRequest.setReason("test");
+        cardholderApproveRequest.setTicketId(ticketId);
+        String json = gson.toJson(cardholderApproveRequest);
+
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
                 .pathParam("clientId", clientId)
-                .header("content-type", "application/json")
-                .body("{\n" +
-                        "  \"reason\": \"test\",\n" +
-                        "  \"ticketId\": " + ticketId + "\n" +
-                        "}")
+                .contentType("application/json")
+                .body(json)
                 .when()
                 .post("/v1/client/{clientId}/cardholder/approve")
                 .then().log().all()

@@ -2,6 +2,8 @@ package tests.bo.boTicket;
 
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
+import com.google.gson.Gson;
+import model.bo.boServices.CardholderApproveRejectRequest;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -26,6 +28,8 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
     String actualTypeName = null;
     String tomorrow = null;
     String email = "testdipocket002@gmail.com";
+    Gson gson = new Gson();
+    CardholderApproveRejectRequest cardholderRejectRequest = new CardholderApproveRejectRequest();
 
     @Test(priority = 1)
     public void test_registration() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
@@ -94,7 +98,6 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
                 .get("/v1/ticket/{ticketId}/isTicketOwner")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
-
         assertEquals(response, "true");
     }
 
@@ -114,15 +117,16 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
 
     @Test(priority = 9)
     public void test_BOServices_v1_client_clientId_cardholder_reject() {
+        cardholderRejectRequest.setReason("test");
+        cardholderRejectRequest.setTicketId(ticketId);
+        String json = gson.toJson(cardholderRejectRequest);
+
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
                 .pathParam("clientId", clientId)
-                .header("content-type", "application/json")
-                .body("{\n" +
-                        "  \"reason\": \"test\",\n" +
-                        "  \"ticketId\": " + ticketId + "\n" +
-                        "}")
+                .contentType("application/json")
+                .body(json)
                 .when()
                 .post("/v1/client/{clientId}/cardholder/reject")
                 .then().log().all()

@@ -115,8 +115,32 @@ public class BOHelper extends HelperBase {
                 break;
             }
 
-            approveFDDBlockedTickets_dev(cookie, actualClientId, ticketId);
-            updateAndApproveSDDBlockedTicket_dev(cookie, actualClientId, ticketId);
+            if (actualTypeName.equals("Cardholder name change") && clientStateName.equals("Blocked")) {
+                given()
+                        .log().uri().log().headers().log().body()
+                        .baseUri("https://support.dipocket.dev")
+                        .basePath("BOServices")
+                        .contentType("application/json")
+                        .pathParam("clientId", actualClientId)
+                        .header("bo-auth-token", 123456)
+                        .cookie(cookie)
+                        .body("{\n" +
+                                "  \"ticketId\" : "+ticketId+"\n" +
+                                "}")
+                        .post("/v1/client/{clientId}/cardholder/approve")
+                        .then().log().all()
+                        .statusCode(200);
+                continue;
+            }
+
+            if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
+                approveFDDBlockedTickets_dev(cookie, actualClientId, ticketId);
+                continue;
+            }
+            if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
+                updateAndApproveSDDBlockedTicket_dev(cookie, actualClientId, ticketId);
+                continue;
+            }
 
             if (!actualTypeName.equals("Cardholder name change")) {
                 boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
