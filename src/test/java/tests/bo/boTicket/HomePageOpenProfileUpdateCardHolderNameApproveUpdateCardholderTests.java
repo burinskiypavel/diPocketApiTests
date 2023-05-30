@@ -1,16 +1,14 @@
 package tests.bo.boTicket;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
-import com.google.gson.Gson;
 import io.restassured.response.Response;
-import model.bo.boServices.Client_clientId_update;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.testng.Assert.assertEquals;
@@ -34,26 +32,26 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     int countryId = 826;
 
     @Test(priority = 1)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
+    public void test_registration() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
+        app.getDbHelper().deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"), Site.DIPOCKET.toString(), prop.getProperty("db.url"));
         System.out.println("delete done");
         tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, prop.getProperty("mobile.registration.email"), "dev");
 //        clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), "DIPOCKET"));
 //        app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
 //        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
 //        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), "DIPOCKET");
 //        tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
 //        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, HelperBase.prop.getProperty("mobile.registration.email"));
-        clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), "DIPOCKET"));
+        clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(prop.getProperty("mobile.registration.email"), "DIPOCKET"));
         System.out.println("clientId: " + clientId);
         app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
         System.out.println("update done");
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 3)

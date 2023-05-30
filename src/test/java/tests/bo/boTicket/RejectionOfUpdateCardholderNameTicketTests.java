@@ -1,6 +1,5 @@
 package tests.bo.boTicket;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import org.testng.annotations.Test;
@@ -8,6 +7,7 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.testng.Assert.assertEquals;
@@ -28,16 +28,26 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
     String email = "testdipocket002@gmail.com";
 
     @Test(priority = 1)
-    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
-        app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
+    public void test_registration() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
+        app.getDbHelper().deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"), Site.DIPOCKET.toString(), prop.getProperty("db.url"));
         tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, HelperBase.prop.getProperty("mobile.registration.email"), "dev");
-        clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString()));
-        app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, prop.getProperty("mobile.registration.email"), "dev");
+        //clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString()));
+        //app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
+        //cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
-    @Test(priority = 7)
+    @Test(priority = 2)
+    public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException, InterruptedException {
+        //app.getDbHelper().deleteClientFromDB(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
+        //tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
+        //app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+        clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString()));
+        app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
+    }
+
+    @Test(priority = 3)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2() {
         String response = given()
                 .spec(app.requestSpecDipocketHomePage)
@@ -51,7 +61,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
         actualCardHolderName = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "cardholderName");
     }
 
-    @Test(priority = 8)
+    @Test(priority = 4)
     public void test_ClientServices_v1_clientProfile_changeCardholderName() {
         if (actualCardHolderName.equals("Pavel Burinsk")) {
             newCardHolderName = "Pavel Burinsky";
@@ -64,17 +74,17 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
         app.getClientProfileRequestsHelper().clientServices_v1_clientProfile_changeCardholderName(cliSessionId, phone, pass, newCardHolderName);
     }
 
-    @Test(priority = 9)
+    @Test(priority = 5)
     public void test_BOServices_v1_auth_authentication() {
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
-    @Test(priority = 10)
+    @Test(priority = 6)
     public void test_BOServices_v1_ticket_take() {
         ticketId = app.getBOHelper().takeCardholderNameChangeTicket_dev(cookie, tomorrow);
     }
 
-    @Test(priority = 11)
+    @Test(priority = 7)
     public void test_BOServices_v1_ticket_ticketId_isTicketOwner() {
         String response = given()
                 .spec(app.requestSpecBO)
@@ -88,7 +98,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
         assertEquals(response, "true");
     }
 
-    @Test(priority = 12)
+    @Test(priority = 8)
     public void test_BOServices_v1_client_clientId_prevCardholderName() {
         given()
                 .spec(app.requestSpecBO)
@@ -102,7 +112,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
                         "cardholderName", hasItems(oldCardHolderName));
     }
 
-    @Test(priority = 13)
+    @Test(priority = 9)
     public void test_BOServices_v1_client_clientId_cardholder_reject() {
         given()
                 .spec(app.requestSpecBO)
@@ -120,7 +130,7 @@ public class RejectionOfUpdateCardholderNameTicketTests extends TestBase {
 
     }
 
-    @Test(priority = 14)
+    @Test(priority = 10)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2_() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
