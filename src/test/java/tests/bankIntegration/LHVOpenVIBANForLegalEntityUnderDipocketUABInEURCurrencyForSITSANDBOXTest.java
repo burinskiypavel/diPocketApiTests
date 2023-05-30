@@ -24,7 +24,7 @@ public class LHVOpenVIBANForLegalEntityUnderDipocketUABInEURCurrencyForSITSANDBO
     String sms = null;
     String firstName = "Pavel";
     String lastName = "Burinsky";
-    int individualClientId = 55669;
+    int individualClientId = 63719;//55669
     int currencyId = 978;
     int countryId = 440;
     String city = "Vilnius";
