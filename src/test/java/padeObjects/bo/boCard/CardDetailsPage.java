@@ -19,7 +19,7 @@ public class CardDetailsPage {
     @FindBy(xpath = "//app-button[@label='Operations']")
     public WebElement operationsBtn;
 
-    @FindBy(xpath = "//app-button[@label='Back to search']")
+    @FindBy(xpath = "//p-button[@ng-reflect-label='Back to search']")
     public WebElement backToSearchBtn;
 
     @FindBy(xpath = "//a[@role='tab'] //span[contains(text(), 'Info')]")
