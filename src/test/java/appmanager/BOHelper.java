@@ -43,8 +43,14 @@ public class BOHelper extends HelperBase {
                 break;
             }
 
-            approveBlockedFDDTickets_test(cookie, sms);
-            updateAndApproveSDDTicket_test(cookie, sms, actualClientId, ticketId);
+            if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
+                approveBlockedFDDTickets_test(cookie, sms);
+                continue;
+            }
+            if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
+                updateAndApproveSDDTicket_test(cookie, sms, actualClientId, ticketId);
+                continue;
+            }
 
             if(!actualTypeName.equals("SDD check") || !actualClientId.equals(clientId)){
                 boRequests.boServices_v1_ticket_ticketId_postpone_test(cookie, ticketId, date, sms);
@@ -267,7 +273,7 @@ public class BOHelper extends HelperBase {
         if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
             given()
                     .log().uri().log().headers().log().body()
-                    .baseUri("https://support.dipocket.site")
+                    .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
                     .basePath("BOServices")
                     .contentType("application/json")
                     .pathParam("clientId", actualClientId)
@@ -281,7 +287,7 @@ public class BOHelper extends HelperBase {
     }
 
     public void updateAndApproveSDDTicket_test(String cookie, String sms, String actualClientId, int ticketId) {
-        if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
+        //if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
             //client_clientId_update.setId(Integer.parseInt(clientId));
             client_clientId_update.setMainPhone(380685448615l);
             //client_clientId_update.setFirstName("Pavel");
@@ -319,7 +325,7 @@ public class BOHelper extends HelperBase {
             given()
                     .log().uri().log().headers().log().body()
                     //.config(configTimeout)
-                    .baseUri("https://support.dipocket.site")
+                    .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
                     .basePath("BOServices")
                     .contentType("application/json")
                     .pathParam("clientId", actualClientId)
@@ -334,7 +340,7 @@ public class BOHelper extends HelperBase {
             given()
                     .log().uri().log().headers().log().body()
                     //.config(configTimeout)
-                    .baseUri("https://support.dipocket.site")
+                    .baseUri(HelperBase.prop.getProperty("bo.test.base.url"))
                     .basePath("BOServices")
                     .contentType("application/json")
                     .pathParam("clientId", actualClientId)
@@ -344,7 +350,7 @@ public class BOHelper extends HelperBase {
                     .post("/v1/client/{clientId}/approveSDD")
                     .then().log().all()
                     .statusCode(200);
-        }
+     //   }
     }
 
     public void updateAndApproveSDDBlockedTicket_dev(String cookie, String actualClientId, int ticketId) {
