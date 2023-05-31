@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.testng.Assert.assertEquals;
@@ -31,7 +32,7 @@ public class TheUserNeedsToReassignTheSupervisionTicketToAnotherBOUserTest exten
     @Test(priority = 0)
     public void test_registration() throws SQLException, ClassNotFoundException, InterruptedException, ParseException {
         tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", "pasword1", "1230768000000", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", "pasword1", "1230768000000", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
         //cliSessionId = app.getLogin_registrationHelper().loginDipocket(regPhone, regPass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
@@ -39,7 +40,7 @@ public class TheUserNeedsToReassignTheSupervisionTicketToAnotherBOUserTest exten
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, InterruptedException {
         //app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", "pasword1", "1230768000000");
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(regPhone, regPass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(regPhone, regPass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
@@ -68,7 +69,7 @@ public class TheUserNeedsToReassignTheSupervisionTicketToAnotherBOUserTest exten
 
     @Test(priority = 4)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(parentPhone, parentPass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(parentPhone, parentPass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 5)

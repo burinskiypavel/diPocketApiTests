@@ -1,6 +1,5 @@
 package tests.bo.boTicket;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -9,6 +8,7 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static appmanager.HelperBase.prop;
 import static org.testng.Assert.assertEquals;
 
 public class TheUserNeedsToReassignTheSelfieChangeTicketToAnotherBOUserTest extends TestBase {
@@ -26,7 +26,7 @@ public class TheUserNeedsToReassignTheSelfieChangeTicketToAnotherBOUserTest exte
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException {
         tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
