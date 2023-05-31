@@ -229,8 +229,15 @@ public class BOHelper extends HelperBase {
                 break;
             }
 
-            approveFDDBlockedTickets_dev(cookie, actualClientId, ticketId);
-            updateAndApproveSDDBlockedTicket_dev(cookie, actualClientId, ticketId);
+            if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
+                approveFDDBlockedTickets_dev(cookie, actualClientId, ticketId);
+                continue;
+            }
+
+            if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
+                updateAndApproveSDDBlockedTicket_dev(cookie, actualClientId, ticketId);
+                continue;
+            }
 
             if(!actualTypeName.equals("Selfie change")){
                 boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
