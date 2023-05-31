@@ -122,20 +122,21 @@ public class BOHelper extends HelperBase {
             }
 
             if (actualTypeName.equals("Cardholder name change") && clientStateName.equals("Blocked")) {
-                given()
-                        .log().uri().log().headers().log().body()
-                        .baseUri("https://support.dipocket.dev")
-                        .basePath("BOServices")
-                        .contentType("application/json")
-                        .pathParam("clientId", actualClientId)
-                        .header("bo-auth-token", 123456)
-                        .cookie(cookie)
-                        .body("{\n" +
-                                "  \"ticketId\" : "+ticketId+"\n" +
-                                "}")
-                        .post("/v1/client/{clientId}/cardholder/approve")
-                        .then().log().all()
-                        .statusCode(200);
+                boRequests.boServices_v1_client_clientId_cardholder_approve_dev(cookie, actualClientId, ticketId, 123456);
+//                given()
+//                        .log().uri().log().headers().log().body()
+//                        .baseUri("https://support.dipocket.dev")
+//                        .basePath("BOServices")
+//                        .contentType("application/json")
+//                        .pathParam("clientId", actualClientId)
+//                        .header("bo-auth-token", 123456)
+//                        .cookie(cookie)
+//                        .body("{\n" +
+//                                "  \"ticketId\" : "+ticketId+"\n" +
+//                                "}")
+//                        .post("/v1/client/{clientId}/cardholder/approve")
+//                        .then().log().all()
+//                        .statusCode(200);
                 continue;
             }
 
@@ -253,7 +254,7 @@ public class BOHelper extends HelperBase {
 
     public void approveFDDBlockedTickets_dev(String cookie, String actualClientId, int ticketId) {
         //if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
-        boRequests.boServices_v1_client_clientId_approveFDD_dev(cookie, actualClientId, ticketId, "123456");
+        boRequests.boServices_v1_client_clientId_approveFDD_dev(cookie, actualClientId, ticketId, 123456);
 //            given()
 //                    .log().uri().log().headers().log().body()
 //                    .baseUri("https://support.dipocket.dev")
@@ -388,7 +389,7 @@ public class BOHelper extends HelperBase {
             client_clientId_update.setSkippedReg(false);
             String json = gson.toJson(client_clientId_update);
 
-            boRequests.boServices_v1_client_clientId_update_dev(cookie, actualClientId, json, "123456");
+            boRequests.boServices_v1_client_clientId_update_dev(cookie, actualClientId, json, 123456);
 
 //            given()
 //                    .log().uri().log().headers().log().body()
@@ -404,7 +405,7 @@ public class BOHelper extends HelperBase {
 //                    .then().log().all()
 //                    .statusCode(200);
 
-        boRequests.boServices_v1_client_clientId_approveSDD_dev(cookie, actualClientId, ticketId, "123456");
+        boRequests.boServices_v1_client_clientId_approveSDD_dev(cookie, actualClientId, ticketId, 123456);
 //            given()
 //                    .log().uri().log().headers().log().body()
 //                    //.config(configTimeout)
