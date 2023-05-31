@@ -842,6 +842,55 @@ public class BORequests {
                 .statusCode(200);
     }
 
+    public void boServices_v1_client_clientId_approveFDD_dev(String cookie, String actualClientId, int ticketId, String secureCode) {
+            given()
+                    //.log().uri().log().headers().log().body()
+                    .spec(requestSpecBOTest)
+                    .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                    //.basePath("BOServices")
+                    //.contentType("application/json")
+                    .pathParam("clientId", actualClientId)
+                    .header("bo-auth-token", secureCode)
+                    .queryParam("ticketId", ticketId)
+                    .cookie(cookie)
+                    .post("/v1/client/{clientId}/approveFDD")
+                    .then().log().all()
+                    .statusCode(200);
+    }
+
+    public void boServices_v1_client_clientId_update_dev(String cookie, String actualClientId, String json, String secureCode){
+        given()
+                //.log().uri().log().headers().log().body()
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .spec(requestSpecBOTest)
+                //.basePath("BOServices")
+                //.contentType("application/json")
+                .pathParam("clientId", actualClientId)
+                .header("bo-auth-token", secureCode)
+                .cookie(cookie)
+                .when()
+                .body(json)
+                .post("/v1/client/{clientId}/update")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    public void boServices_v1_client_clientId_approveSDD_dev(String cookie, String actualClientId, int ticketId, String secureCode){
+        given()
+                //.log().uri().log().headers().log().body()
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .spec(requestSpecBOTest)
+                //.basePath("BOServices")
+                //.contentType("application/json")
+                .pathParam("clientId", actualClientId)
+                .header("bo-auth-token", secureCode)
+                .queryParam("ticketId", ticketId)
+                .cookie(cookie)
+                .post("/v1/client/{clientId}/approveSDD")
+                .then().log().all()
+                .statusCode(200);
+    }
+
     public void boServices_v1_ticket_ticketId_reassign(String cookie, int ticketId, String username, final String reason) {
         given()
                 .spec(requestSpecBO)

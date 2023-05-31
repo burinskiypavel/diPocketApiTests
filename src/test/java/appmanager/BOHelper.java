@@ -178,8 +178,14 @@ public class BOHelper extends HelperBase {
                 break;
             }
 
-            approveFDDBlockedTickets_dev(cookie, actualClientId, ticketId);
-            updateAndApproveSDDBlockedTicket_dev(cookie, actualClientId, ticketId);
+            if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
+                approveFDDBlockedTickets_dev(cookie, actualClientId, ticketId);
+                continue;
+            }
+            if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
+                updateAndApproveSDDBlockedTicket_dev(cookie, actualClientId, ticketId);
+                continue;
+            }
 
             if(!actualTypeName.equals("Supervision")){
                 boRequests.boServices_v1_ticket_ticketId_postpone(cookie, ticketId, date);
@@ -240,20 +246,21 @@ public class BOHelper extends HelperBase {
     }
 
     public void approveFDDBlockedTickets_dev(String cookie, String actualClientId, int ticketId) {
-        if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
-            given()
-                    .log().uri().log().headers().log().body()
-                    .baseUri("https://support.dipocket.dev")
-                    .basePath("BOServices")
-                    .contentType("application/json")
-                    .pathParam("clientId", actualClientId)
-                    .header("bo-auth-token", 123456)
-                    .queryParam("ticketId", ticketId)
-                    .cookie(cookie)
-                    .post("/v1/client/{clientId}/approveFDD")
-                    .then().log().all()
-                    .statusCode(200);
-        }
+        //if(actualTypeName.equals("FDD check") && clientStateName.equals("Blocked")){
+        boRequests.boServices_v1_client_clientId_approveFDD_dev(cookie, actualClientId, ticketId, "123456");
+//            given()
+//                    .log().uri().log().headers().log().body()
+//                    .baseUri("https://support.dipocket.dev")
+//                    .basePath("BOServices")
+//                    .contentType("application/json")
+//                    .pathParam("clientId", actualClientId)
+//                    .header("bo-auth-token", 123456)
+//                    .queryParam("ticketId", ticketId)
+//                    .cookie(cookie)
+//                    .post("/v1/client/{clientId}/approveFDD")
+//                    .then().log().all()
+//                    .statusCode(200);
+     //   }
     }
 
     public void approveBlockedFDDTickets_test(String cookie, String sms) {
@@ -341,7 +348,7 @@ public class BOHelper extends HelperBase {
     }
 
     public void updateAndApproveSDDBlockedTicket_dev(String cookie, String actualClientId, int ticketId) {
-        if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
+        //if(actualTypeName.equals("SDD check") && clientStateName.equals("Blocked")){
             //client_clientId_update.setId(Integer.parseInt(String.valueOf(clientId)));
             //client_clientId_update.setMainPhone(380685448615l);
             //client_clientId_update.setFirstName("Pavel");
@@ -375,35 +382,37 @@ public class BOHelper extends HelperBase {
             client_clientId_update.setSkippedReg(false);
             String json = gson.toJson(client_clientId_update);
 
-            given()
-                    .log().uri().log().headers().log().body()
-                    //.config(configTimeout)
-                    .baseUri("https://support.dipocket.dev")
-                    .basePath("BOServices")
-                    .contentType("application/json")
-                    .pathParam("clientId", actualClientId)
-                    .header("bo-auth-token", 123456)
-                    .cookie(cookie)
-                    .when()
-                    .body(json)
-                    .post("/v1/client/{clientId}/update")
-                    .then().log().all()
-                    .statusCode(200);
+            boRequests.boServices_v1_client_clientId_update_dev(cookie, actualClientId, json, "123456");
 
-            given()
-                    .log().uri().log().headers().log().body()
-                    //.config(configTimeout)
-                    .baseUri("https://support.dipocket.dev")
-                    .basePath("BOServices")
-                    .contentType("application/json")
-                    .pathParam("clientId", actualClientId)
-                    .header("bo-auth-token", 123456)
-                    .queryParam("ticketId", ticketId)
-                    .cookie(cookie)
-                    .post("/v1/client/{clientId}/approveSDD")
-                    .then().log().all()
-                    .statusCode(200);
-        }
+//            given()
+//                    .log().uri().log().headers().log().body()
+//                    .baseUri("https://support.dipocket.dev")
+//                    .basePath("BOServices")
+//                    .contentType("application/json")
+//                    .pathParam("clientId", actualClientId)
+//                    .header("bo-auth-token", 123456)
+//                    .cookie(cookie)
+//                    .when()
+//                    .body(json)
+//                    .post("/v1/client/{clientId}/update")
+//                    .then().log().all()
+//                    .statusCode(200);
+
+        boRequests.boServices_v1_client_clientId_approveSDD_dev(cookie, actualClientId, ticketId, "123456");
+//            given()
+//                    .log().uri().log().headers().log().body()
+//                    //.config(configTimeout)
+//                    .baseUri("https://support.dipocket.dev")
+//                    .basePath("BOServices")
+//                    .contentType("application/json")
+//                    .pathParam("clientId", actualClientId)
+//                    .header("bo-auth-token", 123456)
+//                    .queryParam("ticketId", ticketId)
+//                    .cookie(cookie)
+//                    .post("/v1/client/{clientId}/approveSDD")
+//                    .then().log().all()
+//                    .statusCode(200);
+     //   }
     }
 
     public void checkUserRolesId(User_roles[] user_roles, String id) {
