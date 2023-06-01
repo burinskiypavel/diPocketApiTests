@@ -845,28 +845,30 @@ public class BORequests {
     public void boServices_v1_client_clientId_approveFDD_dev(String cookie, String actualClientId, int ticketId, int secureCode) {
             given()
                     //.log().uri().log().headers().log().body()
-                    .spec(requestSpecBOTest)
+                    .spec(requestSpecBO)
                     .baseUri(HelperBase.prop.getProperty("bo.base.url"))
                     //.basePath("BOServices")
                     //.contentType("application/json")
                     .pathParam("clientId", actualClientId)
-                    .header("bo-auth-token", secureCode)
+                    //.header("bo-auth-token", secureCode)
                     .queryParam("ticketId", ticketId)
                     .cookie(cookie)
+                    .when()
                     .post("/v1/client/{clientId}/approveFDD")
                     .then().log().all()
                     .statusCode(200);
     }
 
     public void boServices_v1_client_clientId_update_dev(String cookie, String actualClientId, String json, int secureCode){
+        //String link = baseUri;
         given()
                 //.log().uri().log().headers().log().body()
+                .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))
-                .spec(requestSpecBOTest)
                 //.basePath("BOServices")
                 //.contentType("application/json")
                 .pathParam("clientId", actualClientId)
-                .header("bo-auth-token", secureCode)
+                //.header("bo-auth-token", secureCode)
                 .cookie(cookie)
                 .when()
                 .body(json)
@@ -878,14 +880,15 @@ public class BORequests {
     public void boServices_v1_client_clientId_approveSDD_dev(String cookie, String actualClientId, int ticketId, int secureCode){
         given()
                 //.log().uri().log().headers().log().body()
+                .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))
-                .spec(requestSpecBOTest)
                 //.basePath("BOServices")
                 //.contentType("application/json")
                 .pathParam("clientId", actualClientId)
-                .header("bo-auth-token", secureCode)
+                //.header("bo-auth-token", secureCode)
                 .queryParam("ticketId", ticketId)
                 .cookie(cookie)
+                .when()
                 .post("/v1/client/{clientId}/approveSDD")
                 .then().log().all()
                 .statusCode(200);
@@ -894,12 +897,12 @@ public class BORequests {
     public void boServices_v1_client_clientId_cardholder_approve_dev(String cookie, String actualClientId, int ticketId, int secureCode){
         given()
                 //.log().uri().log().headers().log().body()
+                .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))
-                .spec(requestSpecBOTest)
                 //.basePath("BOServices")
                 //.contentType("application/json")
                 .pathParam("clientId", actualClientId)
-                .header("bo-auth-token", secureCode)
+                //.header("bo-auth-token", secureCode)
                 .cookie(cookie)
                 .body("{\n" +
                         "  \"ticketId\" : "+ticketId+"\n" +
