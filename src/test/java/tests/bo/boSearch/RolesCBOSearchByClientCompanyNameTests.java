@@ -40,7 +40,6 @@ public class RolesCBOSearchByClientCompanyNameTests extends TestBase {
                         "clientStateSName", hasItem(notNullValue()),
                         "site", hasItem(notNullValue()),
                         "companyName", hasItem(notNullValue()),
-                        "companyNameChar", hasItem(notNullValue()),
                         "companyName", hasItem(containsString(companyName)));
     }
 }

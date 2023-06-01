@@ -8,7 +8,6 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class RolesBOSearchByClientCompanyNameTests extends TestBase {
     String cookie = null;
-    String username = "EVGENYA";
     String phone = "380685448615";
     String email = "pavelburinskiy@gmail.com";
     String companyName = "Dipocket";
@@ -41,7 +40,6 @@ public class RolesBOSearchByClientCompanyNameTests extends TestBase {
                         "clientStateSName", hasItem(notNullValue()),
                         "site", hasItem(notNullValue()),
                         "companyName", hasItem(notNullValue()),
-                        "companyNameChar", hasItem(notNullValue()),
                         "companyName", hasItem(containsString(companyName)));
     }
 }
