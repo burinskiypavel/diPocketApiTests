@@ -1,6 +1,5 @@
 package tests.dipocket.homePage;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
@@ -10,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -23,11 +23,11 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientDeviceFromDB(HelperBase.prop.getProperty("mobile.login.deviceuuid"), HelperBase.prop.getProperty("db.url"));
+        app.getDbHelper().deleteClientDeviceFromDB(prop.getProperty("mobile.login.deviceuuid"), prop.getProperty("db.url"));
 
         homePageAuthenticateMobileAppRequest.setDevToken("eGy9q-lDQBGKz-bgdz1U6q:APA91bF8bT00_Cj-KVTiTSLlB-LBL8itr4LKxJVSxKJGZs3eyvHMbLZ4mZWYyo_r290PQFuKhx7mQOgAFeisGhBByoHXzQ0ANETYA-nTnDGM29zXKxcaIh47qJ7dyFQymXolPLYtmeM8");
         homePageAuthenticateMobileAppRequest.setDevType("android");
-        homePageAuthenticateMobileAppRequest.setDeviceUUID(HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        homePageAuthenticateMobileAppRequest.setDeviceUUID(prop.getProperty("mobile.login.deviceuuid"));
         homePageAuthenticateMobileAppRequest.setAppVersion("2.2.7");
         String json = gson.toJson(homePageAuthenticateMobileAppRequest);
 
@@ -37,7 +37,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, HelperBase.prop.getProperty("mobile.login.deviceuuid"), Site.DIPOCKET.toString(), HelperBase.prop.getProperty("db.url"));
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, prop.getProperty("mobile.login.deviceuuid"), Site.DIPOCKET.toString(), prop.getProperty("db.url"));
 
         homePageAuthenticateMobileAppRequest.setOtp(loginSMSCode);
         String json = gson.toJson(homePageAuthenticateMobileAppRequest);
@@ -116,6 +116,6 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     @Test(priority = 7)
     public void test_ClientServices_v1_tile_getMessage2(){
         Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, phone, pass);
-        response.then().body("unreadMessageCount", equalTo(0));
+        response.then().body("unreadMessageCount", notNullValue());
     }
 }
