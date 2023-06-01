@@ -496,9 +496,15 @@ public class UIBOTicketHelper extends UIHelperBase {
                 break;
             }
 
-            reasignSFDDTickets(countryId, currencyId, terms1, terms2);
+            if(ddState.equals("DD:  SFDD")){
+                reasignSFDDTickets(countryId, currencyId, terms1, terms2);
+                continue;
+            }
 
-            approveBlockedSDDTickets2(countryId, currencyId, terms1, terms2);
+            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+                approveBlockedSDDTickets2(countryId, currencyId, terms1, terms2);
+                continue;
+            }
 
             if (!actualTicketType.equals("FDD - check client's data")) {
                 delayTicketForSeveralMinutes();
@@ -528,7 +534,15 @@ public class UIBOTicketHelper extends UIHelperBase {
                 break;
             }
 
-            approveBlockedSDDTickets();
+            if(ddState.equals("DD:  SFDD")){
+                reasignSFDDTickets(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+                continue;
+            }
+
+            if(actualTicketType.equals("SDD - check client's data") && state.equals("State:  Blocked")){
+                approveBlockedSDDTickets();
+                continue;
+            }
 
             if (!actualTicketType.equals("FDD - check client's data")) {
                 delayTicketForSeveralMinutes();
