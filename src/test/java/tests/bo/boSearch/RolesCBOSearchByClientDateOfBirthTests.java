@@ -11,6 +11,7 @@ public class RolesCBOSearchByClientDateOfBirthTests extends TestBase {
     String cookie = null;
     String phone = "380980316499";
     String email = "pavelburinskiy@gmail.com";
+    String birthDate = "01.01.1998";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
@@ -24,6 +25,6 @@ public class RolesCBOSearchByClientDateOfBirthTests extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_client_search(){
-        app.getBoRequestsHelper().boServices_v1_client_search(cookie, "birthDate",  "1.1.1998", "Jaleel", "Haley", "380667904157", "Shirley32@hotmail.com", Site.GETSBYCARD.toString(), 883605600000l);
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, "birthDate",  birthDate, "Jaleel", "Haley", "380667904157", "Shirley32@hotmail.com", Site.GETSBYCARD.toString(), birthDate);
     }
 }

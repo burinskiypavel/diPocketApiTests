@@ -425,7 +425,7 @@ public class BORequests {
                         "site", hasItem(expectedSite));
     }
 
-    public void boServices_v1_client_search(String cookie, String by, String value, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite, long expectedBirthDate){
+    public void boServices_v1_client_search(String cookie, String by, String value, String expectedFirstName, String expectedLastName, String expectedMainPhone, String expectedEmail, String expectedSite, String expectedBirthDate){
         given()
                 .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))

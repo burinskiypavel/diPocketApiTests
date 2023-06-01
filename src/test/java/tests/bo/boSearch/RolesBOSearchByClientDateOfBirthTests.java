@@ -9,9 +9,9 @@ import static io.restassured.RestAssured.baseURI;
 
 public class RolesBOSearchByClientDateOfBirthTests extends TestBase {
     String cookie = null;
-    String username = "EVGENYA";
     String phone = "380685448615";
     String email = "pavelburinskiy@gmail.com";
+    String birthDate = "01.01.1997";
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() {
@@ -25,6 +25,6 @@ public class RolesBOSearchByClientDateOfBirthTests extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_client_search(){
-        app.getBoRequestsHelper().boServices_v1_client_search(cookie, "birthDate",  "1.1.1997", "Three- H", "Sixty Two", "380910000363", "dipocket3010+d363@gmail.com", Site.DIPOCKET.toString(), 852069600000l);
+        app.getBoRequestsHelper().boServices_v1_client_search(cookie, "birthDate",  birthDate, "Three- H", "Sixty Two", "380910000363", "dipocket3010+d363@gmail.com", Site.DIPOCKET.toString(), birthDate);
     }
 }
