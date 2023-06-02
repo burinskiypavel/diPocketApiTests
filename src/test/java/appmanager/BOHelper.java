@@ -412,7 +412,8 @@ public class BOHelper extends HelperBase {
 //                    .then().log().all()
 //                    .statusCode(200);
 
-        boRequests.boServices_v1_client_clientId_approveSDD_dev(cookie, actualClientId, ticketId, 123456);
+        //boRequests.boServices_v1_client_clientId_approveSDD_dev(cookie, actualClientId, ticketId, 123456);
+        boRequests.boServices_v1_client_clientId_approveSDD_dev_AndReassignSFDD(cookie, actualClientId, ticketId, 123456);
 //            given()
 //                    .log().uri().log().headers().log().body()
 //                    //.config(configTimeout)

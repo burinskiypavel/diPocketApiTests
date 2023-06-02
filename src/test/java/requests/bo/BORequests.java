@@ -2,6 +2,7 @@ package requests.bo;
 
 import appmanager.DBHelper;
 import appmanager.HelperBase;
+import appmanager.ResponseValidationHelper;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
@@ -23,6 +24,7 @@ public class BORequests {
     DBHelper dbHelper = new DBHelper();
     Gson gson = new Gson();
     Client_clientId_update client_clientId_update = new Client_clientId_update();
+    ResponseValidationHelper responseValidationHelper = new ResponseValidationHelper();
 
     public RequestSpecification requestSpecBO = given()
             .log().uri().log().headers().log().body()
@@ -844,13 +846,9 @@ public class BORequests {
 
     public void boServices_v1_client_clientId_approveFDD_dev(String cookie, String actualClientId, int ticketId, int secureCode) {
             given()
-                    //.log().uri().log().headers().log().body()
                     .spec(requestSpecBO)
                     .baseUri(HelperBase.prop.getProperty("bo.base.url"))
-                    //.basePath("BOServices")
-                    //.contentType("application/json")
                     .pathParam("clientId", actualClientId)
-                    //.header("bo-auth-token", secureCode)
                     .queryParam("ticketId", ticketId)
                     .cookie(cookie)
                     .when()
@@ -860,15 +858,10 @@ public class BORequests {
     }
 
     public void boServices_v1_client_clientId_update_dev(String cookie, String actualClientId, String json, int secureCode){
-        //String link = baseUri;
         given()
-                //.log().uri().log().headers().log().body()
                 .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))
-                //.basePath("BOServices")
-                //.contentType("application/json")
                 .pathParam("clientId", actualClientId)
-                //.header("bo-auth-token", secureCode)
                 .cookie(cookie)
                 .when()
                 .body(json)
@@ -879,19 +872,34 @@ public class BORequests {
 
     public void boServices_v1_client_clientId_approveSDD_dev(String cookie, String actualClientId, int ticketId, int secureCode){
         given()
-                //.log().uri().log().headers().log().body()
                 .spec(requestSpecBO)
                 .baseUri(HelperBase.prop.getProperty("bo.base.url"))
-                //.basePath("BOServices")
-                //.contentType("application/json")
                 .pathParam("clientId", actualClientId)
-                //.header("bo-auth-token", secureCode)
                 .queryParam("ticketId", ticketId)
                 .cookie(cookie)
                 .when()
                 .post("/v1/client/{clientId}/approveSDD")
                 .then().log().all()
                 .statusCode(200);
+    }
+
+    public void boServices_v1_client_clientId_approveSDD_dev_AndReassignSFDD(String cookie, String actualClientId, int ticketId, int secureCode){
+        Response response = given()
+                .spec(requestSpecBO)
+                .baseUri(HelperBase.prop.getProperty("bo.base.url"))
+                .pathParam("clientId", actualClientId)
+                .queryParam("ticketId", ticketId)
+                .cookie(cookie)
+                .when()
+                .post("/v1/client/{clientId}/approveSDD");
+        response.then().log().all();
+
+        if(response.getStatusCode() == 400){
+             String errorCode = responseValidationHelper.getStringFromResponseJsonPath(response.asString(), "errCode");
+             if(errorCode.equals("DIP-00044:")){
+                 boServices_v1_ticket_ticketId_reassign(cookie, ticketId, "AUTO", "test");
+             }
+        }
     }
 
     public void boServices_v1_client_clientId_cardholder_approve_dev(String cookie, String actualClientId, int ticketId, int secureCode){
