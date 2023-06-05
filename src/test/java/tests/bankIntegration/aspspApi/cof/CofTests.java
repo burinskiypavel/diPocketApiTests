@@ -20,15 +20,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CofTests extends APIUITestBase {
-    public String consentId = null;
-    public String href = null;
-    public String uiTransactionCode = null;
-    public String apiTransactionCode = null;
-    public int notifyId = 0;
-    public String phone = "380980316499";
-    public String pass = "reset246740";
-    public String iban = "PL42109010560000000150296424";
-    public String site = Site.DIPOCKET.toString();
+    String consentId = null;
+    String href = null;
+    String uiTransactionCode = null;
+    String apiTransactionCode = null;
+    int notifyId = 0;
+    String phone = "380980316499";
+    String pass = "reset246740";
+    String iban = "PL42109010560000000150296424";
+    String site = Site.DIPOCKET.toString();
     Gson gson = new Gson();
     CreateConsentRequest createConsentRequest = new CreateConsentRequest();
     Account account = new Account();
@@ -55,9 +55,8 @@ public class CofTests extends APIUITestBase {
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
-        JsonPath jsonPath = new JsonPath(response);
-        consentId = jsonPath.getString("consentId");
-        href = jsonPath.getString("_links.scaRedirect.href");
+        consentId = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "consentId");
+        href = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "_links.scaRedirect.href");
     }
 
     @Test(priority = 2)
