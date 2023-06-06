@@ -8,7 +8,10 @@ import io.restassured.response.Response;
 import model.aspsp.Account;
 import model.aspsp.ConfirmationOfFundsRequest;
 import model.aspsp.CreateConsentRequest;
-import model.aspsp.InstructedAmount;
+import model.aspsp.pis.CreditorAccount;
+import model.aspsp.pis.CreditorAddress;
+import model.aspsp.pis.InstructedAmount;
+import model.aspsp.pis.PaymentsCrossBorderCreditTransfersRequest;
 import model.clientServices.DashBoardNotifyDetails3Request;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -29,7 +32,6 @@ public class PisTests extends APIUITestBase {
     String phone = "380980316499";
     String pass = "reset246740";
     String apiTransactionCode = null;
-
     int notifyId = 0;
     String site = Site.DIPOCKET.toString();
     String uiTransactionCode = null;
@@ -39,6 +41,9 @@ public class PisTests extends APIUITestBase {
     DashBoardNotifyDetails3Request dashBoardNotifyDetails3Request = new DashBoardNotifyDetails3Request();
     ConfirmationOfFundsRequest confirmationOfFundsRequest = new ConfirmationOfFundsRequest();
     InstructedAmount instructedAmount = new InstructedAmount();
+    PaymentsCrossBorderCreditTransfersRequest paymentsCrossBorderCreditTransfersRequest = new PaymentsCrossBorderCreditTransfersRequest();
+    CreditorAddress creditorAddress = new CreditorAddress();
+    CreditorAccount creditorAccount = new CreditorAccount();
 
     @Test(priority = 1)
     public void test_pisGetPaymentRequest() {
@@ -82,6 +87,27 @@ public class PisTests extends APIUITestBase {
 
     @Test(priority = 3)
     public void test_PISInitiatePaymentSWIFT(){
+        instructedAmount.setCurrency("EUR");
+        instructedAmount.setAmount("1.50");
+
+        creditorAddress.setStreetName("Sörnäistenlaituri");
+        creditorAddress.setBuildingNumber("3");
+        creditorAddress.setTownName("Helsinki");
+        creditorAddress.setPostCode("00540");
+        creditorAddress.setCountry("FI");
+
+        creditorAccount.setIban("DE02100100109307118603");
+
+        paymentsCrossBorderCreditTransfersRequest.setInstructedAmount(instructedAmount);
+        paymentsCrossBorderCreditTransfersRequest.setCreditorName("Merchant123");
+        paymentsCrossBorderCreditTransfersRequest.setCreditorType("INDIVIDUAL");
+        paymentsCrossBorderCreditTransfersRequest.setCreditorAddress(creditorAddress);
+        paymentsCrossBorderCreditTransfersRequest.setCreditorAgent("SBANFIHH");
+        paymentsCrossBorderCreditTransfersRequest.setCreditorAccount(creditorAccount);
+        paymentsCrossBorderCreditTransfersRequest.setRemittanceInformationUnstructured("SWIFT payment test");
+
+        String json = gson.toJson(paymentsCrossBorderCreditTransfersRequest);
+
         String stResponse = given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
@@ -90,26 +116,7 @@ public class PisTests extends APIUITestBase {
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
                 .contentType("application/json")
-                .body("{\n" +
-                        "    \"instructedAmount\": {\n" +
-                        "        \"currency\": \"EUR\", \n" +
-                        "        \"amount\": \"1.50\"\n" +
-                        "        }, \n" +
-                        "    \"creditorName\": \"Merchant123\",\n" +
-                        "    \"creditorType\": \"INDIVIDUAL\",\n" +
-                        "    \"creditorAddress\": {\n" +
-                        "        \"streetName\": \"Sörnäistenlaituri\",\n" +
-                        "        \"buildingNumber\": \"3\",\n" +
-                        "        \"townName\": \"Helsinki\",\n" +
-                        "        \"postCode\": \"00540\",\n" +
-                        "        \"country\": \"FI\"\n" +
-                        "    },\n" +
-                        "    \"creditorAgent\": \"SBANFIHH\",\n" +
-                        "    \"creditorAccount\": {\n" +
-                        "        \"iban\": \"DE02100100109307118603\"\n" +
-                        "        }, \n" +
-                        "    \"remittanceInformationUnstructured\": \"SWIFT payment test\"\n" +
-                        "}")
+                .body(json)
                 .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/cross-border-credit-transfers")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
