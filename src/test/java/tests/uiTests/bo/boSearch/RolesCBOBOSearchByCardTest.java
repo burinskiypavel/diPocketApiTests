@@ -17,9 +17,9 @@ public class RolesCBOBOSearchByCardTest extends UITestBase {
         app.getUiboHelper().gotoCardSearchTab();
 
         softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
-                "//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='publicToken']",
-                "//app-input[@ng-reflect-name='dipToken']", "//app-input[@ng-reflect-name='pan']",
-                "//app-input-number[@ng-reflect-name='clientId']", "//app-input[@ng-reflect-name='cardholderName']",}));
+                "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_id')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_publicToken')]",
+                "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_dipToken')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_pan')]",
+                "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_clientId')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_cardholderName')]",}));
 
         softAssert.assertAll();
     }
@@ -33,9 +33,9 @@ public class RolesCBOBOSearchByCardTest extends UITestBase {
         app.getUiboHelper().gotoCardSearchTab();
 
         softAssert.assertFalse(!app.getUiboHelper().areElementsPresent(new String[]{
-                "//app-input-number[@ng-reflect-name='id']", "//app-input[@ng-reflect-name='publicToken']",
-                "//app-input[@ng-reflect-name='dipToken']", "//app-input[@ng-reflect-name='pan']",
-                "//app-input-number[@ng-reflect-name='clientId']", "//app-input[@ng-reflect-name='cardholderName']",}));
+                "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_id')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_publicToken')]",
+                "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_dipToken')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_pan')]",
+                "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_clientId')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_cardholderName')]",}));
 
         softAssert.assertAll();
     }
