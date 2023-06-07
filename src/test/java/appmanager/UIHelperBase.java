@@ -135,8 +135,36 @@ public class UIHelperBase {
     public boolean areElementsPresent(String mas []){
         boolean bool = false;
         for(int i = 0; i < mas.length; i++){
-
             bool =  isElementPresent(By.xpath(mas[i]));
+
+            if(bool == false){
+                System.out.println("element is not present: " + mas[i]);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean areElementsPresent(WebElement[] mas){
+        boolean bool = false;
+        boolean failed = true;
+        for(int i = 0; i < mas.length; i++){
+            bool =  isElementPresent(mas[i]);
+
+            if(bool == false){
+                System.out.println("element is not present: " + mas[i]);
+                failed = false;
+                continue;
+            }
+        }
+        bool = failed;
+        return bool;
+    }
+
+    public boolean areElementsPresent3(WebElement[] mas){
+        boolean bool = false;
+        for(int i = 0; i < mas.length; i++){
+            bool =  isElementPresent(mas[i]);
 
             if(bool == false){
                 System.out.println("element is not present: " + mas[i]);
@@ -148,6 +176,26 @@ public class UIHelperBase {
 
     public boolean isElementPresent(By locator) {
         return driver.findElements(locator).size() != 0;
+    }
+
+    public boolean isElementPresent(WebElement element) throws NoSuchElementException {
+        boolean size = false;
+        try {
+            size = element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return size;
+        }
+        return size;
+    }
+
+    public boolean isTabPresent(WebElement element) throws NoSuchElementException {
+        boolean size = false;
+        try {
+            size = element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return size;
+        }
+        return size;
     }
 
     public boolean isDefault(By locator) {

@@ -3,15 +3,18 @@ package appmanager.ui.bo;
 import appmanager.UIHelperBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 import padeObjects.bo.boCard.CardDetailsPage;
 import padeObjects.bo.boCard.OverdraftLimitPage;
 import padeObjects.bo.search.CardSearchPage;
+import padeObjects.bo.search.ClientSearchPage;
 
 public class UIBOCardHelper extends UIHelperBase {
     CardDetailsPage cardDetailsPage = new CardDetailsPage(driver);
     OverdraftLimitPage overdraftLimitPage = new OverdraftLimitPage(driver);
     CardSearchPage cardSearchPage = new CardSearchPage(driver);
+    ClientSearchPage clientSearchPage = new ClientSearchPage(driver);
 
     public UIBOCardHelper(WebDriver driver) {
         super(driver);
@@ -109,6 +112,20 @@ public class UIBOCardHelper extends UIHelperBase {
                 "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_id')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_publicToken')]",
                 "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_dipToken')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_pan')]",
                 "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_clientId')]", "//p-tabpanel[@header='Card'] //input[contains(@id, 'input_cardholderName')]",}), "CardSearchInputFields");
+        return softAssert;
+    }
+
+    public SoftAssert verifyCardSearchInputFields2(SoftAssert softAssert) {
+        softAssert.assertFalse(!areElementsPresent(new WebElement[]{
+                cardSearchPage.idInput, cardSearchPage.publicTokenInput,
+                cardSearchPage.dipTokenInput, cardSearchPage.panInput,
+                cardSearchPage.clientIdInput, cardSearchPage.cardholderNameInput}), "Card search input fields");
+        return softAssert;
+    }
+
+    public SoftAssert verifyClientAndCardTabsPresent(SoftAssert softAssert) {
+        softAssert.assertFalse(!isTabPresent(clientSearchPage.clientTab), "Client");
+        softAssert.assertFalse(!isTabPresent(clientSearchPage.cardTab), "Card");
         return softAssert;
     }
 }

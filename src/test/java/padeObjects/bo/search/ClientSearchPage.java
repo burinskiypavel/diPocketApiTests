@@ -14,6 +14,12 @@ public class ClientSearchPage {
         PageFactory.initElements(driver, this);
     }
 
+    @FindBy(xpath = "//a[@role='tab'] //span[contains(text(), 'Client')]")
+    public WebElement clientTab;
+
+    @FindBy(xpath = "//a[@role='tab'] //span[contains(text(), 'Card')]")
+    public WebElement cardTab;
+
     @FindBy(css = "input[id*=input_id]")
     public WebElement idInput;
 
