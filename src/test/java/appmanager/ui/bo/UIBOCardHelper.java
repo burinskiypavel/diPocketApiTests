@@ -128,4 +128,22 @@ public class UIBOCardHelper extends UIHelperBase {
         softAssert.assertFalse(!isTabPresent(clientSearchPage.cardTab), "Card");
         return softAssert;
     }
+
+    public void searchByCardBySeveralFields(String cardId, String publicToken, String dipToken, String pan, String clientId, String cardholderName) {
+        type(cardSearchPage.idInput, cardId);
+        type(cardSearchPage.publicTokenInput, publicToken);
+        type(cardSearchPage.dipTokenInput, dipToken);
+        type(cardSearchPage.panInput, pan);
+        type(cardSearchPage.clientIdInput, clientId);
+        type(cardSearchPage.cardholderNameInput, cardholderName);
+        waitFor(By.xpath("//td //span[@ng-reflect-text='"+cardId+"']"));
+
+    }
+
+    public SoftAssert verifySearchInformationPresentInSearchResults(SoftAssert softAssert, String cardId, String publicToken, String dipToken, String clientId, String cardholderName) {
+        softAssert.assertTrue(areElementsPresent(new String[]{"//td //span[@ng-reflect-text='"+cardId+"']", "//td //span[@ng-reflect-text='"+publicToken+"']",
+                "//td //span[@ng-reflect-text='"+dipToken+"']", "//td //span[@ng-reflect-text='"+clientId+"']",
+                "//td //span[@ng-reflect-text='"+cardholderName+"']"}), "Incorrect data in the table results");
+        return softAssert;
+    }
 }

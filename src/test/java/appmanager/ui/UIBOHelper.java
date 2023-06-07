@@ -553,14 +553,14 @@ public class UIBOHelper extends UIHelperBase {
 //        Thread.sleep(1500);
 //    }
 
-    public void searchByCardBySeveralFields(String cardId, String publicToken, String dipToken, String pan, String clientId, String cardholderName) {
-        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='id'] //input"), cardId);
-        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='publicToken'] //input"), publicToken);
-        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='dipToken'] //input"), dipToken);
-        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='pan'] //input"), pan);
-        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='clientId'] //input"), clientId);
-        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='cardholderName'] //input"), cardholderName);
-    }
+//    public void searchByCardBySeveralFields(String cardId, String publicToken, String dipToken, String pan, String clientId, String cardholderName) {
+//        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='id'] //input"), cardId);
+//        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='publicToken'] //input"), publicToken);
+//        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='dipToken'] //input"), dipToken);
+//        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='pan'] //input"), pan);
+//        type(By.xpath("//app-card-tab //app-input-number[@ng-reflect-name='clientId'] //input"), clientId);
+//        type(By.xpath("//app-card-tab //app-input[@ng-reflect-name='cardholderName'] //input"), cardholderName);
+//    }
 
     public void searchByCard(String filter, String value) {
         type(By.xpath("//app-search-cards //input[contains(@id, 'input_"+filter+"')]"), value);
