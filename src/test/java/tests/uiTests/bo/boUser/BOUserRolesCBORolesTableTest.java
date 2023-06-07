@@ -20,8 +20,7 @@ public class BOUserRolesCBORolesTableTest extends UITestBase {
         softAssert.assertTrue(app.getUiboHelper().isTabActiveAndSelected(By.xpath("//a[@id='p-tabpanel-3-label'][@aria-selected='true']")));
         softAssert.assertTrue(app.getUiboHelper().isPageOpen(By.xpath("//div[@id='p-tabpanel-3'][@aria-hidden='false']")));
 
-        app.getUiboHelper().click(By.cssSelector("p-dropdown[placeholder='Role']"));
-        app.getUiboHelper().click(By.cssSelector("li[aria-label='1']"));
+        app.getUiboHelper().selectFromDropDown("id", "1");
 
         softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[label='Edit")));
         softAssert.assertTrue(app.getUiboHelper().isButtonEnabled3(By.cssSelector("p-button[label='Delete")));
