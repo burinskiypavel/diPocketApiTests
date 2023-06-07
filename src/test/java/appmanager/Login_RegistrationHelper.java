@@ -22,6 +22,7 @@ import static org.testng.Assert.assertEquals;
 
 public class Login_RegistrationHelper extends HelperBase {
     DBHelper dbHelper = new DBHelper();
+    EmailIMAPHelper emailIMAPHelper = new EmailIMAPHelper();
 
     public String loginDipocket(String phone, String pass, final String deviceUUID) throws ClassNotFoundException, SQLException {
         String cliSessionId = null;
@@ -335,6 +336,7 @@ public class Login_RegistrationHelper extends HelperBase {
     public void dipocketRegistration(int countryId1, int currencyId1, String terms1, String terms2, String pin, String birthDate, String phone, String email, String env) throws InterruptedException, SQLException, ClassNotFoundException {
         String envUrl = HelperBase.prop.getProperty("mobile.base.url");
         String dbEnvUrl = prop.getProperty("db.url");
+        emailIMAPHelper.deleteLettersFromEmail("pop.gmail.com", email, "password1<");
 
         if(env.equals("dev")){
             envUrl = HelperBase.prop.getProperty("mobile.base.url");

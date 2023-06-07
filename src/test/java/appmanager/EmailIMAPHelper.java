@@ -16,6 +16,55 @@ import static io.restassured.RestAssured.given;
 public class EmailIMAPHelper extends HelperBase {
     public static String appPass = "oangitprvdsqwrgh";
 
+    public void deleteLettersFromEmail(String host, String user, String password){
+        try {
+
+            Properties properties = new Properties();
+            properties.put("mail.imap.host", host);
+            properties.put("mail.imap.port", "993");
+            properties.put("mail.imap.starttls.enable", "true");
+            Session emailSession = Session.getDefaultInstance(properties);
+
+            System.out.println("0. Preconnect");
+            Store store = emailSession.getStore("imaps");
+
+            store.connect(host, user, appPass);
+            System.out.println("1. Connected");
+
+            Folder emailFolder = store.getFolder("INBOX");
+            emailFolder.open(Folder.READ_WRITE);//READ_ONLY
+
+//            int count = 0;
+//            while(emailFolder.getMessages().length == 0 && count < 120){
+//                Thread.sleep(1000);
+//                count++;
+//            }
+//            System.out.println("count:" + count);
+
+            Message[] messages = emailFolder.getMessages();
+            System.out.println("messages.length---" + messages.length);
+
+            for (int i = 0, n = messages.length; i < n; i++) {
+                Message message = messages[i];
+                System.out.println("---------------------------------");
+                System.out.println("Email Number " + (i + 1));
+                System.out.println("Subject: " + message.getSubject());
+                System.out.println("Received Date: " + message.getReceivedDate());
+                System.out.println("From: " + message.getFrom()[0]);
+
+
+                System.out.println("deleted");
+                message.setFlag(Flags.Flag.DELETED, true);
+            }
+
+            emailFolder.close(true); //false
+            store.close();
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static String getLinkFromEmailAfterRegistration(String host, String user,
                                                            String password, String expectedSubject) throws InterruptedException {
         String emailLink = null;
