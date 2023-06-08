@@ -19,7 +19,7 @@ public class LimitPlanPage {
     @FindBy(xpath = "//app-limit-plan-tab //p-button[@ng-reflect-label='+ Add row']")
     public WebElement addRowButton;
 
-    @FindBy(xpath = "//app-limit-plan-tab //button[@ng-reflect-icon='pi pi-trash']")
+    @FindBy(xpath = "//button[@ng-reflect-icon='pi pi-trash']")
     public WebElement deleteRowBtn;
 
     @FindBy(xpath = "//p-button[@ng-reflect-label='Delete limit plan']")
