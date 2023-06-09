@@ -185,4 +185,33 @@ public class PisTests extends APIUITestBase {
 
         assertThat(uiTransactionCode, equalTo(apiTransactionCode));
     }
+
+    @Test(priority = 6)
+    public void test_PISInitiatePaymentDomestic(){
+        String stResponse = given()
+                .log().uri().log().headers().log().body()
+                .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
+                .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
+                .header("TPP-Redirect-URI", "https://www.google.com")
+                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
+                .contentType("application/json")
+                .body("{\n" +
+                        "    \"instructedAmount\": {\n" +
+                        "        \"currency\": \"PLN\", \n" +
+                        "        \"amount\": \"9.00\"\n" +
+                        "        }, \n" +
+                        "    \"creditorName\": \"Marek Testing\",\n" +
+                        "    \"creditorType\": \"INDIVIDUAL\",\n" +
+                        "    \"creditorAccount\": {\n" +
+                        "        \"iban\": \"EE657777000012110759\"\n" +
+                        "        }, \n" +
+                        "    \"remittanceInformationUnstructured\": \"domestic transfer test version1\"\n" +
+                        "}")
+                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/domestic-credit-transfers")
+                .then().log().all()
+                .statusCode(200).extract().response().asString();
+
+        href = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
+    }
 }
