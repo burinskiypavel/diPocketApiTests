@@ -118,7 +118,9 @@ public class PisTests extends APIUITestBase {
                 .body(json)
                 .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/cross-border-credit-transfers")
                 .then().log().all()
-                .statusCode(200).extract().response().asString();
+                .statusCode(200)
+                .body("transactionStatus", equalTo("RCVD"))
+                .extract().response().asString();
 
         href = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
     }
@@ -210,7 +212,9 @@ public class PisTests extends APIUITestBase {
                 .body(json)
                 .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/domestic-credit-transfers")
                 .then().log().all()
-                .statusCode(200).extract().response().asString();
+                .statusCode(200)
+                .body("transactionStatus", equalTo("RCVD"))
+                .extract().response().asString();
 
         href = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
     }
