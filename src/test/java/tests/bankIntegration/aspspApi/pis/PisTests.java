@@ -8,10 +8,7 @@ import io.restassured.response.Response;
 import model.aspsp.Account;
 import model.aspsp.ConfirmationOfFundsRequest;
 import model.aspsp.CreateConsentRequest;
-import model.aspsp.pis.CreditorAccount;
-import model.aspsp.pis.CreditorAddress;
-import model.aspsp.pis.InstructedAmount;
-import model.aspsp.pis.PaymentsCrossBorderCreditTransfersRequest;
+import model.aspsp.pis.*;
 import model.clientServices.DashBoardNotifyDetails3Request;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -44,6 +41,8 @@ public class PisTests extends APIUITestBase {
     PaymentsCrossBorderCreditTransfersRequest paymentsCrossBorderCreditTransfersRequest = new PaymentsCrossBorderCreditTransfersRequest();
     CreditorAddress creditorAddress = new CreditorAddress();
     CreditorAccount creditorAccount = new CreditorAccount();
+
+    PaymentsDomesticCreditTransfersRequest paymentsDomesticCreditTransfersRequest = new PaymentsDomesticCreditTransfersRequest();
 
     @Test(priority = 1)
     public void test_pisGetPaymentRequest() {
@@ -188,6 +187,18 @@ public class PisTests extends APIUITestBase {
 
     @Test(priority = 6)
     public void test_PISInitiatePaymentDomestic(){
+        instructedAmount.setCurrency("PLN");
+        instructedAmount.setAmount("9.00");
+
+        creditorAccount.setIban("EE657777000012110759");
+
+        paymentsDomesticCreditTransfersRequest.setInstructedAmount(instructedAmount);
+        paymentsDomesticCreditTransfersRequest.setCreditorName("Marek Testing");
+        paymentsDomesticCreditTransfersRequest.setCreditorType("INDIVIDUAL");
+        paymentsDomesticCreditTransfersRequest.setCreditorAccount(creditorAccount);
+        paymentsDomesticCreditTransfersRequest.setRemittanceInformationUnstructured("domestic transfer test version1");
+        String json = gson.toJson(paymentsDomesticCreditTransfersRequest);
+
         String stResponse = given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
@@ -196,18 +207,7 @@ public class PisTests extends APIUITestBase {
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
                 .contentType("application/json")
-                .body("{\n" +
-                        "    \"instructedAmount\": {\n" +
-                        "        \"currency\": \"PLN\", \n" +
-                        "        \"amount\": \"9.00\"\n" +
-                        "        }, \n" +
-                        "    \"creditorName\": \"Marek Testing\",\n" +
-                        "    \"creditorType\": \"INDIVIDUAL\",\n" +
-                        "    \"creditorAccount\": {\n" +
-                        "        \"iban\": \"EE657777000012110759\"\n" +
-                        "        }, \n" +
-                        "    \"remittanceInformationUnstructured\": \"domestic transfer test version1\"\n" +
-                        "}")
+                .body(json)
                 .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/domestic-credit-transfers")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
