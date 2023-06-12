@@ -40,9 +40,11 @@ public class PisTests extends APIUITestBase {
     InstructedAmount instructedAmount = new InstructedAmount();
     PaymentsCrossBorderCreditTransfersRequest paymentsCrossBorderCreditTransfersRequest = new PaymentsCrossBorderCreditTransfersRequest();
     CreditorAddress creditorAddress = new CreditorAddress();
+    CreditorAddress creditorAddressForSepaPayment = new CreditorAddress();
     CreditorAccount creditorAccount = new CreditorAccount();
 
     PaymentsDomesticCreditTransfersRequest paymentsDomesticCreditTransfersRequest = new PaymentsDomesticCreditTransfersRequest();
+    PaymentSepaCreditTransfersRequest paymentSepaCreditTransfersRequest = new PaymentSepaCreditTransfersRequest();
 
     @Test(priority = 1)
     public void test_pisGetPaymentRequest() {
@@ -211,6 +213,41 @@ public class PisTests extends APIUITestBase {
                 .contentType("application/json")
                 .body(json)
                 .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/domestic-credit-transfers")
+                .then().log().all()
+                .statusCode(200)
+                .body("transactionStatus", equalTo("RCVD"))
+                .extract().response().asString();
+
+        href = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
+    }
+
+    @Test(priority = 7)
+    public void test_PISInitiatePaymentSEPA(){
+        instructedAmount.setCurrency("EUR");
+        instructedAmount.setAmount("1.10");
+
+        creditorAccount.setIban("DE02100100109307118603");
+        creditorAddressForSepaPayment.setCountry("FI");
+
+        paymentSepaCreditTransfersRequest.setInstructedAmount(instructedAmount);
+        paymentSepaCreditTransfersRequest.setCreditorName("Merchant123");
+        paymentSepaCreditTransfersRequest.setCreditorType("INDIVIDUAL");
+        paymentSepaCreditTransfersRequest.setCreditorAddress(creditorAddressForSepaPayment);
+        paymentSepaCreditTransfersRequest.setCreditorAgent("SBANFIHH");
+        paymentSepaCreditTransfersRequest.setCreditorAccount(creditorAccount);
+        paymentSepaCreditTransfersRequest.setRemittanceInformationUnstructured("SEPA payment test full payment v1");
+        String json = gson.toJson(paymentSepaCreditTransfersRequest);
+
+        String stResponse = given()
+                .log().uri().log().headers().log().body()
+                .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
+                .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
+                .header("TPP-Redirect-URI", "https://www.google.com")
+                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
+                .contentType("application/json")
+                .body(json)
+                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/sepa-credit-transfers")
                 .then().log().all()
                 .statusCode(200)
                 .body("transactionStatus", equalTo("RCVD"))
