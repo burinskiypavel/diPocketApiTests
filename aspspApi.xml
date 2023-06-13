@@ -8,4 +8,22 @@
         </classes>
     </test>
 
+    <test name="ASPSPAutorizationAISForWebcabinetUsersTests">
+        <classes>
+            <class name="tests.bankIntegration.aspspApi.ais.ASPSPAutorizationAISForWebcabinetUsersTests"/>
+        </classes>
+    </test>
+
+    <test name="CofTests">
+        <classes>
+            <class name="tests.bankIntegration.aspspApi.cof.CofTests"/>
+        </classes>
+    </test>
+
+    <test name="PisTests">
+        <classes>
+            <class name="tests.bankIntegration.aspspApi.pis.PisTests"/>
+        </classes>
+    </test>
+
 </suite>
