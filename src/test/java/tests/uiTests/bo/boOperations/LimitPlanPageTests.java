@@ -79,11 +79,8 @@ public class LimitPlanPageTests extends UITestBase {
         app.getUiboOperationsHelper().gotoLimitPlanTab();
 
         app.getUiboOperationsHelper().selectLimitPlan("Unlimited");
-
         app.getUiboOperationsHelper().addRowInLimitPlan("150", "Face to Face (Out)", "Max Daily");
-
         app.getUiboOperationsHelper().pressPencilEditButtonForLimitPlanPage();
-
         app.getUiboOperationsHelper().editLimitPlanRow("All transactions (In)", "Max Monthly", "12");
 
         app.getUiboOperationsHelper().deleteRow(0);

@@ -217,7 +217,7 @@ public class UIBOOperationsHelper extends UIHelperBase {
     }
 
     public void deleteRow(int index) {
-        List<WebElement> elements = driver.findElements(By.xpath("//button[@ng-reflect-icon='pi pi-trash']"));
+        List<WebElement> elements = driver.findElements(By.xpath("//p-tabpanel[@ng-reflect-header='Limit plan'] //button[@ng-reflect-icon='pi pi-trash']"));
         WebElement element = elements.get(index);
         element.click();
         waitFor(By.xpath("//*[contains(text(), 'Row deleted successfully')]"));
