@@ -337,6 +337,17 @@ public class ApplicationManager {
         return dt;
     }
 
+    public String getTimeStampWithAddSomeAmountOfMonth(String pattern, int amountOfMonth) throws ParseException {
+        String curentDate = getTimeStamp(pattern);
+        String dt = curentDate;
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        Calendar c = Calendar.getInstance();
+        c.setTime(sdf.parse(dt));
+        c.add(Calendar.MONTH, amountOfMonth);
+        dt = sdf.format(c.getTime());
+        return dt;
+    }
+
     public DBHelper getDbHelper() {
         return dbHelper;
     }

@@ -9,6 +9,7 @@ import model.clientServices.DashBoardNotifyDetails3Request;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
@@ -16,17 +17,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class AisTests extends APIUITestBase {
-    public String consentId = null;
-    public String href = null;
-    public String uiTransactionCode = null;
-    public String apiTransactionCode = null;
-    public int notifyId = 0;
-    public String phone = "380980316499";
-    public String pass = "reset246740";
-    public String iban = "PL42109010560000000150296424";
+    String consentId = null;
+    String href = null;
+    String uiTransactionCode = null;
+    String apiTransactionCode = null;
+    int notifyId = 0;
+    String phone = "380980316499";
+    String pass = "reset246740";
+    String iban = "PL42109010560000000150296424";
     String dateFrom = "2019-11-26";
     String dateTo = "2023-05-12";
-    public String validUntil = "2023-06-17";
+    String validUntil = "2023-09-17";
+    String nextMonthValidUntilDate = null;
     String resourceId = null;
     String[] balances = new String[0];
     String[] transactions = new String[0];
@@ -45,12 +47,13 @@ public class AisTests extends APIUITestBase {
 
 
     @Test(priority = 1)
-    public void test_AISCreateConsentRequest() {
+    public void test_AISCreateConsentRequest() throws ParseException {
+        nextMonthValidUntilDate = app.getTimeStampWithAddSomeAmountOfMonth("yyyy-MM-dd", 1);
         //access.setBalances(balances);
         //access.setTransactions(transactions);
         v1ConsentsRequest.setAccess(access);
         v1ConsentsRequest.setRecurringIndicator(true);
-        v1ConsentsRequest.setValidUntil(validUntil);
+        v1ConsentsRequest.setValidUntil(nextMonthValidUntilDate);
         String json = gson.toJson(v1ConsentsRequest);
         String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json, partnerId);
 
@@ -96,7 +99,7 @@ public class AisTests extends APIUITestBase {
     @Test(priority = 5)
     public void test_AISGetConsentRequest_showConsentInformation() {
         Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents_confirmationOfFunds(consentId, partnerId);
-        response.then().body("validUntil", equalTo(validUntil),
+        response.then().body("validUntil", equalTo(nextMonthValidUntilDate),
                 "consentStatus", equalTo("valid"),
                 "recurringIndicator", equalTo(true));
     }

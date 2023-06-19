@@ -10,6 +10,7 @@ import model.clientServices.DashBoardNotifyDetails3Request;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -29,7 +30,8 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     String clientId = "62008";
 
     String iban = "EE517777000012207332";
-    String validUntil = "2023-06-17";
+    String validUntil = "2023-09-17";
+    String nextMonthValidUntilDate = null;
     String resourceId = null;
     String[] balances = new String[0];
     String[] transactions = new String[0];
@@ -48,12 +50,13 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
 
 
     @Test(priority = 1)
-    public void test_AISCreateConsentRequest() {
+    public void test_AISCreateConsentRequest() throws ParseException {
+        nextMonthValidUntilDate = app.getTimeStampWithAddSomeAmountOfMonth("yyyy-MM-dd", 1);
         //access.setBalances(balances);
         //access.setTransactions(transactions);
         v1ConsentsRequest.setAccess(access);
         v1ConsentsRequest.setRecurringIndicator(true);
-        v1ConsentsRequest.setValidUntil(validUntil);
+        v1ConsentsRequest.setValidUntil(nextMonthValidUntilDate);
         String json = gson.toJson(v1ConsentsRequest);
         String response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents(json, partnerId);
 
@@ -77,7 +80,7 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     @Test(priority = 4)
     public void test_AISGetConsentRequest_showConsentInformation() {
         Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_consents_confirmationOfFunds(consentId, partnerId);
-        response.then().body("validUntil", equalTo(validUntil),
+        response.then().body("validUntil", equalTo(nextMonthValidUntilDate),
                 "consentStatus", equalTo("valid"),
                 "recurringIndicator", equalTo(true));
     }
