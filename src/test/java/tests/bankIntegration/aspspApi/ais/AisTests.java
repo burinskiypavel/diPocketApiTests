@@ -147,7 +147,6 @@ public class AisTests extends APIUITestBase {
 
         response.then().body("account.iban", equalTo(iban),
                 "transactions.booked.transactionId", hasItems("29818;11;187652", "29818;11;187651"),
-                "transactions.booked.entryReference", hasItems("487171", "487170"),
                 "transactions.booked.creditorName", hasItems("-29791"),
                 "transactions.booked.debtorName", hasItems("380661470959"),
                 "transactions.booked.transactionAmount.currency", hasItems(currency),

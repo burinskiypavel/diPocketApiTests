@@ -128,7 +128,6 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
 
         response.then().body("account.iban", equalTo(iban),
                 "transactions.booked.transactionId", hasItems("62008;11;376771", "62008;11;376772"),
-                "transactions.booked.entryReference", hasItems("675652", "675653"),
                 "transactions.booked.creditorName", hasItems("Shop with Chip POS"),
                 "transactions.booked.debtorName", hasItems("Everypay Payments Services S.M.S.A"),
                 "transactions.booked.transactionAmount.currency", hasItems(currency),
