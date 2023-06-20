@@ -55,7 +55,7 @@ public class TDSV1BioAcceptTest extends TestBase {
     @Test(timeOut = 30000, priority = 2)
     public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
-        String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
+        String now = app.getTimeStampHelper().getTimeStamp("YYYYMMdd HH:mm:ss");
         System.out.println("txid: " + randomTXID + " pan: " + app.pan + " now: " + now);
         Response res = given()
                 .spec(app.requestSpecTDS)

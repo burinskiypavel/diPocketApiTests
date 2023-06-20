@@ -51,7 +51,7 @@ public class TDSV1PareqAllFieldsTest extends TestBase {
     @Test(priority = 2)
     public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
-        String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
+        String now = app.getTimeStampHelper().getTimeStamp("YYYYMMdd HH:mm:ss");
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

@@ -25,7 +25,7 @@ public class TDSV2BrowserAppCancelTest extends TestBase {
     @Test(timeOut = 30000, priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
-        String now = app.getTimeStamp("YYYYMMddHHmmss");
+        String now = app.getTimeStampHelper().getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

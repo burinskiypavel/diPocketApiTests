@@ -48,7 +48,7 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 1)
     public void test_AISCreateConsentRequest() throws ParseException {
-        nextMonthValidUntilDate = app.getTimeStampWithAddSomeAmountOfMonth("yyyy-MM-dd", 1);
+        nextMonthValidUntilDate = app.getTimeStampHelper().getTimeStampWithAddSomeAmountOfMonth("yyyy-MM-dd", 1);
         //access.setBalances(balances);
         //access.setTransactions(transactions);
         v1ConsentsRequest.setAccess(access);

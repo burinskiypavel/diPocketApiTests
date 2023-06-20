@@ -57,7 +57,7 @@ public class OpenVIBANForDiPocketUABClientEURTest extends TestBase {
 
     @Test(priority = 1)
     public void testRegistration() throws SQLException, InterruptedException, ClassNotFoundException, ParseException {
-        tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
+        tomorrow = app.getTimeStampHelper().getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
         login_registrationHelper.dipocketRegistration(countryId, currencyId, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", pass, "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "test");
     }
 

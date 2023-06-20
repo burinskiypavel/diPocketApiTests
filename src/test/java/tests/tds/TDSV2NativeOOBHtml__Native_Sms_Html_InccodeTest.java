@@ -24,7 +24,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     @Test(priority = 1)
     public void test_AReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
-        String now = app.getTimeStamp("YYYYMMddHHmmss");
+        String now = app.getTimeStampHelper().getTimeStamp("YYYYMMddHHmmss");
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -94,7 +94,7 @@ public class TDSV2NativeOOBHtml__Native_Sms_Html_InccodeTest extends TestBase {
     @Test(priority = 2)
     public void test_CReq_TDSServices_acs_bgAuth() throws IOException, SAXException, ParserConfigurationException {
         printCurentThredId();
-        now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
+        now2 = app.getTimeStampHelper().getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

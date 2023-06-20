@@ -20,8 +20,8 @@ public class TDSV2NativeSmsAcceptTest extends TestBase {
     String randomAcsTransId = app.generateRandomNumber(10) + "-integrTest-acsTransid-v2";
     String dsTransId = app.generateRandomNumber(10) + "-integrTest-dsTransId-v2";
     String tranId = null;
-    String now = app.getTimeStamp("YYYYMMddHHmmss");
-    String now2 = app.getTimeStamp("dd.MM.YYYY HH:mm");
+    String now = app.getTimeStampHelper().getTimeStamp("YYYYMMddHHmmss");
+    String now2 = app.getTimeStampHelper().getTimeStamp("dd.MM.YYYY HH:mm");
     String sms = null;
 
     @Test(priority = 1)

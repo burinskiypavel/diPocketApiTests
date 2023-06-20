@@ -52,8 +52,8 @@ public class TDSV1EPINAcceptTest extends TestBase {
 
     @Test(priority = 2)
     public void test_paReq_TDSServices_acs_bgAuth_v1() throws IOException, SAXException, ParserConfigurationException {
-        String now = app.getTimeStamp("YYYYMMdd HH:mm:ss");
-        String nowAsExpected = app.getTimeStamp("dd.MM.YYYY HH:mm");
+        String now = app.getTimeStampHelper().getTimeStamp("YYYYMMdd HH:mm:ss");
+        String nowAsExpected = app.getTimeStampHelper().getTimeStamp("dd.MM.YYYY HH:mm");
         Response res = given()
                 .spec(app.requestSpecTDS)
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +

@@ -40,6 +40,7 @@ public class ApplicationManager {
     private SSLCertHelper sslCertHelper = new SSLCertHelper();
     private BankIntegrationHelper bankIntegrationHelper = new BankIntegrationHelper();
     private JsonHelper jsonHelper = new JsonHelper();
+    private TimeStampHelper timeStampHelper = new TimeStampHelper();
     private BORequests boRequestsHelper = new BORequests();
     private ConsentsRequests consentsRequestsHelper = new ConsentsRequests();
     private ClientServicesRequests clientServicesRequestsHelper = new ClientServicesRequests();
@@ -321,75 +322,63 @@ public class ApplicationManager {
         return randomNumber;
     }
 
-    public String getTimeStamp(String pattern) {
-        String timeStamp = new SimpleDateFormat(pattern).format(Calendar.getInstance().getTime());
-        return timeStamp;
-    }
-
-    public String getTimeStampWithAddSomeAmountOfDays(String pattern, int amountOfDays) throws ParseException {
-        String curentDate = getTimeStamp(pattern);
-        String dt = curentDate;  // Start date
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        Calendar c = Calendar.getInstance();
-        c.setTime(sdf.parse(dt));
-        c.add(Calendar.DATE, amountOfDays);  // number of days to add
-        dt = sdf.format(c.getTime());  // dt is now the new date
-        return dt;
-    }
-
-    public String getTimeStampWithAddSomeAmountOfMonth(String pattern, int amountOfMonth) throws ParseException {
-        String curentDate = getTimeStamp(pattern);
-        String dt = curentDate;
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        Calendar c = Calendar.getInstance();
-        c.setTime(sdf.parse(dt));
-        c.add(Calendar.MONTH, amountOfMonth);
-        dt = sdf.format(c.getTime());
-        return dt;
-    }
+//    public String getTimeStamp(String pattern) {
+//        String timeStamp = new SimpleDateFormat(pattern).format(Calendar.getInstance().getTime());
+//        return timeStamp;
+//    }
+//
+//    public String getTimeStampWithAddSomeAmountOfDays(String pattern, int amountOfDays) throws ParseException {
+//        String curentDate = getTimeStamp(pattern);
+//        String dt = curentDate;  // Start date
+//        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(sdf.parse(dt));
+//        c.add(Calendar.DATE, amountOfDays);  // number of days to add
+//        dt = sdf.format(c.getTime());  // dt is now the new date
+//        return dt;
+//    }
+//
+//    public String getTimeStampWithAddSomeAmountOfMonth(String pattern, int amountOfMonth) throws ParseException {
+//        String curentDate = getTimeStamp(pattern);
+//        String dt = curentDate;
+//        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(sdf.parse(dt));
+//        c.add(Calendar.MONTH, amountOfMonth);
+//        dt = sdf.format(c.getTime());
+//        return dt;
+//    }
 
     public DBHelper getDbHelper() {
         return dbHelper;
     }
-
     public XmlHelper getXmlHelper() {
         return xmlHelper;
     }
-
     public TelenorHelper getTelenorHelper() { return telenorHelper; }
-
     public ResponseValidationHelper getResponseValidationHelper() { return responseValidationHelper; }
-
     public Login_RegistrationHelper getLogin_registrationHelper() {
         return login_registrationHelper;
     }
-
     public AttachmentHelper getAttachmentHelper() {
         return attachmentHelper;
     }
-
+    public TimeStampHelper getTimeStampHelper() {
+        return timeStampHelper;
+    }
     public BOHelper getBOHelper() { return boHelper; }
     public SSLCertHelper getSSLCertHelper() {
         return sslCertHelper;
     }
-
     public BankIntegrationHelper getBankIntegrationHelper() { return bankIntegrationHelper; }
-
     public JsonHelper getJsonHelper() { return jsonHelper; }
-
     public BORequests getBoRequestsHelper() { return boRequestsHelper; }
     public ConsentsRequests getConsentsRequestsHelper() { return consentsRequestsHelper; }
     public ClientServicesRequests getClientServicesRequestsHelper() { return clientServicesRequestsHelper; }
-
     public CustomerServicesRequests getCustomerServicesRequestsHelper() { return customerServicesRequestsHelper; }
-
     public ClientProfileRequests getClientProfileRequestsHelper() { return clientProfileRequestsHelper; }
-
     //public ClientServicesRequests getClientServicesRequests() { return clientServicesRequests; }
-
     public UIBOHelper getUiboHelper() { return uiboHelper; }
-
     public UIUpAndGoHelper getUiUpAndGoHelper() { return uiUpAndGoHelper; }
-
     public UITelenorHelper getUiTelenorHelper() { return uiTelenorHelper; }
 }

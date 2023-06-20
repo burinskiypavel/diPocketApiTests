@@ -23,7 +23,7 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests ex
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws ParseException {
-        tomorrow = app.getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
+        tomorrow = app.getTimeStampHelper().getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
     }
 
