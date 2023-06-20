@@ -293,21 +293,21 @@ public class ApplicationManagerUI {
         return randomNumber;
     }
 
-    public String getTimeStamp(String pattern) {
-        String timeStamp = new SimpleDateFormat(pattern).format(Calendar.getInstance().getTime());
-        return timeStamp;
-    }
+//    public String getTimeStamp(String pattern) {
+//        String timeStamp = new SimpleDateFormat(pattern).format(Calendar.getInstance().getTime());
+//        return timeStamp;
+//    }
 
-    public String getTimeStampWithAddSomeAmountOfDays(String pattern, int amountOfDays) throws ParseException {
-        String curentDate = getTimeStamp(pattern);
-        String dt = curentDate;  // Start date
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        Calendar c = Calendar.getInstance();
-        c.setTime(sdf.parse(dt));
-        c.add(Calendar.DATE, amountOfDays);  // number of days to add
-        dt = sdf.format(c.getTime());  // dt is now the new date
-        return dt;
-    }
+//    public String getTimeStampWithAddSomeAmountOfDays(String pattern, int amountOfDays) throws ParseException {
+//        String curentDate = getTimeStamp(pattern);
+//        String dt = curentDate;  // Start date
+//        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(sdf.parse(dt));
+//        c.add(Calendar.DATE, amountOfDays);  // number of days to add
+//        dt = sdf.format(c.getTime());  // dt is now the new date
+//        return dt;
+//    }
 
     public DBHelper getDbHelper() {
         return dbHelper;
