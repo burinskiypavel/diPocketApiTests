@@ -10,7 +10,7 @@ public class BOUserRolesCBOVerifyActiveUsersTableIsDefaultOptionTest extends UIT
 
     @Test
     public void testBOUserRolesCBOVerifyActiveUsersTableIsDefaultOption() throws InterruptedException {
-        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole("Viktoria", "kWmaB0s");
+        app.getUiboHelper().gotoBOSiteAndLoginWithCBOUserRole(app.CBOuserLogin2, app.CBOuserPass2);
         app.getUiboHelper().gotoBOUsersPage();
 
         assertTrue(app.getUiboHelper().isElementPresent(By.xpath("//span[contains(text(), 'Active users')]")));
