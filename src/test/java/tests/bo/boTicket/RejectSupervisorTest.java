@@ -1,5 +1,6 @@
 package tests.bo.boTicket;
 
+import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
@@ -17,10 +18,10 @@ import static org.hamcrest.CoreMatchers.hasItem;
 
 public class RejectSupervisorTest extends TestBase {
     String cliSessionId = null;
-    String regPhone = "380685448615";
-    String regPass = "pasword1";
+    //String regPhone = "380685448615";
+    //String regPass = "pasword1";
     String cookie = null;
-    String username = app.BOusername;
+    //String username = app.BOusername;
     int ticketId = 0;
     String actualTypeName = null;
     String childId =  null;
@@ -43,7 +44,7 @@ public class RejectSupervisorTest extends TestBase {
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, InterruptedException {
         //app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", "pasword1", "1230768000000");
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(regPhone, regPass, prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(app.mobileRegPhone, app.mobileRegPass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
@@ -51,13 +52,13 @@ public class RejectSupervisorTest extends TestBase {
         supervisionInviteSupervisorRequest.setValue(parentPhone);
         String json = gson.toJson(supervisionInviteSupervisorRequest);
 
-        app.getClientServicesRequestsHelper().clientServices_v1_supervision_inviteSupervisor(prop.getProperty("mobile.base.url"), regPhone, regPass, cliSessionId, json);
+        app.getClientServicesRequestsHelper().clientServices_v1_supervision_inviteSupervisor(prop.getProperty("mobile.base.url"), app.mobileRegPhone, app.mobileRegPass, cliSessionId, json);
     }
 
     @Test(priority = 3)
     public void test_ClientServices_v1_tile_getMessages2() throws SQLException, ClassNotFoundException {
         childId = app.getDbHelper().getClientIdFromDB("testdipocket@gmail.com", Site.DIPOCKET.toString());
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, regPhone, regPass);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, app.mobileRegPhone, app.mobileRegPass);
         response.then().body("communicationTileList.shortName", hasItem("Approval Pending"));
 
     }
@@ -83,7 +84,7 @@ public class RejectSupervisorTest extends TestBase {
 
     @Test(priority = 7)
     public void test_BOServices_v1_auth_authentication() {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
     @Test(priority = 8)
