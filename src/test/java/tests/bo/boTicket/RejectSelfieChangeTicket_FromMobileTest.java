@@ -1,8 +1,6 @@
 package tests.bo.boTicket;
 
 import base.TestBase;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -10,30 +8,25 @@ import java.text.ParseException;
 
 import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
 
 public class RejectSelfieChangeTicket_FromMobileTest extends TestBase {
     String cliSessionId = null;
-    String phone = app.homePageLoginPhone;
-    String pass = app.homePagePass;
     String cookie = null;
-    String username = app.BOusername;
     int clientId = app.homePageClientId;
     int ticketId = 0;
-    String actualTypeName = null;
     String tomorrow = null;
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException {
         tomorrow = app.getTimeStampHelper().getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(app.homePageLoginPhone, app.homePagePass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
     public void test_ClientServices_v1_clientProfile_updateSelfie() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(app.homePageLoginPhone, app.homePagePass)
                 .contentType("application/json")
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
@@ -48,7 +41,7 @@ public class RejectSelfieChangeTicket_FromMobileTest extends TestBase {
 
     @Test(priority = 3)
     public void test_BOServices_v1_auth_authentication() {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
     @Test(priority = 4)
