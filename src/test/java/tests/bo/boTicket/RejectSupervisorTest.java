@@ -1,6 +1,5 @@
 package tests.bo.boTicket;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
@@ -18,17 +17,11 @@ import static org.hamcrest.CoreMatchers.hasItem;
 
 public class RejectSupervisorTest extends TestBase {
     String cliSessionId = null;
-    //String regPhone = "380685448615";
-    //String regPass = "pasword1";
     String cookie = null;
-    //String username = app.BOusername;
     int ticketId = 0;
-    String actualTypeName = null;
     String childId =  null;
     int supervisorId = app.homePageClientId;
     String tomorrow = null;
-    String parentPhone = app.homePageLoginPhone;
-    String parentPass = app.homePagePass;
     Gson gson = new Gson();
     SupervisorApproveRejectRequest supervisorRejectRequest = new SupervisorApproveRejectRequest();
     SupervisionInviteSupervisorRequest supervisionInviteSupervisorRequest = new SupervisionInviteSupervisorRequest();
@@ -49,7 +42,7 @@ public class RejectSupervisorTest extends TestBase {
 
     @Test(priority = 2)
     public void test_ClientServices_v1_supervision_inviteSupervisor(){
-        supervisionInviteSupervisorRequest.setValue(parentPhone);
+        supervisionInviteSupervisorRequest.setValue(app.homePageLoginPhone);
         String json = gson.toJson(supervisionInviteSupervisorRequest);
 
         app.getClientServicesRequestsHelper().clientServices_v1_supervision_inviteSupervisor(prop.getProperty("mobile.base.url"), app.mobileRegPhone, app.mobileRegPass, cliSessionId, json);
@@ -65,14 +58,14 @@ public class RejectSupervisorTest extends TestBase {
 
     @Test(priority = 4)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(parentPhone, parentPass, prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(app.homePageLoginPhone, app.homePagePass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 5)
     public void test_ClientServices_v1_supervision_childId_acceptRequest() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(parentPhone, parentPass)
+                .auth().preemptive().basic(app.homePageLoginPhone, app.homePagePass)
                 .pathParam("childId", childId)
                 .contentType("application/json")
                 .header("clisessionid", cliSessionId)
