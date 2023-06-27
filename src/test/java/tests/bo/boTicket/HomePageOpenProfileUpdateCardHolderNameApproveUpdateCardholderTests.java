@@ -18,12 +18,12 @@ import static org.testng.Assert.assertEquals;
 public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests extends TestBase {
     String cliSessionId = null;
     String phone = "420703666872";
-    String pass = app.homePagePass;
+    //String pass = app.homePagePass;
     String newCardHolderName = null;
     String oldCardHolderName = null;
     String actualCardHolderName = null;
     String cookie = null;
-    String username = app.BOusername;
+    //String username = app.BOusername;
     int clientId;
     int ticketId = 0;
     String actualTypeName = null;
@@ -43,7 +43,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
         app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, prop.getProperty("mobile.registration.email"), "dev");
 //        clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), "DIPOCKET"));
 //        app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
-//        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+//        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, app.homePagePass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
@@ -55,14 +55,14 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
         System.out.println("clientId: " + clientId);
         app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
         System.out.println("update done");
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, app.homePagePass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 3)
     public void test_ClientServices_v1_tile_getMainScreenMessages() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(phone, app.homePagePass)
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("tile/getMainScreenMessages")
@@ -75,7 +75,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_ClientServices_v1_accounts_accountId_accountHistoryList() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(phone, app.homePagePass)
                 .pathParam("accountId", accountId)
                 .header("clisessionid", cliSessionId)
                 .when()
@@ -92,7 +92,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_ClientServices_v1_clientProfile_imageStatus() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(phone, app.homePagePass)
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/imageStatus")
@@ -108,7 +108,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_ClientServices_v1_clientProfile_clientSmallImageByType() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(phone, app.homePagePass)
                 .header("clisessionid", cliSessionId)
                 .queryParam("imageTypeId", 1)
                 .when()
@@ -125,7 +125,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_ClientServices_v1_ClientProfile_ClientInfo2() {
         String response = given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(phone, app.homePagePass)
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientInfo2")
@@ -145,12 +145,12 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
             oldCardHolderName = "Pavel Burinsky";
         }
 
-        app.getClientProfileRequestsHelper().clientServices_v1_clientProfile_changeCardholderName(cliSessionId, phone, pass, newCardHolderName);
+        app.getClientProfileRequestsHelper().clientServices_v1_clientProfile_changeCardholderName(cliSessionId, phone, app.homePagePass, newCardHolderName);
     }
 
     @Test(priority = 9)
     public void test_BOServices_v1_auth_authentication() {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
     @Test(priority = 10)
@@ -300,7 +300,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
     public void test_ClientServices_v1_ClientProfile_ClientInfo2_() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(phone, app.homePagePass)
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientInfo2")
