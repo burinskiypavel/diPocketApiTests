@@ -2,8 +2,6 @@ package tests.bo.boTicket;
 
 import appmanager.HelperBase;
 import base.TestBase;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -11,20 +9,17 @@ import java.text.ParseException;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
 
 public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests extends TestBase {
     String cookie = null;
-    String username = app.BOusername;
     int clientId = app.homePageClientId;
     int ticketId = 0;
-    String actualTypeName = null;
     String tomorrow = null;
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws ParseException {
         tomorrow = app.getTimeStampHelper().getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
     @Test(priority = 2)
