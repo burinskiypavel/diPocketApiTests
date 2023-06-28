@@ -18,12 +18,12 @@ import static org.hamcrest.CoreMatchers.hasItem;
 public class ApproveSupervisorTest extends TestBase {
     String cliSessionId = null;
     String cookie = null;
-    String username = app.BOusername;
+    //String username = app.BOusername;
     int ticketId = 0;
     String childId =  null;
     int supervisorId = app.homePageClientId;
     String tomorrow = null;
-    String parentPass = app.homePagePass;
+    //String parentPass = app.homePagePass;
     Gson gson = new Gson();
     SupervisorApproveRejectRequest supervisorApproveRequest = new SupervisorApproveRejectRequest();
     SupervisionInviteSupervisorRequest supervisionInviteSupervisorRequest = new SupervisionInviteSupervisorRequest();
@@ -60,14 +60,14 @@ public class ApproveSupervisorTest extends TestBase {
 
     @Test(priority = 4)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(app.homePageLoginPhone, parentPass, prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(app.homePageLoginPhone, app.homePagePass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 5)
     public void test_ClientServices_v1_supervision_childId_acceptRequest() {
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(app.homePageLoginPhone, parentPass)
+                .auth().preemptive().basic(app.homePageLoginPhone, app.homePagePass)
                 .pathParam("childId", childId)
                 .contentType("application/json")
                 .header("clisessionid", cliSessionId)
@@ -79,7 +79,7 @@ public class ApproveSupervisorTest extends TestBase {
 
     @Test(priority = 7)
     public void test_BOServices_v1_auth_authentication() {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
     @Test(priority = 8)
