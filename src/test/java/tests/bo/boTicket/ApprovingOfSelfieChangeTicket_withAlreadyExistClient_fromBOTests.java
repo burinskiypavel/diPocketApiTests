@@ -2,6 +2,8 @@ package tests.bo.boTicket;
 
 import appmanager.HelperBase;
 import base.TestBase;
+import com.google.gson.Gson;
+import model.bo.boServices.ClientImageUploadSelfieRequest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -15,6 +17,8 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests ex
     int clientId = app.homePageClientId;
     int ticketId = 0;
     String tomorrow = null;
+    Gson gson = new Gson();
+    ClientImageUploadSelfieRequest clientImageUploadSelfieRequest = new ClientImageUploadSelfieRequest();
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws ParseException {
@@ -90,15 +94,16 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests ex
     @Test(priority = 6)
     public void test_BOServices_v1_clientImage_uploadSelfie() throws IOException {
         String base64Selfie = HelperBase.readFileReturnString("files/bo/images/base64/base64Selfie.txt");
+        clientImageUploadSelfieRequest.setBase64Selfie1(base64Selfie);
+        clientImageUploadSelfieRequest.setBase64Selfie2(base64Selfie);
+        clientImageUploadSelfieRequest.setClientId(clientId);
+        String json = gson.toJson(clientImageUploadSelfieRequest);
+
         given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
                 .header("content-type", "application/json")
-                .body("{\n" +
-                        "  \"base64Selfie1\": \""+base64Selfie+"\",\n" +
-                        "  \"base64Selfie2\": \""+base64Selfie+"\",\n" +
-                        "  \"clientId\": "+clientId+"\n" +
-                        "}")
+                .body(json)
                 .when()
                 .post("/v1/clientImage/uploadSelfie")
                 .then().log().all()
@@ -108,31 +113,6 @@ public class ApprovingOfSelfieChangeTicket_withAlreadyExistClient_fromBOTests ex
     @Test(priority = 7)
     public void test_BOServices_v1_ticket_take() {
         ticketId = app.getBOHelper().takeSelfieChangeTicket_dev(cookie, tomorrow);
-//        for(int i = 0; i < 12; i++) {
-//            Response res = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-//            String response = res.then().extract().response().asString();
-//
-//            JsonPath js = new JsonPath(response);
-//            ticketId = js.getInt("id");
-//            actualTypeName = js.getString("typeName");
-//
-//            if(actualTypeName.equals("Selfie change")){
-//                break;
-//            }
-//
-//            if(!actualTypeName.equals("Selfie change")){
-//                app.getBoRequestsHelper().boServices_v1_ticket_ticketId_postpone(cookie, ticketId, tomorrow);
-//            }
-//
-//            Response res2 = app.getBoRequestsHelper().boServices_v1_ticket_take(cookie);
-//            String response2 = res2.then().extract().response().asString();
-//
-//            JsonPath js2 = new JsonPath(response2);
-//            ticketId = js2.getInt("id");
-//            actualTypeName = js2.getString("typeName");
-//        }
-//
-//        assertEquals(actualTypeName, "Selfie change");
     }
 
     @Test(priority = 8)
