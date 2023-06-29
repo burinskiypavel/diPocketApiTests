@@ -19,7 +19,7 @@ public class HelperBase {
     public java.util.Properties loadDataFromConfigFile(){
         FileInputStream input = null;
         try {
-            input = new FileInputStream("C:\\Work\\DiPocket\\API\\ApiTests\\config2.properties");
+            input = new FileInputStream("/Work/DiPocket/API/ApiTests/config2.properties");
             prop.load(input);
         } catch (Exception exp) {
             System.out.println(exp.getMessage());
