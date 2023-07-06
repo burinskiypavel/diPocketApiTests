@@ -1,6 +1,5 @@
 package tests.bankIntegration;
 
-import appmanager.HelperBase;
 import appmanager.Login_RegistrationHelper;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
@@ -17,6 +16,7 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -26,11 +26,9 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     String cookie = null;
     String username = "PAVELB_BO";
     int ticketId = 0;
-    String actualTypeName = null;
     String sms = null;
     String tomorrow = null;
     String clientId = null;
-    String actualClientId = null;
     int currencyId = 978;
     int countryId = 826;
     int clientIdSandbox = 0;
@@ -38,7 +36,6 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     String countryCode = "GB";
     String token = null;
     String pan = null;
-    String pass = "password1";
     String cliSessionId = null;
     String actualVIbanFromMobileApp = null;
     String actualVIbanFromBO = null;
@@ -55,12 +52,12 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
     @Test(priority = 1)
     public void testRegistration() throws SQLException, InterruptedException, ClassNotFoundException, ParseException {
         tomorrow = app.getTimeStampHelper().getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        login_registrationHelper.dipocketRegistration(countryId, currencyId, "TERMS_AND_CONDITIONS_GB", "DATA_PROCESSING", pass, "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "test");
+        login_registrationHelper.dipocketRegistration(countryId, currencyId, "TERMS_AND_CONDITIONS_GB", "DATA_PROCESSING", prop.getProperty("mobile.registration.pass"), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "test");
     }
 
     @Test(priority = 2)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
-        clientId = app.getDbHelper().getClientIdFromTestDB(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
+        clientId = app.getDbHelper().getClientIdFromTestDB(prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication_test(app.boUserLogin_test, app.boUserPass_test, username);
     }
 
@@ -151,8 +148,8 @@ public class OpenVIBANForDiPocketLTDClientEURTest extends TestBase {
 
     @Test(priority = 12)
     public void test_verifyIbanFromMobileApp() throws SQLException, ClassNotFoundException {
-        cliSessionId = login_registrationHelper.loginDipocket_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
-        String response = app.getClientServicesRequestsHelper().clientServices_v1_clientProfile_paymentDetails_test(HelperBase.prop.getProperty("mobile.registration.phoneNumber"), pass, cliSessionId);
+        cliSessionId = login_registrationHelper.loginDipocket_test(prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.pass"), prop.getProperty("mobile.login.deviceuuid"));
+        String response = app.getClientServicesRequestsHelper().clientServices_v1_clientProfile_paymentDetails_test(prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.pass"), cliSessionId);
 
         JsonPath jsonPath = new JsonPath(response);
         actualVIbanFromMobileApp = jsonPath.getString("paymentDetailsList[0].accountNo");
