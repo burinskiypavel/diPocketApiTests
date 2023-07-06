@@ -26,8 +26,6 @@ public class PisTests extends APIUITestBase {
     String actualPaymentId = null;
     String href = null;
     String paymentId = "94647f10-c4d6-4009-84dd-dcbf49a082e3";
-    String phone = "380980316499";
-    String pass = "reset246740";
     String apiTransactionCode = null;
     int notifyId = 0;
     String site = Site.DIPOCKET.toString();
@@ -131,8 +129,8 @@ public class PisTests extends APIUITestBase {
     public void test_webConfirmaton() {
         appUi.driver.navigate().to(href);
         appUi.getUiboHelper().waitFor(By.id("phone-number"));
-        appUi.driver.findElement(By.id("phone-number")).sendKeys(phone);
-        appUi.driver.findElement(By.id("password")).sendKeys(pass);
+        appUi.driver.findElement(By.id("phone-number")).sendKeys(prop.getProperty("mobile.login.homePage.loginPhone"));
+        appUi.driver.findElement(By.id("password")).sendKeys(prop.getProperty("mobile.login.homePage.pass"));
         appUi.driver.findElement(By.xpath("//button[@data-dip-action='login']")).click();
         appUi.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Please go to DiPocket Mobile Application to confirm your authorization attempt')]"));
         uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
@@ -140,10 +138,10 @@ public class PisTests extends APIUITestBase {
 
     @Test(priority = 5)
     public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
-        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
+        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), prop.getProperty("mobile.login.deviceuuid"));
         String response2 = given()
                 .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .header("site", site)
                 .header("cliSessionId", cliSessionId)
                 .get("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyList2")
@@ -161,7 +159,7 @@ public class PisTests extends APIUITestBase {
 
         String response4 = given()
                 .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .contentType("application/json")
                 .header("cliSessionId", cliSessionId)
                 .header("site", site)
@@ -177,7 +175,7 @@ public class PisTests extends APIUITestBase {
 
         given()
                 .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .contentType("application/json")
                 .header("cliSessionId", cliSessionId)
                 .pathParam("notifyId", notifyId)
