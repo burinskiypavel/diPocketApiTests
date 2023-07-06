@@ -1,6 +1,5 @@
 package tests.bankIntegration.aspspApi.cof;
 
-import appmanager.HelperBase;
 import base.APIUITestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
@@ -15,6 +14,7 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -25,8 +25,6 @@ public class CofTests extends APIUITestBase {
     String uiTransactionCode = null;
     String apiTransactionCode = null;
     int notifyId = 0;
-    String phone = "380980316499";
-    String pass = "reset246740";
     String iban = "PL42109010560000000150296424";
     String site = Site.DIPOCKET.toString();
     Gson gson = new Gson();
@@ -63,8 +61,8 @@ public class CofTests extends APIUITestBase {
     public void test_webConfirmaton() {
         appUi.driver.navigate().to(href);
         appUi.getUiboHelper().waitFor(By.id("phone-number"));
-        appUi.driver.findElement(By.id("phone-number")).sendKeys(phone);
-        appUi.driver.findElement(By.id("password")).sendKeys(pass);
+        appUi.driver.findElement(By.id("phone-number")).sendKeys(prop.getProperty("mobile.login.homePage.loginPhone"));
+        appUi.driver.findElement(By.id("password")).sendKeys(prop.getProperty("mobile.login.homePage.pass"));
         appUi.driver.findElement(By.xpath("//button[@data-dip-action='login']")).click();
         appUi.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Please go to DiPocket Mobile Application to confirm your authorization attempt')]"));
         uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
@@ -72,10 +70,10 @@ public class CofTests extends APIUITestBase {
 
     @Test(priority = 3)
     public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
-        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), prop.getProperty("mobile.login.deviceuuid"));
         String response2 = given()
                 .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .header("site", site)
                 .header("cliSessionId", cliSessionId)
                 .get("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyList2")
@@ -93,7 +91,7 @@ public class CofTests extends APIUITestBase {
 
         String response4 = given()
                 .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .contentType("application/json")
                 .header("cliSessionId", cliSessionId)
                 .header("site", site)
@@ -109,7 +107,7 @@ public class CofTests extends APIUITestBase {
 
         given()
                 .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .contentType("application/json")
                 .header("cliSessionId", cliSessionId)
                 .pathParam("notifyId", notifyId)
