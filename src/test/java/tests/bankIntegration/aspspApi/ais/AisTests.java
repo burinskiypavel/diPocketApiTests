@@ -22,8 +22,6 @@ public class AisTests extends APIUITestBase {
     String uiTransactionCode = null;
     String apiTransactionCode = null;
     int notifyId = 0;
-    String phone = "380980316499";
-    String pass = "reset246740";
     String iban = "PL42109010560000000150296424";
     String dateFrom = "2019-11-26";
     String dateTo = "2023-05-12";
@@ -63,13 +61,13 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 2)
     public void test_webConfirmaton() {
-        uiTransactionCode = appUi.getUiAspspHelper().webConfirmaton(href, phone, pass);
+        uiTransactionCode = appUi.getUiAspspHelper().webConfirmaton(href, prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"));
     }
 
     @Test(priority = 3)
     public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
-        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(phone, pass, prop.getProperty("mobile.login.deviceuuid"));
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyList2(prop.getProperty("mobile.test.base.url"), phone, pass, cliSessionId);
+        String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), prop.getProperty("mobile.login.deviceuuid"));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyList2(prop.getProperty("mobile.test.base.url"), prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), cliSessionId);
         String responseString = response.then().body("notificationList[0].notifyTypeName", equalTo("ASPSP Authorization")).extract().response().asString();
         notifyId = app.getResponseValidationHelper().getIntFromResponseJsonPath(responseString, "notificationList[0].notifyId");
 
@@ -77,12 +75,12 @@ public class AisTests extends APIUITestBase {
         dashBoardNotifyDetails3Request.setNotifyId(notifyId);
         dashBoardNotifyDetails3Request.setDetailsRef("");
         String json = gson.toJson(dashBoardNotifyDetails3Request);
-        Response response2 = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyDetails3(prop.getProperty("mobile.test.base.url"), json, phone, pass, cliSessionId);
+        Response response2 = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyDetails3(prop.getProperty("mobile.test.base.url"), json, prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), cliSessionId);
         String responseStringNotifyDetails3 = response2.then().body("notifyTypeName", equalTo("ASPSP Authorization"),
                         "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
         apiTransactionCode = app.getResponseValidationHelper().getStringFromResponseJsonPath(responseStringNotifyDetails3, "dtails");
 
-        app.getClientServicesRequestsHelper().clientServices_v1_aspsp_notifyId_approve(prop.getProperty("mobile.test.base.url"), notifyId, phone, pass, cliSessionId);
+        app.getClientServicesRequestsHelper().clientServices_v1_aspsp_notifyId_approve(prop.getProperty("mobile.test.base.url"), notifyId, prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), cliSessionId);
 
         appUi.getUiAspspHelper().selectAccount(iban);
         appUi.getUiAspspHelper().pressConsent();
