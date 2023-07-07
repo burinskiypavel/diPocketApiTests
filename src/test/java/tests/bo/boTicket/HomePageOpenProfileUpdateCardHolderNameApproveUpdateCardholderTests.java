@@ -18,15 +18,12 @@ import static org.testng.Assert.assertEquals;
 public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests extends TestBase {
     String cliSessionId = null;
     String phone = "420703666872";
-    //String pass = app.homePagePass;
     String newCardHolderName = null;
     String oldCardHolderName = null;
     String actualCardHolderName = null;
     String cookie = null;
-    //String username = app.BOusername;
     int clientId;
     int ticketId = 0;
-    String actualTypeName = null;
     String tomorrow = null;
     String email = "testdipocket002@gmail.com";
     String accountId = "95901";
@@ -43,7 +40,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
         app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.homePagePass, "1230768000000", phone, prop.getProperty("mobile.registration.email"), "dev");
 //        clientId = Integer.parseInt(app.getDbHelper().getClientIdFromDB(HelperBase.prop.getProperty("mobile.registration.email"), "DIPOCKET"));
 //        app.getDbHelper().updateClientEmailFromDB(email, String.valueOf(clientId));
-//        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, app.homePagePass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+//        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, app.homePagePass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
@@ -246,7 +243,7 @@ public class HomePageOpenProfileUpdateCardHolderNameApproveUpdateCardholderTests
                         "lastName", equalTo("Burinsky"),
                         "birthDate", equalTo("2009-01-01"),
                         "email", equalTo(email),
-                        "site", equalTo("DIPOCKET"));
+                        "site", equalTo(Site.DIPOCKET.toString()));
     }
 
     @Test(priority = 16)
