@@ -1,6 +1,5 @@
 package tests.bo.boTicket;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -9,18 +8,16 @@ import org.testng.annotations.Test;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
 
 public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
     String cliSessionId = null;
-    String phone = app.homePageLoginPhone;
-    String pass = app.homePagePass;
     String newCardHolderName = null;
     String oldCardHolderName = null;
     String actualCardHolderName = null;
     String cookie = null;
-    String username = app.BOusername;
     int clientId = app.homePageClientId;
     int ticketId = 0;
     String actualTypeName = null;
@@ -29,15 +26,15 @@ public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, ParseException {
         tomorrow = app.getTimeStampHelper().getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(phone, pass, HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(app.homePageLoginPhone, app.homePagePass, prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         String response = given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
-                .header("clisessionid", ""+cliSessionId+"")
+                .auth().preemptive().basic(app.homePageLoginPhone, app.homePagePass)
+                .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientInfo2")
                 .then().log().all()
@@ -58,12 +55,12 @@ public class BlockAClientOnUpdateCardHolderNameTicketPageTest extends TestBase {
             oldCardHolderName = "Pavel Burinsky";
         }
 
-        app.getClientProfileRequestsHelper().clientServices_v1_clientProfile_changeCardholderName(cliSessionId, phone, pass, newCardHolderName);
+        app.getClientProfileRequestsHelper().clientServices_v1_clientProfile_changeCardholderName(cliSessionId, app.homePageLoginPhone, app.homePagePass, newCardHolderName);
     }
 
     @Test(priority = 4)
     public void test_BOServices_v1_auth_authentication() {
-        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, username);
+        cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
     @Test(priority = 5)
