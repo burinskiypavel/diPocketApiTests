@@ -15,8 +15,6 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class HomePageWithAlreadyExistClientTest extends TestBase {
     String cliSessionId = null;
-    String phone = "380980316499";
-    String pass = "reset246740";
     int accountId = 109405;
     Gson gson = new Gson();
     HomePageAuthenticateMobileAppRequest homePageAuthenticateMobileAppRequest = new HomePageAuthenticateMobileAppRequest();
@@ -31,18 +29,18 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
         homePageAuthenticateMobileAppRequest.setAppVersion("2.2.7");
         String json = gson.toJson(homePageAuthenticateMobileAppRequest);
 
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_homePage_AutintificateMobileApp(phone, pass, json, 400);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_homePage_AutintificateMobileApp(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), json, 400);
         response.then().body("errCode", equalTo("DIP-00591"));
     }
 
     @Test(priority = 2)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp_() throws SQLException, ClassNotFoundException {
-        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(phone, prop.getProperty("mobile.login.deviceuuid"), Site.DIPOCKET.toString(), prop.getProperty("db.url"));
+        String loginSMSCode = app.getDbHelper().getLoginSMSFromDB(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.deviceuuid"), Site.DIPOCKET.toString(), prop.getProperty("db.url"));
 
         homePageAuthenticateMobileAppRequest.setOtp(loginSMSCode);
         String json = gson.toJson(homePageAuthenticateMobileAppRequest);
 
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_homePage_AutintificateMobileApp(phone, pass, json, 200);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_homePage_AutintificateMobileApp(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), json, 200);
         cliSessionId = response.getHeader("cliSessionId");
         System.out.println("cliSessionId " + cliSessionId);
     }
@@ -51,7 +49,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_ClientProfile_ClientInfo2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientInfo2")
@@ -59,7 +57,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
                 .statusCode(200)
                 .body("clientFirstName", equalTo("Pavel"),
                         "clientLastName", equalTo("Burinsky"),
-                        "mainPhone",equalTo(phone),
+                        "mainPhone",equalTo(prop.getProperty("mobile.login.homePage.loginPhone")),
                         "email", equalTo("testdipocket3@gmail.com"));
     }
 
@@ -67,7 +65,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_ClientProfile_ClientConfig(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .header("clisessionid", cliSessionId)
                 .when()
                 .get("clientProfile/clientConfig")
@@ -85,7 +83,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_accounts_ClientDipAccounts2(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .queryParam("walletId","null" )
                 .header("clisessionid", cliSessionId)
                 .when()
@@ -100,7 +98,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
     public void test_ClientServices_v1_accounts_getAccountInfo(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(phone, pass)
+                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
                 .header("clisessionid", cliSessionId)
                 .queryParam("accountId", accountId)
                 .queryParam("walletId","null" )
@@ -115,7 +113,7 @@ public class HomePageWithAlreadyExistClientTest extends TestBase {
 
     @Test(priority = 7)
     public void test_ClientServices_v1_tile_getMessage2(){
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, phone, pass);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"));
         response.then().body("unreadMessageCount", notNullValue());
     }
 }
