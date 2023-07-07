@@ -1,6 +1,5 @@
 package tests.bo.boClient;
 
-import appmanager.HelperBase;
 import base.TestBase;
 import com.cs.dipocketback.base.data.Site;
 import io.restassured.response.Response;
@@ -10,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
+import static appmanager.HelperBase.prop;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,7 +21,7 @@ public class RolesBOUserClientPageUploadSelfiesButtonTests extends TestBase {
 
     @Test(priority = 1)
     public void test_BOServices_v1_auth_authentication() throws SQLException, ClassNotFoundException {
-        clientId = app.getDbHelper().getClientIdFromDB2(HelperBase.prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
+        clientId = app.getDbHelper().getClientIdFromDB2(prop.getProperty("mobile.registration.email"), Site.DIPOCKET.toString());
         cookie = app.getBoRequestsHelper().boServices_v1_auth_authentication(app.BOuserLogin, app.BOuserPass, app.BOusername);
     }
 
@@ -30,9 +30,8 @@ public class RolesBOUserClientPageUploadSelfiesButtonTests extends TestBase {
         app.getBoRequestsHelper().boServices_v1_client_search(cookie, clientId, "Pavel", "Burinsky", "380685448615", "testdipocket@gmail.com", Site.DIPOCKET.toString());
     }
 
-
     @Test(priority = 3)
-    public void test_BOServices_v1_clientImage_33217_selfie(){
+    public void test_BOServices_v1_clientImage_clientId_selfie(){
         Response res = given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
@@ -52,7 +51,7 @@ public class RolesBOUserClientPageUploadSelfiesButtonTests extends TestBase {
     }
 
     @Test(priority = 5)
-    public void test_BOServices_v1_clientImage_33217_selfie_(){
+    public void test_BOServices_v1_clientImage_clientId_selfie_(){
         Response res = given()
                 .spec(app.requestSpecBO)
                 .cookie(cookie)
