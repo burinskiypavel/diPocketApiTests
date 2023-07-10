@@ -1218,7 +1218,7 @@ public class DBHelper extends HelperBase {
         myCall.setInt(3, currencyId);
         myCall.setString(4, accountName);
         myCall.setInt(5, 1);
-        myCall.setInt(6, 1);
+        myCall.setInt(6, 0);
         myCall.setInt(7, 1);
         //myCall.setInt(2, clientID);
 
@@ -1472,5 +1472,32 @@ public class DBHelper extends HelperBase {
         }
         con.close();
         return clientId;
+    }
+
+    public String getIbanFromIBANFromTestDB(String srcId) throws SQLException, ClassNotFoundException {
+        Connection con = connectToTestDB();
+        //String dbUrl = "jdbc:oracle:thin:@"+ prop.getProperty("db.test.url")+"";
+        //String username = prop.getProperty("db.username");
+        //String password = prop.getProperty("db.password");
+
+        String query = "select * from IBAN where srcid = '"+srcId+"'";
+
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Connection con = DriverManager.getConnection(dbUrl, username, password);
+        Statement stmt = con.createStatement();
+        ResultSet rs= stmt.executeQuery(query);
+
+        String iban = null;
+        String srcid = null;
+        int count = 0;
+        while (rs.next()){
+            iban = rs.getString(1);
+            srcid = rs.getString(4);
+            System. out.println("iban : " + iban);
+            System. out.println("srcid : " + srcid);
+            break;
+        }
+        con.close();
+        return iban;
     }
 }

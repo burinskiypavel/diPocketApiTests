@@ -14,6 +14,7 @@ public class CardCreateRequest {
     private Long corpClientId;
     private String cardHolderName;
     private Long ePin;
+    private String comment;
 
     public CardCreateRequest() {
     }
@@ -105,4 +106,12 @@ public class CardCreateRequest {
         return ePin;
     }
     public void setePin(Long ePin){this.ePin = ePin;}
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }
