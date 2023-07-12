@@ -92,4 +92,16 @@
         </classes>
     </test>
 
+    <test name="CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryLTTests">
+        <classes>
+            <class name="tests.bankIntegration.CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryLTTests"/>
+        </classes>
+    </test>
+
+    <test name="CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryGBTests">
+        <classes>
+            <class name="tests.bankIntegration.CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryGBTests"/>
+        </classes>
+    </test>
+
 </suite>
