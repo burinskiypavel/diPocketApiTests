@@ -16,12 +16,12 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryLTTests extends TestBase {
+public class CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryGBTests extends TestBase {
     String cookie = null;
     String sms = null;
     int clientId = 0;
     String currencyCodeEUR = "EUR";
-    String countryCode = "LT";
+    String countryCode = "GB";
     String token = null;
     String program = "PAYBAN_EUR";
     String actualVIbanFromBO = null;
