@@ -37,8 +37,8 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     String[] transactions = new String[0];
     String transactionId = null;
     String currency = "EUR";
-    String amount = "926.00";//911.00
-    String amount2 = "926.00";
+    String amount = "902.00";//911.00
+    String amount2 = "902.00";//926
     String ownerName = "Vasya White";
     String cashAccountType = "CACC";
     String status = "enabled";

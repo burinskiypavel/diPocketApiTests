@@ -2,10 +2,10 @@ package appmanager.ui;
 
 import appmanager.DBHelper;
 import appmanager.UIHelperBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class UIAspspHelper extends UIHelperBase {
@@ -27,8 +27,16 @@ public class UIAspspHelper extends UIHelperBase {
         return uiTransactionCode;
     }
 
-    public void everypayWebConfirmaton(String href, String phone, String pass, String clientId) throws SQLException, ClassNotFoundException {
-        driver.navigate().to(href);
+    public void everypayWebConfirmaton(String hrefUrl, String phone, String pass, String clientId) throws SQLException, ClassNotFoundException {
+        driver.navigate().to(hrefUrl);
+
+        ProcessBuilder processBuilder = new ProcessBuilder("C:/Users/user/Desktop/autoIt/basicAuth.exe");
+        try {
+            processBuilder.start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         waitFor(By.id("phone_number"));
         driver.findElement(By.id("phone_number")).sendKeys(phone);
         driver.findElement(By.id("key")).sendKeys(pass);
