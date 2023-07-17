@@ -9,16 +9,13 @@ import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.specification.RequestSpecification;
+import net.lightbody.bmp.BrowserMobProxy;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import requests.bo.BORequests;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import static io.restassured.RestAssured.given;
 
@@ -81,8 +78,10 @@ public class ApplicationManagerUI {
     public String expectedEmailSender_upAndGo = "wsparcie@upcard.pl";
     public String expectedEmailSender_playIt = "PlayIT Card <customer.service@dipocket.org>";
     public String mobile_login_deviceuuid_tds = "380730000069-AutoTest-Login";
-    public String tds_phone = "380730000069";
-    public String tds_pass = "a111111";
+    //public String tds_phone = "380730000069";
+    //public String tds_pass = "a111111";
+    public String tds_phone = null;
+    public String tds_pass = null;
     public String site = "DiPocket";
     public String site_discontu = "discontu";
     public String site_PlayIT = "PlayIT";
@@ -112,23 +111,44 @@ public class ApplicationManagerUI {
     public String registrationPhone = "380636083315";
     public String registrationEmail = "testdipocket4@gmail.com";
     public String BOURL = "https://support.dipocket.dev";
-    public String CBOuserLogin = "Viktoria";
-    public String CBOuserPass = "kWmaB0s";
-    public String CBOuserLogin2 = "PAVELBAuto";
-    public String CBOuserPass2 = "mLjY6Ja";
-    public String CBOuserLogin3 = "dipcbo1";
-    public String CBOuserPass3 = "12345678";
-    public String BOuserLogin2 = "Evgenya";
-    public String BOuserPass2 = "7RTwTUP";
-    public String BOuserLogin = "PAVELB_AUTO_BO";
-    public String BOuserPass = "ZG7Y5gS";
-    public String BOusername = "PAVELB_AUTO_BO";
-    public String homePageLoginPhone = "380980316499";
-    public String homePagePass = "reset246740";
+    //public String CBOuserLogin = "Viktoria";
+    //public String CBOuserPass = "kWmaB0s";
+    //public String CBOuserLogin2 = "PAVELBAuto";
+    public String CBOuserLogin = null;
+    public String CBOuserPass = null;
+    public String CBOusername = null;
+    //public String CBOuserPass2 = "mLjY6Ja";
+    public String CBOuserLogin2 = null;
+    public String CBOuserPass2 = null;
+    public String CBOusername2 = null;
+    //public String CBOuserLogin3 = "dipcbo1";
+    //public String CBOuserPass3 = "12345678";
+    public String CBOuserLogin3 = null;
+    public String CBOuserPass3 = null;
+    ///public String BOuserLogin2 = "Evgenya";
+    //public String BOuserPass2 = "7RTwTUP";
+    public String BOuserLogin2 = null;
+    public String BOuserPass2 = null;
+    //public String BOuserLogin = "PAVELB_AUTO_BO";
+    //public String BOuserPass = "ZG7Y5gS";
+    //public String BOusername = "PAVELB_AUTO_BO";
+    public String BOuserLogin = null;
+    public String BOuserPass = null;
+    public String BOusername = null;
+    //public String homePageLoginPhone = "380980316499";
+    //public String homePagePass = "reset246740";
+    public String homePageLoginPhone = null;
+    public String homePagePass = null;
     public String homePageLoginId = "40263";
+    public String mobileRegPass = null;
+    public String mobileRegPhone = null;
 
 
     public void initStart() {
+//        IE
+//        System.setProperty("webdriver.ie.driver", "driver/IEDriverServer.exe");
+//        driver = new InternetExplorerDriver();
+
         System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         //chromeOptions.addArguments("--headless");
@@ -179,6 +199,26 @@ public class ApplicationManagerUI {
         mobile_site_snowAttack = HelperBase.prop.getProperty("mobile.site.snowAttack");
         emailsVerificationsCountryId = HelperBase.prop.getProperty("emailsVerifications.countryId");
         emailsVerificationsCurrencyId = HelperBase.prop.getProperty("emailsVerifications.currencyId");
+
+        tds_phone = HelperBase.prop.getProperty("tds.phone");
+        tds_pass = HelperBase.prop.getProperty("tds.pass");
+        CBOuserLogin = HelperBase.prop.getProperty("dev.cbo.userLogin2");
+        CBOuserPass = HelperBase.prop.getProperty("dev.cbo.userPass2");
+        CBOusername = HelperBase.prop.getProperty("dev.cbo.username2");
+        CBOuserLogin2 = HelperBase.prop.getProperty("cbo.user.login");
+        CBOuserPass2 = HelperBase.prop.getProperty("cbo.user.pass");
+        CBOusername2 = HelperBase.prop.getProperty("cbo.username");
+        CBOuserLogin3 = HelperBase.prop.getProperty("cbo.userLogin3");
+        CBOuserPass3 = HelperBase.prop.getProperty("cbo.userPass3");
+        BOuserLogin2 = HelperBase.prop.getProperty("bo.userLogin2");
+        BOuserPass2 = HelperBase.prop.getProperty("bo.userPass2");
+        BOuserLogin = HelperBase.prop.getProperty("bo.user.login");
+        BOuserPass = HelperBase.prop.getProperty("bo.user.pass");
+        BOusername = HelperBase.prop.getProperty("bo.username");
+        mobileRegPhone = HelperBase.prop.getProperty("mobile.registration.phoneNumber");
+        mobileRegPass = HelperBase.prop.getProperty("mobile.registration.pass");
+        homePageLoginPhone = HelperBase.prop.getProperty("mobile.login.homePage.loginPhone");
+        homePagePass = HelperBase.prop.getProperty("mobile.login.homePage.pass");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()
