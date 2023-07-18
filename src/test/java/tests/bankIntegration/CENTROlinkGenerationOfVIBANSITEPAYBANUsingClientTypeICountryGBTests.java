@@ -2,7 +2,6 @@ package tests.bankIntegration;
 
 import base.TestBase;
 import com.cs.dipocketback.pojo.card.CardType;
-import com.cs.dipocketback.pojo.customer.CardActivateRequest;
 import com.cs.dipocketback.pojo.customer.CardCreateRequest;
 import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
 import com.google.gson.Gson;
