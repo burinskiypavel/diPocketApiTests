@@ -27,10 +27,7 @@ public class CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryLTTests
     String actualVIbanFromBO = null;
     String actualVIbanPaybanFromDB = null;
     String username = "PAVELB_BO";
-    String login = "API.PAYBAN";
-    String pass = "5pr6CsT";
     Gson gson = new Gson();
-    CardActivateRequest cardActivateRequest = new CardActivateRequest();
     CardCreateRequest cardCreateRequest = new CardCreateRequest();
     ClientRegisterRequest clientRegisterRequest = new ClientRegisterRequest();
 
@@ -61,7 +58,7 @@ public class CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryLTTests
         clientRegisterRequest.setCitizenship(countryCode);
         String json = gson.toJson(clientRegisterRequest);
 
-        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(login, pass, json);
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.testPaybanLogin, app.testPaybanPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         clientId = jsonPath.getInt("clientId");
@@ -77,14 +74,12 @@ public class CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryLTTests
         cardCreateRequest.setAccFeeTariffPlanId(Long.valueOf(1010));
         cardCreateRequest.setePin(Long.valueOf(1111));
         cardCreateRequest.setAccountId(null);
-
         cardCreateRequest.setePin(1111l);
-        //cardCreateRequest.setCorpClientId(0l);
         cardCreateRequest.setCardHolderName("payban test");
         cardCreateRequest.setComment("GBP IBAN generation test");
         String json = gson.toJson(cardCreateRequest);
 
-        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_card_create_test(login, pass, json);
+        String response = app.getCustomerServicesRequestsHelper().customerServices_v1_card_create_test(app.testPaybanLogin, app.testPaybanPass, json);
 
         JsonPath jsonPath = new JsonPath(response);
         token = jsonPath.getString("token");

@@ -149,6 +149,8 @@ public class ApplicationManager {
 
     public String testEverypayPhone = null;
     public String testEverypayPass = null;
+    public String testPaybanLogin = null;
+    public String testPaybanPass = null;
 
     public void initStart() {
 //        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
@@ -224,6 +226,8 @@ public class ApplicationManager {
         bankIntegrationPaymentPass = HelperBase.prop.getProperty("test.bankIntegrationPayment.pass");
         testEverypayPhone = HelperBase.prop.getProperty("test.everypay.phone");
         testEverypayPass = HelperBase.prop.getProperty("test.everypay.pass");
+        testPaybanLogin = HelperBase.prop.getProperty("test.payban.login");
+        testPaybanPass = HelperBase.prop.getProperty("test.payban.pass");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()
