@@ -24,9 +24,7 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     int notifyId = 0;
     String dateFrom = "2019-11-26";
     String dateTo = "2023-05-12";
-    String phone = "37064902199";
     String partnerId = "122222";
-    String pass = "123456A";
     String clientId = "62008";
 
     String iban = "EE517777000012207332";
@@ -37,8 +35,8 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
     String[] transactions = new String[0];
     String transactionId = null;
     String currency = "EUR";
-    String amount = "902.00";//911.00
-    String amount2 = "902.00";//926
+    String amount = "902.00";
+    String amount2 = "902.00";
     String ownerName = "Vasya White";
     String cashAccountType = "CACC";
     String status = "enabled";
@@ -66,7 +64,7 @@ public class ASPSPAutorizationAISForWebcabinetUsersTests extends APIUITestBase {
 
     @Test(priority = 2)
     public void test_everypayWebConfirmaton() throws SQLException, ClassNotFoundException {
-        appUi.getUiAspspHelper().everypayWebConfirmaton(href, phone, pass, clientId);
+        appUi.getUiAspspHelper().everypayWebConfirmaton(href, app.testEverypayPhone, app.testEverypayPass, clientId);
         appUi.getUiAspspHelper().selectAccount(iban);
         appUi.getUiAspspHelper().pressConsent();
     }

@@ -147,6 +147,9 @@ public class ApplicationManager {
     public String mobileRegPass = null;
     public String mobileRegPhone = null;
 
+    public String testEverypayPhone = null;
+    public String testEverypayPass = null;
+
     public void initStart() {
 //        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
 //        ChromeOptions chromeOptions = new ChromeOptions();
@@ -219,6 +222,9 @@ public class ApplicationManager {
         homePagePass = HelperBase.prop.getProperty("mobile.login.homePage.pass");
         bankIntegrationPaymentsLogin = HelperBase.prop.getProperty("test.bankIntegrationPayments.login");
         bankIntegrationPaymentPass = HelperBase.prop.getProperty("test.bankIntegrationPayment.pass");
+
+        testEverypayPhone = HelperBase.prop.getProperty("test.everypay.phone");
+        testEverypayPass = HelperBase.prop.getProperty("test.everypay.pass");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()

@@ -127,6 +127,9 @@ public class ApplicationManagerUI {
     public String mobileRegPass = null;
     public String mobileRegPhone = null;
 
+    public String testEverypayPhone = null;
+    public String testEverypayPass = null;
+
 
     public void initStart() {
 //        IE
@@ -203,6 +206,9 @@ public class ApplicationManagerUI {
         mobileRegPass = HelperBase.prop.getProperty("mobile.registration.pass");
         homePageLoginPhone = HelperBase.prop.getProperty("mobile.login.homePage.loginPhone");
         homePagePass = HelperBase.prop.getProperty("mobile.login.homePage.pass");
+
+        testEverypayPhone = HelperBase.prop.getProperty("test.everypay.phone");
+        testEverypayPass = HelperBase.prop.getProperty("test.everypay.pass");
 
         requestSpecDipocketRegistration = given()
                 .log().uri().log().headers().log().body()
