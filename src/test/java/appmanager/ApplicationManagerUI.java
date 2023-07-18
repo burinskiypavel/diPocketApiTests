@@ -206,7 +206,6 @@ public class ApplicationManagerUI {
         mobileRegPass = HelperBase.prop.getProperty("mobile.registration.pass");
         homePageLoginPhone = HelperBase.prop.getProperty("mobile.login.homePage.loginPhone");
         homePagePass = HelperBase.prop.getProperty("mobile.login.homePage.pass");
-
         testEverypayPhone = HelperBase.prop.getProperty("test.everypay.phone");
         testEverypayPass = HelperBase.prop.getProperty("test.everypay.pass");
 

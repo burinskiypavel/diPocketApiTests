@@ -222,7 +222,6 @@ public class ApplicationManager {
         homePagePass = HelperBase.prop.getProperty("mobile.login.homePage.pass");
         bankIntegrationPaymentsLogin = HelperBase.prop.getProperty("test.bankIntegrationPayments.login");
         bankIntegrationPaymentPass = HelperBase.prop.getProperty("test.bankIntegrationPayment.pass");
-
         testEverypayPhone = HelperBase.prop.getProperty("test.everypay.phone");
         testEverypayPass = HelperBase.prop.getProperty("test.everypay.pass");
 
