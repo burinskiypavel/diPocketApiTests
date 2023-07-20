@@ -110,6 +110,7 @@ public class ApplicationManager {
     public RequestSpecification requestSpecBO;
     public RequestSpecification requestSpecBOTest;
     public RequestSpecification requestSpecCustomerServicesTest;
+    public RequestSpecification requestSpecASPSPTest;
     public RestAssuredConfig configTimeout;
     public String playITRegistrationPhone = "380636083315";
     public String playITRegistrationEmail = "testdipocket4@gmail.com";
@@ -151,6 +152,7 @@ public class ApplicationManager {
     public String testEverypayPass = null;
     public String testPaybanLogin = null;
     public String testPaybanPass = null;
+    public String testOpenbankingUrl = "https://openbanking.dipocket.site";
 
     public void initStart() {
 //        System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
@@ -335,6 +337,13 @@ public class ApplicationManager {
                 .config(configTimeout)
                 .baseUri(baseTestURL)
                 .basePath("/CustomerServices");
+
+        requestSpecASPSPTest = given()
+                .log().uri().log().headers().log().body()
+                .config(configTimeout)
+                .config(sslCertHelper.aspspSslConfig)
+                .port(3443)
+                .baseUri(testOpenbankingUrl);
     }
 
     public void init() {

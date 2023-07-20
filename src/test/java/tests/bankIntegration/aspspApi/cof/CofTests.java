@@ -9,7 +9,6 @@ import model.aspsp.ConfirmationOfFundsRequest;
 import model.aspsp.CreateConsentRequest;
 import model.aspsp.InstructedAmount;
 import model.clientServices.DashBoardNotifyDetails3Request;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -43,15 +42,14 @@ public class CofTests extends APIUITestBase {
         String json = gson.toJson(createConsentRequest);
 
         String response = given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi/")
                 .contentType("application/json")
                 .body(json)
-                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v2/consents/confirmation-of-funds")
+                .post("/{partnerId}/bg/v2/consents/confirmation-of-funds")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -112,22 +110,20 @@ public class CofTests extends APIUITestBase {
                 .then().log().all()
                 .statusCode(200);
 
+        appUi.getUiAspspHelper().pressConsent();
+
         assertThat(uiTransactionCode, equalTo(apiTransactionCode));
     }
 
     @Test(priority = 4)
     public void test_getConsentStatus_showConsentStatus() {
-        appUi.getUiboHelper().waitFor(By.xpath("//button[contains(text(), 'Consent')]"));
-        appUi.driver.findElement(By.xpath("//button[contains(text(), 'Consent')]")).click();
-
         given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
-                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}/status")
+                .get("/{partnerId}/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}/status")
                 .then().log().all()
                 .statusCode(200)
                 .body("consentStatus", equalTo("valid"));
@@ -136,13 +132,12 @@ public class CofTests extends APIUITestBase {
     @Test(priority = 5)
     public void test_getConsentRequest_showConsentInformation() {
         given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "b3500b4a-ca36-4917-9d94-f60a1731c4ca")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
-                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}")
+                .get("/{partnerId}/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}")
                 .then().log().all()
                 .statusCode(200)
                 .body("account.iban", equalTo(iban),
@@ -159,14 +154,13 @@ public class CofTests extends APIUITestBase {
         String json = gson.toJson(confirmationOfFundsRequest);
 
         given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .contentType("application/json")
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)
                 .body(json)
-                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/funds-confirmations")
+                .post("/{partnerId}/bg/v1/funds-confirmations")
                 .then().log().all()
                 .statusCode(200)
                 .body("fundsAvailable", equalTo(true));
