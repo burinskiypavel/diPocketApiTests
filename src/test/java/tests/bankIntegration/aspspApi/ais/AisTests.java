@@ -25,7 +25,7 @@ public class AisTests extends APIUITestBase {
     String iban = "PL42109010560000000150296424";
     String dateFrom = "2019-11-26";
     String dateTo = "2023-05-12";
-    String validUntil = "2023-09-17";
+    //String validUntil = "2023-09-17";
     String nextMonthValidUntilDate = null;
     String resourceId = null;
     String[] balances = new String[0];
@@ -155,19 +155,9 @@ public class AisTests extends APIUITestBase {
 
     @Test(priority = 10)
     public void test_AISReadAccountTransactionDetailedInfo(){
-        given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
-                .pathParam("accountId", resourceId)
-                .pathParam("partnerId", partnerId)
-                .pathParam("transactionId", transactionId)
-                .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
-                .header("Consent-ID", consentId)
-                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/accounts/{accountId}/transactions/{transactionId}")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("transactionsDetails.transactionId", equalTo(transactionId),
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_accounts_accountId_transactions_transactionId(consentId, partnerId, resourceId, transactionId);
+
+        response.then().body("transactionsDetails.transactionId", equalTo(transactionId),
                         "transactionsDetails.creditorName", equalTo("-29791"),
                         "transactionsDetails.transactionAmount.currency", equalTo(currency),
                         "transactionsDetails.transactionAmount.amount", equalTo("-10.00"),
