@@ -130,50 +130,20 @@ public class PisTests extends APIUITestBase {
     @Test(priority = 5)
     public void test_mobileConfirmation() throws SQLException, ClassNotFoundException {
         String cliSessionId = app.getLogin_registrationHelper().loginDipocket_test(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), prop.getProperty("mobile.login.deviceuuid"));
-        String response2 = given()
-                .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
-                .header("site", site)
-                .header("cliSessionId", cliSessionId)
-                .get("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyList2")
-                .then().log().all()
-                .statusCode(200)
-                .body("notificationList[0].notifyTypeName", equalTo("ASPSP Authorization")).extract().response().asString();
-
-        JsonPath jsonPath2 = new JsonPath(response2);
-        notifyId = jsonPath2.getInt("notificationList[0].notifyId");
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyList2(prop.getProperty("mobile.test.base.url"), prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), cliSessionId);
+        String responseString = response.then().body("notificationList[0].notifyTypeName", equalTo("ASPSP Authorization")).extract().response().asString();
+        notifyId = app.getResponseValidationHelper().getIntFromResponseJsonPath(responseString, "notificationList[0].notifyId");
 
         dashBoardNotifyDetails3Request.setTypeId(55);
         dashBoardNotifyDetails3Request.setNotifyId(notifyId);
         dashBoardNotifyDetails3Request.setDetailsRef("");
         String json = gson.toJson(dashBoardNotifyDetails3Request);
+        Response response2 = app.getClientServicesRequestsHelper().clientServices_v1_dashBoard_notifyDetails3(prop.getProperty("mobile.test.base.url"), json, prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), cliSessionId);
+        String responseStringNotifyDetails3 = response2.then().body("notifyTypeName", equalTo("ASPSP Authorization"),
+                "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
+        apiTransactionCode = app.getResponseValidationHelper().getStringFromResponseJsonPath(responseStringNotifyDetails3, "dtails");
 
-        String response4 = given()
-                .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
-                .contentType("application/json")
-                .header("cliSessionId", cliSessionId)
-                .header("site", site)
-                .body(json)
-                .post("https://http.dipocket.site/ClientServices/v1/dashBoard/notifyDetails3")
-                .then().log().all()
-                .statusCode(200)
-                .body("notifyTypeName", equalTo("ASPSP Authorization"),
-                        "hint", equalTo("Please confirm your authentication attempt only if you see the same PIN at authentication webpage")).extract().response().asString();
-
-        JsonPath jsonPath3 = new JsonPath(response4);
-        apiTransactionCode = jsonPath3.getString("dtails");
-
-        given()
-                .log().uri().log().headers().log().body()
-                .auth().preemptive().basic(prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"))
-                .contentType("application/json")
-                .header("cliSessionId", cliSessionId)
-                .pathParam("notifyId", notifyId)
-                .header("site", site)
-                .post("https://http.dipocket.site/ClientServices/v1/aspsp/{notifyId}/approve")
-                .then().log().all()
-                .statusCode(200);
+        app.getClientServicesRequestsHelper().clientServices_v1_aspsp_notifyId_approve(prop.getProperty("mobile.test.base.url"), notifyId, prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"), cliSessionId);
 
         assertThat(uiTransactionCode, equalTo(apiTransactionCode));
     }

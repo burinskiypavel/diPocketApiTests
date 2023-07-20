@@ -278,6 +278,7 @@ public class ClientServicesRequests {
                 .spec(requestSpecDipocketHomePage)
                 .baseUri(urlEnv)
                 .auth().preemptive().basic(phone, pass)
+                //.header("site", site)
                 .contentType("application/json")
                 .pathParam("notifyId", notifyId)
                 .header("clisessionid", cliSessionId)
