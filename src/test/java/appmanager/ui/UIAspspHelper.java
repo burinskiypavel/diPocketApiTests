@@ -30,7 +30,7 @@ public class UIAspspHelper extends UIHelperBase {
     public void everypayWebConfirmaton(String hrefUrl, String phone, String pass, String clientId) throws SQLException, ClassNotFoundException {
         driver.navigate().to(hrefUrl);
 
-        ProcessBuilder processBuilder = new ProcessBuilder("C:/Users/user/Desktop/autoIt/basicAuth.exe");
+        ProcessBuilder processBuilder = new ProcessBuilder("autoIt/basicAuth.exe");
         try {
             processBuilder.start();
         } catch (IOException e) {
