@@ -20,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class CofTests extends APIUITestBase {
+    String partnerId = "654321";
     String consentId = null;
     String href = null;
     String uiTransactionCode = null;
@@ -44,12 +45,13 @@ public class CofTests extends APIUITestBase {
         String response = given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi/")
                 .contentType("application/json")
                 .body(json)
-                .post("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds")
+                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v2/consents/confirmation-of-funds")
                 .then().log().all()
                 .statusCode(200).extract().response().asString();
 
@@ -121,10 +123,11 @@ public class CofTests extends APIUITestBase {
         given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}/status")
+                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}/status")
                 .then().log().all()
                 .statusCode(200)
                 .body("consentStatus", equalTo("valid"));
@@ -135,10 +138,11 @@ public class CofTests extends APIUITestBase {
         given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "b3500b4a-ca36-4917-9d94-f60a1731c4ca")
                 .header("TPP-Redirect-URI", "http://www.google.com")
                 .pathParam("confirmation-of-funds", consentId)
-                .get("https://openbanking.dipocket.site:3443/654321/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}")
+                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v2/consents/confirmation-of-funds/{confirmation-of-funds}")
                 .then().log().all()
                 .statusCode(200)
                 .body("account.iban", equalTo(iban),
@@ -157,11 +161,12 @@ public class CofTests extends APIUITestBase {
         given()
                 .log().uri().log().headers().log().body()
                 .config(app.getSSLCertHelper().aspspSslConfig)
+                .pathParam("partnerId", partnerId)
                 .contentType("application/json")
                 .header("X-Request-ID", "b463a960-9616-4df6-909f-f80884190c22")
                 .header("Consent-ID", consentId)
                 .body(json)
-                .post("https://openbanking.dipocket.site:3443/654321/bg/v1/funds-confirmations")
+                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/funds-confirmations")
                 .then().log().all()
                 .statusCode(200)
                 .body("fundsAvailable", equalTo(true));
