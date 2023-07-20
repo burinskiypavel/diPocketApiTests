@@ -47,12 +47,11 @@ public class PisTests extends APIUITestBase {
     @Test(priority = 1)
     public void test_pisGetPaymentRequest() {
         Response response = given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .pathParam("paymentId", paymentId)
                 .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
-                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/sepa-credit-transfers/{paymentId}");
+                .get("/{partnerId}/bg/v1/payments/sepa-credit-transfers/{paymentId}");
 
         String stResponse = response.then().log().all()
                 .statusCode(200).extract().response().asString();
@@ -73,12 +72,11 @@ public class PisTests extends APIUITestBase {
     @Test(priority = 2)
     public void test_PISGetPaymentRequestStatus(){
         given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .pathParam("paymentId", paymentId)
                 .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
-                .get("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/sepa-credit-transfers/{paymentId}/status")
+                .get("/{partnerId}/bg/v1/payments/sepa-credit-transfers/{paymentId}/status")
                 .then().log().all()
                 .statusCode(200)
                 .body("transactionStatus", equalTo("ACSC"));
@@ -108,15 +106,14 @@ public class PisTests extends APIUITestBase {
         String json = gson.toJson(paymentsCrossBorderCreditTransfersRequest);
 
         String stResponse = given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
                 .contentType("application/json")
                 .body(json)
-                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/cross-border-credit-transfers")
+                .post("/{partnerId}/bg/v1/payments/cross-border-credit-transfers")
                 .then().log().all()
                 .statusCode(200)
                 .body("transactionStatus", equalTo("RCVD"))
@@ -202,15 +199,14 @@ public class PisTests extends APIUITestBase {
         String json = gson.toJson(paymentsDomesticCreditTransfersRequest);
 
         String stResponse = given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
                 .contentType("application/json")
                 .body(json)
-                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/domestic-credit-transfers")
+                .post("/{partnerId}/bg/v1/payments/domestic-credit-transfers")
                 .then().log().all()
                 .statusCode(200)
                 .body("transactionStatus", equalTo("RCVD"))
@@ -237,15 +233,14 @@ public class PisTests extends APIUITestBase {
         String json = gson.toJson(paymentSepaCreditTransfersRequest);
 
         String stResponse = given()
-                .log().uri().log().headers().log().body()
-                .config(app.getSSLCertHelper().aspspSslConfig)
+                .spec(app.requestSpecASPSPTest)
                 .pathParam("partnerId", partnerId)
                 .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
                 .header("TPP-Redirect-URI", "https://www.google.com")
                 .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
                 .contentType("application/json")
                 .body(json)
-                .post("https://openbanking.dipocket.site:3443/{partnerId}/bg/v1/payments/sepa-credit-transfers")
+                .post("/{partnerId}/bg/v1/payments/sepa-credit-transfers")
                 .then().log().all()
                 .statusCode(200)
                 .body("transactionStatus", equalTo("RCVD"))
