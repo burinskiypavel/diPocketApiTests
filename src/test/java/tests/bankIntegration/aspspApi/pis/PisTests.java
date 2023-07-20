@@ -124,13 +124,7 @@ public class PisTests extends APIUITestBase {
 
     @Test(priority = 4)
     public void test_webConfirmaton() {
-        appUi.driver.navigate().to(href);
-        appUi.getUiboHelper().waitFor(By.id("phone-number"));
-        appUi.driver.findElement(By.id("phone-number")).sendKeys(prop.getProperty("mobile.login.homePage.loginPhone"));
-        appUi.driver.findElement(By.id("password")).sendKeys(prop.getProperty("mobile.login.homePage.pass"));
-        appUi.driver.findElement(By.xpath("//button[@data-dip-action='login']")).click();
-        appUi.getUiboHelper().waitFor(By.xpath("//*[contains(text(), 'Please go to DiPocket Mobile Application to confirm your authorization attempt')]"));
-        uiTransactionCode = appUi.driver.findElement(By.id("transaction-code")).getText();
+        uiTransactionCode = appUi.getUiAspspHelper().webConfirmaton(href, prop.getProperty("mobile.login.homePage.loginPhone"), prop.getProperty("mobile.login.homePage.pass"));
     }
 
     @Test(priority = 5)
