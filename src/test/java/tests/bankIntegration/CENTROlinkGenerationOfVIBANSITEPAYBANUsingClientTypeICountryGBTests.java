@@ -5,7 +5,6 @@ import com.cs.dipocketback.pojo.card.CardType;
 import com.cs.dipocketback.pojo.customer.CardCreateRequest;
 import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
 import com.google.gson.Gson;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -59,8 +58,7 @@ public class CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryGBTests
 
         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.testPaybanLogin, app.testPaybanPass, json);
 
-        JsonPath jsonPath = new JsonPath(response);
-        clientId = jsonPath.getInt("clientId");
+        clientId = app.getResponseValidationHelper().getIntFromResponseJsonPath(response, "clientId");
     }
 
     @Test(priority = 2)
@@ -80,8 +78,7 @@ public class CENTROlinkGenerationOfVIBANSITEPAYBANUsingClientTypeICountryGBTests
 
         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_card_create_test(app.testPaybanLogin, app.testPaybanPass, json);
 
-        JsonPath jsonPath = new JsonPath(response);
-        token = jsonPath.getString("token");
+        token = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "token");
     }
 
     @Test(priority = 3)

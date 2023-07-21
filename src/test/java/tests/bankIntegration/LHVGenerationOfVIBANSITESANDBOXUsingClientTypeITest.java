@@ -1,20 +1,16 @@
 package tests.bankIntegration;
 
 import base.TestBase;
-import com.cs.dipocketback.base.data.Site;
 import com.cs.dipocketback.pojo.card.CardType;
 import com.cs.dipocketback.pojo.customer.CardActivateRequest;
 import com.cs.dipocketback.pojo.customer.CardCreateRequest;
 import com.cs.dipocketback.pojo.customer.ClientRegisterRequest;
 import com.google.gson.Gson;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import model.bo.boServices.Client_clientId_update;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -64,8 +60,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
 
         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_client_register_test(app.sandboxLogin, app.sandboxPass, json);
 
-        JsonPath jsonPath = new JsonPath(response);
-        clientIdSandbox = jsonPath.getInt("clientId");
+        clientIdSandbox = app.getResponseValidationHelper().getIntFromResponseJsonPath(response, "clientId");
     }
 
     @Test(priority = 2)
@@ -82,8 +77,7 @@ public class LHVGenerationOfVIBANSITESANDBOXUsingClientTypeITest extends TestBas
 
         String response = app.getCustomerServicesRequestsHelper().customerServices_v1_card_create_test(app.sandboxLogin, app.sandboxPass, json);
 
-        JsonPath jsonPath = new JsonPath(response);
-        token = jsonPath.getString("token");
+        token = app.getResponseValidationHelper().getStringFromResponseJsonPath(response, "token");
     }
 
     @Test(priority = 3)
