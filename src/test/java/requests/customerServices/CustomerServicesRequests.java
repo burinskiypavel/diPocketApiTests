@@ -60,6 +60,32 @@ public class CustomerServicesRequests {
                 .then().log().all().statusCode(200);
     }
 
+    public Response customerServices_v1_card_activate_test_(String authLogin, String authPass, String json){
+        Response response = given()
+                .spec(requestSpecCustomerServices)
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .auth().basic(authLogin, authPass)
+                .when()
+                .body(json)
+                .post( "/v1/card/activate");
+
+                response.then().log().all().statusCode(200);
+                return response;
+    }
+
+    public Response customerServices_v1_card_load_test(String authLogin, String authPass, String json){
+        Response response = given()
+                .spec(requestSpecCustomerServices)
+                .baseUri(HelperBase.prop.getProperty("test.base.url"))
+                .auth().basic(authLogin, authPass)
+                .when()
+                .body(json)
+                .post( "/v1/card/load");
+
+        response.then().log().all().statusCode(200);
+        return response;
+    }
+
     public String customerServices_v1_account_calculateBankTransfer_SEPA_test(String authLogin, String authPass, String json){
         String response = given()
                 .spec(requestSpecCustomerServices)
