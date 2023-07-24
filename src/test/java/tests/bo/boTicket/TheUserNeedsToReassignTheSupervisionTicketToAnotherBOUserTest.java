@@ -25,22 +25,20 @@ public class TheUserNeedsToReassignTheSupervisionTicketToAnotherBOUserTest exten
     @Test(priority = 0)
     public void test_registration() throws SQLException, ClassNotFoundException, InterruptedException, ParseException {
         tomorrow = app.getTimeStampHelper().getTimeStampWithAddSomeAmountOfDays("dd.MM.yyyy HH:mm:ss", 2);
-        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", prop.getProperty("mobile.registration.pass"), "1230768000000", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
-        //cliSessionId = app.getLogin_registrationHelper().loginDipocket(prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.pass"), HelperBase.prop.getProperty("mobile.login.deviceuuid"));
+        app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", prop.getProperty("mobile.registration.pass"), "1230768000000", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
     }
 
 
     @Test(priority = 1)
     public void test_ClientServices_v1_homePage_AutintificateMobileApp() throws SQLException, ClassNotFoundException, InterruptedException {
-        //app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", prop.getProperty("mobile.registration.pass"), "1230768000000");
-        cliSessionId = app.getLogin_registrationHelper().loginDipocket(prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.pass"), prop.getProperty("mobile.login.deviceuuid"));
+        cliSessionId = app.getLogin_registrationHelper().loginDipocket(app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.pass"), prop.getProperty("mobile.login.deviceuuid"));
     }
 
     @Test(priority = 2)
     public void test_ClientServices_v1_supervision_inviteSupervisor(){
         given()
                 .spec(app.requestSpecDipocketHomePage)
-                .auth().preemptive().basic(prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.pass"))
+                .auth().preemptive().basic(app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.pass"))
                 .contentType("application/json")
                 .header("clisessionid", cliSessionId)
                 .body("{\n" +
@@ -55,7 +53,7 @@ public class TheUserNeedsToReassignTheSupervisionTicketToAnotherBOUserTest exten
     @Test(priority = 3)
     public void test_ClientServices_v1_tile_getMessages2() throws SQLException, ClassNotFoundException {
         childId = app.getDbHelper().getClientIdFromDB("testdipocket@gmail.com", Site.DIPOCKET.toString());
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.pass"));
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_tile_getMessages2(cliSessionId, app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.pass"));
         response.then().body("communicationTileList.shortName", hasItem("Approval Pending"));
     }
 

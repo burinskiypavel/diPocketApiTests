@@ -65,7 +65,7 @@ public class TakeSDDTicketTests extends UITestBase {
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -83,7 +83,7 @@ public class TakeSDDTicketTests extends UITestBase {
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -107,7 +107,7 @@ public class TakeSDDTicketTests extends UITestBase {
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -125,7 +125,7 @@ public class TakeSDDTicketTests extends UITestBase {
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -152,7 +152,7 @@ public class TakeSDDTicketTests extends UITestBase {
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -170,7 +170,7 @@ public class TakeSDDTicketTests extends UITestBase {
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }
@@ -195,7 +195,7 @@ public class TakeSDDTicketTests extends UITestBase {
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
         if (app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0) {
-            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
             app.getUiboTicketHelper().gotoTakeTicket();
         }
 
@@ -211,7 +211,7 @@ public class TakeSDDTicketTests extends UITestBase {
             }
 
             if(app.getUiboHelper().findElements(By.id("takeTicketContent")).size() == 0){
-                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                app.getLogin_registrationHelper().dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.generateRandomString(8), "715611173985", app.mobile_registration_phoneNumber, prop.getProperty("mobile.registration.email"), "dev");
                 app.getUiboTicketHelper().gotoTakeTicket();
             }
         }

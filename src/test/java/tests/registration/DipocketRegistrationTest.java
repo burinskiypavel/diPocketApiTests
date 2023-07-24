@@ -40,7 +40,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 1)
     public void test_ClientServices_v1_references_availableCountries() throws SQLException, ClassNotFoundException {
-        app.getDbHelper().deleteClientFromDB(prop.getProperty("mobile.registration.phoneNumber"), site, prop.getProperty("db.url"));
+        app.getDbHelper().deleteClientFromDB(app.mobile_registration_phoneNumber, site, prop.getProperty("db.url"));
         String clientId = app.getDbHelper().getClientIdFromDB(prop.getProperty("mobile.registration.email"), site);
         if(!(clientId == null)){
             app.getDbHelper().deleteClientFromDB("420703666872", site, prop.getProperty("db.url"));
@@ -113,7 +113,7 @@ public class DipocketRegistrationTest extends TestBase {
         userRegistrationSendSMSCodeForPhoneRequest.setSmsNumber(1);
         String json = gson.toJson(userRegistrationSendSMSCodeForPhoneRequest);
 
-        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_sendSMSCodeForPhone(prop.getProperty("mobile.base.url"), langId, prop.getProperty("mobile.registration.phoneNumber"), json, site);
+        app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_sendSMSCodeForPhone(prop.getProperty("mobile.base.url"), langId, app.mobile_registration_phoneNumber, json, site);
 
 //        given()
 //                .spec(app.requestSpecDipocketRegistration)
@@ -140,7 +140,7 @@ public class DipocketRegistrationTest extends TestBase {
 
         String smsMessage = given()
                 .log().uri().log().headers().log().body()
-                .queryParam("phone", prop.getProperty("mobile.registration.phoneNumber"))
+                .queryParam("phone", app.mobile_registration_phoneNumber)
                 .queryParam("site", site)
                 .when()
                 .get("http://app.dipocket.dev:8091/sms/by_phone_and_site")
@@ -151,9 +151,9 @@ public class DipocketRegistrationTest extends TestBase {
         String  smsFromMemCash = smsMessage.substring(6, 12);
         System.out.println("smsFromMemCash: " + smsFromMemCash);
 
-        smsCode = app.getDbHelper().getSMSCodeFromDB(prop.getProperty("mobile.registration.phoneNumber"), site, prop.getProperty("db.url"));
+        smsCode = app.getDbHelper().getSMSCodeFromDB(app.mobile_registration_phoneNumber, site, prop.getProperty("db.url"));
 
-        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_verifyPhone(prop.getProperty("mobile.base.url"), prop.getProperty("mobile.registration.phoneNumber"), site);
+        Response response = app.getClientServicesRequestsHelper().сlientServices_v1_references_verifyPhone(prop.getProperty("mobile.base.url"), app.mobile_registration_phoneNumber, site);
         response.then().body("value", equalTo(true));
 //        given()
 //                .spec(app.requestSpecDipocketRegistration)
@@ -192,7 +192,7 @@ public class DipocketRegistrationTest extends TestBase {
         RegSavepointData regSavepointData = new RegSavepointData();
         regSavepointData.setDeviceUUID(prop.getProperty("mobile.registration.deviceuuid"));
         regSavepointData.setLangId(langId);
-        regSavepointData.setMainPhone(prop.getProperty("mobile.registration.phoneNumber"));
+        regSavepointData.setMainPhone(app.mobile_registration_phoneNumber);
         regSavepointData.setStepNo(1);
         regSavepointData.setRegisteredAddrAsmail(true);
         regSavepointData.setAddress(clientAddress);
@@ -236,7 +236,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 9)
     public void test_ClientServices_v1_userRegistration_checkPhoneAndLoadSavePoint() {
-        Response response = app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(prop.getProperty("mobile.base.url"), langId, prop.getProperty("mobile.registration.phoneNumber"), smsCode, site);
+        Response response = app.getClientServicesRequestsHelper().clientServices_v1_userRegistration_checkPhoneAndLoadSavePoint(prop.getProperty("mobile.base.url"), langId, app.mobile_registration_phoneNumber, smsCode, site);
         response.then().body("isInvited", equalTo(false),
                 "smsCode", equalTo(smsCode));
 //        given()
@@ -269,7 +269,7 @@ public class DipocketRegistrationTest extends TestBase {
         regSavepointData2.setLangId(langId);
         regSavepointData2.setFirstName(prop.getProperty("mobile.registration.firstName"));
         regSavepointData2.setLastName(prop.getProperty("mobile.registration.lastName"));
-        regSavepointData2.setMainPhone(prop.getProperty("mobile.registration.phoneNumber"));
+        regSavepointData2.setMainPhone(app.mobile_registration_phoneNumber);
         regSavepointData2.setCountryId(countryId);
         regSavepointData2.setCurrencyId(currencyId);
         regSavepointData2.setBirthDate("715611173985");
@@ -635,7 +635,7 @@ public class DipocketRegistrationTest extends TestBase {
 
     @Test(priority = 19)
     public void testVerifyEmailIsVerifiedFromDB() throws SQLException, ClassNotFoundException {
-        int emailisverified =  app.getDbHelper().getEMAILISVERIFIEDFromClientFromDB(prop.getProperty("mobile.registration.phoneNumber"), site, prop.getProperty("db.url"));
+        int emailisverified =  app.getDbHelper().getEMAILISVERIFIEDFromClientFromDB(app.mobile_registration_phoneNumber, site, prop.getProperty("db.url"));
         assertThat(emailisverified, equalTo(1));
     }
 

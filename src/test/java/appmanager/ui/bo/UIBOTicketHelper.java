@@ -1,5 +1,6 @@
 package appmanager.ui.bo;
 
+import appmanager.ApplicationManager;
 import appmanager.HelperBase;
 import appmanager.Login_RegistrationHelper;
 import appmanager.UIHelperBase;
@@ -35,6 +36,7 @@ public class UIBOTicketHelper extends UIHelperBase {
     RescanRequestPage rescanRequestPage = new RescanRequestPage(driver);
     AskForPage askForPage = new AskForPage(driver);
     Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
+    ApplicationManager applicationManager = new ApplicationManager();
 
     public UIBOTicketHelper(WebDriver driver) {
         super(driver);
@@ -297,7 +299,7 @@ public class UIBOTicketHelper extends UIHelperBase {
 
             if (findElements(By.id("takeTicketContent")).size() == 0) {
                 Login_RegistrationHelper login_registrationHelper = new Login_RegistrationHelper();
-                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, login_registrationHelper.generateRandomString(8), "715611173985", HelperBase.prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, login_registrationHelper.generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), HelperBase.prop.getProperty("mobile.registration.email"), "dev");
                 gotoTakeTicket();
                 initFDDTicketDisplain("380685448615", "M");
             }

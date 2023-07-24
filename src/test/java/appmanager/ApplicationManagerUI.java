@@ -49,7 +49,7 @@ public class ApplicationManagerUI {
     public String telenorSite = null;
     public String dipocket3_intranet = "https://dipocket3.intranet:8900";
     public String baseURL = null;
-    public String telenorLoginPhone = null;
+    public String telenorLoginPhone = "380685448616";
     public String loginPhone = null;
     public String telenorRegistrationPhone = "380980316499";
     public String telenorRegistrationPhone2 = "380636083315";
@@ -108,6 +108,7 @@ public class ApplicationManagerUI {
     public String registrationPhone = "380636083315";
     public String registrationEmail = "testdipocket4@gmail.com";
     public String BOURL = "https://support.dipocket.dev";
+    public String mobile_registration_phoneNumber = "380685448616";
     public String CBOuserLogin = null;
     public String CBOuserPass = null;
     public String CBOusername = null;
@@ -125,7 +126,7 @@ public class ApplicationManagerUI {
     public String homePagePass = null;
     public String homePageLoginId = "40263";
     public String mobileRegPass = null;
-    public String mobileRegPhone = null;
+    public String mobileRegPhone = "380685448616";
 
     public String testEverypayPhone = null;
     public String testEverypayPass = null;
@@ -169,7 +170,7 @@ public class ApplicationManagerUI {
         baseURL = HelperBase.prop.getProperty("base.url");
         telenorSite = "TELENOR";
         //dipocket3_intranet = "https://dipocket3.intranet:8900";
-        telenorLoginPhone = dbHelper.prop.getProperty("mobile.registration.phoneNumber");
+        //telenorLoginPhone = dbHelper.prop.getProperty("mobile.registration.phoneNumber");
         loginPhone = "$5_" + telenorLoginPhone; //$5_380685448615
         //telenorRegistrationPhone = "380980316499";
         fullRegistrationTelenorLoginPhone = "$5_" + telenorRegistrationPhone;
@@ -202,7 +203,7 @@ public class ApplicationManagerUI {
         BOuserLogin = HelperBase.prop.getProperty("bo.user.login");
         BOuserPass = HelperBase.prop.getProperty("bo.user.pass");
         BOusername = HelperBase.prop.getProperty("bo.username");
-        mobileRegPhone = HelperBase.prop.getProperty("mobile.registration.phoneNumber");
+        //mobileRegPhone = HelperBase.prop.getProperty("mobile.registration.phoneNumber");
         mobileRegPass = HelperBase.prop.getProperty("mobile.registration.pass");
         homePageLoginPhone = HelperBase.prop.getProperty("mobile.login.homePage.loginPhone");
         homePagePass = HelperBase.prop.getProperty("mobile.login.homePage.pass");
