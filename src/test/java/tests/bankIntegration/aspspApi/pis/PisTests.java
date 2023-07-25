@@ -135,21 +135,17 @@ public class PisTests extends APIUITestBase {
         paymentsDomesticCreditTransfersRequest.setRemittanceInformationUnstructured("domestic transfer test version1");
         String json = gson.toJson(paymentsDomesticCreditTransfersRequest);
 
-        String stResponse = given()
-                .spec(app.requestSpecASPSPTest)
-                .pathParam("partnerId", partnerId)
-                .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
-                .header("TPP-Redirect-URI", "https://www.google.com")
-                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
-                .contentType("application/json")
-                .body(json)
-                .post("/{partnerId}/bg/v1/payments/domestic-credit-transfers")
-                .then().log().all()
-                .statusCode(200)
-                .body("transactionStatus", equalTo("RCVD"))
-                .extract().response().asString();
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_payments_domestic_credit_transfers(x_request_ID, partnerId, json);
+        String stResponse = response.then().extract().response().asString();
+        response.then().body("transactionStatus", equalTo("RCVD"), "paymentId", notNullValue());
 
-        href = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
+        String scaRedirectHref = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
+        String selfHref = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.self.href");
+        String statusHref = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.status.href");
+
+        assertThat(scaRedirectHref, notNullValue());
+        assertThat(selfHref, notNullValue());
+        assertThat(statusHref, notNullValue());
     }
 
     @Test(priority = 7)
@@ -169,20 +165,16 @@ public class PisTests extends APIUITestBase {
         paymentSepaCreditTransfersRequest.setRemittanceInformationUnstructured("SEPA payment test full payment v1");
         String json = gson.toJson(paymentSepaCreditTransfersRequest);
 
-        String stResponse = given()
-                .spec(app.requestSpecASPSPTest)
-                .pathParam("partnerId", partnerId)
-                .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
-                .header("TPP-Redirect-URI", "https://www.google.com")
-                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
-                .contentType("application/json")
-                .body(json)
-                .post("/{partnerId}/bg/v1/payments/sepa-credit-transfers")
-                .then().log().all()
-                .statusCode(200)
-                .body("transactionStatus", equalTo("RCVD"))
-                .extract().response().asString();
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_payments_sepa_credit_transfers(x_request_ID, partnerId, json);
+        String stResponse = response.then().extract().response().asString();
+        response.then().body("transactionStatus", equalTo("RCVD"), "paymentId", notNullValue());
 
-        href = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
+        String scaRedirectHref = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
+        String selfHref = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.self.href");
+        String statusHref = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.status.href");
+
+        assertThat(scaRedirectHref, notNullValue());
+        assertThat(selfHref, notNullValue());
+        assertThat(statusHref, notNullValue());
     }
 }

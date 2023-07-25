@@ -173,4 +173,36 @@ public class ConsentsRequests {
                 .statusCode(200);
         return response;
     }
+
+    public Response partnerId_bg_v1_payments_domestic_credit_transfers(String x_request_ID, String partnerId, String json){
+        Response response = given()
+                .config(sslCertHelper.aspspSslConfig)
+                .spec(requestSpecConsentsTest)
+                .pathParam("partnerId", partnerId)
+                .header("X-Request-ID", x_request_ID)
+                .header("TPP-Redirect-URI", "https://www.google.com")
+                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
+                .contentType("application/json")
+                .body(json)
+                .post("/{partnerId}/bg/v1/payments/domestic-credit-transfers");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
+    }
+
+    public Response partnerId_bg_v1_payments_sepa_credit_transfers(String x_request_ID, String partnerId, String json){
+        Response response = given()
+                .config(sslCertHelper.aspspSslConfig)
+                .spec(requestSpecConsentsTest)
+                .pathParam("partnerId", partnerId)
+                .header("X-Request-ID", x_request_ID)
+                .header("TPP-Redirect-URI", "https://www.google.com")
+                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
+                .contentType("application/json")
+                .body(json)
+                .post("/{partnerId}/bg/v1/payments/sepa-credit-transfers");
+        response.then().log().all()
+                .statusCode(200);
+        return response;
+    }
 }
