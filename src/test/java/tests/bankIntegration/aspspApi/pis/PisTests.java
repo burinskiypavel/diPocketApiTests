@@ -3,14 +3,12 @@ package tests.bankIntegration.aspspApi.pis;
 import base.APIUITestBase;
 import com.cs.dipocketback.base.data.Site;
 import com.google.gson.Gson;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import model.aspsp.Account;
 import model.aspsp.ConfirmationOfFundsRequest;
 import model.aspsp.CreateConsentRequest;
 import model.aspsp.pis.*;
 import model.clientServices.DashBoardNotifyDetails3Request;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import java.sql.SQLException;
@@ -26,6 +24,7 @@ public class PisTests extends APIUITestBase {
     String actualPaymentId = null;
     String href = null;
     String paymentId = "94647f10-c4d6-4009-84dd-dcbf49a082e3";
+    String x_request_ID = "ded9c406-b701-4963-9b68-5d8d7a2b3041";
     String apiTransactionCode = null;
     int notifyId = 0;
     String site = Site.DIPOCKET.toString();
@@ -40,21 +39,13 @@ public class PisTests extends APIUITestBase {
     CreditorAddress creditorAddress = new CreditorAddress();
     CreditorAddress creditorAddressForSepaPayment = new CreditorAddress();
     CreditorAccount creditorAccount = new CreditorAccount();
-
     PaymentsDomesticCreditTransfersRequest paymentsDomesticCreditTransfersRequest = new PaymentsDomesticCreditTransfersRequest();
     PaymentSepaCreditTransfersRequest paymentSepaCreditTransfersRequest = new PaymentSepaCreditTransfersRequest();
 
     @Test(priority = 1)
     public void test_pisGetPaymentRequest() {
-        Response response = given()
-                .spec(app.requestSpecASPSPTest)
-                .pathParam("partnerId", partnerId)
-                .pathParam("paymentId", paymentId)
-                .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
-                .get("/{partnerId}/bg/v1/payments/sepa-credit-transfers/{paymentId}");
-
-        String stResponse = response.then().log().all()
-                .statusCode(200).extract().response().asString();
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_payments_sepa_credit_transfers_paymentId(x_request_ID, partnerId, paymentId);
+        String stResponse = response.then().extract().response().asString();
 
         response.then()
                 .body("transactionStatus", equalTo("ACSC"),
@@ -71,15 +62,8 @@ public class PisTests extends APIUITestBase {
 
     @Test(priority = 2)
     public void test_PISGetPaymentRequestStatus(){
-        given()
-                .spec(app.requestSpecASPSPTest)
-                .pathParam("partnerId", partnerId)
-                .pathParam("paymentId", paymentId)
-                .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
-                .get("/{partnerId}/bg/v1/payments/sepa-credit-transfers/{paymentId}/status")
-                .then().log().all()
-                .statusCode(200)
-                .body("transactionStatus", equalTo("ACSC"));
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_payments_sepa_credit_transfers_paymentId_status(x_request_ID, partnerId, paymentId);
+        response.then().body("transactionStatus", equalTo("ACSC"));
     }
 
     @Test(priority = 3)
@@ -102,22 +86,11 @@ public class PisTests extends APIUITestBase {
         paymentsCrossBorderCreditTransfersRequest.setCreditorAgent("SBANFIHH");
         paymentsCrossBorderCreditTransfersRequest.setCreditorAccount(creditorAccount);
         paymentsCrossBorderCreditTransfersRequest.setRemittanceInformationUnstructured("SWIFT payment test");
-
         String json = gson.toJson(paymentsCrossBorderCreditTransfersRequest);
 
-        String stResponse = given()
-                .spec(app.requestSpecASPSPTest)
-                .pathParam("partnerId", partnerId)
-                .header("X-Request-ID", "ded9c406-b701-4963-9b68-5d8d7a2b3041")
-                .header("TPP-Redirect-URI", "https://www.google.com")
-                .header("TPP-Nok-Redirect-URI", "https://luxhelsinki.fi")
-                .contentType("application/json")
-                .body(json)
-                .post("/{partnerId}/bg/v1/payments/cross-border-credit-transfers")
-                .then().log().all()
-                .statusCode(200)
-                .body("transactionStatus", equalTo("RCVD"))
-                .extract().response().asString();
+        Response response = app.getConsentsRequestsHelper().partnerId_bg_v1_payments_cross_border_credit_transfers(x_request_ID, partnerId, json);
+        String stResponse = response.then().extract().response().asString();
+        response.then().body("transactionStatus", equalTo("RCVD"));
 
         href = app.getResponseValidationHelper().getStringFromResponseJsonPath(stResponse, "_links.scaRedirect.href");
     }
