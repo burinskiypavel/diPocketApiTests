@@ -483,11 +483,11 @@ public class UIBOTicketHelper extends UIHelperBase {
         waitFor(By.xpath("//*[contains(text(), 'Assign to is required ')]"));
     }
 
-    public String takeFDDTicket(int countryId, int currencyId, String terms1, String terms2) throws InterruptedException, SQLException, ClassNotFoundException {
+    public String takeFDDTicket(int countryId, int currencyId, String terms1, String terms2, String phone) throws InterruptedException, SQLException, ClassNotFoundException {
         if (findElements(By.id("takeTicketContent")).size() == 0) {
-            login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", phone, prop.getProperty("mobile.registration.email"), "dev");
             gotoTakeTicket();
-            initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+            initFDDTicketDisplain(phone, "M");
         }
 
         for(int i = 0; i < 15; i++) {
@@ -514,19 +514,19 @@ public class UIBOTicketHelper extends UIHelperBase {
             }
 
             if(findElements(By.id("takeTicketContent")).size() == 0){
-                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                login_registrationHelper.dipocketRegistration(countryId, currencyId, terms1, terms2, generateRandomString(8), "715611173985", phone, prop.getProperty("mobile.registration.email"), "dev");
                 gotoTakeTicket();
-                initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+                initFDDTicketDisplain(phone, "M");
             }
         }
         return actualTicketType;
     }
 
-    public String takeFDDTicketForRescanRequesteAndUploadDocs() throws InterruptedException, SQLException, ClassNotFoundException {
+    public String takeFDDTicketForRescanRequesteAndUploadDocs(String phone) throws InterruptedException, SQLException, ClassNotFoundException {
         if (findElements(By.id("takeTicketContent")).size() == 0) {
-            login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+            login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", phone, prop.getProperty("mobile.registration.email"), "dev");
             gotoTakeTicket();
-            clientId = initFDDTicketDisplainWithSecondID(prop.getProperty("mobile.registration.phoneNumber"), "M");
+            clientId = initFDDTicketDisplainWithSecondID(phone, "M");
         }
 
         for(int i = 0; i < 12; i++) {
@@ -552,9 +552,9 @@ public class UIBOTicketHelper extends UIHelperBase {
             }
 
             if(findElements(By.id("takeTicketContent")).size() == 0){
-                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", prop.getProperty("mobile.registration.phoneNumber"), prop.getProperty("mobile.registration.email"), "dev");
+                login_registrationHelper.dipocketRegistration(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", generateRandomString(8), "715611173985", phone, prop.getProperty("mobile.registration.email"), "dev");
                 gotoTakeTicket();
-                clientId = initFDDTicketDisplain(prop.getProperty("mobile.registration.phoneNumber"), "M");
+                clientId = initFDDTicketDisplain(phone, "M");
             }
         }
         return clientId;

@@ -36,7 +36,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        actualTicketType = app.getUiboTicketHelper().takeFDDTicket(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        actualTicketType = app.getUiboTicketHelper().takeFDDTicket(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.mobileRegPhone);
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "Passport", "CGH164279", "34999285098", "Poland");
@@ -52,7 +52,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        actualTicketType = app.getUiboTicketHelper().takeFDDTicket(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        actualTicketType = app.getUiboTicketHelper().takeFDDTicket(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", app.mobileRegPhone);
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().unsuccessfulApprove("Impossible to approve ticket. Client already have documents. Fields “Document type“, “Doc serial number“, “Doc country of issue“ should be filled");
@@ -67,7 +67,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        actualTicketType = app.getUiboTicketHelper().takeFDDTicket(unitedKingdomCountryId, unitedKingdomCountryId, "TERMS_AND_CONDITIONS_GB", "DATA_PROCESSING");
+        actualTicketType = app.getUiboTicketHelper().takeFDDTicket(unitedKingdomCountryId, unitedKingdomCountryId, "TERMS_AND_CONDITIONS_GB", "DATA_PROCESSING", app.mobileRegPhone);
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().editAndSaveFDDTicket("", "National identification number", "11111111111", "", "United Kingdom");
@@ -134,7 +134,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        app.getUiboTicketHelper().takeFDDTicket(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION");
+        app.getUiboTicketHelper().takeFDDTicket(616, 985, "TERMS_AND_CONDITIONS_PL", "ELECTRONIC_COMMUNICATION", prop.getProperty("mobile.registration.phoneNumber"));
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
             app.getUiboTicketHelper().verifyUserChangedHisMindAboutRescanRequest();
@@ -169,7 +169,7 @@ public class TakeFDDTicketTests extends UITestBase {
         app.getUiboHelper().gotoBOSiteAndLoginWithBOUserRole(app.BOuserLogin, app.BOuserPass);
         app.getUiboTicketHelper().gotoTakeTicketWithReg();
 
-        clientId = app.getUiboTicketHelper().takeFDDTicketForRescanRequesteAndUploadDocs();
+        clientId = app.getUiboTicketHelper().takeFDDTicketForRescanRequesteAndUploadDocs(app.mobileRegPhone);
 
         if (app.getUiboHelper().isElementPresent(By.xpath("//*[contains(text(), 'FDD - check client')]"))) {
 
